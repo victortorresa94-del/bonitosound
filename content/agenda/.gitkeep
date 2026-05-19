@@ -1,0 +1,9 @@
+# Agenda — un .md por bolo. Frontmatter:
+# ---
+# artist: "Nàtura"
+# date: "2026-06-14"
+# city: "Barcelona"
+# venue: "Sala Apolo"
+# ticketsUrl: "https://..."
+# ---
+# La agenda se actualiza añadiendo/borrando estos ficheros. Sin tocar código.
