@@ -3,29 +3,29 @@
 @tailwind utilities;
 
 :root {
-  /* Base oscura — negro azulado, no negro puro */
-  --bg-primary: #0b0f14;
-  --bg-secondary: #131820;
-  --bg-tertiary: #1a2230;
+  /* Tema claro · minimalista — fondo blanco */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f6f5f1;
+  --bg-tertiary: #efede7;
 
   /* Azul Bonito — primary action */
   --accent-blue: #1b6ee6;
-  --accent-blue-hover: #3585f2;
+  --accent-blue-hover: #1559c4;
 
   /* Acento cálido — herencia de Jaleo */
-  --accent-warm: #ff6b35;
+  --accent-warm: #ff5a1f;
   --accent-warm-soft: #ffb47a;
 
-  /* Jaleo — identidad propia del festival (rojo gastro-festival) */
+  /* Jaleo — identidad propia del festival */
   --jaleo-red: #e8351f;
 
-  /* Texto */
-  --text-primary: #f5f2eb;
-  --text-secondary: #b8bcc4;
-  --text-muted: #6e7480;
+  /* Texto sobre blanco */
+  --text-primary: #0b0f14;
+  --text-secondary: #51565f;
+  --text-muted: #8b8f98;
 
-  /* Borders / divisores */
-  --border-subtle: rgba(245, 242, 235, 0.08);
+  /* Borders / divisores — finos, casi imperceptibles */
+  --border-subtle: rgba(11, 15, 20, 0.1);
 }
 
 * {
@@ -47,7 +47,7 @@ body {
 
 ::selection {
   background: var(--accent-warm);
-  color: var(--bg-primary);
+  color: #fff;
 }
 
 @layer components {
@@ -55,47 +55,50 @@ body {
     @apply mx-auto w-full max-w-content px-6 md:px-10;
   }
 
+  /* Display divertida: Fraunces, peso alto, italic opcional */
   .display {
-    font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-    @apply font-bold tracking-tight;
-    line-height: 0.98;
+    font-family: var(--font-display), Georgia, serif;
+    @apply font-semibold;
+    letter-spacing: -0.02em;
+    line-height: 1;
   }
 
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.18em] text-text-muted;
+    @apply text-xs font-semibold uppercase tracking-[0.2em];
+    color: var(--accent-blue);
   }
 
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3
-      text-sm font-semibold transition-transform duration-200 will-change-transform;
+      text-sm font-semibold transition-all duration-200 will-change-transform;
   }
   .btn:hover {
-    transform: scale(1.02);
+    transform: translateY(-1px);
   }
   .btn-primary {
-    background: var(--accent-blue);
+    background: var(--text-primary);
     color: #fff;
   }
   .btn-primary:hover {
-    background: var(--accent-blue-hover);
+    background: var(--accent-blue);
   }
   .btn-ghost {
-    @apply border;
-    border-color: var(--border-subtle);
+    @apply border bg-transparent;
+    border-color: var(--text-primary);
     color: var(--text-primary);
   }
   .btn-ghost:hover {
-    border-color: var(--accent-warm);
-    color: var(--accent-warm);
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
   }
 
+  /* Minimal: sin relleno pesado, borde fino, sin sombra */
   .card {
-    @apply rounded-2xl border bg-bg-secondary p-7 transition-all duration-300;
+    @apply rounded-2xl border bg-transparent p-7 transition-colors duration-300;
     border-color: var(--border-subtle);
   }
   .card:hover {
-    border-color: rgba(245, 242, 235, 0.16);
-    transform: translateY(-3px);
+    border-color: var(--text-primary);
   }
 
   .link-underline {
@@ -103,23 +106,23 @@ body {
   }
   .link-underline::after {
     content: "";
-    @apply absolute -bottom-0.5 left-0 h-px w-0 bg-accent-warm transition-all duration-300;
+    @apply absolute -bottom-0.5 left-0 h-px w-0 transition-all duration-300;
+    background: var(--accent-blue);
   }
   .link-underline:hover::after {
     @apply w-full;
   }
 }
 
-/* Page-load orquestado: staggered reveals */
 .stagger > * {
   animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .stagger > *:nth-child(1) { animation-delay: 0.05s; }
-.stagger > *:nth-child(2) { animation-delay: 0.15s; }
-.stagger > *:nth-child(3) { animation-delay: 0.25s; }
-.stagger > *:nth-child(4) { animation-delay: 0.35s; }
-.stagger > *:nth-child(5) { animation-delay: 0.45s; }
-.stagger > *:nth-child(6) { animation-delay: 0.55s; }
+.stagger > *:nth-child(2) { animation-delay: 0.13s; }
+.stagger > *:nth-child(3) { animation-delay: 0.21s; }
+.stagger > *:nth-child(4) { animation-delay: 0.29s; }
+.stagger > *:nth-child(5) { animation-delay: 0.37s; }
+.stagger > *:nth-child(6) { animation-delay: 0.45s; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

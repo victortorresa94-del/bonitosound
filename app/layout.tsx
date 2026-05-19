@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Fraunces } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
@@ -7,10 +7,11 @@ import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/ui";
 import { site, memberships, team } from "@/lib/site";
 
-const display = Bricolage_Grotesque({
+const display = Fraunces({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
+  axes: ["SOFT", "WONK", "opsz"],
 });
 
 export const metadata: Metadata = {
