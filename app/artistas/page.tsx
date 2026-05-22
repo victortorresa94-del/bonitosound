@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Section, Heading, Eyebrow, Cta } from "@/components/ui";
 import { LogoWall } from "@/components/LogoWall";
 import { getArtists } from "@/lib/content";
+import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -34,16 +36,28 @@ export default function Artistas() {
       <Section>
         <Eyebrow>Booking & Management</Eyebrow>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {roster.map((a) => (
-            <Link key={a.slug} href={`/artistas/${a.slug}`} className="group">
-              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
-                <span className="absolute inset-x-0 bottom-0 p-6">
-                  <span className="display text-3xl">{a.name}</span>
-                </span>
-              </div>
-              <p className="mt-3 text-sm text-text-muted">{a.genre}</p>
-            </Link>
-          ))}
+          {roster.map((a) => {
+            const photo = a.image ?? findAsset("artistas", a.slug);
+            return (
+              <Link key={a.slug} href={`/artistas/${a.slug}`} className="group">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
+                  {photo && (
+                    <Image
+                      src={photo}
+                      alt={a.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
+                  <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 to-transparent p-6">
+                    <span className="display text-3xl text-white">{a.name}</span>
+                  </span>
+                </div>
+                <p className="mt-3 text-sm text-text-muted">{a.genre}</p>
+              </Link>
+            );
+          })}
         </div>
       </Section>
 
@@ -51,7 +65,7 @@ export default function Artistas() {
         <Eyebrow>Catálogo de distribución</Eyebrow>
         <Heading>~20 artistas en distribución y editorial.</Heading>
         <div className="mt-10">
-          <LogoWall items={distributionCatalog} />
+          <LogoWall items={distributionCatalog} dir="artistas" />
         </div>
       </Section>
 

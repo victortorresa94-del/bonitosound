@@ -1,0 +1,11 @@
+Logos de marcas clientes. Formato preferido: SVG (o PNG/WebP con fondo
+transparente). Versión en color u oscura — el fondo de la web es blanco.
+
+Nombra cada fichero con el slug exacto (sin acentos, en minúsculas):
+  ballantines · pernod-ricard · pepsico · schweppes · absolut · font-vella
+  four-roses · le-souffle · universal · gestmusic · concert-studio
+  gts-global-talent-services · sweet-bird · codigo-1530 · lighthouse
+  corre-lola-corre · sr-wilson
+
+Ejemplo: public/img/marcas/ballantines.svg
+En cuanto exista el fichero, el LogoWall lo pinta solo (si no, deja el texto).

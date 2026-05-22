@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Section, Heading, Eyebrow, Cta } from "@/components/ui";
 import { LogoWall } from "@/components/LogoWall";
+import { findLogo } from "@/lib/assets";
 import { team, memberships, support, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -47,14 +49,27 @@ export default function Nosotros() {
         <Eyebrow>Equipo</Eyebrow>
         <Heading>Tres personas con nombre y teléfono.</Heading>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {team.map((p) => (
-            <div key={p.name} className="card">
-              <div className="mb-5 aspect-square rounded-xl border border-subtle bg-bg-tertiary" />
-              <h3 className="display text-xl">{p.name}</h3>
-              <p className="mt-1 text-sm text-accent-warm">{p.role}</p>
-              <p className="mt-3 text-sm text-text-secondary">{p.line}</p>
-            </div>
-          ))}
+          {team.map((p) => {
+            const photo = findLogo("equipo", p.name);
+            return (
+              <div key={p.name} className="card">
+                <div className="relative mb-5 aspect-square overflow-hidden rounded-xl border border-subtle bg-bg-tertiary">
+                  {photo && (
+                    <Image
+                      src={photo}
+                      alt={p.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+                <h3 className="display text-xl">{p.name}</h3>
+                <p className="mt-1 text-sm text-accent-warm">{p.role}</p>
+                <p className="mt-3 text-sm text-text-secondary">{p.line}</p>
+              </div>
+            );
+          })}
         </div>
         <p className="mt-6 text-sm text-text-muted">
           Roser Gamonal y Cristina: rol exacto y aparición pública pendiente de
@@ -63,9 +78,9 @@ export default function Nosotros() {
       </Section>
 
       <Section>
-        <LogoWall items={memberships} label="Miembros activos de" />
+        <LogoWall items={memberships} dir="instituciones" label="Miembros activos de" />
         <div className="mt-12">
-          <LogoWall items={support} label="Con el apoyo de" />
+          <LogoWall items={support} dir="apoyos" label="Con el apoyo de" />
         </div>
       </Section>
 

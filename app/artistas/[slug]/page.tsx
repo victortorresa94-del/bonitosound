@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Section, Heading, Eyebrow, Cta, JsonLd } from "@/components/ui";
 import { SpotifyEmbed } from "@/components/Embeds";
 import { getArtist, getArtists } from "@/lib/content";
+import { findAsset } from "@/lib/assets";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -31,6 +33,8 @@ export default function ArtistPage({
 }) {
   const a = getArtist(params.slug);
   if (!a) notFound();
+
+  const photo = a.image ?? findAsset("artistas", a.slug);
 
   return (
     <>
@@ -61,7 +65,18 @@ export default function ArtistPage({
               </Cta>
             </div>
           </div>
-          <div className="aspect-[3/4] rounded-2xl border border-subtle bg-bg-tertiary" />
+          <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
+            {photo && (
+              <Image
+                src={photo}
+                alt={a.name}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover"
+                priority
+              />
+            )}
+          </div>
         </div>
       </section>
 

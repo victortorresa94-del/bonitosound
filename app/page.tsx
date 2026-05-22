@@ -1,9 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Section, Heading, Eyebrow, Cta } from "@/components/ui";
 import { Superhero } from "@/components/Superhero";
 import { LogoWall } from "@/components/LogoWall";
 import { InstagramFeed } from "@/components/Embeds";
 import { getArtists } from "@/lib/content";
+import { findAsset } from "@/lib/assets";
 import { brands, memberships, support, team } from "@/lib/site";
 
 const verticals = [
@@ -104,7 +106,7 @@ export default function Home() {
           musical — nos llaman.
         </p>
         <div className="mt-10">
-          <LogoWall items={brands} />
+          <LogoWall items={brands} dir="marcas" />
         </div>
         <div className="mt-10">
           <Cta href="/eventos/marcas">Cuéntanos qué necesitas →</Cta>
@@ -118,20 +120,32 @@ export default function Home() {
           Cinco artistas que no necesitan que les expliquemos quiénes son.
         </Heading>
         <div className="mt-12 flex gap-5 overflow-x-auto pb-4 md:grid md:grid-cols-3 md:overflow-visible lg:grid-cols-6">
-          {roster.map((a) => (
-            <Link
-              key={a.slug}
-              href={`/artistas/${a.slug}`}
-              className="group min-w-[60vw] sm:min-w-[40vw] md:min-w-0"
-            >
-              <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
-                <span className="absolute inset-x-0 bottom-0 flex items-end p-5">
-                  <span className="display text-2xl">{a.name}</span>
-                </span>
-              </div>
-              <p className="mt-3 text-sm text-text-muted">{a.genre}</p>
-            </Link>
-          ))}
+          {roster.map((a) => {
+            const photo = a.image ?? findAsset("artistas", a.slug);
+            return (
+              <Link
+                key={a.slug}
+                href={`/artistas/${a.slug}`}
+                className="group min-w-[60vw] sm:min-w-[40vw] md:min-w-0"
+              >
+                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
+                  {photo && (
+                    <Image
+                      src={photo}
+                      alt={a.name}
+                      fill
+                      sizes="(max-width: 768px) 60vw, 16vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )}
+                  <span className="absolute inset-x-0 bottom-0 flex items-end bg-gradient-to-t from-black/55 to-transparent p-5">
+                    <span className="display text-2xl text-white">{a.name}</span>
+                  </span>
+                </div>
+                <p className="mt-3 text-sm text-text-muted">{a.genre}</p>
+              </Link>
+            );
+          })}
         </div>
         <div className="mt-10">
           <Cta href="/artistas" variant="ghost">
@@ -212,10 +226,10 @@ export default function Home() {
           ))}
         </div>
         <div className="mt-12">
-          <LogoWall items={memberships} label="Miembros activos de" />
+          <LogoWall items={memberships} dir="instituciones" label="Miembros activos de" />
         </div>
         <div className="mt-10">
-          <LogoWall items={support} label="Con el apoyo de" />
+          <LogoWall items={support} dir="apoyos" label="Con el apoyo de" />
         </div>
       </Section>
 

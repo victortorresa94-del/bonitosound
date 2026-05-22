@@ -61,7 +61,7 @@ export default function Giras() {
       <Section>
         <Eyebrow>Hemos llevado de gira a</Eyebrow>
         <div className="mt-8">
-          <LogoWall items={tourArtists} />
+          <LogoWall items={tourArtists} dir="giras" />
         </div>
       </Section>
 

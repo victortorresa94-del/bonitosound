@@ -126,7 +126,7 @@ export default function Records() {
         <Eyebrow>Catálogo de distribución</Eyebrow>
         <Heading>~20 artistas, una distribuidora.</Heading>
         <div className="mt-10">
-          <LogoWall items={distributionCatalog} />
+          <LogoWall items={distributionCatalog} dir="artistas" />
         </div>
       </Section>
 

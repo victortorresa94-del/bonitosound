@@ -11,6 +11,7 @@ export type Artist = {
   tier: "booking" | "distribucion";
   spotifyArtistId?: string;
   instagram?: string;
+  image?: string;
   bio: string[];
   reels?: string[];
 };

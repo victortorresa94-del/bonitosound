@@ -61,7 +61,7 @@ export default function Distribucion() {
         <Eyebrow>En catálogo</Eyebrow>
         <Heading>~20 artistas ya distribuyen con nosotros.</Heading>
         <div className="mt-10">
-          <LogoWall items={distributionCatalog} />
+          <LogoWall items={distributionCatalog} dir="artistas" />
         </div>
       </Section>
 

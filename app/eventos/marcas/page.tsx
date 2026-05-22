@@ -146,7 +146,7 @@ export default function EventosMarcas() {
       <Section className="bg-bg-secondary">
         <Eyebrow>Marcas con las que hemos trabajado</Eyebrow>
         <div className="mt-8">
-          <LogoWall items={brands} />
+          <LogoWall items={brands} dir="marcas" />
         </div>
       </Section>
 

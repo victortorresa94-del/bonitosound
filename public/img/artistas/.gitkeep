@@ -1,0 +1,14 @@
+Fotos de artistas. Foto vertical (retrato 3:4), JPG/WebP, ~1200px de ancho.
+El nombre del fichero = slug del artista (el del .md en content/artistas/).
+
+Roster booking:
+  otem · sa-pena · natura · dulze · paule · eva-calyza
+
+Catálogo de distribución (se muestran en el LogoWall, foto opcional):
+  paule · dulze · sa-pena · soylapau · daniel-giro · 96grados · pablo-rojo
+  natura · hebe · kanela · sotrac · belbaka · egon-calle · rumba-menuda
+  fabian · eva-calyza · kenai-white · overpulation
+
+Ejemplo: public/img/artistas/natura.webp
+Se detecta solo en la ficha, en el roster de la home y en /artistas.
+También puedes fijarla a mano con el campo `image:` en el frontmatter del .md.
