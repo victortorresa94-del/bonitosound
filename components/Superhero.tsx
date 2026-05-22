@@ -1,8 +1,12 @@
+import Image from "next/image";
+import { findAsset } from "@/lib/assets";
+
 type State = "home" | "records" | "eventos";
 
 /**
- * Superhéroe del ecosistema. v1 = 3 estados estáticos (Sarah Chen / §10.5).
- * Línea + relleno azul/blanco, sin sombras complejas, cohesión con el pez del logo.
+ * Superhéroe del ecosistema. v1 = 3 estados.
+ * Si existe el PNG raster generado en /public/img/marca/superheroe-{state}.png,
+ * se usa ese. Si no, cae al SVG inline cohesivo con el logo-pez.
  */
 export function Superhero({
   state = "home",
@@ -11,6 +15,20 @@ export function Superhero({
   state?: State;
   className?: string;
 }) {
+  const png = findAsset("marca", `superheroe-${state}`);
+  if (png) {
+    return (
+      <Image
+        src={png}
+        alt={`Bonito Sound — ${state}`}
+        width={1024}
+        height={1024}
+        className={className}
+        priority={state === "home"}
+      />
+    );
+  }
+
   const stroke = "var(--text-primary)";
   const fill = "var(--accent-blue)";
   return (
@@ -29,7 +47,6 @@ export function Superhero({
         strokeOpacity="0.14"
         strokeWidth="2"
       />
-      {/* Cuerpo-pez común a los 3 estados (herencia del logo) */}
       <path
         d="M58 100c0-26 24-44 52-44s52 18 52 44-24 44-52 44-52-18-52-44Z"
         fill={fill}
@@ -46,7 +63,6 @@ export function Superhero({
         strokeWidth="3.5"
         strokeLinejoin="round"
       />
-      {/* Antifaz de superhéroe */}
       <path
         d="M96 86c8-4 18-4 26 0-2 7-8 11-13 11s-11-4-13-11Z"
         fill={stroke}

@@ -1,8 +1,12 @@
-Assets de marca de Bonito Sound:
-  logo-bonito.svg        Logo principal (el pez)
-  superheroe-home.svg    Superhéroe estado neutro/home
-  superheroe-records.svg Superhéroe estado records (vinilo/DJ)
-  superheroe-eventos.svg Superhéroe estado eventos (altavoz)
+Assets de marca de Bonito Sound (referencias canónicas):
 
-Mientras no existan, la web usa el superhéroe SVG generado en componente
-(components/Superhero.tsx) y el logotipo tipográfico del Nav/Footer.
+  logo-bonito.avif         Logo principal (el pez)
+  heroe-volando.jpeg       Personaje del héroe en pose volando con puño arriba
+  heroe-megafono.jpeg      Personaje del héroe con megáfono
+  mockup-01..06.png        Mockups de la web original entregados por Dani (§14)
+
+Estas son las referencias que el script scripts/generate-images.js pasa a
+gpt-image-1 en cada llamada para garantizar cohesión visual con la marca.
+
+Cuando se generen los superhéroes en raster (PNG transparente), se guardan
+aquí también: superheroe-home.png · superheroe-records.png · superheroe-eventos.png

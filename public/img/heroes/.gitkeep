@@ -1,0 +1,6 @@
+Ilustraciones de hero (4:3) para las cabeceras de página.
+Generadas por scripts/generate-images.mjs.
+
+  eventos-marcas.png · nosotros.png · lab.png · records.png
+
+Si no existen, queda el placeholder gris claro original (sigue funcionando).
