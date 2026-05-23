@@ -17,11 +17,12 @@ export function Nav() {
           onClick={() => setOpen(false)}
         >
           <Image
-            src="/img/marca/logo-bonito.png"
+            src="/img/marca/logo-bonito.avif"
             alt="Bonito Sound"
-            width={160}
-            height={160}
+            width={400}
+            height={500}
             priority
+            unoptimized
             className="h-11 w-auto"
           />
         </Link>
