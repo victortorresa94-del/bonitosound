@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Section, Heading, Eyebrow, Cta, Faq, JsonLd } from "@/components/ui";
 import { LeadMagnetBrands } from "@/components/LeadMagnetBrands";
 import { LogoWall } from "@/components/LogoWall";
 import { getCases } from "@/lib/content";
+import { findAsset } from "@/lib/assets";
 import { brands, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -55,6 +57,7 @@ const faq = [
 
 export default function EventosMarcas() {
   const cases = getCases();
+  const heroImg = findAsset("heroes", "eventos-marcas");
   return (
     <>
       <JsonLd
@@ -97,7 +100,18 @@ export default function EventosMarcas() {
               </Cta>
             </div>
           </div>
-          <div className="aspect-[4/3] rounded-2xl border border-subtle bg-bg-tertiary" />
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
+            {heroImg && (
+              <Image
+                src={heroImg}
+                alt="Activación de marca con música — Bonito Sound"
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-cover"
+                priority
+              />
+            )}
+          </div>
         </div>
       </section>
 
@@ -117,16 +131,32 @@ export default function EventosMarcas() {
         <Eyebrow>Casos</Eyebrow>
         <Heading>Lo hemos hecho. No lo contamos, lo montamos.</Heading>
         <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {cases.map((c) => (
-            <div key={c.slug} className="card">
-              <p className="text-sm text-accent-warm">{c.brand}</p>
-              <h3 className="display mt-2 text-xl">{c.title}</h3>
-              <p className="mt-3 text-sm text-text-secondary">{c.context}</p>
-              <p className="mt-4 border-t border-subtle pt-4 text-sm text-text-muted">
-                {c.result}
-              </p>
-            </div>
-          ))}
+          {cases.map((c) => {
+            const cover = findAsset("casos", c.slug);
+            return (
+              <div key={c.slug} className="card overflow-hidden p-0">
+                <div className="relative aspect-[4/3] border-b border-subtle bg-bg-tertiary">
+                  {cover && (
+                    <Image
+                      src={cover}
+                      alt={`${c.brand} — ${c.title}`}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+                <div className="p-7">
+                  <p className="text-sm text-accent-warm">{c.brand}</p>
+                  <h3 className="display mt-2 text-xl">{c.title}</h3>
+                  <p className="mt-3 text-sm text-text-secondary">{c.context}</p>
+                  <p className="mt-4 border-t border-subtle pt-4 text-sm text-text-muted">
+                    {c.result}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </Section>
 

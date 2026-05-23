@@ -11,24 +11,28 @@ import { brands, memberships, support, team } from "@/lib/site";
 const verticals = [
   {
     title: "Eventos",
+    slug: "eventos",
     href: "/eventos",
     desc: "Activaciones para marcas y giras. Del brief al titular.",
     state: "eventos" as const,
   },
   {
     title: "Records",
+    slug: "records",
     href: "/records",
     desc: "Sello, booking, management, distribución y editorial.",
     state: "records" as const,
   },
   {
     title: "Lab",
+    slug: "lab",
     href: "/lab",
     desc: "Artiverse y Giraverse. El software que el sector no tiene.",
     state: "home" as const,
   },
   {
     title: "Jaleo Sound",
+    slug: "jaleo",
     href: "/jaleo-sound",
     desc: "Festival propio de cultura española en Amsterdam.",
     state: "home" as const,
@@ -79,19 +83,34 @@ export default function Home() {
           entiende el sistema entero — no solo su trozo.
         </p>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {verticals.map((v) => (
-            <Link key={v.href} href={v.href} className="card group">
-              <Superhero
-                state={v.state}
-                className="mb-5 h-16 w-16 opacity-80 transition-opacity group-hover:opacity-100"
-              />
-              <h3 className="display text-xl">{v.title}</h3>
-              <p className="mt-2 text-sm text-text-secondary">{v.desc}</p>
-              <span className="mt-4 inline-block text-sm text-accent-warm">
-                Ver →
-              </span>
-            </Link>
-          ))}
+          {verticals.map((v) => {
+            const img = findAsset("secciones", v.slug);
+            return (
+              <Link key={v.href} href={v.href} className="card group">
+                {img ? (
+                  <div className="relative mb-5 h-16 w-16">
+                    <Image
+                      src={img}
+                      alt=""
+                      fill
+                      sizes="64px"
+                      className="object-contain transition-opacity group-hover:opacity-100"
+                    />
+                  </div>
+                ) : (
+                  <Superhero
+                    state={v.state}
+                    className="mb-5 h-16 w-16 opacity-80 transition-opacity group-hover:opacity-100"
+                  />
+                )}
+                <h3 className="display text-xl">{v.title}</h3>
+                <p className="mt-2 text-sm text-text-secondary">{v.desc}</p>
+                <span className="mt-4 inline-block text-sm text-accent-warm">
+                  Ver →
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </Section>
 

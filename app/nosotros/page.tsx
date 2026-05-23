@@ -41,7 +41,20 @@ export default function Nosotros() {
               consultora con keynote, esta no es tu web.
             </p>
           </div>
-          <div className="aspect-[4/3] rounded-2xl border border-subtle bg-bg-tertiary" />
+          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
+            {(() => {
+              const img = findLogo("heroes", "nosotros");
+              return img ? (
+                <Image
+                  src={img}
+                  alt="El equipo de Bonito Sound"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              ) : null;
+            })()}
+          </div>
         </div>
       </Section>
 
