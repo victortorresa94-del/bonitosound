@@ -11,7 +11,7 @@
 //   category  "web" (slot fijo del sitio) | "banco" (extras navegables)
 
 export const REFS = {
-  logo: "public/img/marca/logo-bonito.avif",
+  logo: "public/img/marca/logo-bonito.png",
   heroVuelo: "public/img/marca/heroe-volando.jpeg",
   heroMegafono: "public/img/marca/heroe-megafono.jpeg",
   // Mockups del estilo real de la web (referencias UI/UX de Víctor):
@@ -22,6 +22,8 @@ export const REFS = {
 
 export const STYLE = [
   "Style requirement: Bonito Sound brand identity, exactly as in the provided reference mockups.",
+  "MANDATORY: pure flat white background (#FFFFFF). No vignette, no gradient backdrop, no stage lighting,",
+  "no colored ambient, no photographic background — just clean flat white edge to edge.",
   "Paleta: pure white background with dark navy blue (#0B1E2F) for typography and the hero character,",
   "teal/turquoise (#1FB89A) for highlights and primary buttons, warm cream (#F8EFD8) for blob-shaped accents,",
   "and a very sparing touch of warm amber (#F5A623) for tiny badges only.",
@@ -71,31 +73,31 @@ export const manifest = [
     refs: sceneRefs, size: "1024x1024", quality: "medium", category: "web" },
 
   { id: "hero-eventos-marcas", dest: "public/img/heroes/eventos-marcas.png",
-    prompt: "Wide editorial composition: the Bonito Sound hero character at the mic on a stylized stage with two stage lights above and a draped curtain. Around them, decorative motifs scattered like confetti — tiny stars, music notes, wavy lines. Navy character on white background, teal accents.",
+    prompt: "Wide editorial illustration on PURE FLAT WHITE BACKGROUND (no stage, no curtain, no spotlights drawn as a scene). The Bonito Sound navy hero character at the mic, confident pose. Around them: two simple line-drawn stage lights as small decorative icons, tiny music notes, stars, wavy lines and dots scattered like confetti. NO vignette, NO colored backdrop, NO ambient lighting — flat white canvas with character and confetti motifs only.",
     refs: composedRefs, size: "1536x1024", quality: "medium", category: "web" },
 
   { id: "hero-nosotros", dest: "public/img/heroes/nosotros.png",
-    prompt: "Wide editorial composition: three Bonito Sound hero figures standing together in different welcoming poses (waving, hands on hips, arms crossed). Group portrait energy with tiny decorative motifs (stars, dots, a wavy underline) scattered around them. White background, navy figures, teal highlights. No real human faces — pure stylized silhouettes following the reference exactly.",
+    prompt: "Wide editorial illustration on PURE FLAT WHITE BACKGROUND. Three Bonito Sound hero figures standing together in different welcoming poses (waving, hands on hips, arms crossed). Tiny decorative motifs (stars, dots, a wavy underline) scattered around them. NO vignette, NO ambient lighting, NO colored backdrop — flat white canvas only. Navy figures, teal highlights. Pure stylized silhouettes following the reference exactly, no real human faces.",
     refs: composedRefs, size: "1536x1024", quality: "medium", category: "web" },
 
   { id: "hero-records", dest: "public/img/heroes/records.png",
-    prompt: "Wide editorial composition: a recording studio scene with a large vintage microphone in the foreground, mixing console outline, a vinyl record. The Bonito Sound hero character is small in the background. Scattered decorative motifs (notes, dots). Navy and teal on white.",
+    prompt: "Wide editorial illustration on PURE FLAT WHITE BACKGROUND. A recording studio composition: large vintage microphone in the foreground, a small mixing console outline, a vinyl record stylized as a flat icon, the Bonito Sound hero small in the background. Scattered decorative motifs (notes, dots, stars). NO vignette, NO stage spotlights drawn as ambient, NO colored backdrop — flat white canvas only. Navy and teal palette.",
     refs: composedRefs, size: "1536x1024", quality: "medium", category: "web" },
 
   { id: "hero-lab", dest: "public/img/heroes/lab.png",
-    prompt: "Wide editorial composition: the Bonito Sound hero in a 'connecting' pose with abstract wifi-style arcs and a constellation network spreading from one hand. Scattered tiny decorative motifs (dots, stars). Navy and teal on white background.",
+    prompt: "Wide editorial illustration on PURE FLAT WHITE BACKGROUND. The Bonito Sound hero in a 'connecting' pose with two clean wifi-style arcs from one hand and a small network constellation beside them. Scattered tiny decorative motifs (dots, stars). NO vignette, NO glow, NO colored backdrop — flat white canvas only. Navy character, teal accents.",
     refs: composedRefs, size: "1536x1024", quality: "medium", category: "web" },
 
   { id: "caso-ballantines", dest: "public/img/casos/ballantines.png",
-    prompt: "Symbolic editorial composition for a premium spirits brand activation with live music: a stylized whisky bottle silhouette, two intersecting sound waves and a small stage outline. Scattered tiny stars and notes. No real logos, no brand names, no text. Navy and teal on white.",
+    prompt: "Symbolic editorial composition on PURE FLAT WHITE BACKGROUND for a premium spirits brand activation with live music: a stylized whisky bottle silhouette, two intersecting sound waves and a small stage outline. Scattered tiny stars and notes. NO real logos, NO brand names, NO text, NO vignette. Navy and teal.",
     refs: sceneRefs, size: "1024x1024", quality: "medium", category: "web" },
 
   { id: "caso-pernod-ricard", dest: "public/img/casos/pernod-ricard.png",
-    prompt: "Symbolic editorial composition for a cultural premium brand experience: a stylized cocktail glass, a small turntable and a few music notes drifting. Scattered tiny dots and a wavy underline. No real logos, no text. Navy and teal on white.",
+    prompt: "Symbolic editorial composition on PURE FLAT WHITE BACKGROUND for a cultural premium brand experience: a stylized cocktail glass, a small turntable and a few music notes drifting. Scattered tiny dots and a wavy underline. NO real logos, NO text, NO vignette. Navy and teal.",
     refs: sceneRefs, size: "1024x1024", quality: "medium", category: "web" },
 
   { id: "caso-gira-1016", dest: "public/img/casos/gira-1016.png",
-    prompt: "Symbolic editorial composition of a music tour reaching its final arena show: a tour van outline at the bottom-left, a stadium silhouette with stage lights at the back, a flowing road connecting them, scattered tiny stars. No text. Navy and teal on white.",
+    prompt: "Symbolic editorial composition on PURE FLAT WHITE BACKGROUND of a music tour reaching its final arena show: a tour van outline at the bottom-left, a stadium silhouette outlined as a flat icon, a flowing road connecting them, scattered tiny stars. NO text, NO vignette, NO ambient stage lighting drawn as scene. Navy and teal.",
     refs: sceneRefs, size: "1536x1024", quality: "medium", category: "web" },
 
   { id: "opengraph", dest: "app/opengraph-image.png",
