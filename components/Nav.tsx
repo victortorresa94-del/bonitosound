@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { nav } from "@/lib/site";
@@ -11,10 +12,18 @@ export function Nav() {
       <div className="wrap flex h-16 items-center justify-between">
         <Link
           href="/"
-          className="display text-lg tracking-tight"
+          aria-label="Bonito Sound — inicio"
+          className="flex items-center"
           onClick={() => setOpen(false)}
         >
-          Bonito<span className="text-accent-blue">.</span>Sound
+          <Image
+            src="/img/marca/logo-bonito.png"
+            alt="Bonito Sound"
+            width={160}
+            height={160}
+            priority
+            className="h-11 w-auto"
+          />
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">
