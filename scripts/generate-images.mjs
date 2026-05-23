@@ -44,7 +44,8 @@ async function refAsBlob(refKey) {
     : p.endsWith(".png")
       ? "image/png"
       : "image/jpeg";
-  return { blob: new Blob([buf], { type: mime }), name: path.basename(p) };
+  const safeName = path.basename(p).replace(/\s+/g, "_");
+  return { blob: new Blob([buf], { type: mime }), name: safeName };
 }
 
 async function callOpenAI(entry, attempt = 0) {

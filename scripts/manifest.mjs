@@ -14,21 +14,30 @@ export const REFS = {
   logo: "public/img/marca/logo-bonito.avif",
   heroVuelo: "public/img/marca/heroe-volando.jpeg",
   heroMegafono: "public/img/marca/heroe-megafono.jpeg",
+  // Mockups del estilo real de la web (referencias UI/UX de Víctor):
+  mockupHero: "references/ui-ux/HERO.png",
+  mockupHeroFresh: "references/ui-ux/Bonito Sound - Hero con Logo Original.png",
+  mockupComoFunciona: "references/ui-ux/Bonito Sound - Como Funciona On Brand.png",
 };
 
 export const STYLE = [
-  "Style requirement: Bonito Sound brand identity.",
-  "Flat editorial illustration in the EXACT visual language of the provided reference images of the hero character:",
-  "dark navy blue and medium teal-blue on a pure white background,",
-  "confident continuous strokes, no shadows, no gradients, no textures, no realism.",
-  "Keep the iconic silhouette and energy of the hero whenever the character appears.",
-  "Minimalist composition with generous negative space.",
-  "A very rare, tiny accent of warm orange (#FF5A1F) is allowed only when explicitly requested — never dominant.",
-  "Lettering inside the hero body is part of the brand mark only:",
-  "do NOT invent additional text in derivative illustrations.",
+  "Style requirement: Bonito Sound brand identity, exactly as in the provided reference mockups.",
+  "Paleta: pure white background with dark navy blue (#0B1E2F) for typography and the hero character,",
+  "teal/turquoise (#1FB89A) for highlights and primary buttons, warm cream (#F8EFD8) for blob-shaped accents,",
+  "and a very sparing touch of warm amber (#F5A623) for tiny badges only.",
+  "Visual language: editorial, fresh, musical, slightly playful — NOT flat corporate.",
+  "Use confident continuous strokes, no shadows, no gradients, no photoreal textures.",
+  "Decorative motifs scattered like confetti at small scale: tiny stars, music notes,",
+  "wavy lines, dots, swirls — always in light teal or light navy, never overwhelming the composition.",
+  "When the Bonito Sound hero character appears, preserve its iconic silhouette exactly as in the reference",
+  "(navy body, teal head/cape, the lettering inside the body is part of the brand mark).",
+  "Generous negative space. Asymmetric, organic-feeling, never rigid or symmetric.",
+  "Do NOT invent additional brand text, taglines or wordmarks unless explicitly asked.",
 ].join(" ");
 
 const heroRefs = ["heroVuelo", "heroMegafono", "logo"];
+const composedRefs = ["heroVuelo", "logo", "mockupHero", "mockupHeroFresh"];
+const sceneRefs = ["heroMegafono", "mockupComoFunciona", "mockupHeroFresh"];
 
 export const manifest = [
   // ─────────────────────────── WEB SLOTS (15) ───────────────────────────
@@ -46,52 +55,52 @@ export const manifest = [
     refs: heroRefs, size: "1024x1024", quality: "medium", category: "web" },
 
   { id: "seccion-eventos", dest: "public/img/secciones/eventos.png",
-    prompt: "Editorial line illustration: a vertical microphone on a stand, two simple stage lights above, and a sound wave drifting to the side. White background, no characters.",
-    refs: ["heroMegafono"], size: "1024x1024", quality: "medium", category: "web" },
+    prompt: "Small editorial icon-illustration: a vertical microphone with two stage lights above and a soft wavy line beside it, scattered tiny stars and dots around. Composition in navy and teal on white. No characters.",
+    refs: sceneRefs, size: "1024x1024", quality: "medium", category: "web" },
 
   { id: "seccion-records", dest: "public/img/secciones/records.png",
-    prompt: "Editorial line illustration: a vinyl record being played with two flowing sound waves coming out of it. White background, no characters.",
-    refs: ["heroMegafono"], size: "1024x1024", quality: "medium", category: "web" },
+    prompt: "Small editorial icon-illustration: a stylized vinyl record with two curling sound waves and tiny scattered music notes nearby. Navy and teal on white. No characters.",
+    refs: sceneRefs, size: "1024x1024", quality: "medium", category: "web" },
 
   { id: "seccion-lab", dest: "public/img/secciones/lab.png",
-    prompt: "Editorial line illustration: a network constellation — five dots connected by clean lines, with one central wifi-style emanation. White background, no characters.",
-    refs: ["heroMegafono"], size: "1024x1024", quality: "medium", category: "web" },
+    prompt: "Small editorial icon-illustration: a constellation of five dots connected by hand-drawn lines, a central wifi-style emanation, tiny stars around. Navy and teal on white. No characters.",
+    refs: sceneRefs, size: "1024x1024", quality: "medium", category: "web" },
 
   { id: "seccion-jaleo", dest: "public/img/secciones/jaleo.png",
-    prompt: "Editorial line illustration symbolic of a Spanish-Mediterranean festival in Amsterdam: a stylized sun, drifting music notes and a small fish silhouette. White background. A subtle warm orange (#FF5A1F) accent is allowed only on the sun.",
-    refs: ["heroMegafono"], size: "1024x1024", quality: "medium", category: "web" },
+    prompt: "Small editorial icon-illustration symbolic of a Mediterranean festival in Amsterdam: a stylized sun with rays, two drifting music notes and a tiny fish silhouette. Navy and teal on white. A subtle warm amber (#F5A623) accent inside the sun is allowed.",
+    refs: sceneRefs, size: "1024x1024", quality: "medium", category: "web" },
 
   { id: "hero-eventos-marcas", dest: "public/img/heroes/eventos-marcas.png",
-    prompt: "Wide editorial illustration: a brand activation scene — a modular stage outline with a draped curtain, a single performer (use the Bonito Sound hero silhouette) at the mic, lights above. Line work, white background.",
-    refs: heroRefs, size: "1536x1024", quality: "medium", category: "web" },
+    prompt: "Wide editorial composition: the Bonito Sound hero character at the mic on a stylized stage with two stage lights above and a draped curtain. Around them, decorative motifs scattered like confetti — tiny stars, music notes, wavy lines. Navy character on white background, teal accents.",
+    refs: composedRefs, size: "1536x1024", quality: "medium", category: "web" },
 
   { id: "hero-nosotros", dest: "public/img/heroes/nosotros.png",
-    prompt: "Wide editorial illustration: three Bonito Sound hero figures standing together in different welcoming poses (waving, hands in pockets, arms crossed). Group portrait energy. Line work, white background. No real faces — pure stylized silhouettes following the reference style.",
-    refs: heroRefs, size: "1536x1024", quality: "medium", category: "web" },
+    prompt: "Wide editorial composition: three Bonito Sound hero figures standing together in different welcoming poses (waving, hands on hips, arms crossed). Group portrait energy with tiny decorative motifs (stars, dots, a wavy underline) scattered around them. White background, navy figures, teal highlights. No real human faces — pure stylized silhouettes following the reference exactly.",
+    refs: composedRefs, size: "1536x1024", quality: "medium", category: "web" },
 
   { id: "hero-records", dest: "public/img/heroes/records.png",
-    prompt: "Wide editorial illustration: a recording studio scene — large vintage microphone, mixing console outline, a vinyl record on the side, a small hero silhouette in the background. Line work, white background.",
-    refs: ["heroMegafono"], size: "1536x1024", quality: "medium", category: "web" },
+    prompt: "Wide editorial composition: a recording studio scene with a large vintage microphone in the foreground, mixing console outline, a vinyl record. The Bonito Sound hero character is small in the background. Scattered decorative motifs (notes, dots). Navy and teal on white.",
+    refs: composedRefs, size: "1536x1024", quality: "medium", category: "web" },
 
   { id: "hero-lab", dest: "public/img/heroes/lab.png",
-    prompt: "Wide editorial illustration: the Bonito Sound hero in a 'connecting' pose with abstract wifi-style arcs and network lines spreading from them across the composition. Line work, white background.",
-    refs: heroRefs, size: "1536x1024", quality: "medium", category: "web" },
+    prompt: "Wide editorial composition: the Bonito Sound hero in a 'connecting' pose with abstract wifi-style arcs and a constellation network spreading from one hand. Scattered tiny decorative motifs (dots, stars). Navy and teal on white background.",
+    refs: composedRefs, size: "1536x1024", quality: "medium", category: "web" },
 
   { id: "caso-ballantines", dest: "public/img/casos/ballantines.png",
-    prompt: "Symbolic editorial illustration of a premium spirits brand activation with live music: a stylized whisky bottle outline, two intersecting sound waves and a stage outline. No real logos, no brand names, no text. Line work, white background.",
-    refs: ["heroMegafono"], size: "1024x1024", quality: "medium", category: "web" },
+    prompt: "Symbolic editorial composition for a premium spirits brand activation with live music: a stylized whisky bottle silhouette, two intersecting sound waves and a small stage outline. Scattered tiny stars and notes. No real logos, no brand names, no text. Navy and teal on white.",
+    refs: sceneRefs, size: "1024x1024", quality: "medium", category: "web" },
 
   { id: "caso-pernod-ricard", dest: "public/img/casos/pernod-ricard.png",
-    prompt: "Symbolic editorial illustration of a cultural premium brand experience with curated music: a stylized cocktail glass, a turntable and abstract music notes. No real logos, no text. Line work, white background.",
-    refs: ["heroMegafono"], size: "1024x1024", quality: "medium", category: "web" },
+    prompt: "Symbolic editorial composition for a cultural premium brand experience: a stylized cocktail glass, a small turntable and a few music notes drifting. Scattered tiny dots and a wavy underline. No real logos, no text. Navy and teal on white.",
+    refs: sceneRefs, size: "1024x1024", quality: "medium", category: "web" },
 
   { id: "caso-gira-1016", dest: "public/img/casos/gira-1016.png",
-    prompt: "Symbolic editorial illustration of a music tour reaching its final arena show: a tour van outline at the bottom-left, a stadium silhouette with stage lights at the back, and a flowing road connecting them. No text. Line work, white background.",
-    refs: ["heroMegafono"], size: "1536x1024", quality: "medium", category: "web" },
+    prompt: "Symbolic editorial composition of a music tour reaching its final arena show: a tour van outline at the bottom-left, a stadium silhouette with stage lights at the back, a flowing road connecting them, scattered tiny stars. No text. Navy and teal on white.",
+    refs: sceneRefs, size: "1536x1024", quality: "medium", category: "web" },
 
   { id: "opengraph", dest: "app/opengraph-image.png",
-    prompt: "Social-share composition for the website 'Bonito Sound'. Centered-left: the Bonito Sound hero character in a confident pose (exactly as in the reference). Centered-right: the clean wordmark 'Bonito.Sound' in a friendly serif typeface, with a single accent dot in medium blue. White background, generous margins, wide aspect.",
-    refs: ["heroVuelo", "logo"], size: "1536x1024", quality: "high", category: "web" },
+    prompt: "Wide social-share composition for the Bonito Sound website. Left side: the Bonito Sound hero character in a confident pose (exactly as in the reference, navy + teal). Right side: the handwritten script wordmark 'Bonito Sound' in navy blue (as in the reference mockups). Scattered tiny decorative motifs (stars, notes, dots) across the background. Pure white background, generous margins.",
+    refs: composedRefs, size: "1536x1024", quality: "high", category: "web" },
 
   // ─────────────────────────── BANCO VISUAL (28) ───────────────────────────
 
