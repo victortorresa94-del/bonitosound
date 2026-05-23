@@ -2,7 +2,7 @@
 name: "OTEM"
 genre: "Urbano / Pop alternativo"
 tier: "booking"
-spotifyArtistId: ""
+spotifyArtistId: "382ZStNMRpkdxhvwYgQRaU"
 instagram: ""
 reels: []
 ---

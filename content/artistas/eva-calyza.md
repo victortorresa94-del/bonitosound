@@ -3,7 +3,8 @@ name: "Eva Calyza"
 genre: "Pop / Electrónica"
 tier: "booking"
 spotifyArtistId: ""
-instagram: ""
+instagram: "https://www.instagram.com/evacalyza"
+image: "/img/artistas/eva-calyza.jpg"
 reels: []
 ---
 A Eva Calyza la gestiona Manu personalmente. Eso ya te dice algo: aquí no hay artistas de primera y de segunda, hay gente a la que llevamos a mano.

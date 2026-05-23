@@ -3,7 +3,8 @@ name: "Dulze"
 genre: "Pop / R&B"
 tier: "booking"
 spotifyArtistId: ""
-instagram: ""
+instagram: "https://www.instagram.com/duuuulze"
+image: "/img/artistas/dulze.png"
 reels: []
 ---
 Dulze tiene una voz que no necesita subir el volumen para que te calles. Eso, en directo, vale oro.

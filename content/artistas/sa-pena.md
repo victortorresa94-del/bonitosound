@@ -3,7 +3,8 @@ name: "Sa Pena"
 genre: "Mestizaje / Raíz mediterránea"
 tier: "booking"
 spotifyArtistId: ""
-instagram: ""
+instagram: "https://www.instagram.com/sa_pena_"
+image: "/img/artistas/sa-pena.jpg"
 reels: []
 ---
 Sa Pena suena a sitio. A puerto, a sobremesa larga, a algo que no se inventa en un estudio en dos tardes.

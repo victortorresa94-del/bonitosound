@@ -53,9 +53,14 @@ export const team = [
     line: "Project management, financiación y booking. Lleva a Eva Calyza de la mano.",
   },
   {
-    name: "Júlia Martín",
-    role: "Producto y marketing",
-    line: "La que mueve esto cada día. Si la web está viva, es por ella.",
+    name: "Xavi Julià",
+    role: "Producción",
+    line: "El que hace que el deck se convierta en evento. Sin él, no hay escenario.",
+  },
+  {
+    name: "Cristina Soler",
+    role: "Comunicación",
+    line: "La voz que coordina lo de fuera y lo de dentro. Si te llega, es porque ella lo manda.",
   },
 ] as const;
 
@@ -127,4 +132,7 @@ export const distributionCatalog = [
   "Eva Calyza",
   "Kenai White",
   "Overpulation",
+  "D Nácar",
+  "AlexDeLion",
+  "Marco la Testa",
 ] as const;

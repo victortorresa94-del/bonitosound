@@ -85,8 +85,8 @@ export default function Nosotros() {
           })}
         </div>
         <p className="mt-6 text-sm text-text-muted">
-          Roser Gamonal y Cristina: rol exacto y aparición pública pendiente de
-          confirmar con Víctor (§17 del brief).
+          Roser Gamonal y Júlia Martín: pendiente confirmar incorporación al
+          equipo público con Dani Boada (§17 del brief).
         </p>
       </Section>
 
