@@ -11,7 +11,7 @@
 //   category  "web" (slot fijo del sitio) | "banco" (extras navegables)
 
 export const REFS = {
-  logo: "public/img/marca/logo-bonito.avif",
+  logo: "public/img/marca/logo-bonito.png",
   heroVuelo: "public/img/marca/heroe-volando.jpeg",
   heroMegafono: "public/img/marca/heroe-megafono.jpeg",
   // Mockups del estilo real de la web (referencias UI/UX de Víctor):
