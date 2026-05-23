@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Section, Heading, Eyebrow, Cta } from "@/components/ui";
+import { findAsset } from "@/lib/assets";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -13,8 +15,8 @@ export default function Lab() {
   return (
     <>
       <section className="border-b border-subtle">
-        <div className="wrap py-24 md:py-32">
-          <div className="stagger max-w-3xl">
+        <div className="wrap grid items-center gap-10 py-24 md:grid-cols-[1.2fr_1fr] md:py-32">
+          <div className="stagger">
             <Eyebrow>Lab</Eyebrow>
             <Heading as="h1">
               El sector mueve carreras por WhatsApp. Nos parece flipante.
@@ -24,6 +26,14 @@ export default function Lab() {
               esperamos a que alguien lo arregle. Lo construimos.
             </p>
           </div>
+          {(() => {
+            const img = findAsset("heroes", "lab");
+            return img ? (
+              <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-subtle">
+                <Image src={img} alt="" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
+              </div>
+            ) : null;
+          })()}
         </div>
       </section>
 

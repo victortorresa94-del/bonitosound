@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Section, Heading, Eyebrow, Cta, Faq, JsonLd } from "@/components/ui";
 import { LeadMagnetArtists } from "@/components/LeadMagnetArtists";
 import { LogoWall } from "@/components/LogoWall";
 import { getArtists } from "@/lib/content";
+import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -68,8 +70,8 @@ export default function Records() {
       />
 
       <section className="border-b border-subtle">
-        <div className="wrap py-24 md:py-32">
-          <div className="stagger max-w-3xl">
+        <div className="wrap grid items-center gap-10 py-24 md:grid-cols-[1.2fr_1fr] md:py-32">
+          <div className="stagger">
             <Eyebrow>Records</Eyebrow>
             <Heading as="h1">
               Tienes la música. Te falta el sistema.
@@ -79,6 +81,14 @@ export default function Records() {
               mayoría te hace montar con cinco proveedores, aquí está en uno.
             </p>
           </div>
+          {(() => {
+            const img = findAsset("heroes", "records");
+            return img ? (
+              <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-subtle">
+                <Image src={img} alt="" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
+              </div>
+            ) : null;
+          })()}
         </div>
       </section>
 
