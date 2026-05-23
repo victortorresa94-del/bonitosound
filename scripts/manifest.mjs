@@ -22,6 +22,8 @@ export const REFS = {
 
 export const STYLE = [
   "Style requirement: Bonito Sound brand identity, exactly as in the provided reference mockups.",
+  "MANDATORY: pure flat white background (#FFFFFF). No vignette, no gradient backdrop, no stage lighting,",
+  "no colored ambient, no photographic background — just clean flat white edge to edge.",
   "Paleta: pure white background with dark navy blue (#0B1E2F) for typography and the hero character,",
   "teal/turquoise (#1FB89A) for highlights and primary buttons, warm cream (#F8EFD8) for blob-shaped accents,",
   "and a very sparing touch of warm amber (#F5A623) for tiny badges only.",
@@ -71,7 +73,7 @@ export const manifest = [
     refs: sceneRefs, size: "1024x1024", quality: "medium", category: "web" },
 
   { id: "hero-eventos-marcas", dest: "public/img/heroes/eventos-marcas.png",
-    prompt: "Wide editorial composition: the Bonito Sound hero character at the mic on a stylized stage with two stage lights above and a draped curtain. Around them, decorative motifs scattered like confetti — tiny stars, music notes, wavy lines. Navy character on white background, teal accents.",
+    prompt: "Wide editorial illustration on PURE FLAT WHITE BACKGROUND (no stage, no curtain, no spotlights drawn as a scene). The Bonito Sound navy hero character at the mic, confident pose. Around them: two simple line-drawn stage lights as small decorative icons, tiny music notes, stars, wavy lines and dots scattered like confetti. NO vignette, NO colored backdrop, NO ambient lighting — flat white canvas with character and confetti motifs only.",
     refs: composedRefs, size: "1536x1024", quality: "medium", category: "web" },
 
   { id: "hero-nosotros", dest: "public/img/heroes/nosotros.png",
