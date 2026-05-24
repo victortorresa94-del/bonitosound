@@ -1,0 +1,42 @@
+import type { MetadataRoute } from "next";
+import { getArtists } from "@/lib/content";
+import { site } from "@/lib/site";
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const routes = [
+    "",
+    "/eventos",
+    "/eventos/marcas",
+    "/eventos/giras",
+    "/records",
+    "/records/sello",
+    "/records/booking-management",
+    "/records/distribucion",
+    "/artistas",
+    "/lab",
+    "/lab/artiverse",
+    "/lab/giraverse",
+    "/jaleo-sound",
+    "/nosotros",
+    "/agenda",
+    "/diario",
+    "/contacto",
+  ];
+
+  const now = new Date();
+  const base = routes.map((r) => ({
+    url: `${site.url}${r}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: r === "" ? 1 : r === "/eventos/marcas" ? 0.9 : 0.7,
+  }));
+
+  const artists = getArtists().map((a) => ({
+    url: `${site.url}/artistas/${a.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...base, ...artists];
+}

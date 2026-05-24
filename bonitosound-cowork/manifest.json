@@ -1,0 +1,53 @@
+{
+  "_meta": {
+    "source": "bonitosound.com (scraped via web_fetch)",
+    "fetched_at": "2026-05-23",
+    "repo": "victortorresa94-del/bonitosound",
+    "branch": "claude/bonito-sound-web-YDR54"
+  },
+  "marca": {
+    "logo-bonito.svg":       { "src": "https://bonitosound.com/wp-content/uploads/2024/04/logo.svg",   "dest": "public/img/marca/logo-bonito.svg" },
+    "logo-bonito-color.svg": { "src": "https://bonitosound.com/wp-content/uploads/2024/04/logo-1.svg", "dest": "public/img/marca/logo-bonito-color.svg" }
+  },
+  "artistas": {
+    "paule":          { "src": "https://bonitosound.com/wp-content/uploads/2025/11/image00001.jpeg",                "instagram": "https://www.instagram.com/paulemusica", "dest": "public/img/artistas/paule.jpeg" },
+    "sa-pena":        { "src": "https://bonitosound.com/wp-content/uploads/2024/10/FOTO-DE-GRUP-scaled.jpg",        "instagram": null, "dest": "public/img/artistas/sa-pena.jpg" },
+    "natura":         { "src": "https://bonitosound.com/wp-content/uploads/2024/04/DJ-Natura-feat-scaled.jpg",      "instagram": null, "dest": "public/img/artistas/natura.jpg" },
+    "dulze":          { "src": "https://bonitosound.com/wp-content/uploads/2025/04/ps1.png",                         "instagram": "https://www.instagram.com/duuuulze", "dest": "public/img/artistas/dulze.png" },
+    "eva-calyza":     { "src": "https://bonitosound.com/wp-content/uploads/2024/06/Eva-Calyza-2.jpg",                "instagram": "https://www.instagram.com/evacalyza", "dest": "public/img/artistas/eva-calyza.jpg" },
+    "pablo-rojo":     { "src": "https://bonitosound.com/wp-content/uploads/2024/07/IMG_0251-scaled.jpg",             "instagram": null, "dest": "public/img/artistas/pablo-rojo.jpg" },
+    "d-nacar":        { "src": "https://bonitosound.com/wp-content/uploads/2025/01/D-NACAR-scaled.jpeg",             "instagram": null, "dest": "public/img/artistas/d-nacar.jpeg" },
+    "alexdelion":     { "src": "https://bonitosound.com/wp-content/uploads/2025/01/Campeonato-cover.png",            "instagram": null, "dest": "public/img/artistas/alexdelion.png" },
+    "marco-la-testa": { "src": "https://bonitosound.com/wp-content/uploads/2025/01/Marco-la-Testa-scaled.jpeg",      "instagram": null, "dest": "public/img/artistas/marco-la-testa.jpeg" },
+    "hebe":           { "src": "https://bonitosound.com/wp-content/uploads/2025/01/IMG_5857-scaled-e1738156300749.jpeg", "instagram": null, "dest": "public/img/artistas/hebe.jpeg" }
+  },
+  "equipo": {
+    "dani-boada":     { "src": "https://bonitosound.com/wp-content/uploads/2024/06/DANIEL_BOADA_BONITO_SOUND_2024__001-e1721832808420.jpg", "dest": "public/img/equipo/dani-boada.jpg" },
+    "manu-rojo":      { "src": "https://bonitosound.com/wp-content/uploads/2024/06/manu_rojo_bonito_sound-copia.jpg",                       "dest": "public/img/equipo/manu-rojo.jpg" },
+    "xavi-julia":     { "src": "https://bonitosound.com/wp-content/uploads/2024/07/xavi_julia_bonito_sound-copia.jpg",                      "dest": "public/img/equipo/xavi-julia.jpg" },
+    "cristina-soler": { "src": "https://bonitosound.com/wp-content/uploads/2025/03/b819c45d-314f-4d61-9953-acd80ee30cc3-2.jpg",            "dest": "public/img/equipo/cristina-soler.jpg" }
+  },
+  "marcas": {
+    "ballantines":            { "src": "https://bonitosound.com/wp-content/uploads/2024/04/image-1.png",  "dest": "public/img/marcas/ballantines.png" },
+    "sweet-bird":             { "src": "https://bonitosound.com/wp-content/uploads/2024/04/image-2.png",  "dest": "public/img/marcas/sweet-bird.png" },
+    "font-vella":             { "src": "https://bonitosound.com/wp-content/uploads/2024/04/image-3.png",  "dest": "public/img/marcas/font-vella.png" },
+    "global-talent-services": { "src": "https://bonitosound.com/wp-content/uploads/2024/04/image-4.png",  "dest": "public/img/marcas/global-talent-services.png" },
+    "four-roses":             { "src": "https://bonitosound.com/wp-content/uploads/2024/04/image-5.png",  "dest": "public/img/marcas/four-roses.png" },
+    "schweppes":              { "src": "https://bonitosound.com/wp-content/uploads/2024/04/image-6.png",  "dest": "public/img/marcas/schweppes.png" },
+    "la-sucursal":            { "src": "https://bonitosound.com/wp-content/uploads/2024/04/image-7.png",  "dest": "public/img/marcas/la-sucursal.png" },
+    "concert-studio":         { "src": "https://bonitosound.com/wp-content/uploads/2024/04/image-10.png", "dest": "public/img/marcas/concert-studio.png" },
+    "gestmusic":              { "src": "https://bonitosound.com/wp-content/uploads/2024/04/image-13.png", "dest": "public/img/marcas/gestmusic.png" },
+    "universal":              { "src": "https://bonitosound.com/wp-content/uploads/2024/04/image-15.png", "dest": "public/img/marcas/universal.png" }
+  },
+  "instituciones": {
+    "ufi":                    { "src": "https://bonitosound.com/wp-content/uploads/2024/10/UFI_logo.png",               "dest": "public/img/instituciones/ufi.png" },
+    "sgae":                   { "src": "https://bonitosound.com/wp-content/uploads/2024/10/sgae_logo.png",              "dest": "public/img/instituciones/sgae.png" },
+    "agedi":                  { "src": "https://bonitosound.com/wp-content/uploads/2024/10/agedi_logo.png",             "dest": "public/img/instituciones/agedi.png" },
+    "arte":                   { "src": "https://bonitosound.com/wp-content/uploads/2024/10/arte_logo.png",              "dest": "public/img/instituciones/arte.png" },
+    "aedem":                  { "src": "https://bonitosound.com/wp-content/uploads/2024/10/AEDEM_white.png",            "dest": "public/img/instituciones/aedem.png" },
+    "european-music-council": { "src": "https://bonitosound.com/wp-content/uploads/2024/10/european-music-council.png", "dest": "public/img/instituciones/european-music-council.png" },
+    "plan-recuperacion":      { "src": "https://bonitosound.com/wp-content/uploads/2024/04/plan-recuperacion.svg",      "dest": "public/img/instituciones/plan-recuperacion.svg" },
+    "institut-llull":         { "src": "https://bonitosound.com/wp-content/uploads/2026/04/Institut_llull_Marca_White_H-300x73.png", "dest": "public/img/instituciones/institut-llull.png" },
+    "union-europea":          { "src": "https://bonitosound.com/wp-content/uploads/2024/04/union-europea.svg",          "dest": "public/img/instituciones/union-europea.svg" }
+  }
+}

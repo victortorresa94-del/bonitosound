@@ -1,0 +1,6 @@
+Ilustraciones de las 4 cards de verticales en la home.
+Generadas por scripts/generate-images.mjs.
+
+  eventos.png · records.png · lab.png · jaleo.png
+
+Si el PNG no existe, la card cae al SVG inline del componente Superhero.
