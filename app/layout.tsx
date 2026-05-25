@@ -5,6 +5,7 @@ import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/ui";
+import { MotionProvider } from "@/components/motion";
 import { site, memberships, team } from "@/lib/site";
 
 const display = Fraunces({
@@ -70,9 +71,11 @@ export default function RootLayout({
     <html lang="es" className={`${display.variable} ${GeistSans.variable}`}>
       <body style={{ ["--font-body" as string]: "var(--font-geist-sans)" }}>
         <JsonLd data={orgLd} />
-        <Nav />
-        <main>{children}</main>
-        <Footer />
+        <MotionProvider>
+          <Nav />
+          <main>{children}</main>
+          <Footer />
+        </MotionProvider>
       </body>
     </html>
   );

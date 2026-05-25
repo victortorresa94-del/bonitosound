@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Section, Heading, Eyebrow, Cta, Faq, JsonLd } from "@/components/ui";
+import { Section, Heading, Eyebrow, Cta, JsonLd } from "@/components/ui";
 import { LeadMagnetBrands } from "@/components/LeadMagnetBrands";
-import { LogoWall } from "@/components/LogoWall";
+import {
+  RevealOnScroll,
+  StaggerGroup,
+  SplitTextReveal,
+  MagneticButton,
+  ParallaxLayer,
+  MarqueeLogoWall,
+  FaqMotion,
+} from "@/components/motion";
 import { getCases } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { brands, site } from "@/lib/site";
@@ -84,66 +92,99 @@ export default function EventosMarcas() {
 
       <section className="border-b border-subtle">
         <div className="wrap grid items-center gap-10 py-24 md:grid-cols-[1.3fr_1fr] md:py-32">
-          <div className="stagger">
-            <Eyebrow>Eventos para marcas</Eyebrow>
-            <Heading as="h1">
+          <div>
+            <RevealOnScroll as="p" className="eyebrow mb-4">
+              Eventos para marcas
+            </RevealOnScroll>
+            <SplitTextReveal
+              as="h1"
+              split="lines"
+              className="display text-[clamp(2.6rem,7vw,5.4rem)]"
+            >
               Música que la gente recuerda. No decorado.
-            </Heading>
-            <p className="mt-7 max-w-xl text-lg text-text-secondary">
+            </SplitTextReveal>
+            <RevealOnScroll as="p" className="mt-7 max-w-xl text-lg text-text-secondary" delay={0.2}>
               Producimos activaciones, lanzamientos y experiencias culturales
               para marcas premium. Del brief al titular, con un solo equipo.
-            </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Cta href="/contacto">Reservar llamada de 30 min →</Cta>
-              <Cta href="#disena" variant="ghost">
-                Diseña tu activación
-              </Cta>
-            </div>
+            </RevealOnScroll>
+            <RevealOnScroll className="mt-9 flex flex-wrap gap-4" delay={0.35}>
+              <MagneticButton strength={0.35}>
+                <Cta href="/contacto">Reservar llamada de 30 min →</Cta>
+              </MagneticButton>
+              <MagneticButton strength={0.25}>
+                <Cta href="#disena" variant="ghost">
+                  Diseña tu activación
+                </Cta>
+              </MagneticButton>
+            </RevealOnScroll>
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
             {heroImg && (
-              <Image
-                src={heroImg}
-                alt="Activación de marca con música — Bonito Sound"
-                fill
-                sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-cover"
-                priority
-              />
+              <ParallaxLayer speed={0.2} className="absolute inset-0">
+                <Image
+                  src={heroImg}
+                  alt="Activación de marca con música — Bonito Sound"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="object-cover scale-110"
+                  priority
+                />
+              </ParallaxLayer>
             )}
           </div>
         </div>
       </section>
 
       <Section id="disena">
-        <Eyebrow>Diseña tu activación en 90 segundos</Eyebrow>
-        <Heading>Cuéntanos qué tienes en la cabeza.</Heading>
-        <p className="mt-5 max-w-2xl text-text-secondary">
+        <RevealOnScroll as="p" className="eyebrow mb-4">
+          Diseña tu activación en 90 segundos
+        </RevealOnScroll>
+        <SplitTextReveal
+          as="h2"
+          split="lines"
+          className="display text-[clamp(2rem,4.5vw,3.4rem)]"
+        >
+          Cuéntanos qué tienes en la cabeza.
+        </SplitTextReveal>
+        <RevealOnScroll as="p" className="mt-5 max-w-2xl text-text-secondary" delay={0.15}>
           Cuatro preguntas. Sin email para usarlo. Al final te enseñamos qué
           del portfolio se parece a lo tuyo.
-        </p>
-        <div className="mt-10 max-w-3xl">
+        </RevealOnScroll>
+        <RevealOnScroll className="mt-10 max-w-3xl" delay={0.25}>
           <LeadMagnetBrands />
-        </div>
+        </RevealOnScroll>
       </Section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>Casos</Eyebrow>
-        <Heading>Lo hemos hecho. No lo contamos, lo montamos.</Heading>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <RevealOnScroll as="p" className="eyebrow mb-4">
+          Casos
+        </RevealOnScroll>
+        <SplitTextReveal
+          as="h2"
+          split="lines"
+          className="display text-[clamp(2rem,4.5vw,3.4rem)]"
+        >
+          Lo hemos hecho. No lo contamos, lo montamos.
+        </SplitTextReveal>
+        <StaggerGroup
+          stagger={0.12}
+          className="mt-12 grid gap-6 md:grid-cols-3"
+        >
           {cases.map((c) => {
             const cover = findAsset("casos", c.slug);
             return (
               <div key={c.slug} className="card overflow-hidden p-0">
-                <div className="relative aspect-[4/3] border-b border-subtle bg-bg-tertiary">
+                <div className="relative aspect-[4/3] overflow-hidden border-b border-subtle bg-bg-tertiary">
                   {cover && (
-                    <Image
-                      src={cover}
-                      alt={`${c.brand} — ${c.title}`}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover"
-                    />
+                    <ParallaxLayer speed={0.12} className="absolute inset-0">
+                      <Image
+                        src={cover}
+                        alt={`${c.brand} — ${c.title}`}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover scale-110"
+                      />
+                    </ParallaxLayer>
                   )}
                 </div>
                 <div className="p-7">
@@ -157,33 +198,57 @@ export default function EventosMarcas() {
               </div>
             );
           })}
-        </div>
+        </StaggerGroup>
       </Section>
 
       <Section>
-        <Eyebrow>Servicios</Eyebrow>
-        <Heading>Tres formas de hacerlo bien.</Heading>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <RevealOnScroll as="p" className="eyebrow mb-4">
+          Servicios
+        </RevealOnScroll>
+        <SplitTextReveal
+          as="h2"
+          split="lines"
+          className="display text-[clamp(2rem,4.5vw,3.4rem)]"
+        >
+          Tres formas de hacerlo bien.
+        </SplitTextReveal>
+        <StaggerGroup
+          stagger={0.1}
+          className="mt-12 grid gap-6 md:grid-cols-3"
+        >
           {services.map((s) => (
             <div key={s.name} className="card">
               <h3 className="display text-2xl">{s.name}</h3>
               <p className="mt-3 text-text-secondary">{s.desc}</p>
             </div>
           ))}
-        </div>
+        </StaggerGroup>
       </Section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>Marcas con las que hemos trabajado</Eyebrow>
-        <div className="mt-8">
-          <LogoWall items={brands} dir="marcas" />
-        </div>
+        <RevealOnScroll as="p" className="eyebrow mb-4">
+          Marcas con las que hemos trabajado
+        </RevealOnScroll>
+        <RevealOnScroll className="mt-8">
+          <MarqueeLogoWall items={brands} dir="marcas" speed={40} />
+        </RevealOnScroll>
       </Section>
 
       <Section>
-        <Eyebrow>Por qué nosotros</Eyebrow>
-        <Heading>Cuatro razones, ninguna de relleno.</Heading>
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <RevealOnScroll as="p" className="eyebrow mb-4">
+          Por qué nosotros
+        </RevealOnScroll>
+        <SplitTextReveal
+          as="h2"
+          split="lines"
+          className="display text-[clamp(2rem,4.5vw,3.4rem)]"
+        >
+          Cuatro razones, ninguna de relleno.
+        </SplitTextReveal>
+        <StaggerGroup
+          stagger={0.1}
+          className="mt-12 grid gap-6 md:grid-cols-2"
+        >
           {why.map((w, i) => (
             <div key={i} className="flex gap-5 card">
               <span className="display text-3xl text-accent-blue">
@@ -192,30 +257,40 @@ export default function EventosMarcas() {
               <p className="text-text-secondary">{w}</p>
             </div>
           ))}
-        </div>
+        </StaggerGroup>
       </Section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>Preguntas frecuentes</Eyebrow>
-        <Heading>Lo que nos preguntáis antes de la llamada.</Heading>
-        <div className="mt-10 max-w-3xl">
-          <Faq items={faq} />
-        </div>
+        <RevealOnScroll as="p" className="eyebrow mb-4">
+          Preguntas frecuentes
+        </RevealOnScroll>
+        <SplitTextReveal
+          as="h2"
+          split="lines"
+          className="display text-[clamp(2rem,4.5vw,3.4rem)]"
+        >
+          Lo que nos preguntáis antes de la llamada.
+        </SplitTextReveal>
+        <RevealOnScroll className="mt-10 max-w-3xl" delay={0.2}>
+          <FaqMotion items={faq} />
+        </RevealOnScroll>
       </Section>
 
       <Section>
-        <div className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
+        <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
           <Heading>¿Lo hablamos?</Heading>
           <p className="mx-auto mt-4 max-w-xl text-text-secondary">
             Una llamada de 30 minutos. Tú cuentas el evento, nosotros te
             decimos qué se puede hacer de verdad.
           </p>
           <div className="mt-8 flex justify-center">
-            <Cta href={`mailto:${site.emails.general}?subject=Llamada%20activación`}>
-              Reservar llamada →
-            </Cta>
+            <MagneticButton strength={0.5}>
+              <Cta href={`mailto:${site.emails.general}?subject=Llamada%20activación`}>
+                Reservar llamada →
+              </Cta>
+            </MagneticButton>
           </div>
-        </div>
+        </RevealOnScroll>
       </Section>
     </>
   );

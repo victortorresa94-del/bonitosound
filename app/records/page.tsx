@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Section, Heading, Eyebrow, Cta, Faq, JsonLd } from "@/components/ui";
+import { Section, Heading, Eyebrow, Cta, JsonLd } from "@/components/ui";
 import { LeadMagnetArtists } from "@/components/LeadMagnetArtists";
-import { LogoWall } from "@/components/LogoWall";
+import {
+  RevealOnScroll,
+  StaggerGroup,
+  SplitTextReveal,
+  MagneticButton,
+  ParallaxLayer,
+  MarqueeLogoWall,
+  FaqMotion,
+} from "@/components/motion";
 import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
@@ -71,21 +79,29 @@ export default function Records() {
 
       <section className="border-b border-subtle">
         <div className="wrap grid items-center gap-10 py-24 md:grid-cols-[1.2fr_1fr] md:py-32">
-          <div className="stagger">
-            <Eyebrow>Records</Eyebrow>
-            <Heading as="h1">
+          <div>
+            <RevealOnScroll as="p" className="eyebrow mb-4">
+              Records
+            </RevealOnScroll>
+            <SplitTextReveal
+              as="h1"
+              split="lines"
+              className="display text-[clamp(2.6rem,7vw,5.4rem)]"
+            >
               Tienes la música. Te falta el sistema.
-            </Heading>
-            <p className="mt-7 text-lg text-text-secondary">
+            </SplitTextReveal>
+            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
               Sello, booking, management, distribución y editorial. Lo que la
               mayoría te hace montar con cinco proveedores, aquí está en uno.
-            </p>
+            </RevealOnScroll>
           </div>
           {(() => {
             const img = findAsset("heroes", "records");
             return img ? (
               <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-subtle">
-                <Image src={img} alt="" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
+                <ParallaxLayer speed={0.2} className="absolute inset-0">
+                  <Image src={img} alt="" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover scale-110" />
+                </ParallaxLayer>
               </div>
             ) : null;
           })()}
@@ -93,57 +109,70 @@ export default function Records() {
       </section>
 
       <Section>
-        <Eyebrow>¿Encajas con Bonito?</Eyebrow>
-        <Heading>No te vendemos humo. Te decimos qué te toca.</Heading>
-        <div className="mt-10 max-w-3xl">
+        <RevealOnScroll as="p" className="eyebrow mb-4">¿Encajas con Bonito?</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          No te vendemos humo. Te decimos qué te toca.
+        </SplitTextReveal>
+        <RevealOnScroll className="mt-10 max-w-3xl" delay={0.15}>
           <LeadMagnetArtists />
-        </div>
+        </RevealOnScroll>
       </Section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>Servicios</Eyebrow>
-        <Heading>Cuatro piezas del mismo sistema.</Heading>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <RevealOnScroll as="p" className="eyebrow mb-4">Servicios</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          Cuatro piezas del mismo sistema.
+        </SplitTextReveal>
+        <StaggerGroup stagger={0.08} className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s) => (
             <div key={s.name} className="card">
               <h3 className="display text-xl">{s.name}</h3>
               <p className="mt-3 text-sm text-text-secondary">{s.desc}</p>
             </div>
           ))}
-        </div>
+        </StaggerGroup>
       </Section>
 
       <Section>
-        <Eyebrow>Roster</Eyebrow>
-        <Heading>A estos los llevamos nosotros.</Heading>
-        <div className="mt-10 flex flex-wrap gap-3">
+        <RevealOnScroll as="p" className="eyebrow mb-4">Roster</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          A estos los llevamos nosotros.
+        </SplitTextReveal>
+        <StaggerGroup stagger={0.04} className="mt-10 flex flex-wrap gap-3">
           {roster.map((a) => (
             <Link
               key={a.slug}
               href={`/artistas/${a.slug}`}
               className="btn btn-ghost"
+              data-cursor="link"
             >
               {a.name}
             </Link>
           ))}
-          <Link href="/artistas" className="btn btn-primary">
-            Roster completo →
-          </Link>
-        </div>
+          <MagneticButton strength={0.3}>
+            <Link href="/artistas" className="btn btn-primary">
+              Roster completo →
+            </Link>
+          </MagneticButton>
+        </StaggerGroup>
       </Section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>Catálogo de distribución</Eyebrow>
-        <Heading>~20 artistas, una distribuidora.</Heading>
-        <div className="mt-10">
-          <LogoWall items={distributionCatalog} dir="artistas" />
-        </div>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Catálogo de distribución</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          ~20 artistas, una distribuidora.
+        </SplitTextReveal>
+        <RevealOnScroll className="mt-10" delay={0.2}>
+          <MarqueeLogoWall items={distributionCatalog} dir="artistas" speed={35} />
+        </RevealOnScroll>
       </Section>
 
       <Section>
-        <Eyebrow>Cómo trabajamos</Eyebrow>
-        <Heading>Cuatro pasos. Sin letra pequeña.</Heading>
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <RevealOnScroll as="p" className="eyebrow mb-4">Cómo trabajamos</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          Cuatro pasos. Sin letra pequeña.
+        </SplitTextReveal>
+        <StaggerGroup stagger={0.1} className="mt-12 grid gap-6 md:grid-cols-2">
           {steps.map((s, i) => (
             <div key={i} className="flex gap-5 card">
               <span className="display text-3xl text-accent-warm">
@@ -152,24 +181,32 @@ export default function Records() {
               <p className="text-text-secondary">{s}</p>
             </div>
           ))}
-        </div>
+        </StaggerGroup>
       </Section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>Preguntas frecuentes</Eyebrow>
-        <Heading>Lo básico, claro.</Heading>
-        <div className="mt-10 max-w-3xl">
-          <Faq items={faq} />
-        </div>
-        <div className="mt-12 flex flex-wrap gap-4">
-          <Cta href="/records/sello">Sello →</Cta>
-          <Cta href="/records/booking-management" variant="ghost">
-            Booking y management →
-          </Cta>
-          <Cta href="/records/distribucion" variant="ghost">
-            Distribución →
-          </Cta>
-        </div>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          Lo básico, claro.
+        </SplitTextReveal>
+        <RevealOnScroll className="mt-10 max-w-3xl" delay={0.15}>
+          <FaqMotion items={faq} />
+        </RevealOnScroll>
+        <RevealOnScroll className="mt-12 flex flex-wrap gap-4" delay={0.25}>
+          <MagneticButton strength={0.3}>
+            <Cta href="/records/sello">Sello →</Cta>
+          </MagneticButton>
+          <MagneticButton strength={0.25}>
+            <Cta href="/records/booking-management" variant="ghost">
+              Booking y management →
+            </Cta>
+          </MagneticButton>
+          <MagneticButton strength={0.25}>
+            <Cta href="/records/distribucion" variant="ghost">
+              Distribución →
+            </Cta>
+          </MagneticButton>
+        </RevealOnScroll>
       </Section>
     </>
   );

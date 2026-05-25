@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Section, Heading, Eyebrow } from "@/components/ui";
+import { Section } from "@/components/ui";
 import { ContactForm } from "@/components/ContactForm";
+import { RevealOnScroll, SplitTextReveal } from "@/components/motion";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -15,9 +16,11 @@ export default function Contacto() {
     <>
       <section className="border-b border-subtle">
         <div className="wrap py-24 md:py-32">
-          <div className="stagger max-w-3xl">
-            <Eyebrow>Contacto</Eyebrow>
-            <Heading as="h1">Cuéntanoslo. Te contestamos nosotros.</Heading>
+          <div className="max-w-3xl">
+            <RevealOnScroll as="p" className="eyebrow mb-4">Contacto</RevealOnScroll>
+            <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
+              Cuéntanoslo. Te contestamos nosotros.
+            </SplitTextReveal>
           </div>
         </div>
       </section>

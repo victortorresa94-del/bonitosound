@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
-import { Section, Heading, Eyebrow } from "@/components/ui";
+import { Section } from "@/components/ui";
+import { RevealOnScroll, SplitTextReveal, StaggerGroup } from "@/components/motion";
 
 export const metadata: Metadata = {
   title: "Banco visual",
@@ -26,18 +27,20 @@ export default function BancoVisual() {
     <>
       <section className="border-b border-subtle">
         <div className="wrap py-20 md:py-28">
-          <div className="stagger max-w-3xl">
-            <Eyebrow>Interno · noindex</Eyebrow>
-            <Heading as="h1">Banco visual.</Heading>
-            <p className="mt-7 text-lg text-text-secondary">
+          <div className="max-w-3xl">
+            <RevealOnScroll as="p" className="eyebrow mb-4">Interno · noindex</RevealOnScroll>
+            <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
+              Banco visual.
+            </SplitTextReveal>
+            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
               Todas las imágenes generadas que no están colocadas en un slot
               concreto del sitio. Para usar una: copia su nombre, muévela a la
               carpeta que toque y cablea con <code>findAsset</code>.
-            </p>
-            <p className="mt-3 text-sm text-text-muted">
+            </RevealOnScroll>
+            <RevealOnScroll as="p" className="mt-3 text-sm text-text-muted" delay={0.3}>
               {files.length} {files.length === 1 ? "imagen" : "imágenes"} en{" "}
               <code>public/img/banco/</code>
-            </p>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
@@ -52,7 +55,7 @@ export default function BancoVisual() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <StaggerGroup stagger={0.04} className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {files.map((f) => (
               <figure
                 key={f}
@@ -72,7 +75,7 @@ export default function BancoVisual() {
                 </figcaption>
               </figure>
             ))}
-          </div>
+          </StaggerGroup>
         )}
       </Section>
     </>

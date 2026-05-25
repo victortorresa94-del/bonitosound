@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
-import { Section, Heading, Eyebrow, Cta, Faq, JsonLd } from "@/components/ui";
-import { LogoWall } from "@/components/LogoWall";
+import { Section, Cta, JsonLd } from "@/components/ui";
+import {
+  RevealOnScroll,
+  SplitTextReveal,
+  MagneticButton,
+  FaqMotion,
+  MarqueeLogoWall,
+} from "@/components/motion";
 import { distributionCatalog, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -41,34 +47,40 @@ export default function Distribucion() {
       />
       <section className="border-b border-subtle">
         <div className="wrap py-24 md:py-32">
-          <div className="stagger max-w-3xl">
-            <Eyebrow>Records · Distribución & Editorial</Eyebrow>
-            <Heading as="h1">Tu música en las plataformas. Bien.</Heading>
-            <p className="mt-7 text-lg text-text-secondary">
+          <div className="max-w-3xl">
+            <RevealOnScroll as="p" className="eyebrow mb-4">Records · Distribución & Editorial</RevealOnScroll>
+            <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
+              Tu música en las plataformas. Bien.
+            </SplitTextReveal>
+            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
               Subir música es fácil. Subirla bien — metadatos, calendario,
               editorial — es lo que separa una carrera de un perfil.
-            </p>
-            <div className="mt-9">
-              <Cta href={`mailto:${site.emails.booking}?subject=Distribución`}>
-                Distribuir con Bonito →
-              </Cta>
-            </div>
+            </RevealOnScroll>
+            <RevealOnScroll className="mt-9" delay={0.35}>
+              <MagneticButton strength={0.35}>
+                <Cta href={`mailto:${site.emails.booking}?subject=Distribución`}>
+                  Distribuir con Bonito →
+                </Cta>
+              </MagneticButton>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
 
       <Section>
-        <Eyebrow>En catálogo</Eyebrow>
-        <Heading>~20 artistas ya distribuyen con nosotros.</Heading>
+        <RevealOnScroll as="p" className="eyebrow mb-4">En catálogo</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          ~20 artistas ya distribuyen con nosotros.
+        </SplitTextReveal>
         <div className="mt-10">
-          <LogoWall items={distributionCatalog} dir="artistas" />
+          <MarqueeLogoWall items={distributionCatalog} dir="artistas" label="En catálogo" speed={35} />
         </div>
       </Section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>Preguntas frecuentes</Eyebrow>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
         <div className="mt-8 max-w-3xl">
-          <Faq items={faq} />
+          <FaqMotion items={faq} />
         </div>
       </Section>
     </>

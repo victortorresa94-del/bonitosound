@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { Section, Heading, Eyebrow, Cta, Faq, JsonLd } from "@/components/ui";
+import { Section, Cta, JsonLd } from "@/components/ui";
+import {
+  RevealOnScroll,
+  StaggerGroup,
+  SplitTextReveal,
+  MagneticButton,
+  FaqMotion,
+} from "@/components/motion";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -40,26 +47,32 @@ export default function Sello() {
       />
       <section className="border-b border-subtle">
         <div className="wrap py-24 md:py-32">
-          <div className="stagger max-w-3xl">
-            <Eyebrow>Records · Sello</Eyebrow>
-            <Heading as="h1">Del máster a la calle, con criterio.</Heading>
-            <p className="mt-7 text-lg text-text-secondary">
+          <div className="max-w-3xl">
+            <RevealOnScroll as="p" className="eyebrow mb-4">Records · Sello</RevealOnScroll>
+            <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
+              Del máster a la calle, con criterio.
+            </SplitTextReveal>
+            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
               No somos una fábrica de canciones. Trabajamos pocos proyectos y
               los trabajamos en serio: producción, publicación y carrera.
-            </p>
-            <div className="mt-9">
-              <Cta href={`mailto:${site.emails.booking}?subject=Sello`}>
-                Mándanos tu música →
-              </Cta>
-            </div>
+            </RevealOnScroll>
+            <RevealOnScroll className="mt-9" delay={0.35}>
+              <MagneticButton strength={0.35}>
+                <Cta href={`mailto:${site.emails.booking}?subject=Sello`}>
+                  Mándanos tu música →
+                </Cta>
+              </MagneticButton>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
 
       <Section>
-        <Eyebrow>Qué ponemos</Eyebrow>
-        <Heading>Lo que un sello debería poner y casi ninguno pone.</Heading>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <RevealOnScroll as="p" className="eyebrow mb-4">Qué ponemos</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          Lo que un sello debería poner y casi ninguno pone.
+        </SplitTextReveal>
+        <StaggerGroup stagger={0.08} className="mt-12 grid gap-6 md:grid-cols-3">
           {[
             ["Criterio", "Te decimos qué single sale y por qué. Con argumentos, no con corazonadas."],
             ["Sistema", "Sello, booking y distribución hablan entre sí. No vas rebotando."],
@@ -70,13 +83,13 @@ export default function Sello() {
               <p className="mt-3 text-sm text-text-secondary">{d}</p>
             </div>
           ))}
-        </div>
+        </StaggerGroup>
       </Section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>Preguntas frecuentes</Eyebrow>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
         <div className="mt-8 max-w-3xl">
-          <Faq items={faq} />
+          <FaqMotion items={faq} />
         </div>
       </Section>
     </>
