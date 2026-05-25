@@ -13,3 +13,5 @@ export { HorizontalScroller } from "./HorizontalScroller";
 export { FaqMotion } from "./FaqMotion";
 export { MarqueeLogoWall } from "./MarqueeLogoWall";
 export { JaleoColorBurst } from "./JaleoColorBurst";
+export { HeroBackdrop } from "./HeroBackdrop";
+export { PageTransitionShell } from "./PageTransitionShell";

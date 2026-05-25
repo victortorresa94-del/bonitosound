@@ -11,6 +11,7 @@ import {
   ParallaxLayer,
   MarqueeLogoWall,
   JaleoColorBurst,
+  HeroBackdrop,
 } from "@/components/motion";
 import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
@@ -84,8 +85,11 @@ export default function Home() {
               </MagneticButton>
             </RevealOnScroll>
           </div>
-          <ParallaxLayer speed={0.15} className="mx-auto w-2/3 max-w-sm md:w-full">
-            <Superhero state="home" className="w-full animate-fade-in" />
+          <ParallaxLayer
+            speed={0.12}
+            className="relative mx-auto aspect-square w-2/3 max-w-md overflow-hidden rounded-3xl border border-subtle md:w-full"
+          >
+            <HeroBackdrop className="absolute inset-0" />
           </ParallaxLayer>
         </div>
       </section>
