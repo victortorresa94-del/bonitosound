@@ -3,7 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { nav } from "@/lib/site";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -43,40 +46,72 @@ export function Nav() {
         </nav>
 
         <button
-          className="md:hidden"
+          className="relative h-6 w-6 md:hidden"
           aria-label="Menú"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="block h-0.5 w-6 bg-text-primary" />
-          <span className="mt-1.5 block h-0.5 w-6 bg-text-primary" />
-          <span className="mt-1.5 block h-0.5 w-6 bg-text-primary" />
+          <motion.span
+            className="absolute left-0 right-0 h-0.5 bg-text-primary"
+            animate={open ? { top: "50%", rotate: 45, y: "-50%" } : { top: "25%", rotate: 0, y: 0 }}
+            transition={{ duration: 0.3, ease: EASE }}
+          />
+          <motion.span
+            className="absolute left-0 right-0 top-1/2 h-0.5 -translate-y-1/2 bg-text-primary"
+            animate={open ? { opacity: 0 } : { opacity: 1 }}
+            transition={{ duration: 0.2 }}
+          />
+          <motion.span
+            className="absolute left-0 right-0 h-0.5 bg-text-primary"
+            animate={open ? { top: "50%", rotate: -45, y: "-50%" } : { top: "75%", rotate: 0, y: 0 }}
+            transition={{ duration: 0.3, ease: EASE }}
+          />
         </button>
       </div>
 
-      {open && (
-        <nav className="border-t border-subtle bg-bg-secondary md:hidden">
-          <div className="wrap flex flex-col py-4">
-            {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="py-3 text-text-secondary"
-                onClick={() => setOpen(false)}
+      <AnimatePresence>
+        {open && (
+          <motion.nav
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: EASE }}
+            className="overflow-hidden border-t border-subtle bg-bg-secondary md:hidden"
+          >
+            <div className="wrap flex flex-col py-4">
+              {nav.map((item, idx) => (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.06 * idx, ease: EASE }}
+                >
+                  <Link
+                    href={item.href}
+                    className="block py-3 text-text-secondary"
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.06 * nav.length, ease: EASE }}
               >
-                {item.label}
-              </Link>
-            ))}
-            <Link
-              href="/contacto"
-              className="btn btn-primary mt-3"
-              onClick={() => setOpen(false)}
-            >
-              Hablamos
-            </Link>
-          </div>
-        </nav>
-      )}
+                <Link
+                  href="/contacto"
+                  className="btn btn-primary mt-3"
+                  onClick={() => setOpen(false)}
+                >
+                  Hablamos
+                </Link>
+              </motion.div>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
