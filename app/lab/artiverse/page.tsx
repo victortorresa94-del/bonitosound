@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { Section, Heading, Eyebrow, Cta, Faq, JsonLd } from "@/components/ui";
+import { Section, Cta, JsonLd } from "@/components/ui";
+import {
+  RevealOnScroll,
+  StaggerGroup,
+  SplitTextReveal,
+  MagneticButton,
+  FaqMotion,
+} from "@/components/motion";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -40,23 +47,27 @@ export default function Artiverse() {
       />
       <section className="border-b border-subtle">
         <div className="wrap py-24 md:py-32">
-          <div className="stagger max-w-3xl">
-            <Eyebrow>Lab · Artiverse</Eyebrow>
-            <Heading as="h1">Deja de trabajar a ciegas.</Heading>
-            <p className="mt-7 text-lg text-text-secondary">
+          <div className="max-w-3xl">
+            <RevealOnScroll as="p" className="eyebrow mb-4">Lab · Artiverse</RevealOnScroll>
+            <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
+              Deja de trabajar a ciegas.
+            </SplitTextReveal>
+            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
               Artiverse conecta agencias, programadores y promotores. 200+
               usuarios usándola ya. La parte del sector que decidió ordenarse.
-            </p>
-            <div className="mt-9">
-              <Cta href={site.external.artiverse}>Conocer Artiverse →</Cta>
-            </div>
+            </RevealOnScroll>
+            <RevealOnScroll className="mt-9" delay={0.35}>
+              <MagneticButton strength={0.35}>
+                <Cta href={site.external.artiverse}>Conocer Artiverse →</Cta>
+              </MagneticButton>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
 
       <Section>
-        <Eyebrow>Qué resuelve</Eyebrow>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <RevealOnScroll as="p" className="eyebrow mb-4">Qué resuelve</RevealOnScroll>
+        <StaggerGroup stagger={0.08} className="mt-10 grid gap-6 md:grid-cols-3">
           {[
             ["Agencias", "Tu roster y tu disponibilidad, visibles para quien programa."],
             ["Programadores", "Encuentra y cierra sin cadena de favores."],
@@ -67,13 +78,13 @@ export default function Artiverse() {
               <p className="mt-3 text-sm text-text-secondary">{d}</p>
             </div>
           ))}
-        </div>
+        </StaggerGroup>
       </Section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>Preguntas frecuentes</Eyebrow>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
         <div className="mt-8 max-w-3xl">
-          <Faq items={faq} />
+          <FaqMotion items={faq} />
         </div>
       </Section>
     </>

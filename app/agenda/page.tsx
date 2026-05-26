@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Section, Heading, Eyebrow, Cta, JsonLd } from "@/components/ui";
+import { Section, Cta, JsonLd } from "@/components/ui";
+import { RevealOnScroll, SplitTextReveal, MagneticButton } from "@/components/motion";
 import { getShows } from "@/lib/agenda";
 import { site } from "@/lib/site";
 
@@ -48,9 +49,11 @@ export default function Agenda() {
 
       <section className="border-b border-subtle">
         <div className="wrap py-24 md:py-32">
-          <div className="stagger max-w-3xl">
-            <Eyebrow>Agenda</Eyebrow>
-            <Heading as="h1">Dónde estamos sonando.</Heading>
+          <div className="max-w-3xl">
+            <RevealOnScroll as="p" className="eyebrow mb-4">Agenda</RevealOnScroll>
+            <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
+              Dónde estamos sonando.
+            </SplitTextReveal>
           </div>
         </div>
       </section>
@@ -58,16 +61,20 @@ export default function Agenda() {
       <Section>
         {shows.length === 0 ? (
           <div className="rounded-3xl border border-subtle bg-bg-secondary p-12 text-center">
-            <Heading as="h3">Agenda en construcción.</Heading>
-            <p className="mx-auto mt-4 max-w-lg text-text-secondary">
+            <SplitTextReveal as="h3" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+              Agenda en construcción.
+            </SplitTextReveal>
+            <RevealOnScroll as="p" className="mx-auto mt-4 max-w-lg text-text-secondary" delay={0.2}>
               Estamos cerrando las próximas fechas. Si quieres a alguien del
               roster en tu sala o festival, no esperes a la agenda: escríbenos.
-            </p>
-            <div className="mt-8 flex justify-center">
-              <Cta href={`mailto:${site.emails.booking}?subject=Booking`}>
-                Contactar booking →
-              </Cta>
-            </div>
+            </RevealOnScroll>
+            <RevealOnScroll className="mt-8 flex justify-center" delay={0.35}>
+              <MagneticButton strength={0.35}>
+                <Cta href={`mailto:${site.emails.booking}?subject=Booking`}>
+                  Contactar booking →
+                </Cta>
+              </MagneticButton>
+            </RevealOnScroll>
           </div>
         ) : (
           <ul className="divide-y divide-subtle border-y border-subtle">

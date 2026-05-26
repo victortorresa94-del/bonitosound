@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Section, Heading, Eyebrow, Cta } from "@/components/ui";
-import { LogoWall } from "@/components/LogoWall";
+import { Section, Heading, Cta } from "@/components/ui";
+import {
+  RevealOnScroll,
+  StaggerGroup,
+  SplitTextReveal,
+  MagneticButton,
+  ParallaxLayer,
+  MarqueeLogoWall,
+} from "@/components/motion";
 import { findLogo } from "@/lib/assets";
 import { team, memberships, support, site } from "@/lib/site";
 
@@ -17,16 +24,24 @@ export default function Nosotros() {
     <>
       <section className="border-b border-subtle">
         <div className="wrap py-24 md:py-32">
-          <div className="stagger max-w-3xl">
-            <Eyebrow>Nosotros</Eyebrow>
-            <Heading as="h1">Gente del sector. Cansada del sector.</Heading>
+          <div className="max-w-3xl">
+            <RevealOnScroll as="p" className="eyebrow mb-4">
+              Nosotros
+            </RevealOnScroll>
+            <SplitTextReveal
+              as="h1"
+              split="lines"
+              className="display text-[clamp(2.6rem,7vw,5.4rem)]"
+            >
+              Gente del sector. Cansada del sector.
+            </SplitTextReveal>
           </div>
         </div>
       </section>
 
       <Section>
         <div className="grid gap-12 md:grid-cols-[1fr_1fr] md:items-center">
-          <div className="space-y-5 text-lg text-text-secondary">
+          <RevealOnScroll className="space-y-5 text-lg text-text-secondary">
             <p>
               Bonito Sound se monta en 2022 en Sabadell. No para hacer una
               agencia más: para hacer la que faltaba.
@@ -40,18 +55,20 @@ export default function Nosotros() {
               Somos pocos, hacemos mucho y cogemos el teléfono. Si buscas una
               consultora con keynote, esta no es tu web.
             </p>
-          </div>
+          </RevealOnScroll>
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
             {(() => {
               const img = findLogo("heroes", "nosotros");
               return img ? (
-                <Image
-                  src={img}
-                  alt="El equipo de Bonito Sound"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                />
+                <ParallaxLayer speed={0.2} className="absolute inset-0">
+                  <Image
+                    src={img}
+                    alt="El equipo de Bonito Sound"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover scale-110"
+                  />
+                </ParallaxLayer>
               ) : null;
             })()}
           </div>
@@ -59,9 +76,11 @@ export default function Nosotros() {
       </Section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>Equipo</Eyebrow>
-        <Heading>Tres personas con nombre y teléfono.</Heading>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <RevealOnScroll as="p" className="eyebrow mb-4">Equipo</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          Tres personas con nombre y teléfono.
+        </SplitTextReveal>
+        <StaggerGroup stagger={0.1} className="mt-12 grid gap-6 md:grid-cols-3">
           {team.map((p) => {
             const photo = findLogo("equipo", p.name);
             return (
@@ -73,7 +92,7 @@ export default function Nosotros() {
                       alt={p.name}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover"
+                      className="object-cover transition-transform duration-700 hover:scale-105"
                     />
                   )}
                 </div>
@@ -83,7 +102,7 @@ export default function Nosotros() {
               </div>
             );
           })}
-        </div>
+        </StaggerGroup>
         <p className="mt-6 text-sm text-text-muted">
           Roser Gamonal y Júlia Martín: pendiente confirmar incorporación al
           equipo público con Dani Boada (§17 del brief).
@@ -91,19 +110,23 @@ export default function Nosotros() {
       </Section>
 
       <Section>
-        <LogoWall items={memberships} dir="instituciones" label="Miembros activos de" />
-        <div className="mt-12">
-          <LogoWall items={support} dir="apoyos" label="Con el apoyo de" />
-        </div>
+        <RevealOnScroll>
+          <MarqueeLogoWall items={memberships} dir="instituciones" label="Miembros activos de" speed={30} />
+        </RevealOnScroll>
+        <RevealOnScroll className="mt-12">
+          <MarqueeLogoWall items={support} dir="apoyos" label="Con el apoyo de" speed={30} direction="right" />
+        </RevealOnScroll>
       </Section>
 
       <Section className="bg-bg-secondary">
-        <div className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
+        <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
           <Heading>¿Hablamos?</Heading>
           <div className="mt-8 flex justify-center">
-            <Cta href="/contacto">Hablamos →</Cta>
+            <MagneticButton strength={0.5}>
+              <Cta href="/contacto">Hablamos →</Cta>
+            </MagneticButton>
           </div>
-        </div>
+        </RevealOnScroll>
       </Section>
     </>
   );

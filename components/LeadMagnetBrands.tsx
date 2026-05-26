@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/lib/site";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const steps = [
   {
@@ -54,25 +57,37 @@ export function LeadMagnetBrands() {
             </p>
           </div>
           <div className="mb-7 h-1 w-full overflow-hidden rounded-full bg-bg-tertiary">
-            <div
-              className="h-full bg-accent-blue transition-all duration-500"
-              style={{ width: `${(step / steps.length) * 100}%` }}
+            <motion.div
+              className="h-full bg-accent-blue"
+              initial={false}
+              animate={{ width: `${(step / steps.length) * 100}%` }}
+              transition={{ duration: 0.5, ease: EASE }}
             />
           </div>
-          <h3 className="display mb-7 text-2xl md:text-3xl">
-            {steps[step].q}
-          </h3>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {steps[step].opts.map((o) => (
-              <button
-                key={o}
-                onClick={() => pick(o)}
-                className="card text-left text-base font-medium"
-              >
-                {o}
-              </button>
-            ))}
-          </div>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={step}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.35, ease: EASE }}
+            >
+              <h3 className="display mb-7 text-2xl md:text-3xl">
+                {steps[step].q}
+              </h3>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {steps[step].opts.map((o) => (
+                  <button
+                    key={o}
+                    onClick={() => pick(o)}
+                    className="card text-left text-base font-medium"
+                  >
+                    {o}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
           {step > 0 && (
             <button
               onClick={() => setStep((s) => s - 1)}
@@ -83,19 +98,26 @@ export function LeadMagnetBrands() {
           )}
         </>
       ) : (
-        <div className="stagger">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE }}
+        >
           <p className="eyebrow mb-3">Por lo que cuentas…</p>
           <h3 className="display mb-6 text-2xl md:text-3xl">
             Esto del portfolio se parece a lo tuyo:
           </h3>
           <ul className="mb-8 space-y-3">
-            {examples.map((e) => (
-              <li
+            {examples.map((e, i) => (
+              <motion.li
                 key={e}
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.15 + i * 0.08, ease: EASE }}
                 className="rounded-xl border border-subtle bg-bg-tertiary px-5 py-4 text-text-secondary"
               >
                 {e}
-              </li>
+              </motion.li>
             ))}
           </ul>
           <p className="mb-6 max-w-lg text-text-secondary">
@@ -119,7 +141,7 @@ export function LeadMagnetBrands() {
           >
             Volver a empezar
           </button>
-        </div>
+        </motion.div>
       )}
     </div>
   );

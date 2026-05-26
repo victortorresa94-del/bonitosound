@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { SpotifyEmbed } from "@/components/Embeds";
 import { JsonLd } from "@/components/ui";
+import {
+  RevealOnScroll,
+  StaggerGroup,
+  SplitTextReveal,
+  MagneticButton,
+} from "@/components/motion";
 import { site, support } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -38,47 +44,59 @@ export default function JaleoSound() {
 
       <section className="border-b border-white/15">
         <div className="wrap py-24 md:py-32">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/75">
+          <RevealOnScroll as="p" className="text-xs font-semibold uppercase tracking-[0.2em] text-white/75">
             Festival propio · Amsterdam
-          </p>
-          <h1 className="display mt-5 text-[clamp(2.6rem,8vw,6rem)]">
+          </RevealOnScroll>
+          <SplitTextReveal
+            as="h1"
+            split="chars"
+            stagger={0.035}
+            y={60}
+            className="display mt-5 text-[clamp(2.6rem,8vw,6rem)]"
+          >
             Jaleo Sound
-          </h1>
-          <p className="mt-7 max-w-2xl text-xl text-white/90">
+          </SplitTextReveal>
+          <RevealOnScroll as="p" className="mt-7 max-w-2xl text-xl text-white/90" delay={0.3}>
             No massive stages, no VIP fences, no nonsense. Just music, good
             taste, great food and people.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href={site.external.jaleo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn bg-white font-semibold text-[color:var(--jaleo-red)]"
-            >
-              Web del festival →
-            </a>
-            <a
-              href={`${site.external.jaleo}/open-call`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn border border-white/40 text-white"
-            >
-              Open Call artistas →
-            </a>
-            <a
-              href={site.external.jaleo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn border border-white/40 text-white"
-            >
-              Comprar entradas →
-            </a>
-          </div>
+          </RevealOnScroll>
+          <RevealOnScroll className="mt-10 flex flex-wrap gap-4" delay={0.45}>
+            <MagneticButton strength={0.35}>
+              <a
+                href={site.external.jaleo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn bg-white font-semibold text-[color:var(--jaleo-red)]"
+              >
+                Web del festival →
+              </a>
+            </MagneticButton>
+            <MagneticButton strength={0.25}>
+              <a
+                href={`${site.external.jaleo}/open-call`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn border border-white/40 text-white"
+              >
+                Open Call artistas →
+              </a>
+            </MagneticButton>
+            <MagneticButton strength={0.25}>
+              <a
+                href={site.external.jaleo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn border border-white/40 text-white"
+              >
+                Comprar entradas →
+              </a>
+            </MagneticButton>
+          </RevealOnScroll>
         </div>
       </section>
 
       <section className="py-20 md:py-28">
-        <div className="wrap grid gap-8 md:grid-cols-3">
+        <StaggerGroup stagger={0.12} className="wrap grid gap-8 md:grid-cols-3">
           {[
             [
               "Qué es",
@@ -95,33 +113,37 @@ export default function JaleoSound() {
           ].map(([t, d]) => (
             <div
               key={t}
-              className="rounded-2xl border border-white/20 bg-white/5 p-7"
+              className="rounded-2xl border border-white/20 bg-white/5 p-7 transition-colors hover:bg-white/10"
             >
               <h2 className="display text-2xl">{t}</h2>
               <p className="mt-3 text-white/80">{d}</p>
             </div>
           ))}
-        </div>
+        </StaggerGroup>
       </section>
 
       <section className="pb-24">
         <div className="wrap">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/75">
+          <RevealOnScroll as="p" className="text-xs font-semibold uppercase tracking-[0.2em] text-white/75">
             La banda sonora
-          </p>
-          <h2 className="display mt-4 mb-8 text-3xl">
+          </RevealOnScroll>
+          <SplitTextReveal
+            as="h2"
+            split="lines"
+            className="display mt-4 mb-8 text-3xl"
+          >
             Playlist oficial de Jaleo.
-          </h2>
-          <div className="max-w-3xl">
+          </SplitTextReveal>
+          <RevealOnScroll className="max-w-3xl" delay={0.2}>
             <SpotifyEmbed
               type="playlist"
               id={site.external.spotifyJaleoPlaylistId}
               title="Playlist Jaleo Sound"
             />
-          </div>
-          <p className="mt-12 text-sm text-white/70">
+          </RevealOnScroll>
+          <RevealOnScroll as="p" className="mt-12 text-sm text-white/70">
             Con el apoyo de {support.join(" · ")}.
-          </p>
+          </RevealOnScroll>
         </div>
       </section>
     </div>

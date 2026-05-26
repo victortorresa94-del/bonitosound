@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
-import { Section, Heading, Eyebrow, Cta, Faq, JsonLd } from "@/components/ui";
+import { Section, Cta, JsonLd } from "@/components/ui";
 import { YouTubeEmbed } from "@/components/Embeds";
-import { LogoWall } from "@/components/LogoWall";
+import {
+  RevealOnScroll,
+  SplitTextReveal,
+  MagneticButton,
+  FaqMotion,
+  MarqueeLogoWall,
+} from "@/components/motion";
 import { tourArtists, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -42,42 +48,48 @@ export default function Giras() {
       />
       <section className="border-b border-subtle">
         <div className="wrap py-24 md:py-32">
-          <div className="stagger max-w-3xl">
-            <Eyebrow>Giras</Eyebrow>
-            <Heading as="h1">
+          <div className="max-w-3xl">
+            <RevealOnScroll as="p" className="eyebrow mb-4">Giras</RevealOnScroll>
+            <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
               Una gira no se improvisa. Se lleva.
-            </Heading>
-            <p className="mt-7 text-lg text-text-secondary">
+            </SplitTextReveal>
+            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
               Road, tour y stage management. La parte que no se ve desde el
               público y que decide si la gira sale o se cae.
-            </p>
-            <div className="mt-9">
-              <Cta href="/contacto">Cuéntanos tu gira →</Cta>
-            </div>
+            </RevealOnScroll>
+            <RevealOnScroll className="mt-9" delay={0.35}>
+              <MagneticButton strength={0.35}>
+                <Cta href="/contacto">Cuéntanos tu gira →</Cta>
+              </MagneticButton>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
 
       <Section>
-        <Eyebrow>Hemos llevado de gira a</Eyebrow>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Hemos llevado de gira a</RevealOnScroll>
         <div className="mt-8">
-          <LogoWall items={tourArtists} dir="giras" />
+          <MarqueeLogoWall items={tourArtists} dir="giras" label="Hemos llevado de gira a" speed={35} />
         </div>
       </Section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>El vídeo lo cuenta mejor</Eyebrow>
-        <Heading>Final de Gira 1016 — Sant Jordi Club.</Heading>
+        <RevealOnScroll as="p" className="eyebrow mb-4">El vídeo lo cuenta mejor</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          Final de Gira 1016 — Sant Jordi Club.
+        </SplitTextReveal>
         <div className="mt-10 max-w-3xl">
           <YouTubeEmbed id="r47SP4OULcI" title="Final de Gira 1016" />
         </div>
       </Section>
 
       <Section>
-        <Eyebrow>Preguntas frecuentes</Eyebrow>
-        <Heading>Lo que se pregunta antes de firmar.</Heading>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          Lo que se pregunta antes de firmar.
+        </SplitTextReveal>
         <div className="mt-10 max-w-3xl">
-          <Faq items={faq} />
+          <FaqMotion items={faq} />
         </div>
       </Section>
     </>

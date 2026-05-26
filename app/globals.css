@@ -37,6 +37,19 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Cuando el cursor custom está montado (desktop, no reduced-motion),
+   ocultamos el cursor nativo. Mantenemos cursor nativo en touch y reducido. */
+html.bs-cursor-active,
+html.bs-cursor-active * {
+  cursor: none;
+}
+@media (pointer: coarse) {
+  html.bs-cursor-active,
+  html.bs-cursor-active * {
+    cursor: auto;
+  }
+}
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -129,8 +142,19 @@ body {
   *,
   .stagger > *,
   .animate-reveal-up,
-  .animate-fade-in {
+  .animate-fade-in,
+  .bs-split-line,
+  .bs-split-word,
+  .bs-split-char {
     animation: none !important;
     transition: none !important;
+    transform: none !important;
+  }
+  html.bs-cursor-active,
+  html.bs-cursor-active * {
+    cursor: auto !important;
+  }
+  .bs-cursor {
+    display: none !important;
   }
 }

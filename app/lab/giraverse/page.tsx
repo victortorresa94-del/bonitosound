@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Section, Heading, Eyebrow, Cta, Faq, JsonLd } from "@/components/ui";
+import { Section, Cta, JsonLd } from "@/components/ui";
+import {
+  RevealOnScroll,
+  SplitTextReveal,
+  MagneticButton,
+  FaqMotion,
+} from "@/components/motion";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -36,30 +42,34 @@ export default function Giraverse() {
       />
       <section className="border-b border-subtle">
         <div className="wrap py-24 md:py-32">
-          <div className="stagger max-w-3xl">
-            <Eyebrow>Lab · Giraverse · En desarrollo</Eyebrow>
-            <Heading as="h1">Las giras dejan de montarse a mano.</Heading>
-            <p className="mt-7 text-lg text-text-secondary">
+          <div className="max-w-3xl">
+            <RevealOnScroll as="p" className="eyebrow mb-4">Lab · Giraverse · En desarrollo</RevealOnScroll>
+            <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
+              Las giras dejan de montarse a mano.
+            </SplitTextReveal>
+            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
               Circulación de giras nacional e internacional, ordenada. Lo que
               ahora resuelven cien llamadas y una hoja de cálculo compartida.
-            </p>
-            <div className="mt-9">
-              <Cta
-                href={`mailto:${site.emails.general}?subject=${encodeURIComponent(
-                  "Avísame cuando esté Giraverse",
-                )}`}
-              >
-                Avísame cuando esté listo →
-              </Cta>
-            </div>
+            </RevealOnScroll>
+            <RevealOnScroll className="mt-9" delay={0.35}>
+              <MagneticButton strength={0.35}>
+                <Cta
+                  href={`mailto:${site.emails.general}?subject=${encodeURIComponent(
+                    "Avísame cuando esté Giraverse",
+                  )}`}
+                >
+                  Avísame cuando esté listo →
+                </Cta>
+              </MagneticButton>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>Preguntas frecuentes</Eyebrow>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
         <div className="mt-8 max-w-3xl">
-          <Faq items={faq} />
+          <FaqMotion items={faq} />
         </div>
       </Section>
     </>

@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/lib/site";
+
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 type Q =
   | { id: string; q: string; type: "single"; opts: string[] }
@@ -89,71 +92,83 @@ export function LeadMagnetArtists() {
             </p>
           </div>
           <div className="mb-7 h-1 w-full overflow-hidden rounded-full bg-bg-tertiary">
-            <div
-              className="h-full bg-accent-warm transition-all duration-500"
-              style={{ width: `${(i / questions.length) * 100}%` }}
+            <motion.div
+              className="h-full bg-accent-warm"
+              initial={false}
+              animate={{ width: `${(i / questions.length) * 100}%` }}
+              transition={{ duration: 0.5, ease: EASE }}
             />
           </div>
-          <h3 className="display mb-7 text-2xl md:text-3xl">{cur.q}</h3>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={cur.id}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.35, ease: EASE }}
+            >
+              <h3 className="display mb-7 text-2xl md:text-3xl">{cur.q}</h3>
 
-          {cur.type === "single" && (
-            <div className="grid gap-3 sm:grid-cols-2">
-              {cur.opts.map((o) => (
-                <button
-                  key={o}
-                  onClick={() => next(o)}
-                  className="card text-left font-medium"
-                >
-                  {o}
-                </button>
-              ))}
-            </div>
-          )}
-
-          {cur.type === "multi" && (
-            <>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {cur.opts.map((o) => {
-                  const sel = ((a[cur.id] as string[]) || []).includes(o);
-                  return (
+              {cur.type === "single" && (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {cur.opts.map((o) => (
                     <button
                       key={o}
-                      onClick={() => toggleMulti(o)}
-                      className={`card text-left font-medium ${
-                        sel ? "border-accent-warm text-accent-warm" : ""
-                      }`}
+                      onClick={() => next(o)}
+                      className="card text-left font-medium"
                     >
                       {o}
                     </button>
-                  );
-                })}
-              </div>
-              <button
-                onClick={() => next((a[cur.id] as string[]) || [])}
-                className="btn btn-primary mt-6"
-              >
-                Siguiente →
-              </button>
-            </>
-          )}
+                  ))}
+                </div>
+              )}
 
-          {cur.type === "text" && (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                next(text);
-              }}
-            >
-              <input
-                autoFocus
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                placeholder="Escríbelo corto"
-                className="w-full rounded-xl border border-subtle bg-bg-tertiary px-5 py-4 text-text-primary outline-none focus:border-accent-warm"
-              />
-              <button className="btn btn-primary mt-6">Siguiente →</button>
-            </form>
-          )}
+              {cur.type === "multi" && (
+                <>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {cur.opts.map((o) => {
+                      const sel = ((a[cur.id] as string[]) || []).includes(o);
+                      return (
+                        <button
+                          key={o}
+                          onClick={() => toggleMulti(o)}
+                          className={`card text-left font-medium ${
+                            sel ? "border-accent-warm text-accent-warm" : ""
+                          }`}
+                        >
+                          {o}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <button
+                    onClick={() => next((a[cur.id] as string[]) || [])}
+                    className="btn btn-primary mt-6"
+                  >
+                    Siguiente →
+                  </button>
+                </>
+              )}
+
+              {cur.type === "text" && (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    next(text);
+                  }}
+                >
+                  <input
+                    autoFocus
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    placeholder="Escríbelo corto"
+                    className="w-full rounded-xl border border-subtle bg-bg-tertiary px-5 py-4 text-text-primary outline-none focus:border-accent-warm"
+                  />
+                  <button className="btn btn-primary mt-6">Siguiente →</button>
+                </form>
+              )}
+            </motion.div>
+          </AnimatePresence>
 
           {i > 0 && (
             <button
@@ -165,7 +180,11 @@ export function LeadMagnetArtists() {
           )}
         </>
       ) : (
-        <div className="stagger">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: EASE }}
+        >
           <p className="eyebrow mb-3">Diagnóstico</p>
           <p className="mb-8 max-w-xl text-xl text-text-primary">
             {diagnose(a)}
@@ -196,7 +215,7 @@ export function LeadMagnetArtists() {
           >
             Repetir
           </button>
-        </div>
+        </motion.div>
       )}
     </div>
   );

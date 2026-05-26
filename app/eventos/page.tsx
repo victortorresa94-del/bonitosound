@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Section, Heading, Eyebrow, Cta } from "@/components/ui";
+import { Section, Cta } from "@/components/ui";
 import { YouTubeEmbed } from "@/components/Embeds";
+import {
+  RevealOnScroll,
+  StaggerGroup,
+  SplitTextReveal,
+  MagneticButton,
+} from "@/components/motion";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -16,22 +22,24 @@ export default function Eventos() {
     <>
       <section className="border-b border-subtle">
         <div className="wrap py-24 md:py-32">
-          <div className="stagger max-w-3xl">
-            <Eyebrow>Eventos</Eyebrow>
-            <Heading as="h1">Aquí está la pasta. Y el oficio.</Heading>
-            <p className="mt-7 text-lg text-text-secondary">
+          <div className="max-w-3xl">
+            <RevealOnScroll as="p" className="eyebrow mb-4">Eventos</RevealOnScroll>
+            <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
+              Aquí está la pasta. Y el oficio.
+            </SplitTextReveal>
+            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
               Dos cosas: producimos activaciones para marcas que quieren música
               que se recuerde, y llevamos giras de principio a fin. Las dos con
               el mismo equipo que las monta.
-            </p>
+            </RevealOnScroll>
           </div>
         </div>
       </section>
 
       <Section>
-        <div className="grid gap-6 md:grid-cols-2">
+        <StaggerGroup stagger={0.08} className="grid gap-6 md:grid-cols-2">
           <Link href="/eventos/marcas" className="card group flex flex-col">
-            <Eyebrow>Marcas</Eyebrow>
+            <p className="eyebrow">Marcas</p>
             <h2 className="display mt-3 text-3xl">Eventos para marcas</h2>
             <p className="mt-3 flex-1 text-text-secondary">
               Ballantine&apos;s, Pernod Ricard, Pepsico, Absolut. Activaciones,
@@ -42,7 +50,7 @@ export default function Eventos() {
           </Link>
 
           <Link href="/eventos/giras" className="card group flex flex-col">
-            <Eyebrow>Giras</Eyebrow>
+            <p className="eyebrow">Giras</p>
             <h2 className="display mt-3 text-3xl">Tour management</h2>
             <p className="mt-3 flex-1 text-text-secondary">
               Road, tour y stage management. Hemos llevado a Albert Pla, Alfred
@@ -50,12 +58,14 @@ export default function Eventos() {
             </p>
             <span className="mt-6 text-accent-warm">Ver giras →</span>
           </Link>
-        </div>
+        </StaggerGroup>
       </Section>
 
       <Section className="bg-bg-secondary">
-        <Eyebrow>En directo</Eyebrow>
-        <Heading>Final de gira en el Sant Jordi Club.</Heading>
+        <RevealOnScroll as="p" className="eyebrow mb-4">En directo</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          Final de gira en el Sant Jordi Club.
+        </SplitTextReveal>
         <div className="mt-10 max-w-3xl">
           <YouTubeEmbed id="r47SP4OULcI" title="Final de Gira 1016 — Sant Jordi Club" />
         </div>
@@ -63,13 +73,17 @@ export default function Eventos() {
 
       <Section>
         <div className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
-          <Heading>¿Marca o gira?</Heading>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">
+          <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+            ¿Marca o gira?
+          </SplitTextReveal>
+          <RevealOnScroll as="p" className="mx-auto mt-4 max-w-xl text-text-secondary" delay={0.2}>
             Cuéntanos qué necesitas. Te decimos qué se puede hacer de verdad.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <Cta href="/contacto">Hablamos →</Cta>
-          </div>
+          </RevealOnScroll>
+          <RevealOnScroll className="mt-8 flex justify-center" delay={0.35}>
+            <MagneticButton strength={0.35}>
+              <Cta href="/contacto">Hablamos →</Cta>
+            </MagneticButton>
+          </RevealOnScroll>
         </div>
       </Section>
     </>
