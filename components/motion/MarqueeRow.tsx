@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, Children, cloneElement, isValidElement } from "react";
 import type { ReactNode } from "react";
-import { gsap } from "gsap";
+import { gsap } from "@/lib/gsap";
 
 type MarqueeRowProps = {
   children: ReactNode;

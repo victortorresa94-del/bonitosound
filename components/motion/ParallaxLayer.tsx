@@ -2,8 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { ReactNode, ElementType } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import { SCROLL } from "@/lib/motion";
 
 type ParallaxLayerProps = {

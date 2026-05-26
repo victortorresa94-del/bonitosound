@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { ReactNode, ElementType } from "react";
-import { gsap } from "gsap";
+import { gsap } from "@/lib/gsap";
 import { DURATION, EASE } from "@/lib/motion";
 
 type MagneticButtonProps = {

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { gsap } from "gsap";
+import { gsap } from "@/lib/gsap";
 import { useLenis } from "./MotionContext";
 
 type Props = {

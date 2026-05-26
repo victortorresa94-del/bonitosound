@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import type { ReactNode } from "react";
 import Lenis from "lenis";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { MotionContext, type CursorState } from "./MotionContext";
 import { MagneticCursor } from "./MagneticCursor";
 import { LENIS_OPTS } from "@/lib/motion";
@@ -20,8 +19,6 @@ export function MotionProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-
-    gsap.registerPlugin(ScrollTrigger);
 
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updateReduced = () => setPrefersReducedMotion(mq.matches);

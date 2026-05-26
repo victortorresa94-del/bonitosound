@@ -2,8 +2,7 @@
 
 import { useLayoutEffect, useRef } from "react";
 import type { ElementType } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import SplitType from "split-type";
 import { DURATION, EASE, SCROLL } from "@/lib/motion";
 
