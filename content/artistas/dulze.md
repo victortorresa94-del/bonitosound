@@ -1,8 +1,8 @@
 ---
 name: "Dulze"
-genre: "Pop / R&B"
+genre: "Indie pop / Raíz flamenca"
 tier: "booking"
-spotifyArtistId: ""
+spotifyArtistId: "1PNJOvNCIMG9dN4cy7IG4D"
 instagram: "https://www.instagram.com/duuuulze"
 image: "/img/artistas/dulze.png"
 reels: []

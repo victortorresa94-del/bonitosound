@@ -122,7 +122,47 @@ export default function JaleoSound() {
         </StaggerGroup>
       </section>
 
-      <section className="pb-24">
+      {/* Line-up — verificar edición/confirmaciones 2026 con el equipo antes de publicar */}
+      <section className="pb-4">
+        <div className="wrap">
+          <RevealOnScroll as="p" className="text-xs font-semibold uppercase tracking-[0.2em] text-white/75">
+            Line-up
+          </RevealOnScroll>
+          <SplitTextReveal
+            as="h2"
+            split="lines"
+            className="display mt-4 mb-8 text-3xl"
+          >
+            Quién suena en Jaleo.
+          </SplitTextReveal>
+          <StaggerGroup stagger={0.1} className="grid gap-6 md:grid-cols-3">
+            {[
+              [
+                "Lucía Conde",
+                "Residente del colectivo The Sun. Junta la nostalgia española, el sonido latino y la escena electrónica holandesa.",
+              ],
+              [
+                "Andrés Barrios — Km.0",
+                "Un viaje que transforma el flamenco desde la raíz hacia lo contemporáneo, con el piano como voz y brújula.",
+              ],
+              [
+                "Sofía Peters",
+                "Indie-pop hispano-neerlandés: ganchos pop con un poso de melancolía indie.",
+              ],
+            ].map(([n, d]) => (
+              <div
+                key={n}
+                className="rounded-2xl border border-white/20 bg-white/5 p-7 transition-colors hover:bg-white/10"
+              >
+                <h3 className="display text-xl">{n}</h3>
+                <p className="mt-3 text-white/80">{d}</p>
+              </div>
+            ))}
+          </StaggerGroup>
+        </div>
+      </section>
+
+      <section className="py-20 md:pb-24 md:pt-16">
         <div className="wrap">
           <RevealOnScroll as="p" className="text-xs font-semibold uppercase tracking-[0.2em] text-white/75">
             La banda sonora

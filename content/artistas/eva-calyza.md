@@ -1,8 +1,8 @@
 ---
 name: "Eva Calyza"
-genre: "Pop / Electrónica"
+genre: "Pop mental / Electrónica y folclore"
 tier: "booking"
-spotifyArtistId: ""
+spotifyArtistId: "6rUgNfaBgUk0WCQbNafgKh"
 instagram: "https://www.instagram.com/evacalyza"
 image: "/img/artistas/eva-calyza.jpg"
 reels: []
