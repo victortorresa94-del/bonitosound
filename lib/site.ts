@@ -76,6 +76,11 @@ export const memberships = [
 export const support = [
   "Institut Ramon Llull",
   "Plan de Recuperación UE",
+  "Unión Europea",
+] as const;
+
+// Apoyos confirmados sin logo aún (mostrar como texto):
+export const supportPending = [
   "Ministerio de Cultura",
   "Instituto Cervantes",
   "Embajada de España en Holanda",
