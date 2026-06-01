@@ -37,6 +37,20 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Cursor custom activo (desktop, no reduced-motion): ocultamos el nativo.
+   La clase bs-cursor-active solo la pone MagneticCursor si se montó bien;
+   en touch/reduced se mantiene el cursor nativo. */
+html.bs-cursor-active,
+html.bs-cursor-active * {
+  cursor: none;
+}
+@media (pointer: coarse) {
+  html.bs-cursor-active,
+  html.bs-cursor-active * {
+    cursor: auto;
+  }
+}
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
