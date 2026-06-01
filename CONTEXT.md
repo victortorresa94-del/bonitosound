@@ -1050,6 +1050,30 @@ GitHub avisa con archivos >50MB. Vercel falla con bundles muy grandes.
 
 Estos mockups están EXCLUIDOS de `tsconfig.json` (no son código) pero SÍ los lee el script de gpt-image-1 como referencia visual para garantizar cohesión.
 
+## 15-ter. Skills universales (`.agents/skills/`)
+
+13 skills cargadas en `.agents/skills/` (estándar universal: Claude Code, Cursor, Cline, Amp, Codex, Antigravity, +más). Cada una es un `SKILL.md` con persona + reglas + anti-patterns + workflow para un dominio concreto de diseño.
+
+**Skills disponibles** (instaladas vía `npx skills add Leonxlnx/taste-skill` + `emilkowalski/skill`):
+
+| Skill | Para |
+|---|---|
+| `high-end-visual-design` | ⭐ **Awwwards-tier**. Anti-patterns explícitos (banea Inter/Roboto/Arial, shadows feos, motion linear). |
+| `emil-design-eng` | Filosofía Emil Kowalski (Vaul, Sonner). Detalles invisibles que compounden. |
+| `minimalist-ui` | Editorial clean monocromo cálido. Sin gradientes, sin shadows pesados. Coincide con el target Bonito. |
+| `redesign-existing-projects` | ⭐ Upgrade de webs existentes — exactamente lo que estamos haciendo. |
+| `industrial-brutalist-ui` | Brutalismo industrial (alternativa de estilo). |
+| `brandkit` | Brand-guidelines boards y sistemas de identidad. |
+| `design-taste-frontend`, `design-taste-frontend-v1` | Gusto general frontend. |
+| `gpt-taste`, `stitch-design-taste` | Variantes de taste systems. |
+| `image-to-code` | Convierte mockups a código. |
+| `imagegen-frontend-web`, `imagegen-frontend-mobile` | Prompts para generar UIs como imagen. |
+| `full-output-enforcement` | Garantiza outputs completos. |
+
+**Cuándo invocarlas**: cuando vayas a hacer una iteración visual concreta, Claude las verá automáticamente como tools disponibles. Combina `redesign-existing-projects` + `minimalist-ui` + `emil-design-eng` para iteraciones top en este proyecto.
+
+`impeccable skills install` falló por la network policy del entorno (HTTP 403 al CDN de impeccable). Reintentar en entorno con red abierta si quieres esa también.
+
 ## 15-bis. Prompts de referencia (`references/prompts/`)
 
 System prompts filtrados de productos como Anthropic Claude Design, Claude Code, Claude in Chrome, Google AI Studio Build, Cursor, etc. **Léelos como contexto** cuando vayas a hacer iteraciones de diseño nuevas — son las recetas internas que esos productos usan para generar UIs profesionales.
