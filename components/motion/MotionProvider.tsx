@@ -5,7 +5,6 @@ import type { ReactNode } from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { MotionContext, type CursorState } from "./MotionContext";
-import { MagneticCursor } from "./MagneticCursor";
 import { LENIS_OPTS } from "@/lib/motion";
 
 export function MotionProvider({ children }: { children: ReactNode }) {
@@ -55,7 +54,8 @@ export function MotionProvider({ children }: { children: ReactNode }) {
 
   return (
     <MotionContext.Provider value={{ lenis, prefersReducedMotion, setCursor }}>
-      {!prefersReducedMotion && <MagneticCursor stateRef={cursorStateRef} />}
+      {/* Cursor custom desactivado: el nativo es más robusto y nunca deja al
+          usuario sin puntero. Reactivar con <MagneticCursor stateRef=…/>. */}
       {children}
     </MotionContext.Provider>
   );
