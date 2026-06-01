@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import fs from "node:fs";
+import path from "node:path";
 import Image from "next/image";
-import { SpotifyEmbed } from "@/components/Embeds";
+import { SpotifyEmbed, YouTubeEmbed } from "@/components/Embeds";
 import { JsonLd } from "@/components/ui";
 import { MarqueeRow } from "@/components/motion";
 import { findAsset } from "@/lib/assets";
@@ -14,10 +16,11 @@ export const metadata: Metadata = {
 };
 
 const lineup = [
-  { name: "Lucía Conde", line: "Nostalgia española + electrónica holandesa.", tag: "Live" },
-  { name: "Andrés Barrios", line: "Flamenco al piano, contemporáneo. Km.0.", tag: "Live" },
-  { name: "Sofía Peters", line: "Indie-pop hispano-neerlandés.", tag: "Live" },
-  { name: "+ TBA", line: "Más artistas por anunciar.", tag: "Soon" },
+  { name: "Grupo Puerto", line: "Afro-latin melodic jazz.", tag: "Confirmado" },
+  { name: "Lucía Conde", line: "Nostalgia española + electrónica holandesa.", tag: "Confirmado" },
+  { name: "Andrés Barrios", line: "Flamenco al piano. Km.0.", tag: "Confirmado" },
+  { name: "AlexAbril", line: "Flamenco-jazz fusion.", tag: "Confirmado" },
+  { name: "+ TBA", line: "Más artistas en las próximas semanas.", tag: "Soon" },
 ];
 
 function Star({ className = "" }: { className?: string }) {
@@ -28,8 +31,24 @@ function Star({ className = "" }: { className?: string }) {
   );
 }
 
+/** Galería automática plug-and-play: pinta lo que haya en /public/img/jaleo */
+function listJaleoPhotos(): string[] {
+  try {
+    const dir = path.join(process.cwd(), "public", "img", "jaleo");
+    if (!fs.existsSync(dir)) return [];
+    return fs
+      .readdirSync(dir)
+      .filter((f) => /\.(png|webp|jpe?g|avif)$/i.test(f))
+      .sort()
+      .map((f) => `/img/jaleo/${f}`);
+  } catch {
+    return [];
+  }
+}
+
 export default function JaleoSound() {
   const seccion = findAsset("secciones", "jaleo");
+  const photos = listJaleoPhotos();
 
   return (
     <div className="text-white" style={{ background: "var(--jaleo-red)" }}>
@@ -51,7 +70,7 @@ export default function JaleoSound() {
         }}
       />
 
-      {/* ───── HERO a pantalla completa (Dekmantel-tier) ───── */}
+      {/* ───── HERO cartel pantalla completa ───── */}
       <section className="relative flex min-h-[100dvh] flex-col justify-between overflow-hidden pt-28">
         <div className="pointer-events-none absolute -right-40 -top-40 h-[44rem] w-[44rem] rounded-full opacity-40 blur-3xl" style={{ background: "#ff8a5c" }} />
         <div className="pointer-events-none absolute -bottom-40 -left-32 h-[40rem] w-[40rem] rounded-full opacity-25 blur-3xl" style={{ background: "#fff" }} />
@@ -64,7 +83,6 @@ export default function JaleoSound() {
           </p>
         </div>
 
-        {/* Título gigante */}
         <div className="relative">
           <h1 className="display px-2 text-center text-[clamp(4rem,22vw,20rem)] leading-[0.8] tracking-tighter">
             JALEO
@@ -76,8 +94,7 @@ export default function JaleoSound() {
 
         <div className="wrap relative grid gap-6 pb-12 md:grid-cols-3 md:items-end">
           <p className="max-w-md text-lg text-white/85 md:text-xl">
-            No massive stages, no VIP fences, no nonsense. Just music, good
-            taste, great food and people.
+            No massive stages, no VIP fences, no nonsense. Just music, good taste, great food and people.
           </p>
           <div className="md:text-center">
             <p className="display text-4xl leading-none md:text-5xl">11–12 SEP</p>
@@ -106,6 +123,84 @@ export default function JaleoSound() {
         </MarqueeRow>
       </section>
 
+      {/* ───── Galería de ediciones pasadas (plug-and-play) ───── */}
+      <section className="border-b border-white/15 py-20 md:py-28">
+        <div className="wrap mb-10 flex items-end justify-between">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">Ediciones pasadas</p>
+            <h2 className="display mt-3 text-[clamp(2.2rem,6vw,4rem)] leading-[0.95]">
+              Esto es lo que pasó.
+            </h2>
+          </div>
+          <a
+            href="https://www.instagram.com/festivaljaleo/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden text-sm font-semibold text-white underline underline-offset-4 hover:text-accent-warm-soft md:inline-block"
+          >
+            Ver más en @festivaljaleo →
+          </a>
+        </div>
+
+        {photos.length > 0 ? (
+          <div className="wrap grid grid-cols-2 gap-3 md:grid-cols-4">
+            {photos.slice(0, 8).map((p, i) => (
+              <div
+                key={p}
+                className={`relative overflow-hidden rounded-2xl border border-white/20 ${
+                  i === 0 || i === 5 ? "aspect-[3/4] md:row-span-2 md:aspect-[3/5]" : "aspect-square"
+                }`}
+              >
+                <Image
+                  src={p}
+                  alt=""
+                  fill
+                  sizes="(max-width:768px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-700 hover:scale-110"
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="wrap">
+            <div className="rounded-3xl border-2 border-dashed border-white/30 bg-white/[0.04] p-10 text-center">
+              <p className="text-lg text-white/80">
+                Fotos de ediciones pasadas — drop en{" "}
+                <code className="rounded bg-white/15 px-2 py-0.5 text-sm">public/img/jaleo/</code>
+              </p>
+              <p className="mt-2 text-sm text-white/55">
+                Cualquier .jpg/.png/.webp aquí aparece automáticamente como mosaico.
+              </p>
+              <a
+                href="https://www.instagram.com/festivaljaleo/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-5 inline-block text-sm font-semibold text-white underline underline-offset-4"
+              >
+                Mientras tanto: @festivaljaleo →
+              </a>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* ───── Vídeo (Sant Jordi Club) como muestra del directo Bonito ───── */}
+      <section className="border-b border-white/15 py-20 md:py-28">
+        <div className="wrap">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">El directo de Bonito</p>
+          <h2 className="display mt-3 text-[clamp(2.2rem,6vw,4rem)] leading-[0.95]">
+            Lo que montamos cuando nos dejan.
+          </h2>
+          <p className="mt-4 max-w-2xl text-white/80">
+            Final de la Gira 1016 en el Sant Jordi Club de Barcelona. Producido
+            por el mismo equipo que monta Jaleo cada septiembre en Amsterdam.
+          </p>
+          <div className="mt-8 overflow-hidden rounded-2xl border border-white/20">
+            <YouTubeEmbed id="r47SP4OULcI" title="Final Gira 1016 — Sant Jordi Club" />
+          </div>
+        </div>
+      </section>
+
       {/* ───── Qué es ───── */}
       <section className="py-24 md:py-32">
         <div className="wrap grid gap-12 md:grid-cols-[1fr_1fr] md:items-center">
@@ -128,7 +223,7 @@ export default function JaleoSound() {
         </div>
       </section>
 
-      {/* ───── Line-up grande ───── */}
+      {/* ───── Line-up ───── */}
       <section className="border-t border-white/20 py-24 md:py-32">
         <div className="wrap">
           <div className="flex items-end justify-between">
@@ -137,7 +232,10 @@ export default function JaleoSound() {
           </div>
           <ul className="mt-12 divide-y divide-white/20 border-y border-white/20">
             {lineup.map((a, i) => (
-              <li key={a.name} className="group flex flex-col gap-2 py-7 transition-colors hover:bg-white/5 md:flex-row md:items-center md:justify-between md:px-4">
+              <li
+                key={a.name}
+                className="group flex flex-col gap-2 py-7 transition-colors hover:bg-white/5 md:flex-row md:items-center md:justify-between md:px-4"
+              >
                 <div className="flex items-baseline gap-5">
                   <span className="text-sm text-white/40">0{i + 1}</span>
                   <span className="display text-[clamp(2rem,6vw,4.5rem)] leading-none transition-transform duration-300 group-hover:translate-x-3">
@@ -165,6 +263,14 @@ export default function JaleoSound() {
             <p className="mt-5 max-w-md text-lg text-white/80">
               La playlist oficial. Para entender el festival antes de pisar Amsterdam.
             </p>
+            <a
+              href="https://www.instagram.com/festivaljaleo/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 inline-block text-sm font-semibold text-white underline underline-offset-4"
+            >
+              También en @festivaljaleo →
+            </a>
           </div>
           <div className="rounded-2xl bg-black/15 p-2">
             <SpotifyEmbed type="playlist" id={site.external.spotifyJaleoPlaylistId} title="Playlist Jaleo Sound" />
@@ -176,7 +282,7 @@ export default function JaleoSound() {
       <section className="border-t border-white/20 py-16">
         <div className="wrap">
           <p className="text-sm text-white/70">
-            Con el apoyo de Instituto Cervantes, Embajada de España, AIE y
+            Con el apoyo del Instituto Cervantes, Embajada de España en Holanda, AIE y
             Stadsdeel Amsterdam. {support.join(" · ")}.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
