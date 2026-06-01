@@ -87,7 +87,15 @@ export function SplitTextReveal({
           },
         });
 
+        // Failsafe: si por lo que sea el ScrollTrigger no dispara (Lenis no
+        // sincronizado, fuentes tardías, refresh fallido…), forzamos el texto
+        // a visible para que NUNCA quede un titular invisible.
+        const failsafe = window.setTimeout(() => {
+          gsap.set(targets, { opacity: 1, y: 0, yPercent: 0, clearProps: "transform" });
+        }, 1600);
+
         return () => {
+          window.clearTimeout(failsafe);
           splitInstance.revert();
         };
       }
