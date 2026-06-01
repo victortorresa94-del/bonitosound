@@ -6,7 +6,6 @@ import { InstagramFeed, SpotifyEmbed } from "@/components/Embeds";
 import { RosterHover } from "@/components/RosterHover";
 import { findLogo } from "@/lib/assets";
 import { MarqueeLogoWall } from "@/components/motion";
-import { HeroCanvas } from "@/components/motion";
 import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { brands, memberships, support, supportPending, team, site } from "@/lib/site";
@@ -51,9 +50,10 @@ const stats = [
 ];
 
 const jaleoLineup = [
+  { name: "Grupo Puerto", line: "Afro-latin melodic jazz." },
   { name: "Lucía Conde", line: "Nostalgia española + electrónica holandesa." },
   { name: "Andrés Barrios — Km.0", line: "Flamenco al piano, contemporáneo." },
-  { name: "Sofía Peters", line: "Indie-pop hispano-neerlandés." },
+  { name: "AlexAbril", line: "Flamenco-jazz fusion." },
 ];
 
 export default function Home() {
@@ -68,11 +68,17 @@ export default function Home() {
 
   return (
     <>
-      {/* ───────────── 1. HERO con WebGL ───────────── */}
+      {/* ───────────── 1. HERO ───────────── */}
       <section className="relative overflow-hidden">
-        {/* Campo WebGL animado de fondo (degradado de ruido reactivo al mouse) */}
-        <HeroCanvas className="absolute inset-0 -z-20 h-full w-full opacity-70" />
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-bg-primary/60 via-bg-primary/30 to-bg-primary" />
+        {/* Blobs decorativos (CSS, sin WebGL — el HeroCanvas se veía cortado) */}
+        <div
+          className="pointer-events-none absolute -left-32 -top-24 -z-10 h-[34rem] w-[34rem] rounded-full opacity-70 blur-3xl"
+          style={{ background: "radial-gradient(circle, rgba(31,184,154,0.22), transparent 70%)" }}
+        />
+        <div
+          className="pointer-events-none absolute -right-24 top-40 -z-10 h-[28rem] w-[28rem] rounded-full opacity-60 blur-3xl"
+          style={{ background: "radial-gradient(circle, rgba(27,110,230,0.16), transparent 70%)" }}
+        />
         <Star className="absolute left-[12%] top-32 h-6 w-6 text-accent-warm/70" />
         <Note className="absolute right-[14%] top-44 hidden h-8 w-8 text-accent-blue/50 md:block" />
         <Star className="absolute bottom-24 right-[28%] h-4 w-4 text-accent-blue/40" />
@@ -148,7 +154,7 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* ───────────── 4. STATS Awwwards-tier ───────────── */}
+      {/* ───────────── 4. STATS — limpio, contundente ───────────── */}
       <section className="relative overflow-hidden border-y border-subtle bg-text-primary py-24 text-bg-primary md:py-32">
         <Star className="absolute left-[8%] top-12 h-8 w-8 text-accent-warm/40" />
         <Note className="absolute bottom-16 right-[10%] h-10 w-10 text-white/15" />
@@ -156,35 +162,29 @@ export default function Home() {
 
         <div className="wrap">
           <p className="text-xs uppercase tracking-[0.3em] text-white/50">Los números</p>
-          <h2 className="display mt-3 max-w-3xl text-[clamp(2rem,4vw,3rem)] leading-tight text-white/85">
+          <h2 className="display mt-3 max-w-3xl text-[clamp(2.4rem,5vw,3.8rem)] leading-tight">
             Lo que <span className="italic text-accent-warm">no se dice</span>, pero se cuenta.
           </h2>
 
-          <div className="mt-16 grid grid-cols-1 gap-x-10 gap-y-16 md:grid-cols-12">
-            {stats.map((s, i) => {
-              // Layout asimétrico: alternar col-span y offsets
-              const layout = [
-                "md:col-span-6 md:col-start-1",
-                "md:col-span-5 md:col-start-8",
-                "md:col-span-4 md:col-start-2",
-                "md:col-span-6 md:col-start-7",
-              ][i];
-              return (
-                <div key={s.label} className={layout}>
+          {/* Lista tipo cuenta — cada stat en una fila grande con divisor */}
+          <ul className="mt-20 divide-y divide-white/15 border-y border-white/15">
+            {stats.map((s, i) => (
+              <li key={s.label} className="group grid grid-cols-12 items-baseline gap-4 py-10 md:py-14">
+                <span className="col-span-1 self-start pt-3 text-xs text-white/35">0{i + 1}</span>
+                <div className="col-span-11 grid grid-cols-1 items-baseline gap-3 md:grid-cols-[auto_1fr] md:gap-12">
                   <div className="flex items-baseline gap-3">
-                    <p className="display text-[clamp(5rem,16vw,11rem)] leading-[0.85] tracking-tight">
+                    <span className="display text-[clamp(4.5rem,12vw,9rem)] leading-[0.85] tracking-tight">
                       {s.n}<span className="text-accent-warm">{s.suffix}</span>
-                    </p>
-                    <p className="text-2xl text-white/40 md:text-3xl">{s.unit}</p>
+                    </span>
+                    <span className="text-xl text-white/45 md:text-2xl">{s.unit}</span>
                   </div>
-                  <div className="mt-3 flex items-center gap-3">
-                    <span className="block h-px w-12 bg-accent-warm" />
-                    <p className="text-sm text-white/70 md:text-base">{s.label}</p>
-                  </div>
+                  <p className="self-end pb-4 text-base text-white/70 md:pb-6 md:text-right md:text-lg">
+                    {s.label}
+                  </p>
                 </div>
-              );
-            })}
-          </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
