@@ -1050,6 +1050,14 @@ GitHub avisa con archivos >50MB. Vercel falla con bundles muy grandes.
 
 Estos mockups están EXCLUIDOS de `tsconfig.json` (no son código) pero SÍ los lee el script de gpt-image-1 como referencia visual para garantizar cohesión.
 
+## 15-bis. Prompts de referencia (`references/prompts/`)
+
+System prompts filtrados de productos como Anthropic Claude Design, Claude Code, Claude in Chrome, Google AI Studio Build, Cursor, etc. **Léelos como contexto** cuando vayas a hacer iteraciones de diseño nuevas — son las recetas internas que esos productos usan para generar UIs profesionales.
+
+Ver `references/prompts/README.md` para detalle de cada uno y cómo usarlos.
+
+**Uso típico**: en el primer mensaje de la sesión nueva, además de pedir leer `CONTEXT.md`, pide leer también `references/prompts/anthropic-claude-design.md` y aplicarlo como contexto de estilo en cualquier rediseño que te pida después.
+
 ## 16. Logo y personaje del héroe
 
 Originales subidos por Víctor:
