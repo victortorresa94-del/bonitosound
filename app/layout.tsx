@@ -5,7 +5,7 @@ import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/ui";
-import { MotionProvider } from "@/components/motion";
+import { MotionProvider, PageTransitionShell } from "@/components/motion";
 import { site, memberships, team } from "@/lib/site";
 
 const display = Bricolage_Grotesque({
@@ -73,7 +73,9 @@ export default function RootLayout({
         <JsonLd data={orgLd} />
         <MotionProvider>
           <Nav />
-          <main>{children}</main>
+          <PageTransitionShell>
+            <main>{children}</main>
+          </PageTransitionShell>
           <Footer />
         </MotionProvider>
       </body>

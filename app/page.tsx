@@ -3,8 +3,10 @@ import Image from "next/image";
 import { Section, Cta } from "@/components/ui";
 import { Superhero } from "@/components/Superhero";
 import { InstagramFeed, SpotifyEmbed } from "@/components/Embeds";
+import { RosterHover } from "@/components/RosterHover";
 import { findLogo } from "@/lib/assets";
-import { MarqueeLogoWall, HorizontalScroller } from "@/components/motion";
+import { MarqueeLogoWall } from "@/components/motion";
+import { HeroCanvas } from "@/components/motion";
 import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { brands, memberships, support, supportPending, team, site } from "@/lib/site";
@@ -56,16 +58,21 @@ const jaleoLineup = [
 
 export default function Home() {
   const roster = getArtists().filter((a) => a.tier === "booking").slice(0, 6);
+  const rosterItems = roster.map((a) => ({
+    slug: a.slug,
+    name: a.name,
+    genre: a.genre,
+    image: a.image ?? findAsset("artistas", a.slug),
+  }));
   const heroArt = findAsset("marca", "superheroe-home");
 
   return (
     <>
-      {/* ───────────── 1. HERO ───────────── */}
+      {/* ───────────── 1. HERO con WebGL ───────────── */}
       <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute -left-32 -top-24 -z-10 h-[34rem] w-[34rem] rounded-full opacity-70 blur-3xl"
-             style={{ background: "radial-gradient(circle, rgba(31,184,154,0.22), transparent 70%)" }} />
-        <div className="pointer-events-none absolute -right-24 top-40 -z-10 h-[28rem] w-[28rem] rounded-full opacity-60 blur-3xl"
-             style={{ background: "radial-gradient(circle, rgba(27,110,230,0.16), transparent 70%)" }} />
+        {/* Campo WebGL animado de fondo (degradado de ruido reactivo al mouse) */}
+        <HeroCanvas className="absolute inset-0 -z-20 h-full w-full opacity-70" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-bg-primary/60 via-bg-primary/30 to-bg-primary" />
         <Star className="absolute left-[12%] top-32 h-6 w-6 text-accent-warm/70" />
         <Note className="absolute right-[14%] top-44 hidden h-8 w-8 text-accent-blue/50 md:block" />
         <Star className="absolute bottom-24 right-[28%] h-4 w-4 text-accent-blue/40" />
@@ -181,9 +188,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ───────────── 5. ROSTER horizontal cinemático ───────────── */}
-      <section className="border-t border-subtle py-20 md:py-28">
-        <div className="wrap flex flex-wrap items-end justify-between gap-6">
+      {/* ───────────── 5. ROSTER — lista hover (Earth Agency) ───────────── */}
+      <Section className="border-t border-subtle">
+        <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
             <p className="eyebrow mb-4">Roster</p>
             <h2 className="display text-[clamp(2rem,5vw,3.6rem)] leading-[1.02]">
@@ -192,30 +199,10 @@ export default function Home() {
           </div>
           <Cta href="/artistas" variant="ghost">Roster completo →</Cta>
         </div>
-
-        <HorizontalScroller className="mt-12">
-          {roster.map((a) => {
-            const photo = a.image ?? findAsset("artistas", a.slug);
-            return (
-              <Link
-                key={a.slug}
-                href={`/artistas/${a.slug}`}
-                className="group relative block h-[60vh] w-[78vw] shrink-0 overflow-hidden rounded-3xl border border-subtle bg-bg-tertiary sm:w-[44vw] md:h-[68vh] md:w-[34vw] lg:w-[26vw]"
-              >
-                {photo && (
-                  <Image src={photo} alt={a.name} fill sizes="(max-width: 768px) 78vw, 26vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-7">
-                  <p className="text-xs uppercase tracking-[0.2em] text-white/70">{a.genre}</p>
-                  <p className="display mt-1 text-4xl text-white">{a.name}</p>
-                  <span className="mt-3 inline-block text-sm text-white/80">Ver ficha →</span>
-                </div>
-              </Link>
-            );
-          })}
-        </HorizontalScroller>
-      </section>
+        <div className="mt-12">
+          <RosterHover items={rosterItems} />
+        </div>
+      </Section>
 
       {/* ───────────── 6. JALEO SOUND — banner cartel-festival ───────────── */}
       <section className="relative overflow-hidden text-white" style={{ background: "var(--jaleo-red)" }}>
