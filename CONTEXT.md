@@ -1050,6 +1050,32 @@ GitHub avisa con archivos >50MB. Vercel falla con bundles muy grandes.
 
 Estos mockups están EXCLUIDOS de `tsconfig.json` (no son código) pero SÍ los lee el script de gpt-image-1 como referencia visual para garantizar cohesión.
 
+## 15-quater. 21st.dev Magic — MCP server de UI generativa
+
+Integración del SDK de [21st.dev](https://21st.dev) como MCP server. Da 4 tools para generar/refinar componentes UI inspirados en el catálogo de 21st (Vercel-style, framer-motion, shadcn/ui, etc.):
+
+| Tool | Para |
+|---|---|
+| `mcp__21st-dev-magic__21st_magic_component_builder` | Generar un componente nuevo (`/ui hero` → genera un hero) |
+| `mcp__21st-dev-magic__21st_magic_component_inspiration` | Buscar inspiración por concepto |
+| `mcp__21st-dev-magic__21st_magic_component_refiner` | Refinar un componente existente del proyecto |
+| `mcp__21st-dev-magic__logo_search` | Buscar logos en SVG/JSX/TSX (catálogo limitado — marcas tech/dev) |
+
+**Skill formal**: `.agents/skills/21st-sdk/SKILL.md` con el protocolo (cargada automáticamente).
+
+**Activación**:
+1. Saca API key en https://21st.dev/magic/console (formato `21st_sk_…`).
+2. Setea `TWENTYFIRST_API_KEY` en las **variables de entorno del entorno de Claude Code on the web**.
+3. La config del MCP en `~/.claude.json` ya espera `${TWENTYFIRST_API_KEY}` — se conecta solo.
+
+⚠️ **NUNCA poner la key en el chat ni en el repo**. El `.env.example` lleva placeholder vacío. El repo es público.
+
+**Uso típico** en sesiones nuevas:
+```
+Usando 21st.dev Magic, genera un hero animado al estilo Vercel
+para /eventos/marcas con framer-motion. Mantén la paleta del CONTEXT.md.
+```
+
 ## 15-ter. Skills universales (`.agents/skills/`)
 
 13 skills cargadas en `.agents/skills/` (estándar universal: Claude Code, Cursor, Cline, Amp, Codex, Antigravity, +más). Cada una es un `SKILL.md` con persona + reglas + anti-patterns + workflow para un dominio concreto de diseño.
