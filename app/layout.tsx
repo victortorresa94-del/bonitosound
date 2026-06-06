@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Zilla_Slab } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
@@ -8,11 +8,14 @@ import { JsonLd } from "@/components/ui";
 import { MotionProvider, PageTransitionShell } from "@/components/motion";
 import { site, memberships, team } from "@/lib/site";
 
-const display = Bricolage_Grotesque({
+// Display: Zilla Slab — slab serif tipo Clarendon (la referencia de Hello Monday
+// es ClarendonBTWXX-Light). Editorial, con carácter, peso ligero para titulares
+// grandes. Body: Geist (grotesca neutra, equivalente libre a NB International Pro).
+const display = Zilla_Slab({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {

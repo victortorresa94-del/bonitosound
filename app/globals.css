@@ -3,29 +3,34 @@
 @tailwind utilities;
 
 :root {
-  /* Tema claro · minimalista — fondo blanco */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f6f5f1;
-  --bg-tertiary: #efede7;
+  /* Tema claro · minimalista · editorial — fondo crema cálido (ref. Hello Monday) */
+  --bg-primary: #f7f4ed;
+  --bg-secondary: #f1ede3;
+  --bg-tertiary: #e9e4d7;
 
-  /* Azul Bonito — primary action */
-  --accent-blue: #1b6ee6;
-  --accent-blue-hover: #1559c4;
+  /* Cian de la mascota — ÚNICO color de acento. El color es un evento, no un fondo. */
+  --accent-cyan: #16b6d4;
+  --accent-cyan-hover: #119db8;
 
-  /* Acento cálido — herencia de Jaleo */
+  /* Compat: el resto del sitio aún referencia --accent-blue. Lo apuntamos al cian
+     para unificar el acento sin reescribir todas las páginas internas. */
+  --accent-blue: var(--accent-cyan);
+  --accent-blue-hover: var(--accent-cyan-hover);
+
+  /* Acento cálido — herencia de Jaleo (uso puntual) */
   --accent-warm: #ff5a1f;
   --accent-warm-soft: #ffb47a;
 
   /* Jaleo — identidad propia del festival */
   --jaleo-red: #e8351f;
 
-  /* Texto sobre blanco */
-  --text-primary: #0b0f14;
-  --text-secondary: #51565f;
-  --text-muted: #8b8f98;
+  /* Texto sobre crema — negro cálido */
+  --text-primary: #14110b;
+  --text-secondary: #57544c;
+  --text-muted: #8d897e;
 
   /* Borders / divisores — finos, casi imperceptibles */
-  --border-subtle: rgba(11, 15, 20, 0.1);
+  --border-subtle: rgba(20, 17, 11, 0.12);
 }
 
 * {
@@ -60,7 +65,7 @@ body {
 }
 
 ::selection {
-  background: var(--accent-warm);
+  background: var(--accent-cyan);
   color: #fff;
 }
 
@@ -69,12 +74,24 @@ body {
     @apply mx-auto w-full max-w-content px-6 md:px-10;
   }
 
-  /* Display divertida: Fraunces, peso alto, italic opcional */
+  /* Display: Zilla Slab (slab serif tipo Clarendon). Carácter editorial. */
   .display {
     font-family: var(--font-display), Georgia, serif;
     @apply font-semibold;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     line-height: 1;
+  }
+
+  /* Statement de la home: slab ligero, grande, editorial. Una idea por pantalla. */
+  .statement {
+    font-family: var(--font-display), Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+  .statement .accent {
+    color: var(--accent-cyan);
   }
 
   .eyebrow {
@@ -126,6 +143,39 @@ body {
   .link-underline:hover::after {
     @apply w-full;
   }
+
+  /* "Ver más →" discreto: la flecha avanza al hover, el texto se tiñe de cian. */
+  .more-link {
+    @apply inline-flex items-center gap-2 text-sm font-medium;
+    color: var(--text-secondary);
+    transition: color 0.25s ease;
+  }
+  .more-link .arrow {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .more-link:hover {
+    color: var(--accent-cyan);
+  }
+  .more-link:hover .arrow {
+    transform: translateX(6px);
+  }
+
+  /* Cue de scroll del hero: línea que late hacia abajo. */
+  .scroll-cue {
+    @apply relative h-12 w-px overflow-hidden;
+    background: rgba(255, 255, 255, 0.35);
+  }
+  .scroll-cue::after {
+    content: "";
+    @apply absolute left-0 top-0 h-1/2 w-px;
+    background: #fff;
+    animation: cue-slide 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+}
+
+@keyframes cue-slide {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
 }
 
 .stagger > * {

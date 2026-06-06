@@ -15,6 +15,8 @@ const config: Config = {
           tertiary: "var(--bg-tertiary)",
         },
         accent: {
+          cyan: "var(--accent-cyan)",
+          "cyan-hover": "var(--accent-cyan-hover)",
           blue: "var(--accent-blue)",
           "blue-hover": "var(--accent-blue-hover)",
           warm: "var(--accent-warm)",
