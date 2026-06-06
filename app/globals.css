@@ -171,6 +171,17 @@ body {
     background: #fff;
     animation: cue-slide 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
   }
+  /* Variante sobre fondo claro (crema). */
+  .scroll-cue-dark {
+    @apply relative h-12 w-px overflow-hidden;
+    background: rgba(20, 17, 11, 0.18);
+  }
+  .scroll-cue-dark::after {
+    content: "";
+    @apply absolute left-0 top-0 h-1/2 w-px;
+    background: var(--text-primary);
+    animation: cue-slide 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
 }
 
 @keyframes cue-slide {

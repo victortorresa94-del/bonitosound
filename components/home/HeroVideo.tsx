@@ -10,10 +10,15 @@ type HeroVideoProps = {
 };
 
 /**
- * Escena 1 — Hero. La mascota en vídeo, a pantalla completa.
- * Autoplay, bucle, silenciado. Decorativo: no bloquea interacción ni mete layout
- * shift (el contenedor reserva el alto). Con prefers-reduced-motion mostramos el
- * póster estático en vez del vídeo. Capa de contraste abajo para el cue/legibilidad.
+ * Escena 1 — Hero. La mascota en vídeo, centrada y a tamaño natural (el vídeo es
+ * vertical 3:4; NO se recorta a pantalla completa, respira sobre el crema).
+ *
+ * El vídeo viene con fondo blanco: con mix-blend-mode:multiply el blanco se funde
+ * con el crema de la página y solo queda la mascota. Si más adelante se re-renderiza
+ * el vídeo directamente sobre el crema (#f7f4ed), el multiply sigue siendo inocuo.
+ *
+ * Decorativo: no bloquea interacción ni mete layout shift. Con prefers-reduced-motion
+ * mostramos el póster estático.
  */
 export function HeroVideo({ src, poster, label }: HeroVideoProps) {
   const reduced = usePrefersReducedMotion();
@@ -23,7 +28,6 @@ export function HeroVideo({ src, poster, label }: HeroVideoProps) {
   useEffect(() => {
     const v = videoRef.current;
     if (!v || reduced) return;
-    // Algunos navegadores necesitan un play() explícito tras montar.
     const tryPlay = () => v.play().catch(() => {});
     if (v.readyState >= 2) {
       setReady(true);
@@ -31,12 +35,15 @@ export function HeroVideo({ src, poster, label }: HeroVideoProps) {
     }
   }, [reduced]);
 
+  const mediaClass =
+    "h-[68svh] max-h-[760px] w-auto max-w-[88vw] object-contain [mix-blend-mode:multiply]";
+
   return (
     <section
-      className="relative flex h-[100svh] w-full items-end justify-center overflow-hidden bg-bg-tertiary"
+      className="relative flex h-[100svh] w-full flex-col items-center justify-center overflow-hidden bg-bg-primary"
       aria-label={label}
     >
-      {/* Título accesible invisible: da estructura semántica (h1) sin tapar el vídeo. */}
+      {/* Título accesible invisible: estructura semántica (h1) sin tapar el vídeo. */}
       <h1 className="sr-only">
         {label} — el ecosistema cultural integral del sector musical
       </h1>
@@ -44,17 +51,12 @@ export function HeroVideo({ src, poster, label }: HeroVideoProps) {
       {reduced ? (
         poster ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={poster}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+          <img src={poster} alt="" aria-hidden="true" className={mediaClass} />
         ) : null
       ) : (
         <video
           ref={videoRef}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+          className={`${mediaClass} transition-opacity duration-700 ${
             ready ? "opacity-100" : "opacity-0"
           }`}
           src={src}
@@ -69,19 +71,13 @@ export function HeroVideo({ src, poster, label }: HeroVideoProps) {
         />
       )}
 
-      {/* Velo de contraste: gradiente sutil abajo para el cue y para no “lavar” el pie. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/35 to-transparent"
-      />
-
-      {/* Cue de scroll — solo con movimiento permitido. */}
+      {/* Cue de scroll — sobre crema, en tinta oscura. Solo con movimiento permitido. */}
       {!reduced && (
-        <div className="relative z-10 mb-10 flex flex-col items-center gap-3">
-          <span className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-white/80">
+        <div className="absolute bottom-9 flex flex-col items-center gap-3">
+          <span className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-text-muted">
             Baja
           </span>
-          <span className="scroll-cue" aria-hidden="true" />
+          <span className="scroll-cue-dark" aria-hidden="true" />
         </div>
       )}
     </section>
