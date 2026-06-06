@@ -42,6 +42,8 @@ export const heroVideo = {
   label: "Bonito Sound",
 };
 
+// Para añadir/cambiar la mascota de una escena: deja un archivo en
+// public/img/home/<id>.(png|jpg|webp…) y aparecerá solo (es el primer candidato).
 export const scenes: HomeScene[] = [
   {
     id: "que-es",
@@ -57,26 +59,58 @@ export const scenes: HomeScene[] = [
     statement: "Hacemos que las marcas suenen.",
     accent: "suenen",
     support:
-      "Activaciones, giras y eventos que la gente recuerda. Del brief al titular en seis semanas.",
+      "Activaciones, eventos y experiencias de marca que la gente recuerda. Del brief al titular en seis semanas.",
     cta: { label: "Ver más", href: "/eventos" },
     mediaCandidates: [
+      "/img/home/marcas.png",
       "/img/marca/heroe-megafono.jpeg",
       "/img/marca/superheroe-eventos.png",
       "/img/secciones/eventos.png",
     ],
   },
   {
-    id: "artistas",
-    kicker: "Artistas",
+    id: "giras",
+    kicker: "Giras",
+    statement: "Y las giras, las llenamos.",
+    accent: "llenamos",
+    support:
+      "Producción, ruta y management de directo. De Antonio Orozco a Maldita Nerea: el escenario montado y el aforo lleno.",
+    cta: { label: "Ver más", href: "/eventos/giras" },
+    mediaCandidates: ["/img/home/giras.png", "/img/marca/superheroe-eventos.png"],
+  },
+  {
+    id: "records",
+    kicker: "Records",
     statement: "Ayudamos a artistas a despegar.",
     accent: "despegar",
     support:
-      "Sello, booking, management y distribución. Todo lo que necesita una carrera para crecer, en un solo sitio.",
+      "Sello, booking, management, distribución y editorial. Todo lo que necesita una carrera para crecer, en un solo sitio.",
     cta: { label: "Ver más", href: "/records" },
     mediaCandidates: [
+      "/img/home/records.png",
       "/img/marca/superheroe-records.png",
       "/img/secciones/records.png",
     ],
+  },
+  {
+    id: "estudio",
+    kicker: "Estudio y producción",
+    statement: "Las canciones se cocinan aquí.",
+    accent: "aquí",
+    support:
+      "Estudio de grabación, producción y desarrollo artístico. Del primer demo al máster listo para plataformas.",
+    cta: { label: "Ver más", href: "/records/sello" },
+    mediaCandidates: ["/img/home/estudio.png"],
+  },
+  {
+    id: "marketing",
+    kicker: "Marketing para artistas",
+    statement: "Y que el lanzamiento no pase desapercibido.",
+    accent: "no pase desapercibido",
+    support:
+      "Campañas de ads, estrategia de redes y lanzamientos de álbum y de evento. Cuando salga, se entera quien se tiene que enterar.",
+    cta: { label: "Ver más", href: "/records" },
+    mediaCandidates: ["/img/home/marketing.png", "/img/marca/heroe-volando.jpeg"],
   },
   {
     id: "tecnologia",
@@ -86,7 +120,7 @@ export const scenes: HomeScene[] = [
     support:
       "Artiverse y Giraverse: el software que ordena una industria que sigue funcionando por WhatsApp.",
     cta: { label: "Ver más", href: "/lab" },
-    mediaCandidates: ["/img/secciones/lab.png"],
+    mediaCandidates: ["/img/home/tecnologia.png", "/img/secciones/lab.png"],
   },
   {
     id: "festival",
@@ -95,7 +129,11 @@ export const scenes: HomeScene[] = [
     accent: "festival",
     support: "Jaleo Sound. Música española y latina en Ámsterdam.",
     cta: { label: "Ver más", href: "/jaleo-sound" },
-    mediaCandidates: ["/img/secciones/jaleo.png", "/img/jaleo/jaleo-01.jpg"],
+    mediaCandidates: [
+      "/img/home/festival.png",
+      "/img/secciones/jaleo.png",
+      "/img/jaleo/jaleo-01.jpg",
+    ],
   },
   {
     id: "cierre",
@@ -105,6 +143,5 @@ export const scenes: HomeScene[] = [
     support:
       "Treinta minutos. Tú cuentas qué necesitas, nosotros te decimos qué se puede hacer de verdad.",
     cta: { label: "Hablamos", href: "/contacto" },
-    mediaCandidates: ["/img/marca/heroe-volando.jpeg"],
   },
 ];
