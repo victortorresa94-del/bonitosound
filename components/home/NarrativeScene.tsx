@@ -70,7 +70,7 @@ export function NarrativeScene({ scene, media, index }: NarrativeSceneProps) {
 
   return (
     <section
-      id={scene.id}
+      id={`scene-${scene.id}`}
       className="flex min-h-[88svh] items-center py-24 md:py-32"
     >
       <div className="wrap w-full">

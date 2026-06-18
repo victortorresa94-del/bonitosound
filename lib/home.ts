@@ -30,12 +30,58 @@ export type HomeScene = {
   mediaCandidates?: string[];
 };
 
-/** Hero (escena 1). SVG vectorial del superhéroe que se "pinta solo" con
- *  GSAP DrawSVGPlugin y luego entra en un loop sutil. El propio SVG se
- *  genera con scripts/vectorize-mascot.mjs a partir del PNG de marca. */
+/** Identidad metamórfica del logo Bonito Sound.
+ *
+ *  El logo se transforma a lo largo del scroll en distintos objetos
+ *  musicales, manteniendo el lettering "BONITO SOUND" siempre presente.
+ *  Cada forma se asocia (opcionalmente) a una escena de la narrativa.
+ *
+ *  Los SVGs se generan con scripts/vectorize-mascot.mjs y se sirven desde
+ *  /public/img/marca/forma-<id>.svg. app/page.tsx los lee en server y los
+ *  pasa inline al componente MetamorphicLogo.
+ */
+export type LogoForm = {
+  /** id estable, coincide con el data-bs-forma del SVG */
+  id: "superheroe" | "megafono" | "guitarra" | "bafle";
+  /** ruta pública del SVG vectorizado */
+  svgPath: string;
+  /** id de la escena de la narrativa con la que se sincroniza el morph
+   *  vía ScrollTrigger; null = inicial (hero). */
+  triggerSceneId: string | null;
+  /** descripción accesible (sr-only) cuando esta forma está activa */
+  label: string;
+};
+
+export const logoForms: LogoForm[] = [
+  {
+    id: "superheroe",
+    svgPath: "/img/marca/forma-superheroe.svg",
+    triggerSceneId: null,
+    label: "Bonito Sound — superhéroe",
+  },
+  {
+    id: "megafono",
+    svgPath: "/img/marca/forma-megafono.svg",
+    triggerSceneId: "marcas",
+    label: "Bonito Sound — megáfono (Marcas)",
+  },
+  {
+    id: "guitarra",
+    svgPath: "/img/marca/forma-guitarra.svg",
+    triggerSceneId: "records",
+    label: "Bonito Sound — guitarra (Records)",
+  },
+  {
+    id: "bafle",
+    svgPath: "/img/marca/forma-bafle.svg",
+    triggerSceneId: "festival",
+    label: "Bonito Sound — bafle (Festival)",
+  },
+];
+
+/** Compat con código previo. */
 export const heroMascot = {
-  svgPath: "/img/marca/superheroe-vector.svg",
-  /** texto solo para lectores de pantalla: el SVG es decorativo */
+  svgPath: logoForms[0].svgPath,
   label: "Bonito Sound",
 };
 

@@ -1,19 +1,24 @@
 import fs from "node:fs";
 import path from "node:path";
-import { HeroDrawing } from "@/components/home/HeroDrawing";
+import { MetamorphicLogo, type FormData } from "@/components/home/MetamorphicLogo";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
-import { heroMascot, scenes } from "@/lib/home";
+import { logoForms, scenes } from "@/lib/home";
+import { parseFormSvg } from "@/lib/svg-form";
 
 /**
- * HOME narrativa. Una idea por escena, scroll que presenta lo que hacemos en
- * lenguaje natural. La home no lo cuenta todo: invita a descubrir (el roster,
- * los números, el equipo, las marcas… viven en las páginas internas).
+ * HOME narrativa con identidad metamórfica.
  *
- * Referencia de craft: hellomonday.com — slab serif editorial, movimiento con
- * propósito, mucho aire. El contenido se edita en lib/home.ts sin tocar esto.
+ * El hero ya no es estático: el logo de Bonito Sound se "pinta solo" como
+ * superhéroe y se va transformando con el scroll en megáfono → guitarra →
+ * bafle, sincronizado con las escenas de la narrativa (Marcas, Records,
+ * Festival). La firma "el logo es la marca" recorre toda la web.
+ *
+ * Referencia de craft: hellomonday.com (slab editorial, movimiento con
+ * propósito) + GSAP DrawSVG/MorphSVG (Codrops, mascot animations).
+ * El contenido editorial se edita en lib/home.ts sin tocar componentes.
  */
 
-/** Primer candidato de /public que existe en disco (o null). Resuelto en servidor. */
+/** Primer candidato de /public que existe en disco (o null). */
 function firstExisting(candidates: string[] | undefined): string | null {
   if (!candidates) return null;
   for (const rel of candidates) {
@@ -23,23 +28,29 @@ function firstExisting(candidates: string[] | undefined): string | null {
   return null;
 }
 
-/** Lee el SVG del personaje en disco, le añade el atributo data-bs-mascot
- *  (svgo lo elimina si va vacío) y lo deja listo para inyectar. */
-function readMascotSvg(): string {
-  const abs = path.join(process.cwd(), "public", heroMascot.svgPath.replace(/^\//, ""));
-  let svg = fs.readFileSync(abs, "utf8").trim();
-  if (!/data-bs-mascot/.test(svg)) {
-    svg = svg.replace(/<svg\b/, '<svg data-bs-mascot="true"');
-  }
-  // ARIA: el SVG es decorativo (el h1.sr-only lleva la semántica).
-  if (!/aria-hidden/.test(svg)) {
-    svg = svg.replace(/<svg\b/, '<svg aria-hidden="true"');
-  }
-  return svg;
+/** Lee y normaliza un SVG de /public para inyectarlo inline en el cliente. */
+function readSvg(relPath: string): string {
+  const abs = path.join(process.cwd(), "public", relPath.replace(/^\//, ""));
+  return fs.readFileSync(abs, "utf8").trim();
 }
 
 export default function HomePage() {
-  const svgMarkup = readMascotSvg();
+  const forms: FormData[] = logoForms
+    .filter((f) => {
+      const abs = path.join(
+        process.cwd(),
+        "public",
+        f.svgPath.replace(/^\//, "")
+      );
+      return fs.existsSync(abs);
+    })
+    .map((f) => ({
+      id: f.id,
+      triggerSceneId: f.triggerSceneId,
+      label: f.label,
+      ...parseFormSvg(readSvg(f.svgPath)),
+    }));
+
   const resolved = scenes.map((scene) => ({
     scene,
     media: firstExisting(scene.mediaCandidates),
@@ -47,7 +58,7 @@ export default function HomePage() {
 
   return (
     <>
-      <HeroDrawing svgMarkup={svgMarkup} label={heroMascot.label} />
+      <MetamorphicLogo forms={forms} />
 
       {resolved.map(({ scene, media }, i) => (
         <NarrativeScene key={scene.id} scene={scene} media={media} index={i} />
