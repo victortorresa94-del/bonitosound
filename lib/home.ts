@@ -30,15 +30,12 @@ export type HomeScene = {
   mediaCandidates?: string[];
 };
 
-/** Vídeo del hero (escena 1). Mascota a pantalla completa, autoplay/loop/muted. */
-export const heroVideo = {
-  src: "/video/hero-mascota.mp4",
-  /** póster opcional: si existe en /public se usa como primer fotograma */
-  posterCandidates: [
-    "/img/marca/superheroe-home.png",
-    "/img/heroes/eventos-marcas.png",
-  ],
-  /** texto solo para lectores de pantalla: el vídeo es decorativo */
+/** Hero (escena 1). SVG vectorial del superhéroe que se "pinta solo" con
+ *  GSAP DrawSVGPlugin y luego entra en un loop sutil. El propio SVG se
+ *  genera con scripts/vectorize-mascot.mjs a partir del PNG de marca. */
+export const heroMascot = {
+  svgPath: "/img/marca/superheroe-vector.svg",
+  /** texto solo para lectores de pantalla: el SVG es decorativo */
   label: "Bonito Sound",
 };
 

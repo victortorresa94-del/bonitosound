@@ -189,6 +189,18 @@ body {
   100% { transform: translateY(200%); }
 }
 
+/* Mascota animada del hero (SVG inline + GSAP DrawSVG).
+   Estado inicial antes de que JS tome el control: los paths quedan
+   invisibles para que el "draw-on" empiece desde un lienzo vacío.
+   Cuando HeroDrawing arranca, marca data-stage="ready" en el <svg>
+   y GSAP toma el control del fill/stroke. */
+svg[data-bs-mascot]:not([data-stage="ready"]) path {
+  fill-opacity: 0;
+}
+svg[data-bs-mascot] path {
+  vector-effect: non-scaling-stroke;
+}
+
 .stagger > * {
   animation: reveal-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -218,5 +230,11 @@ body {
   }
   .bs-cursor {
     display: none !important;
+  }
+  /* Si no hay JS o el usuario pide menos movimiento, mostramos el SVG ya
+     pintado al instante (anula la regla de FOUC). */
+  svg[data-bs-mascot] path {
+    fill-opacity: 1 !important;
+    stroke-width: 0 !important;
   }
 }

@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
-import { HeroVideo } from "@/components/home/HeroVideo";
+import { HeroDrawing } from "@/components/home/HeroDrawing";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
-import { heroVideo, scenes } from "@/lib/home";
+import { heroMascot, scenes } from "@/lib/home";
 
 /**
  * HOME narrativa. Una idea por escena, scroll que presenta lo que hacemos en
@@ -23,8 +23,23 @@ function firstExisting(candidates: string[] | undefined): string | null {
   return null;
 }
 
+/** Lee el SVG del personaje en disco, le añade el atributo data-bs-mascot
+ *  (svgo lo elimina si va vacío) y lo deja listo para inyectar. */
+function readMascotSvg(): string {
+  const abs = path.join(process.cwd(), "public", heroMascot.svgPath.replace(/^\//, ""));
+  let svg = fs.readFileSync(abs, "utf8").trim();
+  if (!/data-bs-mascot/.test(svg)) {
+    svg = svg.replace(/<svg\b/, '<svg data-bs-mascot="true"');
+  }
+  // ARIA: el SVG es decorativo (el h1.sr-only lleva la semántica).
+  if (!/aria-hidden/.test(svg)) {
+    svg = svg.replace(/<svg\b/, '<svg aria-hidden="true"');
+  }
+  return svg;
+}
+
 export default function HomePage() {
-  const poster = firstExisting(heroVideo.posterCandidates);
+  const svgMarkup = readMascotSvg();
   const resolved = scenes.map((scene) => ({
     scene,
     media: firstExisting(scene.mediaCandidates),
@@ -32,7 +47,7 @@ export default function HomePage() {
 
   return (
     <>
-      <HeroVideo src={heroVideo.src} poster={poster} label={heroVideo.label} />
+      <HeroDrawing svgMarkup={svgMarkup} label={heroMascot.label} />
 
       {resolved.map(({ scene, media }, i) => (
         <NarrativeScene key={scene.id} scene={scene} media={media} index={i} />
