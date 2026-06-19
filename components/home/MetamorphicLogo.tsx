@@ -77,13 +77,14 @@ export function MetamorphicLogo({ forms }: MetamorphicLogoProps) {
           return;
         }
 
-        // 1 · Draw-on inicial de la forma 0 (superhéroe).
-        //     Subimos algo la duración y el stagger para que el "se pinta solo"
-        //     se aprecie (antes era casi instantáneo y parecía no moverse).
+        // 1 · Entrada del logo: scale + fade del SVG entero (siempre visible,
+        //     no depende del plugin DrawSVG) + dibujado-on de los paths
+        //     superpuesto encima para el detalle "se pinta solo".
         const initialPaths = groups[0].querySelectorAll<SVGPathElement>(
           "path"
         );
         gsap.set(groups[0], { opacity: 1 });
+        gsap.set(root, { scale: 0.9, opacity: 0, transformOrigin: "50% 55%" });
         gsap.set(initialPaths, {
           stroke: "currentColor",
           strokeWidth: 1.3,
@@ -92,19 +93,33 @@ export function MetamorphicLogo({ forms }: MetamorphicLogoProps) {
         });
         const intro = gsap.timeline();
         intro
-          .from(initialPaths, {
-            drawSVG: 0,
-            duration: 1.25,
-            ease: "power2.inOut",
-            stagger: 0.02,
+          .to(root, {
+            scale: 1,
+            opacity: 1,
+            duration: 0.9,
+            ease: "power3.out",
           })
-          .to(initialPaths, {
-            fillOpacity: 1,
-            strokeWidth: 0,
-            strokeOpacity: 0,
-            duration: 0.55,
-            ease: "power1.out",
-          }, "-=0.2");
+          .from(
+            initialPaths,
+            {
+              drawSVG: 0,
+              duration: 1.4,
+              ease: "power2.inOut",
+              stagger: 0.02,
+            },
+            0
+          )
+          .to(
+            initialPaths,
+            {
+              fillOpacity: 1,
+              strokeWidth: 0,
+              strokeOpacity: 0,
+              duration: 0.6,
+              ease: "power1.out",
+            },
+            ">-0.25"
+          );
 
         // 2 · Idle: respiración muy sutil del SVG entero.
         const idle = gsap.to(root, {
