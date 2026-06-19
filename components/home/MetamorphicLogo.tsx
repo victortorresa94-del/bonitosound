@@ -78,9 +78,12 @@ export function MetamorphicLogo({ forms }: MetamorphicLogoProps) {
         }
 
         // 1 · Draw-on inicial de la forma 0 (superhéroe).
+        //     Subimos algo la duración y el stagger para que el "se pinta solo"
+        //     se aprecie (antes era casi instantáneo y parecía no moverse).
         const initialPaths = groups[0].querySelectorAll<SVGPathElement>(
           "path"
         );
+        gsap.set(groups[0], { opacity: 1 });
         gsap.set(initialPaths, {
           stroke: "currentColor",
           strokeWidth: 1.3,
@@ -91,17 +94,17 @@ export function MetamorphicLogo({ forms }: MetamorphicLogoProps) {
         intro
           .from(initialPaths, {
             drawSVG: 0,
-            duration: 0.55,
+            duration: 1.25,
             ease: "power2.inOut",
-            stagger: 0.012,
+            stagger: 0.02,
           })
           .to(initialPaths, {
             fillOpacity: 1,
             strokeWidth: 0,
             strokeOpacity: 0,
-            duration: 0.4,
+            duration: 0.55,
             ease: "power1.out",
-          });
+          }, "-=0.2");
 
         // 2 · Idle: respiración muy sutil del SVG entero.
         const idle = gsap.to(root, {
@@ -150,6 +153,7 @@ export function MetamorphicLogo({ forms }: MetamorphicLogoProps) {
             );
 
           ScrollTrigger.create({
+            id: `bs-morph-${f.id}`,
             trigger: target,
             start: "top 70%",
             end: "top 30%",
@@ -162,7 +166,9 @@ export function MetamorphicLogo({ forms }: MetamorphicLogoProps) {
 
         return () => {
           ScrollTrigger.getAll().forEach((st) => {
-            if (st.trigger?.id?.startsWith("scene-")) st.kill();
+            if (typeof st.vars?.id === "string" && st.vars.id.startsWith("bs-morph-")) {
+              st.kill();
+            }
           });
           idle.kill();
           intro.kill();

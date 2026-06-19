@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 :root {
-  /* Tema claro · minimalista · editorial — fondo crema cálido (ref. Hello Monday) */
-  --bg-primary: #f7f4ed;
-  --bg-secondary: #f1ede3;
-  --bg-tertiary: #e9e4d7;
+  /* Tema claro · minimalista · editorial — blanco apenas tibio
+     (antes era un crema cálido; bajado en saturación para que respire más blanco). */
+  --bg-primary: #fbfaf6;
+  --bg-secondary: #f4f1e9;
+  --bg-tertiary: #ece7d8;
 
   /* Cian de la mascota — ÚNICO color de acento. El color es un evento, no un fondo. */
   --accent-cyan: #16b6d4;
@@ -194,10 +195,12 @@ body {
    invisibles para que el "draw-on" empiece desde un lienzo vacío.
    Cuando HeroDrawing arranca, marca data-stage="ready" en el <svg>
    y GSAP toma el control del fill/stroke. */
-svg[data-bs-mascot]:not([data-stage="ready"]) path {
+svg[data-bs-mascot]:not([data-stage="ready"]) path,
+svg[data-bs-metamorphic]:not([data-stage="ready"]) path {
   fill-opacity: 0;
 }
-svg[data-bs-mascot] path {
+svg[data-bs-mascot] path,
+svg[data-bs-metamorphic] path {
   vector-effect: non-scaling-stroke;
 }
 
@@ -233,7 +236,8 @@ svg[data-bs-mascot] path {
   }
   /* Si no hay JS o el usuario pide menos movimiento, mostramos el SVG ya
      pintado al instante (anula la regla de FOUC). */
-  svg[data-bs-mascot] path {
+  svg[data-bs-mascot] path,
+  svg[data-bs-metamorphic] path {
     fill-opacity: 1 !important;
     stroke-width: 0 !important;
   }
