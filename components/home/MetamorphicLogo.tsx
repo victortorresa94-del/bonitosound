@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
-import { gsap, ScrollTrigger, DrawSVGPlugin, MorphSVGPlugin } from "@/lib/gsap";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 import type { ParsedForm } from "@/lib/svg-form";
 
 export type FormData = ParsedForm & {
@@ -14,47 +14,32 @@ type MetamorphicLogoProps = {
   forms: FormData[];
 };
 
-/** Identidad metamórfica de Bonito Sound: el logo se "pinta solo" al cargar
- *  (superhéroe) y se transforma a lo largo del scroll en megáfono → guitarra
- *  → bafle, sincronizado con las secciones de la narrativa.
+/** Identidad metamórfica de Bonito Sound. El logo aparece, vive (flota +
+ *  saluda con un wobble cálido) y se transforma con el scroll en megáfono
+ *  → guitarra → bafle, encadenado a las escenas de la narrativa.
  *
- *  Cada forma viene PRE-PARSEADA del servidor (lib/svg-form.ts) — el cliente
- *  solo orquesta la animación, sin DOMParser ni FOUC.
+ *  Implementación: cada forma es su PROPIO <svg> apilado en absoluto con
+ *  su viewBox nativo (sin morph entre coords que no encajan). El cruce de
+ *  formas es un crossfade animado con GSAP core + ScrollTrigger — sin
+ *  plugins de pago (DrawSVG/MorphSVG no eran fiables en este entorno).
  *
- *  Técnica:
- *    - Un único <svg> con:
- *      • <path id="bs-silhouette"> que MorphSVG transforma entre las d's
- *        de cada forma (continuum visual subyacente, opacidad baja).
- *      • <g data-form="ID"> por cada forma con su shape + lettering ya
- *        serializados desde el server. Solo el activo es opacity 1.
- *    - Draw-on inicial de la forma 0 con DrawSVG + stagger.
- *    - ScrollTrigger ligado a `#scene-<triggerSceneId>` dispara el morph
- *      hacia la siguiente forma con scrub.
+ *  Movimiento siempre activo:
+ *    - Entrada: scale + fade del SVG.
+ *    - Loop: pequeño bob vertical + wobble (saludo) infinito (yoyo).
+ *    - Scroll: la forma actual "vuela" (sube + rota + se desvanece) y la
+ *      siguiente entra desde abajo con su propio bob.
  */
 export function MetamorphicLogo({ forms }: MetamorphicLogoProps) {
-  void DrawSVGPlugin;
-  void MorphSVGPlugin;
   const stageRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
 
   useLayoutEffect(() => {
     const stage = stageRef.current;
     if (!stage || forms.length === 0) return;
-    const root = stage.querySelector<SVGSVGElement>("svg[data-bs-metamorphic]");
-    if (!root) return;
-
-    const sil = root.querySelector<SVGPathElement>("#bs-silhouette");
-    if (!sil) return;
-
-    // Estado inicial: silueta con la d de la forma 0; todos los grupos
-    // ocultos excepto el activo.
-    sil.setAttribute("d", forms[0].silhouetteD);
-    const groups = Array.from(
-      root.querySelectorAll<SVGGElement>("[data-form]")
+    const svgs = Array.from(
+      stage.querySelectorAll<SVGSVGElement>("svg[data-bs-form]")
     );
-    gsap.set(groups, { opacity: 0 });
-    gsap.set(groups[0], { opacity: 1 });
-    root.setAttribute("data-stage", "ready");
+    if (svgs.length === 0) return;
 
     const mm = gsap.matchMedia();
     mm.add(
@@ -68,74 +53,58 @@ export function MetamorphicLogo({ forms }: MetamorphicLogoProps) {
           reduced: boolean;
         };
 
-        if (reduced) {
-          // Estado final estático: forma activa pintada, sin transición.
-          const allPaths = root.querySelectorAll<SVGPathElement>(
-            "[data-form] path"
-          );
-          gsap.set(allPaths, { fillOpacity: 1, strokeWidth: 0 });
-          return;
-        }
+        // Estado inicial: todas ocultas excepto la 0.
+        gsap.set(svgs, { opacity: 0, scale: 1, yPercent: 0, rotation: 0 });
+        gsap.set(svgs[0], { opacity: 1 });
 
-        // 1 · Entrada del logo: scale + fade del SVG entero (siempre visible,
-        //     no depende del plugin DrawSVG) + dibujado-on de los paths
-        //     superpuesto encima para el detalle "se pinta solo".
-        const initialPaths = groups[0].querySelectorAll<SVGPathElement>(
-          "path"
-        );
-        gsap.set(groups[0], { opacity: 1 });
-        gsap.set(root, { scale: 0.9, opacity: 0, transformOrigin: "50% 55%" });
-        gsap.set(initialPaths, {
-          stroke: "currentColor",
-          strokeWidth: 1.3,
-          fillOpacity: 0,
-          strokeOpacity: 1,
-        });
-        const intro = gsap.timeline();
-        intro
-          .to(root, {
+        if (reduced) return;
+
+        // 1 · Entrada: la primera forma escala + entra.
+        gsap.fromTo(
+          svgs[0],
+          { scale: 0.85, opacity: 0, yPercent: 4 },
+          {
             scale: 1,
             opacity: 1,
-            duration: 0.9,
+            yPercent: 0,
+            duration: 1.1,
             ease: "power3.out",
-          })
-          .from(
-            initialPaths,
-            {
-              drawSVG: 0,
-              duration: 1.4,
-              ease: "power2.inOut",
-              stagger: 0.02,
-            },
-            0
-          )
-          .to(
-            initialPaths,
-            {
-              fillOpacity: 1,
-              strokeWidth: 0,
-              strokeOpacity: 0,
-              duration: 0.6,
-              ease: "power1.out",
-            },
-            ">-0.25"
-          );
+          }
+        );
 
-        // 2 · Idle: respiración muy sutil del SVG entero.
-        const idle = gsap.to(root, {
-          scale: 1.012,
-          transformOrigin: "50% 60%",
-          duration: 2.4,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          paused: true,
-        });
-        intro.add(() => idle.play(), "+=0.15");
+        // 2 · Loop infinito: bob vertical + wobble (saludo cálido).
+        //     Cada forma activa adquiere el mismo idle al activarse.
+        const startIdle = (el: SVGSVGElement) => {
+          gsap.killTweensOf(el, "yPercent,rotation,scale");
+          gsap.to(el, {
+            yPercent: -2.6,
+            duration: 2.2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+          gsap.to(el, {
+            rotation: 3.2,
+            transformOrigin: "50% 80%",
+            duration: 1.6,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+          gsap.to(el, {
+            scale: 1.018,
+            transformOrigin: "50% 60%",
+            duration: 3.1,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        };
+        startIdle(svgs[0]);
 
-        // 3 · Morphs por scroll. Cada forma (>=1) se asocia a un trigger
-        //     #scene-<triggerSceneId>. Pintamos sus paths para que MorphSVG
-        //     no haga estallar nada y aparezcan ya rellenos al crossfade.
+        // 3 · Transformaciones con scroll. Cada forma >=1 se asocia a un
+        //     #scene-<triggerSceneId>: la anterior vuela hacia arriba +
+        //     rota y se desvanece; la nueva entra desde abajo con bob.
         for (let i = 1; i < forms.length; i++) {
           const f = forms[i];
           if (!f.triggerSceneId) continue;
@@ -144,57 +113,70 @@ export function MetamorphicLogo({ forms }: MetamorphicLogoProps) {
 
           const fromIdx = i - 1;
           const toIdx = i;
-          const toPaths = groups[toIdx].querySelectorAll<SVGPathElement>(
-            "path"
-          );
-          gsap.set(toPaths, { fillOpacity: 1, strokeWidth: 0 });
+          const fromSvg = svgs[fromIdx];
+          const toSvg = svgs[toIdx];
 
-          const tween = gsap.timeline({ paused: true });
-          tween
-            .to(sil, {
-              morphSVG: forms[toIdx].silhouetteD,
-              duration: 1.1,
-              ease: "power2.inOut",
-            })
-            .to(
-              groups[fromIdx],
-              { opacity: 0, duration: 0.55, ease: "power2.out" },
-              0
-            )
-            .to(
-              groups[toIdx],
-              { opacity: 1, duration: 0.55, ease: "power2.in" },
-              0.4
-            );
+          const tl = gsap.timeline({ paused: true });
+          tl.to(
+            fromSvg,
+            {
+              yPercent: -28,
+              rotation: -8,
+              scale: 0.7,
+              opacity: 0,
+              transformOrigin: "50% 50%",
+              duration: 1,
+              ease: "power2.in",
+            },
+            0
+          ).fromTo(
+            toSvg,
+            { yPercent: 26, scale: 0.85, opacity: 0, rotation: 6 },
+            {
+              yPercent: 0,
+              scale: 1,
+              opacity: 1,
+              rotation: 0,
+              duration: 1,
+              ease: "power2.out",
+            },
+            0.15
+          );
 
           ScrollTrigger.create({
             id: `bs-morph-${f.id}`,
             trigger: target,
-            start: "top 70%",
-            end: "top 30%",
-            scrub: 0.6,
-            onEnter: () => setActiveIdx(toIdx),
-            onLeaveBack: () => setActiveIdx(fromIdx),
-            animation: tween,
+            start: "top 75%",
+            end: "top 25%",
+            scrub: 0.8,
+            animation: tl,
+            onEnter: () => {
+              setActiveIdx(toIdx);
+              startIdle(toSvg);
+            },
+            onLeaveBack: () => {
+              setActiveIdx(fromIdx);
+              startIdle(fromSvg);
+            },
           });
         }
 
         return () => {
           ScrollTrigger.getAll().forEach((st) => {
-            if (typeof st.vars?.id === "string" && st.vars.id.startsWith("bs-morph-")) {
+            if (
+              typeof st.vars?.id === "string" &&
+              st.vars.id.startsWith("bs-morph-")
+            ) {
               st.kill();
             }
           });
-          idle.kill();
-          intro.kill();
+          svgs.forEach((s) => gsap.killTweensOf(s));
         };
       }
     );
 
     return () => mm.revert();
   }, [forms]);
-
-  const viewBox = forms[0]?.viewBox || "0 0 1086 1448";
 
   return (
     <section
@@ -208,39 +190,27 @@ export function MetamorphicLogo({ forms }: MetamorphicLogoProps) {
 
       <div
         ref={stageRef}
-        className="flex h-[72svh] max-h-[820px] w-auto max-w-[92vw] items-center justify-center"
+        className="relative flex h-[72svh] max-h-[820px] w-full max-w-[92vw] items-center justify-center"
       >
-        <svg
-          data-bs-metamorphic="true"
-          aria-hidden="true"
-          viewBox={viewBox}
-          preserveAspectRatio="xMidYMid meet"
-          fill="currentColor"
-          className="h-full w-auto"
-        >
-          {/* Silueta morphable: opacity 0 (es continuum subyacente). */}
-          <path
-            id="bs-silhouette"
-            style={{ color: "var(--text-primary)" }}
-            opacity={0}
-            d={forms[0]?.silhouetteD || ""}
+        {forms.map((f, i) => (
+          <svg
+            key={f.id}
+            data-bs-form={f.id}
+            aria-hidden="true"
+            viewBox={f.viewBox}
+            preserveAspectRatio="xMidYMid meet"
+            fill="currentColor"
+            // Cada forma stackeada: posición absoluta, centro-centro.
+            // La forma 0 visible en SSR para evitar FOUC; el resto a 0.
+            style={{ opacity: i === 0 ? 1 : 0, willChange: "transform, opacity" }}
+            className="absolute inset-0 m-auto h-full w-auto max-w-full"
+            dangerouslySetInnerHTML={{
+              __html:
+                `<g style="${f.shapeStyle}">${f.shapeInner}</g>` +
+                `<g style="${f.letteringStyle}">${f.letteringInner}</g>`,
+            }}
           />
-          {forms.map((f, i) => (
-            <g
-              key={f.id}
-              data-form={f.id}
-              // Opacity inline para evitar FOUC: en SSR solo la forma 0 se
-              // ve; tras hidratar, GSAP toma el control y reescribe estas
-              // propiedades en cada cambio de scroll.
-              opacity={i === 0 ? 1 : 0}
-              dangerouslySetInnerHTML={{
-                __html:
-                  `<g style="${f.shapeStyle}">${f.shapeInner}</g>` +
-                  `<g style="${f.letteringStyle}">${f.letteringInner}</g>`,
-              }}
-            />
-          ))}
-        </svg>
+        ))}
       </div>
 
       <div className="absolute bottom-9 flex flex-col items-center gap-3">
