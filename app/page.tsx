@@ -1,22 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
-import { MetamorphicLogo, type FormData } from "@/components/home/MetamorphicLogo";
+import { HeroAlive } from "@/components/home/HeroAlive";
+import { HeroDisplaceFilter } from "@/components/home/HeroDisplaceFilter";
+import { HeroVideo } from "@/components/home/HeroVideo";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
-import { logoForms, scenes } from "@/lib/home";
-import { parseFormSvg } from "@/lib/svg-form";
-
-/**
- * HOME narrativa con identidad metamórfica.
- *
- * El hero ya no es estático: el logo de Bonito Sound se "pinta solo" como
- * superhéroe y se va transformando con el scroll en megáfono → guitarra →
- * bafle, sincronizado con las escenas de la narrativa (Marcas, Records,
- * Festival). La firma "el logo es la marca" recorre toda la web.
- *
- * Referencia de craft: hellomonday.com (slab editorial, movimiento con
- * propósito) + GSAP DrawSVG/MorphSVG (Codrops, mascot animations).
- * El contenido editorial se edita en lib/home.ts sin tocar componentes.
- */
+import { scenes } from "@/lib/home";
 
 /** Primer candidato de /public que existe en disco (o null). */
 function firstExisting(candidates: string[] | undefined): string | null {
@@ -28,28 +16,10 @@ function firstExisting(candidates: string[] | undefined): string | null {
   return null;
 }
 
-/** Lee y normaliza un SVG de /public para inyectarlo inline en el cliente. */
-function readSvg(relPath: string): string {
-  const abs = path.join(process.cwd(), "public", relPath.replace(/^\//, ""));
-  return fs.readFileSync(abs, "utf8").trim();
-}
+const HERO_VIDEO_PATH = "/video/home/hero.mp4";
 
 export default function HomePage() {
-  const forms: FormData[] = logoForms
-    .filter((f) => {
-      const abs = path.join(
-        process.cwd(),
-        "public",
-        f.svgPath.replace(/^\//, "")
-      );
-      return fs.existsSync(abs);
-    })
-    .map((f) => ({
-      id: f.id,
-      triggerSceneId: f.triggerSceneId,
-      label: f.label,
-      ...parseFormSvg(readSvg(f.svgPath)),
-    }));
+  const heroVideo = firstExisting([HERO_VIDEO_PATH]);
 
   const resolved = scenes.map((scene) => ({
     scene,
@@ -58,7 +28,14 @@ export default function HomePage() {
 
   return (
     <>
-      <MetamorphicLogo forms={forms} />
+      {heroVideo ? (
+        <HeroVideo src={heroVideo} />
+      ) : (
+        <>
+          <HeroDisplaceFilter />
+          <HeroAlive />
+        </>
+      )}
 
       {resolved.map(({ scene, media }, i) => (
         <NarrativeScene key={scene.id} scene={scene} media={media} index={i} />

@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { MotionImage } from "@/components/home/MotionImage";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
 import type { HomeScene } from "@/lib/home";
 
@@ -82,16 +82,11 @@ export function NarrativeScene({ scene, media, index }: NarrativeSceneProps) {
           >
             {text}
             <RevealOnScroll y={36} delay={0.1}>
-              <div className="relative mx-auto aspect-[4/5] w-full max-w-md">
-                <Image
-                  src={media}
-                  alt={scene.statement}
-                  fill
-                  loading="lazy"
-                  sizes="(max-width: 768px) 80vw, 40vw"
-                  className="object-contain"
-                />
-              </div>
+              <MotionImage
+                src={media}
+                alt={scene.statement}
+                preset={scene.motionPreset ?? "kenburns"}
+              />
             </RevealOnScroll>
           </div>
         ) : (

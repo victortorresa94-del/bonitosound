@@ -9,6 +9,8 @@
  * Si una frase la podría firmar otra agencia, no está terminada.
  */
 
+import type { MotionPreset } from "@/components/home/MotionImage";
+
 export type HomeScene = {
   /** id estable (sirve para anclas y para buscar el vídeo/imagen de la escena) */
   id: string;
@@ -25,64 +27,10 @@ export type HomeScene = {
   /**
    * media de la escena (la mascota transformada). Se resuelve en el servidor:
    * se prueban estos candidatos en /public y se usa el primero que exista.
-   * El vídeo del hero va aparte (heroVideo).
    */
   mediaCandidates?: string[];
-};
-
-/** Identidad metamórfica del logo Bonito Sound.
- *
- *  El logo se transforma a lo largo del scroll en distintos objetos
- *  musicales, manteniendo el lettering "BONITO SOUND" siempre presente.
- *  Cada forma se asocia (opcionalmente) a una escena de la narrativa.
- *
- *  Los SVGs se generan con scripts/vectorize-mascot.mjs y se sirven desde
- *  /public/img/marca/forma-<id>.svg. app/page.tsx los lee en server y los
- *  pasa inline al componente MetamorphicLogo.
- */
-export type LogoForm = {
-  /** id estable, coincide con el data-bs-forma del SVG */
-  id: "superheroe" | "megafono" | "guitarra" | "bafle";
-  /** ruta pública del SVG vectorizado */
-  svgPath: string;
-  /** id de la escena de la narrativa con la que se sincroniza el morph
-   *  vía ScrollTrigger; null = inicial (hero). */
-  triggerSceneId: string | null;
-  /** descripción accesible (sr-only) cuando esta forma está activa */
-  label: string;
-};
-
-export const logoForms: LogoForm[] = [
-  {
-    id: "superheroe",
-    svgPath: "/img/marca/forma-superheroe.svg",
-    triggerSceneId: null,
-    label: "Bonito Sound — superhéroe",
-  },
-  {
-    id: "megafono",
-    svgPath: "/img/marca/forma-megafono.svg",
-    triggerSceneId: "marcas",
-    label: "Bonito Sound — megáfono (Marcas)",
-  },
-  {
-    id: "guitarra",
-    svgPath: "/img/marca/forma-guitarra.svg",
-    triggerSceneId: "records",
-    label: "Bonito Sound — guitarra (Records)",
-  },
-  {
-    id: "bafle",
-    svgPath: "/img/marca/forma-bafle.svg",
-    triggerSceneId: "festival",
-    label: "Bonito Sound — bafle (Festival)",
-  },
-];
-
-/** Compat con código previo. */
-export const heroMascot = {
-  svgPath: logoForms[0].svgPath,
-  label: "Bonito Sound",
+  /** Preset de movimiento aplicado al media en scroll (ver MotionImage). */
+  motionPreset?: MotionPreset;
 };
 
 // Para añadir/cambiar la mascota de una escena: deja un archivo en
@@ -104,7 +52,9 @@ export const scenes: HomeScene[] = [
     support:
       "Activaciones, eventos y experiencias de marca que la gente recuerda. Del brief al titular en seis semanas.",
     cta: { label: "Ver más", href: "/eventos" },
+    motionPreset: "glow",
     mediaCandidates: [
+      "/video/home/marcas.mp4",
       "/img/home/marcas.png",
       "/img/marca/heroe-megafono.jpeg",
       "/img/marca/superheroe-eventos.png",
@@ -119,6 +69,7 @@ export const scenes: HomeScene[] = [
     support:
       "Producción, ruta y management de directo. De Antonio Orozco a Maldita Nerea: el escenario montado y el aforo lleno.",
     cta: { label: "Ver más", href: "/eventos/giras" },
+    motionPreset: "parallax",
     mediaCandidates: ["/img/home/giras.png", "/img/marca/superheroe-eventos.png"],
   },
   {
@@ -129,7 +80,9 @@ export const scenes: HomeScene[] = [
     support:
       "Sello, booking, management, distribución y editorial. Todo lo que necesita una carrera para crecer, en un solo sitio.",
     cta: { label: "Ver más", href: "/records" },
+    motionPreset: "kenburns",
     mediaCandidates: [
+      "/video/home/records.mp4",
       "/img/home/records.png",
       "/img/marca/superheroe-records.png",
       "/img/secciones/records.png",
@@ -153,6 +106,7 @@ export const scenes: HomeScene[] = [
     support:
       "Campañas de ads, estrategia de redes y lanzamientos de álbum y de evento. Cuando salga, se entera quien se tiene que enterar.",
     cta: { label: "Ver más", href: "/records" },
+    motionPreset: "pulse",
     mediaCandidates: ["/img/home/marketing.png", "/img/marca/heroe-volando.jpeg"],
   },
   {
@@ -172,7 +126,9 @@ export const scenes: HomeScene[] = [
     accent: "festival",
     support: "Jaleo Sound. Música española y latina en Ámsterdam.",
     cta: { label: "Ver más", href: "/jaleo-sound" },
+    motionPreset: "parallax",
     mediaCandidates: [
+      "/video/home/festival.mp4",
       "/img/home/festival.png",
       "/img/secciones/jaleo.png",
       "/img/jaleo/jaleo-01.jpg",
