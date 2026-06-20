@@ -1,10 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
-import { HeroAlive } from "@/components/home/HeroAlive";
-import { HeroDisplaceFilter } from "@/components/home/HeroDisplaceFilter";
+import { HeroRigged } from "@/components/home/HeroRigged";
 import { HeroVideo } from "@/components/home/HeroVideo";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
 import { scenes } from "@/lib/home";
+
+/** Cuando es true, el hero usa el personaje vectorial animado por partes
+ *  aunque exista /video/home/hero.mp4. Se cambia a false si en el futuro
+ *  queremos volver al vídeo IA. */
+const PREFER_HERO_RIG = true;
 
 /** Primer candidato de /public que existe en disco (o null). */
 function firstExisting(candidates: string[] | undefined): string | null {
@@ -20,6 +24,7 @@ const HERO_VIDEO_PATH = "/video/home/hero.mp4";
 
 export default function HomePage() {
   const heroVideo = firstExisting([HERO_VIDEO_PATH]);
+  const useRig = PREFER_HERO_RIG || !heroVideo;
 
   const resolved = scenes.map((scene) => ({
     scene,
@@ -28,14 +33,7 @@ export default function HomePage() {
 
   return (
     <>
-      {heroVideo ? (
-        <HeroVideo src={heroVideo} />
-      ) : (
-        <>
-          <HeroDisplaceFilter />
-          <HeroAlive />
-        </>
-      )}
+      {useRig ? <HeroRigged /> : heroVideo ? <HeroVideo src={heroVideo} /> : <HeroRigged />}
 
       {resolved.map(({ scene, media }, i) => (
         <NarrativeScene key={scene.id} scene={scene} media={media} index={i} />
