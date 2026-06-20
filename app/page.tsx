@@ -8,7 +8,7 @@ import { scenes } from "@/lib/home";
 /** Cuando es true, el hero usa el personaje vectorial animado por partes
  *  aunque exista /video/home/hero.mp4. Se cambia a false si en el futuro
  *  queremos volver al vídeo IA. */
-const PREFER_HERO_RIG = true;
+const PREFER_HERO_RIG = false;
 
 /** Primer candidato de /public que existe en disco (o null). */
 function firstExisting(candidates: string[] | undefined): string | null {
