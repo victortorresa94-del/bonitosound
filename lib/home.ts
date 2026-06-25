@@ -89,16 +89,6 @@ export const scenes: HomeScene[] = [
     ],
   },
   {
-    id: "estudio",
-    kicker: "Estudio y producción",
-    statement: "Las canciones se cocinan aquí.",
-    accent: "aquí",
-    support:
-      "Estudio de grabación, producción y desarrollo artístico. Del primer demo al máster listo para plataformas.",
-    cta: { label: "Ver más", href: "/records/sello" },
-    mediaCandidates: ["/img/home/estudio.png"],
-  },
-  {
     id: "marketing",
     kicker: "Marketing para artistas",
     statement: "Y que el lanzamiento no pase desapercibido.",
