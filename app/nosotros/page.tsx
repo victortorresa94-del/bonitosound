@@ -43,13 +43,14 @@ export default function Nosotros() {
         <div className="grid gap-12 md:grid-cols-[1fr_1fr] md:items-center">
           <RevealOnScroll className="space-y-5 text-lg text-text-secondary">
             <p>
-              Bonito Sound se monta en 2022 en Sabadell. No para hacer una
-              agencia más: para hacer la que faltaba.
+              Bonito Sound se monta en 2022 en Sabadell. La empresa es
+              joven; el oficio, no — Dani lleva treinta años en la industria
+              musical española.
             </p>
             <p>
-              Treinta años en la industria dan para ver de todo. Sobre todo,
-              para ver lo que no funciona y por qué nadie lo arregla. Nosotros
-              lo arreglamos.
+              Esos treinta años dan para ver de todo: sobre todo, para ver lo
+              que no funciona y por qué nadie lo arregla. Montamos Bonito
+              para arreglarlo.
             </p>
             <p>
               Somos pocos, hacemos mucho y cogemos el teléfono. Si buscas una

@@ -6,6 +6,9 @@ spotifyArtistId: "1PNJOvNCIMG9dN4cy7IG4D"
 instagram: "https://www.instagram.com/duuuulze"
 image: "/img/artistas/dulze.png"
 reels: []
+milestones:
+  - { year: "2026", text: "Primera gira nacional, Qué Fantasía Tour, con ayuda de Girando por Salas (GPS16)" }
+  - { year: "2026", text: "Nuevo single, Verde aceituna" }
 ---
 Dulze tiene una voz que no necesita subir el volumen para que te calles. Eso, en directo, vale oro.
 

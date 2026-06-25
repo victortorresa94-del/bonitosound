@@ -53,8 +53,9 @@ export default function BookingManagement() {
               Agenda de verdad. No promesas.
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
-              30 años llamando a salas, festivales y promotores. Sabemos qué
-              artista funciona dónde — y te lo decimos antes, no después.
+              Tres décadas de oficio llamando a salas, festivales y
+              promotores. Sabemos qué artista funciona dónde — y te lo
+              decimos antes, no después.
             </RevealOnScroll>
             <RevealOnScroll className="mt-9" delay={0.35}>
               <MagneticButton strength={0.35}>

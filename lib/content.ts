@@ -14,6 +14,12 @@ export type Artist = {
   image?: string;
   bio: string[];
   reels?: string[];
+  /** Hitos verificables: año + frase corta. Si está vacío no se pinta nada.
+   *  Ej. frontmatter:
+   *    milestones:
+   *      - { year: "2025", text: "Gira nacional Qué Fantasía Tour, 6 ciudades" }
+   *      - { year: "2024", text: "Primer EP 'Gatea'" }                       */
+  milestones?: { year: string; text: string }[];
 };
 
 export type CaseStudy = {

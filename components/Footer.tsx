@@ -33,8 +33,8 @@ export function Footer() {
             Bonito<span className="text-accent-blue">.</span>Sound
           </p>
           <p className="mt-3 max-w-xs text-sm text-text-secondary">
-            En la música nadie te regala nada. Llevamos 30 años. Hace tres
-            montamos esto para hacerlo como hay que hacerlo.
+            En la música nadie te regala nada. Tres décadas de oficio detrás,
+            tres años montando la agencia para hacerlo como hay que hacerlo.
           </p>
         </div>
 
