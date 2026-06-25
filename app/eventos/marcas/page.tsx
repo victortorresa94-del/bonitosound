@@ -188,7 +188,7 @@ export default function EventosMarcas() {
                   )}
                 </div>
                 <div className="p-7">
-                  <p className="text-sm text-accent-warm">{c.brand}</p>
+                  <p className="text-sm text-text-secondary">{c.brand}</p>
                   <h3 className="display mt-2 text-xl">{c.title}</h3>
                   <p className="mt-3 text-sm text-text-secondary">{c.context}</p>
                   <p className="mt-4 border-t border-subtle pt-4 text-sm text-text-muted">

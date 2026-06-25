@@ -74,7 +74,7 @@ export function InstagramFeed({
               className="group relative aspect-square overflow-hidden rounded-xl border border-subtle bg-bg-tertiary"
               aria-label={`Ver @${handle} en Instagram`}
             >
-              <span className="absolute inset-0 flex items-center justify-center text-xs text-text-muted transition-colors group-hover:text-accent-warm">
+              <span className="absolute inset-0 flex items-center justify-center text-xs text-text-muted transition-colors group-hover:text-accent-cyan">
                 @{handle}
               </span>
             </a>

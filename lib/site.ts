@@ -5,7 +5,7 @@ export const site = {
   founded: 2022,
   url: "https://bonitosound.com",
   description:
-    "El único ecosistema cultural integral del sector musical en España. Artistas, eventos para marcas, festival propio y la tecnología que conecta a toda la industria.",
+    "Llevamos artistas, montamos eventos para marcas, tenemos festival propio y construimos el software que al sector le falta. Todo bajo el mismo techo, en Sabadell.",
   address: {
     street: "Carrer Tulancingo, 4",
     zip: "08206",
@@ -35,10 +35,10 @@ export const site = {
 export const nav = [
   { label: "Eventos", href: "/eventos" },
   { label: "Records", href: "/records" },
+  { label: "Artistas", href: "/artistas" },
   { label: "Lab", href: "/lab" },
   { label: "Jaleo Sound", href: "/jaleo-sound" },
   { label: "Nosotros", href: "/nosotros" },
-  { label: "Agenda", href: "/agenda" },
 ] as const;
 
 export const team = [

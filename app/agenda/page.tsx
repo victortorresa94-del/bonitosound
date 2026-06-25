@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description:
     "Próximos conciertos de los artistas de Bonito Sound. Filtra por artista, mes y ciudad.",
   alternates: { canonical: `${site.url}/agenda` },
+  // Sin shows poblados: no indexar hasta que la agenda tenga fechas reales.
+  robots: { index: false, follow: true },
 };
 
 const fmt = new Intl.DateTimeFormat("es-ES", {

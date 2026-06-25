@@ -113,7 +113,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
             loop
             playsInline
             autoPlay
-            preload="auto"
+            preload="none"
             className="absolute inset-0 h-full w-full object-contain"
             style={{ mixBlendMode: "multiply" }}
           />
