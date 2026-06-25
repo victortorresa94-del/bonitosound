@@ -97,6 +97,9 @@ export function MotionImage({
         }
 
         if (preset === "pulse" || preset === "glow") {
+          // Entrada limpia (sin loop perpetuo): el preset es para reveal,
+          // no para distraer en bucle. Awwwards minimal = movimiento
+          // narrativo, no decorativo.
           gsap.fromTo(
             inner,
             { opacity: 0, scale: 0.94 },
@@ -109,23 +112,22 @@ export function MotionImage({
             }
           );
 
-          gsap.to(inner, {
-            scale: 1.03,
-            duration: 1.6,
-            repeat: -1,
-            yoyo: true,
-            ease: "sine.inOut",
-          });
-
-          if (preset === "glow") {
-            gsap.to(inner, {
-              "--scene-glow": 22,
-              duration: 2.4,
-              repeat: -1,
-              yoyo: true,
-              ease: "sine.inOut",
-            });
-          }
+          // Variante kenburns muy sutil mientras está en viewport: zoom
+          // lento ligado al scroll. Sin yoyo continuo.
+          const kb = gsap.fromTo(
+            inner,
+            { scale: 1 },
+            { scale: 1.04, ease: "none" }
+          );
+          triggers.push(
+            ScrollTrigger.create({
+              trigger: wrap,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1,
+              animation: kb,
+            })
+          );
         }
 
         if (preset === "parallax") {
@@ -163,14 +165,7 @@ export function MotionImage({
       <div
         ref={innerRef}
         className="absolute inset-0"
-        style={{
-          ["--scene-glow" as string]: "8",
-          filter:
-            preset === "glow"
-              ? "drop-shadow(0 calc(var(--scene-glow) * 1px) calc(var(--scene-glow) * 2px) rgba(22, 182, 212, 0.20))"
-              : undefined,
-          willChange: "transform, opacity, filter",
-        }}
+        style={{ willChange: "transform, opacity" }}
       >
         {useVideo ? (
           <video

@@ -36,7 +36,13 @@ export default function HomePage() {
       {useRig ? <HeroRigged /> : heroVideo ? <HeroVideo src={heroVideo} /> : <HeroRigged />}
 
       {resolved.map(({ scene, media }, i) => (
-        <NarrativeScene key={scene.id} scene={scene} media={media} index={i} />
+        <NarrativeScene
+          key={scene.id}
+          scene={scene}
+          media={media}
+          index={i}
+          total={resolved.length}
+        />
       ))}
     </>
   );

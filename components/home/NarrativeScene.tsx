@@ -11,6 +11,8 @@ type NarrativeSceneProps = {
   media: string | null;
   /** índice para alternar el lado de la imagen y dar ritmo editorial */
   index: number;
+  /** total de escenas, para el contador editorial 01 / N */
+  total?: number;
 };
 
 /** Parte el statement para teñir la palabra de acento sin romper el flujo. */
@@ -26,15 +28,27 @@ function renderStatement(statement: string, accent?: string) {
   );
 }
 
-export function NarrativeScene({ scene, media, index }: NarrativeSceneProps) {
+export function NarrativeScene({ scene, media, index, total }: NarrativeSceneProps) {
   const flip = index % 2 === 1;
+  const counter = total
+    ? `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`
+    : null;
 
   const text = (
     <div className={media ? "md:max-w-xl" : "mx-auto max-w-3xl text-center"}>
       <RevealOnScroll y={20}>
-        <p className="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-accent-cyan">
-          {scene.kicker}
-        </p>
+        <div
+          className={`mb-5 flex items-baseline gap-4 text-xs font-semibold uppercase tracking-[0.22em] text-accent-cyan ${
+            media ? "" : "justify-center"
+          }`}
+        >
+          <span>{scene.kicker}</span>
+          {counter && (
+            <span className="text-text-muted" aria-hidden="true">
+              · {counter}
+            </span>
+          )}
+        </div>
       </RevealOnScroll>
 
       <RevealOnScroll y={28} delay={0.06}>
