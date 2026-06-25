@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Section, Heading, Eyebrow, Cta, JsonLd } from "@/components/ui";
 import { LeadMagnetBrands } from "@/components/LeadMagnetBrands";
+import { FaqOpen } from "@/components/FaqOpen";
 import {
   RevealOnScroll,
   StaggerGroup,
@@ -9,7 +10,6 @@ import {
   MagneticButton,
   ParallaxLayer,
   MarqueeLogoWall,
-  FaqMotion,
 } from "@/components/motion";
 import { getCases } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
@@ -39,7 +39,7 @@ const services = [
 
 const why = [
   "Un solo equipo del brief al desmontaje. No rebotas entre cinco proveedores.",
-  "30 años de agenda real: sabemos qué artista funciona en qué evento.",
+  "Tres décadas de oficio de nuestro fundador: sabemos qué artista funciona en qué evento.",
   "La música no es decoración: la elegimos como decisión estratégica.",
   "Producción técnica propia. Lo que prometemos en el deck, lo montamos.",
 ];
@@ -51,7 +51,7 @@ const faq = [
   },
   {
     q: "¿Necesito traer mi propio artista?",
-    a: "No. Bonito Sound tiene roster propio y 30 años de agenda en la industria española. Elegimos al artista que encaja con tu marca y tu público, no el que toca por agenda.",
+    a: "No. Bonito Sound tiene roster propio y un fundador con tres décadas de agenda en la industria española. Elegimos al artista que encaja con tu marca y tu público, no el que toca por agenda.",
   },
   {
     q: "¿En qué se diferencia una agencia de eventos de una productora?",
@@ -271,8 +271,8 @@ export default function EventosMarcas() {
         >
           Lo que nos preguntáis antes de la llamada.
         </SplitTextReveal>
-        <RevealOnScroll className="mt-10 max-w-3xl" delay={0.2}>
-          <FaqMotion items={faq} />
+        <RevealOnScroll className="mt-10" delay={0.2}>
+          <FaqOpen items={faq} />
         </RevealOnScroll>
       </Section>
 

@@ -168,6 +168,57 @@ export default function Records() {
       </Section>
 
       <Section>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Cómo son nuestros contratos</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          Lo que firmas con nosotros, en cinco líneas.
+        </SplitTextReveal>
+        <RevealOnScroll
+          as="p"
+          className="mt-6 max-w-2xl text-text-secondary"
+          delay={0.15}
+        >
+          No vamos a poner los porcentajes en una web. Sí los principios.
+          Si encajan, hablamos; si no, mejor saberlo ya.
+        </RevealOnScroll>
+        <StaggerGroup
+          stagger={0.08}
+          className="mt-12 grid gap-6 md:grid-cols-2"
+        >
+          {[
+            {
+              t: "Pacto antes de empezar",
+              d: "Todo lo que prometemos en la primera llamada acaba por escrito antes del primer movimiento. Cero acuerdos verbales que luego nadie recuerda.",
+            },
+            {
+              t: "Exclusividad solo donde aporta",
+              d: "Si te llevamos en booking no te obligamos a fichar también el sello. Cada servicio se contrata por separado y se justifica por separado.",
+            },
+            {
+              t: "Salida ordenada",
+              d: "Si la cosa no va, se acaba sin pelea. Plazo de aviso corto, devolución de los activos que son tuyos, y a otra cosa.",
+            },
+            {
+              t: "Sin cláusulas de papelera",
+              d: "Nada de obligar a sacar X canciones al año ni a cubrir gastos imposibles. Si tenemos que renegociar, se renegocia.",
+            },
+            {
+              t: "Tu música, tus masters",
+              d: "Lo que produzcamos juntos se acuerda en el papel: a quién pertenece, durante cuánto y bajo qué condiciones revierten. Sin ambigüedad.",
+            },
+            {
+              t: "Liquidaciones a tiempo",
+              d: "Cuentas claras y trimestrales — vengan o no las liquidaciones de plataformas en hora. Si hay retraso, te lo decimos.",
+            },
+          ].map((p) => (
+            <div key={p.t} className="card">
+              <h3 className="display text-xl">{p.t}</h3>
+              <p className="mt-3 text-text-secondary">{p.d}</p>
+            </div>
+          ))}
+        </StaggerGroup>
+      </Section>
+
+      <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">Cómo trabajamos</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           Cuatro pasos. Sin letra pequeña.

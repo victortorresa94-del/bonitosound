@@ -42,6 +42,15 @@ export default function ArtistPage({
 
   const photo = a.image ?? findAsset("artistas", a.slug);
 
+  // Schema MusicGroup enriquecido: sameAs (Spotify + IG) + image cuando
+  // existan. Mejora SEO y aparición en Knowledge Graph / Music panels.
+  const sameAs: string[] = [];
+  if (a.spotifyArtistId)
+    sameAs.push(`https://open.spotify.com/artist/${a.spotifyArtistId}`);
+  if (a.instagram) sameAs.push(a.instagram);
+
+  const absolutePhoto = photo ? `${site.url}${photo}` : undefined;
+
   return (
     <>
       <JsonLd
@@ -54,6 +63,8 @@ export default function ArtistPage({
           "@id": `${site.url}/artistas/${a.slug}`,
           url: `${site.url}/artistas/${a.slug}`,
           agent: { "@type": "Organization", name: site.legalName },
+          ...(absolutePhoto ? { image: absolutePhoto } : {}),
+          ...(sameAs.length ? { sameAs } : {}),
         }}
       />
       <section className="border-b border-subtle">
@@ -125,6 +136,26 @@ export default function ArtistPage({
             </RevealOnScroll>
           )}
         </div>
+
+        {a.milestones && a.milestones.length > 0 && (
+          <RevealOnScroll className="mt-20 max-w-3xl">
+            <p className="eyebrow mb-6">Trayectoria</p>
+            <ul className="divide-y divide-subtle border-y border-subtle">
+              {a.milestones.map((m, i) => (
+                <li
+                  key={`${m.year}-${i}`}
+                  className="grid grid-cols-[80px_1fr] gap-6 py-4 text-text-secondary"
+                >
+                  <span className="font-mono text-sm tabular-nums text-text-muted">
+                    {m.year}
+                  </span>
+                  <span>{m.text}</span>
+                </li>
+              ))}
+            </ul>
+          </RevealOnScroll>
+        )}
+
         <RevealOnScroll className="mt-14">
           <Link href="/artistas" className="link-underline text-sm text-text-secondary">
             ← Roster completo
