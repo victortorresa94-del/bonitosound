@@ -86,24 +86,41 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
         Bonito Sound — el ecosistema cultural integral del sector musical
       </h1>
 
+      {/* Halo radial sutil para fundir el fondo del vídeo (crema IA) con el
+          fondo de la sección. Evita el "cuadrado" cuando el vídeo es 9:16. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 55%, var(--bg-tertiary) 0%, var(--bg-primary) 60%)",
+        }}
+      />
+
       <div
         ref={wrapRef}
-        className="relative flex h-[100svh] w-full items-center justify-center"
+        className="relative z-10 flex h-[100svh] w-full items-center justify-center"
         style={{ willChange: "transform, opacity" }}
       >
-        <video
-          ref={videoRef}
-          src={src}
-          poster={poster}
-          muted
-          loop
-          playsInline
-          autoPlay
-          className="h-full w-full object-cover"
-        />
+        {/* Wrapper con aspect 9:16 — el vídeo es vertical y debe verse
+            entero, no recortado. Limitamos altura para respiro vertical. */}
+        <div className="relative aspect-[9/16] h-[88svh] max-h-[88svh] max-w-full">
+          <video
+            ref={videoRef}
+            src={src}
+            poster={poster ?? "/img/marca/superheroe-home.png"}
+            muted
+            loop
+            playsInline
+            autoPlay
+            preload="auto"
+            className="absolute inset-0 h-full w-full object-contain"
+            style={{ mixBlendMode: "multiply" }}
+          />
+        </div>
       </div>
 
-      <div className="absolute bottom-9 flex flex-col items-center gap-3">
+      <div className="absolute bottom-9 z-20 flex flex-col items-center gap-3">
         <span className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-text-muted">
           Baja
         </span>
