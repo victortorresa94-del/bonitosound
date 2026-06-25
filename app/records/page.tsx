@@ -175,7 +175,7 @@ export default function Records() {
         <StaggerGroup stagger={0.1} className="mt-12 grid gap-6 md:grid-cols-2">
           {steps.map((s, i) => (
             <div key={i} className="flex gap-5 card">
-              <span className="display text-3xl text-accent-warm">
+              <span className="display text-3xl text-text-muted">
                 0{i + 1}
               </span>
               <p className="text-text-secondary">{s}</p>

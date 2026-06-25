@@ -78,8 +78,7 @@ export function ContactForm() {
         />
         <button className="btn btn-primary">Enviar →</button>
         <p className="text-xs text-text-muted">
-          Te contestamos nosotros, no un bot. Backend de envío (Resend /
-          Formspree) pendiente de conectar — de momento abre tu correo.
+          Te contestamos nosotros, no un bot.
         </p>
       </form>
     </div>

@@ -88,7 +88,7 @@ export function RosterHover({ items }: { items: RosterItem[] }) {
                 </span>
                 <span
                   className={`shrink-0 pl-6 text-xs uppercase tracking-[0.2em] transition-all duration-300 ${
-                    active === i ? "text-accent-warm opacity-100" : "text-text-muted opacity-0 group-hover:opacity-100"
+                    active === i ? "text-accent-cyan opacity-100" : "text-text-muted opacity-0 group-hover:opacity-100"
                   }`}
                 >
                   {a.genre}

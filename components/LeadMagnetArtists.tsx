@@ -133,7 +133,7 @@ export function LeadMagnetArtists() {
                           key={o}
                           onClick={() => toggleMulti(o)}
                           className={`card text-left font-medium ${
-                            sel ? "border-accent-warm text-accent-warm" : ""
+                            sel ? "border-accent-cyan text-accent-cyan" : ""
                           }`}
                         >
                           {o}

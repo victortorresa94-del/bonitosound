@@ -97,16 +97,12 @@ export default function Nosotros() {
                   )}
                 </div>
                 <h3 className="display text-xl">{p.name}</h3>
-                <p className="mt-1 text-sm text-accent-warm">{p.role}</p>
+                <p className="mt-1 text-sm text-text-muted">{p.role}</p>
                 <p className="mt-3 text-sm text-text-secondary">{p.line}</p>
               </div>
             );
           })}
         </StaggerGroup>
-        <p className="mt-6 text-sm text-text-muted">
-          Roser Gamonal y Júlia Martín: pendiente confirmar incorporación al
-          equipo público con Dani Boada (§17 del brief).
-        </p>
       </Section>
 
       <Section>

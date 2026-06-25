@@ -18,9 +18,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/lab/giraverse",
     "/jaleo-sound",
     "/nosotros",
-    "/agenda",
-    "/diario",
     "/contacto",
+    // /agenda y /diario quedan fuera del sitemap hasta que tengan
+    // contenido real — páginas finas dañan calidad de dominio.
   ];
 
   const now = new Date();

@@ -46,7 +46,7 @@ export default function Eventos() {
               lanzamientos y experiencias culturales. Del brief al titular en 6
               semanas.
             </p>
-            <span className="mt-6 text-accent-warm">Ver eventos para marcas →</span>
+            <span className="mt-6 text-text-secondary transition-colors group-hover:text-accent-cyan">Ver eventos para marcas →</span>
           </Link>
 
           <Link href="/eventos/giras" className="card group flex flex-col">
@@ -56,7 +56,7 @@ export default function Eventos() {
               Road, tour y stage management. Hemos llevado a Albert Pla, Alfred
               García, Antonio Orozco, Maldita Nerea, Ruth Lorenzo.
             </p>
-            <span className="mt-6 text-accent-warm">Ver giras →</span>
+            <span className="mt-6 text-text-secondary transition-colors group-hover:text-accent-cyan">Ver giras →</span>
           </Link>
         </StaggerGroup>
       </Section>

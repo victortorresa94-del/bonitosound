@@ -12,6 +12,10 @@
   /* Cian de la mascota — ÚNICO color de acento. El color es un evento, no un fondo. */
   --accent-cyan: #16b6d4;
   --accent-cyan-hover: #119db8;
+  /* Variante para TEXTO sobre crema: cumple WCAG AA (>4.5:1).
+     Usar --accent-cyan en bloques de color/iconos grandes; --accent-cyan-text
+     en cualquier texto pequeño cian (eyebrows, links, etc.). */
+  --accent-cyan-text: #0c7e93;
 
   /* Compat: el resto del sitio aún referencia --accent-blue. Lo apuntamos al cian
      para unificar el acento sin reescribir todas las páginas internas. */
@@ -25,10 +29,10 @@
   /* Jaleo — identidad propia del festival */
   --jaleo-red: #e8351f;
 
-  /* Texto sobre crema — negro cálido */
+  /* Texto sobre crema — negro cálido. --text-muted oscurecido para cumplir AA. */
   --text-primary: #14110b;
   --text-secondary: #57544c;
-  --text-muted: #8d897e;
+  --text-muted: #6e6a60;
 
   /* Borders / divisores — finos, casi imperceptibles */
   --border-subtle: rgba(20, 17, 11, 0.12);
@@ -55,6 +59,18 @@ html.bs-cursor-active * {
   html.bs-cursor-active * {
     cursor: auto;
   }
+}
+
+/* Foco de teclado siempre visible y de alto contraste. Aunque el cursor
+   custom oculte el ratón, el anillo de foco vuelve a aparecer cuando el
+   usuario navega con Tab. Cumple WCAG 2.4.7 / 2.4.13. */
+*:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+html.bs-cursor-active *:focus-visible {
+  cursor: auto;
 }
 
 body {
@@ -92,12 +108,12 @@ body {
     text-wrap: balance;
   }
   .statement .accent {
-    color: var(--accent-cyan);
+    color: var(--accent-cyan-text);
   }
 
   .eyebrow {
     @apply text-xs font-semibold uppercase tracking-[0.2em];
-    color: var(--accent-blue);
+    color: var(--accent-cyan-text);
   }
 
   .btn {

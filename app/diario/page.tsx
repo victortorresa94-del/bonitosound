@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   description:
     "Noticias y publicaciones de Bonito Sound: nuevos artistas, lanzamientos y presencia en eventos.",
   alternates: { canonical: `${site.url}/diario` },
+  // Página vacía: no indexar hasta que tenga ≥1 entrada real.
+  robots: { index: false, follow: true },
 };
 
 export default function Diario() {

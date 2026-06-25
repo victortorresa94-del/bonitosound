@@ -101,34 +101,32 @@ export default function ArtistPage({
       </section>
 
       <Section>
-        <div className="grid gap-12 md:grid-cols-[1.2fr_1fr]">
+        <div
+          className={`grid gap-12 ${
+            a.spotifyArtistId || (a.reels && a.reels.length > 0)
+              ? "md:grid-cols-[1.2fr_1fr]"
+              : "md:grid-cols-1"
+          }`}
+        >
           <RevealOnScroll className="max-w-xl space-y-5 text-lg text-text-secondary">
             {a.bio.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
           </RevealOnScroll>
-          <RevealOnScroll className="space-y-6" delay={0.15}>
-            {a.spotifyArtistId ? (
-              <SpotifyEmbed
-                type="artist"
-                id={a.spotifyArtistId}
-                title={`${a.name} en Spotify`}
-              />
-            ) : (
-              <div className="rounded-2xl border border-subtle bg-bg-secondary p-6 text-sm text-text-muted">
-                Embed de Spotify pendiente: añade{" "}
-                <code>spotifyArtistId</code> en{" "}
-                <code>content/artistas/{a.slug}.md</code>.
-              </div>
-            )}
-            <div className="rounded-2xl border border-subtle bg-bg-secondary p-6 text-sm text-text-muted">
-              Reels de Instagram (2-3) pendientes: añade los enlaces en el
-              frontmatter <code>reels</code>.
-            </div>
-          </RevealOnScroll>
+          {(a.spotifyArtistId || (a.reels && a.reels.length > 0)) && (
+            <RevealOnScroll className="space-y-6" delay={0.15}>
+              {a.spotifyArtistId && (
+                <SpotifyEmbed
+                  type="artist"
+                  id={a.spotifyArtistId}
+                  title={`${a.name} en Spotify`}
+                />
+              )}
+            </RevealOnScroll>
+          )}
         </div>
         <RevealOnScroll className="mt-14">
-          <Link href="/artistas" className="link-underline text-sm text-accent-warm">
+          <Link href="/artistas" className="link-underline text-sm text-text-secondary">
             ← Roster completo
           </Link>
         </RevealOnScroll>
