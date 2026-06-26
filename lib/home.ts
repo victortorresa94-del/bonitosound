@@ -54,7 +54,6 @@ export const scenes: HomeScene[] = [
     cta: { label: "Ver más", href: "/eventos" },
     motionPreset: "glow",
     mediaCandidates: [
-      "/video/home/marcas.mp4",
       "/img/home/marcas.png",
       "/img/marca/heroe-megafono.jpeg",
       "/img/marca/superheroe-eventos.png",
@@ -82,7 +81,6 @@ export const scenes: HomeScene[] = [
     cta: { label: "Ver más", href: "/records" },
     motionPreset: "kenburns",
     mediaCandidates: [
-      "/video/home/records.mp4",
       "/img/home/records.png",
       "/img/marca/superheroe-records.png",
       "/img/secciones/records.png",
@@ -118,7 +116,6 @@ export const scenes: HomeScene[] = [
     cta: { label: "Ver más", href: "/jaleo-sound" },
     motionPreset: "parallax",
     mediaCandidates: [
-      "/video/home/festival.mp4",
       "/img/home/festival.png",
       "/img/secciones/jaleo.png",
       "/img/jaleo/jaleo-01.jpg",

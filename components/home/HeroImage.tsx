@@ -1,37 +1,27 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef } from "react";
+import Image from "next/image";
+import { useLayoutEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 
-type HeroVideoProps = {
+type HeroImageProps = {
   src: string;
-  poster?: string;
+  alt?: string;
 };
 
-/** Hero con vídeo real (ej. salida de Higgsfield / fal.ai). Reproduce
- *  loop muted playsInline; respeta `prefers-reduced-motion` mostrando el
- *  primer frame congelado. Tiene parallax de salida idéntico a HeroAlive
- *  para que la transición a la primera escena sea consistente. */
-export function HeroVideo({ src, poster }: HeroVideoProps) {
+/** Hero con imagen estática del superhéroe. Entrada con fade+scale,
+ *  flotación sutil en loop y parallax de salida al hacer scroll.
+ *  Respeta prefers-reduced-motion (imagen quieta, sin animación). */
+export function HeroImage({ src, alt = "Bonito Sound" }: HeroImageProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) {
-      v.pause();
-    } else {
-      v.play().catch(() => {});
-    }
-  }, []);
+  const floatRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
     const wrap = wrapRef.current;
-    if (!section || !wrap) return;
+    const floatEl = floatRef.current;
+    if (!section || !wrap || !floatEl) return;
 
     const mm = gsap.matchMedia();
     mm.add(
@@ -52,6 +42,15 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
           { opacity: 1, scale: 1, duration: 1.2, ease: "power3.out" }
         );
 
+        // Flotación continua suave del personaje.
+        gsap.to(floatEl, {
+          y: -16,
+          duration: 3.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+
         const exit = ScrollTrigger.create({
           id: "bs-hero-exit",
           trigger: section,
@@ -69,6 +68,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
         return () => {
           exit.kill();
           gsap.killTweensOf(wrap);
+          gsap.killTweensOf(floatEl);
         };
       }
     );
@@ -86,8 +86,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
         Bonito Sound — el ecosistema cultural integral del sector musical
       </h1>
 
-      {/* Halo radial sutil para fundir el fondo del vídeo (crema IA) con el
-          fondo de la sección. Evita el "cuadrado" cuando el vídeo es 9:16. */}
+      {/* Halo radial que funde el fondo de la imagen con el del sitio. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-0"
@@ -102,19 +101,17 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
         className="relative z-10 flex h-[100svh] w-full items-center justify-center"
         style={{ willChange: "transform, opacity" }}
       >
-        {/* Wrapper con aspect 9:16 — el vídeo es vertical y debe verse
-            entero, no recortado. Limitamos altura para respiro vertical. */}
-        <div className="relative aspect-[9/16] h-[88svh] max-h-[88svh] max-w-full">
-          <video
-            ref={videoRef}
+        <div
+          ref={floatRef}
+          className="relative aspect-square h-[78svh] max-h-[78svh] max-w-full will-change-transform"
+        >
+          <Image
             src={src}
-            poster={poster ?? "/img/marca/superheroe-home.png"}
-            muted
-            loop
-            playsInline
-            autoPlay
-            preload="none"
-            className="absolute inset-0 h-full w-full object-contain"
+            alt={alt}
+            fill
+            priority
+            sizes="(max-width: 768px) 90vw, 70vh"
+            className="object-contain"
             style={{ mixBlendMode: "multiply" }}
           />
         </div>
