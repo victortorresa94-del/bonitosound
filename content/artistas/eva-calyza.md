@@ -11,8 +11,8 @@ milestones:
   - { year: "2023", text: "Primer EP, afilá" }
   - { year: "2021", text: "Debut autoeditado con La Tarara" }
 ---
-A Eva Calyza la gestiona Manu personalmente. Eso ya te dice algo: aquí no hay artistas de primera y de segunda, hay gente a la que llevamos a mano.
+Eva Calyza estudió flauta travesera y un máster en gestión cultural, y con esa base montó lo que ella llama "pop mental": melodías pop y voz por delante, electrónica y folclore andaluz por debajo. En 2025 publicó su primer álbum, MARCA DIVINA, producido con Bonito Sound — diez canciones sobre dolor, fuerza y reconstrucción.
 
-Está en booking, management y en el catálogo de distribución de Bonito.
+A Eva la gestiona Manu personalmente. Eso ya te dice algo: aquí no hay artistas de primera y de segunda, hay gente a la que llevamos a mano.
 
-Para fechas y disponibilidad, escríbenos a booking. Te contestamos nosotros, no un formulario.
+Está en booking, management y en el catálogo de distribución de Bonito. Para fechas y disponibilidad, escríbenos a booking. Te contestamos nosotros, no un formulario.

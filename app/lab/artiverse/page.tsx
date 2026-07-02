@@ -10,20 +10,24 @@ import {
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Artiverse — La plataforma que conecta al sector",
+  title: "Artiverse — La app de la programación artística",
   description:
-    "Artiverse es la plataforma B2B que conecta agencias, programadores y promotores. 200+ usuarios y creciendo.",
+    "Artiverse conecta artistas, promotores, salas y agencias: datos reales de seguidores, streams y presencia por ciudad para programar y cerrar acuerdos.",
   alternates: { canonical: `${site.url}/lab/artiverse` },
 };
 
 const faq = [
   {
     q: "¿Qué es Artiverse y por qué nace?",
-    a: "Artiverse es una plataforma B2B que conecta agencias, programadores y promotores del sector musical. Nace porque la industria mueve cientos de millones con Excel, WhatsApp y favores: hacía falta una herramienta seria.",
+    a: "Artiverse es la app de la programación artística: una plataforma que conecta artistas, promotores, salas y agencias del sector musical. Nace porque la industria mueve cientos de millones con Excel, WhatsApp y favores: hacía falta una herramienta seria.",
+  },
+  {
+    q: "¿Qué puede hacer un artista en Artiverse?",
+    a: "Ver qué promotores visitan su perfil y presentarse con datos que importan: seguidores, streams, presencia por ciudad y país, y próximos conciertos. En vez de mandar un dossier a ciegas, el promotor te encuentra con la información delante.",
   },
   {
     q: "¿Para quién es Artiverse?",
-    a: "Para agencias de booking y management, programadores de salas y festivales, y promotores que necesitan dejar de trabajar a ciegas.",
+    a: "Para promotores y programadores de sala que planifican su programación con datos, y para agencias y managers que quieren poner su roster delante de quien contrata. Hay usuarios que la usan cada semana para programar su sala.",
   },
   {
     q: "¿Artiverse es lo mismo que Bonito Sound?",
@@ -53,8 +57,9 @@ export default function Artiverse() {
               Deja de trabajar a ciegas.
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
-              Artiverse conecta agencias, programadores y promotores. 200+
-              usuarios usándola ya. La parte del sector que decidió ordenarse.
+              La app de la programación artística: artistas, promotores,
+              salas y agencias en la misma plataforma, con datos reales en
+              vez de corazonadas. La parte del sector que decidió ordenarse.
             </RevealOnScroll>
             <RevealOnScroll className="mt-9" delay={0.35}>
               <MagneticButton strength={0.35}>
@@ -69,9 +74,18 @@ export default function Artiverse() {
         <RevealOnScroll as="p" className="eyebrow mb-4">Qué resuelve</RevealOnScroll>
         <StaggerGroup stagger={0.08} className="mt-10 grid gap-6 md:grid-cols-3">
           {[
-            ["Agencias", "Tu roster y tu disponibilidad, visibles para quien programa."],
-            ["Programadores", "Encuentra y cierra sin cadena de favores."],
-            ["Promotores", "Una capa común en vez de mil hilos de WhatsApp."],
+            [
+              "Artistas y agencias",
+              "Ves qué promotores visitan tu perfil y te presentas con datos: seguidores, streams, presencia por ciudad y próximos bolos.",
+            ],
+            [
+              "Salas y programadores",
+              "Planificas la programación con información real, no con cadenas de favores. Hay salas que la usan cada semana.",
+            ],
+            [
+              "Promotores",
+              "Encuentras y cierras acuerdos con el sector en una capa común, en vez de mil hilos de WhatsApp.",
+            ],
           ].map(([t, d]) => (
             <div key={t} className="card">
               <h3 className="display text-xl">{t}</h3>

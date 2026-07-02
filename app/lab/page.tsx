@@ -49,7 +49,7 @@ export default function Lab() {
       <Section>
         <StaggerGroup stagger={0.08} className="grid gap-6 md:grid-cols-2">
           <div className="card flex flex-col">
-            <p className="eyebrow">En marcha · 200+ usuarios</p>
+            <p className="eyebrow">En marcha</p>
             <h2 className="display mt-3 text-3xl">Artiverse</h2>
             <p className="mt-3 flex-1 text-text-secondary">
               Plataforma B2B que conecta agencias, programadores y promotores.

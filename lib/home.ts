@@ -93,7 +93,7 @@ export const scenes: HomeScene[] = [
     accent: "no pase desapercibido",
     support:
       "Campañas de ads, estrategia de redes y lanzamientos de álbum y de evento. Cuando salga, se entera quien se tiene que enterar.",
-    cta: { label: "Ver más", href: "/records" },
+    cta: { label: "Ver más", href: "/marketing" },
     motionPreset: "pulse",
     mediaCandidates: ["/img/home/marketing.png", "/img/marca/heroe-volando.jpeg"],
   },

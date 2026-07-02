@@ -1,14 +1,17 @@
 ---
 name: "Sa Pena"
-genre: "Mestizaje / Raíz mediterránea"
+genre: "Urbano valencià / pop + drum'n'bass"
 tier: "booking"
-spotifyArtistId: ""
 instagram: "https://www.instagram.com/sa_pena_"
 image: "/img/artistas/sa-pena.jpg"
 reels: []
+milestones:
+  - { year: "2025", text: "Nuevo single, FCK PENA" }
+  - { year: "2023", text: "Finalistas del Sona9 (23ª edición); actuación en las Festes de la Mercè" }
+  - { year: "2023", text: "Single Tot Canvia — pop + drum'n'bass en valencià" }
 ---
-Sa Pena suena a sitio. A puerto, a sobremesa larga, a algo que no se inventa en un estudio en dos tardes.
+Sa Pena viene de La Safor, canta en valencià y no le tiene miedo a mezclar: pop, drum'n'bass y calle en la misma canción. Un proyecto entre primos que en 2023 llegó a la final del Sona9 por votación popular — o sea, gente de verdad votándoles, no un jurado de compromiso.
 
-Lo llevamos porque encaja con lo que somos: raíz de verdad, directo que se siente, nada de decorado.
+Los llevamos porque tienen lo que no se enseña: identidad y un directo que se siente.
 
-¿Lo quieres en tu sala, tu festival o tu evento? Hablamos.
+¿Los quieres en tu sala, tu festival o tu evento? Hablamos.

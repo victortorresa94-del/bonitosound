@@ -15,12 +15,14 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/jaleo-sound` },
 };
 
-const lineup = [
-  { name: "Grupo Puerto", line: "Afro-latin melodic jazz.", tag: "Confirmado" },
-  { name: "Lucía Conde", line: "Nostalgia española + electrónica holandesa.", tag: "Confirmado" },
-  { name: "Andrés Barrios", line: "Flamenco al piano. Km.0.", tag: "Confirmado" },
-  { name: "AlexAbril", line: "Flamenco-jazz fusion.", tag: "Confirmado" },
-  { name: "+ TBA", line: "Más artistas en las próximas semanas.", tag: "Soon" },
+// Line-up de la edición 2025 (verificado: jaleosound.com / spainculture.nl).
+// Las confirmaciones de 2026 se añadirán cuando el festival las anuncie.
+const lineup2025 = [
+  { name: "Andrés Barrios", line: "Flamenco al piano. Km.0: de la raíz a lo contemporáneo." },
+  { name: "Lucía Conde", line: "Nostalgia española + electrónica holandesa. Colectivo The Sun." },
+  { name: "Grupo Puerto", line: "Jazz melódico afrolatino." },
+  { name: "AlexAbril", line: "Dúo español de jazz-fusión. Disco REELAX." },
+  { name: "Dúo Zambra", line: "Flamenco, danza española y electrónica." },
 ];
 
 function Star({ className = "" }: { className?: string }) {
@@ -123,7 +125,9 @@ export default function JaleoSound() {
         </MarqueeRow>
       </section>
 
-      {/* ───── Galería de ediciones pasadas (plug-and-play) ───── */}
+      {/* ───── Galería de ediciones pasadas (plug-and-play) ─────
+           Solo se renderiza si hay fotos en public/img/jaleo/. */}
+      {photos.length > 0 && (
       <section className="border-b border-white/15 py-20 md:py-28">
         <div className="wrap mb-10 flex items-end justify-between">
           <div>
@@ -133,56 +137,35 @@ export default function JaleoSound() {
             </h2>
           </div>
           <a
-            href="https://www.instagram.com/festivaljaleo/"
+            href={site.external.jaleo}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden text-sm font-semibold text-white underline underline-offset-4 hover:text-accent-warm-soft md:inline-block"
           >
-            Ver más en @festivaljaleo →
+            Ver más en jaleosound.com →
           </a>
         </div>
 
-        {photos.length > 0 ? (
-          <div className="wrap grid grid-cols-2 gap-3 md:grid-cols-4">
-            {photos.slice(0, 8).map((p, i) => (
-              <div
-                key={p}
-                className={`relative overflow-hidden rounded-2xl border border-white/20 ${
-                  i === 0 || i === 5 ? "aspect-[3/4] md:row-span-2 md:aspect-[3/5]" : "aspect-square"
-                }`}
-              >
-                <Image
-                  src={p}
-                  alt=""
-                  fill
-                  sizes="(max-width:768px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-700 hover:scale-110"
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="wrap">
-            <div className="rounded-3xl border-2 border-dashed border-white/30 bg-white/[0.04] p-10 text-center">
-              <p className="text-lg text-white/80">
-                Fotos de ediciones pasadas — drop en{" "}
-                <code className="rounded bg-white/15 px-2 py-0.5 text-sm">public/img/jaleo/</code>
-              </p>
-              <p className="mt-2 text-sm text-white/55">
-                Cualquier .jpg/.png/.webp aquí aparece automáticamente como mosaico.
-              </p>
-              <a
-                href="https://www.instagram.com/festivaljaleo/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-5 inline-block text-sm font-semibold text-white underline underline-offset-4"
-              >
-                Mientras tanto: @festivaljaleo →
-              </a>
+        <div className="wrap grid grid-cols-2 gap-3 md:grid-cols-4">
+          {photos.slice(0, 8).map((p, i) => (
+            <div
+              key={p}
+              className={`relative overflow-hidden rounded-2xl border border-white/20 ${
+                i === 0 || i === 5 ? "aspect-[3/4] md:row-span-2 md:aspect-[3/5]" : "aspect-square"
+              }`}
+            >
+              <Image
+                src={p}
+                alt=""
+                fill
+                sizes="(max-width:768px) 50vw, 25vw"
+                className="object-cover transition-transform duration-700 hover:scale-110"
+              />
             </div>
-          </div>
-        )}
+          ))}
+        </div>
       </section>
+      )}
 
       {/* ───── Vídeo (Sant Jordi Club) como muestra del directo Bonito ───── */}
       <section className="border-b border-white/15 py-20 md:py-28">
@@ -223,15 +206,20 @@ export default function JaleoSound() {
         </div>
       </section>
 
-      {/* ───── Line-up ───── */}
+      {/* ───── Edición 2025 ───── */}
       <section className="border-t border-white/20 py-24 md:py-32">
         <div className="wrap">
-          <div className="flex items-end justify-between">
-            <h2 className="display text-[clamp(2.5rem,8vw,6rem)] leading-[0.9]">Line-up</h2>
-            <p className="text-xs uppercase tracking-[0.2em] text-white/50">Edición 2026</p>
+          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <h2 className="display text-[clamp(2.5rem,8vw,6rem)] leading-[0.9]">
+              Así sonó 2025.
+            </h2>
+            <p className="max-w-sm text-sm text-white/70 md:text-right">
+              11–12 de octubre de 2025, Posthoornkerk, dentro de los actos del
+              750 aniversario de Amsterdam. Música, arte y gastronomía.
+            </p>
           </div>
           <ul className="mt-12 divide-y divide-white/20 border-y border-white/20">
-            {lineup.map((a, i) => (
+            {lineup2025.map((a, i) => (
               <li
                 key={a.name}
                 className="group flex flex-col gap-2 py-7 transition-colors hover:bg-white/5 md:flex-row md:items-center md:justify-between md:px-4"
@@ -242,15 +230,23 @@ export default function JaleoSound() {
                     {a.name}
                   </span>
                 </div>
-                <div className="flex items-center gap-6 md:pl-6">
-                  <span className="text-sm text-white/70">{a.line}</span>
-                  <span className="shrink-0 rounded-full border border-white/30 px-3 py-1 text-xs uppercase tracking-wide text-white/80">
-                    {a.tag}
-                  </span>
-                </div>
+                <span className="text-sm text-white/70 md:pl-6">{a.line}</span>
               </li>
             ))}
           </ul>
+          <p className="mt-8 text-sm text-white/60">
+            El cartel de la edición 2026 se anunciará en las próximas semanas
+            en{" "}
+            <a
+              href={site.external.jaleo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-4 hover:text-white"
+            >
+              jaleosound.com
+            </a>
+            .
+          </p>
         </div>
       </section>
 
@@ -264,12 +260,12 @@ export default function JaleoSound() {
               La playlist oficial. Para entender el festival antes de pisar Amsterdam.
             </p>
             <a
-              href="https://www.instagram.com/festivaljaleo/"
+              href={site.external.jaleo}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-block text-sm font-semibold text-white underline underline-offset-4"
             >
-              También en @festivaljaleo →
+              Más en jaleosound.com →
             </a>
           </div>
           <div className="rounded-2xl bg-black/15 p-2">

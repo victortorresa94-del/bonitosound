@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Section, Cta, JsonLd } from "@/components/ui";
 import {
   RevealOnScroll,
+  StaggerGroup,
   SplitTextReveal,
   MagneticButton,
-  FaqMotion,
   MarqueeLogoWall,
 } from "@/components/motion";
+import { FaqOpen } from "@/components/FaqOpen";
 import { distributionCatalog, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -68,6 +69,32 @@ export default function Distribucion() {
       </section>
 
       <Section>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Qué ponemos</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          Dos piezas distintas, las dos importan.
+        </SplitTextReveal>
+        <StaggerGroup stagger={0.1} className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="card flex flex-col">
+            <h3 className="display text-2xl">Distribución</h3>
+            <p className="mt-3 flex-1 text-text-secondary">
+              Llevamos tus grabaciones a Spotify, Apple Music, YouTube Music,
+              Amazon, Deezer y el resto. Con metadatos correctos, ISRC, fecha
+              de lanzamiento coordinada y perfiles verificados. La diferencia
+              entre publicar y que se te encuentre.
+            </p>
+          </div>
+          <div className="card flex flex-col">
+            <h3 className="display text-2xl">Editorial</h3>
+            <p className="mt-3 flex-1 text-text-secondary">
+              Gestionamos los derechos de autor de tus canciones — la parte
+              que se cobra aunque no la cante nadie más. Registro, reparto y
+              cobro de lo que genera tu composición, no solo la grabación.
+            </p>
+          </div>
+        </StaggerGroup>
+      </Section>
+
+      <Section className="bg-bg-secondary">
         <RevealOnScroll as="p" className="eyebrow mb-4">En catálogo</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           ~20 artistas ya distribuyen con nosotros.
@@ -75,12 +102,19 @@ export default function Distribucion() {
         <div className="mt-10">
           <MarqueeLogoWall items={distributionCatalog} dir="artistas" label="En catálogo" speed={35} />
         </div>
+        <RevealOnScroll as="p" className="mt-8 text-text-secondary" delay={0.2}>
+          Entre ellos, artistas como{" "}
+          <a href="/artistas/kenai-white" className="link-underline text-accent-cyan-text">
+            Kenai White
+          </a>{" "}
+          — cantautor y actor salmantino con discografía propia.
+        </RevealOnScroll>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
-        <div className="mt-8 max-w-3xl">
-          <FaqMotion items={faq} />
+        <div className="mt-8">
+          <FaqOpen items={faq} />
         </div>
       </Section>
     </>

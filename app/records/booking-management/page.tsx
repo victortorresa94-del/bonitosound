@@ -5,8 +5,8 @@ import {
   StaggerGroup,
   SplitTextReveal,
   MagneticButton,
-  FaqMotion,
 } from "@/components/motion";
+import { FaqOpen } from "@/components/FaqOpen";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -92,9 +92,28 @@ export default function BookingManagement() {
       </Section>
 
       <Section className="bg-bg-secondary">
+        <RevealOnScroll as="p" className="eyebrow mb-4">A quién llevamos</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          Pocos, y bien llevados.
+        </SplitTextReveal>
+        <RevealOnScroll as="p" className="mt-6 max-w-2xl text-text-secondary" delay={0.15}>
+          Dulze de gira nacional con el Qué Fantasía Tour, Eva Calyza con su
+          primer álbum, Sa Pena y Nàtura en directo. No coleccionamos
+          artistas: llevamos a los que podemos llevar como hay que llevarlos.
+        </RevealOnScroll>
+        <RevealOnScroll className="mt-8" delay={0.25}>
+          <MagneticButton strength={0.3}>
+            <Cta href="/artistas" variant="ghost">
+              Ver el roster →
+            </Cta>
+          </MagneticButton>
+        </RevealOnScroll>
+      </Section>
+
+      <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
-        <div className="mt-8 max-w-3xl">
-          <FaqMotion items={faq} />
+        <div className="mt-8">
+          <FaqOpen items={faq} />
         </div>
       </Section>
     </>

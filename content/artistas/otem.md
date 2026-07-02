@@ -2,9 +2,11 @@
 name: "OTEM"
 genre: "Urbano / Pop alternativo"
 tier: "booking"
-spotifyArtistId: "382ZStNMRpkdxhvwYgQRaU"
 instagram: ""
 reels: []
+draft: true
+# draft: pendiente de enlaces reales de Spotify/Instagram del cliente.
+# El spotifyArtistId anterior apuntaba a un artista francés homónimo — retirado.
 ---
 OTEM no necesita que le expliquemos quién es. Si has llegado hasta aquí, probablemente ya lo sabes.
 

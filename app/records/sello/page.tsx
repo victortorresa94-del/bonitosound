@@ -5,8 +5,8 @@ import {
   StaggerGroup,
   SplitTextReveal,
   MagneticButton,
-  FaqMotion,
 } from "@/components/motion";
+import { FaqOpen } from "@/components/FaqOpen";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -87,9 +87,29 @@ export default function Sello() {
       </Section>
 
       <Section className="bg-bg-secondary">
+        <RevealOnScroll as="p" className="eyebrow mb-4">Un ejemplo</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          MARCA DIVINA, de Eva Calyza.
+        </SplitTextReveal>
+        <RevealOnScroll as="p" className="mt-6 max-w-2xl text-lg text-text-secondary" delay={0.15}>
+          El primer álbum de Eva Calyza — diez canciones que fusionan folclore
+          andaluz y electrónica oscura — se produjo con nosotros y salió en
+          2025. Del máster a la calle, con criterio: eso es lo que hace un
+          sello cuando hace su trabajo.
+        </RevealOnScroll>
+        <RevealOnScroll className="mt-8" delay={0.25}>
+          <MagneticButton strength={0.3}>
+            <Cta href="/artistas/eva-calyza" variant="ghost">
+              Ver a Eva Calyza →
+            </Cta>
+          </MagneticButton>
+        </RevealOnScroll>
+      </Section>
+
+      <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
-        <div className="mt-8 max-w-3xl">
-          <FaqMotion items={faq} />
+        <div className="mt-8">
+          <FaqOpen items={faq} />
         </div>
       </Section>
     </>
