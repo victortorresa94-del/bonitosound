@@ -17,6 +17,7 @@ const config: Config = {
         accent: {
           cyan: "var(--accent-cyan)",
           "cyan-hover": "var(--accent-cyan-hover)",
+          "cyan-text": "var(--accent-cyan-text)",
           blue: "var(--accent-blue)",
           "blue-hover": "var(--accent-blue-hover)",
           warm: "var(--accent-warm)",

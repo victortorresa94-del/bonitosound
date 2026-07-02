@@ -79,9 +79,9 @@ export default function Nosotros() {
       <Section className="bg-bg-secondary">
         <RevealOnScroll as="p" className="eyebrow mb-4">Equipo</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-          Tres personas con nombre y teléfono.
+          Gente con nombre y teléfono.
         </SplitTextReveal>
-        <StaggerGroup stagger={0.1} className="mt-12 grid gap-6 md:grid-cols-3">
+        <StaggerGroup stagger={0.1} className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {team.map((p) => {
             const photo = findLogo("equipo", p.name);
             return (
@@ -107,6 +107,34 @@ export default function Nosotros() {
       </Section>
 
       <Section>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Dónde estamos</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          El sector nos conoce.
+        </SplitTextReveal>
+        <StaggerGroup stagger={0.1} className="mt-12 grid gap-6 md:grid-cols-3">
+          {[
+            [
+              "Fabra i Coats",
+              "Proyecto residente 2025 de la fábrica de creación del Ajuntament de Barcelona.",
+            ],
+            [
+              "Redescena",
+              "Compañía inscrita en la Red Española de Teatros, Auditorios, Circuitos y Festivales.",
+            ],
+            [
+              "Fundació Catalunya Cultura",
+              "Proyecto acompañado por la fundación que conecta cultura y empresa en Catalunya.",
+            ],
+          ].map(([t, d]) => (
+            <div key={t} className="card">
+              <h3 className="display text-xl">{t}</h3>
+              <p className="mt-3 text-sm text-text-secondary">{d}</p>
+            </div>
+          ))}
+        </StaggerGroup>
+      </Section>
+
+      <Section className="bg-bg-secondary">
         <RevealOnScroll>
           <MarqueeLogoWall items={memberships} dir="instituciones" label="Miembros activos de" speed={30} />
         </RevealOnScroll>

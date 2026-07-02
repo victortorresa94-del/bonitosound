@@ -3,28 +3,42 @@ import { Section, Cta, JsonLd } from "@/components/ui";
 import { YouTubeEmbed } from "@/components/Embeds";
 import {
   RevealOnScroll,
+  StaggerGroup,
   SplitTextReveal,
   MagneticButton,
   FaqMotion,
-  MarqueeLogoWall,
 } from "@/components/motion";
-import { tourArtists, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Tour management — Giras de principio a fin",
   description:
-    "Road, tour y stage management. Hemos llevado giras de Albert Pla, Alfred García, Antonio Orozco, Maldita Nerea, Ruth Lorenzo, Ramon Mirabet y Efecto Pasillo.",
+    "Road, tour y stage management. Del management de Anne Lukin y Nerea Rodríguez al cierre de la Gira 1016 de Alfred García en el Sant Jordi Club.",
   alternates: { canonical: `${site.url}/eventos/giras` },
 };
+
+const cases = [
+  {
+    artist: "Alfred García — Gira 1016",
+    detail:
+      "Cerramos la gira del disco 1016 en el Sant Jordi Club de Barcelona, tras unos 40 conciertos por toda España. Road, tour y stage management de principio a fin.",
+  },
+  {
+    artist: "Anne Lukin",
+    detail:
+      "Management de la artista pamplonesa surgida de OT: su álbum Al día siguiente y temas que superan los 15 millones de reproducciones.",
+  },
+  {
+    artist: "Nerea Rodríguez",
+    detail:
+      "Management y desarrollo, con EP producido junto a Sweet Bird y Sony Music Publishing. Carrera llevada a mano, no en piloto automático.",
+  },
+];
 
 const faq = [
   {
     q: "¿Qué incluye el tour management de Bonito Sound?",
     a: "Road management, tour management y stage management: logística, rutas, equipo, producción técnica y coordinación en plaza. De la primera furgoneta al desmontaje del último bolo.",
-  },
-  {
-    q: "¿Con qué artistas habéis trabajado en gira?",
-    a: "Hemos trabajado con Albert Pla, Alfred García, Antonio Orozco, Maldita Nerea, Ruth Lorenzo, Ramon Mirabet y Efecto Pasillo, entre otros.",
   },
   {
     q: "¿Lleváis giras de artistas que no son del roster?",
@@ -67,19 +81,27 @@ export default function Giras() {
       </section>
 
       <Section>
-        <RevealOnScroll as="p" className="eyebrow mb-4">Hemos llevado de gira a</RevealOnScroll>
-        <div className="mt-8">
-          <MarqueeLogoWall items={tourArtists} dir="giras" label="Hemos llevado de gira a" speed={35} />
-        </div>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Lo que hemos llevado</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+          Giras y carreras que sostenemos nosotros.
+        </SplitTextReveal>
+        <StaggerGroup stagger={0.1} className="mt-12 grid gap-6 md:grid-cols-3">
+          {cases.map((c) => (
+            <div key={c.artist} className="card flex flex-col">
+              <h3 className="display text-xl">{c.artist}</h3>
+              <p className="mt-3 flex-1 text-text-secondary">{c.detail}</p>
+            </div>
+          ))}
+        </StaggerGroup>
       </Section>
 
       <Section className="bg-bg-secondary">
         <RevealOnScroll as="p" className="eyebrow mb-4">El vídeo lo cuenta mejor</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-          Final de Gira 1016 — Sant Jordi Club.
+          Final de la Gira 1016 en el Sant Jordi Club.
         </SplitTextReveal>
         <div className="mt-10 max-w-3xl">
-          <YouTubeEmbed id="r47SP4OULcI" title="Final de Gira 1016" />
+          <YouTubeEmbed id="r47SP4OULcI" title="Final de la Gira 1016 — Alfred García" />
         </div>
       </Section>
 

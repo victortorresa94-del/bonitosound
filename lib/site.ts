@@ -36,6 +36,7 @@ export const nav = [
   { label: "Eventos", href: "/eventos" },
   { label: "Records", href: "/records" },
   { label: "Artistas", href: "/artistas" },
+  { label: "Marketing", href: "/marketing" },
   { label: "Lab", href: "/lab" },
   { label: "Jaleo Sound", href: "/jaleo-sound" },
   { label: "Nosotros", href: "/nosotros" },

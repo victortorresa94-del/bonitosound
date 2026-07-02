@@ -20,6 +20,9 @@ export type Artist = {
    *      - { year: "2025", text: "Gira nacional Qué Fantasía Tour, 6 ciudades" }
    *      - { year: "2024", text: "Primer EP 'Gatea'" }                       */
   milestones?: { year: string; text: string }[];
+  /** Si true, la ficha no se publica: se excluye del roster y de las rutas
+   *  estáticas. Para artistas cuyos datos aún no están confirmados. */
+  draft?: boolean;
 };
 
 export type CaseStudy = {
@@ -51,6 +54,7 @@ export function getArtists(): Artist[] {
         ...(data as Omit<Artist, "slug" | "bio">),
       };
     })
+    .filter((a) => !a.draft)
     .sort((a, b) => (a.tier === b.tier ? 0 : a.tier === "booking" ? -1 : 1));
 }
 

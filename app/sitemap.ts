@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/records/booking-management",
     "/records/distribucion",
     "/artistas",
+    "/marketing",
     "/lab",
     "/lab/artiverse",
     "/lab/giraverse",
