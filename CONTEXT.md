@@ -2,6 +2,11 @@
 
 > Documento de transferencia de contexto entre sesiones. Si vas a continuar el proyecto, **léelo entero** antes de tocar nada. Fecha de actualización: 24 may 2026.
 
+> ⚠️ **PENDIENTES: ver `ROADMAP.md`** (raíz del repo). Es la fuente viva de
+> todo lo que falta — bloqueos del cliente, código pendiente, deuda técnica y
+> reactivaciones — actualizada el 25 jun 2026, posterior a este documento.
+> Las secciones de roadmap de ESTE archivo pueden estar desfasadas.
+
 ---
 
 ## ÍNDICE
