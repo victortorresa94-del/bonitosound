@@ -206,6 +206,12 @@ body {
   100% { transform: translateY(200%); }
 }
 
+/* Ecualizador del reproductor flotante (BonitoPlayer). */
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
+}
+
 /* Mascota animada del hero (SVG inline + GSAP DrawSVG).
    Estado inicial antes de que JS tome el control: los paths quedan
    invisibles para que el "draw-on" empiece desde un lienzo vacío.

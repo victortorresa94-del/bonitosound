@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
+import { BonitoPlayer } from "@/components/BonitoPlayer";
 import { JsonLd } from "@/components/ui";
 import { MotionProvider, PageTransitionShell } from "@/components/motion";
 import { site, memberships, team } from "@/lib/site";
@@ -80,6 +81,7 @@ export default function RootLayout({
             <main>{children}</main>
           </PageTransitionShell>
           <Footer />
+          <BonitoPlayer />
         </MotionProvider>
       </body>
     </html>
