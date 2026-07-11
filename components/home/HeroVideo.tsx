@@ -79,18 +79,9 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
         Bonito Sound — música, eventos para marcas, festival y tecnología del sector
       </h1>
 
-      {/* Halo radial que funde el fondo del vídeo con el del sitio. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 50%, var(--bg-tertiary) 0%, var(--bg-primary) 65%)",
-        }}
-      />
-
-      {/* Vídeo centrado a ~la mitad de la pantalla, sin recuadro: el blanco del
-          fondo se funde con el crema del sitio vía mix-blend multiply. */}
+      {/* Vídeo centrado a ~la mitad de la pantalla. El fondo del vídeo ya es el
+          crema del sitio (horneado al recortar el negro), así que encaja sin
+          recuadro ni blend: el personaje flota sobre el fondo. */}
       <div
         ref={wrapRef}
         className="relative z-10 aspect-video w-[86vw] max-h-[80svh] md:w-[48vw]"
@@ -99,7 +90,6 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
         <video
           ref={videoRef}
           className="h-full w-full object-contain"
-          style={{ mixBlendMode: "multiply" }}
           src={src}
           poster={poster}
           autoPlay
