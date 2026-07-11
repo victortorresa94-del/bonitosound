@@ -64,6 +64,11 @@ export const team = [
     role: "Comunicación",
     line: "Coordina lo de dentro y lo de fuera. Lo que ves publicado, ha pasado por ella.",
   },
+  {
+    name: "Victor Torres",
+    role: "Marketing Artístico & IA",
+    line: "Campañas, contenido y la IA que hace que cada lanzamiento llegue más lejos.",
+  },
 ] as const;
 
 export const memberships = [

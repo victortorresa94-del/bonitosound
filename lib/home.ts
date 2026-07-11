@@ -43,6 +43,7 @@ export const scenes: HomeScene[] = [
     accent: "WhatsApp",
     support:
       "Nosotros hacemos que pase como merece. Del primer brief al último bolo.",
+    mediaCandidates: ["/img/home/que-es.webp"],
   },
   {
     id: "marcas",
@@ -54,7 +55,7 @@ export const scenes: HomeScene[] = [
     cta: { label: "Ver más", href: "/eventos" },
     motionPreset: "glow",
     mediaCandidates: [
-      "/img/home/marcas.png",
+      "/img/home/marcas.webp",
       "/img/marca/heroe-megafono.jpeg",
       "/img/marca/superheroe-eventos.png",
       "/img/secciones/eventos.png",
@@ -69,7 +70,7 @@ export const scenes: HomeScene[] = [
       "Producción, ruta y management de directo. De Antonio Orozco a Maldita Nerea: el escenario montado y el aforo lleno.",
     cta: { label: "Ver más", href: "/eventos/giras" },
     motionPreset: "parallax",
-    mediaCandidates: ["/img/home/giras.png", "/img/marca/superheroe-eventos.png"],
+    mediaCandidates: ["/img/home/giras.webp", "/img/marca/superheroe-eventos.png"],
   },
   {
     id: "records",
@@ -81,7 +82,7 @@ export const scenes: HomeScene[] = [
     cta: { label: "Ver más", href: "/records" },
     motionPreset: "kenburns",
     mediaCandidates: [
-      "/img/home/records.png",
+      "/img/home/records.webp",
       "/img/marca/superheroe-records.png",
       "/img/secciones/records.png",
     ],
@@ -95,7 +96,7 @@ export const scenes: HomeScene[] = [
       "Campañas de ads, estrategia de redes y lanzamientos de álbum y de evento. Cuando salga, se entera quien se tiene que enterar.",
     cta: { label: "Ver más", href: "/marketing" },
     motionPreset: "pulse",
-    mediaCandidates: ["/img/home/marketing.png", "/img/marca/heroe-volando.jpeg"],
+    mediaCandidates: ["/img/home/marketing.webp", "/img/marca/heroe-volando.jpeg"],
   },
   {
     id: "tecnologia",
@@ -105,7 +106,7 @@ export const scenes: HomeScene[] = [
     support:
       "Artiverse y Giraverse: el software que ordena el trabajo del directo y del lanzamiento.",
     cta: { label: "Ver más", href: "/lab" },
-    mediaCandidates: ["/img/home/tecnologia.png", "/img/secciones/lab.png"],
+    mediaCandidates: ["/img/home/tecnologia.webp", "/img/secciones/lab.png"],
   },
   {
     id: "festival",
@@ -129,5 +130,6 @@ export const scenes: HomeScene[] = [
     support:
       "Treinta minutos. Tú cuentas qué necesitas, nosotros te decimos qué se puede hacer de verdad.",
     cta: { label: "Hablamos", href: "/contacto" },
+    mediaCandidates: ["/img/home/cierre.webp"],
   },
 ];
