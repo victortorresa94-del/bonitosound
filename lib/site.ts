@@ -32,13 +32,14 @@ export const site = {
   },
 } as const;
 
+// Menú principal: 5 entradas. Categorías-servicio + institucional, en orden
+// de prioridad. Marketing vive dentro de Records; Jaleo Sound, en el footer
+// (es un proyecto con marca propia, no compite en el nivel principal).
 export const nav = [
   { label: "Eventos", href: "/eventos" },
   { label: "Records", href: "/records" },
   { label: "Artistas", href: "/artistas" },
-  { label: "Marketing", href: "/marketing" },
   { label: "Lab", href: "/lab" },
-  { label: "Jaleo Sound", href: "/jaleo-sound" },
   { label: "Nosotros", href: "/nosotros" },
 ] as const;
 
@@ -56,12 +57,12 @@ export const team = [
   {
     name: "Xavi Julià",
     role: "Producción",
-    line: "El que hace que el deck se convierta en evento. Sin él, no hay escenario.",
+    line: "El que convierte el deck en evento. La producción que se ve en el escenario.",
   },
   {
     name: "Cristina Soler",
     role: "Comunicación",
-    line: "La voz que coordina lo de fuera y lo de dentro. Si te llega, es porque ella lo manda.",
+    line: "Coordina lo de dentro y lo de fuera. Lo que ves publicado, ha pasado por ella.",
   },
 ] as const;
 
