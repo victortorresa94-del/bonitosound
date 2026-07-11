@@ -89,23 +89,31 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
         }}
       />
 
-      {/* Vídeo centrado a ~la mitad de la pantalla (16:9 completo, sin recorte). */}
+      {/* Vídeo centrado a ~la mitad de la pantalla, sin recuadro: el blanco del
+          fondo se funde con el crema del sitio vía mix-blend multiply. */}
       <div
         ref={wrapRef}
-        className="relative z-10 aspect-video w-[86vw] max-h-[80svh] overflow-hidden rounded-xl md:w-[48vw]"
+        className="relative z-10 aspect-video w-[86vw] max-h-[80svh] md:w-[48vw]"
         style={{ willChange: "transform, opacity" }}
       >
         <video
           ref={videoRef}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
+          style={{ mixBlendMode: "multiply" }}
           src={src}
           poster={poster}
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           aria-hidden="true"
+          onEnded={(e) => {
+            // Loop a prueba de balas: si algún navegador ignora `loop`, reanuda.
+            const v = e.currentTarget;
+            v.currentTime = 0;
+            v.play().catch(() => {});
+          }}
         />
       </div>
 
