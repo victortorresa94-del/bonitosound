@@ -56,7 +56,8 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
           start: "top top",
           end: "bottom top",
           scrub: 0.6,
-          animation: gsap.to(wrap, { y: -120, opacity: 0, ease: "none" }),
+          // Parallax suave de salida. Sin fundido a 0 (antes "desaparecía").
+          animation: gsap.to(wrap, { y: -60, ease: "none" }),
         });
 
         return () => {
@@ -84,7 +85,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
           recuadro ni blend: el personaje flota sobre el fondo. */}
       <div
         ref={wrapRef}
-        className="relative z-10 mb-[8vh] aspect-video w-[95vw] max-h-[88svh] md:w-[53vw]"
+        className="relative z-10 aspect-video w-[92vw] max-h-[80svh] md:w-[50vw]"
         style={{ willChange: "transform, opacity" }}
       >
         <video
@@ -107,7 +108,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
         />
       </div>
 
-      <div className="absolute bottom-9 z-20 flex flex-col items-center gap-3">
+      <div className="absolute bottom-4 z-20 flex flex-col items-center gap-2">
         <span className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-text-muted">
           Baja
         </span>

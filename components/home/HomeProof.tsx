@@ -20,7 +20,7 @@ export function HomeProof() {
       <p className="eyebrow mb-8 px-6 text-center">En directo · nombres que hemos llevado</p>
 
       {/* Nombres grandes en marquee. */}
-      <MarqueeRow speed={70} gap="0px" className="[mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+      <MarqueeRow speed={70} gap="0px">
         {tourArtists.map((name) => (
           <div key={name} className="flex items-center whitespace-nowrap">
             <span className="font-display text-4xl leading-none text-text-primary md:text-6xl">
