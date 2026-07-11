@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { HeroImage } from "@/components/home/HeroImage";
 import { HomeProof } from "@/components/home/HomeProof";
+import { HomeProcess } from "@/components/home/HomeProcess";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
 import { scenes } from "@/lib/home";
 
@@ -23,18 +24,36 @@ export default function HomePage() {
     media: firstExisting(scene.mediaCandidates),
   }));
 
+  // "Cómo trabajamos" va después de las escenas de servicio y antes del cierre
+  // (landing-anatomy). Separamos la escena de cierre para intercalar el proceso.
+  const closingIdx = resolved.findIndex(({ scene }) => scene.id === "cierre");
+  const bodyScenes = closingIdx === -1 ? resolved : resolved.slice(0, closingIdx);
+  const closingScenes = closingIdx === -1 ? [] : resolved.slice(closingIdx);
+
   return (
     <>
       <HeroImage src={HERO_IMAGE} />
 
       <HomeProof />
 
-      {resolved.map(({ scene, media }, i) => (
+      {bodyScenes.map(({ scene, media }, i) => (
         <NarrativeScene
           key={scene.id}
           scene={scene}
           media={media}
           index={i}
+          total={resolved.length}
+        />
+      ))}
+
+      <HomeProcess />
+
+      {closingScenes.map(({ scene, media }, i) => (
+        <NarrativeScene
+          key={scene.id}
+          scene={scene}
+          media={media}
+          index={closingIdx + i}
           total={resolved.length}
         />
       ))}
