@@ -1,125 +1,51 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { SpotifyEmbed } from "@/components/Embeds";
 
 /**
- * Reproductor de "Bonito" (Jarabe de Palo). Objetivo: que al entrar en la web
- * suene la canción. Los navegadores bloquean el autoplay con sonido al cargar,
- * así que arranca en el PRIMER gesto del usuario (clic/scroll/tecla) — lo que
- * ocurre casi al instante. Usa la Spotify IFrame API para controlar el play
- * sin depender del botón del embed. Pastilla flotante para pausar/reanudar.
+ * Reproductor flotante de "Bonito" (Jarabe de Palo). Muestra el embed real de
+ * Spotify con su botón de play — fiable en todos los navegadores. Al minimizar,
+ * el iframe se queda MONTADO (colapsado con altura 0, no display:none) para que
+ * el audio no se corte y siga sonando mientras se navega.
  *
- * El iframe vive fuera de pantalla (montado siempre) para que el audio no se
- * corte al no mostrar el embed. Nunca fuerza sonido sin interacción previa.
+ * Nota: el autoplay con sonido al cargar lo bloquean todos los navegadores; por
+ * eso el visitante da al play una vez y ya suena de fondo el resto de la visita.
  */
-const TRACK_URI = "spotify:track:5FiB1uNoGZE4PenzZd7Imu"; // Bonito — Jarabe de Palo
+const TRACK_ID = "5FiB1uNoGZE4PenzZd7Imu"; // Bonito — Jarabe de Palo
 
 export function BonitoPlayer() {
-  const hostRef = useRef<HTMLDivElement>(null);
-  const controllerRef = useRef<{ play: () => void; pause: () => void } | null>(null);
-  const [playing, setPlaying] = useState(false);
-  const [ready, setReady] = useState(false);
+  const [open, setOpen] = useState(false);
   const [dismissed, setDismissed] = useState(false);
-
-  useEffect(() => {
-    if (dismissed) return;
-    const w = window as unknown as {
-      onSpotifyIframeApiReady?: (api: unknown) => void;
-      __spotifyIframeApi?: unknown;
-    };
-
-    let started = false;
-    const gestureEvents = ["pointerdown", "keydown", "scroll", "touchstart"];
-
-    function armAutostart(controller: { play: () => void }) {
-      const start = () => {
-        if (started) return;
-        started = true;
-        try {
-          controller.play();
-        } catch {
-          /* el navegador puede requerir otro gesto; el usuario tiene la pastilla */
-        }
-        gestureEvents.forEach((ev) => window.removeEventListener(ev, start));
-      };
-      gestureEvents.forEach((ev) =>
-        window.addEventListener(ev, start, { passive: true })
-      );
-    }
-
-    function init(IFrameAPI: {
-      createController: (
-        el: HTMLElement,
-        opts: Record<string, unknown>,
-        cb: (c: {
-          play: () => void;
-          pause: () => void;
-          addListener: (e: string, cb: (d: { data: { isPaused: boolean } }) => void) => void;
-        }) => void
-      ) => void;
-    }) {
-      if (!hostRef.current) return;
-      IFrameAPI.createController(
-        hostRef.current,
-        { uri: TRACK_URI, width: "100%", height: 80 },
-        (controller) => {
-          controllerRef.current = controller;
-          setReady(true);
-          controller.addListener("playback_update", (e) => {
-            setPlaying(!e.data.isPaused);
-          });
-          armAutostart(controller);
-        }
-      );
-    }
-
-    if (w.__spotifyIframeApi) {
-      init(w.__spotifyIframeApi as Parameters<typeof init>[0]);
-    } else {
-      w.onSpotifyIframeApiReady = (api) => {
-        w.__spotifyIframeApi = api;
-        init(api as Parameters<typeof init>[0]);
-      };
-      if (!document.getElementById("spotify-iframe-api")) {
-        const s = document.createElement("script");
-        s.id = "spotify-iframe-api";
-        s.src = "https://open.spotify.com/embed/iframe-api/v1";
-        s.async = true;
-        document.body.appendChild(s);
-      }
-    }
-
-    return () => {
-      gestureEvents.forEach((ev) => window.removeEventListener(ev, () => {}));
-    };
-  }, [dismissed]);
 
   if (dismissed) return null;
 
-  const toggle = () => {
-    const c = controllerRef.current;
-    if (!c) return;
-    if (playing) c.pause();
-    else c.play();
-  };
-
   return (
-    <>
-      {/* Host del iframe de Spotify: montado siempre, fuera de pantalla, para
-          que el audio no se corte. No usar display:none (pararía el sonido). */}
+    <div className="fixed bottom-5 left-5 z-40 print:hidden">
+      {/* Panel SIEMPRE montado (colapsa con altura, no se desmonta) para que el
+          audio persista al minimizar. */}
       <div
-        aria-hidden
-        style={{ position: "fixed", left: "-9999px", bottom: 0, width: 320, height: 80 }}
+        className={`overflow-hidden transition-all duration-300 ${
+          open
+            ? "mb-2 w-[min(340px,calc(100vw-2.5rem))] opacity-100"
+            : "h-0 w-0 opacity-0"
+        }`}
       >
-        <div ref={hostRef} />
+        <div className="rounded-2xl border border-subtle bg-bg-primary p-2 shadow-xl">
+          <SpotifyEmbed
+            type="track"
+            id={TRACK_ID}
+            height={152}
+            title="Bonito — Jarabe de Palo"
+          />
+        </div>
       </div>
 
-      <div className="fixed bottom-5 left-5 z-40 flex items-center gap-1.5 print:hidden">
+      <div className="flex items-center gap-1.5">
         <button
-          onClick={toggle}
-          disabled={!ready}
-          aria-label={playing ? "Pausar Bonito" : "Reproducir Bonito"}
-          className="group flex items-center gap-2.5 rounded-full border border-subtle bg-bg-primary/90 py-2.5 pl-3 pr-4 shadow-lg backdrop-blur-md transition-colors hover:bg-bg-primary disabled:opacity-60"
+          onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          className="group flex items-center gap-2.5 rounded-full border border-subtle bg-bg-primary/90 py-2.5 pl-3 pr-4 shadow-lg backdrop-blur-md transition-colors hover:bg-bg-primary"
         >
           <span className="flex h-5 items-end gap-[3px]" aria-hidden>
             {[0.4, 0.9, 0.6].map((h, i) => (
@@ -128,15 +54,13 @@ export function BonitoPlayer() {
                 className="w-[3px] origin-bottom rounded-full bg-accent-cyan"
                 style={{
                   height: `${h * 100}%`,
-                  animation: playing
-                    ? `eq 0.9s ease-in-out infinite ${i * 0.15}s`
-                    : "none",
+                  animation: `eq 0.9s ease-in-out infinite ${i * 0.15}s`,
                 }}
               />
             ))}
           </span>
           <span className="text-sm font-medium text-text-primary">
-            {playing ? "Suena bonito" : "Dale al play"}
+            {open ? "La canción de Bonito" : "Escúchanos"}
           </span>
         </button>
         <button
@@ -147,6 +71,6 @@ export function BonitoPlayer() {
           ✕
         </button>
       </div>
-    </>
+    </div>
   );
 }

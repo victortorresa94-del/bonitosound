@@ -190,7 +190,7 @@ body {
   }
   /* Variante sobre fondo claro (crema). */
   .scroll-cue-dark {
-    @apply relative h-12 w-px overflow-hidden;
+    @apply relative h-7 w-px overflow-hidden;
     background: rgba(20, 17, 11, 0.18);
   }
   .scroll-cue-dark::after {
