@@ -79,9 +79,20 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
         Bonito Sound — música, eventos para marcas, festival y tecnología del sector
       </h1>
 
+      {/* Halo radial que funde el fondo del vídeo con el del sitio. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 50%, var(--bg-tertiary) 0%, var(--bg-primary) 65%)",
+        }}
+      />
+
+      {/* Vídeo centrado a ~la mitad de la pantalla (16:9 completo, sin recorte). */}
       <div
         ref={wrapRef}
-        className="absolute inset-0 z-0"
+        className="relative z-10 aspect-video w-[86vw] max-h-[80svh] overflow-hidden rounded-xl md:w-[48vw]"
         style={{ willChange: "transform, opacity" }}
       >
         <video
@@ -99,10 +110,10 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
       </div>
 
       <div className="absolute bottom-9 z-20 flex flex-col items-center gap-3">
-        <span className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-white/80 mix-blend-difference">
+        <span className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-text-muted">
           Baja
         </span>
-        <span className="scroll-cue" aria-hidden="true" />
+        <span className="scroll-cue-dark" aria-hidden="true" />
       </div>
     </section>
   );
