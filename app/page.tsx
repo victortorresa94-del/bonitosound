@@ -1,12 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
-import { HeroImage } from "@/components/home/HeroImage";
+import { HeroVideo } from "@/components/home/HeroVideo";
 import { HomeProof } from "@/components/home/HomeProof";
 import { HomeProcess } from "@/components/home/HomeProcess";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
 import { scenes } from "@/lib/home";
 
-const HERO_IMAGE = "/img/marca/superheroe-home.png";
+const HERO_VIDEO = "/video/home/hero.mp4";
+const HERO_POSTER = "/img/marca/hero-poster.webp";
 
 /** Primer candidato de /public que existe en disco (o null). */
 function firstExisting(candidates: string[] | undefined): string | null {
@@ -32,7 +33,7 @@ export default function HomePage() {
 
   return (
     <>
-      <HeroImage src={HERO_IMAGE} />
+      <HeroVideo src={HERO_VIDEO} poster={HERO_POSTER} />
 
       <HomeProof />
 
