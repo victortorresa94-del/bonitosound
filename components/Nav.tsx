@@ -18,7 +18,7 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname() ?? "/";
   return (
-    <header className="sticky top-0 z-50 border-b border-subtle bg-bg-primary/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 bg-bg-primary/85 backdrop-blur-md">
       <div className="wrap flex h-16 items-center justify-between">
         <Link
           href="/"
