@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { HeroImage } from "@/components/home/HeroImage";
+import { HomeProof } from "@/components/home/HomeProof";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
 import { scenes } from "@/lib/home";
 
@@ -25,6 +26,8 @@ export default function HomePage() {
   return (
     <>
       <HeroImage src={HERO_IMAGE} />
+
+      <HomeProof />
 
       {resolved.map(({ scene, media }, i) => (
         <NarrativeScene
