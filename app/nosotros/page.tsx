@@ -81,25 +81,32 @@ export default function Nosotros() {
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           Gente con nombre y teléfono.
         </SplitTextReveal>
-        <StaggerGroup stagger={0.1} className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <StaggerGroup
+          stagger={0.1}
+          className="mx-auto mt-14 flex flex-wrap justify-center gap-x-8 gap-y-12"
+        >
           {team.map((p) => {
             const photo = findLogo("equipo", p.name);
             return (
-              <div key={p.name} className="card">
-                <div className="relative mb-5 aspect-square overflow-hidden rounded-xl border border-subtle bg-bg-tertiary">
+              <div key={p.name} className="group w-[45%] max-w-[230px] sm:w-[230px]">
+                <div className="relative mb-5 aspect-[4/5] overflow-hidden rounded-2xl bg-bg-tertiary">
                   {photo && (
                     <Image
                       src={photo}
                       alt={p.name}
                       fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-700 hover:scale-105"
+                      sizes="(max-width: 640px) 45vw, 230px"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                   )}
                 </div>
-                <h3 className="display text-xl">{p.name}</h3>
-                <p className="mt-1 text-sm text-text-muted">{p.role}</p>
-                <p className="mt-3 text-sm text-text-secondary">{p.line}</p>
+                <h3 className="display text-2xl leading-tight">{p.name}</h3>
+                <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.15em] text-text-muted">
+                  {p.role}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+                  {p.line}
+                </p>
               </div>
             );
           })}
