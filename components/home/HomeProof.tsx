@@ -1,41 +1,50 @@
+import Image from "next/image";
 import { MarqueeRow, MarqueeLogoWall } from "@/components/motion";
-import { brands, tourArtists } from "@/lib/site";
+import { brands, distributionCatalog } from "@/lib/site";
+import { findLogo } from "@/lib/assets";
 
 /**
- * Banda de prueba social de la home. Va tras el hero: nombres y marcas reales
- * generan confianza antes de leer nada (prueba social, Cialdini).
+ * Banda de prueba social de la home. Va tras el hero.
  *
- * Diseño: sin caja de color, a sangre sobre el fondo del sitio, con reglas
- * de un pelo arriba/abajo. Los nombres top van GRANDES y en movimiento
- * (marquee) — es el tratamiento premium cuando aún no hay logos de cada
- * artista. Los logos de marca van en marquee inverso, atenuados y uniformes.
- * Cuando lleguen los logos de artista (scrape local), se cambian nombres→logos.
+ * Fila 1: fotos B&W de nuestros artistas (marquee; a color al hacer hover).
+ *   Solo se muestran los que tienen foto en public/img/artistas/. Los clientes
+ *   de gira (Orozco, Maldita Nerea…) aparecerán aquí en cuanto se suban sus
+ *   fotos — no se pueden descargar desde el entorno.
+ * Fila 2: logos de marca en marquee inverso, atenuados.
  */
 export function HomeProof() {
+  const artists = distributionCatalog
+    .map((name) => ({ name, photo: findLogo("artistas", name) }))
+    .filter((a): a is { name: string; photo: string } => Boolean(a.photo));
+
   return (
     <section
-      aria-label="Artistas y marcas con las que hemos trabajado"
+      aria-label="Nuestros artistas y las marcas con las que trabajamos"
       className="overflow-hidden border-y border-subtle bg-bg-primary py-14 md:py-20"
     >
-      <p className="eyebrow mb-8 px-6 text-center">En directo · nombres que hemos llevado</p>
+      <p className="eyebrow mb-8 px-6 text-center">Artistas que llevamos</p>
 
-      {/* Nombres grandes en marquee. */}
-      <MarqueeRow speed={70} gap="0px">
-        {tourArtists.map((name) => (
-          <div key={name} className="flex items-center whitespace-nowrap">
-            <span className="font-display text-4xl leading-none text-text-primary md:text-6xl">
-              {name}
-            </span>
-            <span
-              aria-hidden
-              className="mx-8 inline-block h-2.5 w-2.5 rounded-full bg-accent-cyan md:mx-12"
-            />
+      <MarqueeRow speed={55} gap="1.75rem">
+        {artists.map((a) => (
+          <div
+            key={a.name}
+            className="group flex w-[128px] shrink-0 flex-col items-center gap-3"
+          >
+            <div className="relative h-32 w-32 overflow-hidden rounded-2xl bg-bg-tertiary">
+              <Image
+                src={a.photo}
+                alt={a.name}
+                fill
+                sizes="128px"
+                className="object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
+              />
+            </div>
+            <span className="text-sm font-medium text-text-secondary">{a.name}</span>
           </div>
         ))}
       </MarqueeRow>
 
-      {/* Logos de marca en marquee inverso, atenuados. */}
-      <div className="mt-12 md:mt-16">
+      <div className="mt-14 md:mt-16">
         <p className="eyebrow mb-6 px-6 text-center">Marcas que han sonado con nosotros</p>
         <MarqueeLogoWall items={brands} dir="marcas" speed={45} direction="right" />
       </div>
