@@ -15,7 +15,7 @@ import { findLogo } from "@/lib/assets";
 export function HomeProof() {
   const artists = distributionCatalog
     .map((name) => ({ name, photo: findLogo("artistas", name) }))
-    .filter((a): a is { name: string; photo: string } => Boolean(a.photo));
+    .filter((a) => Boolean(a.photo)) as { name: string; photo: string }[];
 
   return (
     <section
