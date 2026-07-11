@@ -100,10 +100,10 @@ export const scenes: HomeScene[] = [
   {
     id: "tecnologia",
     kicker: "Tecnología",
-    statement: "Y construimos lo que el sector no tiene.",
-    accent: "no tiene",
+    statement: "Y construimos las herramientas que faltaban.",
+    accent: "las herramientas que faltaban",
     support:
-      "Artiverse y Giraverse: el software que ordena una industria que sigue funcionando por WhatsApp.",
+      "Artiverse y Giraverse: el software que ordena el trabajo del directo y del lanzamiento.",
     cta: { label: "Ver más", href: "/lab" },
     mediaCandidates: ["/img/home/tecnologia.png", "/img/secciones/lab.png"],
   },

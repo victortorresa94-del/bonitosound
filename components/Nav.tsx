@@ -2,14 +2,21 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { nav } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+/** ¿La ruta actual pertenece a este item de nav? (activo también en subrutas) */
+function isActive(pathname: string, href: string) {
+  return pathname === href || pathname.startsWith(href + "/");
+}
+
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname() ?? "/";
   return (
     <header className="sticky top-0 z-50 border-b border-subtle bg-bg-primary/85 backdrop-blur-md">
       <div className="wrap flex h-16 items-center justify-between">
@@ -31,15 +38,21 @@ export function Nav() {
         </Link>
 
         <nav className="hidden items-center gap-7 md:flex">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="link-underline text-sm font-medium text-text-secondary hover:text-text-primary"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {nav.map((item) => {
+            const active = isActive(pathname, item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`link-underline text-sm font-medium ${
+                  active ? "text-text-primary" : "text-text-secondary hover:text-text-primary"
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
           <Link href="/contacto" className="btn btn-primary px-5 py-2">
             Hablamos
           </Link>
@@ -88,7 +101,10 @@ export function Nav() {
                 >
                   <Link
                     href={item.href}
-                    className="block py-3 text-text-secondary"
+                    aria-current={isActive(pathname, item.href) ? "page" : undefined}
+                    className={`block py-3 ${
+                      isActive(pathname, item.href) ? "text-text-primary" : "text-text-secondary"
+                    }`}
                     onClick={() => setOpen(false)}
                   >
                     {item.label}
