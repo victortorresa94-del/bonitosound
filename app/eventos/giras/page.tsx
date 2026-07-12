@@ -61,7 +61,7 @@ export default function Giras() {
         }}
       />
       <section className="border-b border-subtle">
-        <div className="wrap py-24 md:py-32">
+        <div className="wrap grid gap-12 py-24 md:grid-cols-[1.2fr_1fr] md:items-center md:py-32">
           <div className="max-w-3xl">
             <RevealOnScroll as="p" className="eyebrow mb-4">Giras</RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
@@ -76,6 +76,17 @@ export default function Giras() {
                 <Cta href="/contacto">Cuéntanos tu gira →</Cta>
               </MagneticButton>
             </RevealOnScroll>
+          </div>
+          <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-subtle">
+            <video
+              src="/video/home/giras.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              className="h-full w-full object-cover"
+            />
           </div>
         </div>
       </section>
