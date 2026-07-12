@@ -33,6 +33,7 @@ export function MarqueeLogoWallClient({
                 alt={it.name}
                 width={160}
                 height={48}
+                loading="eager"
                 className="h-10 w-auto object-contain opacity-70 transition-opacity hover:opacity-100"
               />
             ) : (
