@@ -117,7 +117,7 @@ export const scenes: HomeScene[] = [
     cta: { label: "Ver más", href: "/jaleo-sound" },
     motionPreset: "parallax",
     mediaCandidates: [
-      "/img/home/festival.png",
+      "/img/marca/jaleo-sound.png",
       "/img/secciones/jaleo.png",
       "/img/jaleo/jaleo-01.jpg",
     ],

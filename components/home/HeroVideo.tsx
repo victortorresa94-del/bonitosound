@@ -85,7 +85,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
           recuadro ni blend: el personaje flota sobre el fondo. */}
       <div
         ref={wrapRef}
-        className="relative z-10 aspect-video w-[92vw] max-h-[80svh] md:w-[50vw]"
+        className="relative z-10 aspect-video w-[94vw] max-h-[84svh] md:w-[58vw]"
         style={{ willChange: "transform, opacity" }}
       >
         <video

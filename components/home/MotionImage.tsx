@@ -160,7 +160,7 @@ export function MotionImage({
   return (
     <div
       ref={wrapRef}
-      className={`relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden ${className}`}
+      className={`relative mx-auto aspect-[4/5] w-full max-w-xl ${className}`}
     >
       <div
         ref={innerRef}

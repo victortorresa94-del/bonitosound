@@ -52,7 +52,7 @@ export function NarrativeScene({ scene, media, index, total }: NarrativeScenePro
       </RevealOnScroll>
 
       <RevealOnScroll y={28} delay={0.06}>
-        <h2 className="statement text-[clamp(2.6rem,7vw,6rem)]">
+        <h2 className="statement text-[clamp(2.1rem,5vw,4.2rem)]">
           {renderStatement(scene.statement, scene.accent)}
         </h2>
       </RevealOnScroll>
