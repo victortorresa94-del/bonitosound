@@ -107,7 +107,7 @@ export const brands = [
   "Universal",
   "Gestmusic",
   "Concert Studio",
-  "GTS Global Talent Services",
+  "Global Talent Services",
   "Sweet Bird",
   "Código 1530",
   "Lighthouse",
