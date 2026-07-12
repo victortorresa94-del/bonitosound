@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { Section, Cta, JsonLd } from "@/components/ui";
 import {
   RevealOnScroll,
@@ -101,6 +103,30 @@ export default function BookingManagement() {
           primer álbum, Sa Pena y Nàtura en directo. No coleccionamos
           artistas: llevamos a los que podemos llevar como hay que llevarlos.
         </RevealOnScroll>
+        <StaggerGroup
+          stagger={0.08}
+          className="mt-10 grid grid-cols-2 gap-5 sm:grid-cols-4"
+        >
+          {[
+            { slug: "dulze", name: "Dulze", photo: "/img/artistas/dulze.png" },
+            { slug: "eva-calyza", name: "Eva Calyza", photo: "/img/artistas/eva-calyza.jpg" },
+            { slug: "sa-pena", name: "Sa Pena", photo: "/img/artistas/sa-pena.jpg" },
+            { slug: "natura", name: "Nàtura", photo: "/img/artistas/natura.jpg" },
+          ].map((a) => (
+            <Link key={a.slug} href={`/artistas/${a.slug}`} className="group">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-subtle bg-bg-tertiary">
+                <Image
+                  src={a.photo}
+                  alt={a.name}
+                  fill
+                  sizes="(max-width: 640px) 45vw, 22vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <p className="mt-2 text-sm font-medium text-text-secondary">{a.name}</p>
+            </Link>
+          ))}
+        </StaggerGroup>
         <RevealOnScroll className="mt-8" delay={0.25}>
           <MagneticButton strength={0.3}>
             <Cta href="/artistas" variant="ghost">
