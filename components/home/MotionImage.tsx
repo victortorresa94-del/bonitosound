@@ -160,7 +160,7 @@ export function MotionImage({
   return (
     <div
       ref={wrapRef}
-      className={`relative mx-auto aspect-[4/5] w-full max-w-xl ${className}`}
+      className={`relative mx-auto aspect-square w-full max-w-[17rem] sm:max-w-sm md:max-w-md ${className}`}
     >
       <div
         ref={innerRef}
@@ -174,18 +174,19 @@ export function MotionImage({
             muted
             loop
             playsInline
-            preload="metadata"
+            autoPlay
+            preload="auto"
             aria-label={alt}
-            className="h-full w-full object-contain"
+            className="h-full w-full object-cover"
           />
         ) : (
           <Image
             src={src}
             alt={alt}
             fill
-            loading="lazy"
+            loading="eager"
             sizes={sizes}
-            className="object-contain"
+            className="object-cover"
           />
         )}
       </div>
