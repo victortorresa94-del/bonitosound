@@ -90,7 +90,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
       >
         <video
           ref={videoRef}
-          className="h-full w-full object-contain"
+          className="h-full w-full origin-center scale-[1.37] object-contain md:scale-100"
           src={src}
           poster={poster}
           autoPlay
