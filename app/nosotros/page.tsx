@@ -96,7 +96,7 @@ export default function Nosotros() {
                       alt={p.name}
                       fill
                       sizes="(max-width: 640px) 45vw, 230px"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover grayscale transition-transform duration-700 group-hover:scale-105"
                     />
                   )}
                 </div>
