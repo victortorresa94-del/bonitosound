@@ -12,7 +12,7 @@ import {
   MarqueeLogoWall,
 } from "@/components/motion";
 import { getCases } from "@/lib/content";
-import { findAsset } from "@/lib/assets";
+import { findAsset, findLogo } from "@/lib/assets";
 import { brands, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -172,10 +172,11 @@ export default function EventosMarcas() {
         >
           {cases.map((c) => {
             const cover = findAsset("casos", c.slug);
+            const logo = findLogo("marcas", c.brand);
             return (
               <div key={c.slug} className="card overflow-hidden p-0">
-                <div className="relative aspect-[4/3] overflow-hidden border-b border-subtle bg-bg-tertiary">
-                  {cover && (
+                <div className="relative aspect-[4/3] overflow-hidden border-b border-subtle bg-bg-secondary">
+                  {cover ? (
                     <ParallaxLayer speed={0.12} className="absolute inset-0">
                       <Image
                         src={cover}
@@ -185,6 +186,20 @@ export default function EventosMarcas() {
                         className="object-cover scale-110"
                       />
                     </ParallaxLayer>
+                  ) : logo ? (
+                    <div className="absolute inset-0 flex items-center justify-center p-10">
+                      <Image
+                        src={logo}
+                        alt={c.brand}
+                        width={220}
+                        height={120}
+                        className="max-h-14 w-auto object-contain opacity-90"
+                      />
+                    </div>
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="display text-2xl text-text-muted">{c.brand}</span>
+                    </div>
                   )}
                 </div>
                 <div className="p-7">
