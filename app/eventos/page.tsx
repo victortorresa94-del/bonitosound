@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Section, Cta } from "@/components/ui";
 import { YouTubeEmbed } from "@/components/Embeds";
@@ -7,6 +8,7 @@ import {
   StaggerGroup,
   SplitTextReveal,
   MagneticButton,
+  ParallaxLayer,
 } from "@/components/motion";
 import { site } from "@/lib/site";
 
@@ -21,7 +23,7 @@ export default function Eventos() {
   return (
     <>
       <section className="border-b border-subtle">
-        <div className="wrap py-24 md:py-32">
+        <div className="wrap grid gap-12 py-24 md:grid-cols-[1.2fr_1fr] md:items-center md:py-32">
           <div className="max-w-3xl">
             <RevealOnScroll as="p" className="eyebrow mb-4">Eventos</RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
@@ -32,6 +34,17 @@ export default function Eventos() {
               que se recuerde, y llevamos giras de principio a fin. Las dos con
               el mismo equipo que las monta.
             </RevealOnScroll>
+          </div>
+          <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-subtle">
+            <ParallaxLayer speed={0.2} className="absolute inset-0">
+              <Image
+                src="/img/heroes/eventos-marcas.png"
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-cover scale-110"
+              />
+            </ParallaxLayer>
           </div>
         </div>
       </section>
