@@ -12,7 +12,7 @@ import { SpotifyEmbed } from "@/components/Embeds";
  * Nota: el autoplay con sonido al cargar lo bloquean todos los navegadores; por
  * eso el visitante da al play una vez y ya suena de fondo el resto de la visita.
  */
-const TRACK_ID = "5FiB1uNoGZE4PenzZd7Imu"; // Bonito — Jarabe de Palo
+const PLAYLIST_ID = "2lxa6r7k0dthpANWR9wRWs"; // Playlist de Bonito (Bonito 1ª + artistas)
 
 export function BonitoPlayer() {
   const [open, setOpen] = useState(false);
@@ -33,10 +33,10 @@ export function BonitoPlayer() {
       >
         <div className="rounded-2xl border border-subtle bg-bg-primary p-2 shadow-xl">
           <SpotifyEmbed
-            type="track"
-            id={TRACK_ID}
-            height={152}
-            title="Bonito — Jarabe de Palo"
+            type="playlist"
+            id={PLAYLIST_ID}
+            height={352}
+            title="La playlist de Bonito Sound"
           />
         </div>
       </div>
