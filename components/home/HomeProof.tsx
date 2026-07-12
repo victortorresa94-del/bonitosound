@@ -25,9 +25,9 @@ export function HomeProof() {
       <p className="eyebrow mb-8 px-6 text-center">Artistas que llevamos</p>
 
       <MarqueeRow speed={55} gap="1.75rem">
-        {artists.map((a) => (
+        {[...artists, ...artists].map((a, i) => (
           <div
-            key={a.name}
+            key={`${a.name}-${i}`}
             className="group flex w-[128px] shrink-0 flex-col items-center gap-3"
           >
             <div className="relative h-32 w-32 overflow-hidden rounded-2xl bg-bg-tertiary">
@@ -35,6 +35,7 @@ export function HomeProof() {
                 src={a.photo}
                 alt={a.name}
                 fill
+                loading="eager"
                 sizes="128px"
                 className="object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
               />
