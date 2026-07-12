@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Section, Cta, JsonLd } from "@/components/ui";
+import { SpotifyEmbed } from "@/components/Embeds";
 import {
   RevealOnScroll,
   StaggerGroup,
@@ -87,23 +89,44 @@ export default function Sello() {
       </Section>
 
       <Section className="bg-bg-secondary">
-        <RevealOnScroll as="p" className="eyebrow mb-4">Un ejemplo</RevealOnScroll>
-        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-          MARCA DIVINA, de Eva Calyza.
-        </SplitTextReveal>
-        <RevealOnScroll as="p" className="mt-6 max-w-2xl text-lg text-text-secondary" delay={0.15}>
-          El primer álbum de Eva Calyza — diez canciones que fusionan folclore
-          andaluz y electrónica oscura — se produjo con nosotros y salió en
-          2025. Del máster a la calle, con criterio: eso es lo que hace un
-          sello cuando hace su trabajo.
-        </RevealOnScroll>
-        <RevealOnScroll className="mt-8" delay={0.25}>
-          <MagneticButton strength={0.3}>
-            <Cta href="/artistas/eva-calyza" variant="ghost">
-              Ver a Eva Calyza →
-            </Cta>
-          </MagneticButton>
-        </RevealOnScroll>
+        <div className="grid gap-12 md:grid-cols-2 md:items-center">
+          <div>
+            <RevealOnScroll as="p" className="eyebrow mb-4">Un ejemplo</RevealOnScroll>
+            <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+              MARCA DIVINA, de Eva Calyza.
+            </SplitTextReveal>
+            <RevealOnScroll as="p" className="mt-6 max-w-2xl text-lg text-text-secondary" delay={0.15}>
+              El primer álbum de Eva Calyza — diez canciones que fusionan folclore
+              andaluz y electrónica oscura — se produjo con nosotros y salió en
+              2025. Del máster a la calle, con criterio: eso es lo que hace un
+              sello cuando hace su trabajo.
+            </RevealOnScroll>
+            <RevealOnScroll className="mt-8" delay={0.25}>
+              <MagneticButton strength={0.3}>
+                <Cta href="/artistas/eva-calyza" variant="ghost">
+                  Ver a Eva Calyza →
+                </Cta>
+              </MagneticButton>
+            </RevealOnScroll>
+          </div>
+          <RevealOnScroll className="space-y-5" delay={0.15}>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-subtle">
+              <Image
+                src="/img/artistas/eva-calyza.jpg"
+                alt="Eva Calyza"
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-cover"
+              />
+            </div>
+            <SpotifyEmbed
+              type="artist"
+              id="6rUgNfaBgUk0WCQbNafgKh"
+              height={152}
+              title="Eva Calyza en Spotify"
+            />
+          </RevealOnScroll>
+        </div>
       </Section>
 
       <Section>
