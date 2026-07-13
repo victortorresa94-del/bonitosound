@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
+import { Fragment } from "react";
 import { HeroVideo } from "@/components/home/HeroVideo";
-import { HomeProof } from "@/components/home/HomeProof";
-import { HomeProcess } from "@/components/home/HomeProcess";
+import { ArtistsBand, BrandsBand } from "@/components/home/HomeProof";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
 import { scenes } from "@/lib/home";
 
@@ -25,38 +25,26 @@ export default function HomePage() {
     media: firstExisting(scene.mediaCandidates),
   }));
 
-  // "Cómo trabajamos" va después de las escenas de servicio y antes del cierre
-  // (landing-anatomy). Separamos la escena de cierre para intercalar el proceso.
-  const closingIdx = resolved.findIndex(({ scene }) => scene.id === "cierre");
-  const bodyScenes = closingIdx === -1 ? resolved : resolved.slice(0, closingIdx);
-  const closingScenes = closingIdx === -1 ? [] : resolved.slice(closingIdx);
+  // El hero cuenta como el primer paso del recorrido (01), así que el
+  // contador editorial de cada escena se desplaza +1 y el total también.
+  const total = resolved.length + 1;
 
   return (
     <>
       <HeroVideo src={HERO_VIDEO} poster={HERO_POSTER} />
 
-      <HomeProof />
-
-      {bodyScenes.map(({ scene, media }, i) => (
-        <NarrativeScene
-          key={scene.id}
-          scene={scene}
-          media={media}
-          index={i}
-          total={resolved.length}
-        />
-      ))}
-
-      <HomeProcess />
-
-      {closingScenes.map(({ scene, media }, i) => (
-        <NarrativeScene
-          key={scene.id}
-          scene={scene}
-          media={media}
-          index={closingIdx + i}
-          total={resolved.length}
-        />
+      {resolved.map(({ scene, media }, i) => (
+        <Fragment key={scene.id}>
+          <NarrativeScene
+            scene={scene}
+            media={media}
+            index={i}
+            total={total}
+            displayIndex={i + 2}
+          />
+          {scene.id === "marcas" && <BrandsBand />}
+          {scene.id === "giras" && <ArtistsBand />}
+        </Fragment>
       ))}
     </>
   );

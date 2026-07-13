@@ -155,7 +155,7 @@ export default function EventosMarcas() {
         </RevealOnScroll>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">
           Casos
         </RevealOnScroll>
@@ -175,7 +175,7 @@ export default function EventosMarcas() {
             const logo = findLogo("marcas", c.brand);
             return (
               <div key={c.slug} className="card overflow-hidden p-0">
-                <div className="relative aspect-[4/3] overflow-hidden border-b border-subtle bg-bg-secondary">
+                <div className="relative aspect-[4/3] overflow-hidden border-b border-subtle bg-bg-primary">
                   {cover ? (
                     <ParallaxLayer speed={0.12} className="absolute inset-0">
                       <Image
@@ -240,7 +240,7 @@ export default function EventosMarcas() {
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">
           Marcas con las que hemos trabajado
         </RevealOnScroll>
@@ -275,7 +275,7 @@ export default function EventosMarcas() {
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">
           Preguntas frecuentes
         </RevealOnScroll>

@@ -88,7 +88,7 @@ export default function Sello() {
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <div className="grid gap-12 md:grid-cols-2 md:items-center">
           <div>
             <RevealOnScroll as="p" className="eyebrow mb-4">Un ejemplo</RevealOnScroll>

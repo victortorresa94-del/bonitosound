@@ -118,7 +118,7 @@ export default function Records() {
         </RevealOnScroll>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">Servicios</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           Cuatro piezas del mismo sistema.
@@ -157,7 +157,7 @@ export default function Records() {
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">Catálogo de distribución</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           ~20 artistas, una distribuidora.
@@ -235,7 +235,7 @@ export default function Records() {
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           Lo básico, claro.

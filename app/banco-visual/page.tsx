@@ -47,7 +47,7 @@ export default function BancoVisual() {
 
       <Section>
         {files.length === 0 ? (
-          <div className="rounded-3xl border border-subtle bg-bg-secondary p-12 text-center">
+          <div className="rounded-3xl border border-subtle bg-bg-primary p-12 text-center">
             <p className="text-text-secondary">
               El banco está vacío. Lánzate{" "}
               <code className="text-text-primary">npm run generate-images</code>{" "}

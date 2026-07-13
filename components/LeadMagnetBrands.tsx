@@ -47,7 +47,7 @@ export function LeadMagnetBrands() {
   }
 
   return (
-    <div className="rounded-3xl border border-subtle bg-bg-secondary p-7 md:p-10">
+    <div className="rounded-3xl border border-subtle bg-bg-primary p-7 md:p-10">
       {!done ? (
         <>
           <div className="mb-6 flex items-center justify-between">

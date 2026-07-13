@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
 
@@ -26,13 +27,17 @@ const cols = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-subtle bg-bg-secondary">
-      <div className="wrap grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+    <footer className="border-t border-subtle bg-bg-primary">
+      <div className="wrap grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr_1.2fr] md:py-20">
         <div>
-          <p className="display text-xl">
-            Bonito<span className="text-accent-blue">.</span>Sound
-          </p>
-          <p className="mt-3 max-w-xs text-sm text-text-secondary">
+          <Image
+            src="/img/marca/logo-bonito-color.svg"
+            alt="Bonito Sound"
+            width={121}
+            height={82}
+            className="h-11 w-auto"
+          />
+          <p className="mt-5 max-w-xs text-sm leading-relaxed text-text-secondary">
             En la música nadie te regala nada. Tres décadas de oficio detrás,
             tres años montando la agencia para hacerlo como hay que hacerlo.
           </p>
@@ -40,13 +45,13 @@ export function Footer() {
 
         {cols.map((c) => (
           <div key={c.title}>
-            <p className="eyebrow mb-4">{c.title}</p>
+            <p className="mb-4 text-sm font-bold text-text-primary">{c.title}</p>
             <ul className="space-y-2.5">
               {c.links.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-sm text-text-secondary hover:text-text-primary"
+                    className="text-sm text-text-secondary transition-colors hover:text-accent-cyan"
                   >
                     {l.label}
                   </Link>
@@ -57,20 +62,29 @@ export function Footer() {
         ))}
 
         <div>
-          <p className="eyebrow mb-4">Contacto</p>
+          <p className="mb-4 text-sm font-bold text-text-primary">Contacto</p>
           <ul className="space-y-2.5 text-sm text-text-secondary">
             <li>
-              <a href={`mailto:${site.emails.general}`} className="hover:text-text-primary">
+              <a
+                href={`mailto:${site.emails.general}`}
+                className="transition-colors hover:text-accent-cyan"
+              >
                 {site.emails.general}
               </a>
             </li>
             <li>
-              <a href={`mailto:${site.emails.booking}`} className="hover:text-text-primary">
+              <a
+                href={`mailto:${site.emails.booking}`}
+                className="transition-colors hover:text-accent-cyan"
+              >
                 {site.emails.booking}
               </a>
             </li>
             <li>
-              <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="hover:text-text-primary">
+              <a
+                href={`tel:${site.phone.replace(/\s/g, "")}`}
+                className="transition-colors hover:text-accent-cyan"
+              >
                 {site.phone}
               </a>
             </li>
@@ -78,10 +92,20 @@ export function Footer() {
               {site.address.street}, {site.address.zip} {site.address.city}
             </li>
             <li className="flex gap-4 pt-2">
-              <a href={site.social.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-text-primary">
+              <a
+                href={site.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-text-primary transition-colors hover:text-accent-cyan"
+              >
                 Instagram
               </a>
-              <a href={site.social.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-text-primary">
+              <a
+                href={site.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-text-primary transition-colors hover:text-accent-cyan"
+              >
                 LinkedIn
               </a>
             </li>

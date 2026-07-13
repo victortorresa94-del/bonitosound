@@ -62,7 +62,7 @@ export default function Agenda() {
 
       <Section>
         {shows.length === 0 ? (
-          <div className="rounded-3xl border border-subtle bg-bg-secondary p-12 text-center">
+          <div className="rounded-3xl border border-subtle bg-bg-primary p-12 text-center">
             <SplitTextReveal as="h3" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
               Agenda en construcción.
             </SplitTextReveal>

@@ -13,6 +13,8 @@ type NarrativeSceneProps = {
   index: number;
   /** total de escenas, para el contador editorial 01 / N */
   total?: number;
+  /** Nº mostrado en el contador si difiere de index+1 (p.ej. el hero cuenta como 01) */
+  displayIndex?: number;
 };
 
 /** Parte el statement para teñir la palabra de acento sin romper el flujo. */
@@ -28,11 +30,16 @@ function renderStatement(statement: string, accent?: string) {
   );
 }
 
-export function NarrativeScene({ scene, media, index, total }: NarrativeSceneProps) {
+export function NarrativeScene({
+  scene,
+  media,
+  index,
+  total,
+  displayIndex,
+}: NarrativeSceneProps) {
   const flip = index % 2 === 1;
-  const counter = total
-    ? `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`
-    : null;
+  const shown = displayIndex ?? index + 1;
+  const counter = total ? `${String(shown).padStart(2, "0")} / ${String(total).padStart(2, "0")}` : null;
 
   const text = (
     <div className={media ? "md:max-w-xl" : "mx-auto max-w-3xl text-center"}>
@@ -70,12 +77,19 @@ export function NarrativeScene({ scene, media, index, total }: NarrativeScenePro
       {scene.cta && (
         <RevealOnScroll y={16} delay={0.2}>
           <div className={`mt-9 ${media ? "" : "flex justify-center"}`}>
-            <Link href={scene.cta.href} className="more-link">
-              {scene.cta.label}
-              <span className="arrow" aria-hidden="true">
-                →
-              </span>
-            </Link>
+            {scene.id === "cierre" ? (
+              <Link href={scene.cta.href} className="btn btn-primary px-8 py-4 text-base">
+                {scene.cta.label}
+                <span aria-hidden="true">→</span>
+              </Link>
+            ) : (
+              <Link href={scene.cta.href} className="more-link">
+                {scene.cta.label}
+                <span className="arrow" aria-hidden="true">
+                  →
+                </span>
+              </Link>
+            )}
           </div>
         </RevealOnScroll>
       )}
@@ -101,6 +115,7 @@ export function NarrativeScene({ scene, media, index, total }: NarrativeScenePro
                 alt={scene.statement}
                 preset={scene.motionPreset ?? "kenburns"}
                 fit={media.includes("jaleo-sound") ? "contain" : "cover"}
+                size={scene.id === "tecnologia" ? "lg" : "md"}
               />
             </RevealOnScroll>
           </div>

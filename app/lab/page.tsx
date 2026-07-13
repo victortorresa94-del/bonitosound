@@ -85,7 +85,7 @@ export default function Lab() {
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">Por qué construimos software</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           Porque entender el sistema entero también significa darle herramientas.

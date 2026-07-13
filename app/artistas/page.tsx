@@ -85,7 +85,7 @@ export default function Artistas() {
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">
           Catálogo de distribución
         </RevealOnScroll>

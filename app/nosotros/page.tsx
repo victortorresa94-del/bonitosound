@@ -76,7 +76,7 @@ export default function Nosotros() {
         </div>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">Equipo</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           Gente con nombre y teléfono.
@@ -141,7 +141,7 @@ export default function Nosotros() {
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll>
           <MarqueeLogoWall items={memberships} dir="instituciones" label="Miembros activos de" speed={30} />
         </RevealOnScroll>
@@ -150,7 +150,7 @@ export default function Nosotros() {
         </RevealOnScroll>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
           <Heading>¿Hablamos?</Heading>
           <div className="mt-8 flex justify-center">
