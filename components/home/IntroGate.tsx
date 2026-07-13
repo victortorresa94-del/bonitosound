@@ -113,9 +113,8 @@ export function IntroGate() {
           <img
             src="/img/marca/logo-bonito-color.svg"
             alt="Bonito Sound"
-            className="mb-12 h-20 w-auto"
+            className="mb-14 h-20 w-auto"
           />
-          <p className="eyebrow mb-6">Ponte los cascos</p>
           <button
             onClick={() => enter(true)}
             className="group inline-flex items-center gap-3 rounded-full bg-text-primary px-9 py-4 text-bg-primary shadow-xl transition-transform hover:scale-105"
@@ -123,7 +122,7 @@ export function IntroGate() {
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
               <path d="M8 5v14l11-7z" />
             </svg>
-            <span className="text-lg font-semibold tracking-wide">Escúchanos</span>
+            <span className="text-lg font-semibold tracking-wide">Dale al play</span>
           </button>
           <button
             onClick={() => enter(false)}
