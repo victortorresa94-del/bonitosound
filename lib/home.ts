@@ -39,10 +39,9 @@ export const scenes: HomeScene[] = [
   {
     id: "que-es",
     kicker: "Qué es esto",
-    statement: "En la música, casi todo se sigue gestionando por WhatsApp.",
-    accent: "WhatsApp",
-    support:
-      "Nosotros hacemos que pase como merece. Del primer brief al último bolo.",
+    statement: "Hacemos que la música tenga el hueco que merece.",
+    accent: "el hueco que merece",
+    support: "En forma de cantante, de evento, de grabación o de difusión.",
     mediaCandidates: ["/video/home/que-es.mp4", "/img/home/que-es.webp"],
   },
   {
