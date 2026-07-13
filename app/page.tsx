@@ -43,7 +43,7 @@ export default function HomePage() {
             displayIndex={i + 2}
           />
           {scene.id === "marcas" && <BrandsBand />}
-          {scene.id === "giras" && <ArtistsBand />}
+          {scene.id === "records" && <ArtistsBand />}
         </Fragment>
       ))}
     </>
