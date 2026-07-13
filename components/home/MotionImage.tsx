@@ -12,6 +12,10 @@ type MotionImageProps = {
   preset?: MotionPreset;
   sizes?: string;
   className?: string;
+  /** "cover" (llena el cuadro, recorta bordes) o "contain" (se ve entero, con
+   *  aire alrededor). Usa "contain" para logos/wordmarks anchos que no deben
+   *  recortarse. Por defecto "cover" (encaja con las figuras del hero). */
+  fit?: "cover" | "contain";
 };
 
 const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
@@ -26,6 +30,7 @@ export function MotionImage({
   preset = "kenburns",
   sizes = "(max-width: 768px) 80vw, 40vw",
   className = "",
+  fit = "cover",
 }: MotionImageProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -177,7 +182,7 @@ export function MotionImage({
             autoPlay
             preload="auto"
             aria-label={alt}
-            className="h-full w-full object-cover"
+            className={`h-full w-full ${fit === "contain" ? "object-contain" : "object-cover"}`}
           />
         ) : (
           <Image
@@ -186,7 +191,7 @@ export function MotionImage({
             fill
             loading="eager"
             sizes={sizes}
-            className="object-cover"
+            className={fit === "contain" ? "object-contain" : "object-cover"}
           />
         )}
       </div>
