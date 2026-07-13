@@ -39,9 +39,10 @@ export const scenes: HomeScene[] = [
   {
     id: "que-es",
     kicker: "Qué es esto",
-    statement: "Hacemos que la música tenga el hueco que merece.",
-    accent: "el hueco que merece",
-    support: "En forma de cantante, de evento, de grabación o de difusión.",
+    statement: "Llevamos la música a todas partes.",
+    accent: "todas partes",
+    support:
+      "Da igual si es con un cantante, un evento, una grabación o difusión. La cosa es hacerlo bonito.",
     mediaCandidates: ["/video/home/que-es.mp4", "/img/home/que-es.webp"],
   },
   {
@@ -100,10 +101,9 @@ export const scenes: HomeScene[] = [
   {
     id: "tecnologia",
     kicker: "Tecnología",
-    statement: "Y construimos las herramientas que faltaban.",
-    accent: "las herramientas que faltaban",
-    support:
-      "Artiverse y Giraverse: el software que ordena el trabajo del directo y del lanzamiento.",
+    statement: "También construimos las herramientas que haga falta.",
+    accent: "las herramientas que haga falta",
+    support: "Hacemos webs, software, y tenemos nuestra propia app: Artiverse.",
     cta: { label: "Ver más", href: "/lab" },
     mediaCandidates: ["/video/home/tecnologia.mp4", "/img/home/tecnologia.webp", "/img/secciones/lab.png"],
   },
