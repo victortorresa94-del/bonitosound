@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useLenis } from "@/components/motion/MotionContext";
 
 /**
@@ -21,7 +22,12 @@ export function IntroGate() {
   const [entered, setEntered] = useState(false);
   const [leaving, setLeaving] = useState(false);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const lenis = useLenis();
+
+  // Portal a document.body: el gate NO puede vivir dentro del wrapper de
+  // PageTransitionShell (se anima con opacity+transform y rompería el overlay).
+  useEffect(() => setMounted(true), []);
   const hostRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<Controller>(null);
 
@@ -89,7 +95,9 @@ export function IntroGate() {
     window.setTimeout(() => setEntered(true), 700);
   };
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <>
       {/* Reproductor: montado siempre (colapsado no lo para). Pastilla tras entrar. */}
       <div className="fixed bottom-5 left-5 z-40 print:hidden">
@@ -155,6 +163,7 @@ export function IntroGate() {
           </button>
         </div>
       )}
-    </>
+    </>,
+    document.body
   );
 }
