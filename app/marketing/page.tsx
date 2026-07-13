@@ -116,7 +116,7 @@ export default function Marketing() {
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
         <div className="mt-8">
           <FaqOpen items={faq} />

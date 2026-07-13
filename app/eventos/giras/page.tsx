@@ -106,7 +106,7 @@ export default function Giras() {
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-secondary">
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">El vídeo lo cuenta mejor</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           Final de la Gira 1016 en el Sant Jordi Club.

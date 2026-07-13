@@ -16,6 +16,8 @@ type MotionImageProps = {
    *  aire alrededor). Usa "contain" para logos/wordmarks anchos que no deben
    *  recortarse. Por defecto "cover" (encaja con las figuras del hero). */
   fit?: "cover" | "contain";
+  /** Tamaño de la caja. "lg" para escenas donde el media debe pesar más. */
+  size?: "md" | "lg";
 };
 
 const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
@@ -31,6 +33,7 @@ export function MotionImage({
   sizes = "(max-width: 768px) 80vw, 40vw",
   className = "",
   fit = "cover",
+  size = "md",
 }: MotionImageProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -165,7 +168,9 @@ export function MotionImage({
   return (
     <div
       ref={wrapRef}
-      className={`relative mx-auto aspect-square w-full max-w-[17rem] sm:max-w-sm md:max-w-md ${className}`}
+      className={`relative mx-auto aspect-square w-full ${
+        size === "lg" ? "max-w-[22rem] sm:max-w-md md:max-w-xl" : "max-w-[17rem] sm:max-w-sm md:max-w-md"
+      } ${className}`}
     >
       <div
         ref={innerRef}

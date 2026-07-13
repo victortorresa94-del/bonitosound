@@ -28,7 +28,7 @@ export function ContactForm() {
   )}`;
 
   return (
-    <div className="rounded-3xl border border-subtle bg-bg-secondary p-7 md:p-10">
+    <div className="rounded-3xl border border-subtle bg-bg-primary p-7 md:p-10">
       <p className="eyebrow mb-4">Vengo porque soy…</p>
       <div className="mb-8 flex flex-wrap gap-2">
         {segments.map((s) => (

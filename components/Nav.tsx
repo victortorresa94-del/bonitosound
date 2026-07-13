@@ -89,7 +89,7 @@ export function Nav() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.35, ease: EASE }}
-            className="overflow-hidden border-t border-subtle bg-bg-secondary md:hidden"
+            className="overflow-hidden border-t border-subtle bg-bg-primary md:hidden"
           >
             <div className="wrap flex flex-col py-4">
               {nav.map((item, idx) => (
