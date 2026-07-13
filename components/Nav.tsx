@@ -19,7 +19,7 @@ export function Nav() {
   const pathname = usePathname() ?? "/";
   return (
     <header className="sticky top-0 z-50 bg-bg-primary/85 backdrop-blur-md">
-      <div className="wrap flex h-16 items-center justify-between">
+      <div className="wrap flex h-16 items-center justify-between md:h-20">
         <Link
           href="/"
           aria-label="Bonito Sound — inicio"
@@ -33,7 +33,7 @@ export function Nav() {
             height={500}
             priority
             unoptimized
-            className="h-11 w-auto"
+            className="h-11 w-auto md:h-14"
           />
         </Link>
 
