@@ -43,7 +43,7 @@ export const scenes: HomeScene[] = [
     accent: "todas partes",
     support:
       "Da igual si es con un cantante, un evento, una grabación o difusión. La cosa es hacerlo bonito.",
-    mediaCandidates: ["/video/home/que-es.mp4", "/img/home/que-es.webp"],
+    mediaCandidates: ["/video/home/furgoneta.mp4", "/video/home/que-es.mp4", "/img/home/que-es.webp"],
   },
   {
     id: "marcas",
