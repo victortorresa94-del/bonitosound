@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { HeroVideo } from "@/components/home/HeroVideo";
+import { IntroGate } from "@/components/home/IntroGate";
 import { HomeProof } from "@/components/home/HomeProof";
 import { HomeProcess } from "@/components/home/HomeProcess";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
@@ -33,6 +34,8 @@ export default function HomePage() {
 
   return (
     <>
+      <IntroGate />
+
       <HeroVideo src={HERO_VIDEO} poster={HERO_POSTER} />
 
       <HomeProof />
