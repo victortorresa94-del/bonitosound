@@ -7,29 +7,27 @@ import { useLenis } from "@/components/motion/MotionContext";
 /**
  * Gate de entrada de la home. Overlay a pantalla completa con un CTA central
  * "Escúchanos": hasta que no se pulsa, el scroll está bloqueado y el hero queda
- * tapado. Al pulsar, arranca "Bonito" (Jarabe de Palo) vía la Spotify IFrame API
- * (el clic es el gesto que los navegadores exigen para reproducir sonido),
- * se funde el overlay y se libera el scroll → la canción suena con el vídeo.
+ * tapado. Al pulsar, arranca el estribillo de "Bonito" (Jarabe de Palo) — audio
+ * nativo, el fragmento 0:46–1:49 del original en loop — se funde el overlay y
+ * se libera el scroll → la canción suena con el vídeo.
  *
- * El host del reproductor queda montado siempre (colapsado, no display:none) para
- * que el audio no se corte; tras entrar, una pastilla flotante lo controla.
+ * <audio> nativo en vez de un embed externo: arranque instantáneo y fiable con
+ * el gesto del clic, loop real del fragmento, sin límite de 30s de preview.
  */
-const TRACK_URI = "spotify:track:5FiB1uNoGZE4PenzZd7Imu"; // Bonito — Jarabe de Palo
-
-type Controller = { play: () => void; pause: () => void } | null;
+const AUDIO_SRC = "/audio/bonito.m4a";
+const AUDIO_FALLBACK = "/audio/bonito.mp3";
 
 export function IntroGate() {
   const [entered, setEntered] = useState(false);
   const [leaving, setLeaving] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const [mounted, setMounted] = useState(false);
   const lenis = useLenis();
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   // Portal a document.body: el gate NO puede vivir dentro del wrapper de
   // PageTransitionShell (se anima con opacity+transform y rompería el overlay).
   useEffect(() => setMounted(true), []);
-  const hostRef = useRef<HTMLDivElement>(null);
-  const controllerRef = useRef<Controller>(null);
 
   // Bloqueo de scroll mientras el gate está arriba.
   useEffect(() => {
@@ -42,52 +40,19 @@ export function IntroGate() {
     };
   }, [entered, lenis]);
 
-  // Controlador de Spotify (IFrame API) para el track de Bonito.
-  useEffect(() => {
-    const w = window as unknown as {
-      onSpotifyIframeApiReady?: (api: unknown) => void;
-      __spIframeApi?: unknown;
-    };
-    function init(api: {
-      createController: (
-        el: HTMLElement,
-        opts: Record<string, unknown>,
-        cb: (c: Controller) => void
-      ) => void;
-    }) {
-      if (!hostRef.current || controllerRef.current) return;
-      api.createController(
-        hostRef.current,
-        { uri: TRACK_URI, width: "100%", height: 152 },
-        (c) => {
-          controllerRef.current = c;
-        }
-      );
-    }
-    if (w.__spIframeApi) {
-      init(w.__spIframeApi as Parameters<typeof init>[0]);
+  const toggle = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    if (a.paused) {
+      a.play().catch(() => {});
     } else {
-      w.onSpotifyIframeApiReady = (api) => {
-        w.__spIframeApi = api;
-        init(api as Parameters<typeof init>[0]);
-      };
-      if (!document.getElementById("sp-iframe-api")) {
-        const s = document.createElement("script");
-        s.id = "sp-iframe-api";
-        s.src = "https://open.spotify.com/embed/iframe-api/v1";
-        s.async = true;
-        document.body.appendChild(s);
-      }
+      a.pause();
     }
-  }, []);
+  };
 
   const enter = (withMusic: boolean) => {
     if (withMusic) {
-      try {
-        controllerRef.current?.play();
-      } catch {
-        /* si el navegador lo bloquea, la pastilla queda para darle al play */
-      }
+      audioRef.current?.play().catch(() => {});
     }
     setLeaving(true);
     lenis?.start();
@@ -99,23 +64,23 @@ export function IntroGate() {
 
   return createPortal(
     <>
-      {/* Reproductor: montado siempre (colapsado no lo para). Pastilla tras entrar. */}
-      <div className="fixed bottom-5 left-5 z-40 print:hidden">
-        <div
-          className={`overflow-hidden transition-all duration-300 ${
-            open
-              ? "mb-2 w-[min(340px,calc(100vw-2.5rem))] opacity-100"
-              : "h-0 w-0 opacity-0"
-          }`}
-        >
-          <div className="rounded-2xl border border-subtle bg-bg-primary p-2 shadow-xl">
-            <div ref={hostRef} />
-          </div>
-        </div>
-        {entered && (
+      <audio
+        ref={audioRef}
+        loop
+        preload="auto"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+      >
+        <source src={AUDIO_SRC} type="audio/mp4" />
+        <source src={AUDIO_FALLBACK} type="audio/mpeg" />
+      </audio>
+
+      {/* Pastilla flotante de control, solo tras entrar. */}
+      {entered && (
+        <div className="fixed bottom-5 left-5 z-40 print:hidden">
           <button
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
+            onClick={toggle}
+            aria-pressed={playing}
             className="flex items-center gap-2.5 rounded-full border border-subtle bg-bg-primary/90 py-2.5 pl-3 pr-4 shadow-lg backdrop-blur-md transition-colors hover:bg-bg-primary"
           >
             <span className="flex h-5 items-end gap-[3px]" aria-hidden>
@@ -123,14 +88,19 @@ export function IntroGate() {
                 <span
                   key={i}
                   className="w-[3px] origin-bottom rounded-full bg-accent-cyan"
-                  style={{ height: `${h * 100}%`, animation: `eq 0.9s ease-in-out infinite ${i * 0.15}s` }}
+                  style={{
+                    height: `${h * 100}%`,
+                    animation: playing ? `eq 0.9s ease-in-out infinite ${i * 0.15}s` : "none",
+                  }}
                 />
               ))}
             </span>
-            <span className="text-sm font-medium text-text-primary">La canción de Bonito</span>
+            <span className="text-sm font-medium text-text-primary">
+              {playing ? "Suena bonito" : "La canción de Bonito"}
+            </span>
           </button>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Overlay del gate */}
       {!entered && (
