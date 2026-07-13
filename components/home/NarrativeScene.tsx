@@ -100,6 +100,7 @@ export function NarrativeScene({ scene, media, index, total }: NarrativeScenePro
                 src={media}
                 alt={scene.statement}
                 preset={scene.motionPreset ?? "kenburns"}
+                fit={media.includes("jaleo-sound") ? "contain" : "cover"}
               />
             </RevealOnScroll>
           </div>
