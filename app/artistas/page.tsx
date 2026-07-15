@@ -20,8 +20,50 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/artistas` },
 };
 
+function ArtistCard({
+  slug,
+  name,
+  genre,
+  photo,
+  big = false,
+}: {
+  slug: string;
+  name: string;
+  genre: string;
+  photo: string | null;
+  big?: boolean;
+}) {
+  return (
+    <Link href={`/artistas/${slug}`} className="group" data-cursor="link">
+      <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
+        {photo && (
+          <Image
+            src={photo}
+            alt={name}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+          />
+        )}
+        <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-5">
+          <span className={`display text-white ${big ? "text-3xl" : "text-2xl"}`}>
+            {name}
+          </span>
+        </span>
+      </div>
+      <p className="mt-3 text-sm text-text-muted">{genre}</p>
+    </Link>
+  );
+}
+
 export default function Artistas() {
-  const roster = getArtists().filter((a) => a.tier === "booking");
+  const all = getArtists();
+  const booking = all.filter((a) => a.tier === "booking");
+  const distro = all
+    .filter((a) => a.tier === "distribucion")
+    .map((a) => ({ ...a, photo: a.image ?? findAsset("artistas", a.slug) }))
+    .filter((a) => a.photo);
+
   return (
     <>
       <section className="border-b border-subtle">
@@ -48,71 +90,68 @@ export default function Artistas() {
       </section>
 
       <Section>
-        <RevealOnScroll as="p" className="eyebrow mb-4">
-          Booking & Management
+        <RevealOnScroll as="p" className="eyebrow mb-8">
+          Booking &amp; Management
         </RevealOnScroll>
-        <StaggerGroup
-          stagger={0.08}
-          className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {roster.map((a) => {
-            const photo = a.image ?? findAsset("artistas", a.slug);
-            return (
-              <Link
-                key={a.slug}
-                href={`/artistas/${a.slug}`}
-                className="group"
-                data-cursor="link"
-              >
-                <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
-                  {photo && (
-                    <Image
-                      src={photo}
-                      alt={a.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                  )}
-                  <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 to-transparent p-6">
-                    <span className="display text-3xl text-white">{a.name}</span>
-                  </span>
-                </div>
-                <p className="mt-3 text-sm text-text-muted">{a.genre}</p>
-              </Link>
-            );
-          })}
+        <StaggerGroup stagger={0.08} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {booking.map((a) => (
+            <ArtistCard
+              key={a.slug}
+              slug={a.slug}
+              name={a.name}
+              genre={a.genre}
+              photo={a.image ?? findAsset("artistas", a.slug)}
+              big
+            />
+          ))}
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-4">
-          Catálogo de distribución
-        </RevealOnScroll>
-        <SplitTextReveal
-          as="h2"
-          split="lines"
-          className="display text-[clamp(2rem,4.5vw,3.4rem)]"
-        >
-          ~20 artistas en distribución y editorial.
-        </SplitTextReveal>
-        <RevealOnScroll className="mt-10" delay={0.2}>
-          <MarqueeLogoWall items={distributionCatalog} dir="artistas" speed={35} />
-        </RevealOnScroll>
-      </Section>
+      {distro.length > 0 && (
+        <Section className="bg-bg-primary pt-0">
+          <RevealOnScroll as="p" className="eyebrow mb-8">
+            En distribución y editorial
+          </RevealOnScroll>
+          <StaggerGroup
+            stagger={0.06}
+            className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4"
+          >
+            {distro.map((a) => (
+              <ArtistCard
+                key={a.slug}
+                slug={a.slug}
+                name={a.name}
+                genre={a.genre}
+                photo={a.photo!}
+              />
+            ))}
+          </StaggerGroup>
+          <RevealOnScroll className="mt-14">
+            <p className="mb-6 text-sm text-text-muted">Y muchos más en catálogo:</p>
+            <MarqueeLogoWall items={distributionCatalog} dir="artistas" speed={35} />
+          </RevealOnScroll>
+        </Section>
+      )}
 
       <Section>
         <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
           <Heading>¿Quieres a alguien del roster?</Heading>
           <p className="mx-auto mt-4 max-w-xl text-text-secondary">
-            Booking directo. Sin intermediarios raros.
+            Booking directo. Sin intermediarios raros — coges el teléfono y hablas
+            con quien lo lleva.
           </p>
-          <div className="mt-8 flex justify-center">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-5">
             <MagneticButton strength={0.5}>
               <Cta href={`mailto:${site.emails.booking}?subject=Booking%20roster`}>
                 Contactar booking →
               </Cta>
             </MagneticButton>
+            <a
+              href={`tel:${site.phone.replace(/\s/g, "")}`}
+              className="text-sm font-medium text-text-secondary transition-colors hover:text-accent-cyan"
+            >
+              o llama al {site.phone}
+            </a>
           </div>
         </RevealOnScroll>
       </Section>
