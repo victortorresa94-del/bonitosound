@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getArtists } from "@/lib/content";
+import { getArtists, getEventos } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -39,5 +39,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...base, ...artists];
+  const eventos = getEventos().map((e) => ({
+    url: `${site.url}/eventos/${e.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...base, ...artists, ...eventos];
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Section, Heading, Eyebrow, Cta, JsonLd } from "@/components/ui";
 import { LeadMagnetBrands } from "@/components/LeadMagnetBrands";
 import { FaqOpen } from "@/components/FaqOpen";
@@ -11,7 +12,7 @@ import {
   ParallaxLayer,
   MarqueeLogoWall,
 } from "@/components/motion";
-import { getCases } from "@/lib/content";
+import { getEventos } from "@/lib/content";
 import { findAsset, findLogo } from "@/lib/assets";
 import { brands, site } from "@/lib/site";
 
@@ -64,7 +65,7 @@ const faq = [
 ];
 
 export default function EventosMarcas() {
-  const cases = getCases();
+  const cases = getEventos().filter((e) => e.type === "marca");
   const heroImg = findAsset("heroes", "eventos-marcas");
   return (
     <>
@@ -171,10 +172,14 @@ export default function EventosMarcas() {
           className="mt-12 grid gap-6 md:grid-cols-3"
         >
           {cases.map((c) => {
-            const cover = findAsset("casos", c.slug);
-            const logo = findLogo("marcas", c.brand);
+            const cover = findAsset("eventos", c.slug);
+            const logo = c.brand ? findLogo("marcas", c.brand) : null;
             return (
-              <div key={c.slug} className="card overflow-hidden p-0">
+              <Link
+                key={c.slug}
+                href={`/eventos/${c.slug}`}
+                className="card group overflow-hidden p-0"
+              >
                 <div className="relative aspect-[4/3] overflow-hidden border-b border-subtle bg-bg-primary">
                   {cover ? (
                     <ParallaxLayer speed={0.12} className="absolute inset-0">
@@ -183,14 +188,14 @@ export default function EventosMarcas() {
                         alt={`${c.brand} — ${c.title}`}
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover scale-110"
+                        className="object-cover scale-110 transition-transform duration-700 group-hover:scale-125"
                       />
                     </ParallaxLayer>
                   ) : logo ? (
                     <div className="absolute inset-0 flex items-center justify-center p-10">
                       <Image
                         src={logo}
-                        alt={c.brand}
+                        alt={c.brand ?? c.title}
                         width={220}
                         height={120}
                         className="max-h-14 w-auto object-contain opacity-90"
@@ -210,7 +215,7 @@ export default function EventosMarcas() {
                     {c.result}
                   </p>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </StaggerGroup>

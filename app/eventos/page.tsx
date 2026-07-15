@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Section, Cta } from "@/components/ui";
-import { YouTubeEmbed } from "@/components/Embeds";
+import { EventoCard } from "@/components/EventoCard";
 import {
   RevealOnScroll,
   StaggerGroup,
@@ -10,6 +10,7 @@ import {
   MagneticButton,
   ParallaxLayer,
 } from "@/components/motion";
+import { getEventos } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default function Eventos() {
+  const eventos = getEventos();
   return (
     <>
       <section className="border-b border-subtle">
@@ -74,15 +76,19 @@ export default function Eventos() {
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-4">En directo</RevealOnScroll>
-        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-          Final de gira en el Sant Jordi Club.
-        </SplitTextReveal>
-        <div className="mt-10 max-w-3xl">
-          <YouTubeEmbed id="r47SP4OULcI" title="Final de Gira 1016 — Sant Jordi Club" />
-        </div>
-      </Section>
+      {eventos.length > 0 && (
+        <Section className="bg-bg-primary">
+          <RevealOnScroll as="p" className="eyebrow mb-4">Lo hemos montado</RevealOnScroll>
+          <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+            Eventos y giras, uno por uno.
+          </SplitTextReveal>
+          <StaggerGroup stagger={0.08} className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {eventos.map((e) => (
+              <EventoCard key={e.slug} evento={e} />
+            ))}
+          </StaggerGroup>
+        </Section>
+      )}
 
       <Section>
         <div className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
