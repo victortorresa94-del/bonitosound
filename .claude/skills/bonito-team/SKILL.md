@@ -1,17 +1,17 @@
 ---
 name: bonito-team
-description: El "equipo de diseño" de Bonito Sound — un panel de 10 perspectivas para revisar y elevar cualquier página o pantalla a nivel top (UI/UX). Úsala antes de diseñar/rediseñar una página importante (eventos, artistas, landings, home). Convoca las 10 voces, cada una critica desde su lente, se converge en una dirección y se implementa CON CONTENCIÓN (ver web-motion). Combínala con web-ui-craft, web-motion y bonito-voz.
+description: El "equipo de diseño" de Bonito Sound — un panel de 11 perspectivas para revisar y elevar cualquier página o pantalla a nivel top (UI/UX). Úsala antes de diseñar/rediseñar una página importante (eventos, artistas, landings, home). Convoca las 11 voces, cada una critica desde su lente, se converge en una dirección y se implementa CON CONTENCIÓN (ver web-motion). Combínala con web-ui-craft, web-motion y bonito-voz.
 ---
 
 # Bonito Team — el panel de diseño
 
 Cuando toca elevar una página a nivel "de puta madre", no se diseña a ojo: se
-pasa por estas **10 lentes**. Cada una hace preguntas incómodas. La página no
-está terminada hasta que las 10 dan el visto bueno. Al final se **converge** y
+pasa por estas **11 lentes**. Cada una hace preguntas incómodas. La página no
+está terminada hasta que las 11 dan el visto bueno. Al final se **converge** y
 se implementa con **gracia pero contención** (una animación con trabajo, no un
 circo — ver `web-motion`).
 
-## Las 10 voces (y qué pregunta cada una)
+## Las 11 voces (y qué pregunta cada una)
 
 1. **El ganador de Awwwards** — *¿Esto es memorable o es una plantilla más?*
    Busca UN momento wow: un hero cinematográfico, una tipografía enorme y
@@ -63,9 +63,16 @@ circo — ver `web-motion`).
     seco, un hover que sorprende, el motivo cassette/vinilo tirando de marca.
     Sin pasarse: la gracia es un guiño, no la fiesta entera.
 
+11. **El copywriter musical** — *¿Este titular se pasa de listo?*
+    Caza el copy "too much": el chiste forzado, el doble negativo cínico
+    ("gente del sector cansada del sector"), hablar de dinero ("aquí está la
+    pasta"), la frase que quiere ser ingeniosa y solo es rara. Regla: la
+    frase más corta que dice la verdad gana. Si suena a eslogan de cuñado,
+    fuera. Trabaja pegado a `bonito-voz` (mismo tono, este afina el filo).
+
 ## Proceso (cómo se usa)
 
-1. **Convoca**: para la página objetivo, pasa por las 10 lentes y anota qué
+1. **Convoca**: para la página objetivo, pasa por las 11 lentes y anota qué
    falla en cada una (rápido, una línea por voz).
 2. **Converge**: junta lo repetido en una **dirección de diseño** concreta
    (estructura de secciones + el momento wow + los assets de Bonito que se usan
@@ -73,7 +80,7 @@ circo — ver `web-motion`).
 3. **Implementa con contención**: aplica `web-ui-craft` (tokens, jerarquía) y
    `web-motion` (un protagonista de movimiento por pantalla, sutil, 60fps,
    reduced-motion). Copy con `bonito-voz`.
-4. **Revisa**: la página no sale hasta que las 10 voces darían el ok.
+4. **Revisa**: la página no sale hasta que las 11 voces darían el ok.
 
 ## Regla de oro
 Nivel top ≠ más movimiento. Nivel top = **una idea fuerte, ejecutada con
