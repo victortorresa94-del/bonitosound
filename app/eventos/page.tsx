@@ -87,33 +87,44 @@ export default function Eventos() {
         </Section>
       )}
 
-      {/* Las dos patas del servicio. */}
+      {/* Las dos patas del servicio: icono + texto + "Saber más". */}
       <Section className={eventos.length > 0 ? "pt-0" : undefined}>
         <StaggerGroup stagger={0.08} className="grid gap-6 md:grid-cols-2">
-          <Link href="/eventos/marcas" className="card group flex flex-col">
-            <p className="eyebrow">Marcas</p>
-            <h2 className="display mt-3 text-3xl">Eventos para marcas</h2>
-            <p className="mt-3 flex-1 text-text-secondary">
-              Ballantine&apos;s, Pernod Ricard, Pepsico, Absolut. Activaciones,
-              lanzamientos y experiencias culturales. Del brief al titular en 6
-              semanas.
-            </p>
-            <span className="mt-6 text-text-secondary transition-colors group-hover:text-accent-cyan">
-              Ver eventos para marcas →
-            </span>
-          </Link>
-
-          <Link href="/eventos/giras" className="card group flex flex-col">
-            <p className="eyebrow">Giras</p>
-            <h2 className="display mt-3 text-3xl">Tour management</h2>
-            <p className="mt-3 flex-1 text-text-secondary">
-              Road, tour y stage management. Hemos llevado a Albert Pla, Alfred
-              García, Antonio Orozco, Maldita Nerea, Ruth Lorenzo.
-            </p>
-            <span className="mt-6 text-text-secondary transition-colors group-hover:text-accent-cyan">
-              Ver giras →
-            </span>
-          </Link>
+          {[
+            {
+              href: "/eventos/marcas",
+              icon: "/img/eventos/marcas.svg",
+              title: "Eventos para marcas",
+              text: "Creamos experiencias que conectan marcas con personas a través de la música y la cultura.",
+            },
+            {
+              href: "/eventos/giras",
+              icon: "/img/eventos/tour.svg",
+              title: "Tour management",
+              text: "Nos encargamos de que todo funcione dentro y fuera del escenario. Tú solo concéntrate en la música.",
+            },
+          ].map((c) => (
+            <Link
+              key={c.href}
+              href={c.href}
+              className="card group flex items-center gap-6 md:gap-8"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={c.icon}
+                alt=""
+                aria-hidden
+                className="h-24 w-24 shrink-0 transition-transform duration-500 group-hover:scale-105 md:h-28 md:w-28"
+              />
+              <div>
+                <h2 className="display text-2xl md:text-[1.7rem]">{c.title}</h2>
+                <p className="mt-2 text-text-secondary">{c.text}</p>
+                <span className="mt-5 inline-flex items-center rounded-full border border-accent-cyan px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-accent-cyan transition-colors group-hover:bg-accent-cyan group-hover:text-white">
+                  Saber más
+                </span>
+              </div>
+            </Link>
+          ))}
         </StaggerGroup>
       </Section>
 
