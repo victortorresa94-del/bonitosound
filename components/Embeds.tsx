@@ -45,6 +45,35 @@ export function YouTubeEmbed({
 }
 
 /**
+ * Reel de Instagram embebido vía iframe oficial (`/embed`). No necesita
+ * script de terceros ni token: el navegador del visitante lo carga directo
+ * de Instagram. Portrait 9:16, pensado para la presentación de marca.
+ * Pasa la URL o el shortcode del reel.
+ */
+export function InstagramReel({
+  url,
+  title = "Reel de Instagram",
+}: {
+  url: string;
+  title?: string;
+}) {
+  const id = url.match(/\/(?:reel|p|tv)\/([\w-]+)/)?.[1] ?? url;
+  return (
+    <div className="mx-auto w-full max-w-[380px] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary shadow-sm">
+      <iframe
+        title={title}
+        src={`https://www.instagram.com/reel/${id}/embed`}
+        loading="lazy"
+        scrolling="no"
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        allowFullScreen
+        className="block h-[640px] w-full"
+      />
+    </div>
+  );
+}
+
+/**
  * Feed "En directo". Embebe posts concretos de Instagram vía oEmbed oficial
  * (no necesita API token). Pasa las URLs de los posts en `posts`.
  * Si la lista está vacía, cae a una rejilla que enlaza al perfil.
