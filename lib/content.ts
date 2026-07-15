@@ -10,10 +10,17 @@ export type Artist = {
   genre: string;
   tier: "booking" | "distribucion";
   spotifyArtistId?: string;
+  /** Playlist propia del artista (si difiere de su perfil de artista). */
+  spotifyPlaylistId?: string;
   instagram?: string;
   image?: string;
+  /** Fotos adicionales para la galería de la ficha (rutas en /public). */
+  gallery?: string[];
   bio: string[];
+  /** URLs de posts/reels de Instagram (conciertos, backstage…). */
   reels?: string[];
+  /** IDs de vídeos de YouTube (directos, videoclips, backstage…). */
+  youtubeIds?: string[];
   /** Hitos verificables: año + frase corta. Si está vacío no se pinta nada.
    *  Ej. frontmatter:
    *    milestones:
@@ -25,13 +32,27 @@ export type Artist = {
   draft?: boolean;
 };
 
-export type CaseStudy = {
+export type Evento = {
   slug: string;
-  brand: string;
   title: string;
+  /** Marca del evento (activaciones, festivales de marca…). Opcional. */
+  brand?: string;
+  /** Artista protagonista (giras, showcases…). Opcional. */
+  artist?: string;
+  /** Tipo de evento — define el tratamiento visual en /eventos. */
+  type: "marca" | "gira" | "festival" | "showcase";
+  year: string;
+  location?: string;
+  /** Vídeo propio en /public/video/eventos/<slug>.mp4 (prioridad sobre YouTube). */
+  video?: string;
+  /** ID de YouTube si el vídeo vive ahí en vez de autoalojado. */
+  youtubeId?: string;
+  /** Fotos adicionales para la galería de la página del evento. */
+  gallery?: string[];
   context: string;
   result: string;
-  year: string;
+  /** Párrafos largos opcionales (cuerpo markdown) para la página individual. */
+  body: string[];
 };
 
 function readDir(dir: string) {
@@ -62,15 +83,23 @@ export function getArtist(slug: string): Artist | undefined {
   return getArtists().find((a) => a.slug === slug);
 }
 
-export function getCases(): CaseStudy[] {
-  return readDir("casos")
+export function getEventos(): Evento[] {
+  return readDir("eventos")
     .map((file) => {
-      const raw = fs.readFileSync(path.join(root, "casos", file), "utf8");
-      const { data } = matter(raw);
+      const raw = fs.readFileSync(path.join(root, "eventos", file), "utf8");
+      const { data, content } = matter(raw);
       return {
         slug: file.replace(/\.md$/, ""),
-        ...(data as Omit<CaseStudy, "slug">),
+        body: content
+          .split(/\n{2,}/)
+          .map((p) => p.trim())
+          .filter(Boolean),
+        ...(data as Omit<Evento, "slug" | "body">),
       };
     })
     .sort((a, b) => b.year.localeCompare(a.year));
+}
+
+export function getEvento(slug: string): Evento | undefined {
+  return getEventos().find((e) => e.slug === slug);
 }

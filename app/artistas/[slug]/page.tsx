@@ -3,9 +3,10 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Section, Cta, JsonLd } from "@/components/ui";
-import { SpotifyEmbed } from "@/components/Embeds";
+import { SpotifyEmbed, YouTubeEmbed, InstagramFeed } from "@/components/Embeds";
 import {
   RevealOnScroll,
+  StaggerGroup,
   SplitTextReveal,
   MagneticButton,
   ParallaxLayer,
@@ -41,6 +42,9 @@ export default function ArtistPage({
   if (!a) notFound();
 
   const photo = a.image ?? findAsset("artistas", a.slug);
+  const hasReels = a.reels && a.reels.length > 0;
+  const hasVideos = a.youtubeIds && a.youtubeIds.length > 0;
+  const hasGallery = a.gallery && a.gallery.length > 0;
 
   // Schema MusicGroup enriquecido: sameAs (Spotify + IG) + image cuando
   // existan. Mejora SEO y aparición en Knowledge Graph / Music panels.
@@ -82,7 +86,7 @@ export default function ArtistPage({
             >
               {a.name}
             </SplitTextReveal>
-            <RevealOnScroll className="mt-9" delay={0.3}>
+            <RevealOnScroll className="mt-9 flex flex-wrap gap-4" delay={0.3}>
               <MagneticButton strength={0.4}>
                 <Cta
                   href={`mailto:${site.emails.booking}?subject=${encodeURIComponent(
@@ -92,6 +96,13 @@ export default function ArtistPage({
                   Contactar booking →
                 </Cta>
               </MagneticButton>
+              {a.instagram && (
+                <MagneticButton strength={0.25}>
+                  <Cta href={a.instagram} variant="ghost" external>
+                    Instagram →
+                  </Cta>
+                </MagneticButton>
+              )}
             </RevealOnScroll>
           </div>
           <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
@@ -114,7 +125,7 @@ export default function ArtistPage({
       <Section>
         <div
           className={`grid gap-12 ${
-            a.spotifyArtistId || (a.reels && a.reels.length > 0)
+            a.spotifyArtistId || a.spotifyPlaylistId
               ? "md:grid-cols-[1.2fr_1fr]"
               : "md:grid-cols-1"
           }`}
@@ -124,7 +135,7 @@ export default function ArtistPage({
               <p key={i}>{p}</p>
             ))}
           </RevealOnScroll>
-          {(a.spotifyArtistId || (a.reels && a.reels.length > 0)) && (
+          {(a.spotifyArtistId || a.spotifyPlaylistId) && (
             <RevealOnScroll className="space-y-6" delay={0.15}>
               {a.spotifyArtistId && (
                 <SpotifyEmbed
@@ -133,12 +144,68 @@ export default function ArtistPage({
                   title={`${a.name} en Spotify`}
                 />
               )}
+              {a.spotifyPlaylistId && (
+                <SpotifyEmbed
+                  type="playlist"
+                  id={a.spotifyPlaylistId}
+                  height={232}
+                  title={`Playlist de ${a.name}`}
+                />
+              )}
             </RevealOnScroll>
           )}
         </div>
+      </Section>
 
-        {a.milestones && a.milestones.length > 0 && (
-          <RevealOnScroll className="mt-20 max-w-3xl">
+      {hasGallery && (
+        <Section className="bg-bg-primary">
+          <RevealOnScroll as="p" className="eyebrow mb-8">
+            Galería
+          </RevealOnScroll>
+          <StaggerGroup stagger={0.08} className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            {a.gallery!.map((src) => (
+              <div
+                key={src}
+                className="relative aspect-[3/4] overflow-hidden rounded-xl border border-subtle"
+              >
+                <Image
+                  src={src}
+                  alt={a.name}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </StaggerGroup>
+        </Section>
+      )}
+
+      {hasReels && (
+        <Section>
+          <RevealOnScroll as="p" className="eyebrow mb-8">
+            En directo
+          </RevealOnScroll>
+          <InstagramFeed posts={a.reels} />
+        </Section>
+      )}
+
+      {hasVideos && (
+        <Section className="bg-bg-primary">
+          <RevealOnScroll as="p" className="eyebrow mb-8">
+            Vídeos
+          </RevealOnScroll>
+          <StaggerGroup stagger={0.1} className="grid gap-6 md:grid-cols-2">
+            {a.youtubeIds!.map((id) => (
+              <YouTubeEmbed key={id} id={id} title={`${a.name} en YouTube`} />
+            ))}
+          </StaggerGroup>
+        </Section>
+      )}
+
+      {a.milestones && a.milestones.length > 0 && (
+        <Section>
+          <RevealOnScroll className="max-w-3xl">
             <p className="eyebrow mb-6">Trayectoria</p>
             <ul className="divide-y divide-subtle border-y border-subtle">
               {a.milestones.map((m, i) => (
@@ -154,14 +221,24 @@ export default function ArtistPage({
               ))}
             </ul>
           </RevealOnScroll>
-        )}
 
-        <RevealOnScroll className="mt-14">
-          <Link href="/artistas" className="link-underline text-sm text-text-secondary">
-            ← Roster completo
-          </Link>
-        </RevealOnScroll>
-      </Section>
+          <RevealOnScroll className="mt-14">
+            <Link href="/artistas" className="link-underline text-sm text-text-secondary">
+              ← Roster completo
+            </Link>
+          </RevealOnScroll>
+        </Section>
+      )}
+
+      {!(a.milestones && a.milestones.length > 0) && (
+        <Section>
+          <RevealOnScroll>
+            <Link href="/artistas" className="link-underline text-sm text-text-secondary">
+              ← Roster completo
+            </Link>
+          </RevealOnScroll>
+        </Section>
+      )}
     </>
   );
 }
