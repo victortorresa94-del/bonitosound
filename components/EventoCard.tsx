@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Evento } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
+import { HoverVideo } from "@/components/HoverVideo";
 
 const TYPE_LABEL: Record<Evento["type"], string> = {
   marca: "Marca",
@@ -26,16 +27,10 @@ export function EventoCard({ evento }: { evento: Evento }) {
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-bg-tertiary">
         {evento.video ? (
-          <video
+          <HoverVideo
             src={evento.video}
             poster={cover ?? undefined}
-            muted
-            loop
-            playsInline
-            preload="metadata"
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            onMouseEnter={(e) => e.currentTarget.play().catch(() => {})}
-            onMouseLeave={(e) => e.currentTarget.pause()}
           />
         ) : cover ? (
           <Image
