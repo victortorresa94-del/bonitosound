@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Evento } from "@/lib/content";
-import { findAsset } from "@/lib/assets";
+import { findAsset, findLogo } from "@/lib/assets";
 import { HoverVideo } from "@/components/HoverVideo";
 
 const TYPE_LABEL: Record<Evento["type"], string> = {
@@ -19,6 +19,9 @@ const TYPE_LABEL: Record<Evento["type"], string> = {
 export function EventoCard({ evento }: { evento: Evento }) {
   const cover = findAsset("eventos", evento.slug);
   const label = evento.brand ?? evento.artist ?? TYPE_LABEL[evento.type];
+  // Mientras no haya vídeo ni foto, si es marca y tenemos su logo, lo usamos
+  // como portada limpia en vez de texto suelto.
+  const logo = evento.brand ? findLogo("marcas", evento.brand) : null;
 
   return (
     <Link
@@ -40,6 +43,16 @@ export function EventoCard({ evento }: { evento: Evento }) {
             sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />
+        ) : logo ? (
+          <div className="absolute inset-0 flex items-center justify-center p-10">
+            <Image
+              src={logo}
+              alt={label}
+              width={200}
+              height={120}
+              className="max-h-16 w-auto object-contain opacity-90 transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
             <span className="display text-2xl text-text-muted">{label}</span>
