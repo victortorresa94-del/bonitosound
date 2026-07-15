@@ -2,11 +2,10 @@
 name: "Paule"
 genre: "Cantautor / Pop de autor"
 tier: "booking"
+spotifyArtistId: "79qGj0n6B3skao1b5Ojt2V"
 instagram: "https://www.instagram.com/paulemusica"
 image: "/img/artistas/paule.jpeg"
 reels: []
-draft: true
-# draft: pendiente de confirmar enlace real de Spotify y datos del cliente.
 ---
 Paule escribe canciones que parecen fáciles hasta que intentas escribir una igual. Ahí está el truco: el oficio no se ve, se nota.
 

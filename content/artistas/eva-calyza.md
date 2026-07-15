@@ -6,6 +6,7 @@ spotifyArtistId: "6rUgNfaBgUk0WCQbNafgKh"
 instagram: "https://www.instagram.com/evacalyza"
 image: "/img/artistas/eva-calyza.jpg"
 reels: []
+youtubeIds: ["W3AgPi12D-A", "BbNvCn9x2LU", "Yepc_DOGdPY"]
 milestones:
   - { year: "2025", text: "Primer álbum, MARCA DIVINA, producido con Bonito Sound" }
   - { year: "2023", text: "Primer EP, afilá" }

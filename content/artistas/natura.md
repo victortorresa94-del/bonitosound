@@ -2,9 +2,11 @@
 name: "Nàtura"
 genre: "DJ / Productora"
 tier: "booking"
+spotifyArtistId: "07Epl3n2QMYOUTYqZNfj3F"
 instagram: "https://www.instagram.com/dj.natura"
 image: "/img/artistas/natura.jpg"
 reels: []
+youtubeIds: ["Mp39xeNVWkE", "ArmSklgS4X8"]
 milestones:
   - { year: "2024", text: "Primer proyecto autoproducido presentado en el FiM (hard techno + escena urbana catalana)" }
   - { year: "2024", text: "Sets en Share Festival y Festiuet" }
