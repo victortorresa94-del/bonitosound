@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 180" fill="none" stroke="#14283C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- motion lines -->
+  <path d="M18 70h24M10 92h30M20 114h22" stroke="#16b6d4" stroke-width="5"/>
+  <!-- body -->
+  <path d="M70 118V70c0-9 7-16 16-16h120c8 0 15 5 18 13l14 34c1 3 2 6 2 9v8"/>
+  <path d="M70 118h170"/>
+  <path d="M56 118c0-8 6-14 14-14"/>
+  <path d="M240 118v-8"/>
+  <!-- windows -->
+  <rect x="92" y="66" width="42" height="30" rx="5" fill="#16b6d4" stroke="none"/>
+  <rect x="146" y="66" width="60" height="30" rx="5" fill="#16b6d4" stroke="none"/>
+  <!-- roof rack -->
+  <path d="M96 54h96" stroke-width="5"/>
+  <!-- V split line -->
+  <path d="M64 100c14-6 24-6 34 0" stroke-width="5"/>
+  <!-- wheels -->
+  <circle cx="104" cy="130" r="20" fill="#FBFAF6"/>
+  <circle cx="104" cy="130" r="7" fill="#14283C" stroke="none"/>
+  <circle cx="202" cy="130" r="20" fill="#FBFAF6"/>
+  <circle cx="202" cy="130" r="7" fill="#14283C" stroke="none"/>
+</svg>

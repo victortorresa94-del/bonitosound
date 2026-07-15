@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" stroke="#14283C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+  <!-- lanyard -->
+  <path d="M78 18c0 22 8 30 22 40M122 18c0 22-8 30-22 40"/>
+  <circle cx="100" cy="64" r="7" fill="#FBFAF6"/>
+  <!-- card -->
+  <rect x="60" y="72" width="80" height="106" rx="10"/>
+  <!-- clip hole -->
+  <rect x="90" y="80" width="20" height="7" rx="3.5" fill="#14283C" stroke="none"/>
+  <!-- cyan photo strip -->
+  <rect x="72" y="98" width="56" height="34" rx="5" fill="#16b6d4" stroke="none"/>
+  <!-- lines -->
+  <path d="M72 146h56M72 160h36" stroke-width="5"/>
+  <!-- sparkle -->
+  <path d="M158 96l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" fill="#16b6d4" stroke="none"/>
+</svg>
