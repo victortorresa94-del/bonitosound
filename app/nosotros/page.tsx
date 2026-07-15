@@ -33,7 +33,7 @@ export default function Nosotros() {
               split="lines"
               className="display text-[clamp(2.6rem,7vw,5.4rem)]"
             >
-              Gente del sector. Cansada del sector.
+              Gente del sector. Enamorada del sector.
             </SplitTextReveal>
           </div>
         </div>

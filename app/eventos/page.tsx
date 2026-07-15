@@ -29,7 +29,7 @@ export default function Eventos() {
           <div className="max-w-3xl">
             <RevealOnScroll as="p" className="eyebrow mb-4">Eventos</RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
-              Aquí está la pasta. Y el oficio.
+              Eventos que se recuerdan. Giras que se llenan.
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
               Dos cosas: producimos activaciones para marcas que quieren música
