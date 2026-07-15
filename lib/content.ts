@@ -83,18 +83,31 @@ export function getArtist(slug: string): Artist | undefined {
   return getArtists().find((a) => a.slug === slug);
 }
 
+/** Ruta del vídeo autoalojado del evento si existe en /public (o null). */
+function resolveEventoVideo(slug: string): string | undefined {
+  const rel = `/video/eventos/${slug}.mp4`;
+  const abs = path.join(process.cwd(), "public", rel.replace(/^\//, ""));
+  return fs.existsSync(abs) ? rel : undefined;
+}
+
 export function getEventos(): Evento[] {
   return readDir("eventos")
     .map((file) => {
       const raw = fs.readFileSync(path.join(root, "eventos", file), "utf8");
       const { data, content } = matter(raw);
+      const slug = file.replace(/\.md$/, "");
+      const fm = data as Omit<Evento, "slug" | "body">;
       return {
-        slug: file.replace(/\.md$/, ""),
+        slug,
         body: content
           .split(/\n{2,}/)
           .map((p) => p.trim())
           .filter(Boolean),
-        ...(data as Omit<Evento, "slug" | "body">),
+        ...fm,
+        // El vídeo se resuelve del disco: se enciende solo cuando el .mp4
+        // aterriza en /public/video/eventos/<slug>.mp4, y nunca deja un
+        // <video> roto si aún no está. El frontmatter puede forzar otra ruta.
+        video: fm.video ?? resolveEventoVideo(slug),
       };
     })
     .sort((a, b) => b.year.localeCompare(a.year));

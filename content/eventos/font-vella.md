@@ -1,0 +1,11 @@
+---
+brand: "Font Vella"
+title: "Font Vella: 30 activaciones en tres años"
+type: "marca"
+year: "2025"
+context: "30 activaciones para Font Vella entre 2023 y 2025. Música que acompaña a la marca sin taparla, en cada formato que ha hecho falta."
+result: "Tres años, treinta eventos, una sola forma de trabajar: la nuestra."
+---
+Treinta activaciones dan para conocerse bien. Sabemos qué pide Font Vella y qué no, y eso se nota en que cada evento sale más redondo que el anterior.
+
+Música que suma sin gritar. La marca delante, el directo acompañando, y una producción que no se ve porque está bien hecha.

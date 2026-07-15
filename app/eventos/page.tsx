@@ -29,6 +29,8 @@ const stats = [
 
 export default function Eventos() {
   const eventos = getEventos();
+  const marcas = eventos.filter((e) => e.type === "marca");
+  const giras = eventos.filter((e) => e.type !== "marca");
   return (
     <>
       <section className="border-b border-subtle">
@@ -72,15 +74,30 @@ export default function Eventos() {
         </div>
       </section>
 
-      {/* El trabajo, uno por uno. Se llena solo con cada .md + su vídeo. */}
-      {eventos.length > 0 && (
+      {/* El trabajo, uno por uno. Separado por pata: marcas / giras. Cada
+          sección se llena sola con sus .md y aparece solo si hay contenido. */}
+      {marcas.length > 0 && (
         <Section>
-          <RevealOnScroll as="p" className="eyebrow mb-4">Lo hemos montado</RevealOnScroll>
+          <RevealOnScroll as="p" className="eyebrow mb-4">Marcas que hemos sonado</RevealOnScroll>
           <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-            Eventos y giras, uno por uno.
+            Activaciones, una por una.
           </SplitTextReveal>
-          <StaggerGroup stagger={0.08} className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {eventos.map((e) => (
+          <StaggerGroup stagger={0.06} className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {marcas.map((e) => (
+              <EventoCard key={e.slug} evento={e} />
+            ))}
+          </StaggerGroup>
+        </Section>
+      )}
+
+      {giras.length > 0 && (
+        <Section className={marcas.length > 0 ? "pt-0" : undefined}>
+          <RevealOnScroll as="p" className="eyebrow mb-4">Giras y directos</RevealOnScroll>
+          <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+            Artistas llevados de verdad.
+          </SplitTextReveal>
+          <StaggerGroup stagger={0.06} className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {giras.map((e) => (
               <EventoCard key={e.slug} evento={e} />
             ))}
           </StaggerGroup>
@@ -88,7 +105,7 @@ export default function Eventos() {
       )}
 
       {/* Las dos patas del servicio: icono + texto + "Saber más". */}
-      <Section className={eventos.length > 0 ? "pt-0" : undefined}>
+      <Section className="pt-0">
         <StaggerGroup stagger={0.08} className="grid gap-6 md:grid-cols-2">
           {[
             {
