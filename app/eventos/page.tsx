@@ -9,9 +9,10 @@ import {
   SplitTextReveal,
   MagneticButton,
   ParallaxLayer,
+  MarqueeLogoWall,
 } from "@/components/motion";
 import { getEventos } from "@/lib/content";
-import { site } from "@/lib/site";
+import { brands, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Eventos — Activaciones para marcas y giras",
@@ -19,6 +20,12 @@ export const metadata: Metadata = {
     "Productora de eventos musicales: activaciones de marca y tour management. Del brief al titular, con un solo equipo.",
   alternates: { canonical: `${site.url}/eventos` },
 };
+
+const stats = [
+  { n: "106", label: "producciones con marcas y artistas" },
+  { n: "58", label: "contrataciones de artistas" },
+  { n: "53", label: "referencias discográficas" },
+];
 
 export default function Eventos() {
   const eventos = getEventos();
@@ -44,40 +51,30 @@ export default function Eventos() {
                 alt=""
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-cover scale-110"
+                className="scale-110 object-cover"
               />
             </ParallaxLayer>
           </div>
         </div>
       </section>
 
-      <Section>
-        <StaggerGroup stagger={0.08} className="grid gap-6 md:grid-cols-2">
-          <Link href="/eventos/marcas" className="card group flex flex-col">
-            <p className="eyebrow">Marcas</p>
-            <h2 className="display mt-3 text-3xl">Eventos para marcas</h2>
-            <p className="mt-3 flex-1 text-text-secondary">
-              Ballantine&apos;s, Pernod Ricard, Pepsico, Absolut. Activaciones,
-              lanzamientos y experiencias culturales. Del brief al titular en 6
-              semanas.
-            </p>
-            <span className="mt-6 text-text-secondary transition-colors group-hover:text-accent-cyan">Ver eventos para marcas →</span>
-          </Link>
+      {/* Números: sustancia inmediata, dato duro (marketing musical + Dani). */}
+      <section className="border-b border-subtle">
+        <div className="wrap grid gap-10 py-16 sm:grid-cols-3 md:py-20">
+          {stats.map((s) => (
+            <RevealOnScroll key={s.label} className="text-center sm:text-left">
+              <p className="display text-[clamp(3rem,7vw,5rem)] leading-none text-accent-cyan">
+                {s.n}
+              </p>
+              <p className="mt-3 text-sm text-text-secondary">{s.label}</p>
+            </RevealOnScroll>
+          ))}
+        </div>
+      </section>
 
-          <Link href="/eventos/giras" className="card group flex flex-col">
-            <p className="eyebrow">Giras</p>
-            <h2 className="display mt-3 text-3xl">Tour management</h2>
-            <p className="mt-3 flex-1 text-text-secondary">
-              Road, tour y stage management. Hemos llevado a Albert Pla, Alfred
-              García, Antonio Orozco, Maldita Nerea, Ruth Lorenzo.
-            </p>
-            <span className="mt-6 text-text-secondary transition-colors group-hover:text-accent-cyan">Ver giras →</span>
-          </Link>
-        </StaggerGroup>
-      </Section>
-
+      {/* El trabajo, uno por uno. Se llena solo con cada .md + su vídeo. */}
       {eventos.length > 0 && (
-        <Section className="bg-bg-primary">
+        <Section>
           <RevealOnScroll as="p" className="eyebrow mb-4">Lo hemos montado</RevealOnScroll>
           <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
             Eventos y giras, uno por uno.
@@ -90,7 +87,45 @@ export default function Eventos() {
         </Section>
       )}
 
-      <Section>
+      {/* Las dos patas del servicio. */}
+      <Section className={eventos.length > 0 ? "pt-0" : undefined}>
+        <StaggerGroup stagger={0.08} className="grid gap-6 md:grid-cols-2">
+          <Link href="/eventos/marcas" className="card group flex flex-col">
+            <p className="eyebrow">Marcas</p>
+            <h2 className="display mt-3 text-3xl">Eventos para marcas</h2>
+            <p className="mt-3 flex-1 text-text-secondary">
+              Ballantine&apos;s, Pernod Ricard, Pepsico, Absolut. Activaciones,
+              lanzamientos y experiencias culturales. Del brief al titular en 6
+              semanas.
+            </p>
+            <span className="mt-6 text-text-secondary transition-colors group-hover:text-accent-cyan">
+              Ver eventos para marcas →
+            </span>
+          </Link>
+
+          <Link href="/eventos/giras" className="card group flex flex-col">
+            <p className="eyebrow">Giras</p>
+            <h2 className="display mt-3 text-3xl">Tour management</h2>
+            <p className="mt-3 flex-1 text-text-secondary">
+              Road, tour y stage management. Hemos llevado a Albert Pla, Alfred
+              García, Antonio Orozco, Maldita Nerea, Ruth Lorenzo.
+            </p>
+            <span className="mt-6 text-text-secondary transition-colors group-hover:text-accent-cyan">
+              Ver giras →
+            </span>
+          </Link>
+        </StaggerGroup>
+      </Section>
+
+      {/* Marcas que han confiado (prueba social). */}
+      <Section className="bg-bg-primary pt-0">
+        <RevealOnScroll as="p" className="eyebrow mb-8">
+          Marcas que han sonado con nosotros
+        </RevealOnScroll>
+        <MarqueeLogoWall items={brands} dir="marcas" speed={42} />
+      </Section>
+
+      <Section className="pt-0">
         <div className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
           <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
             ¿Marca o gira?
