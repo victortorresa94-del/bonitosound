@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { Section, Cta, JsonLd } from "@/components/ui";
 import {
   RevealOnScroll,
-  StaggerGroup,
   SplitTextReveal,
   MagneticButton,
 } from "@/components/motion";
 import { FaqOpen } from "@/components/FaqOpen";
+import {
+  ServiceFeatures,
+  type ServiceFeature,
+} from "@/components/servicios/ServiceFeatures";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -16,18 +19,23 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/marketing` },
 };
 
-const services = [
+// Características del servicio (textos del mockup). La 3ª va en blob cian.
+const features: ServiceFeature[] = [
   {
-    name: "Ads y paid media",
-    desc: "Campañas en Meta, TikTok y YouTube pensadas para mover oyentes y vender entradas — no para inflar dashboards. Medimos lo que importa: escuchas nuevas y tickets.",
+    icon: "megafono",
+    title: "Ads",
+    text: "Configuramos y optimizamos la campaña en cada plataforma. Presupuesto, targeting, creatividades.",
   },
   {
-    name: "Estrategia de redes",
-    desc: "Qué contar, cuándo y en qué formato. Calendario de contenido alineado con tus lanzamientos, no publicar por publicar.",
+    icon: "claqueta",
+    title: "Material",
+    text: "Vídeos, cortes verticales, artes para cada formato. Listos para pautar.",
   },
   {
-    name: "Lanzamientos",
-    desc: "Plan de salida para un single, un álbum o un evento: teaser, día de estreno y sostenimiento. Que el lanzamiento no pase desapercibido.",
+    icon: "moneda",
+    title: "Inversión propia",
+    text: "Cuando creemos en el lanzamiento, ponemos nosotros parte del presupuesto de ads.",
+    highlight: true,
   },
 ];
 
@@ -106,14 +114,9 @@ export default function Marketing() {
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           Tres piezas, un mismo objetivo.
         </SplitTextReveal>
-        <StaggerGroup stagger={0.1} className="mt-12 grid gap-6 md:grid-cols-3">
-          {services.map((s) => (
-            <div key={s.name} className="card flex flex-col">
-              <h3 className="display text-xl">{s.name}</h3>
-              <p className="mt-3 flex-1 text-text-secondary">{s.desc}</p>
-            </div>
-          ))}
-        </StaggerGroup>
+        <RevealOnScroll className="mt-12" delay={0.15}>
+          <ServiceFeatures features={features} />
+        </RevealOnScroll>
       </Section>
 
       <Section className="bg-bg-primary">
