@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Zilla_Slab } from "next/font/google";
+import { Zilla_Slab, Fredoka } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
@@ -16,6 +16,14 @@ const display = Zilla_Slab({
   variable: "--font-display",
   display: "swap",
   weight: ["300", "400", "500", "600", "700"],
+});
+
+// Grotesca redondeada chunky para titulares display de /eventos (mockup).
+const round = Fredoka({
+  subsets: ["latin"],
+  variable: "--font-round",
+  display: "swap",
+  weight: ["500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -80,7 +88,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="es" className={`${display.variable} ${GeistSans.variable}`}>
+    <html lang="es" className={`${display.variable} ${round.variable} ${GeistSans.variable}`}>
       <body style={{ ["--font-body" as string]: "var(--font-geist-sans)" }}>
         <JsonLd data={orgLd} />
         <MotionProvider>

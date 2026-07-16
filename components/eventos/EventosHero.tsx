@@ -46,7 +46,7 @@ export function EventosHero() {
         <div className="pointer-events-none relative mt-1 md:mt-2">
           <h1
             aria-label="Eventos"
-            className="select-none whitespace-nowrap font-body font-black leading-[0.8]"
+            className="select-none whitespace-nowrap font-round font-bold leading-[0.8]"
             style={{
               fontSize: "clamp(5.5rem, 21vw, 20rem)",
               letterSpacing: "-0.02em",
@@ -104,7 +104,7 @@ export function EventosHero() {
 
         {/* 106 — arriba izquierda, el más grande */}
         <div className="absolute left-[2%] top-[6%] md:left-[8%]">
-          <p className="font-body font-black leading-none" style={{ fontSize: "clamp(4rem, 10vw, 8rem)", color: NAVY }}>
+          <p className="font-round font-bold leading-none" style={{ fontSize: "clamp(4rem, 10vw, 8rem)", color: NAVY }}>
             106
           </p>
           <p className="mt-2 text-xs font-bold uppercase leading-tight tracking-wide md:text-sm">
@@ -114,7 +114,7 @@ export function EventosHero() {
 
         {/* 58 — centro, tamaño medio */}
         <div className="absolute left-[28%] top-[40%] md:left-[34%]">
-          <p className="font-body font-black leading-none" style={{ fontSize: "clamp(3rem, 7.5vw, 6rem)", color: NAVY }}>
+          <p className="font-round font-bold leading-none" style={{ fontSize: "clamp(3rem, 7.5vw, 6rem)", color: NAVY }}>
             58
           </p>
           <p className="mt-2 text-xs font-bold uppercase leading-tight tracking-wide md:text-sm">
@@ -124,7 +124,7 @@ export function EventosHero() {
 
         {/* 53 — abajo izquierda, el más pequeño */}
         <div className="absolute left-[3%] top-[74%] md:left-[6%]">
-          <p className="font-body font-black leading-none" style={{ fontSize: "clamp(2.4rem, 6vw, 4.5rem)", color: NAVY }}>
+          <p className="font-round font-bold leading-none" style={{ fontSize: "clamp(2.4rem, 6vw, 4.5rem)", color: NAVY }}>
             53
           </p>
           <p className="mt-2 text-xs font-bold uppercase leading-tight tracking-wide md:text-sm">
