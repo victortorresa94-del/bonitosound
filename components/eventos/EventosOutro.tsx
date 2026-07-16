@@ -6,11 +6,11 @@ const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
 /**
- * Cierre de /eventos (mockup): franja navy en diagonal con la frase grande,
- * fila de logos de marca, y CTA final en blob cyan fuera de eje.
+ * Cierre de /eventos (mockup): franja navy en diagonal con la frase, cluster
+ * de logos, doodles cyan (estrella, flecha, ×, puntos) y CTA en bloque cyan
+ * diagonal en la esquina inferior derecha.
  */
 export function EventosOutro({ brands }: { brands: readonly string[] }) {
-  // Set curado tipo mockup; findLogo cae a null si falta el archivo.
   const preferred = ["Ballantine's", "Schweppes", "Pepsico", "Pernod Ricard"];
   const logos = preferred
     .map((name) => ({ name, src: findLogo("marcas", name) }))
@@ -20,70 +20,71 @@ export function EventosOutro({ brands }: { brands: readonly string[] }) {
     <section className="relative w-full overflow-hidden" style={{ backgroundColor: CREAM }}>
       {/* Franja navy en diagonal con la frase */}
       <div
-        className="relative px-5 py-16 md:px-10 md:py-24"
-        style={{
-          backgroundColor: NAVY,
-          clipPath: "polygon(0 8%, 100% 0, 100% 92%, 0 100%)",
-        }}
+        className="relative px-5 py-14 md:px-10 md:py-20"
+        style={{ backgroundColor: NAVY, clipPath: "polygon(0 14%, 100% 0, 100% 86%, 0 100%)" }}
       >
-        <p
-          className="mx-auto max-w-5xl text-center font-round font-bold leading-[1.05] text-white"
-          style={{ fontSize: "clamp(1.7rem, 5vw, 3.6rem)" }}
-        >
-          <span style={{ color: CYAN }}>“No organizamos eventos.</span>
+        <p className="mx-auto max-w-5xl text-center font-round font-bold leading-[1.02] text-white" style={{ fontSize: "clamp(1.7rem, 5vw, 3.7rem)" }}>
+          <span style={{ color: CYAN }}>“</span>No organizamos eventos.
           <br />
-          Creamos momentos que suenan.”
+          Creamos momentos que suenan.<span style={{ color: CYAN }}>”</span>
         </p>
       </div>
 
-      {/* Logos de marca + blob CTA fuera de eje */}
-      <div className="relative mx-auto max-w-6xl px-5 pb-24 pt-12 md:px-10 md:pb-28 md:pt-16">
-        <p className="mb-6 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: NAVY, opacity: 0.55 }}>
-          Marcas que han confiado
-        </p>
-        {/* Fila de logos, no centrada perfecta. <img> plano: next/image
-            fallaba con estos SVG/logos en este contexto. */}
-        <div className="flex flex-wrap items-center gap-x-10 gap-y-6 md:gap-x-16">
-          {logos.map((b) => (
+      {/* Zona inferior: logos + doodles + CTA diagonal */}
+      <div className="relative mx-auto max-w-6xl px-5 pb-0 pt-12 md:px-10 md:pt-16">
+        {/* Logos sueltos, cluster no alineado */}
+        <div className="flex flex-wrap items-center gap-x-10 gap-y-6 pr-0 md:gap-x-20 md:pr-[38%]">
+          {logos.map((b, i) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               key={b.name}
               src={b.src}
               alt={b.name}
-              className="h-9 w-auto object-contain opacity-90 md:h-11"
+              className="h-9 w-auto object-contain opacity-95 md:h-12"
+              style={{ transform: `translateY(${i % 2 === 0 ? "0" : "18px"})` }}
             />
           ))}
         </div>
 
-        {/* Estrella/garabato decorativo cyan + CTA blob, misma fila en desktop */}
-        <div className="mt-10 flex items-end justify-between gap-6 md:mt-8">
-          <div>
-            <svg className="h-10 w-10" viewBox="0 0 40 40" fill="none" aria-hidden>
-              <path d="M20 3 L23 16 L36 12 L25 21 L33 32 L20 26 L7 32 L15 21 L4 12 L17 16 Z" stroke={CYAN} strokeWidth="2" strokeLinejoin="round" />
-            </svg>
-            <p className="mt-6 text-xs font-semibold uppercase tracking-wide" style={{ color: NAVY }}>
-              ¿Tienes algo en mente?<br />Cuéntanoslo.
-            </p>
-          </div>
-          {/* Blob CTA fuera de eje */}
-          <div
-            className="relative px-10 py-12 text-center md:px-16 md:py-14"
-            style={{
-              backgroundColor: CYAN,
-              borderRadius: "38% 62% 63% 37% / 41% 44% 56% 59%",
-            }}
+        {/* Doodles cyan sueltos: × y puntos */}
+        <svg className="mt-8 h-24 w-full" viewBox="0 0 900 120" fill="none" aria-hidden preserveAspectRatio="xMidYMid meet">
+          {/* × */}
+          <path d="M470 26 l16 16 M486 26 l-16 16" stroke={CYAN} strokeWidth="3" strokeLinecap="round" />
+          {/* puntos */}
+          <circle cx="430" cy="70" r="4" fill={CYAN} />
+          <circle cx="452" cy="86" r="3" fill={CYAN} />
+          <circle cx="470" cy="72" r="2.5" fill={CYAN} />
+          {/* flecha curva hacia el CTA (der) */}
+          <path d="M520 60 C 600 100, 680 96, 740 66" stroke={CYAN} strokeWidth="3" strokeLinecap="round" />
+          <path d="M740 66 l-18 -2 M740 66 l-8 16" stroke={CYAN} strokeWidth="3" strokeLinecap="round" />
+        </svg>
+
+        {/* Estrella + microcopy (abajo izquierda) */}
+        <div className="relative z-10 pb-24 md:pb-28">
+          <svg className="h-11 w-11" viewBox="0 0 44 44" fill="none" aria-hidden>
+            <path d="M22 3 L25 17 L39 13 L27 23 L36 36 L22 28 L8 36 L17 23 L5 13 L19 17 Z" stroke={CYAN} strokeWidth="2.2" strokeLinejoin="round" />
+            <path d="M8 8 l3 3 M38 6 l-3 3" stroke={CYAN} strokeWidth="2" strokeLinecap="round" />
+          </svg>
+          <p className="mt-5 text-xs font-semibold uppercase tracking-wide" style={{ color: NAVY }}>
+            ¿Tienes algo en mente?<br />Cuéntanoslo.
+          </p>
+        </div>
+
+        {/* CTA: bloque cyan diagonal en la esquina inferior derecha */}
+        <div
+          className="absolute bottom-0 right-0 flex w-[72%] flex-col items-start px-6 pb-8 pt-10 sm:w-[52%] md:w-[46%] md:px-12 md:pb-12 md:pt-16"
+          style={{ backgroundColor: CYAN, clipPath: "polygon(14% 0, 100% 22%, 100% 100%, 0 100%)" }}
+        >
+          <p className="pl-6 font-round font-bold uppercase leading-[0.95] md:pl-10" style={{ fontSize: "clamp(2rem, 5vw, 3.6rem)", color: NAVY }}>
+            ¿Marca<br />o gira?
+          </p>
+          <Link
+            href="/contacto"
+            className="ml-6 mt-5 inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs font-bold uppercase tracking-[0.15em] transition-transform hover:scale-105 md:ml-10"
+            style={{ color: NAVY }}
           >
-            <p className="font-round font-bold leading-none text-white" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
-              ¿Marca<br />o gira?
-            </p>
-            <Link
-              href="/contacto"
-              className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs font-bold uppercase tracking-[0.15em] transition-transform hover:scale-105"
-              style={{ color: NAVY }}
-            >
-              Hablemos →
-            </Link>
-          </div>
+            Hablemos →
+          </Link>
         </div>
       </div>
     </section>

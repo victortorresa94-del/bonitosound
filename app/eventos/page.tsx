@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { EventosHero } from "@/components/eventos/EventosHero";
-import { EventosBento } from "@/components/eventos/EventosBento";
+import { EventosShowcase } from "@/components/eventos/EventosShowcase";
 import { EventosOutro } from "@/components/eventos/EventosOutro";
 import { getEventos } from "@/lib/content";
 import { brands, site } from "@/lib/site";
@@ -15,11 +15,11 @@ export const metadata: Metadata = {
 export default function Eventos() {
   const eventos = getEventos();
   return (
-    <>
-      {/* Diseño roto/asimétrico (mockup validado): Hero+Stats → Bento → Cierre. */}
+    <div style={{ backgroundColor: "#FBFAF6" }}>
+      {/* Rediseño calcado del mockup: banda superior + showcase asimétrico + cierre. */}
       <EventosHero />
-      <EventosBento eventos={eventos} />
+      <EventosShowcase eventos={eventos} />
       <EventosOutro brands={brands} />
-    </>
+    </div>
   );
 }
