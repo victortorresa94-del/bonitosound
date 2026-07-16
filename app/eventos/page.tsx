@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Section, Cta } from "@/components/ui";
 import { EventoCard } from "@/components/EventoCard";
+import { EventosHero } from "@/components/eventos/EventosHero";
 import {
   RevealOnScroll,
   StaggerGroup,
   SplitTextReveal,
   MagneticButton,
-  ParallaxLayer,
   MarqueeLogoWall,
 } from "@/components/motion";
 import { getEventos } from "@/lib/content";
@@ -21,58 +20,14 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/eventos` },
 };
 
-const stats = [
-  { n: "106", label: "producciones con marcas y artistas" },
-  { n: "58", label: "contrataciones de artistas" },
-  { n: "53", label: "referencias discográficas" },
-];
-
 export default function Eventos() {
   const eventos = getEventos();
   const marcas = eventos.filter((e) => e.type === "marca");
   const giras = eventos.filter((e) => e.type !== "marca");
   return (
     <>
-      <section className="border-b border-subtle">
-        <div className="wrap grid gap-12 py-24 md:grid-cols-[1.2fr_1fr] md:items-center md:py-32">
-          <div className="max-w-3xl">
-            <RevealOnScroll as="p" className="eyebrow mb-4">Eventos</RevealOnScroll>
-            <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
-              Eventos que se recuerdan. Giras que se llenan.
-            </SplitTextReveal>
-            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
-              Dos cosas: producimos activaciones para marcas que quieren música
-              que se recuerde, y llevamos giras de principio a fin. Las dos con
-              el mismo equipo que las monta.
-            </RevealOnScroll>
-          </div>
-          <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-subtle">
-            <ParallaxLayer speed={0.2} className="absolute inset-0">
-              <Image
-                src="/img/heroes/eventos-marcas.png"
-                alt=""
-                fill
-                sizes="(max-width: 768px) 100vw, 40vw"
-                className="scale-110 object-cover"
-              />
-            </ParallaxLayer>
-          </div>
-        </div>
-      </section>
-
-      {/* Números: sustancia inmediata, dato duro (marketing musical + Dani). */}
-      <section className="border-b border-subtle">
-        <div className="wrap grid gap-10 py-16 sm:grid-cols-3 md:py-20">
-          {stats.map((s) => (
-            <RevealOnScroll key={s.label} className="text-center sm:text-left">
-              <p className="display text-[clamp(3rem,7vw,5rem)] leading-none text-accent-cyan">
-                {s.n}
-              </p>
-              <p className="mt-3 text-sm text-text-secondary">{s.label}</p>
-            </RevealOnScroll>
-          ))}
-        </div>
-      </section>
+      {/* NUEVO diseño roto/asimétrico — Hero + Stats (mockup validado). */}
+      <EventosHero />
 
       {/* El trabajo, uno por uno. Separado por pata: marcas / giras. Cada
           sección se llena sola con sus .md y aparece solo si hay contenido. */}
