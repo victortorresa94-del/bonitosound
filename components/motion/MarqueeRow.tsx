@@ -13,6 +13,13 @@ type MarqueeRowProps = {
   gap?: string;
 };
 
+/**
+ * Marquee horizontal en bucle CONTINUO (nunca se queda en blanco).
+ * Renderiza el contenido dos veces en UNA sola fila con gap uniforme y anima
+ * por la anchura exacta de un set (en píxeles): cuando el segundo set llega a
+ * donde empezaba el primero, reinicia sin salto ni hueco. Repite el contenido
+ * lo suficiente (desde quien lo llama) para cubrir pantallas anchas.
+ */
 export function MarqueeRow({
   children,
   speed = 50,
@@ -28,31 +35,39 @@ export function MarqueeRow({
     const track = trackRef.current;
     if (!track) return;
 
-    const reduced =
+    if (
       typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) return;
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
 
-    const firstHalf = track.firstElementChild as HTMLElement | null;
-    if (!firstHalf) return;
-    const halfWidth = firstHalf.scrollWidth;
-    if (halfWidth === 0) return;
-
-    const duration = halfWidth / speed;
-    const dir = direction === "left" ? -1 : 1;
-
-    gsap.set(track, { xPercent: 0 });
-    tweenRef.current = gsap.to(track, {
-      xPercent: dir * -50,
-      duration,
-      ease: "none",
-      repeat: -1,
+    let tween: gsap.core.Tween | null = null;
+    // Medir tras el layout (rAF) para que scrollWidth sea correcto.
+    const raf = requestAnimationFrame(() => {
+      const styles = getComputedStyle(track);
+      const gapPx = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+      // Contenido duplicado exacto → un set = (total + un gap) / 2. Ese gap de
+      // más es el que separa el último ítem del set A del primero del set B.
+      const setWidth = (track.scrollWidth + gapPx) / 2;
+      if (setWidth <= 0) return;
+      const dir = direction === "left" ? -1 : 1;
+      gsap.set(track, { x: 0 });
+      tween = gsap.to(track, {
+        x: dir * -setWidth,
+        duration: setWidth / speed,
+        ease: "none",
+        repeat: -1,
+      });
+      tweenRef.current = tween;
     });
 
     return () => {
-      tweenRef.current?.kill();
+      cancelAnimationFrame(raf);
+      tween?.kill();
+      tweenRef.current = null;
     };
-  }, [speed, direction]);
+  }, [speed, direction, children]);
 
   const onEnter = () => {
     if (pauseOnHover) tweenRef.current?.pause();
@@ -62,20 +77,10 @@ export function MarqueeRow({
   };
 
   const items = Children.toArray(children);
-  const half = (
-    <div className="flex shrink-0 items-center" style={{ gap }}>
-      {items.map((child, i) =>
-        isValidElement(child) ? cloneElement(child, { key: `m-${i}` }) : child
-      )}
-    </div>
-  );
-  const halfClone = (
-    <div className="flex shrink-0 items-center" aria-hidden="true" style={{ gap }}>
-      {items.map((child, i) =>
-        isValidElement(child) ? cloneElement(child, { key: `c-${i}` }) : child
-      )}
-    </div>
-  );
+  const render = (prefix: string) =>
+    items.map((child, i) =>
+      isValidElement(child) ? cloneElement(child, { key: `${prefix}-${i}` }) : child
+    );
 
   return (
     <div
@@ -83,9 +88,10 @@ export function MarqueeRow({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
     >
-      <div ref={trackRef} className="flex w-max items-center" style={{ gap }}>
-        {half}
-        {halfClone}
+      {/* Una sola fila: los dos sets como hijos directos → gap uniforme. */}
+      <div ref={trackRef} className="flex w-max flex-nowrap items-center" style={{ gap }}>
+        {render("a")}
+        {render("b")}
       </div>
     </div>
   );
