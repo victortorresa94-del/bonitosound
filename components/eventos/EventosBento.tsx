@@ -98,6 +98,12 @@ export function EventosBento({ eventos }: { eventos: Evento[] }) {
   return (
     <section className="relative w-full overflow-hidden" style={{ backgroundColor: "#FBFAF6" }}>
       <div className="mx-auto max-w-6xl px-5 pb-16 md:px-10 md:pb-24">
+        <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "#16b6d4" }}>
+          Más eventos en vídeo
+        </p>
+        <h2 className="mb-8 font-round text-3xl font-bold md:text-5xl" style={{ color: "#14283C" }}>
+          Míralo, no te lo contamos.
+        </h2>
         <div className="grid auto-rows-[76px] grid-cols-6 gap-3 md:auto-rows-[92px] md:gap-4">
           {ordered.map((e, i) => (
             <BentoCard

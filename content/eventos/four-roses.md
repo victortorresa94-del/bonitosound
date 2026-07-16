@@ -2,6 +2,7 @@
 brand: "Four Roses"
 title: "Four Roses: 20 eventos desde 2024"
 type: "marca"
+count: "20 eventos"
 year: "2025"
 context: "20 eventos para Four Roses desde 2024. Directo, ambiente y producción técnica para una marca que sabe cómo quiere sonar."
 result: "Veinte fechas y las que vienen. Cuando repites, es que salió bien."

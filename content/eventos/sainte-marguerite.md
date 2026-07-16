@@ -2,6 +2,7 @@
 brand: "Sainte Marguerite"
 title: "Sainte Marguerite: +20 eventos en 2025"
 type: "marca"
+count: "+20 eventos"
 year: "2025"
 context: "Más de 20 eventos para Sainte Marguerite en 2025. Música en directo para una marca de vino de la Provenza, con el gusto que pide."
 result: "Veinte fechas cuidadas como si cada una fuera la única."

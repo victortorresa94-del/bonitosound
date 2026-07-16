@@ -2,6 +2,7 @@
 brand: "Corona"
 title: "Corona: +40 eventos en un solo año"
 type: "marca"
+count: "+40 eventos"
 year: "2025"
 context: "Más de 40 eventos para Corona en 2025: música en directo alineada con la marca, de la selección del artista a la última prueba de sonido."
 result: "Cuarenta y pico fechas sin una noche floja. Eso es producción, no suerte."

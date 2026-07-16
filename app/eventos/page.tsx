@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { EventosHero } from "@/components/eventos/EventosHero";
 import { EventosShowcase } from "@/components/eventos/EventosShowcase";
+import { EventosBento } from "@/components/eventos/EventosBento";
+import { EventosBrands } from "@/components/eventos/EventosBrands";
 import { EventosOutro } from "@/components/eventos/EventosOutro";
 import { getEventos } from "@/lib/content";
 import { brands, site } from "@/lib/site";
@@ -16,9 +18,11 @@ export default function Eventos() {
   const eventos = getEventos();
   return (
     <div style={{ backgroundColor: "#FBFAF6" }}>
-      {/* Rediseño calcado del mockup: banda superior + showcase asimétrico + cierre. */}
+      {/* Mockup: banda superior + showcase asimétrico + más vídeos + marcas + cierre. */}
       <EventosHero />
       <EventosShowcase eventos={eventos} />
+      <EventosBento eventos={eventos} />
+      <EventosBrands eventos={eventos} />
       <EventosOutro brands={brands} />
     </div>
   );
