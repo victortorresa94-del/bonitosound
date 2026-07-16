@@ -4,9 +4,9 @@ import { ArtistFeatureCase } from "@/components/services/cases";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 
-const s = services.sello;
+const s = services.management;
 export const metadata: Metadata = {
-  title: "Sello discográfico independiente en España",
+  title: `${s.eyebrow} — Bonito Sound`,
   description: s.desc,
   alternates: { canonical: `${site.url}${s.path}` },
 };
@@ -17,9 +17,9 @@ export default function Page() {
       service={s}
       caseSlot={
         <ArtistFeatureCase
-          eyebrow="Un ejemplo"
-          h2="MARCA DIVINA, de Eva Calyza."
-          body="El primer álbum de Eva Calyza — diez canciones que fusionan folclore andaluz y electrónica oscura — se produjo con nosotros y salió en 2025. Del máster a la calle, con criterio."
+          eyebrow="A mano, un ejemplo"
+          h2="A Eva Calyza la lleva Manu."
+          body="Management personal: estrategia, calendario y las decisiones que importan, con un interlocutor que coge el teléfono. Su álbum MARCA DIVINA salió en 2025 con todo el sistema de Bonito detrás."
           slug="eva-calyza"
           spotifyId="6rUgNfaBgUk0WCQbNafgKh"
         />
