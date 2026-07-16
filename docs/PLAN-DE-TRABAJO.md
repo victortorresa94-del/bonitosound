@@ -100,13 +100,18 @@
 conocer al artista", que al propio artista le mole. Reúne y ordena su universo
 (IG, YouTube, Spotify) como el sistema que hay detrás de esas redes. Bloques a
 construir (el carrusel/hero se queda, se toca poco):
-- Bio rica y con carácter (más larga, mucha info del artista).
-- **Números en plataformas** (oyentes mensuales, seguidores, views).
+- **Bio currada APARTE de la del hero**: su historia, conocerle de verdad
+  (larga, con carácter, mucha info del artista).
+- **Estilo de música** (géneros, influencias, "para quién es").
+- **Números en general** (los que tengamos o podamos sacar de redes: oyentes
+  mensuales, seguidores, views…).
 - **Última canción** publicada · canción(es) **destacada(s)**.
 - **Último concierto** · **primer concierto** (hitos con fecha/sala/ciudad).
 - **Reels sueltos** de Instagram.
 - **Vídeos de YouTube intercalados** con publicaciones (entretenido de ver).
 - Próximos shows si los hay.
+- **CTA potente al final** de cada ficha (no dejarla sin salida: contratar /
+  seguir / ver más roster).
 - 💡 **Reproductor / play inmediato** (idea de Víctor): botón de **Play** donde
   hoy va "Contratar booking" (y mover booking a la derecha), que lance una
   **micro-mezcla de 4-5 temas en ~1 min**. Viabilidad: los navegadores **bloquean
