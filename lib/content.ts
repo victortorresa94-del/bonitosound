@@ -14,6 +14,11 @@ export type Artist = {
   spotifyPlaylistId?: string;
   instagram?: string;
   image?: string;
+  /** Stats para la cabecera de la ficha (texto libre, ej. "+18k oyentes
+   *  mensuales" / "+9k seguidores"). Solo se pintan si están puestos — no se
+   *  inventan cifras. */
+  listeners?: string;
+  followers?: string;
   /** Fotos adicionales para la galería de la ficha (rutas en /public). */
   gallery?: string[];
   bio: string[];

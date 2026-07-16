@@ -1,160 +1,230 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Section, Heading, Cta } from "@/components/ui";
 import {
   RevealOnScroll,
   StaggerGroup,
-  SplitTextReveal,
-  MagneticButton,
-  MarqueeLogoWall,
 } from "@/components/motion";
 import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
 
+const NAVY = "#14283C";
+const CYAN = "#16b6d4";
+
 export const metadata: Metadata = {
-  title: "Roster — Artistas Bonito Sound",
+  title: "Artistas — el roster de Bonito Sound",
   description:
-    "Roster de booking y management de Bonito Sound y catálogo de distribución. Pocos artistas, bien llevados.",
+    "A estos los llevamos nosotros: booking, management y sello. Pocos artistas, bien llevados, más un catálogo de distribución de ~20 nombres.",
   alternates: { canonical: `${site.url}/artistas` },
 };
 
-function ArtistCard({
+// Orden del mockup + tratamiento asimétrico por posición (aspecto + desplazamiento).
+const ORDER = ["dulze", "eva-calyza", "natura", "pablo-rojo", "paule", "sa-pena"];
+const LAYOUT: Record<string, { aspect: string; shift: string }> = {
+  dulze: { aspect: "aspect-[4/5]", shift: "" },
+  "eva-calyza": { aspect: "aspect-[4/5]", shift: "md:mt-16" },
+  natura: { aspect: "aspect-[3/4]", shift: "md:-mt-2" },
+  "pablo-rojo": { aspect: "aspect-[4/5]", shift: "" },
+  paule: { aspect: "aspect-[4/5]", shift: "md:mt-16" },
+  "sa-pena": { aspect: "aspect-[5/4]", shift: "md:-mt-2" },
+};
+
+function RosterCard({
   slug,
   name,
   genre,
   photo,
-  big = false,
 }: {
   slug: string;
   name: string;
   genre: string;
   photo: string | null;
-  big?: boolean;
 }) {
+  const l = LAYOUT[slug] ?? { aspect: "aspect-[4/5]", shift: "" };
   return (
-    <Link href={`/artistas/${slug}`} className="group" data-cursor="link">
-      <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
+    <Link
+      href={`/artistas/${slug}`}
+      data-cursor="link"
+      className={`group block ${l.shift}`}
+    >
+      <div
+        className={`relative ${l.aspect} overflow-hidden rounded-[1.5rem] bg-bg-tertiary shadow-[0_1px_0_rgba(20,40,60,0.06)] ring-1 ring-black/5 transition-all duration-500 group-hover:-translate-y-1.5 group-hover:shadow-[0_18px_40px_-18px_rgba(20,40,60,0.45)]`}
+      >
         {photo && (
           <Image
             src={photo}
             alt={name}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+            className="object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
           />
         )}
-        <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-5">
-          <span className={`display text-white ${big ? "text-3xl" : "text-2xl"}`}>
-            {name}
-          </span>
+        {/* Cue clickable: flecha que aparece al hover */}
+        <span
+          className="absolute right-4 top-4 grid h-9 w-9 translate-y-1 place-items-center rounded-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+          style={{ backgroundColor: CYAN, color: NAVY }}
+          aria-hidden
+        >
+          →
         </span>
       </div>
-      <p className="mt-3 text-sm text-text-muted">{genre}</p>
+      <div className="mt-3 flex items-baseline justify-between gap-3">
+        <span
+          className="font-round text-2xl font-bold md:text-3xl"
+          style={{ color: NAVY }}
+        >
+          {name}
+        </span>
+      </div>
+      <p className="mt-0.5 text-sm text-text-muted">{genre}</p>
     </Link>
   );
 }
 
 export default function Artistas() {
   const all = getArtists();
-  const booking = all.filter((a) => a.tier === "booking");
-  const distro = all
-    .filter((a) => a.tier === "distribucion")
-    .map((a) => ({ ...a, photo: a.image ?? findAsset("artistas", a.slug) }))
-    .filter((a) => a.photo);
+  const booking = all
+    .filter((a) => a.tier === "booking")
+    .sort((a, b) => ORDER.indexOf(a.slug) - ORDER.indexOf(b.slug));
 
   return (
     <>
-      <section className="border-b border-subtle">
-        <div className="wrap py-24 md:py-32">
-          <div className="max-w-3xl">
-            <RevealOnScroll as="p" className="eyebrow mb-4">
-              Roster
-            </RevealOnScroll>
-            <SplitTextReveal
-              as="h1"
-              split="chars"
-              stagger={0.025}
-              y={40}
-              className="display text-[clamp(2.6rem,7vw,5.4rem)]"
+      {/* ── HERO ── */}
+      <section style={{ backgroundColor: "#FBFAF6" }}>
+        <div className="wrap pb-4 pt-20 md:pt-28">
+          <RevealOnScroll
+            as="h1"
+            className="font-round font-bold leading-[0.92]"
+          >
+            <span
+              className="block text-[clamp(2.6rem,8vw,6rem)]"
+              style={{ color: NAVY }}
             >
-              Pocos. Bien llevados.
-            </SplitTextReveal>
-            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.3}>
-              No coleccionamos artistas. Llevamos a los que podemos llevar como
-              hay que llevarlos.
-            </RevealOnScroll>
-          </div>
+              Artistas con
+            </span>
+            <span
+              className="block text-[clamp(2.6rem,8vw,6rem)]"
+              style={{ color: NAVY }}
+            >
+              el rollo bonito
+            </span>
+          </RevealOnScroll>
+          <RevealOnScroll
+            as="p"
+            delay={0.2}
+            className="mt-4 text-lg font-medium text-[#14283C]"
+          >
+            Booking · Management · Sello
+          </RevealOnScroll>
         </div>
       </section>
 
-      <Section>
-        <RevealOnScroll as="p" className="eyebrow mb-8">
-          Booking &amp; Management
-        </RevealOnScroll>
-        <StaggerGroup stagger={0.08} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {booking.map((a) => (
-            <ArtistCard
-              key={a.slug}
-              slug={a.slug}
-              name={a.name}
-              genre={a.genre}
-              photo={a.image ?? findAsset("artistas", a.slug)}
-              big
-            />
-          ))}
-        </StaggerGroup>
-      </Section>
-
-      {distro.length > 0 && (
-        <Section className="bg-bg-primary pt-0">
-          <RevealOnScroll as="p" className="eyebrow mb-8">
-            En distribución y editorial
-          </RevealOnScroll>
+      {/* ── ROSTER asimétrico B/N ── */}
+      <section style={{ backgroundColor: "#FBFAF6" }}>
+        <div className="wrap pb-16 pt-8 md:pb-24">
           <StaggerGroup
-            stagger={0.06}
-            className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4"
+            stagger={0.08}
+            className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 md:grid-cols-3"
           >
-            {distro.map((a) => (
-              <ArtistCard
+            {booking.map((a) => (
+              <RosterCard
                 key={a.slug}
                 slug={a.slug}
                 name={a.name}
                 genre={a.genre}
-                photo={a.photo!}
+                photo={a.image ?? findAsset("artistas", a.slug)}
               />
             ))}
           </StaggerGroup>
-          <RevealOnScroll className="mt-14">
-            <p className="mb-6 text-sm text-text-muted">Y muchos más en catálogo:</p>
-            <MarqueeLogoWall items={distributionCatalog} dir="artistas" speed={35} />
-          </RevealOnScroll>
-        </Section>
-      )}
-
-      <Section>
-        <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
-          <Heading>¿Quieres a alguien del roster?</Heading>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">
-            Booking directo. Sin intermediarios raros — coges el teléfono y hablas
-            con quien lo lleva.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-5">
-            <MagneticButton strength={0.5}>
-              <Cta href={`mailto:${site.emails.booking}?subject=Booking%20roster`}>
-                Contactar booking →
-              </Cta>
-            </MagneticButton>
+          <RevealOnScroll className="mt-10 flex justify-end">
             <a
-              href={`tel:${site.phone.replace(/\s/g, "")}`}
-              className="text-sm font-medium text-text-secondary transition-colors hover:text-accent-cyan"
+              href="#catalogo"
+              className="group inline-flex items-center gap-2 text-lg font-semibold"
+              style={{ color: CYAN }}
             >
-              o llama al {site.phone}
+              Roster completo
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
             </a>
+          </RevealOnScroll>
+        </div>
+      </section>
+
+      {/* ── Divisor cian dibujado a mano ── */}
+      <div className="wrap" aria-hidden>
+        <svg
+          className="h-5 w-full"
+          viewBox="0 0 1200 20"
+          fill="none"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 12 C 120 2, 220 2, 340 11 S 560 20, 680 10 S 900 1, 1020 11 S 1160 18, 1200 9"
+            stroke={CYAN}
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+
+      {/* ── CATÁLOGO DE DISTRIBUCIÓN ── */}
+      <section id="catalogo" style={{ backgroundColor: "#FBFAF6" }}>
+        <div className="wrap py-16 md:py-24">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <RevealOnScroll
+              as="h2"
+              className="font-round text-[clamp(2.2rem,5.5vw,3.8rem)] font-bold leading-[0.95] text-[#14283C]"
+            >
+              Catálogo de
+              <br />
+              distribución
+            </RevealOnScroll>
+            <RevealOnScroll
+              as="p"
+              delay={0.1}
+              className="text-right text-lg leading-snug text-text-secondary"
+            >
+              ~20 artistas,
+              <br />
+              una distribuidora.
+            </RevealOnScroll>
           </div>
-        </RevealOnScroll>
-      </Section>
+
+          <RevealOnScroll
+            delay={0.15}
+            className="mt-10 text-[clamp(1.3rem,3.1vw,2.1rem)] font-medium leading-[1.7] text-[#14283C]"
+          >
+            {distributionCatalog.map((n, i) => (
+              <span key={n} className="whitespace-nowrap">
+                {i > 0 && (
+                  <span className="mx-3 font-bold" style={{ color: CYAN }}>
+                    ·
+                  </span>
+                )}
+                {n}
+              </span>
+            ))}
+          </RevealOnScroll>
+
+          <RevealOnScroll
+            delay={0.2}
+            className="mt-12 flex items-start gap-3 border-t border-subtle pt-6"
+          >
+            <span className="mt-0.5 text-lg font-bold" style={{ color: CYAN }}>
+              *
+            </span>
+            <p className="max-w-2xl text-text-secondary">
+              Entre ellos,{" "}
+              <span className="font-medium italic" style={{ color: NAVY }}>
+                Kenai White
+              </span>{" "}
+              — cantautor y actor salmantino con discografía propia.
+            </p>
+          </RevealOnScroll>
+        </div>
+      </section>
     </>
   );
 }

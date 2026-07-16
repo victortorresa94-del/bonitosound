@@ -33,15 +33,15 @@ export function EventosOutro({ brands }: { brands: readonly string[] }) {
       {/* Zona inferior: logos + doodles + CTA diagonal */}
       <div className="relative mx-auto max-w-6xl px-5 pb-0 pt-12 md:px-10 md:pt-16">
         {/* Logos sueltos, cluster no alineado */}
-        <div className="flex flex-wrap items-center gap-x-10 gap-y-6 pr-0 md:gap-x-20 md:pr-[38%]">
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-5 pr-0 md:gap-x-14 md:pr-[40%]">
           {logos.map((b, i) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               key={b.name}
               src={b.src}
               alt={b.name}
-              className="h-9 w-auto object-contain opacity-95 md:h-12"
-              style={{ transform: `translateY(${i % 2 === 0 ? "0" : "18px"})` }}
+              className="h-6 w-auto object-contain opacity-95 md:h-8"
+              style={{ transform: `translateY(${i % 2 === 0 ? "0" : "14px"})` }}
             />
           ))}
         </div>
