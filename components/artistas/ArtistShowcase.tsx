@@ -18,6 +18,8 @@ export type ShowcaseArtist = {
   isIllustration: boolean;
   spotifyUrl?: string;
   instagramUrl?: string;
+  /** ID de Spotify del tema que suena al darle a "Escuchar". */
+  trackId?: string;
 };
 
 function SpotifyIcon() {
@@ -56,11 +58,15 @@ export function ArtistShowcase({
     const idx = artists.findIndex((x) => x.slug === startSlug);
     return idx >= 0 ? idx : 0;
   });
+  // El reproductor se cierra al cambiar de artista: no se queda sonando el
+  // tema de otro mientras miras a este.
+  const [playing, setPlaying] = useState(false);
   if (artists.length === 0) return null;
   const a = artists[i];
   const go = (d: number) => {
     const next = (i + d + artists.length) % artists.length;
     setI(next);
+    setPlaying(false);
     // Navegación in-place: la URL refleja el artista actual sin recargar la
     // página ni perder el estado del carrusel.
     if (startSlug) router.replace(`/artistas/${artists[next].slug}`, { scroll: false });
@@ -100,7 +106,31 @@ export function ArtistShowcase({
             )}
           </div>
 
-          <div className="mt-9">
+          {/* Play primero (que suene nada más llegar), booking a la derecha.
+              El navegador exige un gesto para el audio: ese gesto es este clic,
+              así que el iframe se monta ya con autoplay y suena. */}
+          <div className="mt-9 flex flex-wrap items-center gap-4">
+            {a.trackId && !playing && (
+              <button
+                type="button"
+                onClick={() => setPlaying(true)}
+                className="group inline-flex items-center gap-3 rounded-full py-2 pl-2 pr-6 transition-transform hover:scale-[1.03]"
+                style={{ backgroundColor: CYAN }}
+                aria-label={`Escuchar a ${a.name}`}
+              >
+                <span
+                  className="grid h-11 w-11 place-items-center rounded-full transition-transform group-hover:scale-105"
+                  style={{ backgroundColor: NAVY }}
+                >
+                  <svg width="14" height="16" viewBox="0 0 14 16" fill={CYAN} aria-hidden>
+                    <path d="M0 0 L14 8 L0 16 Z" />
+                  </svg>
+                </span>
+                <span className="font-round text-base font-bold" style={{ color: NAVY }}>
+                  Escuchar
+                </span>
+              </button>
+            )}
             <a
               href={`mailto:${site.emails.booking}?subject=${encodeURIComponent(`Booking ${a.name}`)}`}
               className="btn btn-primary"
@@ -108,6 +138,20 @@ export function ArtistShowcase({
               Contratar booking →
             </a>
           </div>
+
+          {/* Reproductor: aparece al darle a Escuchar y arranca solo. */}
+          {a.trackId && playing && (
+            <div className="mt-5 max-w-md">
+              <iframe
+                title={`${a.name} sonando`}
+                src={`https://open.spotify.com/embed/track/${a.trackId}?utm_source=generator&theme=0&autoplay=1`}
+                width="100%"
+                height={152}
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                className="rounded-2xl border border-subtle"
+              />
+            </div>
+          )}
 
           <div className="mt-8 flex items-center gap-4">
             <button onClick={() => go(-1)} aria-label="Artista anterior" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>←</button>

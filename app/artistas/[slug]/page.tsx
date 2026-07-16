@@ -87,6 +87,8 @@ export default function ArtistPage({
         ? `https://open.spotify.com/artist/${x.spotifyArtistId}`
         : undefined,
       instagramUrl: x.instagram,
+      // Lo que suena al darle a "Escuchar": su última canción, o el 1º destacado.
+      trackId: x.lastTrackId ?? x.featuredTracks?.[0],
     };
   });
 
