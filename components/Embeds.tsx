@@ -58,17 +58,26 @@ export function InstagramReel({
   title?: string;
 }) {
   const id = url.match(/\/(?:reel|p|tv)\/([\w-]+)/)?.[1] ?? url;
+  // El embed de IG trae cabecera (Ver perfil) + vídeo + una barra inferior
+  // fea (likes, comentarios, "Ver más en Instagram"). Recortamos esa barra:
+  // el iframe es más alto que el contenedor y el overflow-hidden corta el pie.
   return (
-    <div className="mx-auto w-full max-w-[380px] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary shadow-sm">
-      <iframe
-        title={title}
-        src={`https://www.instagram.com/reel/${id}/embed`}
-        loading="lazy"
-        scrolling="no"
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        allowFullScreen
-        className="block h-[640px] w-full"
-      />
+    <div className="mx-auto w-full max-w-[300px]">
+      <div
+        className="relative overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary shadow-sm"
+        style={{ height: 520 }}
+      >
+        <iframe
+          title={title}
+          src={`https://www.instagram.com/reel/${id}/embed`}
+          loading="lazy"
+          scrolling="no"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          allowFullScreen
+          className="absolute inset-x-0 top-0 w-full border-0"
+          style={{ height: 640 }}
+        />
+      </div>
     </div>
   );
 }

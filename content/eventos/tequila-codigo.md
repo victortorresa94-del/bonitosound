@@ -2,6 +2,7 @@
 brand: "Tequila Código"
 title: "Tequila Código: +20 eventos de marca premium"
 type: "marca"
+count: "+20 eventos"
 year: "2024"
 context: "Más de 20 eventos para Tequila Código: música en directo y producción para activaciones de marca premium."
 result: "Veinte y pico noches montadas para que la marca solo tenga que brindar."

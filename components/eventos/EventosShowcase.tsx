@@ -24,6 +24,19 @@ function Tag({ e }: { e: Evento }) {
   );
 }
 
+/** Chip con el nº de bolos para esa marca (esquina inf-izq). */
+function CountChip({ e }: { e: Evento }) {
+  if (!e.count) return null;
+  return (
+    <span
+      className="absolute bottom-3 left-3 z-20 inline-block rounded-full px-3 py-1 text-[0.62rem] font-bold uppercase tracking-wide shadow-sm"
+      style={{ backgroundColor: CYAN, color: NAVY }}
+    >
+      {e.count}
+    </span>
+  );
+}
+
 function CardMedia({ e }: { e: Evento }) {
   const cover = findAsset("eventos", e.slug);
   return (
@@ -33,8 +46,8 @@ function CardMedia({ e }: { e: Evento }) {
       ) : cover ? (
         <Image src={cover} alt={e.title} fill sizes="40vw" className="object-cover" />
       ) : (
-        <div className="flex h-full w-full items-center justify-center" style={{ backgroundColor: "#e7e9e7" }}>
-          <span className="font-round text-lg font-bold" style={{ color: NAVY }}>{e.brand ?? e.artist}</span>
+        <div className="flex h-full w-full items-center justify-center p-6 text-center" style={{ backgroundColor: NAVY }}>
+          <span className="font-round text-3xl font-bold leading-none text-white md:text-4xl">{e.brand ?? e.artist}</span>
         </div>
       )}
       <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/25 to-transparent" />
@@ -51,12 +64,13 @@ const SLOTS = [
 ];
 
 export function EventosShowcase({ eventos }: { eventos: Evento[] }) {
-  // Preferimos vídeos para el clúster; fallback a cualquiera con media.
-  const media = eventos.filter((e) => e.video || findAsset("eventos", e.slug));
-  const cluster = media.slice(0, 4);
+  // Orden fijo del clúster (grande → resto). Sainte Marguerite fuera.
+  const bySlug = Object.fromEntries(eventos.map((e) => [e.slug, e]));
+  const clusterSlugs = ["corona", "four-roses", "chateau", "font-vella"];
+  const cluster = clusterSlugs.map((s) => bySlug[s]).filter(Boolean) as Evento[];
 
   const stats = [
-    { n: "106", l: ["Eventos", "realizados"] },
+    { n: "250", l: ["Eventos", "realizados"] },
     { n: "58", l: ["Marcas", "que han confiado"] },
     { n: "53", l: ["Artistas con los que", "hemos colaborado"] },
   ];
@@ -92,6 +106,7 @@ export function EventosShowcase({ eventos }: { eventos: Evento[] }) {
                 <CardMedia e={e} />
               </div>
               <Tag e={e} />
+              <CountChip e={e} />
             </Link>
           );
         })}
@@ -114,6 +129,7 @@ export function EventosShowcase({ eventos }: { eventos: Evento[] }) {
                 <CardMedia e={e} />
               </div>
               <Tag e={e} />
+              <CountChip e={e} />
             </Link>
           ))}
         </div>

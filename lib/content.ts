@@ -43,6 +43,8 @@ export type Evento = {
   type: "marca" | "gira" | "festival" | "showcase";
   year: string;
   location?: string;
+  /** Nº de eventos hechos para esta marca (ej. "+80 eventos"). Opcional. */
+  count?: string;
   /** Vídeo propio en /public/video/eventos/<slug>.mp4 (prioridad sobre YouTube). */
   video?: string;
   /** ID de YouTube si el vídeo vive ahí en vez de autoalojado. */

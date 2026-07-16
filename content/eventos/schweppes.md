@@ -2,6 +2,7 @@
 brand: "Schweppes"
 title: "Schweppes: +80 directos por el noroeste"
 type: "marca"
+count: "+80 eventos"
 year: "2024"
 location: "Noroeste de España"
 context: "Más de 80 activaciones con música en directo para Schweppes entre 2023 y 2024, por todo el noroeste. Booking, dirección artística y producción técnica — gira tras gira, plaza tras plaza."

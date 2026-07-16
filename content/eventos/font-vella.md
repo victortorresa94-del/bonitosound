@@ -2,6 +2,7 @@
 brand: "Font Vella"
 title: "Font Vella: 30 activaciones en tres años"
 type: "marca"
+count: "30 eventos"
 year: "2025"
 context: "30 activaciones para Font Vella entre 2023 y 2025. Música que acompaña a la marca sin taparla, en cada formato que ha hecho falta."
 result: "Tres años, treinta eventos, una sola forma de trabajar: la nuestra."
