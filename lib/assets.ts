@@ -10,6 +10,7 @@ export function assetSlug(name: string): string {
     .toLowerCase()
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "")
+    .replace(/['’]/g, "") // "ballantine's" -> "ballantines" (no guión)
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }

@@ -36,6 +36,7 @@ const config: Config = {
       fontFamily: {
         display: ["var(--font-display)", "ui-sans-serif", "system-ui"],
         body: ["var(--font-body)", "ui-sans-serif", "system-ui"],
+        round: ["var(--font-round)", "ui-rounded", "ui-sans-serif", "system-ui"],
       },
       maxWidth: {
         content: "1240px",
