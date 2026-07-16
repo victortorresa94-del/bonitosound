@@ -36,6 +36,10 @@ export function ArtistStyle({
   const tail = canTint ? words[words.length - 1] : null;
 
   const hasAside = Boolean(soundClean || tags.length > 0 || forWhoClean);
+  // El género YA sale en el hero (bajo el nombre, en cursiva cian). Esta
+  // sección solo se gana su sitio si aporta algo más: sonido, influencias o
+  // para quién. Si no, no se pinta — nada de cabeceras con hueco vacío.
+  if (!hasAside) return null;
 
   return (
     <Section id="sonido">
