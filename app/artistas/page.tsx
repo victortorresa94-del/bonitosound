@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -5,13 +7,20 @@ import { Section, Heading, Cta } from "@/components/ui";
 import {
   RevealOnScroll,
   StaggerGroup,
-  SplitTextReveal,
   MagneticButton,
   MarqueeLogoWall,
 } from "@/components/motion";
+import { ArtistShowcase, type ShowcaseArtist } from "@/components/artistas/ArtistShowcase";
 import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
+
+/** Ilustración "dibujo" si existe en /public; si no, la foto real (sin color). */
+function resolveShowcaseImage(slug: string, fallback: string | null) {
+  const ill = path.join(process.cwd(), "public", "img", "artistas", "ilustracion", `${slug}.png`);
+  if (fs.existsSync(ill)) return { image: `/img/artistas/ilustracion/${slug}.png`, isIllustration: true };
+  return { image: fallback, isIllustration: false };
+}
 
 export const metadata: Metadata = {
   title: "Roster — Artistas Bonito Sound",
@@ -64,48 +73,28 @@ export default function Artistas() {
     .map((a) => ({ ...a, photo: a.image ?? findAsset("artistas", a.slug) }))
     .filter((a) => a.photo);
 
+  const showcase: ShowcaseArtist[] = booking.map((a) => {
+    const { image, isIllustration } = resolveShowcaseImage(
+      a.slug,
+      a.image ?? findAsset("artistas", a.slug)
+    );
+    return {
+      slug: a.slug,
+      name: a.name,
+      genre: a.genre,
+      bioLine: a.bio[0] ?? "",
+      image,
+      isIllustration,
+      spotifyUrl: a.spotifyArtistId
+        ? `https://open.spotify.com/artist/${a.spotifyArtistId}`
+        : undefined,
+      instagramUrl: a.instagram,
+    };
+  });
+
   return (
     <>
-      <section className="border-b border-subtle">
-        <div className="wrap py-24 md:py-32">
-          <div className="max-w-3xl">
-            <RevealOnScroll as="p" className="eyebrow mb-4">
-              Roster
-            </RevealOnScroll>
-            <SplitTextReveal
-              as="h1"
-              split="chars"
-              stagger={0.025}
-              y={40}
-              className="display text-[clamp(2.6rem,7vw,5.4rem)]"
-            >
-              Pocos. Bien llevados.
-            </SplitTextReveal>
-            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.3}>
-              No coleccionamos artistas. Llevamos a los que podemos llevar como
-              hay que llevarlos.
-            </RevealOnScroll>
-          </div>
-        </div>
-      </section>
-
-      <Section>
-        <RevealOnScroll as="p" className="eyebrow mb-8">
-          Booking &amp; Management
-        </RevealOnScroll>
-        <StaggerGroup stagger={0.08} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {booking.map((a) => (
-            <ArtistCard
-              key={a.slug}
-              slug={a.slug}
-              name={a.name}
-              genre={a.genre}
-              photo={a.image ?? findAsset("artistas", a.slug)}
-              big
-            />
-          ))}
-        </StaggerGroup>
-      </Section>
+      <ArtistShowcase artists={showcase} />
 
       {distro.length > 0 && (
         <Section className="bg-bg-primary pt-0">
