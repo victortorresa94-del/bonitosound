@@ -55,10 +55,9 @@ export default function ArtistPage({
   const hasGallery = a.gallery && a.gallery.length > 0;
   const hasMusic = Boolean(a.spotifyArtistId || a.spotifyPlaylistId);
 
-  // Otros del roster (mismo tier primero), para no dejar la página sin salida.
+  // Otros del roster (todos juntos, sin distinción), para no dejar sin salida.
   const others = getArtists()
     .filter((x) => x.slug !== a.slug)
-    .sort((x, y) => (x.tier === a.tier ? -1 : 1))
     .slice(0, 3);
 
   const sameAs: string[] = [];
