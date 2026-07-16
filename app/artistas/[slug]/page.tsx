@@ -146,56 +146,52 @@ export default function ArtistPage({
         </div>
       </section>
 
-      {/* Música primero: si hay, suena arriba. */}
-      {hasMusic && (
+      {/* Banner combinado: Spotify + Instagram, los dos en el mismo bloque. */}
+      {(hasMusic || a.instagram) && (
         <Section>
-          <div className="grid items-start gap-12 md:grid-cols-[1fr_1.1fr]">
-            <div>
-              <RevealOnScroll as="p" className="eyebrow mb-4">
-                Escúchale
-              </RevealOnScroll>
-              <SplitTextReveal
-                as="h2"
-                split="lines"
-                className="display text-[clamp(1.8rem,4vw,3rem)]"
-              >
-                Dale al play antes de escribirnos.
-              </SplitTextReveal>
-              {/* Guiño de marca: clip de cassette, el único elemento en
-                  movimiento de esta zona (web-motion: un protagonista). */}
-              <div
-                aria-hidden
-                className="mt-8 hidden aspect-video w-48 opacity-90 md:block"
-              >
-                <video
-                  src="/video/home/records.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  className="h-full w-full object-contain"
-                />
-              </div>
+          <RevealOnScroll className="overflow-hidden rounded-3xl border border-subtle">
+            <div className="grid md:grid-cols-2">
+              {hasMusic && (
+                <div className="border-b border-subtle bg-bg-tertiary p-6 md:border-b-0 md:border-r md:p-8">
+                  <p className="eyebrow mb-5">Escúchale en Spotify</p>
+                  <div className="space-y-4">
+                    {a.spotifyArtistId && (
+                      <SpotifyEmbed type="artist" id={a.spotifyArtistId} title={`${a.name} en Spotify`} />
+                    )}
+                    {a.spotifyPlaylistId && (
+                      <SpotifyEmbed type="playlist" id={a.spotifyPlaylistId} height={232} title={`Playlist de ${a.name}`} />
+                    )}
+                  </div>
+                </div>
+              )}
+              {a.instagram && (
+                <div className="flex flex-col p-6 md:p-8">
+                  <div className="mb-5 flex items-center justify-between">
+                    <p className="eyebrow">Instagram</p>
+                    <a href={a.instagram} target="_blank" rel="noopener noreferrer" className="link-underline text-sm font-semibold text-text-secondary">
+                      @{igHandle} →
+                    </a>
+                  </div>
+                  {hasReels ? (
+                    <InstagramFeed posts={a.reels} />
+                  ) : (
+                    <a
+                      href={a.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex flex-1 flex-col items-center justify-center gap-2 rounded-2xl border border-dashed p-10 text-center transition-colors hover:border-accent-cyan"
+                      style={{ borderColor: "rgba(20,40,60,0.2)" }}
+                    >
+                      <span className="text-lg text-text-secondary">Su feed, en directo</span>
+                      <span className="text-lg font-semibold text-accent-cyan-text transition-transform group-hover:translate-x-1">
+                        Ver @{igHandle} en Instagram →
+                      </span>
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
-            <RevealOnScroll className="space-y-6" delay={0.15}>
-              {a.spotifyArtistId && (
-                <SpotifyEmbed
-                  type="artist"
-                  id={a.spotifyArtistId}
-                  title={`${a.name} en Spotify`}
-                />
-              )}
-              {a.spotifyPlaylistId && (
-                <SpotifyEmbed
-                  type="playlist"
-                  id={a.spotifyPlaylistId}
-                  height={232}
-                  title={`Playlist de ${a.name}`}
-                />
-              )}
-            </RevealOnScroll>
-          </div>
+          </RevealOnScroll>
         </Section>
       )}
 
@@ -234,53 +230,10 @@ export default function ArtistPage({
         </Section>
       )}
 
-      {a.instagram && (
-        <Section>
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <RevealOnScroll as="p" className="eyebrow mb-2">
-                Instagram
-              </RevealOnScroll>
-              <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.6rem,3.5vw,2.6rem)]">
-                Lo último, en su perfil.
-              </SplitTextReveal>
-            </div>
-            <a
-              href={a.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-underline text-sm font-semibold text-text-secondary"
-            >
-              @{igHandle} →
-            </a>
-          </div>
-          {hasReels ? (
-            <InstagramFeed posts={a.reels} />
-          ) : (
-            <RevealOnScroll>
-              <a
-                href={a.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col items-start gap-3 rounded-2xl border border-subtle bg-bg-tertiary p-8 transition-colors hover:border-accent-cyan md:flex-row md:items-center md:justify-between md:p-10"
-              >
-                <span className="max-w-md text-lg text-text-secondary">
-                  Su día a día — directos, backstage y lanzamientos — está en
-                  Instagram, actualizándose solo.
-                </span>
-                <span className="whitespace-nowrap text-lg font-semibold text-accent-cyan-text transition-transform group-hover:translate-x-1">
-                  Ver el feed de @{igHandle} →
-                </span>
-              </a>
-            </RevealOnScroll>
-          )}
-        </Section>
-      )}
-
       {hasVideos && (
         <Section className="bg-bg-primary">
           <RevealOnScroll as="p" className="eyebrow mb-8">
-            Vídeos
+            Vídeos y ediciones
           </RevealOnScroll>
           <StaggerGroup stagger={0.1} className="grid gap-6 md:grid-cols-2">
             {a.youtubeIds!.map((id) => (

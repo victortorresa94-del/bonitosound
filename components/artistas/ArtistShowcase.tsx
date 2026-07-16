@@ -57,9 +57,11 @@ export function ArtistShowcase({ artists }: { artists: ShowcaseArtist[] }) {
           <p className="mb-4 text-xs font-bold uppercase tracking-[0.25em]" style={{ color: CYAN }}>
             Artista · {pad(i + 1)} / {pad(artists.length)}
           </p>
-          <h1 className="display leading-[0.95]" style={{ color: NAVY, fontSize: "clamp(3rem,8vw,6rem)" }}>
-            {a.name}
-          </h1>
+          <Link href={`/artistas/${a.slug}`} className="inline-block transition-opacity hover:opacity-80">
+            <h1 className="display leading-[0.95]" style={{ color: NAVY, fontSize: "clamp(3rem,8vw,6rem)" }}>
+              {a.name}
+            </h1>
+          </Link>
           <p className="display italic" style={{ color: CYAN, fontSize: "clamp(1.4rem,3vw,2.2rem)" }}>
             {a.genre}
           </p>
@@ -81,24 +83,27 @@ export function ArtistShowcase({ artists }: { artists: ShowcaseArtist[] }) {
           </div>
 
           <div className="mt-10 flex items-center gap-4">
-            <button onClick={() => go(-1)} aria-label="Anterior" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>←</button>
-            <button onClick={() => go(1)} aria-label="Siguiente" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>→</button>
-            <Link href={`/artistas/${a.slug}`} className="ml-2 text-sm font-semibold underline-offset-4 hover:underline" style={{ color: CYAN }}>
-              Ver ficha completa →
-            </Link>
+            <button onClick={() => go(-1)} aria-label="Artista anterior" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>←</button>
+            <button onClick={() => go(1)} aria-label="Siguiente artista" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>→</button>
+            <span className="ml-2 text-sm text-text-muted">Desliza para ver más artistas</span>
           </div>
         </div>
 
-        {/* Imagen */}
+        {/* Imagen — clic → ficha del artista */}
         <div className="order-1 md:order-2">
-          <div key={`i-${a.slug}`} className="relative mx-auto aspect-[3/4] w-full max-w-md animate-[fadeIn_.5s_ease] overflow-hidden rounded-2xl" style={{ backgroundColor: "#ECE7D8" }}>
+          <Link
+            href={`/artistas/${a.slug}`}
+            key={`i-${a.slug}`}
+            className="group relative mx-auto block aspect-[3/4] w-full max-w-md animate-[fadeIn_.5s_ease] overflow-hidden rounded-2xl"
+            style={{ backgroundColor: "#ECE7D8" }}
+          >
             {a.image ? (
               <Image
                 src={a.image}
                 alt={a.name}
                 fill
                 sizes="(max-width: 768px) 100vw, 45vw"
-                className={`object-cover ${a.isIllustration ? "" : "grayscale"}`}
+                className={`object-cover transition-transform duration-500 group-hover:scale-[1.03] ${a.isIllustration ? "" : "grayscale group-hover:grayscale-0"}`}
                 priority
               />
             ) : (
@@ -106,7 +111,10 @@ export function ArtistShowcase({ artists }: { artists: ShowcaseArtist[] }) {
                 <span className="display text-3xl" style={{ color: NAVY }}>{a.name}</span>
               </div>
             )}
-          </div>
+            <span className="absolute bottom-4 left-4 rounded-full bg-black/55 px-4 py-1.5 text-sm font-semibold text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
+              Ver ficha →
+            </span>
+          </Link>
         </div>
       </div>
 
