@@ -1,3 +1,4 @@
+import { LazyVideo } from "@/components/LazyVideo";
 import Image from "next/image";
 import Link from "next/link";
 import type { Evento } from "@/lib/content";
@@ -39,16 +40,11 @@ function BentoCard({ e, size, rot }: { e: Evento; size: string; rot: string }) {
       className={`group relative overflow-hidden rounded-3xl border transition-transform duration-500 hover:z-10 hover:!rotate-0 hover:scale-[1.02] ${size} ${rot}`}
       style={{ borderColor: "rgba(20,40,60,0.12)", backgroundColor: "#eef0ee" }}
     >
-      {/* Media: vídeo autoplay > foto > logo */}
+      {/* Media: vídeo (carga perezosa) > foto > logo */}
       {e.video ? (
-        <video
+        <LazyVideo
           src={e.video}
           poster={cover ?? undefined}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
       ) : cover ? (

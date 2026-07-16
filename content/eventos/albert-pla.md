@@ -2,6 +2,7 @@
 artist: "Albert Pla"
 title: "Gira Rumbagenarios de Albert Pla"
 type: "gira"
+videoUrl: "albert-pla.mp4"
 year: "2024"
 location: "España"
 context: "Producción, coordinación técnica y logística de la gira Rumbagenarios de Albert Pla. Road, escenario y todo lo que no se ve, resuelto."

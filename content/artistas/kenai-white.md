@@ -2,7 +2,7 @@
 name: "Kenai White"
 genre: "Pop urbano / Cantautor"
 tier: "distribucion"
-instagram: ""
+instagram: "https://www.instagram.com/kenaiwhite"
 reels: []
 milestones:
   - { year: "2022", text: "Single Soy Trans" }

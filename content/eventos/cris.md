@@ -2,6 +2,7 @@
 artist: "Cris"
 title: "Cris en directo, producción Bonito"
 type: "showcase"
+videoUrl: "cris.mp4"
 year: "2024"
 context: "Directo de Cris con producción y coordinación de Bonito Sound: sonido, escenario y logística al detalle."
 result: "El artista arriba, todo lo demás resuelto por debajo."

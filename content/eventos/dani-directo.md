@@ -2,6 +2,7 @@
 artist: "Dani"
 title: "Dani en directo: el jefe también toca"
 type: "showcase"
+videoUrl: "dani-directo.mp4"
 year: "2024"
 context: "Dani, alma de Bonito Sound, en directo. Treinta años de oficio no se aprenden en un despacho."
 result: "Aquí la música no es teoría. La tocamos."
