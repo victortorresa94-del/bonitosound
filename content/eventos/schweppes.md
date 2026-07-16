@@ -11,4 +11,4 @@ result: "Un formato que se repite porque funciona. Mismo equipo, misma calidad, 
 ---
 Ochenta y pico eventos no se improvisan. Se montan con un sistema: un artista que encaja con la marca, una producción que no falla y un equipo que ya sabe cómo suena cada sala antes de entrar.
 
-Schweppes repitió temporada tras temporada. Cuando una marca vuelve tantas veces, es que la música dejó de ser un gasto y pasó a ser parte del plan.
+Schweppes repitió temporada tras temporada. Cuando una marca vuelve tantas veces, es porque la música se volvió parte del plan.

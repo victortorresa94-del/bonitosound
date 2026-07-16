@@ -48,7 +48,7 @@ const why = [
 const faq = [
   {
     q: "¿Cuánto cuesta producir un evento de marca?",
-    a: "Depende del formato, el artista y la escala. Las activaciones de marca con música en directo suelen moverse entre 30.000 € y 150.000 €. No damos precio por una web: lo cerramos sobre tu brief real.",
+    a: "Depende del formato, el artista y la escala — no hay dos iguales. Lo cerramos sobre tu brief real, hablándolo, no con una tarifa de escaparate.",
   },
   {
     q: "¿Necesito traer mi propio artista?",
