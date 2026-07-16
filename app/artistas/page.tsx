@@ -95,20 +95,14 @@ export default function Artistas() {
         <div className="wrap pb-4 pt-20 md:pt-28">
           <RevealOnScroll
             as="h1"
-            className="font-round font-bold leading-[0.92]"
+            className="display leading-[0.95] text-[clamp(2.8rem,8.5vw,6.4rem)]"
           >
-            <span
-              className="block text-[clamp(2.6rem,8vw,6rem)]"
-              style={{ color: NAVY }}
-            >
+            <span style={{ color: NAVY }}>
               Artistas con
+              <br />
+              el rollo{" "}
             </span>
-            <span
-              className="block text-[clamp(2.6rem,8vw,6rem)]"
-              style={{ color: NAVY }}
-            >
-              el rollo bonito
-            </span>
+            <span style={{ color: CYAN }}>bonito</span>
           </RevealOnScroll>
           <RevealOnScroll
             as="p"
@@ -194,7 +188,7 @@ export default function Artistas() {
 
           <RevealOnScroll
             delay={0.15}
-            className="mt-10 text-[clamp(1.3rem,3.1vw,2.1rem)] font-medium leading-[1.7] text-[#14283C]"
+            className="font-round mt-10 text-[clamp(1.3rem,3.1vw,2.1rem)] font-semibold leading-[1.7] text-[#14283C]"
           >
             {distributionCatalog.map((n, i) => (
               <span key={n} className="whitespace-nowrap">

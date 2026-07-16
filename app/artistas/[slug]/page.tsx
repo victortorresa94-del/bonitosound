@@ -2,18 +2,16 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Section, Cta, JsonLd } from "@/components/ui";
+import { Section, JsonLd } from "@/components/ui";
 import { SpotifyEmbed, YouTubeEmbed, InstagramFeed } from "@/components/Embeds";
-import {
-  RevealOnScroll,
-  StaggerGroup,
-  SplitTextReveal,
-  MagneticButton,
-  ParallaxLayer,
-} from "@/components/motion";
+import { RevealOnScroll, StaggerGroup, SplitTextReveal } from "@/components/motion";
+import { ArtistShowcase, type ShowcaseArtist } from "@/components/artistas/ArtistShowcase";
 import { getArtist, getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { site } from "@/lib/site";
+
+// Mismo orden que /artistas (roster de booking, orden del mockup).
+const BOOKING_ORDER = ["dulze", "eva-calyza", "natura", "pablo-rojo", "paule", "sa-pena"];
 
 export function generateStaticParams() {
   return getArtists().map((a) => ({ slug: a.slug }));
@@ -42,13 +40,34 @@ export default function ArtistPage({
   if (!a) notFound();
 
   const photo = a.image ?? findAsset("artistas", a.slug);
-  // Ilustración de artista (estilo navy line-art). Si no existe, cae a la foto.
-  const illustration = findAsset("artistas/ilustracion", a.slug);
-  const heroMedia = illustration ?? photo;
-  // Contador "NN/TT" dentro del mismo tier (booking/distribución).
-  const tierList = getArtists().filter((x) => x.tier === a.tier);
-  const artistIdx = tierList.findIndex((x) => x.slug === a.slug) + 1;
-  const artistTotal = tierList.length;
+
+  // Roster navegable del showcase: mismo tier que el artista actual, mismo
+  // orden que /artistas cuando es booking. Así las flechas del carrusel
+  // recorren "el resto del roster" sin salir de la ficha.
+  const tierList = getArtists()
+    .filter((x) => x.tier === a.tier)
+    .sort((x, y) =>
+      a.tier === "booking"
+        ? BOOKING_ORDER.indexOf(x.slug) - BOOKING_ORDER.indexOf(y.slug)
+        : 0,
+    );
+  const showcase: ShowcaseArtist[] = tierList.map((x) => {
+    const illustration = findAsset("artistas/ilustracion", x.slug);
+    const xPhoto = x.image ?? findAsset("artistas", x.slug);
+    return {
+      slug: x.slug,
+      name: x.name,
+      genre: x.genre,
+      bioLine: x.bio[0] ?? "",
+      image: illustration ?? xPhoto,
+      isIllustration: Boolean(illustration),
+      spotifyUrl: x.spotifyArtistId
+        ? `https://open.spotify.com/artist/${x.spotifyArtistId}`
+        : undefined,
+      instagramUrl: x.instagram,
+    };
+  });
+
   const hasReels = a.reels && a.reels.length > 0;
   const hasVideos = a.youtubeIds && a.youtubeIds.length > 0;
   const hasGallery = a.gallery && a.gallery.length > 0;
@@ -83,126 +102,10 @@ export default function ArtistPage({
         }}
       />
 
-      {/* Hero editorial (mockup): nombre serif + género cian + bio + stats a la
-          izquierda; ilustración navy a la derecha. */}
-      <section style={{ backgroundColor: "#FBFAF6" }}>
-        <div className="wrap grid items-center gap-8 py-14 md:grid-cols-[1fr_1fr] md:py-20">
-          <div className="relative z-10 order-2 md:order-1">
-            <RevealOnScroll as="p" className="eyebrow mb-6">
-              Artista · {String(artistIdx).padStart(2, "0")}/
-              {String(artistTotal).padStart(2, "0")}
-            </RevealOnScroll>
-            <SplitTextReveal
-              as="h1"
-              split="chars"
-              stagger={0.02}
-              y={40}
-              className="display font-normal leading-[0.9] text-[clamp(3rem,9vw,6.5rem)] text-[#14283C]"
-            >
-              {a.name}
-            </SplitTextReveal>
-            <RevealOnScroll
-              as="p"
-              delay={0.12}
-              className="mt-2 font-display text-[clamp(1.3rem,3.2vw,2rem)] italic text-[#16b6d4]"
-            >
-              {a.genre}
-            </RevealOnScroll>
-            {a.bio[0] && (
-              <RevealOnScroll
-                as="p"
-                className="mt-6 max-w-md text-lg leading-relaxed text-text-secondary"
-                delay={0.2}
-              >
-                {a.bio[0]}
-              </RevealOnScroll>
-            )}
-
-            {/* Stats: Spotify + Instagram (con cifra solo si está en frontmatter). */}
-            {(a.spotifyArtistId || a.instagram) && (
-              <RevealOnScroll
-                className="mt-8 flex flex-wrap items-center gap-x-10 gap-y-4"
-                delay={0.28}
-              >
-                {a.spotifyArtistId && (
-                  <a
-                    href={`https://open.spotify.com/artist/${a.spotifyArtistId}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-3"
-                  >
-                    <svg viewBox="0 0 24 24" className="h-8 w-8 shrink-0" fill="#14283C" aria-hidden>
-                      <path d="M12 0a12 12 0 100 24 12 12 0 000-24zm5.5 17.3a.75.75 0 01-1.03.25c-2.82-1.72-6.37-2.11-10.55-1.16a.75.75 0 11-.33-1.46c4.57-1.04 8.5-.59 11.66 1.34.35.22.46.68.25 1.03zm1.47-3.27a.94.94 0 01-1.29.31c-3.23-1.98-8.15-2.56-11.97-1.4a.94.94 0 01-.55-1.8c4.37-1.33 9.79-.68 13.5 1.6.44.27.58.85.31 1.29zm.13-3.4C15.72 8.23 8.98 8 5.2 9.15a1.12 1.12 0 11-.65-2.15c4.34-1.32 11.78-1.06 16.43 1.7a1.12 1.12 0 11-1.15 1.93z" />
-                    </svg>
-                    <span className="text-sm text-text-secondary transition-colors group-hover:text-[#0c7e93]">
-                      {a.listeners ?? "Spotify"}
-                    </span>
-                  </a>
-                )}
-                {a.instagram && (
-                  <a
-                    href={a.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-3"
-                  >
-                    <svg viewBox="0 0 24 24" className="h-8 w-8 shrink-0" fill="none" stroke="#14283C" strokeWidth="1.7" aria-hidden>
-                      <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" />
-                      <circle cx="12" cy="12" r="4.2" />
-                      <circle cx="17.4" cy="6.6" r="1.1" fill="#14283C" stroke="none" />
-                    </svg>
-                    <span className="text-sm text-text-secondary transition-colors group-hover:text-[#0c7e93]">
-                      {a.followers ?? "Instagram"}
-                    </span>
-                  </a>
-                )}
-              </RevealOnScroll>
-            )}
-
-            <RevealOnScroll className="mt-9" delay={0.34}>
-              <MagneticButton strength={0.4}>
-                <Cta
-                  href={`mailto:${site.emails.booking}?subject=${encodeURIComponent(
-                    `Booking ${a.name}`,
-                  )}`}
-                >
-                  Contratar booking →
-                </Cta>
-              </MagneticButton>
-            </RevealOnScroll>
-          </div>
-
-          {/* Ilustración (o foto de fallback). */}
-          <div className="order-1 md:order-2">
-            {heroMedia &&
-              (illustration ? (
-                <div className="relative mx-auto aspect-[3/4] w-full max-w-md">
-                  <Image
-                    src={heroMedia}
-                    alt={a.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 45vw"
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-              ) : (
-                <div className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
-                  <ParallaxLayer speed={0.16} className="absolute inset-0">
-                    <Image
-                      src={heroMedia}
-                      alt={a.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 45vw"
-                      className="scale-110 object-cover grayscale"
-                      priority
-                    />
-                  </ParallaxLayer>
-                </div>
-              ))}
-          </div>
-        </div>
-      </section>
+      {/* Hero: carrusel de showcase (nombre serif + género cian + bio +
+          Spotify/Instagram + flechas para recorrer el resto del roster sin
+          salir de la ficha). */}
+      <ArtistShowcase artists={showcase} startSlug={a.slug} />
 
       {/* Música primero: si hay, suena arriba. */}
       {hasMusic && (

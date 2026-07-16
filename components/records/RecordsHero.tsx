@@ -115,29 +115,29 @@ function TagCard({ t }: { t: (typeof TAGS)[number] }) {
 export function RecordsHero() {
   return (
     <section className="relative w-full overflow-hidden" style={{ backgroundColor: "#FBFAF6" }}>
-      <div className="mx-auto max-w-6xl px-5 pb-16 pt-10 md:px-10 md:pb-24 md:pt-14">
-        {/* Statement gigante torcido, relleno navy */}
-        <h1
-          className="font-round font-bold leading-[0.86]"
-          style={{
-            fontSize: "clamp(3rem, 11vw, 9rem)",
-            color: NAVY,
-            transform: "rotate(-3.5deg)",
-            transformOrigin: "left top",
-            letterSpacing: "-0.01em",
-          }}
-        >
-          Tienes la música.<br />Te falta el sistema.
+      <div className="mx-auto max-w-6xl px-5 pb-16 pt-12 md:px-10 md:pb-24 md:pt-16">
+        <p className="eyebrow mb-6">Records · 03/09</p>
+
+        {/* Statement — fuente de los títulos del home (Zilla Slab), recto,
+            con "el sistema" en cian. */}
+        <h1 className="display leading-[0.95]" style={{ fontSize: "clamp(2.6rem, 9vw, 6.6rem)" }}>
+          <span style={{ color: NAVY }}>Tienes la música.</span>
+          <br />
+          <span style={{ color: NAVY }}>Te falta </span>
+          <span style={{ color: CYAN }}>el sistema.</span>
         </h1>
 
-        {/* Descripción */}
-        <p className="mt-16 max-w-md text-lg font-medium leading-snug md:mt-24" style={{ color: NAVY }}>
-          Sello, booking, management, distribución y editorial. Lo que la
-          mayoría te hace montar con cinco proveedores, aquí está en uno.
+        <p className="mt-5 text-lg font-medium text-text-secondary md:text-xl">
+          Sello, booking, management, distribución y editorial.
+        </p>
+
+        {/* Texto de apoyo junto a la cascada */}
+        <p className="mt-14 max-w-xs text-lg font-semibold leading-snug md:mt-20" style={{ color: NAVY }}>
+          Lo que la mayoría te hace montar con cinco proveedores, aquí está en uno.
         </p>
 
         {/* Cadena de tags escalonada, con flechas entre medias */}
-        <div className="mt-10 md:mt-14">
+        <div className="mt-8 md:mt-10">
           {TAGS.map((t, i) => (
             <div key={t.label} className="flex flex-col items-start" style={{ marginLeft: `${INDENT[i] * 0.7}%` }}>
               <TagCard t={t} />

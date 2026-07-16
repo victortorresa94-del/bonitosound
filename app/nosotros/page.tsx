@@ -6,13 +6,15 @@ import {
   StaggerGroup,
   SplitTextReveal,
   MagneticButton,
-  ParallaxLayer,
   MarqueeLogoWall,
 } from "@/components/motion";
 import { R2Video } from "@/components/R2Video";
 import { InstagramReel } from "@/components/Embeds";
-import { findLogo } from "@/lib/assets";
+import { findLogo, findAsset } from "@/lib/assets";
 import { team, memberships, support, site } from "@/lib/site";
+
+const NAVY = "#14283C";
+const CYAN = "#16b6d4";
 
 export const metadata: Metadata = {
   title: "Nosotros — Quiénes están detrás de Bonito Sound",
@@ -24,58 +26,68 @@ export const metadata: Metadata = {
 export default function Nosotros() {
   return (
     <>
-      <section className="border-b border-subtle">
-        <div className="wrap py-24 md:py-32">
-          <div className="max-w-3xl">
-            <RevealOnScroll as="p" className="eyebrow mb-4">
-              Nosotros
+      {/* Hero (mockup): eyebrow con contador + statement serif (2ª línea
+          cian) + apoyo, y la ilustración del equipo a la derecha, sin card. */}
+      <section style={{ backgroundColor: "#FBFAF6" }}>
+        <div className="wrap grid items-center gap-10 py-16 md:grid-cols-[1.1fr_1fr] md:py-24">
+          <div>
+            <RevealOnScroll as="p" className="eyebrow mb-5">
+              Nosotros · 01/04
             </RevealOnScroll>
-            <SplitTextReveal
+            <RevealOnScroll
               as="h1"
-              split="lines"
-              className="display text-[clamp(2.6rem,7vw,5.4rem)]"
+              className="display leading-[1.02] text-[clamp(2.6rem,6.5vw,4.6rem)]"
             >
-              Gente del sector. Enamorada del sector.
-            </SplitTextReveal>
+              <span style={{ color: NAVY }}>Somos la gente</span>
+              <br />
+              <span style={{ color: CYAN }}>del sector.</span>
+            </RevealOnScroll>
+            <RevealOnScroll
+              as="p"
+              delay={0.2}
+              className="mt-6 max-w-md text-lg leading-relaxed text-text-secondary"
+            >
+              Booking, management, sello y distribución. Una agencia musical
+              que hace las cosas bonitas, sin postureo. Llevamos años metidos
+              en esto porque nos gusta de verdad.
+            </RevealOnScroll>
           </div>
+
+          {(() => {
+            const img = findAsset("heroes", "nosotros") ?? findLogo("heroes", "nosotros");
+            return img ? (
+              <RevealOnScroll delay={0.15} className="relative mx-auto aspect-square w-full max-w-lg">
+                <Image
+                  src={img}
+                  alt="El equipo de Bonito Sound"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 45vw"
+                  className="object-contain"
+                  priority
+                />
+              </RevealOnScroll>
+            ) : null;
+          })()}
         </div>
       </section>
 
       <Section>
-        <div className="grid gap-12 md:grid-cols-[1fr_1fr] md:items-center">
-          <RevealOnScroll className="space-y-5 text-lg text-text-secondary">
-            <p>
-              Bonito Sound se monta en 2022 en Sabadell. La empresa es
-              joven; el oficio, no — Dani lleva treinta años en la industria
-              musical española.
-            </p>
-            <p>
-              Esos treinta años dan para ver de todo: sobre todo, para ver lo
-              que no funciona y por qué nadie lo arregla. Montamos Bonito
-              para arreglarlo.
-            </p>
-            <p>
-              Somos pocos, hacemos mucho y cogemos el teléfono. Si buscas una
-              consultora con keynote, esta no es tu web.
-            </p>
-          </RevealOnScroll>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
-            {(() => {
-              const img = findLogo("heroes", "nosotros");
-              return img ? (
-                <ParallaxLayer speed={0.2} className="absolute inset-0">
-                  <Image
-                    src={img}
-                    alt="El equipo de Bonito Sound"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover scale-110"
-                  />
-                </ParallaxLayer>
-              ) : null;
-            })()}
-          </div>
-        </div>
+        <RevealOnScroll className="max-w-2xl space-y-5 text-lg text-text-secondary">
+          <p>
+            Bonito Sound se monta en 2022 en Sabadell. La empresa es
+            joven; el oficio, no — Dani lleva treinta años en la industria
+            musical española.
+          </p>
+          <p>
+            Esos treinta años dan para ver de todo: sobre todo, para ver lo
+            que no funciona y por qué nadie lo arregla. Montamos Bonito
+            para arreglarlo.
+          </p>
+          <p>
+            Somos pocos, hacemos mucho y cogemos el teléfono. Si buscas una
+            consultora con keynote, esta no es tu web.
+          </p>
+        </RevealOnScroll>
       </Section>
 
       <Section className="bg-bg-primary">

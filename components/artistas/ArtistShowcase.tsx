@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { site } from "@/lib/site";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -42,11 +44,27 @@ function InstagramIcon() {
  * ilustración/foto grande. Navegable con las flechas. Cuando aterrice la
  * ilustración "dibujo" de cada artista sustituye a la foto sin tocar nada.
  */
-export function ArtistShowcase({ artists }: { artists: ShowcaseArtist[] }) {
-  const [i, setI] = useState(0);
+export function ArtistShowcase({
+  artists,
+  startSlug,
+}: {
+  artists: ShowcaseArtist[];
+  startSlug?: string;
+}) {
+  const router = useRouter();
+  const [i, setI] = useState(() => {
+    const idx = artists.findIndex((x) => x.slug === startSlug);
+    return idx >= 0 ? idx : 0;
+  });
   if (artists.length === 0) return null;
   const a = artists[i];
-  const go = (d: number) => setI((prev) => (prev + d + artists.length) % artists.length);
+  const go = (d: number) => {
+    const next = (i + d + artists.length) % artists.length;
+    setI(next);
+    // Navegación in-place: la URL refleja el artista actual sin recargar la
+    // página ni perder el estado del carrusel.
+    if (startSlug) router.replace(`/artistas/${artists[next].slug}`, { scroll: false });
+  };
   const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
@@ -71,18 +89,27 @@ export function ArtistShowcase({ artists }: { artists: ShowcaseArtist[] }) {
 
           <div className="mt-8 flex flex-wrap items-center gap-6">
             {a.spotifyUrl && (
-              <a href={a.spotifyUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-70" style={{ color: NAVY }}>
-                <SpotifyIcon /> Escúchala en Spotify
+              <a href={a.spotifyUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-base font-bold transition-opacity hover:opacity-70" style={{ color: NAVY }}>
+                <SpotifyIcon /> Escucha su música en Spotify
               </a>
             )}
             {a.instagramUrl && (
-              <a href={a.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-70" style={{ color: NAVY }}>
-                <InstagramIcon /> Instagram
+              <a href={a.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-base font-bold transition-opacity hover:opacity-70" style={{ color: NAVY }}>
+                <InstagramIcon /> Síguele en Instagram
               </a>
             )}
           </div>
 
-          <div className="mt-10 flex items-center gap-4">
+          <div className="mt-9">
+            <a
+              href={`mailto:${site.emails.booking}?subject=${encodeURIComponent(`Booking ${a.name}`)}`}
+              className="btn btn-primary"
+            >
+              Contratar booking →
+            </a>
+          </div>
+
+          <div className="mt-8 flex items-center gap-4">
             <button onClick={() => go(-1)} aria-label="Artista anterior" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>←</button>
             <button onClick={() => go(1)} aria-label="Siguiente artista" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>→</button>
             <span className="ml-2 text-sm text-text-muted">Desliza para ver más artistas</span>
