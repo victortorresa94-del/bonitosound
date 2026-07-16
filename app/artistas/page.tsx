@@ -132,8 +132,8 @@ export default function Artistas() {
             ))}
           </StaggerGroup>
           <RevealOnScroll className="mt-10 flex justify-end">
-            <a
-              href="#catalogo"
+            <Link
+              href="/artistas/todos"
               className="group inline-flex items-center gap-2 text-lg font-semibold"
               style={{ color: CYAN }}
             >
@@ -141,7 +141,7 @@ export default function Artistas() {
               <span className="transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>
-            </a>
+            </Link>
           </RevealOnScroll>
         </div>
       </section>
