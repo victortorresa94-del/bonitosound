@@ -1,3 +1,4 @@
+import { LazyVideo } from "@/components/LazyVideo";
 import Image from "next/image";
 import Link from "next/link";
 import type { Evento } from "@/lib/content";
@@ -42,7 +43,7 @@ function CardMedia({ e }: { e: Evento }) {
   return (
     <>
       {e.video ? (
-        <video src={e.video} poster={cover ?? undefined} autoPlay muted loop playsInline preload="metadata" className="h-full w-full object-cover" />
+        <LazyVideo src={e.video} poster={cover ?? undefined} className="h-full w-full object-cover" />
       ) : cover ? (
         <Image src={cover} alt={e.title} fill sizes="40vw" className="object-cover" />
       ) : (
