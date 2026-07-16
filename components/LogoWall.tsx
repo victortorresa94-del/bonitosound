@@ -24,15 +24,15 @@ export function LogoWall({
           return (
             <div
               key={name}
-              className="flex items-center justify-center rounded-xl border border-subtle px-4 py-6 text-center"
+              className="flex items-center justify-center rounded-xl border border-subtle px-4 py-4 text-center"
             >
               {src ? (
                 <Image
                   src={src}
                   alt={name}
-                  width={160}
-                  height={48}
-                  className="h-10 w-auto object-contain"
+                  width={140}
+                  height={36}
+                  className="h-7 w-auto object-contain"
                 />
               ) : (
                 <span className="text-sm font-semibold tracking-wide text-text-secondary">

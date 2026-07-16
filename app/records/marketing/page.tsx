@@ -1,15 +1,7 @@
-import type { Metadata } from "next";
-import { ServicePage } from "@/components/services/ServicePage";
-import { services } from "@/lib/services";
-import { site } from "@/lib/site";
+import { redirect } from "next/navigation";
 
-const s = services.marketing;
-export const metadata: Metadata = {
-  title: `${s.eyebrow} — Bonito Sound`,
-  description: s.desc,
-  alternates: { canonical: `${site.url}${s.path}` },
-};
-
+// La página de marketing canónica la lleva la sesión principal en /marketing.
+// Redirigimos para no duplicar contenido.
 export default function Page() {
-  return <ServicePage service={s} />;
+  redirect("/marketing");
 }

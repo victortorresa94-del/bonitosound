@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { site } from "@/lib/site";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -20,7 +22,7 @@ export type ShowcaseArtist = {
 
 function SpotifyIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill={NAVY} aria-hidden="true">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill={NAVY} aria-hidden="true">
       <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 1 1-.277-1.213c3.809-.871 7.076-.496 9.712 1.114a.623.623 0 0 1 .207.856Zm1.223-2.722a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.13-9.965-1.166a.779.779 0 1 1-.452-1.49c3.632-1.102 8.147-.568 11.232 1.327a.779.779 0 0 1 .257 1.072Zm.105-2.835c-3.223-1.914-8.54-2.09-11.617-1.156a.935.935 0 1 1-.542-1.79c3.532-1.072 9.404-.865 13.115 1.338a.935.935 0 1 1-.956 1.608Z" />
     </svg>
   );
@@ -28,7 +30,7 @@ function SpotifyIcon() {
 
 function InstagramIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={NAVY} strokeWidth="2" aria-hidden="true">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke={NAVY} strokeWidth="2" aria-hidden="true">
       <rect x="2" y="2" width="20" height="20" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.5" cy="6.5" r="1" fill={NAVY} stroke="none" />
@@ -42,11 +44,27 @@ function InstagramIcon() {
  * ilustración/foto grande. Navegable con las flechas. Cuando aterrice la
  * ilustración "dibujo" de cada artista sustituye a la foto sin tocar nada.
  */
-export function ArtistShowcase({ artists }: { artists: ShowcaseArtist[] }) {
-  const [i, setI] = useState(0);
+export function ArtistShowcase({
+  artists,
+  startSlug,
+}: {
+  artists: ShowcaseArtist[];
+  startSlug?: string;
+}) {
+  const router = useRouter();
+  const [i, setI] = useState(() => {
+    const idx = artists.findIndex((x) => x.slug === startSlug);
+    return idx >= 0 ? idx : 0;
+  });
   if (artists.length === 0) return null;
   const a = artists[i];
-  const go = (d: number) => setI((prev) => (prev + d + artists.length) % artists.length);
+  const go = (d: number) => {
+    const next = (i + d + artists.length) % artists.length;
+    setI(next);
+    // Navegación in-place: la URL refleja el artista actual sin recargar la
+    // página ni perder el estado del carrusel.
+    if (startSlug) router.replace(`/artistas/${artists[next].slug}`, { scroll: false });
+  };
   const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
@@ -69,20 +87,29 @@ export function ArtistShowcase({ artists }: { artists: ShowcaseArtist[] }) {
             {a.bioLine}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-6">
+          <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
             {a.spotifyUrl && (
               <a href={a.spotifyUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-70" style={{ color: NAVY }}>
-                <SpotifyIcon /> Escúchala en Spotify
+                <SpotifyIcon /> Escucha su música en Spotify
               </a>
             )}
             {a.instagramUrl && (
               <a href={a.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-70" style={{ color: NAVY }}>
-                <InstagramIcon /> Instagram
+                <InstagramIcon /> Síguele en Instagram
               </a>
             )}
           </div>
 
-          <div className="mt-10 flex items-center gap-4">
+          <div className="mt-9">
+            <a
+              href={`mailto:${site.emails.booking}?subject=${encodeURIComponent(`Booking ${a.name}`)}`}
+              className="btn btn-primary"
+            >
+              Contratar booking →
+            </a>
+          </div>
+
+          <div className="mt-8 flex items-center gap-4">
             <button onClick={() => go(-1)} aria-label="Artista anterior" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>←</button>
             <button onClick={() => go(1)} aria-label="Siguiente artista" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>→</button>
             <span className="ml-2 text-sm text-text-muted">Desliza para ver más artistas</span>
@@ -94,8 +121,8 @@ export function ArtistShowcase({ artists }: { artists: ShowcaseArtist[] }) {
           <Link
             href={`/artistas/${a.slug}`}
             key={`i-${a.slug}`}
-            className="group relative mx-auto block aspect-[3/4] w-full max-w-md animate-[fadeIn_.5s_ease] overflow-hidden rounded-2xl"
-            style={{ backgroundColor: "#ECE7D8" }}
+            className={`group relative mx-auto block aspect-[3/4] w-full max-w-md animate-[fadeIn_.5s_ease] ${a.isIllustration ? "" : "overflow-hidden rounded-2xl"}`}
+            style={a.isIllustration ? undefined : { backgroundColor: "#ECE7D8" }}
           >
             {a.image ? (
               <Image
@@ -103,7 +130,7 @@ export function ArtistShowcase({ artists }: { artists: ShowcaseArtist[] }) {
                 alt={a.name}
                 fill
                 sizes="(max-width: 768px) 100vw, 45vw"
-                className={`object-cover transition-transform duration-500 group-hover:scale-[1.03] ${a.isIllustration ? "" : "grayscale group-hover:grayscale-0"}`}
+                className={`transition-transform duration-500 group-hover:scale-[1.03] ${a.isIllustration ? "object-contain" : "object-cover grayscale group-hover:grayscale-0"}`}
                 priority
               />
             ) : (
@@ -111,9 +138,11 @@ export function ArtistShowcase({ artists }: { artists: ShowcaseArtist[] }) {
                 <span className="display text-3xl" style={{ color: NAVY }}>{a.name}</span>
               </div>
             )}
-            <span className="absolute bottom-4 left-4 rounded-full bg-black/55 px-4 py-1.5 text-sm font-semibold text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
-              Ver ficha →
-            </span>
+            {!a.isIllustration && (
+              <span className="absolute bottom-4 left-4 rounded-full bg-black/55 px-4 py-1.5 text-sm font-semibold text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
+                Ver ficha →
+              </span>
+            )}
           </Link>
         </div>
       </div>

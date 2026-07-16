@@ -14,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/records/sello",
     "/records/editorial",
     "/records/distribucion",
-    "/records/marketing",
+    "/marketing",
     "/records/producciones",
     "/artistas",
     "/artistas/todos",

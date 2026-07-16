@@ -1,82 +1,224 @@
-import fs from "node:fs";
-import path from "node:path";
 import type { Metadata } from "next";
-import { Section, Heading, Cta } from "@/components/ui";
-import { RevealOnScroll, MagneticButton, MarqueeLogoWall } from "@/components/motion";
-import { ArtistShowcase, type ShowcaseArtist } from "@/components/artistas/ArtistShowcase";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  RevealOnScroll,
+  StaggerGroup,
+} from "@/components/motion";
 import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
 
-/** Ilustración "dibujo" si existe en /public; si no, la foto real. */
-function resolveShowcaseImage(slug: string, fallback: string | null) {
-  const ill = path.join(process.cwd(), "public", "img", "artistas", "ilustracion", `${slug}.png`);
-  if (fs.existsSync(ill)) return { image: `/img/artistas/ilustracion/${slug}.png`, isIllustration: true };
-  return { image: fallback, isIllustration: false };
-}
+const NAVY = "#14283C";
+const CYAN = "#16b6d4";
 
 export const metadata: Metadata = {
-  title: "Artistas — Roster Bonito Sound",
+  title: "Artistas — el roster de Bonito Sound",
   description:
-    "Los artistas que llevamos en Bonito Sound: booking, management, sello y distribución. Todos juntos, bien llevados.",
+    "A estos los llevamos nosotros: booking, management y sello. Pocos artistas, bien llevados, más un catálogo de distribución de ~20 nombres.",
   alternates: { canonical: `${site.url}/artistas` },
 };
 
+// Orden del mockup + tratamiento asimétrico por posición (aspecto + desplazamiento).
+const ORDER = ["dulze", "eva-calyza", "natura", "pablo-rojo", "paule", "sa-pena"];
+const LAYOUT: Record<string, { aspect: string; shift: string }> = {
+  dulze: { aspect: "aspect-[4/5]", shift: "" },
+  "eva-calyza": { aspect: "aspect-[4/5]", shift: "md:mt-16" },
+  natura: { aspect: "aspect-[3/4]", shift: "md:-mt-2" },
+  "pablo-rojo": { aspect: "aspect-[4/5]", shift: "" },
+  paule: { aspect: "aspect-[4/5]", shift: "md:mt-16" },
+  "sa-pena": { aspect: "aspect-[5/4]", shift: "md:-mt-2" },
+};
+
+function RosterCard({
+  slug,
+  name,
+  genre,
+  photo,
+}: {
+  slug: string;
+  name: string;
+  genre: string;
+  photo: string | null;
+}) {
+  const l = LAYOUT[slug] ?? { aspect: "aspect-[4/5]", shift: "" };
+  return (
+    <Link
+      href={`/artistas/${slug}`}
+      data-cursor="link"
+      className={`group block ${l.shift}`}
+    >
+      <div
+        className={`relative ${l.aspect} overflow-hidden rounded-[1.5rem] bg-bg-tertiary shadow-[0_1px_0_rgba(20,40,60,0.06)] ring-1 ring-black/5 transition-all duration-500 group-hover:-translate-y-1.5 group-hover:shadow-[0_18px_40px_-18px_rgba(20,40,60,0.45)]`}
+      >
+        {photo && (
+          <Image
+            src={photo}
+            alt={name}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
+          />
+        )}
+        {/* Cue clickable: flecha que aparece al hover */}
+        <span
+          className="absolute right-4 top-4 grid h-9 w-9 translate-y-1 place-items-center rounded-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+          style={{ backgroundColor: CYAN, color: NAVY }}
+          aria-hidden
+        >
+          →
+        </span>
+      </div>
+      <div className="mt-3 flex items-baseline justify-between gap-3">
+        <span
+          className="font-round text-2xl font-bold md:text-3xl"
+          style={{ color: NAVY }}
+        >
+          {name}
+        </span>
+      </div>
+      <p className="mt-0.5 text-sm text-text-muted">{genre}</p>
+    </Link>
+  );
+}
+
 export default function Artistas() {
-  // Todos los artistas juntos, sin separar booking de distribución.
   const all = getArtists();
-  const showcase: ShowcaseArtist[] = all.map((a) => {
-    const { image, isIllustration } = resolveShowcaseImage(
-      a.slug,
-      a.image ?? findAsset("artistas", a.slug)
-    );
-    return {
-      slug: a.slug,
-      name: a.name,
-      genre: a.genre,
-      bioLine: a.bio[0] ?? "",
-      image,
-      isIllustration,
-      spotifyUrl: a.spotifyArtistId
-        ? `https://open.spotify.com/artist/${a.spotifyArtistId}`
-        : undefined,
-      instagramUrl: a.instagram,
-    };
-  });
+  const booking = all
+    .filter((a) => a.tier === "booking")
+    .sort((a, b) => ORDER.indexOf(a.slug) - ORDER.indexOf(b.slug));
 
   return (
     <>
-      <ArtistShowcase artists={showcase} />
+      {/* ── HERO ── */}
+      <section style={{ backgroundColor: "#FBFAF6" }}>
+        <div className="wrap pb-4 pt-20 md:pt-28">
+          <RevealOnScroll
+            as="h1"
+            className="display leading-[0.95] text-[clamp(2.8rem,8.5vw,6.4rem)]"
+          >
+            <span style={{ color: NAVY }}>
+              Artistas con
+              <br />
+              el rollo{" "}
+            </span>
+            <span style={{ color: CYAN }}>bonito</span>
+          </RevealOnScroll>
+          <RevealOnScroll
+            as="p"
+            delay={0.2}
+            className="mt-4 text-lg font-medium text-[#14283C]"
+          >
+            Booking · Management · Sello
+          </RevealOnScroll>
+        </div>
+      </section>
 
-      <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-6">
-          Todos los que llevamos
-        </RevealOnScroll>
-        <MarqueeLogoWall items={distributionCatalog} dir="artistas" speed={35} />
-      </Section>
-
-      <Section>
-        <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
-          <Heading>¿Quieres a alguien del roster?</Heading>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">
-            Booking directo. Sin intermediarios raros — coges el teléfono y hablas
-            con quien lo lleva.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-5">
-            <MagneticButton strength={0.5}>
-              <Cta href={`mailto:${site.emails.booking}?subject=Booking%20roster`}>
-                Contactar booking →
-              </Cta>
-            </MagneticButton>
+      {/* ── ROSTER asimétrico B/N ── */}
+      <section style={{ backgroundColor: "#FBFAF6" }}>
+        <div className="wrap pb-16 pt-8 md:pb-24">
+          <StaggerGroup
+            stagger={0.08}
+            className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 md:grid-cols-3"
+          >
+            {booking.map((a) => (
+              <RosterCard
+                key={a.slug}
+                slug={a.slug}
+                name={a.name}
+                genre={a.genre}
+                photo={a.image ?? findAsset("artistas", a.slug)}
+              />
+            ))}
+          </StaggerGroup>
+          <RevealOnScroll className="mt-10 flex justify-end">
             <a
-              href={`tel:${site.phone.replace(/\s/g, "")}`}
-              className="text-sm font-medium text-text-secondary transition-colors hover:text-accent-cyan"
+              href="#catalogo"
+              className="group inline-flex items-center gap-2 text-lg font-semibold"
+              style={{ color: CYAN }}
             >
-              o llama al {site.phone}
+              Roster completo
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
             </a>
+          </RevealOnScroll>
+        </div>
+      </section>
+
+      {/* ── Divisor cian dibujado a mano ── */}
+      <div className="wrap" aria-hidden>
+        <svg
+          className="h-5 w-full"
+          viewBox="0 0 1200 20"
+          fill="none"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 12 C 120 2, 220 2, 340 11 S 560 20, 680 10 S 900 1, 1020 11 S 1160 18, 1200 9"
+            stroke={CYAN}
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+
+      {/* ── CATÁLOGO DE DISTRIBUCIÓN ── */}
+      <section id="catalogo" style={{ backgroundColor: "#FBFAF6" }}>
+        <div className="wrap py-16 md:py-24">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <RevealOnScroll
+              as="h2"
+              className="font-round text-[clamp(2.2rem,5.5vw,3.8rem)] font-bold leading-[0.95] text-[#14283C]"
+            >
+              Catálogo de
+              <br />
+              distribución
+            </RevealOnScroll>
+            <RevealOnScroll
+              as="p"
+              delay={0.1}
+              className="text-right text-lg leading-snug text-text-secondary"
+            >
+              ~20 artistas,
+              <br />
+              una distribuidora.
+            </RevealOnScroll>
           </div>
-        </RevealOnScroll>
-      </Section>
+
+          <RevealOnScroll
+            delay={0.15}
+            className="font-round mt-10 text-[clamp(1.3rem,3.1vw,2.1rem)] font-semibold leading-[1.7] text-[#14283C]"
+          >
+            {distributionCatalog.map((n, i) => (
+              <span key={n} className="whitespace-nowrap">
+                {i > 0 && (
+                  <span className="mx-3 font-bold" style={{ color: CYAN }}>
+                    ·
+                  </span>
+                )}
+                {n}
+              </span>
+            ))}
+          </RevealOnScroll>
+
+          <RevealOnScroll
+            delay={0.2}
+            className="mt-12 flex items-start gap-3 border-t border-subtle pt-6"
+          >
+            <span className="mt-0.5 text-lg font-bold" style={{ color: CYAN }}>
+              *
+            </span>
+            <p className="max-w-2xl text-text-secondary">
+              Entre ellos,{" "}
+              <span className="font-medium italic" style={{ color: NAVY }}>
+                Kenai White
+              </span>{" "}
+              — cantautor y actor salmantino con discografía propia.
+            </p>
+          </RevealOnScroll>
+        </div>
+      </section>
     </>
   );
 }

@@ -15,6 +15,31 @@ export type Artist = {
   spotifyPlaylistId?: string;
   instagram?: string;
   image?: string;
+  /** Stats para la cabecera de la ficha (texto libre, ej. "+18k oyentes
+   *  mensuales" / "+9k seguidores"). Solo se pintan si están puestos — no se
+   *  inventan cifras. */
+  listeners?: string;
+  followers?: string;
+  /** ── Ficha-experiencia (todo opcional: el bloque solo se pinta si hay dato) ──
+   *  Nada inventado: si no está en el frontmatter, la sección no aparece. */
+  /** Números para el bloque "En números". Ej:
+   *    stats:
+   *      - { value: "22k", label: "oyentes/mes en Spotify" }
+   *      - { value: "18k", label: "seguidores en Instagram" } */
+  stats?: { value: string; label: string }[];
+  /** Descripción de su sonido (bloque "Su sonido"). */
+  musicStyle?: string;
+  /** Influencias / referencias (chips). */
+  influences?: string[];
+  /** "Para quien…" — a quién le habla su música. */
+  forWho?: string;
+  /** ID de Spotify de su última canción publicada (embed destacado). */
+  lastTrackId?: string;
+  /** IDs de Spotify de temas destacados. */
+  featuredTracks?: string[];
+  /** Primer y último concierto (prueba de directo). */
+  firstConcert?: { date?: string; venue?: string; city?: string };
+  lastConcert?: { date?: string; venue?: string; city?: string };
   /** Fotos adicionales para la galería de la ficha (rutas en /public). */
   gallery?: string[];
   bio: string[];
