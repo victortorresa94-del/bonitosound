@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
 import { Section, JsonLd } from "@/components/ui";
-import { SpotifyEmbed, YouTubeEmbed, InstagramFeed } from "@/components/Embeds";
-import { RevealOnScroll, StaggerGroup, SplitTextReveal } from "@/components/motion";
+import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { ArtistShowcase, type ShowcaseArtist } from "@/components/artistas/ArtistShowcase";
+import { ArtistNumbers } from "@/components/artistas/ArtistNumbers";
+import { ArtistFeaturedMusic } from "@/components/artistas/ArtistFeaturedMusic";
+import { ArtistStyle } from "@/components/artistas/ArtistStyle";
+import { ArtistBio } from "@/components/artistas/ArtistBio";
+import { ArtistLiveFeed } from "@/components/artistas/ArtistLiveFeed";
+import { ArtistConcerts } from "@/components/artistas/ArtistConcerts";
+import { ArtistCTA } from "@/components/artistas/ArtistCTA";
 import { getArtist, getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { site } from "@/lib/site";
@@ -31,6 +36,23 @@ export function generateMetadata({
   };
 }
 
+/**
+ * Ficha de artista = EXPERIENCIA ("un field donde quedarse a explorar").
+ *
+ * Orden según la lente de `bonito-super-team`:
+ *  1. Hero/carrusel  → P1 (orgullo) + P4 (escuchar), y se recorre el roster sin salir.
+ *  2. Números        → P2 (quien contrata) decide rápido; P1 se valida.
+ *  3. Música         → P4 escucha ya (lo último + destacados).
+ *  4. Su sonido      → de qué va su música.
+ *  5. Su historia    → bio currada, aparte de la del hero.
+ *  6. Su mundo       → reels + YouTube intercalados (entretenido).
+ *  7. Directo        → primer/último concierto + trayectoria (prueba para P2).
+ *  8. Galería        → si hay fotos.
+ *  9. CTA final      → que no acabe en callejón sin salida.
+ *
+ * Todos los bloques son plug-and-play: si el dato no está en el frontmatter,
+ * la sección devuelve null y no se pinta. Nada inventado.
+ */
 export default function ArtistPage({
   params,
 }: {
@@ -42,8 +64,8 @@ export default function ArtistPage({
   const photo = a.image ?? findAsset("artistas", a.slug);
 
   // Roster navegable del showcase: mismo tier que el artista actual, mismo
-  // orden que /artistas cuando es booking. Así las flechas del carrusel
-  // recorren "el resto del roster" sin salir de la ficha.
+  // orden que /artistas cuando es booking. Las flechas recorren el roster
+  // sin salir de la ficha.
   const tierList = getArtists()
     .filter((x) => x.tier === a.tier)
     .sort((x, y) =>
@@ -68,16 +90,7 @@ export default function ArtistPage({
     };
   });
 
-  const hasReels = a.reels && a.reels.length > 0;
-  const hasVideos = a.youtubeIds && a.youtubeIds.length > 0;
   const hasGallery = a.gallery && a.gallery.length > 0;
-  const hasMusic = Boolean(a.spotifyArtistId || a.spotifyPlaylistId);
-
-  // Otros del roster (mismo tier primero), para no dejar la página sin salida.
-  const others = getArtists()
-    .filter((x) => x.slug !== a.slug)
-    .sort((x, y) => (x.tier === a.tier ? -1 : 1))
-    .slice(0, 3);
 
   const sameAs: string[] = [];
   if (a.spotifyArtistId)
@@ -102,75 +115,43 @@ export default function ArtistPage({
         }}
       />
 
-      {/* Hero: carrusel de showcase (nombre serif + género cian + bio +
-          Spotify/Instagram + flechas para recorrer el resto del roster sin
-          salir de la ficha). */}
+      {/* 1. Hero: carrusel (nombre + género cian + bio + Spotify/IG + flechas). */}
       <ArtistShowcase artists={showcase} startSlug={a.slug} />
 
-      {/* Música primero: si hay, suena arriba. */}
-      {hasMusic && (
-        <Section>
-          <div className="grid items-start gap-12 md:grid-cols-[1fr_1.1fr]">
-            <div>
-              <RevealOnScroll as="p" className="eyebrow mb-4">
-                Escúchale
-              </RevealOnScroll>
-              <SplitTextReveal
-                as="h2"
-                split="lines"
-                className="display text-[clamp(1.8rem,4vw,3rem)]"
-              >
-                Dale al play antes de escribirnos.
-              </SplitTextReveal>
-              {/* Guiño de marca: clip de cassette, el único elemento en
-                  movimiento de esta zona (web-motion: un protagonista). */}
-              <div
-                aria-hidden
-                className="mt-8 hidden aspect-video w-48 opacity-90 md:block"
-              >
-                <video
-                  src="/video/home/records.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  className="h-full w-full object-contain"
-                />
-              </div>
-            </div>
-            <RevealOnScroll className="space-y-6" delay={0.15}>
-              {a.spotifyArtistId && (
-                <SpotifyEmbed
-                  type="artist"
-                  id={a.spotifyArtistId}
-                  title={`${a.name} en Spotify`}
-                />
-              )}
-              {a.spotifyPlaylistId && (
-                <SpotifyEmbed
-                  type="playlist"
-                  id={a.spotifyPlaylistId}
-                  height={232}
-                  title={`Playlist de ${a.name}`}
-                />
-              )}
-            </RevealOnScroll>
-          </div>
-        </Section>
-      )}
+      {/* 2. Números: prueba social de un vistazo. */}
+      <ArtistNumbers stats={a.stats ?? []} />
 
-      {/* Bio completa: párrafos a partir del 2º (el 1º ya va en el hero). */}
-      {a.bio.length > 1 && (
-        <Section className={hasMusic ? "pt-0" : undefined}>
-          <RevealOnScroll className="max-w-2xl space-y-5 text-lg leading-relaxed text-text-secondary">
-            {a.bio.slice(1).map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-          </RevealOnScroll>
-        </Section>
-      )}
+      {/* 3. Música: que se escuche ya. */}
+      <ArtistFeaturedMusic
+        name={a.name}
+        lastTrackId={a.lastTrackId}
+        featuredTrackIds={a.featuredTracks}
+        spotifyArtistId={a.spotifyArtistId}
+        spotifyPlaylistId={a.spotifyPlaylistId}
+      />
 
+      {/* 4. Su sonido. */}
+      <ArtistStyle
+        genre={a.genre}
+        style={a.musicStyle}
+        influences={a.influences}
+        forWho={a.forWho}
+      />
+
+      {/* 5. Su historia: la bio currada (el 1er párrafo ya va en el hero). */}
+      <ArtistBio paragraphs={a.bio.slice(1)} name={a.name} />
+
+      {/* 6. Su mundo: reels + YouTube intercalados. */}
+      <ArtistLiveFeed name={a.name} reels={a.reels} youtubeIds={a.youtubeIds} />
+
+      {/* 7. Directo: de su primer bolo a hoy + trayectoria. */}
+      <ArtistConcerts
+        firstConcert={a.firstConcert}
+        lastConcert={a.lastConcert}
+        milestones={a.milestones}
+      />
+
+      {/* 8. Galería (si hay fotos). */}
       {hasGallery && (
         <Section className="bg-bg-primary">
           <RevealOnScroll as="p" className="eyebrow mb-8">
@@ -195,84 +176,13 @@ export default function ArtistPage({
         </Section>
       )}
 
-      {hasReels && (
-        <Section>
-          <RevealOnScroll as="p" className="eyebrow mb-8">
-            En directo
-          </RevealOnScroll>
-          <InstagramFeed posts={a.reels} />
-        </Section>
-      )}
-
-      {hasVideos && (
-        <Section className="bg-bg-primary">
-          <RevealOnScroll as="p" className="eyebrow mb-8">
-            Vídeos
-          </RevealOnScroll>
-          <StaggerGroup stagger={0.1} className="grid gap-6 md:grid-cols-2">
-            {a.youtubeIds!.map((id) => (
-              <YouTubeEmbed key={id} id={id} title={`${a.name} en YouTube`} />
-            ))}
-          </StaggerGroup>
-        </Section>
-      )}
-
-      {a.milestones && a.milestones.length > 0 && (
-        <Section>
-          <RevealOnScroll className="max-w-3xl">
-            <p className="eyebrow mb-6">Trayectoria</p>
-            <ul className="divide-y divide-subtle border-y border-subtle">
-              {a.milestones.map((m, i) => (
-                <li
-                  key={`${m.year}-${i}`}
-                  className="grid grid-cols-[80px_1fr] gap-6 py-4 text-text-secondary"
-                >
-                  <span className="font-mono text-sm tabular-nums text-text-muted">
-                    {m.year}
-                  </span>
-                  <span>{m.text}</span>
-                </li>
-              ))}
-            </ul>
-          </RevealOnScroll>
-        </Section>
-      )}
-
-      {/* Otros del roster: nunca un callejón sin salida. */}
-      {others.length > 0 && (
-        <Section className="bg-bg-primary">
-          <div className="mb-10 flex items-end justify-between gap-6">
-            <p className="eyebrow">Más del roster</p>
-            <Link href="/artistas" className="link-underline text-sm text-text-secondary">
-              Ver todos →
-            </Link>
-          </div>
-          <StaggerGroup stagger={0.08} className="grid gap-6 sm:grid-cols-3">
-            {others.map((o) => {
-              const p = o.image ?? findAsset("artistas", o.slug);
-              return (
-                <Link key={o.slug} href={`/artistas/${o.slug}`} className="group">
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
-                    {p && (
-                      <Image
-                        src={p}
-                        alt={o.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    )}
-                    <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 to-transparent p-5">
-                      <span className="display text-2xl text-white">{o.name}</span>
-                    </span>
-                  </div>
-                  <p className="mt-2 text-sm text-text-muted">{o.genre}</p>
-                </Link>
-              );
-            })}
-          </StaggerGroup>
-        </Section>
-      )}
+      {/* 9. Cierre. */}
+      <ArtistCTA
+        name={a.name}
+        bookingEmail={site.emails.booking}
+        instagram={a.instagram}
+        slug={a.slug}
+      />
     </>
   );
 }

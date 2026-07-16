@@ -139,6 +139,32 @@ construir (el carrusel/hero se queda, se toca poco):
    (técnica ya montada, es rápido).
 7. ⬜ **Más artistas** por poner (Víctor irá subiendo fotos/ilustraciones).
 
+### 📋 Plantilla de datos por artista (frontmatter de `content/artistas/<slug>.md`)
+Todo es **opcional y plug-and-play**: el bloque solo se pinta si el dato existe
+(nada inventado). Rellena lo que tengas y aparece solo:
+
+```yaml
+# Números (bloque "En números")
+stats:
+  - { value: "22k", label: "oyentes/mes en Spotify" }
+  - { value: "18k", label: "seguidores en Instagram" }
+# Su sonido
+musicStyle: "Techno melódico que empieza en el urbano y acaba en trance."
+influences: ["Amelie Lens", "Fred again.."]
+forWho: "Para quien va a bailar hasta que salga el sol."
+# Música (IDs de Spotify de la canción, no del artista)
+lastTrackId: "3n3Ppam7vgaVa1iaRUc9Lp"     # su última canción
+featuredTracks: ["id1", "id2", "id3"]      # temas destacados
+# Directo (prueba para quien contrata)
+firstConcert: { date: "2019-05-12", venue: "Sala Apolo", city: "Barcelona" }
+lastConcert:  { date: "2026-06-14", venue: "Razzmatazz", city: "Barcelona" }
+milestones:                                 # trayectoria (ya lo usan algunos)
+  - { year: "2025", text: "Gira nacional, 6 ciudades" }
+# Su mundo (feed intercalado)
+reels: ["https://www.instagram.com/reel/XXXX/"]
+youtubeIds: ["dQw4w9WgXcQ"]
+```
+
 ## 4. ⏸ BLOQUEADO (necesito de Víctor)
 - ⏸ Ilustración **suelta y correcta** de **Eva Calyza** y **Sa Pena** — las que
   subió eran el mockup entero (Eva) y un grupo de 6 (Sa Pena); retiradas → ahora
