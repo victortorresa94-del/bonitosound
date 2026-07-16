@@ -104,7 +104,7 @@ export const scenes: HomeScene[] = [
     statement: "También construimos las herramientas que haga falta.",
     accent: "las herramientas que haga falta",
     support: "Hacemos webs, software, y tenemos nuestra propia app: Artiverse.",
-    cta: { label: "Ver más", href: "/lab" },
+    cta: { label: "Ver más", href: "/universo" },
     mediaCandidates: ["/video/home/tecnologia.mp4", "/img/home/tecnologia.webp", "/img/secciones/lab.png"],
   },
   {

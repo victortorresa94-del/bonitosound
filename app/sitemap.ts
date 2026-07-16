@@ -14,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/records/distribucion",
     "/artistas",
     "/marketing",
-    "/lab",
+    "/universo",
     "/lab/artiverse",
     "/lab/giraverse",
     "/jaleo-sound",

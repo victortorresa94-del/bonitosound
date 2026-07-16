@@ -39,8 +39,8 @@ export const nav = [
   { label: "Artistas", href: "/artistas" },
   { label: "Eventos", href: "/eventos" },
   { label: "Records", href: "/records" },
-  { label: "Marketing", href: "/marketing" },
-  { label: "Tecnología", href: "/lab" },
+  { label: "Universo", href: "/universo" },
+  { label: "Nosotros", href: "/nosotros" },
 ] as const;
 
 export const team = [
