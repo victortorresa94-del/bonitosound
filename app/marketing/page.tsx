@@ -46,11 +46,11 @@ const faq = [
   },
   {
     q: "¿Qué presupuesto de ads necesito?",
-    a: "Depende del objetivo (oyentes, entradas, territorio). No damos una cifra por una web: montamos el plan sobre tu lanzamiento real y te decimos qué inversión tiene sentido y cuál no.",
+    a: "Según el objetivo (oyentes, entradas, territorio) y lo que tengas encima de la mesa. Montamos el plan sobre tu lanzamiento real y te decimos qué mueve la aguja y qué no. Lo concreto lo hablamos.",
   },
   {
     q: "¿En qué se diferencia de una agencia de marketing normal?",
-    a: "En que venimos del sector musical. Sabemos cómo se mueve un lanzamiento, qué mide de verdad una carrera y cómo se llena una sala — no aprendemos tu industria sobre la marcha con tu presupuesto.",
+    a: "En que venimos del sector musical. Sabemos cómo se mueve un lanzamiento, qué mide de verdad una carrera y cómo se llena una sala. No aprendemos tu industria sobre la marcha.",
   },
 ];
 
@@ -133,7 +133,7 @@ export default function Marketing() {
           </SplitTextReveal>
           <p className="mx-auto mt-4 max-w-xl text-text-secondary">
             Cuéntanos qué lanzas y cuándo. Te decimos qué se puede hacer de
-            verdad con el presupuesto que tengas.
+            verdad y por dónde empezar.
           </p>
           <div className="mt-8 flex justify-center">
             <MagneticButton strength={0.5}>

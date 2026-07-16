@@ -119,7 +119,7 @@ export default function Records() {
             </Link>
           ))}
           <MagneticButton strength={0.3}>
-            <Link href="/artistas" className="btn btn-primary">
+            <Link href="/artistas/todos" className="btn btn-primary">
               Roster completo →
             </Link>
           </MagneticButton>
