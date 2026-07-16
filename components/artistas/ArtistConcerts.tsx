@@ -143,7 +143,9 @@ export function ArtistConcerts({
       )}
 
       {hitos.length > 0 && (
-        <div className="mt-16">
+        // Sin cards de concierto arriba, el eyebrow quedaba flotando sobre un
+        // hueco enorme: pegamos la trayectoria.
+        <div className={first || last ? "mt-16" : "mt-8"}>
           <RevealOnScroll as="h3" className="display text-2xl text-text-primary sm:text-3xl">
             Trayectoria
           </RevealOnScroll>
