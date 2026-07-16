@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { site } from "@/lib/site";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -131,12 +130,9 @@ export function ArtistShowcase({
                 </span>
               </button>
             )}
-            <a
-              href={`mailto:${site.emails.booking}?subject=${encodeURIComponent(`Booking ${a.name}`)}`}
-              className="btn btn-primary"
-            >
+            <Link href={`/contratar/${a.slug}`} className="btn btn-primary">
               Contratar booking →
-            </a>
+            </Link>
           </div>
 
           {/* Reproductor: aparece al darle a Escuchar y arranca solo. */}

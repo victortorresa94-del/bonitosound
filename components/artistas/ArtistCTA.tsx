@@ -25,17 +25,9 @@ export function ArtistCTA({
   // El IG puede llegar vacío desde el frontmatter ("").
   const ig = instagram?.trim();
 
-  // Cuerpo pre-rellenado con lo que pide el copy: filtra leads y evita el
-  // "hola, info?" sin contexto.
-  const asunto = `Booking ${nombre}`;
-  const cuerpo = `Hola, os escribo por ${nombre}.
-
-Fecha:
-Sitio:
-Qué tengo en mente:`;
-  const mailto = `mailto:${email}?subject=${encodeURIComponent(
-    asunto
-  )}&body=${encodeURIComponent(cuerpo)}`;
+  // El botón lleva al formulario de contratación de este artista (precargado),
+  // no a un mailto pelado: se pide la info que hace falta para responder bien.
+  const contratarHref = `/contratar/${slug}`;
 
   return (
     <Section id={slug ? `booking-${slug}` : "booking"}>
@@ -66,7 +58,7 @@ Qué tengo en mente:`;
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
           <MagneticButton strength={0.3}>
-            <Cta href={mailto} variant="primary">
+            <Cta href={contratarHref} variant="primary">
               Contratar a {nombre} →
             </Cta>
           </MagneticButton>
@@ -82,7 +74,7 @@ Qué tengo en mente:`;
 
         <RevealOnScroll delay={0.24} className="mt-8">
           <Link
-            href="/artistas"
+            href="/artistas/todos"
             className="text-sm font-semibold text-text-muted underline-offset-4 transition-colors hover:text-text-primary hover:underline"
           >
             Ver todo el roster →
