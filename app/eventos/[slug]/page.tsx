@@ -21,14 +21,6 @@ const TYPE_LABEL = {
   showcase: "Showcase",
 } as const;
 
-/** Clip de la mascota que acompaña cada tipo — guiño de marca. */
-const TYPE_CLIP: Record<string, string> = {
-  marca: "/video/home/marcas.mp4",
-  gira: "/video/home/giras.mp4",
-  festival: "/video/home/cierre.mp4",
-  showcase: "/video/home/records.mp4",
-};
-
 export function generateStaticParams() {
   return getEventos().map((e) => ({ slug: e.slug }));
 }
@@ -60,6 +52,15 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
   const others = getEventos()
     .filter((x) => x.slug !== e.slug)
     .slice(0, 3);
+
+  // Ficha: datos reales del evento de un vistazo (nada inventado).
+  const facts = [
+    { k: "Tipo", v: TYPE_LABEL[e.type] as string },
+    { k: e.brand ? "Marca" : "Artista", v: label },
+    { k: "Año", v: e.year },
+    ...(e.location ? [{ k: "Dónde", v: e.location }] : []),
+    ...(e.count ? [{ k: "Volumen", v: e.count }] : []),
+  ].filter((f) => Boolean(f.v)) as { k: string; v: string }[];
 
   return (
     <>
@@ -151,8 +152,20 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
         </section>
       )}
 
+      {/* Ficha: datos reales del evento de un vistazo. */}
+      <Section className={cinematic ? undefined : "pt-0"}>
+        <div className="grid gap-x-8 gap-y-7 border-y border-subtle py-8 sm:grid-cols-2 lg:grid-cols-4">
+          {facts.map((f) => (
+            <div key={f.k}>
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-accent-cyan-text">{f.k}</p>
+              <p className="mt-1.5 font-round text-xl font-bold text-text-primary">{f.v}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
       {/* El encargo / El resultado. */}
-      <Section>
+      <Section className="pt-0">
         <div className="grid gap-12 md:grid-cols-2">
           <RevealOnScroll>
             <p className="eyebrow mb-4">El encargo</p>
@@ -165,18 +178,6 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
             <p className="statement text-[clamp(1.6rem,3vw,2.4rem)] leading-tight text-text-primary">
               {e.result}
             </p>
-            {/* Guiño de marca: clip del tipo de evento. */}
-            <div aria-hidden className="mt-10 hidden aspect-video w-44 opacity-90 md:block">
-              <video
-                src={TYPE_CLIP[e.type] ?? "/video/home/que-es.mp4"}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                className="h-full w-full object-contain"
-              />
-            </div>
           </RevealOnScroll>
         </div>
       </Section>
