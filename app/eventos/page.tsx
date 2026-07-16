@@ -18,11 +18,11 @@ export default function Eventos() {
   const eventos = getEventos();
   return (
     <div style={{ backgroundColor: "#FBFAF6" }}>
-      {/* Mockup: banda superior + showcase asimétrico + más vídeos + marcas + cierre. */}
+      {/* Orden: banda superior + showcase + marcas (marca por marca) + más vídeos + cierre. */}
       <EventosHero />
       <EventosShowcase eventos={eventos} />
-      <EventosBento eventos={eventos} />
       <EventosBrands eventos={eventos} />
+      <EventosBento eventos={eventos} />
       <EventosOutro brands={brands} />
     </div>
   );
