@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { Section, Heading, Eyebrow, Cta, JsonLd } from "@/components/ui";
+import { Section, Cta, JsonLd } from "@/components/ui";
+import { RecordsHero } from "@/components/records/RecordsHero";
 import { LeadMagnetArtists } from "@/components/LeadMagnetArtists";
 import {
   RevealOnScroll,
   StaggerGroup,
   SplitTextReveal,
   MagneticButton,
-  ParallaxLayer,
   MarqueeLogoWall,
   FaqMotion,
 } from "@/components/motion";
 import { getArtists } from "@/lib/content";
-import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -77,36 +75,7 @@ export default function Records() {
         }}
       />
 
-      <section className="border-b border-subtle">
-        <div className="wrap grid items-center gap-10 py-24 md:grid-cols-[1.2fr_1fr] md:py-32">
-          <div>
-            <RevealOnScroll as="p" className="eyebrow mb-4">
-              Records
-            </RevealOnScroll>
-            <SplitTextReveal
-              as="h1"
-              split="lines"
-              className="display text-[clamp(2.6rem,7vw,5.4rem)]"
-            >
-              Tienes la música. Te falta el sistema.
-            </SplitTextReveal>
-            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
-              Sello, booking, management, distribución y editorial. Lo que la
-              mayoría te hace montar con cinco proveedores, aquí está en uno.
-            </RevealOnScroll>
-          </div>
-          {(() => {
-            const img = findAsset("heroes", "records");
-            return img ? (
-              <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-subtle">
-                <ParallaxLayer speed={0.2} className="absolute inset-0">
-                  <Image src={img} alt="" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover scale-110" />
-                </ParallaxLayer>
-              </div>
-            ) : null;
-          })()}
-        </div>
-      </section>
+      <RecordsHero />
 
       <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">¿Encajas con Bonito?</RevealOnScroll>
