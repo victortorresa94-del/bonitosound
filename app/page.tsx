@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { HeroVideo } from "@/components/home/HeroVideo";
 import { ArtistsBand, BrandsBand } from "@/components/home/HomeProof";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
-import { PresentacionReel } from "@/components/home/PresentacionReel";
+import { PresentacionVideo } from "@/components/home/PresentacionVideo";
 import { scenes } from "@/lib/home";
 
 const HERO_VIDEO = "/video/home/hero.mp4";
@@ -43,7 +43,7 @@ export default function HomePage() {
             total={total}
             displayIndex={i + 2}
           />
-          {scene.id === "marketing" && <PresentacionReel />}
+          {scene.id === "marketing" && <PresentacionVideo />}
           {scene.id === "marcas" && <BrandsBand />}
           {scene.id === "records" && <ArtistsBand />}
         </Fragment>

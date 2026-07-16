@@ -9,6 +9,8 @@ import {
   ParallaxLayer,
   MarqueeLogoWall,
 } from "@/components/motion";
+import { R2Video } from "@/components/R2Video";
+import { InstagramReel } from "@/components/Embeds";
 import { findLogo } from "@/lib/assets";
 import { team, memberships, support, site } from "@/lib/site";
 
@@ -148,6 +150,32 @@ export default function Nosotros() {
         <RevealOnScroll className="mt-12">
           <MarqueeLogoWall items={support} dir="apoyos" label="Con el apoyo de" speed={30} direction="right" />
         </RevealOnScroll>
+      </Section>
+
+      <Section>
+        <RevealOnScroll as="p" className="eyebrow mb-4">
+          De cerca
+        </RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display mb-10 text-[clamp(2rem,4.5vw,3.4rem)]">
+          Quién lo lleva, contado por dentro.
+        </SplitTextReveal>
+        <div className="grid items-start gap-8 md:grid-cols-[1.4fr_0.6fr]">
+          <RevealOnScroll>
+            <R2Video src="entrevista-dani.mp4" ratio="16 / 9" />
+            <p className="mt-4 text-sm text-text-muted">
+              Entrevista a Dani, uno de los fundadores.
+            </p>
+          </RevealOnScroll>
+          <RevealOnScroll delay={0.15}>
+            <InstagramReel
+              url="https://www.instagram.com/reel/DCOfx1YKHsP/"
+              title="Presentación de Bonito Sound"
+            />
+            <p className="mt-4 text-sm text-text-muted">
+              El día a día, en Instagram.
+            </p>
+          </RevealOnScroll>
+        </div>
       </Section>
 
       <Section className="bg-bg-primary">

@@ -2,6 +2,7 @@
 artist: "Anne Lukin"
 title: "Producción y logística de la gira de Anne Lukin"
 type: "gira"
+videoUrl: "anne-lukin.mp4"
 year: "2024"
 location: "España"
 context: "Producción técnica y logística de la gira de Anne Lukin 2023-2024. Tour management de principio a fin."

@@ -32,6 +32,17 @@ export const site = {
   },
 } as const;
 
+// Cloudflare R2: casa única de los vídeos pesados. Host-independiente — la
+// misma URL sirve en dev (Vercel) y en producción (IONOS). Los .md/componentes
+// referencian solo la CLAVE del objeto (ej. "corona.mp4") y aquí se antepone
+// la base; si algún día cambia el bucket, se toca únicamente esta línea.
+export const R2_BASE = "https://pub-c9e7a562bfd645b5ac829874e2360807.r2.dev";
+
+/** Devuelve la URL completa de un vídeo en R2 a partir de su clave. */
+export function r2(key: string): string {
+  return key.startsWith("http") ? key : `${R2_BASE}/${key.replace(/^\//, "")}`;
+}
+
 // Menú principal: 5 entradas. Categorías-servicio + institucional, en orden
 // de prioridad. Marketing vive dentro de Records; Jaleo Sound, en el footer
 // (es un proyecto con marca propia, no compite en el nivel principal).

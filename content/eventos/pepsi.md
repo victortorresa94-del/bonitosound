@@ -2,6 +2,7 @@
 brand: "Pepsi"
 title: "Pepsi: música para una marca que llena estadios"
 type: "marca"
+videoUrl: "pepsi.mp4"
 year: "2024"
 context: "Activación de marca con música en directo para Pepsi. Del brief al escenario, con un solo interlocutor."
 result: "Una marca enorme, un evento que no se le queda pequeño."

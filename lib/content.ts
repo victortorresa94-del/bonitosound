@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { r2 } from "./site";
 
 const root = path.join(process.cwd(), "content");
 
@@ -47,6 +48,9 @@ export type Evento = {
   count?: string;
   /** Vídeo propio en /public/video/eventos/<slug>.mp4 (prioridad sobre YouTube). */
   video?: string;
+  /** URL externa del vídeo (Cloudflare R2, Bunny, IONOS…). Independiente del
+   *  hosting: la misma URL sirve en dev (Vercel) y en producción (IONOS). */
+  videoUrl?: string;
   /** ID de YouTube si el vídeo vive ahí en vez de autoalojado. */
   youtubeId?: string;
   /** Fotos adicionales para la galería de la página del evento. */
@@ -106,10 +110,10 @@ export function getEventos(): Evento[] {
           .map((p) => p.trim())
           .filter(Boolean),
         ...fm,
-        // El vídeo se resuelve del disco: se enciende solo cuando el .mp4
-        // aterriza en /public/video/eventos/<slug>.mp4, y nunca deja un
-        // <video> roto si aún no está. El frontmatter puede forzar otra ruta.
-        video: fm.video ?? resolveEventoVideo(slug),
+        // El vídeo se resuelve por prioridad: archivo local en /public →
+        // ruta forzada en frontmatter → URL externa (R2/Bunny/IONOS). Así el
+        // <video> nunca queda roto y el mismo `videoUrl` sirve en dev y prod.
+        video: resolveEventoVideo(slug) ?? fm.video ?? (fm.videoUrl ? r2(fm.videoUrl) : undefined),
       };
     })
     .sort((a, b) => b.year.localeCompare(a.year));
