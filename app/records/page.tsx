@@ -136,7 +136,7 @@ export default function Records() {
       <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">Roster</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-          A estos los llevamos nosotros.
+          Artistas que tienen el rollo bonito.
         </SplitTextReveal>
         <StaggerGroup stagger={0.04} className="mt-10 flex flex-wrap gap-3">
           {roster.map((a) => (
