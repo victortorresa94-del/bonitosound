@@ -20,6 +20,13 @@ export function ArtistsBand() {
 
   if (artists.length === 0) return null;
 
+  // Repetimos hasta densificar la fila: con pocas fotos reales el marquee
+  // quedaba corto y dejaba hueco. Da igual que se repitan las caras — el
+  // objetivo es que la banda siempre se vea llena y en bucle continuo.
+  const MIN_ITEMS = 28;
+  const times = Math.max(2, Math.ceil(MIN_ITEMS / artists.length));
+  const filled = Array.from({ length: times }, () => artists).flat();
+
   return (
     <section
       aria-label="Artistas que llevamos"
@@ -27,7 +34,7 @@ export function ArtistsBand() {
     >
       <p className="eyebrow mb-10 px-6 text-center">Artistas que llevamos</p>
       <MarqueeRow speed={50} gap="2.25rem" className={FADE_MASK}>
-        {[...artists, ...artists].map((a, i) => (
+        {filled.map((a, i) => (
           <div
             key={`${a.name}-${i}`}
             className="group flex w-[136px] shrink-0 flex-col items-center gap-3"
