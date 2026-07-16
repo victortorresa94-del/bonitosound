@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -42,6 +44,12 @@ export default function ArtistPage({
   if (!a) notFound();
 
   const photo = a.image ?? findAsset("artistas", a.slug);
+  // Ilustración "dibujo" si ya existe; si no, la foto real. Cuando aterrice
+  // /img/artistas/ilustracion/<slug>.png se muestra sola.
+  const illPath = path.join(process.cwd(), "public", "img", "artistas", "ilustracion", `${a.slug}.png`);
+  const hasIllustration = fs.existsSync(illPath);
+  const hero = hasIllustration ? `/img/artistas/ilustracion/${a.slug}.png` : photo;
+  const igHandle = a.instagram?.replace(/\/+$/, "").split("/").pop();
   const hasReels = a.reels && a.reels.length > 0;
   const hasVideos = a.youtubeIds && a.youtubeIds.length > 0;
   const hasGallery = a.gallery && a.gallery.length > 0;
@@ -122,10 +130,10 @@ export default function ArtistPage({
           </div>
 
           <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary md:-mt-6">
-            {photo && (
+            {hero && (
               <ParallaxLayer speed={0.18} className="absolute inset-0">
                 <Image
-                  src={photo}
+                  src={hero}
                   alt={a.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -226,12 +234,46 @@ export default function ArtistPage({
         </Section>
       )}
 
-      {hasReels && (
+      {a.instagram && (
         <Section>
-          <RevealOnScroll as="p" className="eyebrow mb-8">
-            En directo
-          </RevealOnScroll>
-          <InstagramFeed posts={a.reels} />
+          <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <RevealOnScroll as="p" className="eyebrow mb-2">
+                Instagram
+              </RevealOnScroll>
+              <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.6rem,3.5vw,2.6rem)]">
+                Lo último, en su perfil.
+              </SplitTextReveal>
+            </div>
+            <a
+              href={a.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline text-sm font-semibold text-text-secondary"
+            >
+              @{igHandle} →
+            </a>
+          </div>
+          {hasReels ? (
+            <InstagramFeed posts={a.reels} />
+          ) : (
+            <RevealOnScroll>
+              <a
+                href={a.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col items-start gap-3 rounded-2xl border border-subtle bg-bg-tertiary p-8 transition-colors hover:border-accent-cyan md:flex-row md:items-center md:justify-between md:p-10"
+              >
+                <span className="max-w-md text-lg text-text-secondary">
+                  Su día a día — directos, backstage y lanzamientos — está en
+                  Instagram, actualizándose solo.
+                </span>
+                <span className="whitespace-nowrap text-lg font-semibold text-accent-cyan-text transition-transform group-hover:translate-x-1">
+                  Ver el feed de @{igHandle} →
+                </span>
+              </a>
+            </RevealOnScroll>
+          )}
         </Section>
       )}
 
