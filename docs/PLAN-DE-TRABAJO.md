@@ -26,6 +26,11 @@
   - Ya hemos **chocado 2× en `app/artistas/*`** → resuelto con `git checkout
     --ours` (quedarse con la versión de la sesión principal). Si ves marcadores
     de conflicto `<<<<<<<` al compilar, es esto.
+  - **Docs compartidos** (cada sesión lee los de la otra): esta sesión mantiene
+    `PLAN-DE-TRABAJO.md` (estado) y `EQUIPO-Y-PERSONAS.md` (lente de diseño). La
+    otra mantiene `CONTENIDO-PAGINAS.md` (contenido real por página) y ahora va
+    con lo **urgente: quitar cifras de dinero del copy público** (regla
+    bonito-voz). No pisar ese frente.
 
 **Entorno Windows (gotchas importantes)**
 - El Windows **intercepta HTTPS (proxy TLS)**: `curl` falla con
@@ -102,12 +107,21 @@ construir (el carrusel/hero se queda, se toca poco):
 - **Reels sueltos** de Instagram.
 - **Vídeos de YouTube intercalados** con publicaciones (entretenido de ver).
 - Próximos shows si los hay.
-> Antes de diseñarla a fondo, Víctor quiere definir el **equipo de expertos +
-> buyer personas** (neurociencia/consumo, producto web-app, sector musical,
-> marca) y los distintos perfiles que entran (artista, quien contrata artista,
-> marca que contrata a Bonito, fan). Se diseña con esa lente. → crear
-> `docs/EQUIPO-Y-PERSONAS.md` (pendiente; Víctor lo pidió y luego pasará a modo
-> plan). Complementa a la skill `.claude/skills/bonito-team` (11 diseñadores).
+- 💡 **Reproductor / play inmediato** (idea de Víctor): botón de **Play** donde
+  hoy va "Contratar booking" (y mover booking a la derecha), que lance una
+  **micro-mezcla de 4-5 temas en ~1 min**. Viabilidad: los navegadores **bloquean
+  autoplay con sonido** sin gesto → play-botón es lo correcto. La micro-mezcla NO
+  se hace con el embed de Spotify (no stitchea fragmentos): se hace con
+  **HTML5 audio + `preview_url` (mp3 30 s) de la Web API de Spotify**, recortado
+  a ~12 s por tema + crossfade. Requiere **credenciales de app de Spotify
+  (client id/secret)** — pedir a Víctor. El **MCP de Spotify** que hay conectado
+  es su cuenta personal (search / create_playlist) → NO sirve para el player del
+  sitio público, como mucho para preparar una playlist. Fallback sin credenciales:
+  autoplay-on-click del top-1 (embed) + más abajo, embed de playlist/artista para
+  "escuchar más" en la galería.
+> Lente de diseño lista → `docs/EQUIPO-Y-PERSONAS.md` ✅ (equipo de expertos +
+> buyer personas). Contenido real por artista → `docs/CONTENIDO-PAGINAS.md` (otra
+> sesión). Craft visual → skill `.claude/skills/bonito-team` (11 diseñadores).
 
 ## 3. ⬜ PENDIENTE (priorizado)
 1. ⬜ Definir **equipo de expertos + buyer personas** (doc) — *primero*, es la lente.
