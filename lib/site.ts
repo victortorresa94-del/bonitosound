@@ -50,7 +50,7 @@ export const nav = [
   { label: "Artistas", href: "/artistas" },
   { label: "Eventos", href: "/eventos" },
   { label: "Records", href: "/records" },
-  { label: "Universo", href: "/universo" },
+  { label: "Universo Bonito", href: "/universo" },
   { label: "Nosotros", href: "/nosotros" },
 ] as const;
 

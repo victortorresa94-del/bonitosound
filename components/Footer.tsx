@@ -10,7 +10,7 @@ const cols = [
       { label: "Giras", href: "/eventos/giras" },
       { label: "Records", href: "/records" },
       { label: "Artistas", href: "/artistas" },
-      { label: "Universo", href: "/universo" },
+      { label: "Universo Bonito", href: "/universo" },
     ],
   },
   {
