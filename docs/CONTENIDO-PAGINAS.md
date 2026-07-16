@@ -1,185 +1,219 @@
-# Bonito Sound — Contenido por páginas (para diseño en Aura)
+# Bonito Sound — Contexto, historia y contenido por páginas
 
-> Toda la INFORMACIÓN real que va en cada página. No es diseño: es el qué (copy,
-> datos, secciones, CTAs) para dar profundidad a la herramienta. Datos verificados
-> del sitio actual. Estilo/voz: pro pero cercano, sin humo, con oficio.
-
-**Datos maestros (valen para todas):**
-- Nombre: Bonito Sound · Razón social: Bonito Sound S.L. · CIF: B10805299 · Desde 2022.
-- Sede: Carrer Tulancingo 4, 08206 Sabadell (Barcelona).
-- Teléfono: +34 656 865 545.
-- Emails: general `bonito@bonitosound.com` · booking `sonabonito@bonitosound.com`.
-- Instagram: @bonito_sound · LinkedIn: /company/bonito-sound · Web: bonitosound.com.
-- Una frase: "Llevamos artistas, montamos eventos para marcas, tenemos festival propio
-  y construimos el software que al sector le falta. Todo bajo el mismo techo, en Sabadell."
+> Documento maestro para dar contexto a la herramienta de diseño (Aura). No es solo
+> el copy de la web: es la HISTORIA, la filosofía, los servicios a fondo, el material
+> que tenemos y, al final, el contenido página a página. Cuanto más contexto tenga el
+> modelo, más profundidad tendrán las pantallas. Todo verificado del proyecto real.
 
 ---
 
-## 1. HOME
+## PARTE A — QUIÉN ES BONITO SOUND
 
-Narrativa por escenas (scroll cinematográfico). Orden y mensaje de cada bloque:
-1. **Hero** — "Llevamos la música a todas partes." Sub: da igual si es un concierto, un
-   evento, una gira o una grabación. La música se hace bonita.
-2. **Qué es** — presentación: agencia musical 360.
-3. **Marcas** — prueba social: banda de logos "Marcas que han sonado con nosotros".
-4. **Giras** — directos / tour management. Banda "Artistas que llevamos" (fotos en marquee).
-5. **Records** — sello y distribución. Banda de artistas del roster.
-6. **Marketing** — "Y que el lanzamiento no pase desapercibido." Ads, redes, lanzamientos.
-   Aquí va el **vídeo "resumen Bonito"** reproduciéndose (150+ lanzamientos desde 2022).
-7. **Tecnología** — software propio (Artiverse, Giraverse) → CTA a Universo.
-8. **Festival** — Jaleo Sound.
-9. **Cierre** — CTA final: ¿Hablamos?
+### La historia en una frase
+Bonito Sound es una **agencia musical 360** con sede en **Sabadell**, fundada en **2022**.
+Pero detrás hay **tres décadas de oficio**: gente que lleva toda la vida en la industria de la
+música y que, cansada de ver cómo el sector funciona a trozos —un proveedor para el booking,
+otro para el sello, otro para la distribución, favores por WhatsApp y Excel—, montó una casa
+donde **todo el sistema vive bajo un mismo techo**.
 
-CTAs del home: "Hablamos" (contacto) fijo en el menú; "Síguenos en Instagram".
+### La historia larga
+La música, por dentro, es un sector desordenado: carreras que se mueven por llamadas y contactos,
+lanzamientos que se pierden, giras que se cierran a base de suerte, marcas que quieren "sonar"
+pero no saben con quién. Los fundadores de Bonito llevan **30 años** metidos en ese barro —
+management, contratos, la llamada que cierra el bolo, giras de artistas grandes, activaciones de
+marca— y decidieron que ya sabían lo suficiente como para hacerlo bien y hacerlo entero.
 
----
+Así nace Bonito en 2022: no como "otra agencia con departamentos", sino como un **ecosistema**.
+Llevan artistas (booking, management, sello, distribución, editorial), montan **eventos para
+marcas** y **giras** de directo, hacen el **marketing** para que los lanzamientos no pasen
+desapercibidos, **construyen su propio software** para arreglar lo que al sector le falta
+(Artiverse, Giraverse) y hasta tienen **su propio festival** (Jaleo Sound, en Ámsterdam).
 
-## 2. ARTISTAS
+La diferencia no es el catálogo de servicios: es la **actitud**. No coleccionan artistas — llevan
+a los que pueden llevar como hay que llevarlos, a mano. No venden humo — te dicen qué te toca.
+No dan keynote — montan lo que se ve en el escenario. Y **cogen el teléfono**: hablas con quien
+lo lleva, no con un formulario.
 
-**Estructura:** showcase carrusel (protagonista) + catálogo de distribución.
+### Prueba (por qué creerles)
+- **Giras** de Antonio Orozco, Maldita Nerea, Alfred García, Ruth Lorenzo, Ramon Mirabet,
+  Efecto Pasillo, Albert Pla.
+- **Marcas** activadas: Ballantine's, Absolut, Schweppes, Corona, Pepsi, Font Vella, Four Roses,
+  Seagram's, Monkey 47, Sainte Marguerite… → **250 eventos, 58 marcas**.
+- **Sello:** +150 lanzamientos desde 2022. ~20 artistas en distribución.
+- **Artistas propios** en booking/management: Eva Calyza (álbum MARCA DIVINA producido con
+  Bonito), Dulze, Nàtura, Pablo Rojo, Paule, Sa Pena, OTEM.
+- **Miembros de:** UFI, SGAE, AGEDI, ARTE, AEDEM, European Music Council.
 
-**Showcase (booking & management, 1 artista por pantalla):**
-Formato por artista → eyebrow "ARTISTA · 0X/0Y" · nombre (serif grande) · género (cursiva
-cian) · bio · enlaces Spotify + Instagram · link a ficha completa.
-
-| Artista | Género | Bio |
+### El equipo
+| Nombre | Rol | Qué hace de verdad |
 |---|---|---|
-| **Dulze** | Indie pop / Raíz flamenca | María Lorenzo, de Chipiona. Del flamenco de los tablaos de Cádiz a un indie-pop de fantasía que no se deja etiquetar. Voz que no necesita subir el volumen para que te calles. |
-| **Eva Calyza** | Pop mental / Electrónica y folclore | Flauta travesera + máster en gestión cultural. "Pop mental": pop y voz por delante, electrónica y folclore andaluz por debajo. Álbum MARCA DIVINA (2025, con Bonito Sound). |
-| **Nàtura** | DJ / Productora | Empezó pinchando para grupos de rap y acabó montando sus sesiones. Directo del urbano y reggaeton al techno. Sabe leer una pista. |
-| **Pablo Rojo** | Funk / Jazz | Funk y jazz desde Ámsterdam. Booking, sello, distribución y editorial con Bonito. |
-| **Paule** | Cantautor / Pop de autor | Canciones que parecen fáciles hasta que intentas escribir una igual. El oficio no se ve, se nota. |
-| **Sa Pena** | Urbano valencià / pop + dnb | Dúo de La Safor, canta en valencià. Pop, drum'n'bass y calle. Final del Sona9 2023 por voto popular. |
-| **OTEM** | Urbano / Pop alternativo | "Si has llegado hasta aquí, probablemente ya lo sabes." |
+| **Dani Boada** | Fundador | 30 años en la industria. Management, contratos, la llamada que cierra el bolo. La experiencia bruta de la casa. |
+| **Manu Rojo** | Cofundador | Project management, financiación y booking. Lleva a Eva Calyza personalmente — aquí no hay artistas de primera y de segunda. |
+| **Xavi Julià** | Producción | Convierte el deck en evento. La producción que se ve en el escenario. |
+| **Cristina Soler** | Comunicación | Coordina lo de dentro y lo de fuera. Lo que ves publicado ha pasado por ella. |
+| **Victor Torres** | Marketing Artístico & IA | Campañas, contenido y la IA que hace que cada lanzamiento llegue más lejos. |
 
-**Catálogo de distribución (~20 artistas, una distribuidora):**
-Paule · Dulze · Sa Pena · Soylapau · Daniel Giró · 96Grados · Pablo Rojo · Nàtura · Hebe ·
-Kanela · Sotrac · Belbaka · Egon Calle · Rumba Menuda · Fabian · Eva Calyza · Kenai White ·
-Overpulation · D Nácar · AlexDeLion · Marco la Testa.
-> Destacado: **Kenai White** — cantautor y actor salmantino, serie Dos Vidas (TVE), ficha en Wikipedia.
+---
 
-**Ficha de cada artista (/artistas/slug):** ilustración "dibujo" grande + nombre serif +
-género + bio completa + hitos (milestones año+frase) + Spotify embed + vídeos YouTube +
-CTA booking. Copy CTA: "Booking directo. Sin intermediarios raros — coges el teléfono y
+## PARTE B — LA VOZ (cómo debe escribir el modelo)
+
+**Tono: "pro pero cercano".** Tres ejes en equilibrio:
+1. **Directo, no canalla.** Frases cortas, sin palabrería. Confianza sin chulería: la seguridad
+   viene de los hechos (artistas reales, marcas reales, 30 años), no del tono.
+2. **Honesto, no agresivo.** Decimos lo que se puede hacer de verdad. No atacamos al cliente ni
+   al resto del sector con desprecio. Understatement elegante, no soberbio.
+3. **Cercano, no coloquial de más.** Tuteo, calidez, cero corporativo. Sin jerga que envejezca.
+
+**Regla del dinero (innegociable):** fuera cifras de € del copy público. El precio se habla en la
+llamada. Si una frase presume de coste, se reescribe hacia **resultado** o **cómo trabajamos**.
+
+**Sí al léxico:** suenan, llenamos, despegar, del brief al titular, cogemos el teléfono, sin
+postureo, de verdad, como merece, gente del sector.
+**No:** sinergias, "soluciones 360" como muletilla, líderes del mercado, pasión por la música,
+cualquier cifra en €, "los mejores", superlativos vacíos.
+
+**Frases marca (mantener el espíritu):** "Hacemos que las marcas suenen." · "Y las giras, las
+llenamos." · "No organizamos eventos. Creamos momentos que suenan." · "Tienes la música. Te
+falta el sistema." · "Del primer demo al máster listo para plataformas." · "Coges el teléfono y
 hablas con quien lo lleva."
 
 ---
 
-## 3. RECORDS (sello + servicios)
+## PARTE C — LOS SERVICIOS A FONDO
 
-Titular: **"Tienes la música. Te falta el sistema."** Sub: sello, booking, management,
-distribución y editorial. Lo que la mayoría te hace montar con cinco proveedores, aquí en uno.
+### 1. Sello / Records 360
+El corazón discográfico. **Del primer demo al máster listo para plataformas:** grabación,
+producción, mezcla, máster y lanzamiento. +150 lanzamientos desde 2022. Aquí se produjo el
+álbum **MARCA DIVINA** de Eva Calyza. No es un sello que fichas y desapareces: se produce a mano.
 
-**Las 5 piezas (cada una será su micro-página dentro de Records):**
-1. **Booking Engine** — fechas y contratación de directos.
-2. **Records 360 (Sello)** — grabación, producción, lanzamiento. +150 lanzamientos desde 2022.
-3. **Editorial 360** — gestión editorial/derechos.
-4. **Distribución** — a todas las plataformas. ~20 artistas, una distribuidora.
-5. **Marketing** — ads, estrategia de redes y lanzamientos (marca "NUEVO").
+### 2. Booking & Management
+Llevan la carrera del artista: fechas, contratación de directos, contratos, la estrategia. Booking
+**directo, sin intermediarios raros** — coges el teléfono y hablas con quien lo lleva. Pocos
+artistas, bien llevados.
 
-Roster ("A estos los llevamos nosotros"): Dulze, Eva Calyza, Nàtura, Pablo Rojo, Paule, Sa Pena.
-Mensajes de apoyo: "No te vendemos humo. Te decimos qué te toca." · "Cuatro pasos. Sin letra pequeña."
+### 3. Distribución & Editorial
+Distribución a todas las plataformas (~20 artistas, una distribuidora) y gestión editorial /
+derechos. La parte menos glamurosa y más importante: que la música esté donde tiene que estar y
+que cada uso se cobre.
 
----
+### 4. Eventos de marca (activaciones)
+Diseñan experiencias musicales que conectan marcas, artistas y personas. **Del brief al evento:**
+concepto, producción técnica, artistas, logística. 250 eventos, 58 marcas. Casos: Schweppes (+80
+eventos), Corona (+40), Font Vella (30), Four Roses (20), Tequila Código (+20), Sainte Marguerite
+(+20), Ballantine's, Absolut, Pepsi, Monkey 47, Seagram's. Claim: **"No organizamos eventos.
+Creamos momentos que suenan."**
 
-## 4. EVENTOS
+### 5. Giras / Tour management
+Producción, coordinación técnica y logística de giras, nacionales e internacionales. "Y las giras,
+las llenamos." Artistas de gira: Antonio Orozco, Maldita Nerea, Alfred García, Ruth Lorenzo,
+Ramon Mirabet, Efecto Pasillo, Albert Pla.
 
-Titular gigante "EVENTOS". Sub: "Diseñamos experiencias musicales que conectan marcas,
-artistas y personas." Frase de cierre: **"No organizamos eventos. Creamos momentos que suenan."**
+### 6. Marketing artístico
+Ads, estrategia de redes y lanzamientos de álbum y de evento. **"Que el lanzamiento no pase
+desapercibido."** Cuando algo sale, se entera quien se tiene que enterar. Incluye el uso de IA
+para que cada lanzamiento llegue más lejos.
 
-**Stats (con cabeza):** 250 eventos realizados · 58 marcas que han confiado · 53 artistas.
+### 7. Software propio (Universo Bonito)
+- **Artiverse** (en marcha): plataforma B2B que conecta agencias, programadores y promotores. El
+  sitio donde el sector deja de trabajar a ciegas.
+- **Giraverse** (en desarrollo): la circulación de giras, ordenada. Lo que hoy se resuelve a base
+  de llamadas y suerte.
 
-**Marcas y nº de bolos por marca (de los vídeos):**
-| Marca | Eventos |
-|---|---|
-| Schweppes | +80 |
-| Corona | +40 |
-| Font Vella | 30 |
-| Four Roses | 20 |
-| Tequila Código | +20 |
-| Sainte Marguerite | +20 |
-| Château, Monkey 47, Pepsi, Seagram's, Ballantine's, Pernod Ricard | (sin nº) |
-
-**Vídeos disponibles (R2):** Corona, Schweppes, Tequila Código, Pepsi, Font Vella, Four Roses,
-Château, Nàtura + giras (Albert Pla, Anne Lukin, Cris, Dani directo).
-
-**Marcas completas (banner):** Pepsico, Schweppes, Corona, Absolut, Font Vella, Four Roses,
-Seagram's, Monkey 47, Sainte Marguerite, Le Souffle, Ballantine's, Pernod Ricard, Universal,
-Gestmusic, Concert Studio, Global Talent Services, Sweet Bird, Código 1530, Lighthouse,
-Corre Lola Corre, Sr. Wilson.
-
-**Giras / tour management (artistas de gira):** Albert Pla, Alfred García, Antonio Orozco,
-Maldita Nerea, Ruth Lorenzo, Ramon Mirabet, Efecto Pasillo.
-
-CTA final: **"¿Marca o gira?"** → Hablemos.
+### 8. Festival propio (Jaleo Sound)
+Festival de cultura española y latina en **Ámsterdam** (11–12 septiembre 2026, Posthoornkerk).
+Marca propia. La prueba de que cuando montas el sistema entero, también montas la fiesta.
 
 ---
 
-## 5. UNIVERSO BONITO (proyectos propios)
+## PARTE D — EL MATERIAL QUE TENEMOS (inventario)
 
-Titular: "No esperamos a que el sector se arregle solo. Lo construimos." Sub: más allá de los
-servicios, Bonito crea sus propias cosas — software que le falta a la industria y un festival.
+**Vídeos (alojados en Cloudflare R2, se reproducen en la web):**
+- Eventos de marca: Corona, Schweppes, Tequila Código, Pepsi, Font Vella, Four Roses, Château, Nàtura.
+- Giras/artistas: Albert Pla, Anne Lukin, Cris, Dani en directo.
+- Home: "resumen Bonito" (150+ lanzamientos) — el vídeo grande auto-reproducido.
+- Nosotros: entrevista a Dani (fundador).
 
-**Las 3 cosas (contextualizadas):**
-1. **Artiverse** — *software, en marcha.* Plataforma B2B que conecta agencias, programadores y
-   promotores. "El sitio donde el sector deja de trabajar a ciegas." → artiverse.es
-2. **Giraverse** — *software, en desarrollo.* La circulación de giras ordenada, nacional e
-   internacional. "Lo que ahora se resuelve a base de llamadas y suerte."
-3. **Jaleo Sound** — *festival propio.* Festival de cultura española y latina en Ámsterdam.
-   "Cuando montas el sistema entero, también montas la fiesta." → jaleosound.com
+**Fotos:** retratos B/N de artistas (Dulze, Eva Calyza, Nàtura, Pablo Rojo, Paule, Sa Pena,
+AlexDeLion, D Nácar, Hebe, Marco la Testa). Foto de Vic (fundador, camiseta Bonito) para Nosotros.
 
-Cierre: "Entender el sistema entero también significa darle herramientas y crear las nuestras.
-Bonito no es una agencia con un departamento de tecnología: es un ecosistema donde el software
-y los proyectos propios son otra vertical."
+**Logos de marca disponibles:** Pepsico, Schweppes, Ballantine's, Pernod Ricard, Font Vella,
+Four Roses, Universal, Gestmusic, Concert Studio, Global Talent Services, Sweet Bird.
+**Logos que faltan (generar):** Corona, Absolut, Seagram's, Monkey 47, Sainte Marguerite, Le Souffle.
 
-**Logos que necesita esta página:** Artiverse, Giraverse, Jaleo Sound (rojo #e8351f, script).
+**Redes de artistas:** Instagram enlazado en 11 de 12 fichas (falta OTEM).
 
----
-
-## 6. NOSOTROS
-
-Titular sugerido: "Somos la gente del sector." Historia: "En la música nadie te regala nada.
-Tres décadas de oficio detrás, tres años montando la agencia para hacerlo como hay que hacerlo."
-
-**El equipo (5):**
-| Nombre | Rol | Qué hace |
-|---|---|---|
-| **Dani Boada** | Fundador | 30 años en la industria. Management, contratos, la llamada que cierra el bolo. |
-| **Manu Rojo** | Cofundador | Project management, financiación y booking. Lleva a Eva Calyza de la mano. |
-| **Xavi Julià** | Producción | Convierte el deck en evento. La producción que se ve en el escenario. |
-| **Cristina Soler** | Comunicación | Coordina lo de dentro y lo de fuera. Lo publicado ha pasado por ella. |
-| **Victor Torres** | Marketing Artístico & IA | Campañas, contenido y la IA que hace que cada lanzamiento llegue más lejos. |
-
-**Sección "De cerca":** vídeo **entrevista a Dani** (fundador) + **reel de Instagram** (el día
-a día). CTA: "Síguenos en Instagram".
-
-**Miembros activos de:** UFI · SGAE · AGEDI · ARTE · AEDEM · European Music Council.
-**Con el apoyo de:** Institut Ramon Llull · Plan de Recuperación UE · Unión Europea.
-**(pendientes de logo, como texto):** Ministerio de Cultura · Instituto Cervantes · Embajada de
-España en Holanda · AIE · Stadsdeel Amsterdam.
-
-Foto disponible: retrato de Vic (fundador, camiseta Bonito) — `Vic bonito.png`.
-CTA final: "¿Hablamos?" → /contacto.
+**Pendiente de generar (ver docs/CONTEXTO-GRAFICO.md):** ilustraciones "dibujo" por artista
+(estilo line-art navy + cian) y los 6 logos de marca.
 
 ---
 
-## 7. JALEO SOUND (festival propio)
+## PARTE E — CONTENIDO PÁGINA A PÁGINA
 
-Festival de cultura española y latina en Ámsterdam. **11–12 de septiembre de 2026**,
-Posthoornkerk (iglesia cultural). Marca propia (logo rojo). Playlist en Spotify.
-Apoyos: Institut Ramon Llull, Instituto Cervantes, Embajada de España en Holanda, Stadsdeel Amsterdam.
+### 1. HOME
+Scroll cinematográfico por escenas, cada una una frase que resume una vertical:
+1. "Llevamos la música a todas partes." (qué somos)
+2. "Hacemos que las marcas suenen." → Eventos
+3. "Y las giras, las llenamos." → Giras
+4. "Ayudamos a artistas a despegar." → Records
+5. "Y que el lanzamiento no pase desapercibido." → Marketing. **Aquí el vídeo "resumen Bonito"** grande.
+6. "También construimos las herramientas que haga falta." → Universo Bonito
+7. "Tenemos un festival." → Jaleo Sound
+8. Cierre: "¿Marca, artista o promotor? Hablamos." → Contacto
+Bandas de prueba social: logos de marca ("Marcas que han sonado con nosotros") y fotos de
+artistas ("Artistas que llevamos").
+
+### 2. ARTISTAS
+Showcase carrusel (booking, uno por pantalla): eyebrow "ARTISTA 0X/0Y", nombre serif, género en
+cursiva cian, bio, Spotify + Instagram, link a ficha. Abajo, catálogo de distribución (~20).
+Artistas booking + bios: **Dulze** (indie pop / raíz flamenca, María Lorenzo de Chipiona) ·
+**Eva Calyza** (pop mental, álbum MARCA DIVINA 2025) · **Nàtura** (DJ/productora, del urbano al
+techno) · **Pablo Rojo** (funk/jazz desde Ámsterdam) · **Paule** (cantautor de oficio) ·
+**Sa Pena** (urbano valencià + dnb, final Sona9 2023) · **OTEM** (urbano/pop alt).
+Catálogo: Paule, Dulze, Sa Pena, Soylapau, Daniel Giró, 96Grados, Pablo Rojo, Nàtura, Hebe,
+Kanela, Sotrac, Belbaka, Egon Calle, Rumba Menuda, Fabian, Eva Calyza, Kenai White, Overpulation,
+D Nácar, AlexDeLion, Marco la Testa. Destacado: **Kenai White** (actor de Dos Vidas TVE, ficha en Wikipedia).
+**Ficha de artista:** ilustración/foto grande + nombre + género + bio + hitos + Spotify + vídeos
+YouTube + **sección Instagram** (feed/perfil) + CTA booking directo.
+
+### 3. RECORDS
+Titular: "Tienes la música. Te falta el sistema." Las 5 piezas del sistema, cada una su
+micro-página: Booking Engine · Records 360 (Sello) · Editorial 360 · Distribución · Marketing (NUEVO).
+Mensajes: "No te vendemos humo. Te decimos qué te toca." · "Cuatro pasos. Sin letra pequeña."
+Roster: Dulze, Eva Calyza, Nàtura, Pablo Rojo, Paule, Sa Pena.
+
+### 4. EVENTOS
+Titular "EVENTOS". Sub: "Diseñamos experiencias musicales que conectan marcas, artistas y
+personas." Stats: 250 eventos · 58 marcas · 53 artistas. Clúster de vídeos (Corona grande) con
+nº de bolos por marca. Sección "más vídeos" con todo lo que tenemos. Muro "marca por marca".
+Giras (Orozco, Maldita Nerea…). Cierre: "No organizamos eventos. Creamos momentos que suenan." /
+"¿Marca o gira?".
+
+### 5. UNIVERSO BONITO
+"No esperamos a que el sector se arregle solo. Lo construimos." Artiverse (software, en marcha,
+artiverse.es) · Giraverse (software, en desarrollo) · Jaleo Sound (festival, jaleosound.com).
+Cierre: "Entender el sistema entero también significa darle herramientas y crear las nuestras."
+
+### 6. NOSOTROS
+"Somos la gente del sector." Historia (30 años de oficio, 3 años montando la agencia). Los 5 del
+equipo (tabla arriba). Sección "De cerca": entrevista a Dani (vídeo) + reel de Instagram + CTA
+"Síguenos en Instagram". Miembro de: UFI, SGAE, AGEDI, ARTE, AEDEM, European Music Council. Con
+el apoyo de: Institut Ramon Llull, Plan de Recuperación UE, UE (+ Ministerio de Cultura, Instituto
+Cervantes, Embajada de España en Holanda, AIE, Stadsdeel Amsterdam). CTA: "¿Hablamos?".
+
+### 7. JALEO SOUND
+Festival de cultura española y latina en Ámsterdam. 11–12 septiembre 2026, Posthoornkerk. Marca
+propia (logo rojo #e8351f). Playlist en Spotify. Apoyos institucionales (Ramon Llull, Cervantes,
+Embajada, Stadsdeel Amsterdam).
+
+### 8. CONTACTO
+Booking directo, sin intermediarios. `bonito@bonitosound.com` · booking `sonabonito@bonitosound.com`
+· +34 656 865 545 · Carrer Tulancingo 4, 08206 Sabadell. "Coges el teléfono y hablas con quien lo
+lleva. Te contestamos nosotros, no un formulario."
 
 ---
 
-## 8. CONTACTO
-
-Booking directo (sin intermediarios). Email general `bonito@bonitosound.com`, booking
-`sonabonito@bonitosound.com`, tel +34 656 865 545, Sabadell. "Coges el teléfono y hablas con
-quien lo lleva. Te contestamos nosotros, no un formulario."
-
----
-
-## Assets de imagen que faltan (para la sesión de generación)
-- Ilustraciones "dibujo" por artista (estilo Eva Calyza): los 7 de booking primero. Ver `CONTEXTO-GRAFICO.md`.
-- 6 logos de marca: Corona, Absolut, Seagram's, Monkey 47, Sainte Marguerite, Le Souffle.
-- Foto de Vic ya disponible para Nosotros.
+## DATOS MAESTROS
+Bonito Sound S.L. · CIF B10805299 · desde 2022 · Sabadell (Barcelona) · +34 656 865 545 ·
+bonito@bonitosound.com / sonabonito@bonitosound.com · IG @bonito_sound · LinkedIn /company/bonito-sound
+· bonitosound.com. Colores: crema #FBFAF6, navy #14283C, cian #16b6d4, rojo Jaleo #e8351f.
+Tipografías: Zilla Slab (titulares), Fredoka (heros juguetones), Geist (cuerpo).
