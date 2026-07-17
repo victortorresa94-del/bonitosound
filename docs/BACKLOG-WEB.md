@@ -17,7 +17,8 @@
 - [x] ✅ Estructura de las 7 páginas (aspectos + caso + FAQ + CTA).
 - [ ] 🎨 **Heros de las 7** (los diseña Víctor y me los pasa).
 - [ ] 🎨 Nuevo **banner de servicios** ("foto con 7 servicios").
-- [ ] 🟢 Sección **"Nuestras ediciones"** (editoriales/lanzamientos de Bonito).
+- [x] ✅ Sección **"Nuestras ediciones"** en el sello (+150 lanzamientos desde
+  2022 + ediciones reales: MARCA DIVINA, Afilá, Las Flores Cortadas…).
 - [ ] 🟢 **Botón de Spotify** — hacerlo bien.
 - [ ] 📋🟢 **Links de listas de Spotify** por servicio (Víctor pasa playlists).
 - [ ] 🟢 Pulir "experiencias/artistas" y CTA de cada servicio.
@@ -42,6 +43,14 @@
 - [ ] 📋 **Reels** de Instagram: 0/22 (IG no se indexa; sacar a mano por perfil).
 
 ## EVENTOS
+- [x] ✅ **Copys reescritos** (los 18 .md): voz Bonito, rota la cadencia "de IA",
+  frases-firma repartidas a un solo sitio (cinco proveedores / del brief al…),
+  cero cifras de dinero.
+- [x] ✅ **Eventos de artista** con campos WS2 (services/lineup/location):
+  albert-pla, anne-lukin, gira-1016 (Alfred), cris, dani-directo, natura.
+- [x] ✅ **EventosGiras**: encuadre claro marca vs artista + copy.
+- [x] ✅ **Hero de evento con fallback de marca** (degradado navy + nombre) si el
+  vídeo R2 aún no está subido — no más negro roto.
 - [x] ✅ Títulos sin cifras · tipografía banner "no organizamos" → hero · banner de giras/artistas.
 - [x] ✅ **WS2: estructura de la página de evento** — campos opcionales en el .md
   (se pintan solo si están, nada inventado):
