@@ -7,13 +7,12 @@ import {
   StaggerGroup,
   SplitTextReveal,
   MagneticButton,
-  MarqueeLogoWall,
 } from "@/components/motion";
 import { R2Video } from "@/components/R2Video";
 import { InstagramReel } from "@/components/Embeds";
 import { findLogo, findAsset } from "@/lib/assets";
 import { getPosts } from "@/lib/blog";
-import { team, memberships, support, site } from "@/lib/site";
+import { team, memberships, support, supportPending, site } from "@/lib/site";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -55,6 +54,39 @@ const PRINCIPIOS = [
   { t: "Cuentas claras", d: "Liquidaciones a tiempo y trimestrales. Si una plataforma se retrasa, te lo decimos." },
 ];
 
+const INSTITUCIONES = [
+  ["Fabra i Coats", "Proyecto residente 2025 de la fábrica de creación del Ajuntament de Barcelona."],
+  ["Redescena", "Compañía inscrita en la Red Española de Teatros, Auditorios, Circuitos y Festivales."],
+  ["Fundació Catalunya Cultura", "Proyecto acompañado por la fundación que conecta cultura y empresa en Catalunya."],
+];
+
+/** Logo del banner navy. Los logos de instituciones son blancos (y los de
+ *  apoyo, mezcla) → los normalizamos todos a blanco con un filtro para que se
+ *  vean SIEMPRE, limpios y uniformes, sobre el fondo oscuro. Si falta el logo,
+ *  cae a un chip con el nombre. */
+function LogoChip({ dir, name }: { dir: string; name: string }) {
+  const src = findLogo(dir, name);
+  if (src) {
+    return (
+      <div className="flex h-16 items-center justify-center px-2 md:h-20 md:px-4">
+        <Image
+          src={src}
+          alt={name}
+          width={170}
+          height={52}
+          className="h-9 w-auto max-w-[160px] object-contain opacity-90 transition-opacity hover:opacity-100 md:h-11"
+          style={{ filter: "brightness(0) invert(1)" }}
+        />
+      </div>
+    );
+  }
+  return (
+    <div className="flex h-16 items-center justify-center rounded-xl border border-white/25 px-5 md:h-20 md:px-7">
+      <span className="text-center text-sm font-semibold text-white/85">{name}</span>
+    </div>
+  );
+}
+
 export default function Nosotros() {
   const posts = getPosts().slice(0, 3);
   const heroImg = findAsset("heroes", "nosotros") ?? findLogo("heroes", "nosotros");
@@ -88,24 +120,29 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* ── HISTORIA ── */}
+      {/* ── HISTORIA (a todo el ancho: lead grande + cuerpo) ── */}
       <Section>
-        <RevealOnScroll className="max-w-2xl space-y-5 text-lg text-text-secondary">
-          <p>
-            Bonito Sound se monta en 2022 en Sabadell. La empresa es joven; el
-            oficio, no — Dani lleva treinta años en la industria musical española.
-          </p>
-          <p>
-            Treinta años dan para ver de todo: sobre todo, para ver lo que no
-            funciona y por qué nadie lo arregla. Montamos Bonito para arreglarlo,
-            juntando bajo un mismo techo lo que el sector te hace montar con cinco
-            proveedores.
-          </p>
-          <p>
-            Somos pocos, hacemos mucho y cogemos el teléfono. No damos keynote:
-            montamos lo que se ve en el escenario.
-          </p>
-        </RevealOnScroll>
+        <div className="grid items-start gap-8 md:grid-cols-[0.95fr_1.05fr] md:gap-16">
+          <RevealOnScroll as="h2" className="display text-[clamp(1.9rem,3.6vw,3rem)] leading-[1.08]">
+            <span style={{ color: NAVY }}>Bonito Sound se monta en 2022 en Sabadell. </span>
+            <span style={{ color: CYAN }}>La empresa es joven; el oficio, no.</span>
+          </RevealOnScroll>
+          <RevealOnScroll delay={0.12} className="space-y-5 text-lg leading-relaxed text-text-secondary">
+            <p>
+              Dani lleva treinta años en la industria musical española. Treinta
+              años dan para ver de todo: sobre todo, para ver lo que no funciona y
+              por qué nadie lo arregla.
+            </p>
+            <p>
+              Montamos Bonito para arreglarlo, juntando bajo un mismo techo lo que
+              el sector te hace montar con cinco proveedores.
+            </p>
+            <p>
+              Somos pocos, hacemos mucho y cogemos el teléfono. No damos keynote:
+              montamos lo que se ve en el escenario.
+            </p>
+          </RevealOnScroll>
+        </div>
       </Section>
 
       {/* ── NÚMEROS ── */}
@@ -122,37 +159,25 @@ export default function Nosotros() {
         </div>
       </Section>
 
-      {/* ── DANI, EL CEO ── */}
+      {/* ── EL DÍA A DÍA (IG) — subido ── */}
       <Section>
-        <RevealOnScroll as="p" className="eyebrow mb-4">Dani Boada · Fundador</RevealOnScroll>
-        <SplitTextReveal as="h2" split="lines" className="display mb-10 text-[clamp(2rem,4.5vw,3.4rem)]">
-          Treinta años. Y sigue cogiendo el teléfono.
-        </SplitTextReveal>
-        <div className="grid items-start gap-10 md:grid-cols-2">
-          <RevealOnScroll className="space-y-5">
-            <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl bg-bg-tertiary">
-              {daniPhoto && (
-                <Image src={daniPhoto} alt="Dani Boada" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
-              )}
-            </div>
-            <p className="text-lg leading-relaxed text-text-secondary">
-              Management, contratos y la llamada que cierra el bolo. En treinta
-              años en la industria, Dani ha trabajado con —y descubierto a—
-              artistas que hoy llenan estadios. Ese oficio es lo que hay detrás
-              de cada decisión de Bonito:
-            </p>
-            <div className="flex flex-wrap gap-x-5 gap-y-2 font-round text-lg font-semibold" style={{ color: NAVY }}>
-              {DANI_ARTISTS.map((name, i) => (
-                <span key={name} className="whitespace-nowrap">
-                  {i > 0 && <span className="mr-5" style={{ color: CYAN }}>·</span>}
-                  {name}
-                </span>
-              ))}
-            </div>
-          </RevealOnScroll>
+        <div className="grid items-center gap-8 md:grid-cols-[1fr_0.5fr]">
+          <div>
+            <RevealOnScroll as="p" className="eyebrow mb-4">El día a día</RevealOnScroll>
+            <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,3rem)]">
+              Lo que montamos, semana a semana.
+            </SplitTextReveal>
+            <RevealOnScroll as="p" className="mt-5 max-w-md text-text-secondary" delay={0.15}>
+              Lo de dentro está en Instagram: directos, backstage y lo que va cayendo.
+            </RevealOnScroll>
+            <RevealOnScroll className="mt-7" delay={0.25}>
+              <MagneticButton strength={0.35}>
+                <Cta href={site.social.instagram} external>Síguenos en Instagram →</Cta>
+              </MagneticButton>
+            </RevealOnScroll>
+          </div>
           <RevealOnScroll delay={0.15}>
-            <R2Video src="entrevista-dani.mp4" ratio="16 / 9" />
-            <p className="mt-4 text-sm text-text-muted">La entrevista a Dani, sin guion.</p>
+            <InstagramReel url="https://www.instagram.com/reel/DCOfx1YKHsP/" title="Presentación de Bonito Sound" />
           </RevealOnScroll>
         </div>
       </Section>
@@ -182,8 +207,48 @@ export default function Nosotros() {
         </StaggerGroup>
       </Section>
 
-      {/* ── LO QUE FIRMAS ── */}
+      {/* ── DANI, EL CEO — bajado. Nombres a lo ancho, destacados ── */}
       <Section>
+        <RevealOnScroll as="p" className="eyebrow mb-4">Dani Boada · Fundador</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display mb-10 text-[clamp(2rem,4.5vw,3.4rem)]">
+          Treinta años. Y sigue cogiendo el teléfono.
+        </SplitTextReveal>
+        <div className="grid items-start gap-10 md:grid-cols-2">
+          <RevealOnScroll className="space-y-5">
+            <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl bg-bg-tertiary">
+              {daniPhoto && (
+                <Image src={daniPhoto} alt="Dani Boada" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
+              )}
+            </div>
+            <p className="text-lg leading-relaxed text-text-secondary">
+              Management, contratos y la llamada que cierra el bolo. En treinta
+              años en la industria, Dani ha trabajado con —y descubierto a—
+              artistas que hoy llenan estadios. Ese oficio es lo que hay detrás de
+              cada decisión de Bonito.
+            </p>
+          </RevealOnScroll>
+          <RevealOnScroll delay={0.15}>
+            <R2Video src="entrevista-dani.mp4" ratio="16 / 9" />
+            <p className="mt-4 text-sm text-text-muted">La entrevista a Dani, sin guion.</p>
+          </RevealOnScroll>
+        </div>
+
+        {/* Nombres a lo ancho: los artistas de su carrera, destacados. */}
+        <RevealOnScroll className="mt-14 border-t border-subtle pt-9">
+          <p className="eyebrow mb-6">Ha trabajado con — y descubierto a —</p>
+          <div className="flex flex-wrap gap-x-8 gap-y-4 font-round font-bold leading-none" style={{ color: NAVY }}>
+            {DANI_ARTISTS.map((name, i) => (
+              <span key={name} className="flex items-center whitespace-nowrap text-[clamp(1.5rem,3.4vw,2.6rem)]">
+                {i > 0 && <span className="mr-8" style={{ color: CYAN }} aria-hidden>·</span>}
+                {name}
+              </span>
+            ))}
+          </div>
+        </RevealOnScroll>
+      </Section>
+
+      {/* ── LO QUE FIRMAS ── */}
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">Cómo trabajamos</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           Lo que firmas con nosotros.
@@ -203,51 +268,51 @@ export default function Nosotros() {
         </StaggerGroup>
       </Section>
 
-      {/* ── EL SECTOR NOS CONOCE + INSTITUCIONES ── */}
-      <Section className="bg-bg-primary">
+      {/* ── EL SECTOR NOS CONOCE (cards) ── */}
+      <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">El sector nos conoce</RevealOnScroll>
         <StaggerGroup stagger={0.1} className="grid gap-6 md:grid-cols-3">
-          {[
-            ["Fabra i Coats", "Proyecto residente 2025 de la fábrica de creación del Ajuntament de Barcelona."],
-            ["Redescena", "Compañía inscrita en la Red Española de Teatros, Auditorios, Circuitos y Festivales."],
-            ["Fundació Catalunya Cultura", "Proyecto acompañado por la fundación que conecta cultura y empresa en Catalunya."],
-          ].map(([t, d]) => (
+          {INSTITUCIONES.map(([t, d]) => (
             <div key={t} className="card">
               <h3 className="display text-xl">{t}</h3>
               <p className="mt-3 text-sm text-text-secondary">{d}</p>
             </div>
           ))}
         </StaggerGroup>
-        <RevealOnScroll className="mt-14">
-          <MarqueeLogoWall items={memberships} dir="instituciones" label="Miembros activos de" speed={30} />
-        </RevealOnScroll>
-        <RevealOnScroll className="mt-10">
-          <MarqueeLogoWall items={support} dir="apoyos" label="Con el apoyo de" speed={30} direction="right" />
-        </RevealOnScroll>
       </Section>
 
-      {/* ── DE CERCA (IG) ── */}
-      <Section>
-        <div className="grid items-center gap-8 md:grid-cols-[1fr_0.5fr]">
-          <div>
-            <RevealOnScroll as="p" className="eyebrow mb-4">El día a día</RevealOnScroll>
-            <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,3rem)]">
-              Lo que montamos, semana a semana.
-            </SplitTextReveal>
-            <RevealOnScroll as="p" className="mt-5 max-w-md text-text-secondary" delay={0.15}>
-              Lo de dentro está en Instagram: directos, backstage y lo que va cayendo.
-            </RevealOnScroll>
-            <RevealOnScroll className="mt-7" delay={0.25}>
-              <MagneticButton strength={0.35}>
-                <Cta href={site.social.instagram} external>Síguenos en Instagram →</Cta>
-              </MagneticButton>
-            </RevealOnScroll>
-          </div>
-          <RevealOnScroll delay={0.15}>
-            <InstagramReel url="https://www.instagram.com/reel/DCOfx1YKHsP/" title="Presentación de Bonito Sound" />
+      {/* ── BANNER NAVY: LOGOS (visibles sobre chip blanco) ── */}
+      <section className="w-full" style={{ backgroundColor: NAVY }}>
+        <div className="wrap py-16 md:py-24">
+          <RevealOnScroll as="p" className="mb-3 text-xs font-bold uppercase tracking-[0.22em]" >
+            <span style={{ color: CYAN }}>Respaldo institucional</span>
           </RevealOnScroll>
+          <SplitTextReveal as="h2" split="lines" className="display text-white text-[clamp(1.9rem,4.5vw,3.2rem)]">
+            Con quién estamos.
+          </SplitTextReveal>
+
+          <p className="mb-5 mt-12 text-xs font-bold uppercase tracking-[0.18em] text-white/55">
+            Miembros activos de
+          </p>
+          <StaggerGroup stagger={0.05} className="flex flex-wrap gap-3 md:gap-4">
+            {memberships.map((name) => (
+              <LogoChip key={name} dir="instituciones" name={name} />
+            ))}
+          </StaggerGroup>
+
+          <p className="mb-5 mt-12 text-xs font-bold uppercase tracking-[0.18em] text-white/55">
+            Con el apoyo de
+          </p>
+          <StaggerGroup stagger={0.05} className="flex flex-wrap gap-3 md:gap-4">
+            {support.map((name) => (
+              <LogoChip key={name} dir="apoyos" name={name} />
+            ))}
+            {supportPending.map((name) => (
+              <LogoChip key={name} dir="apoyos" name={name} />
+            ))}
+          </StaggerGroup>
         </div>
-      </Section>
+      </section>
 
       {posts.length > 0 && (
         <Section className="bg-bg-primary">
@@ -261,10 +326,7 @@ export default function Nosotros() {
               </SplitTextReveal>
             </div>
             <RevealOnScroll delay={0.1}>
-              <Link
-                href="/diario"
-                className="more-link"
-              >
+              <Link href="/diario" className="more-link">
                 Ver el diario <span className="arrow">→</span>
               </Link>
             </RevealOnScroll>

@@ -29,6 +29,10 @@ const BLOCKS = [
     logo: findAsset("universo", "logo-artiverse"),
     href: site.external.artiverse,
     hrefLabel: "Ir a Artiverse",
+    // Crema exacto del fondo de la imagen → la sección se funde con ella (sin
+    // recuadro). No se puede recortar la imagen: su ilustración tiene cremas
+    // y blancos dentro que se romperían.
+    bg: "#FDF8F0",
   },
   {
     id: "giraverse",
@@ -40,6 +44,7 @@ const BLOCKS = [
     logo: findAsset("universo", "logo-giraverse"),
     href: undefined,
     hrefLabel: undefined,
+    bg: "#FDF8EC",
   },
   {
     id: "jaleo",
@@ -51,8 +56,12 @@ const BLOCKS = [
     logo: findAsset("marca", "jaleo-sound"),
     href: site.external.jaleo,
     hrefLabel: "jaleosound.com",
+    bg: "#FDFAF2",
   },
 ];
+
+// Crema de la página (el del primer bloque): funde el hero con las imágenes.
+const CREAM = "#FDF8F0";
 
 function Shape({ shape }: { shape: "square" | "circle" | "triangle" }) {
   const common = { fill: "none", stroke: CYAN, strokeWidth: 2.4 };
@@ -69,7 +78,7 @@ export default function Universo() {
   return (
     <>
       {/* ── HERO (recreación de la imagen 1, tipografía de la web) ── */}
-      <section style={{ backgroundColor: "#FBFAF6" }}>
+      <section style={{ backgroundColor: CREAM }}>
         <div className="wrap pb-10 pt-20 md:pt-28">
           <RevealOnScroll as="p" className="mb-6 text-xs font-bold uppercase tracking-[0.25em]">
             <span style={{ color: CYAN }}>Universo Bonito · 01/04</span>
@@ -113,9 +122,9 @@ export default function Universo() {
 
       {/* ── LAS TRES PIEZAS (imágenes tal cual + logo incrustado) ── */}
       {BLOCKS.map((b) => (
-        <section key={b.id} id={b.id} style={{ backgroundColor: "#FBFAF6" }} className="scroll-mt-24">
-          <div className="wrap py-8 md:py-12">
-            <RevealOnScroll className="relative mx-auto w-full max-w-3xl">
+        <section key={b.id} id={b.id} style={{ backgroundColor: b.bg }} className="scroll-mt-24">
+          <div className="wrap py-6 md:py-10">
+            <RevealOnScroll className="relative mx-auto w-full max-w-5xl">
               <Image
                 src={b.image}
                 alt={b.alt}
@@ -128,13 +137,13 @@ export default function Universo() {
 
               {/* Logo incrustado en el hueco reservado (arriba-izquierda). */}
               {b.logo && (
-                <span className="absolute left-[4.5%] top-[3.5%] block h-[14%] w-[42%]">
+                <span className="absolute left-[5%] top-[5%] block h-[13%] w-[40%]">
                   <Image
                     src={b.logo}
                     alt={`Logo ${b.name}`}
                     fill
-                    sizes="42vw"
-                    className="object-contain object-left-top"
+                    sizes="40vw"
+                    className="object-contain object-left"
                   />
                 </span>
               )}
