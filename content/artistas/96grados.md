@@ -1,6 +1,5 @@
 ---
 name: "96Grados"
-genre: "En distribución"
-tier: "distribucion"
+draft: true
 ---
-En el catálogo de distribución de Bonito Sound. Ficha pendiente de completar (foto, bio y enlaces).
+Ficha pendiente de confirmar. Todas las búsquedas devuelven un homónimo mexicano que no es el artista correcto; falta el enlace real de Spotify/Instagram.

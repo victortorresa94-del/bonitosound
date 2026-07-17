@@ -1,6 +1,5 @@
 ---
 name: "Soylapau"
-genre: "En distribución"
-tier: "distribucion"
+draft: true
 ---
-En el catálogo de distribución de Bonito Sound. Ficha pendiente de completar (foto, bio y enlaces).
+Ficha pendiente de confirmar. Hay una pista (Paula Giberga / "La Pau") que debe validar la agencia antes de publicar datos.

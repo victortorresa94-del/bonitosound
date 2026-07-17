@@ -30,12 +30,28 @@
 - [ ] 🟢 Tipo de **título** de artistas · barra de nombres · SEO.
 - [ ] 🟢 **Botón de Spotify** de la ficha.
 - [ ] 🟢 Roster completo "guay" (pulir diseño).
-- [ ] 📋 **Datos de los 10 artistas** (Spotify, IG, YouTube, reels, bio, foto) → Cowork (docs/COWORK-ARTISTAS.md).
-- [ ] 📋 **@ de OTEM** · YouTube de artistas.
+- [x] ✅ **Datos de los 22 artistas integrados** desde Drive/Cowork (Spotify, IG,
+  YouTube, género, bio verificados vía bonitosound.com). Fuera todo el demo
+  inventado (stats/playerTracks/conciertos falsos, youtubeIds rickroll).
+- [ ] 📋 **6 artistas en `draft`** (sin identidad confirmada): otem, soylapau,
+  96grados, sotrac, belbaka, overpulation → Víctor confirma Spotify/IG y quito draft.
+- [ ] 📋 **Fotos** (proxy bloquea bonitosound.com — bajar a mano a `public/img/artistas/<slug>.jpg`):
+  kanela `…/2024/07/Kanela_1.jpg` · daniel-giro `…/2024/07/Foto-Piano-scaled.jpg` ·
+  egon-calle `…/2024/07/egon-calle.jpg` · fabian `…/2024/04/FABIAN_D_CUESTA_©Juan_Marigorta.jpg` ·
+  kenai-white `…/2024/07/IMG_5735.jpg` · rumba-menuda (captura, mejor otra).
+- [ ] 📋 **Reels** de Instagram: 0/22 (IG no se indexa; sacar a mano por perfil).
 
 ## EVENTOS
 - [x] ✅ Títulos sin cifras · tipografía banner "no organizamos" → hero · banner de giras/artistas.
-- [ ] 🟢 **Mejorar estructura de la página de evento** (WS2: ficha + galería + "qué montamos" + line-up + quote + aforo).
+- [x] ✅ **WS2: estructura de la página de evento** — campos opcionales en el .md
+  (se pintan solo si están, nada inventado):
+    ```
+    services: ["Producción integral", "Booking del cartel", "Sonido"]   # chips "Qué montamos"
+    lineup: ["Artista 1", "Artista 2"]                                    # "En el cartel"
+    capacity: "1.200 personas"                                            # aforo (SIN dinero)
+    quote: { text: "…", author: "Nombre, Marca" }                         # cita de cliente
+    ```
+    Ejemplo real puesto en `corona.md`. Falta 📋 que Víctor rellene el resto.
 - [ ] 🟢 **WS3: reescribir copys "de IA"** en TODOS los .md de evento (romper "X no Y", cierres-aforismo, "lo que no se ve").
 - [ ] 🟢 Combinar logos + centrar · spacing · subtítulo de eventos.
 - [ ] 🟢 Revisar **el vídeo que "no le va"** (¿cuál es?).

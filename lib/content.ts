@@ -87,6 +87,17 @@ export type Evento = {
   youtubeId?: string;
   /** Fotos adicionales para la galería de la página del evento. */
   gallery?: string[];
+  /** "Qué montamos": servicios/piezas reales que puso Bonito (chips). Ej:
+   *    services: ["Producción integral", "Booking del cartel", "Backline"]
+   *  Solo se pinta si está. Nada inventado. */
+  services?: string[];
+  /** Cartel / artistas que actuaron (line-up). Solo se pinta si está. */
+  lineup?: string[];
+  /** Aforo o alcance real (texto libre, ej. "1.200 personas", "aforo completo").
+   *  Sin cifras de dinero. Solo se pinta si está. */
+  capacity?: string;
+  /** Cita de cliente/artista: texto + autor. Solo se pinta si ambos están. */
+  quote?: { text: string; author: string };
   context: string;
   result: string;
   /** Párrafos largos opcionales (cuerpo markdown) para la página individual. */

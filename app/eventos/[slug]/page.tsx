@@ -59,6 +59,7 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
     { k: e.brand ? "Marca" : "Artista", v: label },
     { k: "Año", v: e.year },
     ...(e.location ? [{ k: "Dónde", v: e.location }] : []),
+    ...(e.capacity ? [{ k: "Aforo", v: e.capacity }] : []),
     ...(e.count ? [{ k: "Volumen", v: e.count }] : []),
   ].filter((f) => Boolean(f.v)) as { k: string; v: string }[];
 
@@ -164,6 +165,25 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
         </div>
       </Section>
 
+      {/* Qué montamos: piezas reales que puso Bonito (chips). */}
+      {e.services && e.services.length > 0 && (
+        <Section className="pt-0">
+          <RevealOnScroll as="p" className="eyebrow mb-6">
+            Qué montamos
+          </RevealOnScroll>
+          <StaggerGroup stagger={0.05} className="flex flex-wrap gap-3">
+            {e.services.map((s) => (
+              <span
+                key={s}
+                className="rounded-full border border-subtle bg-bg-tertiary px-4 py-2 font-round text-sm font-semibold text-text-primary"
+              >
+                {s}
+              </span>
+            ))}
+          </StaggerGroup>
+        </Section>
+      )}
+
       {/* El encargo / El resultado. */}
       <Section className="pt-0">
         <div className="grid gap-12 md:grid-cols-2">
@@ -181,6 +201,40 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
           </RevealOnScroll>
         </div>
       </Section>
+
+      {/* Line-up: quién actuó (giras/festivales/showcases). */}
+      {e.lineup && e.lineup.length > 0 && (
+        <Section className="pt-0">
+          <RevealOnScroll as="p" className="eyebrow mb-6">
+            En el cartel
+          </RevealOnScroll>
+          <StaggerGroup stagger={0.05} className="flex flex-wrap gap-x-6 gap-y-3">
+            {e.lineup.map((name, i) => (
+              <span
+                key={name}
+                className="flex items-center gap-3 font-round text-2xl font-bold text-text-primary md:text-3xl"
+              >
+                {i > 0 && <span aria-hidden className="text-accent-cyan-text">·</span>}
+                {name}
+              </span>
+            ))}
+          </StaggerGroup>
+        </Section>
+      )}
+
+      {/* Cita de cliente/artista. */}
+      {e.quote && e.quote.text && e.quote.author && (
+        <Section className="pt-0">
+          <RevealOnScroll className="mx-auto max-w-3xl border-l-2 border-accent-cyan pl-6 md:pl-10">
+            <p className="statement text-[clamp(1.5rem,3.2vw,2.4rem)] leading-tight text-text-primary">
+              “{e.quote.text}”
+            </p>
+            <p className="mt-5 text-sm font-semibold uppercase tracking-[0.15em] text-text-muted">
+              — {e.quote.author}
+            </p>
+          </RevealOnScroll>
+        </Section>
+      )}
 
       {/* Vídeo en YouTube (si el hero no lo era ya). */}
       {e.youtubeId && !e.video && (

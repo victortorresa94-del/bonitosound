@@ -1,6 +1,5 @@
 ---
 name: "Sotrac"
-genre: "En distribución"
-tier: "distribucion"
+draft: true
 ---
-En el catálogo de distribución de Bonito Sound. Ficha pendiente de completar (foto, bio y enlaces).
+Ficha pendiente de confirmar. Existe una banda real llamada Sotrac (Llagostera, Girona), pero no se pudo confirmar que sea la representada por la agencia.
