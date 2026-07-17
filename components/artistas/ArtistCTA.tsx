@@ -27,7 +27,7 @@ export function ArtistCTA({
 
   // El botón lleva al formulario único de contratación ya precargado con este
   // artista (?a=<slug>), no a un mailto pelado: se pide la info que hace falta.
-  const contratarHref = `/contratar?a=${slug}`;
+  const contratarHref = `/contacto?a=${slug}`;
 
   return (
     <Section id={slug ? `booking-${slug}` : "booking"}>

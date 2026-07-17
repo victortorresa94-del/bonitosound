@@ -3,84 +3,142 @@
 import { useState } from "react";
 import { site } from "@/lib/site";
 
-const segments = ["Marca", "Artista", "Promotor", "Prensa", "Otro"] as const;
-type Segment = (typeof segments)[number];
+const NAVY = "#14283C";
+const CYAN = "#16b6d4";
 
-const placeholder: Record<Segment, string> = {
-  Marca: "Qué evento tienes en mente, marca, fechas aproximadas.",
-  Artista: "Dónde estás, qué necesitas (sello, booking, distribución).",
-  Promotor: "Qué fecha, qué artista del roster, qué sala o festival.",
-  Prensa: "Qué medio, sobre qué quieres hablar.",
-  Otro: "Cuéntanos.",
-};
+const inputCls =
+  "w-full rounded-xl border-2 bg-transparent px-5 py-3.5 text-text-primary outline-none transition-colors placeholder:text-text-muted focus:border-accent-cyan";
 
-export function ContactForm() {
-  const [seg, setSeg] = useState<Segment>("Marca");
+/**
+ * Formulario ÚNICO de contacto/contratación (diseño del mockup: Nombre, Email,
+ * Mensaje, Enviar). Es el mismo siempre y se adapta:
+ *  - General (sin `artist`): va al correo general.
+ *  - Con `artist` (desde /contacto?a=<slug>, al clicar "Contratar" en un
+ *    artista): muestra un aviso, precarga el mensaje y va a booking.
+ * Sin backend: al enviar compone un correo estructurado (mailto). Si algún día
+ * hay endpoint (NEXT_PUBLIC_FORM_ENDPOINT), se enchufa en `send()`.
+ */
+export function ContactForm({
+  artist,
+}: {
+  artist?: { name: string; genre?: string };
+}) {
+  const starter = artist
+    ? `Hola, me gustaría contratar a ${artist.name}. Os cuento: (evento, fecha, ciudad o sala y aforo aproximado).`
+    : "";
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [msg, setMsg] = useState("");
+  const [msg, setMsg] = useState(starter);
+  const [sent, setSent] = useState(false);
 
-  const to = seg === "Artista" ? site.emails.booking : site.emails.general;
-  const mailto = `mailto:${to}?subject=${encodeURIComponent(
-    `Web · ${seg}`,
-  )}&body=${encodeURIComponent(
-    `Soy: ${seg}\nNombre: ${name}\nEmail: ${email}\n\n${msg}`,
-  )}`;
+  const to = artist ? site.emails.booking : site.emails.general;
+  const subject = artist ? `Contratar · ${artist.name}` : "Web · Contacto";
+
+  const send = (e: React.FormEvent) => {
+    e.preventDefault();
+    const body =
+      (artist ? `Solicitud de contratación · ${artist.name}\n\n` : "") +
+      `Nombre: ${name}\nEmail: ${email}\n\n${msg}`;
+    window.location.href = `mailto:${to}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+    setSent(true);
+  };
+
+  if (sent) {
+    return (
+      <div className="rounded-2xl border-2 border-subtle p-8 text-center">
+        <div
+          className="mx-auto grid h-14 w-14 place-items-center rounded-full"
+          style={{ backgroundColor: CYAN, color: NAVY }}
+          aria-hidden
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </div>
+        <p className="display mt-5 text-2xl" style={{ color: NAVY }}>
+          Te hemos abierto el correo.
+        </p>
+        <p className="mx-auto mt-2 max-w-sm text-sm text-text-secondary">
+          Dale a enviar y lo tenemos. Si no se abrió nada, escríbenos directo a{" "}
+          <a className="font-semibold underline underline-offset-4" href={`mailto:${to}`}>{to}</a>.
+        </p>
+        <button
+          type="button"
+          onClick={() => setSent(false)}
+          className="mt-6 text-sm font-semibold text-text-muted underline-offset-4 hover:text-text-primary hover:underline"
+        >
+          ← Volver a editar
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="rounded-3xl border border-subtle bg-bg-primary p-7 md:p-10">
-      <p className="eyebrow mb-4">Vengo porque soy…</p>
-      <div className="mb-8 flex flex-wrap gap-2">
-        {segments.map((s) => (
-          <button
-            key={s}
-            onClick={() => setSeg(s)}
-            className={`btn px-5 py-2 ${
-              seg === s ? "btn-primary" : "btn-ghost"
-            }`}
-          >
-            {s}
-          </button>
-        ))}
+    <form onSubmit={send} className="space-y-5">
+      {artist && (
+        <div className="flex items-center gap-3 rounded-xl border-2 border-subtle bg-bg-tertiary px-4 py-3">
+          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full text-sm font-black" style={{ backgroundColor: CYAN, color: NAVY }}>
+            ♪
+          </span>
+          <p className="text-sm text-text-secondary">
+            Contratando a <span className="font-bold" style={{ color: NAVY }}>{artist.name}</span>
+            {artist.genre ? <span className="text-text-muted"> · {artist.genre}</span> : null}
+          </p>
+        </div>
+      )}
+
+      <div>
+        <label htmlFor="cf-name" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>Nombre</label>
+        <input
+          id="cf-name"
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Tu nombre"
+          className={inputCls}
+          style={{ borderColor: "rgba(20,40,60,0.2)" }}
+        />
       </div>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          window.location.href = mailto;
-        }}
-        className="space-y-4"
-      >
-        <div className="grid gap-4 sm:grid-cols-2">
-          <input
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Tu nombre"
-            className="rounded-xl border border-subtle bg-bg-tertiary px-5 py-4 outline-none focus:border-accent-blue"
-          />
-          <input
-            required
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Tu email"
-            className="rounded-xl border border-subtle bg-bg-tertiary px-5 py-4 outline-none focus:border-accent-blue"
-          />
-        </div>
+      <div>
+        <label htmlFor="cf-email" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>Email</label>
+        <input
+          id="cf-email"
+          required
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="tu@email.com"
+          className={inputCls}
+          style={{ borderColor: "rgba(20,40,60,0.2)" }}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="cf-msg" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>Mensaje</label>
         <textarea
+          id="cf-msg"
           required
           rows={5}
           value={msg}
           onChange={(e) => setMsg(e.target.value)}
-          placeholder={placeholder[seg]}
-          className="w-full rounded-xl border border-subtle bg-bg-tertiary px-5 py-4 outline-none focus:border-accent-blue"
+          placeholder={artist ? "Cuéntanos el bolo…" : "Cuéntanos en qué podemos ayudarte…"}
+          className={inputCls}
+          style={{ borderColor: "rgba(20,40,60,0.2)" }}
         />
-        <button className="btn btn-primary">Enviar →</button>
-        <p className="text-xs text-text-muted">
-          Te contestamos nosotros, no un bot.
-        </p>
-      </form>
-    </div>
+      </div>
+
+      <button
+        type="submit"
+        className="w-full rounded-xl py-4 text-base font-bold text-white transition-transform duration-200 hover:-translate-y-0.5"
+        style={{ backgroundColor: CYAN }}
+      >
+        Enviar
+      </button>
+      <p className="text-xs text-text-muted">Te respondemos rápido, y por personas. No un bot.</p>
+    </form>
   );
 }
