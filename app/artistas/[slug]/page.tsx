@@ -87,8 +87,8 @@ export default function ArtistPage({
         ? `https://open.spotify.com/artist/${x.spotifyArtistId}`
         : undefined,
       instagramUrl: x.instagram,
-      // Lo que suena al darle a "Escuchar": su última canción, o el 1º destacado.
-      trackId: x.lastTrackId ?? x.featuredTracks?.[0],
+      // Micro-mezcla del botón "Escuchar" (fragmentos de 30 s encadenados).
+      tracks: x.playerTracks,
     };
   });
 
@@ -132,7 +132,12 @@ export default function ArtistPage({
         spotifyPlaylistId={a.spotifyPlaylistId}
       />
 
-      {/* 4. Su sonido. */}
+      {/* 4. Su mundo: reels + YouTube intercalados. Va aquí, pegado a la
+          música, mientras el visitante está en modo "ver y escuchar" — no
+          tirado al final de la página. */}
+      <ArtistLiveFeed name={a.name} reels={a.reels} youtubeIds={a.youtubeIds} />
+
+      {/* 5. Su sonido. */}
       <ArtistStyle
         genre={a.genre}
         style={a.musicStyle}
@@ -140,11 +145,8 @@ export default function ArtistPage({
         forWho={a.forWho}
       />
 
-      {/* 5. Su historia: la bio currada (el 1er párrafo ya va en el hero). */}
+      {/* 6. Su historia: la bio currada (el 1er párrafo ya va en el hero). */}
       <ArtistBio paragraphs={a.bio.slice(1)} name={a.name} />
-
-      {/* 6. Su mundo: reels + YouTube intercalados. */}
-      <ArtistLiveFeed name={a.name} reels={a.reels} youtubeIds={a.youtubeIds} />
 
       {/* 7. Directo: de su primer bolo a hoy + trayectoria. */}
       <ArtistConcerts

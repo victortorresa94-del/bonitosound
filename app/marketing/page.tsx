@@ -79,33 +79,36 @@ export default function Marketing() {
         }}
       />
 
-      <section className="border-b border-subtle">
-        <div className="wrap py-24 md:py-32">
-          <div className="max-w-3xl">
-            <RevealOnScroll as="p" className="eyebrow mb-4">
-              Marketing para artistas
-            </RevealOnScroll>
-            <SplitTextReveal
-              as="h1"
-              split="lines"
-              className="display text-[clamp(2.6rem,7vw,5.4rem)]"
-            >
-              Que el lanzamiento no pase desapercibido.
-            </SplitTextReveal>
-            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
-              Campañas de ads, estrategia de redes y lanzamientos de álbum y
-              de evento. Cuando salga, se entera quien se tiene que enterar.
-            </RevealOnScroll>
-            <RevealOnScroll className="mt-9" delay={0.35}>
-              <MagneticButton strength={0.35}>
-                <Cta
-                  href={`mailto:${site.emails.general}?subject=${encodeURIComponent("Marketing para artistas")}`}
-                >
-                  Cuéntanos tu lanzamiento →
-                </Cta>
-              </MagneticButton>
-            </RevealOnScroll>
-          </div>
+      {/* Hero: tipografía del home (.display / Zilla Slab) con UNA palabra en
+          cian, y aire de sobra. El titular es provisional — Víctor lo cambiará. */}
+      <section style={{ backgroundColor: "#FBFAF6" }}>
+        <div className="wrap pb-8 pt-24 md:pb-12 md:pt-32">
+          <RevealOnScroll as="p" className="eyebrow mb-6">
+            Records · Marketing
+          </RevealOnScroll>
+          <h1 className="display max-w-[16ch] text-[clamp(2.8rem,7.5vw,6rem)] leading-[0.98] text-[#14283C]">
+            Campañas que{" "}
+            <span className="text-[#16b6d4]">lanzan</span>.<br />
+            No que acompañan.
+          </h1>
+          <RevealOnScroll
+            as="p"
+            delay={0.15}
+            className="mt-8 max-w-[52ch] text-lg leading-relaxed text-text-secondary md:text-xl"
+          >
+            Ads para el lanzamiento de tu single o álbum en Spotify, YouTube,
+            Instagram y TikTok. Del guion del vídeo a la campaña corriendo.
+            A veces ponemos nosotros la inversión.
+          </RevealOnScroll>
+          <RevealOnScroll className="mt-10" delay={0.25}>
+            <MagneticButton strength={0.35}>
+              <Cta
+                href={`mailto:${site.emails.general}?subject=${encodeURIComponent("Marketing para artistas")}`}
+              >
+                Hablemos de tu lanzamiento →
+              </Cta>
+            </MagneticButton>
+          </RevealOnScroll>
         </div>
       </section>
 

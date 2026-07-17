@@ -37,6 +37,8 @@ export type Artist = {
   lastTrackId?: string;
   /** IDs de Spotify de temas destacados. */
   featuredTracks?: string[];
+  /** Micro-mezcla del botón "Escuchar": fragmentos de ~30 s encadenados. */
+  playerTracks?: { title: string; src: string }[];
   /** Primer y último concierto (prueba de directo). */
   firstConcert?: { date?: string; venue?: string; city?: string };
   lastConcert?: { date?: string; venue?: string; city?: string };
