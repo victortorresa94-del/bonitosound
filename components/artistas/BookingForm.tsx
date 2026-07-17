@@ -7,10 +7,15 @@ const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
 /**
- * Formulario de contratación de un artista concreto. Calibrado para el momento
- * en que ya se pide la información (lead cualificado): no es un "hola, ¿info?",
- * viene precargado con el artista y pregunta lo justo para poder responder de
- * verdad — tipo de bolo, fecha, sitio, aforo y qué se quiere de ese artista.
+ * Formulario ÚNICO de contratación. Es el mismo siempre; se adapta al artista.
+ *
+ * - Si llega `artistName` (desde /contratar?a=<slug>), viene precargado con ese
+ *   artista: el contexto queda fijo y el copy se personaliza.
+ * - Si no llega (acceso general a /contratar), pide qué artista interesa.
+ *
+ * Calibrado para el momento en que ya se pide la info (lead cualificado): no es
+ * un "hola, ¿info?", pregunta lo justo para poder responder de verdad — tipo de
+ * bolo, fecha, sitio, aforo y qué se quiere de ese artista.
  *
  * Sin backend todavía (el resto del sitio va por mailto): al enviar compone un
  * correo estructurado a booking con todas las respuestas. Si algún día se
@@ -102,9 +107,12 @@ export function BookingForm({
   artistName,
   artistGenre,
 }: {
-  artistName: string;
+  artistName?: string;
   artistGenre?: string;
 }) {
+  const preloaded = Boolean(artistName);
+
+  const [artistaManual, setArtistaManual] = useState("");
   const [tipo, setTipo] = useState<string>("");
   const [fecha, setFecha] = useState("");
   const [sinFecha, setSinFecha] = useState(false);
@@ -119,11 +127,16 @@ export function BookingForm({
   const [perfil, setPerfil] = useState<string>("");
   const [sent, setSent] = useState(false);
 
+  // Artista efectivo: el precargado o el que escribe la persona.
+  const artista = (artistName ?? artistaManual).trim();
+  const quien = artista || "el artista";
+
   const buildMailto = () => {
     const linea = (k: string, v: string) => (v ? `${k}: ${v}\n` : "");
     const cuerpo =
-      `Solicitud de contratación · ${artistName}\n\n` +
+      `Solicitud de contratación${artista ? ` · ${artista}` : ""}\n\n` +
       `— El evento —\n` +
+      linea("Artista", artista) +
       linea("Tipo", tipo) +
       linea("Fecha", sinFecha ? "Aún sin fecha" : fecha) +
       linea("Ciudad / lugar", lugar) +
@@ -138,7 +151,7 @@ export function BookingForm({
       linea("Perfil", perfil);
 
     return `mailto:${site.emails.booking}?subject=${encodeURIComponent(
-      `Contratar · ${artistName}`,
+      `Contratar${artista ? ` · ${artista}` : " artista"}`,
     )}&body=${encodeURIComponent(cuerpo)}`;
   };
 
@@ -185,20 +198,33 @@ export function BookingForm({
 
   return (
     <form onSubmit={send} className="rounded-3xl border border-subtle bg-bg-primary p-6 md:p-9">
-      {/* Contexto: a quién estás contratando. No es editable — es el sentido del form. */}
-      <div className="mb-8 flex items-center gap-3 rounded-2xl border border-subtle bg-bg-tertiary px-5 py-4">
-        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-sm font-black" style={{ backgroundColor: CYAN, color: NAVY }}>
-          ♪
-        </span>
-        <p className="text-sm text-text-secondary">
-          Cuéntanos el bolo para{" "}
-          <span className="font-bold" style={{ color: NAVY }}>{artistName}</span>
-          {artistGenre ? <span className="text-text-muted"> · {artistGenre}</span> : null}
-        </p>
-      </div>
+      {/* Contexto del artista: fijo si viene precargado; editable si es general. */}
+      {preloaded ? (
+        <div className="mb-8 flex items-center gap-3 rounded-2xl border border-subtle bg-bg-tertiary px-5 py-4">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full text-sm font-black" style={{ backgroundColor: CYAN, color: NAVY }}>
+            ♪
+          </span>
+          <p className="text-sm text-text-secondary">
+            Cuéntanos el bolo para{" "}
+            <span className="font-bold" style={{ color: NAVY }}>{artistName}</span>
+            {artistGenre ? <span className="text-text-muted"> · {artistGenre}</span> : null}
+          </p>
+        </div>
+      ) : (
+        <div className="mb-8">
+          <Field label="¿Qué artista te interesa?">
+            <input
+              value={artistaManual}
+              onChange={(e) => setArtistaManual(e.target.value)}
+              placeholder="Nombre del artista (o cuéntanos qué buscas)"
+              className={inputCls}
+            />
+          </Field>
+        </div>
+      )}
 
       <div className="space-y-8">
-        <Field label={`¿Qué quieres montar con ${artistName}?`}>
+        <Field label={`¿Qué quieres montar con ${quien}?`}>
           <div className="flex flex-wrap gap-2">
             {TIPOS.map((t) => (
               <Chip key={t} active={tipo === t} onClick={() => setTipo(t)}>
@@ -266,7 +292,7 @@ export function BookingForm({
             rows={5}
             value={idea}
             onChange={(e) => setIdea(e.target.value)}
-            placeholder={`El evento, el público, el formato (show completo, DJ set, acústico…) y por qué ${artistName}. Cuanto más nos cuentes, mejor te respondemos.`}
+            placeholder={`El evento, el público, el formato (show completo, DJ set, acústico…) y por qué ${quien}. Cuanto más nos cuentes, mejor te respondemos.`}
             className={inputCls}
           />
         </Field>

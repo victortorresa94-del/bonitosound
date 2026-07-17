@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { site } from "@/lib/site";
 import { ArtistPlayer, type PlayerTrack } from "./ArtistPlayer";
 
 const NAVY = "#14283C";
@@ -113,12 +112,9 @@ export function ArtistShowcase({
                 artistName={a.name}
               />
             )}
-            <a
-              href={`mailto:${site.emails.booking}?subject=${encodeURIComponent(`Booking ${a.name}`)}`}
-              className="btn btn-primary"
-            >
+            <Link href={`/contratar?a=${a.slug}`} className="btn btn-primary">
               Contratar booking →
-            </a>
+            </Link>
           </div>
 
           <div className="mt-8 flex items-center gap-4">
