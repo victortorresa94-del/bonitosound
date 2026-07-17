@@ -115,8 +115,8 @@ export const services: Record<string, Service> = {
     slug: "distribucion",
     path: "/records/distribucion",
     eyebrow: "Distribución",
-    h1: "Tu música en las plataformas. Bien.",
-    desc: "Llevamos tu música a todas las plataformas y nos ocupamos de que llegue como toca. Ya distribuyen unos veinte artistas con nosotros.",
+    h1: "Súbela con quien sabe. Suena en todo el mundo.",
+    desc: "Distribuimos tu música en Spotify, Apple Music, YouTube y las demás, con los metadatos en orden y gente del sector detrás. Ya distribuyen unos veinte artistas con nosotros.",
     ctaSubject: "Distribución",
     aspects: [
       { name: "A todas partes", desc: "Spotify, Apple Music, YouTube y las demás. Tu música donde tiene que estar, con los metadatos en orden." },
@@ -125,7 +125,9 @@ export const services: Record<string, Service> = {
     ],
     faq: [
       { q: "¿Distribuís a artistas de fuera del sello?", a: "Sí. La distribución es un servicio independiente; no hace falta estar fichado en el sello." },
-      { q: "¿A qué plataformas llegáis?", a: "A las principales del mundo: Spotify, Apple Music, Amazon, YouTube Music, Deezer y demás." },
+      { q: "¿A qué plataformas llegáis?", a: "A las principales del mundo: Spotify, Apple Music, Amazon Music, YouTube Music, Deezer, Tidal y las tiendas y redes donde se escucha música." },
+      { q: "¿Cuánto cuesta distribuir mi música?", a: "Depende de lo que necesites: un lanzamiento suelto o todo tu catálogo. Lo cerramos contigo antes de subir nada, sin letra pequeña y sin sorpresas. Lo concreto lo hablamos en la primera llamada." },
+      { q: "¿Me quedo con los derechos de mi música?", a: "Sí. Distribuir no es firmar por un sello: tu música sigue siendo tuya. Nosotros la llevamos a las plataformas y nos ocupamos de que todo esté en orden." },
       { q: "¿Puedo distribuir y llevar el resto por mi cuenta?", a: "Claro. Contratas solo la distribución si es lo que necesitas." },
       { q: "¿Qué es la distribución digital de música?", a: "Es el servicio que lleva tu música a las plataformas de streaming y descarga con los metadatos en orden, para que se pueda escuchar, encontrar y pagar correctamente. Subir la canción es el minuto uno; distribuir bien es todo lo que hay alrededor." },
       { q: "¿Cuánto tarda mi música en aparecer en Spotify?", a: "Conviene entregar el lanzamiento con margen, unas semanas antes de la fecha. Así da tiempo a que las plataformas lo procesen y a optar a listas editoriales, que casi siempre piden antelación." },
