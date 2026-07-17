@@ -22,12 +22,24 @@ export function MagneticCursor({ stateRef }: Props) {
 
     document.documentElement.classList.add("bs-cursor-active");
 
+    // Arranca oculto: sin esto, hasta el primer mousemove el anillo+punto se
+    // quedan pegados en la esquina (0,0) —fixed— y flotan sobre la página.
+    gsap.set([dot, ring], { opacity: 0 });
+
     const dotX = gsap.quickTo(dot, "x", { duration: 0.08, ease: "power3" });
     const dotY = gsap.quickTo(dot, "y", { duration: 0.08, ease: "power3" });
     const ringX = gsap.quickTo(ring, "x", { duration: 0.32, ease: "power3" });
     const ringY = gsap.quickTo(ring, "y", { duration: 0.32, ease: "power3" });
 
+    let revealed = false;
     const onMove = (e: MouseEvent) => {
+      if (!revealed) {
+        revealed = true;
+        // Coloca el cursor en el punto real antes de mostrarlo (sin deslizar
+        // desde la esquina) y lo revela.
+        gsap.set([dot, ring], { x: e.clientX, y: e.clientY });
+        gsap.to([dot, ring], { opacity: 1, duration: 0.2 });
+      }
       dotX(e.clientX);
       dotY(e.clientY);
       ringX(e.clientX);
