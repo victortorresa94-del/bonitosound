@@ -25,9 +25,14 @@ export function EventosGiras({ eventos }: { eventos: Evento[] }) {
         <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>
           Giras y directos de artista
         </p>
-        <h2 className="mb-8 font-round text-3xl font-bold md:text-5xl" style={{ color: NAVY }}>
+        <h2 className="mb-4 font-round text-3xl font-bold md:text-5xl" style={{ color: NAVY }}>
           También llenamos giras.
         </h2>
+        <p className="mb-10 max-w-2xl text-base text-text-secondary md:text-lg">
+          No solo activamos marcas. Cuando el que sube al escenario es el artista,
+          ponemos la producción, la técnica y la logística de la gira — para que
+          lo único que se vea sea el directo.
+        </p>
 
         {giras.length > 0 && (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

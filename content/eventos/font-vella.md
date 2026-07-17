@@ -5,9 +5,10 @@ type: "marca"
 videoUrl: "font-vella.mp4"
 count: "30 eventos"
 year: "2025"
-context: "30 activaciones para Font Vella entre 2023 y 2025. Música que acompaña a la marca sin taparla, en cada formato que ha hecho falta."
-result: "Tres años, treinta eventos, una sola forma de trabajar: la nuestra."
+context: "30 activaciones para Font Vella entre 2023 y 2025. Directo que acompaña a la marca en cada formato que hizo falta."
+result: "Tres años y treinta fechas: ya nos conocemos de memoria."
 ---
-Treinta activaciones dan para conocerse bien. Sabemos qué pide Font Vella y qué no, y eso se nota en que cada evento sale más redondo que el anterior.
 
-Música que suma sin gritar. La marca delante, el directo acompañando, y una producción que no se ve porque está bien hecha.
+Treinta activaciones dan para conocerse bien. Sabemos qué le pega a Font Vella y qué no, y por eso cada evento sale un poco más fino que el anterior.
+
+Directo que suma sin levantar la voz. La marca delante, la música acompañando y una producción que funciona precisamente porque no se hace de notar.
