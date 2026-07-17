@@ -51,22 +51,25 @@ export function EventosOutro() {
           </p>
         </div>
 
-        {/* CTA: bloque cyan diagonal en la esquina inferior derecha */}
-        <div
-          className="absolute bottom-0 right-0 flex w-[72%] flex-col items-start px-6 pb-8 pt-10 sm:w-[52%] md:w-[46%] md:px-12 md:pb-12 md:pt-16"
+        {/* CTA: bloque cyan diagonal (todo el panel clicable) en la esquina
+            inferior derecha. z-20 para quedar por encima del div de la estrella
+            (z-10, a todo el ancho) que si no se comía el click. */}
+        <Link
+          href="/contacto"
+          aria-label="¿Marca o gira? Hablemos"
+          className="group absolute bottom-0 right-0 z-20 flex w-[72%] flex-col items-start px-6 pb-8 pt-10 sm:w-[52%] md:w-[46%] md:px-12 md:pb-12 md:pt-16"
           style={{ backgroundColor: CYAN, clipPath: "polygon(14% 0, 100% 22%, 100% 100%, 0 100%)" }}
         >
           <p className="pl-6 font-round font-bold uppercase leading-[0.95] md:pl-10" style={{ fontSize: "clamp(2rem, 5vw, 3.6rem)", color: NAVY }}>
             ¿Marca<br />o gira?
           </p>
-          <Link
-            href="/contacto"
-            className="ml-6 mt-5 inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs font-bold uppercase tracking-[0.15em] transition-transform hover:scale-105 md:ml-10"
+          <span
+            className="ml-6 mt-5 inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs font-bold uppercase tracking-[0.15em] transition-transform group-hover:scale-105 md:ml-10"
             style={{ color: NAVY }}
           >
             Hablemos →
-          </Link>
-        </div>
+          </span>
+        </Link>
       </div>
     </section>
   );
