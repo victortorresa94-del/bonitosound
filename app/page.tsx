@@ -45,7 +45,7 @@ export default function HomePage() {
           />
           {scene.id === "marketing" && <PresentacionVideo />}
           {scene.id === "marcas" && <BrandsBand />}
-          {scene.id === "records" && <ArtistsBand />}
+          {scene.id === "giras" && <ArtistsBand />}
         </Fragment>
       ))}
     </>
