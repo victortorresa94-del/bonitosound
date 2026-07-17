@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -42,6 +42,26 @@ export function ArtistShowcase({
     return idx >= 0 ? idx : 0;
   });
   const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+  // Flechas del teclado (PC): ← anterior, → siguiente. Práctico porque los
+  // botones cambian de sitio según la altura del contenido. Ignora si el foco
+  // está en un campo de texto.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement | null;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
+      const d = e.key === "ArrowLeft" ? -1 : e.key === "ArrowRight" ? 1 : 0;
+      if (!d) return;
+      setI((prev) => {
+        const next = (prev + d + artists.length) % artists.length;
+        if (startSlug) router.replace(`/artistas/${artists[next].slug}`, { scroll: false });
+        return next;
+      });
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [artists, startSlug, router]);
+
   if (artists.length === 0) return null;
   const a = artists[i];
   const go = (d: number) => {
@@ -143,10 +163,12 @@ export function ArtistShowcase({
             </Link>
           </div>
 
-          <div className="mt-8 flex items-center gap-4">
-            <button onClick={() => go(-1)} aria-label="Artista anterior" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>←</button>
-            <button onClick={() => go(1)} aria-label="Siguiente artista" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>→</button>
-            <span className="ml-2 text-sm text-text-muted">Desliza para ver más artistas</span>
+          <div className="mt-8 flex items-center justify-between gap-4">
+            <span className="text-sm text-text-muted">Desliza o usa las flechas para ver más artistas</span>
+            <div className="flex items-center gap-3">
+              <button onClick={() => go(-1)} aria-label="Artista anterior" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>←</button>
+              <button onClick={() => go(1)} aria-label="Siguiente artista" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>→</button>
+            </div>
           </div>
         </div>
 
