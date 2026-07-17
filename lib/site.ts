@@ -57,7 +57,7 @@ export function r2(key: string): string {
 // de prioridad. Marketing vive dentro de Records; Jaleo Sound, en el footer
 // (es un proyecto con marca propia, no compite en el nivel principal).
 export const nav = [
-  { label: "¿Qué hacemos?", href: "/records" },
+  { label: "¿Qué hacemos?", href: "/servicios" },
   { label: "Artistas", href: "/artistas" },
   { label: "Eventos", href: "/eventos" },
   { label: "Universo Bonito", href: "/universo" },

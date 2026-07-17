@@ -1,4 +1,7 @@
+import fs from "node:fs";
+import path from "node:path";
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { Section, Cta, JsonLd } from "@/components/ui";
 import { FaqOpen } from "@/components/FaqOpen";
 import {
@@ -10,10 +13,18 @@ import {
 import type { Service } from "@/lib/services";
 import { site } from "@/lib/site";
 
+/** Ilustración de hero (grabado navy+cian), plug-and-play desde
+ *  /public/img/servicios/heroes/<slug>.png. Si no está, el hero va a una columna. */
+function heroIllo(slug: string): string | null {
+  const rel = `/img/servicios/heroes/${slug}.png`;
+  const abs = path.join(process.cwd(), "public", rel.slice(1));
+  return fs.existsSync(abs) ? rel : null;
+}
+
 /**
  * Plantilla común de las 7 páginas de servicio (subproductos de Bonito).
- * Estructura: hero (PLACEHOLDER — Víctor lo reemplaza con su diseño) →
- * aspectos clave → caso/artistas (slot `caseSlot`) → FAQ → CTA de cierre.
+ * Estructura: hero (titular + ilustración grabado) → aspectos clave →
+ * caso/artistas (slot `caseSlot`) → FAQ → CTA de cierre.
  * El contenido viene de `lib/services.ts`; cada ruta pasa su `caseSlot`.
  */
 export function ServicePage({
@@ -24,6 +35,7 @@ export function ServicePage({
   caseSlot?: ReactNode;
 }) {
   const mailto = `mailto:${site.emails.booking}?subject=${encodeURIComponent(service.ctaSubject)}`;
+  const illo = heroIllo(service.slug);
 
   return (
     <>
@@ -47,10 +59,14 @@ export function ServicePage({
         }}
       />
 
-      {/* HERO placeholder — se sustituye por el diseño de Víctor. */}
-      <section className="border-b border-subtle" data-hero-placeholder>
-        <div className="wrap py-24 md:py-32">
-          <div className="max-w-3xl">
+      {/* HERO — titular en la tipografía del home + ilustración grabado. */}
+      <section className="border-b border-subtle">
+        <div
+          className={`wrap grid items-center gap-10 py-16 md:py-24 ${
+            illo ? "md:grid-cols-[1.05fr_0.95fr]" : ""
+          }`}
+        >
+          <div className={illo ? "" : "max-w-3xl"}>
             <RevealOnScroll as="p" className="eyebrow mb-4">
               Records · {service.eyebrow}
             </RevealOnScroll>
@@ -66,6 +82,19 @@ export function ServicePage({
               </MagneticButton>
             </RevealOnScroll>
           </div>
+
+          {illo && (
+            <RevealOnScroll className="order-first md:order-none" delay={0.15}>
+              <Image
+                src={illo}
+                alt=""
+                width={720}
+                height={620}
+                priority
+                className="mx-auto h-auto w-full max-w-[440px] object-contain md:max-w-[480px]"
+              />
+            </RevealOnScroll>
+          )}
         </div>
       </section>
 
