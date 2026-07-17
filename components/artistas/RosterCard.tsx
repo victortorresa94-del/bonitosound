@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -37,7 +37,30 @@ export function RosterCard({
   shift = "",
 }: RosterCardProps) {
   const [hover, setHover] = useState(false);
+  const [inView, setInView] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
   const hasVideo = Boolean(video || youtubeId);
+
+  // Móvil/táctil: no hay hover. El vídeo arranca solo cuando la tarjeta está
+  // bien centrada en pantalla (estilo feed) y se para al salir. En escritorio
+  // (pointer fino) manda el hover y esto ni se activa.
+  useEffect(() => {
+    if (!hasVideo) return;
+    if (typeof window === "undefined") return;
+    const isTouch = window.matchMedia("(hover: none)").matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!isTouch || reduce) return;
+    const el = cardRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => setInView(e.isIntersecting && e.intersectionRatio >= 0.6),
+      { threshold: [0, 0.6, 1] }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [hasVideo]);
+
+  const active = hover || inView;
 
   return (
     <Link
@@ -48,6 +71,7 @@ export function RosterCard({
       onMouseLeave={() => setHover(false)}
     >
       <div
+        ref={cardRef}
         className={`relative ${aspect} overflow-hidden rounded-[1.5rem] bg-bg-tertiary shadow-[0_1px_0_rgba(20,40,60,0.06)] ring-1 ring-black/5 transition-all duration-500 group-hover:-translate-y-1.5 group-hover:shadow-[0_18px_40px_-18px_rgba(20,40,60,0.45)]`}
       >
         {photo && (
@@ -60,8 +84,9 @@ export function RosterCard({
           />
         )}
 
-        {/* Hover → vídeo. Solo se monta al pasar el ratón (no carga 6 a la vez). */}
-        {hover && video && (
+        {/* Activo (hover en escritorio, en-pantalla en móvil) → vídeo. Solo se
+            monta cuando toca (no carga 6 a la vez). */}
+        {active && video && (
           <video
             src={video}
             muted
@@ -72,7 +97,7 @@ export function RosterCard({
             className="pointer-events-none absolute inset-0 h-full w-full animate-[fadeIn_.4s_ease] object-cover"
           />
         )}
-        {hover && !video && youtubeId && (
+        {active && !video && youtubeId && (
           <div className="pointer-events-none absolute inset-0 overflow-hidden animate-[fadeIn_.5s_ease]">
             <iframe
               title={name}
@@ -86,7 +111,9 @@ export function RosterCard({
         {/* Badge "reproducible": solo si hay vídeo, se desvanece al hacer hover. */}
         {hasVideo && (
           <span
-            className="absolute left-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-black/45 text-white backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-0"
+            className={`absolute left-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-black/45 text-white backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-0 ${
+              active ? "opacity-0" : ""
+            }`}
             aria-hidden
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
