@@ -29,6 +29,8 @@ export function ContactForm({
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [company, setCompany] = useState("");
   const [msg, setMsg] = useState(starter);
   const [sent, setSent] = useState(false);
 
@@ -37,9 +39,14 @@ export function ContactForm({
 
   const send = (e: React.FormEvent) => {
     e.preventDefault();
+    const line = (k: string, v: string) => (v.trim() ? `${k}: ${v}\n` : "");
     const body =
       (artist ? `Solicitud de contratación · ${artist.name}\n\n` : "") +
-      `Nombre: ${name}\nEmail: ${email}\n\n${msg}`;
+      line("Nombre", name) +
+      line("Email", email) +
+      line("Teléfono", phone) +
+      line("Empresa", company) +
+      `\n${msg}`;
     window.location.href = `mailto:${to}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
@@ -90,31 +97,62 @@ export function ContactForm({
         </div>
       )}
 
-      <div>
-        <label htmlFor="cf-name" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>Nombre</label>
-        <input
-          id="cf-name"
-          required
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Tu nombre"
-          className={inputCls}
-          style={{ borderColor: "rgba(20,40,60,0.2)" }}
-        />
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="cf-name" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>Nombre</label>
+          <input
+            id="cf-name"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Tu nombre"
+            className={inputCls}
+            style={{ borderColor: "rgba(20,40,60,0.2)" }}
+          />
+        </div>
+        <div>
+          <label htmlFor="cf-company" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>
+            Empresa <span className="font-normal text-text-muted">(opcional)</span>
+          </label>
+          <input
+            id="cf-company"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+            placeholder="Tu empresa o marca"
+            className={inputCls}
+            style={{ borderColor: "rgba(20,40,60,0.2)" }}
+          />
+        </div>
       </div>
 
-      <div>
-        <label htmlFor="cf-email" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>Email</label>
-        <input
-          id="cf-email"
-          required
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="tu@email.com"
-          className={inputCls}
-          style={{ borderColor: "rgba(20,40,60,0.2)" }}
-        />
+      <div className="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label htmlFor="cf-email" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>Email</label>
+          <input
+            id="cf-email"
+            required
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="tu@email.com"
+            className={inputCls}
+            style={{ borderColor: "rgba(20,40,60,0.2)" }}
+          />
+        </div>
+        <div>
+          <label htmlFor="cf-phone" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>
+            Teléfono <span className="font-normal text-text-muted">(opcional)</span>
+          </label>
+          <input
+            id="cf-phone"
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="+34 …"
+            className={inputCls}
+            style={{ borderColor: "rgba(20,40,60,0.2)" }}
+          />
+        </div>
       </div>
 
       <div>
