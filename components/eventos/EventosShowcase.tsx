@@ -78,6 +78,16 @@ export function EventosShowcase({ eventos }: { eventos: Evento[] }) {
 
   return (
     <section className="relative w-full overflow-hidden" style={{ backgroundColor: "#FBFAF6" }}>
+      {/* Título de sección */}
+      <div className="mx-auto max-w-6xl px-5 pt-6 md:px-10">
+        <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>
+          Eventos de marca
+        </p>
+        <h2 className="font-round text-3xl font-bold md:text-5xl" style={{ color: NAVY }}>
+          Hacemos que las marcas suenen.
+        </h2>
+      </div>
+
       {/* ============ DESKTOP: stats izq + clúster solapado der ============ */}
       <div className="relative mx-auto hidden max-w-6xl px-10 md:block" style={{ height: "760px" }}>
         {/* Stats zigzag (izquierda) */}

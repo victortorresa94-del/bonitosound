@@ -28,7 +28,6 @@ const nextConfig = {
       { source: "/quienes-somos", destination: "/nosotros", statusCode: 301 },
       { source: "/sobre-nosotros", destination: "/nosotros", statusCode: 301 },
       { source: "/equipo", destination: "/nosotros", statusCode: 301 },
-      { source: "/servicios", destination: "/eventos", statusCode: 301 },
       { source: "/booking", destination: "/records/booking-management", statusCode: 301 },
       { source: "/management", destination: "/records/booking-management", statusCode: 301 },
       { source: "/sello", destination: "/records/sello", statusCode: 301 },
