@@ -32,9 +32,14 @@ const LAYOUT: Record<string, { aspect: string; shift: string }> = {
 
 export default function Artistas() {
   const all = getArtists();
-  const booking = all
-    .filter((a) => a.tier === "booking")
-    .sort((a, b) => ORDER.indexOf(a.slug) - ORDER.indexOf(b.slug));
+  // Parrilla curada del mockup (por slug, no por tier): estos 6 son el roster
+  // de /artistas —Dulze incluida—, cada uno con su layout asimétrico. El `tier`
+  // sigue mandando en /artistas/todos y en la ficha; aquí la selección es fija
+  // para que la cuadrícula quede como el diseño, sin huecos por foto que falte.
+  const bySlug = new Map(all.map((a) => [a.slug, a] as const));
+  const booking = ORDER.map((slug) => bySlug.get(slug)).filter(
+    (a): a is NonNullable<typeof a> => Boolean(a),
+  );
 
   return (
     <>
