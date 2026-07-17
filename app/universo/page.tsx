@@ -31,9 +31,9 @@ const BLOCKS = [
     name: "Giraverse",
     blurb: "software en desarrollo",
     logo: findAsset("universo", "logo-giraverse"),
-    href: "/lab/giraverse",
-    linkLabel: "Lo estamos montando",
-    external: false,
+    href: "https://giraverse.es",
+    linkLabel: "giraverse.es",
+    external: true,
   },
   {
     name: "Jaleo Sound",
