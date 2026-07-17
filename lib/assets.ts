@@ -33,3 +33,17 @@ export function findAsset(dir: string, slug: string): string | null {
 export function findLogo(dir: string, name: string): string | null {
   return findAsset(dir, assetSlug(name));
 }
+
+/**
+ * Canción para el botón "Escuchar a X" de la ficha. Si el artista tiene su
+ * propio audio en /public/audio/artistas/<slug>.(mp3|m4a), suena ese; si no,
+ * cae a la canción de Bonito Sound (igual que el botón del home). Así el botón
+ * SIEMPRE reproduce algo en vivo, y se personaliza en cuanto se sube el tema.
+ */
+export function findArtistAudio(slug: string): string {
+  for (const ext of ["mp3", "m4a"]) {
+    const rel = path.join("audio", "artistas", `${slug}.${ext}`);
+    if (fs.existsSync(path.join(pub, rel))) return "/" + rel.split(path.sep).join("/");
+  }
+  return "/audio/bonito.mp3";
+}

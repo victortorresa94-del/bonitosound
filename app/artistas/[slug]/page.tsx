@@ -12,7 +12,7 @@ import { ArtistLiveFeed } from "@/components/artistas/ArtistLiveFeed";
 import { ArtistConcerts } from "@/components/artistas/ArtistConcerts";
 import { ArtistCTA } from "@/components/artistas/ArtistCTA";
 import { getArtist, getArtists } from "@/lib/content";
-import { findAsset } from "@/lib/assets";
+import { findAsset, findArtistAudio } from "@/lib/assets";
 import { site } from "@/lib/site";
 
 // Mismo orden que /artistas (roster de booking, orden del mockup).
@@ -87,8 +87,8 @@ export default function ArtistPage({
         ? `https://open.spotify.com/artist/${x.spotifyArtistId}`
         : undefined,
       instagramUrl: x.instagram,
-      // Micro-mezcla del botón "Escuchar" (fragmentos de 30 s encadenados).
-      tracks: x.playerTracks,
+      // Canción del botón "Escuchar a X" (su audio si lo tiene, o el de Bonito).
+      audioSrc: findArtistAudio(x.slug),
     };
   });
 

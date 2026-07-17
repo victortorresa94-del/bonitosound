@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArtistPlayer, type PlayerTrack } from "./ArtistPlayer";
+import { ArtistPlayer } from "./ArtistPlayer";
 import { SpotifyButton } from "@/components/SpotifyButton";
 
 const NAVY = "#14283C";
@@ -19,8 +19,9 @@ export type ShowcaseArtist = {
   isIllustration: boolean;
   spotifyUrl?: string;
   instagramUrl?: string;
-  /** Temas de la micro-mezcla de 30 s que suena al darle a "Escuchar". */
-  tracks?: PlayerTrack[];
+  /** Canción que reproduce el botón "Escuchar a X" (audio del artista o el de
+   *  Bonito como fallback). */
+  audioSrc?: string;
 };
 
 function InstagramIcon() {
@@ -106,36 +107,39 @@ export function ArtistShowcase({
             {a.bioLine}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            {a.spotifyUrl && (
-              <SpotifyButton href={a.spotifyUrl} size="sm">
-                Escuchar en Spotify
+          {/* Cuatro botones en 2×2. Escuchar (oscuro, suena en vivo) y
+              Contratar (azul bonito) son los protagonistas; Spotify e Instagram
+              acompañan. */}
+          <div className="mt-8 grid max-w-md grid-cols-2 items-stretch gap-3">
+            <ArtistPlayer key={a.slug} artistName={a.name} src={a.audioSrc ?? "/audio/bonito.mp3"} />
+
+            {a.spotifyUrl ? (
+              <SpotifyButton href={a.spotifyUrl} className="h-full w-full justify-center">
+                Spotify
               </SpotifyButton>
+            ) : (
+              <span aria-hidden />
             )}
-            {a.instagramUrl && (
+
+            {a.instagramUrl ? (
               <a
                 href={a.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border-[1.5px] px-4 py-2 text-xs font-bold transition-all duration-200 hover:-translate-y-0.5"
+                className="flex h-full w-full items-center justify-center gap-2 rounded-full border-2 py-3 text-sm font-bold transition-transform duration-200 hover:scale-[1.01]"
                 style={{ color: NAVY, borderColor: NAVY }}
               >
                 <InstagramIcon /> Instagram
               </a>
+            ) : (
+              <span aria-hidden />
             )}
-          </div>
 
-          {/* Play a la izquierda (el botón ES el reproductor: sin popups ni
-              embeds), booking a la derecha. */}
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            {a.tracks && a.tracks.length > 0 && (
-              <ArtistPlayer
-                key={a.slug}
-                tracks={a.tracks}
-                artistName={a.name}
-              />
-            )}
-            <Link href={`/contacto?a=${a.slug}`} className="btn btn-primary">
+            <Link
+              href={`/contacto?a=${a.slug}`}
+              className="flex h-full w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-bold text-white transition-transform duration-200 hover:scale-[1.01]"
+              style={{ backgroundColor: CYAN }}
+            >
               Contratar booking →
             </Link>
           </div>
