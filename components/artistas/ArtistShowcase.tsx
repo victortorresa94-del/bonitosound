@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -51,6 +51,7 @@ export function ArtistShowcase({
     const idx = artists.findIndex((x) => x.slug === startSlug);
     return idx >= 0 ? idx : 0;
   });
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
   if (artists.length === 0) return null;
   const a = artists[i];
   const go = (d: number) => {
@@ -62,8 +63,31 @@ export function ArtistShowcase({
   };
   const pad = (n: number) => String(n).padStart(2, "0");
 
+  // Swipe horizontal (móvil): deslizar izquierda = siguiente, derecha = anterior.
+  // Solo actúa si el gesto es claramente horizontal, para no robar el scroll.
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    touchStart.current = { x: t.clientX, y: t.clientY };
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      go(dx < 0 ? 1 : -1);
+    }
+  };
+
   return (
-    <section className="relative overflow-hidden" style={{ backgroundColor: "#FBFAF6" }}>
+    <section
+      className="relative touch-pan-y overflow-hidden"
+      style={{ backgroundColor: "#FBFAF6" }}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       <div className="mx-auto grid min-h-[78vh] max-w-6xl grid-cols-1 items-center gap-8 px-5 py-16 md:grid-cols-2 md:px-10 md:py-10">
         {/* Texto */}
         <div key={`t-${a.slug}`} className="order-2 animate-[fadeIn_.5s_ease] md:order-1">
