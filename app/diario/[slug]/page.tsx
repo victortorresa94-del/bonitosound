@@ -1,3 +1,4 @@
+import { CtaBlock } from "@/components/CtaBlock";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -154,25 +155,19 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
       {/* CTA al pillar relacionado */}
       <Section>
-        <RevealOnScroll className="mx-auto max-w-2xl rounded-3xl border border-subtle bg-bg-tertiary p-8 text-center md:p-12">
-          <p className="display text-[clamp(1.5rem,3.5vw,2.4rem)] leading-tight">
-            ¿Hablamos de lo tuyo?
-          </p>
-          <p className="mx-auto mt-3 max-w-md text-text-secondary">
-            Si esto te ha sonado a algo que necesitas, cuéntanoslo. Te
-            respondemos nosotros, no un bot.
-          </p>
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-4">
-            <MagneticButton strength={0.4}>
-              <Cta href="/contacto">Hablamos →</Cta>
-            </MagneticButton>
-            {p.pillarHref && (
-              <Cta href={p.pillarHref} variant="ghost">
-                Ver más
-              </Cta>
-            )}
-          </div>
-        </RevealOnScroll>
+        <CtaBlock
+          title="¿Hablamos de lo tuyo?"
+          desc="Si esto te ha sonado a algo que necesitas, cuéntanoslo. Te respondemos nosotros, no un bot."
+          href="/contacto"
+          cta="Hablamos →"
+          secondary={
+            p.pillarHref ? (
+              <Link href={p.pillarHref} className="underline-offset-4 hover:text-accent-cyan hover:underline">
+                Ver más →
+              </Link>
+            ) : undefined
+          }
+        />
       </Section>
     </>
   );

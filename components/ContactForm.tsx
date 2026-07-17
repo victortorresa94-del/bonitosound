@@ -34,7 +34,9 @@ export function ContactForm({
   const [msg, setMsg] = useState(starter);
   const [sent, setSent] = useState(false);
 
-  const to = artist ? site.emails.booking : site.emails.general;
+  // Todo el formulario va a bonito@ (general), también la contratación de
+  // artista — un único buzón.
+  const to = site.emails.general;
   const subject = artist ? `Contratar · ${artist.name}` : "Web · Contacto";
 
   const send = (e: React.FormEvent) => {

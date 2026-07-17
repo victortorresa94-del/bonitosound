@@ -1,3 +1,4 @@
+import { CtaBlock } from "@/components/CtaBlock";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -297,20 +298,12 @@ export default function EventosMarcas() {
       </Section>
 
       <Section>
-        <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
-          <Heading>¿Lo hablamos?</Heading>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">
-            Una llamada de 30 minutos. Tú cuentas el evento, nosotros te
-            decimos qué se puede hacer de verdad.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <MagneticButton strength={0.5}>
-              <Cta href={`mailto:${site.emails.general}?subject=Llamada%20activación`}>
-                Reservar llamada →
-              </Cta>
-            </MagneticButton>
-          </div>
-        </RevealOnScroll>
+        <CtaBlock
+          title="¿Lo hablamos?"
+          desc="Una llamada de 30 minutos. Tú cuentas el evento, nosotros te decimos qué se puede hacer de verdad."
+          href={`mailto:${site.emails.general}?subject=Llamada%20activación`}
+          cta="Reservar llamada →"
+        />
       </Section>
     </>
   );

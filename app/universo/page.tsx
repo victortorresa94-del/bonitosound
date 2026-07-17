@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { RevealOnScroll, StaggerGroup } from "@/components/motion";
+import { RevealOnScroll, StaggerGroup, MagneticButton } from "@/components/motion";
+import { Cta } from "@/components/ui";
 import { findAsset } from "@/lib/assets";
 import { site } from "@/lib/site";
 
@@ -15,62 +16,95 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/universo` },
 };
 
-// Las tres piezas del universo. La imagen es el diseño completo (texto e
-// ilustración van dentro); encima se incrusta el logo en el hueco reservado.
-// Logos plug-and-play: si el archivo no está, el hueco queda limpio.
+// Las tres cosas que Bonito ha creado: dos apps y un festival. Cada tarjeta
+// lleva su logo y enlaza a su sitio (Jaleo, a su página interna).
+// logoH: altura en px del logo, tuneada por logo para EQUILIBRARLOS ópticamente
+// (Giraverse es un wordmark pesado y ancho → va más bajo; Jaleo es cuadrado →
+// va más alto). El ancho sale del ratio real de cada archivo.
 const BLOCKS = [
   {
-    id: "artiverse",
     name: "Artiverse",
-    shape: "square" as const,
-    blurb: "software B2B en marcha",
-    image: "/img/universo/artiverse.png",
-    alt: "Artiverse — el sitio donde el sector deja de trabajar a ciegas. Plataforma B2B que conecta agencias, programadores y promotores.",
+    status: "Software B2B · en marcha",
+    desc: "La plataforma que conecta agencias, programadores y promotores. Donde el sector deja de trabajar a ciegas y las fechas se cierran con datos, no a base de WhatsApp.",
     logo: findAsset("universo", "logo-artiverse"),
+    logoH: 30,
+    ratio: 639 / 138,
     href: site.external.artiverse,
-    hrefLabel: "Ir a Artiverse",
-    // Crema exacto del fondo de la imagen → la sección se funde con ella (sin
-    // recuadro). No se puede recortar la imagen: su ilustración tiene cremas
-    // y blancos dentro que se romperían.
-    bg: "#FDF8F0",
+    linkLabel: "artiverse.es",
+    external: true,
   },
   {
-    id: "giraverse",
     name: "Giraverse",
-    shape: "circle" as const,
-    blurb: "software en desarrollo",
-    image: "/img/universo/giraverse.png",
-    alt: "Giraverse — la circulación de giras, ordenada. Lo que hoy se resuelve a base de llamadas y suerte, en desarrollo.",
+    status: "Software · en desarrollo",
+    desc: "La circulación de giras, ordenada. Lo que hoy se resuelve con llamadas y suerte —qué artista pasa por dónde y cuándo— convertido en software. En desarrollo.",
     logo: findAsset("universo", "logo-giraverse"),
-    href: undefined,
-    hrefLabel: undefined,
-    bg: "#FDF8EC",
+    logoH: 22,
+    ratio: 7391 / 965,
+    href: "https://giraverse.es",
+    linkLabel: "giraverse.es",
+    external: true,
   },
   {
-    id: "jaleo",
     name: "Jaleo Sound",
-    shape: "triangle" as const,
-    blurb: "festival en Ámsterdam",
-    image: "/img/universo/jaleo.png",
-    alt: "Jaleo Sound — también tenemos un festival. Cultura española y latina en Ámsterdam, 11–12 septiembre 2026, Posthoornkerk.",
+    status: "Festival propio · Ámsterdam",
+    desc: "Nuestro festival de cultura española y latina en Ámsterdam. Sin escenarios enormes ni zonas VIP: buena música, buena comida y buena gente. 11–12 sep 2026.",
     logo: findAsset("marca", "jaleo-sound"),
-    href: site.external.jaleo,
-    hrefLabel: "jaleosound.com",
-    bg: "#FDFAF2",
+    logoH: 44,
+    ratio: 1000 / 561,
+    href: "/jaleo-sound",
+    linkLabel: "El festival",
+    external: false,
   },
 ];
 
-// Crema de la página (el del primer bloque): funde el hero con las imágenes.
-const CREAM = "#FDF8F0";
+function Card({ b }: { b: (typeof BLOCKS)[number] }) {
+  const inner = (
+    <>
+      {/* Fila de logo con altura común: los logos se centran en ella, así los
+          tres pesan lo mismo aunque cada archivo tenga proporciones distintas. */}
+      <div className="flex h-14 items-center">
+        {b.logo ? (
+          <Image
+            src={b.logo}
+            alt={b.name}
+            height={b.logoH}
+            width={Math.round(b.logoH * b.ratio)}
+            className="w-auto"
+            style={{ height: b.logoH }}
+          />
+        ) : (
+          <span className="display text-2xl" style={{ color: NAVY }}>
+            {b.name}
+          </span>
+        )}
+      </div>
+      <h2 className="sr-only">{b.name}</h2>
 
-function Shape({ shape }: { shape: "square" | "circle" | "triangle" }) {
-  const common = { fill: "none", stroke: CYAN, strokeWidth: 2.4 };
-  return (
-    <svg width="52" height="52" viewBox="0 0 52 52" aria-hidden className="mb-5">
-      {shape === "square" && <rect x="8" y="8" width="36" height="36" rx="2" {...common} />}
-      {shape === "circle" && <circle cx="26" cy="26" r="19" {...common} />}
-      {shape === "triangle" && <path d="M26 7 L45 44 L7 44 Z" strokeLinejoin="round" {...common} />}
-    </svg>
+      <p className="mt-6 text-[11px] font-bold uppercase tracking-[0.15em]" style={{ color: CYAN }}>
+        {b.status}
+      </p>
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-text-secondary">{b.desc}</p>
+
+      <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: NAVY }}>
+        {b.linkLabel}
+        <span className="transition-transform duration-300 group-hover:translate-x-1" style={{ color: CYAN }}>
+          →
+        </span>
+      </span>
+    </>
+  );
+
+  const cls =
+    "group flex flex-col rounded-3xl border border-subtle bg-transparent p-7 transition-colors duration-300 hover:border-text-primary";
+
+  return b.external ? (
+    <a href={b.href} target="_blank" rel="noopener noreferrer" className={cls} data-cursor="link">
+      {inner}
+    </a>
+  ) : (
+    <Link href={b.href} className={cls} data-cursor="link">
+      {inner}
+    </Link>
   );
 }
 
@@ -78,10 +112,10 @@ export default function Universo() {
   return (
     <>
       {/* ── HERO (recreación de la imagen 1, tipografía de la web) ── */}
-      <section style={{ backgroundColor: CREAM }}>
-        <div className="wrap pb-10 pt-20 md:pt-28">
+      <section style={{ backgroundColor: "#FBFAF6" }}>
+        <div className="wrap pb-16 pt-20 md:pb-24 md:pt-28">
           <RevealOnScroll as="p" className="mb-6 text-xs font-bold uppercase tracking-[0.25em]">
-            <span style={{ color: CYAN }}>Universo Bonito · 01/04</span>
+            <span style={{ color: CYAN }}>Universo Bonito</span>
           </RevealOnScroll>
           <RevealOnScroll
             as="h1"
@@ -97,79 +131,36 @@ export default function Universo() {
             className="mt-7 max-w-xl text-lg text-text-secondary md:text-xl"
           >
             Cuando entiendes el sistema entero, también le das las herramientas
-            que le faltan.
+            que le faltan. Dos apps y un festival, hechos por nosotros.
           </RevealOnScroll>
 
-          {/* 3 bloques */}
-          <StaggerGroup stagger={0.1} className="mt-12 grid gap-5 sm:grid-cols-3">
+          {/* 3 bloques con logo + descripción + enlace */}
+          <StaggerGroup stagger={0.1} className="mt-14 grid gap-5 md:grid-cols-3">
             {BLOCKS.map((b) => (
-              <Link
-                key={b.id}
-                href={`#${b.id}`}
-                className="group flex flex-col rounded-3xl border border-subtle bg-transparent p-7 transition-colors duration-300 hover:border-text-primary"
-                data-cursor="link"
-              >
-                <Shape shape={b.shape} />
-                <h2 className="display text-3xl" style={{ color: NAVY }}>
-                  {b.name}
-                </h2>
-                <p className="mt-2 text-sm text-text-muted">{b.blurb}</p>
-              </Link>
+              <Card key={b.name} b={b} />
             ))}
           </StaggerGroup>
         </div>
       </section>
 
-      {/* ── LAS TRES PIEZAS (imágenes tal cual + logo incrustado) ── */}
-      {BLOCKS.map((b) => (
-        <section key={b.id} id={b.id} style={{ backgroundColor: b.bg }} className="scroll-mt-24">
-          <div className="wrap py-6 md:py-10">
-            <RevealOnScroll className="relative mx-auto w-full max-w-5xl">
-              <Image
-                src={b.image}
-                alt={b.alt}
-                width={1024}
-                height={1536}
-                sizes="(max-width: 768px) 100vw, 768px"
-                className="h-auto w-full"
-                priority={b.id === "artiverse"}
-              />
-
-              {/* Logo incrustado en el hueco reservado (arriba-izquierda). */}
-              {b.logo && (
-                <span className="absolute left-[5%] top-[5%] block h-[13%] w-[40%]">
-                  <Image
-                    src={b.logo}
-                    alt={`Logo ${b.name}`}
-                    fill
-                    sizes="40vw"
-                    className="object-contain object-left"
-                  />
-                </span>
-              )}
-
-              {/* Jaleo: el "¿Hablamos?" del diseño, clicable → contacto. */}
-              {b.id === "jaleo" && (
-                <Link
-                  href="/contacto"
-                  aria-label="Hablamos"
-                  className="absolute left-[5%] top-[86%] block h-[7%] w-[36%]"
-                  data-cursor="cta"
-                />
-              )}
-            </RevealOnScroll>
-
-            {/* Enlace real a la web del proyecto, cuando existe. */}
-            {b.href && (
-              <div className="mt-6 flex justify-center">
-                <a href={b.href} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
-                  {b.hrefLabel} →
-                </a>
-              </div>
-            )}
-          </div>
-        </section>
-      ))}
+      {/* ── CIERRE ── */}
+      <section style={{ backgroundColor: "#FBFAF6" }} className="border-t border-subtle">
+        <div className="wrap py-20 md:py-28">
+          <RevealOnScroll
+            as="h2"
+            className="display max-w-3xl text-[clamp(1.9rem,4.5vw,3.2rem)] leading-[1.05]"
+          >
+            <span style={{ color: NAVY }}>
+              Entender el sistema entero también significa construir lo que le falta.
+            </span>
+          </RevealOnScroll>
+          <RevealOnScroll delay={0.15} className="mt-9">
+            <MagneticButton strength={0.4}>
+              <Cta href="/contacto">Hablamos →</Cta>
+            </MagneticButton>
+          </RevealOnScroll>
+        </div>
+      </section>
     </>
   );
 }

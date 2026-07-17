@@ -3,6 +3,7 @@ import path from "node:path";
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { Section, Cta, JsonLd } from "@/components/ui";
+import { CtaBlock } from "@/components/CtaBlock";
 import { FaqOpen } from "@/components/FaqOpen";
 import {
   RevealOnScroll,
@@ -126,23 +127,17 @@ export function ServicePage({
 
       {/* CTA de cierre */}
       <Section>
-        <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
-          <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-            {service.cta.h2}
-          </SplitTextReveal>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">{service.cta.desc}</p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-5">
-            <MagneticButton strength={0.5}>
-              <Cta href={mailto}>Contactar →</Cta>
-            </MagneticButton>
-            <a
-              href={`tel:${site.phone.replace(/\s/g, "")}`}
-              className="text-sm font-medium text-text-secondary transition-colors hover:text-accent-cyan"
-            >
+        <CtaBlock
+          title={service.cta.h2}
+          desc={service.cta.desc}
+          href={mailto}
+          cta="Contactar →"
+          secondary={
+            <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="transition-colors hover:text-accent-cyan">
               o llama al {site.phone}
             </a>
-          </div>
-        </RevealOnScroll>
+          }
+        />
       </Section>
     </>
   );
