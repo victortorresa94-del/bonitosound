@@ -10,4 +10,4 @@ result: "Una marca enorme y un evento que no se le quedó pequeño."
 
 Con una marca de este tamaño el margen de error es cero: todo tiene que estar cuadrado antes de que se encienda el primer foco. Así lo montamos.
 
-Un mismo equipo del primer correo al último tema. Un interlocutor, cero cabos sueltos.
+Lo llevó el mismo equipo de principio a fin, con una sola persona al teléfono del cliente. Todo atado.
