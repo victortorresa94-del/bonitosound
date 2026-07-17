@@ -86,7 +86,7 @@ export function ServicePage({
       <section className="border-b border-subtle">
         <div className={`wrap grid items-center gap-10 py-16 md:py-24 ${illo ? "md:grid-cols-[1.05fr_0.95fr]" : ""}`}>
           <div className={illo ? "" : "max-w-3xl"}>
-            <RevealOnScroll as="p" className="eyebrow mb-4">Records · {service.eyebrow}</RevealOnScroll>
+            <RevealOnScroll as="p" className="eyebrow mb-4">{service.eyebrow}</RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
               {service.h1}
             </SplitTextReveal>

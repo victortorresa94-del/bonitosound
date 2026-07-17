@@ -175,3 +175,17 @@ export const distributionCatalog = [
   "AlexDeLion",
   "Marco la Testa",
 ] as const;
+
+// Plataformas a las que distribuimos (las principales; hay muchas más tiendas y
+// redes). Si algún día se suben logos a /img/plataformas/<slug>, el componente
+// los usa; mientras, cada una va como chip con su nombre.
+export const distributionPlatforms = [
+  "Spotify",
+  "Apple Music",
+  "YouTube Music",
+  "Amazon Music",
+  "Deezer",
+  "Tidal",
+  "Instagram / TikTok",
+  "Shazam",
+] as const;

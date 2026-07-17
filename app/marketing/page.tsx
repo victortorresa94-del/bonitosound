@@ -112,12 +112,11 @@ export default function Marketing() {
       <section style={{ backgroundColor: "#FBFAF6" }}>
         <div className="wrap pb-8 pt-24 md:pb-12 md:pt-32">
           <RevealOnScroll as="p" className="eyebrow mb-6">
-            Records · Marketing
+            Marketing musical
           </RevealOnScroll>
           <h1 className="display max-w-[16ch] text-[clamp(2.8rem,7.5vw,6rem)] leading-[0.98] text-[#14283C]">
-            Campañas que{" "}
-            <span className="text-[#16b6d4]">lanzan</span>.<br />
-            No que acompañan.
+            Cuando sale,<br />
+            se entera <span className="text-[#16b6d4]">quien debe</span>.
           </h1>
           <RevealOnScroll
             as="p"

@@ -10,8 +10,10 @@ import {
   MarqueeLogoWall,
 } from "@/components/motion";
 import { getArtists } from "@/lib/content";
-import { findAsset } from "@/lib/assets";
-import { brands, distributionCatalog } from "@/lib/site";
+import { findAsset, findLogo, assetSlug } from "@/lib/assets";
+import { brands, distributionCatalog, distributionPlatforms } from "@/lib/site";
+
+const CYAN = "#16b6d4";
 
 /** Caso destacado: un artista con foto + Spotify (sello, management). */
 export function ArtistFeatureCase({
@@ -96,6 +98,135 @@ export function CatalogMarqueeCase() {
       <RevealOnScroll as="p" className="eyebrow mb-8">Ya distribuyen con nosotros</RevealOnScroll>
       <MarqueeLogoWall items={distributionCatalog} dir="artistas" speed={35} />
     </Section>
+  );
+}
+
+/** Glyph genérico (barras de sonido) para las plataformas sin logo propio. */
+function WaveGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
+      <path d="M4 10v4M8 6v12M12 3v18M16 7v10M20 10v4" />
+    </svg>
+  );
+}
+
+/** Chip de plataforma: si hay logo en /img/plataformas/<slug>, se usa; si no,
+ *  un chip limpio con el nombre (mismo tamaño, se ve uniforme). */
+function PlatformChip({ name }: { name: string }) {
+  const logo = findLogo("plataformas", name);
+  return (
+    <div className="flex h-14 items-center gap-2.5 rounded-full border border-subtle bg-bg-primary px-5 shadow-sm md:h-16 md:px-6">
+      {logo ? (
+        <Image src={logo} alt={name} width={130} height={32} className="h-6 w-auto max-w-[130px] object-contain md:h-7" />
+      ) : (
+        <>
+          <span style={{ color: CYAN }}><WaveGlyph /></span>
+          <span className="font-round text-base font-bold text-text-primary md:text-lg">{name}</span>
+        </>
+      )}
+    </div>
+  );
+}
+
+/** Tarjeta de artista del catálogo: foto en gris (a color en hover) o, si no
+ *  hay foto, iniciales sobre navy. Uniforme — nada de fotos y logos sueltos. */
+function CatalogCard({ name }: { name: string }) {
+  const slug = assetSlug(name);
+  const photo = findAsset("artistas", slug);
+  const inRoster = getArtists().some((a) => a.slug === slug);
+  const initials = name.split(" ").map((w) => w[0]).slice(0, 2).join("");
+
+  const inner = (
+    <div className="relative aspect-square overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary" style={{ background: "radial-gradient(120% 120% at 30% 20%, #1b3a52 0%, #14283C 55%, #0d1a29 100%)" }}>
+      {photo ? (
+        <Image src={photo} alt={name} fill sizes="(max-width: 640px) 33vw, 160px" className="object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0" />
+      ) : (
+        <div aria-hidden className="absolute inset-0 flex items-center justify-center">
+          <span className="font-round text-3xl font-bold text-white/15">{initials}</span>
+          <span className="absolute bottom-2.5 right-2.5 h-2 w-2 rounded-full" style={{ backgroundColor: CYAN }} />
+        </div>
+      )}
+      <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2.5">
+        <span className="font-round text-sm font-bold text-white">{name}</span>
+      </span>
+    </div>
+  );
+
+  return inRoster ? (
+    <Link href={`/artistas/${slug}`} className="group block">{inner}</Link>
+  ) : (
+    <div className="group">{inner}</div>
+  );
+}
+
+/**
+ * Caso de la página de distribución: la prueba de que esto funciona.
+ * Plataformas (dónde llega) + números + catálogo de artistas (con quién) +
+ * cómo funciona el precio (genérico, sin cifras — pendiente de cerrar con Dani).
+ */
+export function DistribucionCase() {
+  const stats = [
+    { n: "+150", l: "lanzamientos" },
+    { n: "~20", l: "artistas" },
+    { n: "2022", l: "distribuyendo desde" },
+  ];
+  return (
+    <>
+      {/* PLATAFORMAS */}
+      <Section className="bg-bg-primary">
+        <RevealOnScroll as="p" className="eyebrow mb-4">En todas las plataformas</RevealOnScroll>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,3rem)]">
+          Donde se escucha música, estás.
+        </SplitTextReveal>
+        <StaggerGroup stagger={0.05} className="mt-10 flex flex-wrap gap-3 md:gap-4">
+          {distributionPlatforms.map((p) => (
+            <PlatformChip key={p} name={p} />
+          ))}
+        </StaggerGroup>
+        <RevealOnScroll as="p" className="mt-6 text-sm text-text-muted" delay={0.1}>
+          Y en el resto de tiendas y redes donde la gente descubre y guarda música.
+        </RevealOnScroll>
+      </Section>
+
+      {/* NÚMEROS + CATÁLOGO */}
+      <Section>
+        <div className="grid gap-x-8 gap-y-8 border-b border-subtle pb-12 sm:grid-cols-3">
+          {stats.map((s) => (
+            <div key={s.l}>
+              <p className="font-round font-bold leading-none" style={{ color: "#14283C", fontSize: "clamp(2.6rem,6vw,4.4rem)" }}>{s.n}</p>
+              <p className="mt-2 text-sm font-semibold uppercase leading-tight tracking-wide" style={{ color: "#14283C" }}>{s.l}</p>
+            </div>
+          ))}
+        </div>
+
+        <RevealOnScroll as="p" className="eyebrow mb-8 mt-14">Ya distribuyen con nosotros</RevealOnScroll>
+        <StaggerGroup stagger={0.04} className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:gap-4 lg:grid-cols-6">
+          {distributionCatalog.map((name) => (
+            <CatalogCard key={name} name={name} />
+          ))}
+        </StaggerGroup>
+      </Section>
+
+      {/* PRECIO (genérico, sin cifras — Dani cierra el modelo) */}
+      <Section className="bg-bg-primary">
+        <div className="mx-auto max-w-3xl text-center">
+          <RevealOnScroll as="p" className="eyebrow mb-4">El precio</RevealOnScroll>
+          <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,2.8rem)]">
+            Hablado antes de empezar. Sin sorpresas.
+          </SplitTextReveal>
+          <RevealOnScroll as="p" className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary" delay={0.15}>
+            La distribución se ajusta a lo que necesitas —un single suelto o todo tu
+            catálogo— y lo cerramos contigo antes de subir nada. Sin letra pequeña:
+            tu música sigue siendo tuya.
+          </RevealOnScroll>
+          <RevealOnScroll className="mx-auto mt-7 w-40" delay={0.2}>
+            <svg viewBox="0 0 160 16" fill="none" aria-hidden className="h-4 w-full">
+              <path d="M3 9 C 28 2, 52 2, 78 9 S 128 15, 157 6" stroke={CYAN} strokeWidth="3" strokeLinecap="round" />
+            </svg>
+          </RevealOnScroll>
+        </div>
+      </Section>
+    </>
   );
 }
 
