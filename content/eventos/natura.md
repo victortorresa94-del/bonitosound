@@ -2,6 +2,7 @@
 artist: "Nàtura"
 title: "Nàtura: del club a cualquier escenario"
 type: "showcase"
+videoUrl: "natura.mp4"
 year: "2024"
 context: "Directo de Nàtura, DJ y productora del roster. La llevamos en booking y le montamos la producción de cada sesión."
 result: "Una sesión que no decae en toda la noche."

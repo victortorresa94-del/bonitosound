@@ -2,6 +2,7 @@
 brand: "Font Vella"
 title: "Font Vella: tres años sonando juntos"
 type: "marca"
+videoUrl: "font-vella.mp4"
 count: "30 eventos"
 year: "2025"
 context: "30 activaciones para Font Vella entre 2023 y 2025. Música que acompaña a la marca sin taparla, en cada formato que ha hecho falta."

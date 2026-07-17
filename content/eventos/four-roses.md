@@ -2,6 +2,7 @@
 brand: "Four Roses"
 title: "Four Roses: directo con el carácter del bourbon"
 type: "marca"
+videoUrl: "four-roses.mp4"
 count: "20 eventos"
 year: "2025"
 context: "20 eventos para Four Roses desde 2024. Directo, ambiente y producción técnica para una marca que sabe cómo quiere sonar."

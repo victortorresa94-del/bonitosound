@@ -2,6 +2,7 @@
 brand: "Château"
 title: "Château: directo a medida para una marca de vino"
 type: "marca"
+videoUrl: "chateau.mp4"
 year: "2024"
 context: "Experiencia musical para Château: directo curado y producción técnica al detalle, al nivel del producto."
 result: "Música elegida como se elige un buen vino: sin prisa y con criterio."
