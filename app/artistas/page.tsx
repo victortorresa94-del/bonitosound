@@ -145,18 +145,22 @@ export default function Artistas() {
             </RevealOnScroll>
           </div>
 
+          {/* Nombres en bloque que fluye a varias líneas (como el mockup): cada
+              nombre es una unidad que no se parte, y el flex-wrap corta ENTRE
+              nombres. Antes iba todo en una sola línea porque los <span> nowrap
+              adyacentes no dejaban punto de corte. */}
           <RevealOnScroll
             delay={0.15}
-            className="font-round mt-10 text-[clamp(1.3rem,3.1vw,2.1rem)] font-semibold leading-[1.7] text-[#14283C]"
+            className="mt-10 flex flex-wrap items-baseline gap-x-4 gap-y-3 font-round text-[clamp(1.3rem,3.1vw,2.1rem)] font-semibold leading-tight text-[#14283C]"
           >
             {distributionCatalog.map((n, i) => (
               <span key={n} className="whitespace-nowrap">
-                {i > 0 && (
-                  <span className="mx-3 font-bold" style={{ color: CYAN }}>
+                {n}
+                {i < distributionCatalog.length - 1 && (
+                  <span className="ml-4 font-bold" style={{ color: CYAN }}>
                     ·
                   </span>
                 )}
-                {n}
               </span>
             ))}
           </RevealOnScroll>
