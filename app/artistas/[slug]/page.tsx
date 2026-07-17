@@ -15,8 +15,10 @@ import { getArtist, getArtists } from "@/lib/content";
 import { findAsset, findArtistAudio } from "@/lib/assets";
 import { site } from "@/lib/site";
 
-// Mismo orden que /artistas (roster de booking, orden del mockup).
-const BOOKING_ORDER = ["dulze", "eva-calyza", "natura", "pablo-rojo", "paule", "sa-pena"];
+// Los 6 destacados del roster (orden del mockup de /artistas) van primero en el
+// carrusel; detrás, el resto de artistas. Es un ORDEN ÚNICO: entres por donde
+// entres, las flechas recorren siempre a todos en el mismo orden.
+const FEATURED_ORDER = ["dulze", "eva-calyza", "natura", "pablo-rojo", "paule", "sa-pena"];
 
 export function generateStaticParams() {
   return getArtists().map((a) => ({ slug: a.slug }));
@@ -63,17 +65,16 @@ export default function ArtistPage({
 
   const photo = a.image ?? findAsset("artistas", a.slug);
 
-  // Roster navegable del showcase: mismo tier que el artista actual, mismo
-  // orden que /artistas cuando es booking. Las flechas recorren el roster
-  // sin salir de la ficha.
-  const tierList = getArtists()
-    .filter((x) => x.tier === a.tier)
-    .sort((x, y) =>
-      a.tier === "booking"
-        ? BOOKING_ORDER.indexOf(x.slug) - BOOKING_ORDER.indexOf(y.slug)
-        : 0,
-    );
-  const showcase: ShowcaseArtist[] = tierList.map((x) => {
+  // Carrusel navegable: TODOS los artistas en un orden único y consistente
+  // (destacados primero, luego el resto), sin importar por cuál se haya
+  // entrado. Las flechas (teclado o pantalla) recorren el roster entero.
+  const all = getArtists();
+  const featured = FEATURED_ORDER.map((slug) => all.find((x) => x.slug === slug)).filter(
+    (x): x is NonNullable<typeof x> => Boolean(x),
+  );
+  const rest = all.filter((x) => !FEATURED_ORDER.includes(x.slug));
+  const ordered = [...featured, ...rest];
+  const showcase: ShowcaseArtist[] = ordered.map((x) => {
     const illustration = findAsset("artistas/ilustracion", x.slug);
     const xPhoto = x.image ?? findAsset("artistas", x.slug);
     return {
