@@ -103,24 +103,20 @@ export function ServicePage({
         </div>
       </section>
 
-      {/* INTRO */}
-      {d.intro && (
-        <Section>
-          <RevealOnScroll as="p" className="statement mx-auto max-w-4xl text-center text-[clamp(1.5rem,3.4vw,2.5rem)] leading-tight text-text-primary">
-            {d.intro}
-          </RevealOnScroll>
-        </Section>
-      )}
-
-      {/* QUÉ HACEMOS — con iconos (o fallback a los aspectos simples). */}
+      {/* QUÉ HACEMOS — con iconos, JUSTO tras el hero (o fallback simple).
+          El grid se adapta: 4 items → una sola línea (sin hueco cojo); 6 → dos
+          filas de tres. */}
       {d.whatWeDo ? (
         <Section className="bg-bg-primary">
           <RevealOnScroll as="p" className="eyebrow mb-10">{d.whatWeDoTitle ?? "Qué hacemos"}</RevealOnScroll>
-          <StaggerGroup stagger={0.07} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <StaggerGroup
+            stagger={0.07}
+            className={`grid gap-6 sm:grid-cols-2 ${d.whatWeDo.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}
+          >
             {d.whatWeDo.map((w) => (
-              <div key={w.title} className="card flex flex-col">
-                <span className="mb-4 grid h-12 w-12 place-items-center rounded-xl" style={{ backgroundColor: "rgba(22,182,212,0.1)", color: NAVY }}>
-                  <ServiceIcon name={w.icon} />
+              <div key={w.title} className="card group flex flex-col transition-transform duration-300 hover:-translate-y-1">
+                <span className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-accent-cyan/10 transition-all duration-300 group-hover:-rotate-6 group-hover:bg-accent-cyan/20" style={{ color: NAVY }}>
+                  <ServiceIcon name={w.icon} className="transition-transform duration-300 group-hover:scale-110" />
                 </span>
                 <h3 className="display text-xl leading-tight">{w.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-text-secondary">{w.desc}</p>
@@ -129,7 +125,7 @@ export function ServicePage({
           </StaggerGroup>
         </Section>
       ) : (
-        <Section>
+        <Section className="bg-bg-primary">
           <RevealOnScroll as="p" className="eyebrow mb-8">Qué ponemos</RevealOnScroll>
           <StaggerGroup stagger={0.08} className="grid gap-6 md:grid-cols-3">
             {service.aspects.map((a) => (
@@ -139,6 +135,21 @@ export function ServicePage({
               </div>
             ))}
           </StaggerGroup>
+        </Section>
+      )}
+
+      {/* FRASE — el statement va DEBAJO de los iconos (queda mejor que suelto
+          justo tras el hero). Con su garabato cian (el "rollo" Bonito). */}
+      {d.intro && (
+        <Section>
+          <RevealOnScroll as="p" className="statement mx-auto max-w-4xl text-center text-[clamp(1.5rem,3.4vw,2.5rem)] leading-tight text-text-primary">
+            {d.intro}
+          </RevealOnScroll>
+          <RevealOnScroll className="mx-auto mt-7 w-40" delay={0.15}>
+            <svg viewBox="0 0 160 16" fill="none" aria-hidden className="h-4 w-full">
+              <path d="M3 9 C 28 2, 52 2, 78 9 S 128 15, 157 6" stroke={CYAN} strokeWidth="3" strokeLinecap="round" />
+            </svg>
+          </RevealOnScroll>
         </Section>
       )}
 
