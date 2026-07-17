@@ -18,8 +18,11 @@ type MotionImageProps = {
   fit?: "cover" | "contain";
   /** Tamaño de la caja. "lg"/"xl" para escenas donde el media debe pesar más. */
   size?: "md" | "lg" | "xl";
-  /** Si el vídeo debe loopear SOLO hasta este segundo (para quedarse con el
-   *  primer tramo y no llegar a una transición posterior). En segundos. */
+  /** Segundo en el que ARRANCA el loop (para saltarse una intro). En segundos. */
+  loopStart?: number;
+  /** Segundo en el que TERMINA el loop y vuelve a `loopStart`. En segundos.
+   *  Junto con `loopStart` define la ventana que se reproduce en bucle (p.ej.
+   *  el tramo del tocadiscos, sin el resto del morph). */
   loopEnd?: number;
 };
 
@@ -37,6 +40,7 @@ export function MotionImage({
   className = "",
   fit = "cover",
   size = "md",
+  loopStart,
   loopEnd,
 }: MotionImageProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -66,21 +70,36 @@ export function MotionImage({
     return () => obs.disconnect();
   }, [useVideo]);
 
-  // Loop parcial: si `loopEnd` está definido, el vídeo vuelve al 0 al llegar a
-  // ese segundo (se queda con el primer tramo, no llega a transiciones luego).
+  // Loop de ventana: reproduce solo el tramo [loopStart, loopEnd] en bucle
+  // (p.ej. el tocadiscos ya formado, sin el resto del morph). Al llegar a
+  // loopEnd —o al acabar el vídeo— vuelve a loopStart, nunca al 0.
   useEffect(() => {
-    if (!useVideo || !loopEnd) return;
+    if (!useVideo || (loopStart == null && loopEnd == null)) return;
     const video = videoRef.current;
     if (!video) return;
-    const onTime = () => {
-      if (video.currentTime >= loopEnd) {
-        video.currentTime = 0;
-        video.play().catch(() => {});
-      }
+    const from = loopStart ?? 0;
+    const seekToStart = () => {
+      video.currentTime = from;
+      video.play().catch(() => {});
     };
+    // Colocar el fotograma inicial en cuanto haya metadatos.
+    const onMeta = () => {
+      if (video.currentTime < from) video.currentTime = from;
+    };
+    if (video.readyState >= 1) onMeta();
+    const onTime = () => {
+      if (loopEnd != null && video.currentTime >= loopEnd) seekToStart();
+      else if (video.currentTime < from - 0.05) video.currentTime = from;
+    };
+    video.addEventListener("loadedmetadata", onMeta);
     video.addEventListener("timeupdate", onTime);
-    return () => video.removeEventListener("timeupdate", onTime);
-  }, [useVideo, loopEnd]);
+    video.addEventListener("ended", seekToStart);
+    return () => {
+      video.removeEventListener("loadedmetadata", onMeta);
+      video.removeEventListener("timeupdate", onTime);
+      video.removeEventListener("ended", seekToStart);
+    };
+  }, [useVideo, loopStart, loopEnd]);
 
   useLayoutEffect(() => {
     const wrap = wrapRef.current;
@@ -206,7 +225,7 @@ export function MotionImage({
             ref={videoRef}
             src={src}
             muted
-            loop
+            loop={loopStart == null && loopEnd == null}
             playsInline
             autoPlay
             preload="auto"

@@ -9,66 +9,55 @@ type Props = {
   children: React.ReactNode;
 };
 
+// Una ruta de ficha de artista: /artistas/<slug> (no /artistas ni /artistas/todos).
+const isArtistSlug = (p: string) =>
+  /^\/artistas\/[^/]+$/.test(p) && !p.endsWith("/todos");
+
 export function PageTransitionShell({ children }: Props) {
   const pathname = usePathname();
-  const curtainRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
-  const firstRender = useRef(true);
+  const prevPath = useRef<string | null>(null);
 
   useEffect(() => {
-    const curtain = curtainRef.current;
     const content = contentRef.current;
-    if (!curtain || !content) return;
+    if (!content) return;
 
-    if (
+    const prev = prevPath.current;
+    prevPath.current = pathname;
+
+    const reduce =
       typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      gsap.set(curtain, { autoAlpha: 0 });
-      gsap.set(content, { autoAlpha: 1 });
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Primer render o reduce-motion: contenido visible, sin animar.
+    if (prev === null || reduce) {
+      gsap.set(content, { autoAlpha: 1, y: 0 });
       return;
     }
 
-    if (firstRender.current) {
-      firstRender.current = false;
-      gsap.set(curtain, { autoAlpha: 0 });
-      gsap.set(content, { autoAlpha: 1 });
+    // Cambio entre fichas de artista: el carrusel ya hace su propio fundido
+    // in-place. No forzamos scroll ni transición de página (era lo que hacía
+    // el salto raro). Dejamos el contenido tal cual.
+    if (isArtistSlug(prev) && isArtistSlug(pathname)) {
+      gsap.set(content, { autoAlpha: 1, y: 0 });
       return;
     }
 
+    // Navegación normal: arriba del todo + fundido suave (sin cortina negra).
     if (lenis) lenis.scrollTo(0, { immediate: true });
     else window.scrollTo(0, 0);
 
-    const tl = gsap.timeline();
-    tl.set(content, { autoAlpha: 0, y: 24 })
-      .set(curtain, { autoAlpha: 1, scaleY: 1, transformOrigin: "top" })
-      .to(curtain, {
-        scaleY: 0,
-        duration: 0.7,
-        ease: "expo.inOut",
-        transformOrigin: "bottom",
-      })
-      .to(
-        content,
-        { autoAlpha: 1, y: 0, duration: 0.7, ease: "expo.out" },
-        "-=0.3"
-      );
+    const tween = gsap.fromTo(
+      content,
+      { autoAlpha: 0, y: 14 },
+      { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" }
+    );
 
     return () => {
-      tl.kill();
+      tween.kill();
     };
   }, [pathname, lenis]);
 
-  return (
-    <>
-      <div
-        ref={curtainRef}
-        aria-hidden
-        className="pointer-events-none fixed inset-0 z-[9998] bg-[var(--text-primary)]"
-        style={{ transform: "scaleY(0)" }}
-      />
-      <div ref={contentRef}>{children}</div>
-    </>
-  );
+  return <div ref={contentRef}>{children}</div>;
 }

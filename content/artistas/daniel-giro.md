@@ -1,6 +1,9 @@
 ---
 name: "Daniel Giró"
-genre: "En distribución"
+genre: "Jazz"
 tier: "distribucion"
+spotifyArtistId: "6OlVyNGO5XzLb6YsKOHJHm"
+instagram: "https://www.instagram.com/danielgiroserratosa/"
 ---
-En el catálogo de distribución de Bonito Sound. Ficha pendiente de completar (foto, bio y enlaces).
+
+Daniel Giró es un músico de jazz de Sabadell y lidera su propia orquesta. En sus directos destaca por una entrega concentrada y apasionada al frente del grupo.

@@ -20,6 +20,13 @@ export type Artist = {
   spotifyPlaylistId?: string;
   instagram?: string;
   image?: string;
+  /** Vídeo corto para el hover del roster (mudo, en bucle). Se resuelve por
+   *  prioridad: /public/video/artistas/<slug>.mp4 → `video` forzado →
+   *  `videoUrl` (R2). Si no hay, en el hover cae al primer YouTube. */
+  video?: string;
+  /** Filename/URL del vídeo en R2 (ej. "natura.mp4"). Alternativa a subirlo a
+   *  /public. Se pasa por el helper r2(). */
+  videoUrl?: string;
   /** Stats para la cabecera de la ficha (texto libre, ej. "+18k oyentes
    *  mensuales" / "+9k seguidores"). Solo se pintan si están puestos — no se
    *  inventan cifras. */
@@ -87,6 +94,17 @@ export type Evento = {
   youtubeId?: string;
   /** Fotos adicionales para la galería de la página del evento. */
   gallery?: string[];
+  /** "Qué montamos": servicios/piezas reales que puso Bonito (chips). Ej:
+   *    services: ["Producción integral", "Booking del cartel", "Backline"]
+   *  Solo se pinta si está. Nada inventado. */
+  services?: string[];
+  /** Cartel / artistas que actuaron (line-up). Solo se pinta si está. */
+  lineup?: string[];
+  /** Aforo o alcance real (texto libre, ej. "1.200 personas", "aforo completo").
+   *  Sin cifras de dinero. Solo se pinta si está. */
+  capacity?: string;
+  /** Cita de cliente/artista: texto + autor. Solo se pinta si ambos están. */
+  quote?: { text: string; author: string };
   context: string;
   result: string;
   /** Párrafos largos opcionales (cuerpo markdown) para la página individual. */
@@ -99,18 +117,29 @@ function readDir(dir: string) {
   return fs.readdirSync(full).filter((f) => f.endsWith(".md"));
 }
 
+/** Ruta del vídeo autoalojado del artista si existe en /public (o undefined). */
+function resolveArtistVideo(slug: string): string | undefined {
+  const rel = `/video/artistas/${slug}.mp4`;
+  const abs = path.join(process.cwd(), "public", rel.replace(/^\//, ""));
+  return fs.existsSync(abs) ? rel : undefined;
+}
+
 export function getArtists(): Artist[] {
   return readDir("artistas")
     .map((file) => {
       const raw = fs.readFileSync(path.join(root, "artistas", file), "utf8");
       const { data, content } = matter(raw);
+      const slug = file.replace(/\.md$/, "");
+      const fm = data as Omit<Artist, "slug" | "bio">;
       return {
-        slug: file.replace(/\.md$/, ""),
+        slug,
         bio: content
           .split(/\n{2,}/)
           .map((p) => p.trim())
           .filter(Boolean),
-        ...(data as Omit<Artist, "slug" | "bio">),
+        ...fm,
+        // Mismo patrón que los eventos: local → forzado → R2.
+        video: resolveArtistVideo(slug) ?? fm.video ?? (fm.videoUrl ? r2(fm.videoUrl) : undefined),
       };
     })
     .filter((a) => !a.draft)

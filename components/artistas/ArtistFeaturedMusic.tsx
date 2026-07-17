@@ -1,6 +1,7 @@
-import { Section, Cta } from "@/components/ui";
+import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { SpotifyEmbed } from "@/components/Embeds";
+import { SpotifyButton } from "@/components/SpotifyButton";
 
 /**
  * Bloque "Escúchale" de la ficha de artista: lo último que ha sacado,
@@ -121,13 +122,9 @@ export function ArtistFeaturedMusic({
                 title={`${name} en Spotify`}
               />
             ) : (
-              <Cta
-                href={`https://open.spotify.com/artist/${artist}`}
-                variant="ghost"
-                external
-              >
+              <SpotifyButton href={`https://open.spotify.com/artist/${artist}`}>
                 Síguele en Spotify
-              </Cta>
+              </SpotifyButton>
             )}
           </RevealOnScroll>
         ) : null}

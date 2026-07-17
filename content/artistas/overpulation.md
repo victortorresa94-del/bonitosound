@@ -1,6 +1,5 @@
 ---
 name: "Overpulation"
-genre: "En distribución"
-tier: "distribucion"
+draft: true
 ---
-En el catálogo de distribución de Bonito Sound. Ficha pendiente de completar (foto, bio y enlaces).
+Ficha pendiente de confirmar. No se encontró rastro con este nombre exacto; posible variación en la escritura del nombre.

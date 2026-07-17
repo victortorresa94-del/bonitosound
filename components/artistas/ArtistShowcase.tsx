@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { site } from "@/lib/site";
 import { ArtistPlayer, type PlayerTrack } from "./ArtistPlayer";
+import { SpotifyButton } from "@/components/SpotifyButton";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -22,14 +22,6 @@ export type ShowcaseArtist = {
   /** Temas de la micro-mezcla de 30 s que suena al darle a "Escuchar". */
   tracks?: PlayerTrack[];
 };
-
-function SpotifyIcon() {
-  return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill={NAVY} aria-hidden="true">
-      <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 1 1-.277-1.213c3.809-.871 7.076-.496 9.712 1.114a.623.623 0 0 1 .207.856Zm1.223-2.722a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.13-9.965-1.166a.779.779 0 1 1-.452-1.49c3.632-1.102 8.147-.568 11.232 1.327a.779.779 0 0 1 .257 1.072Zm.105-2.835c-3.223-1.914-8.54-2.09-11.617-1.156a.935.935 0 1 1-.542-1.79c3.532-1.072 9.404-.865 13.115 1.338a.935.935 0 1 1-.956 1.608Z" />
-    </svg>
-  );
-}
 
 function InstagramIcon() {
   return (
@@ -59,6 +51,7 @@ export function ArtistShowcase({
     const idx = artists.findIndex((x) => x.slug === startSlug);
     return idx >= 0 ? idx : 0;
   });
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
   if (artists.length === 0) return null;
   const a = artists[i];
   const go = (d: number) => {
@@ -70,8 +63,31 @@ export function ArtistShowcase({
   };
   const pad = (n: number) => String(n).padStart(2, "0");
 
+  // Swipe horizontal (móvil): deslizar izquierda = siguiente, derecha = anterior.
+  // Solo actúa si el gesto es claramente horizontal, para no robar el scroll.
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    touchStart.current = { x: t.clientX, y: t.clientY };
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touchStart.current;
+    touchStart.current = null;
+    if (!start) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      go(dx < 0 ? 1 : -1);
+    }
+  };
+
   return (
-    <section className="relative overflow-hidden" style={{ backgroundColor: "#FBFAF6" }}>
+    <section
+      className="relative touch-pan-y overflow-hidden"
+      style={{ backgroundColor: "#FBFAF6" }}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       <div className="mx-auto grid min-h-[78vh] max-w-6xl grid-cols-1 items-center gap-8 px-5 py-16 md:grid-cols-2 md:px-10 md:py-10">
         {/* Texto */}
         <div key={`t-${a.slug}`} className="order-2 animate-[fadeIn_.5s_ease] md:order-1">
@@ -90,15 +106,21 @@ export function ArtistShowcase({
             {a.bioLine}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             {a.spotifyUrl && (
-              <a href={a.spotifyUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-70" style={{ color: NAVY }}>
-                <SpotifyIcon /> Escucha su música en Spotify
-              </a>
+              <SpotifyButton href={a.spotifyUrl} size="sm">
+                Escuchar en Spotify
+              </SpotifyButton>
             )}
             {a.instagramUrl && (
-              <a href={a.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-70" style={{ color: NAVY }}>
-                <InstagramIcon /> Síguele en Instagram
+              <a
+                href={a.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border-[1.5px] px-4 py-2 text-xs font-bold transition-all duration-200 hover:-translate-y-0.5"
+                style={{ color: NAVY, borderColor: NAVY }}
+              >
+                <InstagramIcon /> Instagram
               </a>
             )}
           </div>
@@ -113,12 +135,9 @@ export function ArtistShowcase({
                 artistName={a.name}
               />
             )}
-            <a
-              href={`mailto:${site.emails.booking}?subject=${encodeURIComponent(`Booking ${a.name}`)}`}
-              className="btn btn-primary"
-            >
+            <Link href={`/contratar?a=${a.slug}`} className="btn btn-primary">
               Contratar booking →
-            </a>
+            </Link>
           </div>
 
           <div className="mt-8 flex items-center gap-4">

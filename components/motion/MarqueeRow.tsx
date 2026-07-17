@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef, Children, cloneElement, isValidElement } from "react";
+import { useEffect, useRef, useState, Children, cloneElement, isValidElement } from "react";
 import type { ReactNode } from "react";
-import { gsap } from "@/lib/gsap";
 
 type MarqueeRowProps = {
   children: ReactNode;
@@ -14,11 +13,17 @@ type MarqueeRowProps = {
 };
 
 /**
- * Marquee horizontal en bucle CONTINUO (nunca se queda en blanco).
- * Renderiza el contenido dos veces en UNA sola fila con gap uniforme y anima
- * por la anchura exacta de un set (en píxeles): cuando el segundo set llega a
- * donde empezaba el primero, reinicia sin salto ni hueco. Repite el contenido
- * lo suficiente (desde quien lo llama) para cubrir pantallas anchas.
+ * Marquee horizontal en bucle CONTINUO — imposible que se quede en blanco.
+ *
+ * El contenido se renderiza DOS veces en una sola fila con gap uniforme y el
+ * track se anima con CSS puro desplazando `translateX(-50%)`: como el contenido
+ * está duplicado exacto, al -50% el segundo set queda EXACTAMENTE donde
+ * empezaba el primero → reinicio sin salto ni hueco. No depende de medir el
+ * DOM ni de que carguen las imágenes: la posición siempre cuadra.
+ *
+ * La medición en píxeles solo ajusta la DURACIÓN (para una velocidad constante
+ * en px/seg); si falla, se usa una duración por defecto. Un fallo de medición
+ * cambiaría la velocidad, nunca dejaría hueco.
  */
 export function MarqueeRow({
   children,
@@ -29,52 +34,32 @@ export function MarqueeRow({
   gap = "3rem",
 }: MarqueeRowProps) {
   const trackRef = useRef<HTMLDivElement>(null);
-  const tweenRef = useRef<gsap.core.Tween | null>(null);
+  // Duración inicial estimada para que arranque ya (sin flash/hueco); se afina
+  // tras medir. 60s es un valor razonable para cualquier fila.
+  const [duration, setDuration] = useState(60);
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
-    if (
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
-    }
+    const measure = () => {
+      // scrollWidth = dos sets + gaps. Un set = mitad ancho aprox. Distancia
+      // real recorrida en el -50% = scrollWidth/2. Velocidad constante px/seg.
+      const half = track.scrollWidth / 2;
+      if (half > 0) setDuration(half / Math.max(speed, 1));
+    };
 
-    let tween: gsap.core.Tween | null = null;
-    // Medir tras el layout (rAF) para que scrollWidth sea correcto.
-    const raf = requestAnimationFrame(() => {
-      const styles = getComputedStyle(track);
-      const gapPx = parseFloat(styles.columnGap || styles.gap || "0") || 0;
-      // Contenido duplicado exacto → un set = (total + un gap) / 2. Ese gap de
-      // más es el que separa el último ítem del set A del primero del set B.
-      const setWidth = (track.scrollWidth + gapPx) / 2;
-      if (setWidth <= 0) return;
-      const dir = direction === "left" ? -1 : 1;
-      gsap.set(track, { x: 0 });
-      tween = gsap.to(track, {
-        x: dir * -setWidth,
-        duration: setWidth / speed,
-        ease: "none",
-        repeat: -1,
-      });
-      tweenRef.current = tween;
+    // Medir tras el layout y de nuevo al cargar imágenes (por si cambian anchos).
+    const raf = requestAnimationFrame(measure);
+    const imgs = Array.from(track.querySelectorAll("img"));
+    imgs.forEach((img) => {
+      if (!img.complete) img.addEventListener("load", measure, { once: true });
     });
 
-    return () => {
-      cancelAnimationFrame(raf);
-      tween?.kill();
-      tweenRef.current = null;
-    };
-  }, [speed, direction, children]);
+    return () => cancelAnimationFrame(raf);
+  }, [speed, children]);
 
-  const onEnter = () => {
-    if (pauseOnHover) tweenRef.current?.pause();
-  };
-  const onLeave = () => {
-    if (pauseOnHover) tweenRef.current?.resume();
-  };
+  const animName = direction === "left" ? "marquee-x" : "marquee-x-reverse";
 
   const items = Children.toArray(children);
   const render = (prefix: string) =>
@@ -83,13 +68,18 @@ export function MarqueeRow({
     );
 
   return (
-    <div
-      className={`relative overflow-hidden ${className}`}
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
-    >
-      {/* Una sola fila: los dos sets como hijos directos → gap uniforme. */}
-      <div ref={trackRef} className="flex w-max flex-nowrap items-center" style={{ gap }}>
+    <div className={`group relative overflow-hidden ${className}`}>
+      <div
+        ref={trackRef}
+        className={`flex w-max flex-nowrap items-center motion-reduce:animate-none ${
+          pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""
+        }`}
+        style={{
+          gap,
+          animation: `${animName} ${duration}s linear infinite`,
+          willChange: "transform",
+        }}
+      >
         {render("a")}
         {render("b")}
       </div>

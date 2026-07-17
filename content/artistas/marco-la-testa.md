@@ -2,8 +2,9 @@
 name: "Marco la Testa"
 genre: "Rap / Urbano"
 tier: "distribucion"
-instagram: "https://www.instagram.com/marco.la.testa"
+spotifyArtistId: "3thnuvOXFSGGF5CRjxlqCQ"
+instagram: "https://www.instagram.com/marco.la.testa/"
 image: "/img/artistas/marco-la-testa.jpeg"
-reels: []
 ---
-Rap y urbano. En el catálogo de distribución de Bonito Sound.
+
+Marco la Testa lleva el rap y la música urbana en el catálogo de Bonito Sound. Tiene una colaboración con D Nácar en "1 Feeling (Remix)", ya disponible en Spotify.

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import {
   RevealOnScroll,
   StaggerGroup,
 } from "@/components/motion";
+import { RosterCard } from "@/components/artistas/RosterCard";
 import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
@@ -29,58 +29,6 @@ const LAYOUT: Record<string, { aspect: string; shift: string }> = {
   paule: { aspect: "aspect-[4/5]", shift: "md:mt-16" },
   "sa-pena": { aspect: "aspect-[5/4]", shift: "md:-mt-2" },
 };
-
-function RosterCard({
-  slug,
-  name,
-  genre,
-  photo,
-}: {
-  slug: string;
-  name: string;
-  genre: string;
-  photo: string | null;
-}) {
-  const l = LAYOUT[slug] ?? { aspect: "aspect-[4/5]", shift: "" };
-  return (
-    <Link
-      href={`/artistas/${slug}`}
-      data-cursor="link"
-      className={`group block ${l.shift}`}
-    >
-      <div
-        className={`relative ${l.aspect} overflow-hidden rounded-[1.5rem] bg-bg-tertiary shadow-[0_1px_0_rgba(20,40,60,0.06)] ring-1 ring-black/5 transition-all duration-500 group-hover:-translate-y-1.5 group-hover:shadow-[0_18px_40px_-18px_rgba(20,40,60,0.45)]`}
-      >
-        {photo && (
-          <Image
-            src={photo}
-            alt={name}
-            fill
-            sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover grayscale transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:grayscale-0"
-          />
-        )}
-        {/* Cue clickable: flecha que aparece al hover */}
-        <span
-          className="absolute right-4 top-4 grid h-9 w-9 translate-y-1 place-items-center rounded-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
-          style={{ backgroundColor: CYAN, color: NAVY }}
-          aria-hidden
-        >
-          →
-        </span>
-      </div>
-      <div className="mt-3 flex items-baseline justify-between gap-3">
-        <span
-          className="font-round text-2xl font-bold md:text-3xl"
-          style={{ color: NAVY }}
-        >
-          {name}
-        </span>
-      </div>
-      <p className="mt-0.5 text-sm text-text-muted">{genre}</p>
-    </Link>
-  );
-}
 
 export default function Artistas() {
   const all = getArtists();
@@ -121,15 +69,22 @@ export default function Artistas() {
             stagger={0.08}
             className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 md:grid-cols-3"
           >
-            {booking.map((a) => (
-              <RosterCard
-                key={a.slug}
-                slug={a.slug}
-                name={a.name}
-                genre={a.genre}
-                photo={a.image ?? findAsset("artistas", a.slug)}
-              />
-            ))}
+            {booking.map((a) => {
+              const l = LAYOUT[a.slug] ?? { aspect: "aspect-[4/5]", shift: "" };
+              return (
+                <RosterCard
+                  key={a.slug}
+                  slug={a.slug}
+                  name={a.name}
+                  genre={a.genre}
+                  photo={a.image ?? findAsset("artistas", a.slug)}
+                  video={a.video}
+                  youtubeId={a.youtubeIds?.[0]}
+                  aspect={l.aspect}
+                  shift={l.shift}
+                />
+              );
+            })}
           </StaggerGroup>
           <RevealOnScroll className="mt-10 flex justify-end">
             <Link

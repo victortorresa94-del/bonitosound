@@ -101,7 +101,7 @@ Respuestas autocontenidas, sin cifras de dinero, sin inventar servicios.
 
 ## 6. Pendiente de assets — ilustración del formulario
 
-La página `/contratar/<artista>` usa `components/artistas/BookingScene.tsx`:
+La página `/contratar` usa `components/artistas/BookingScene.tsx`:
 hoy pinta un SVG de marca (teléfono + notas). Es **plug-and-play**: en cuanto
 exista `public/img/marca/contratar-scene.(png|webp|svg)`, se usa esa y el SVG
 desaparece solo.

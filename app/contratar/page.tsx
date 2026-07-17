@@ -1,56 +1,55 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { RevealOnScroll } from "@/components/motion";
 import { BookingForm } from "@/components/artistas/BookingForm";
 import { BookingScene } from "@/components/artistas/BookingScene";
-import { getArtist, getArtists } from "@/lib/content";
+import { getArtist } from "@/lib/content";
 import { site } from "@/lib/site";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
-export function generateStaticParams() {
-  return getArtists().map((a) => ({ slug: a.slug }));
+// Formulario ÚNICO y dinámico: la MISMA página siempre (/contratar). Se adapta
+// al artista con el query param ?a=<slug>. Sin artista, es el formulario general.
+type SP = { searchParams: { a?: string } };
+
+function artistFrom(searchParams: SP["searchParams"]) {
+  const slug = typeof searchParams.a === "string" ? searchParams.a : undefined;
+  return slug ? getArtist(slug) : undefined;
 }
 
-export function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Metadata {
-  const a = getArtist(params.slug);
-  if (!a) return {};
+export function generateMetadata({ searchParams }: SP): Metadata {
+  const a = artistFrom(searchParams);
+  const title = a ? `Contratar a ${a.name}` : "Contratar un artista";
+  const description = a
+    ? `Cuéntanos el bolo para ${a.name}: fecha, sitio y qué tienes en mente. Te decimos disponibilidad y cómo montarlo.`
+    : "Cuéntanos qué artista quieres y para qué evento. Te decimos disponibilidad y cómo montarlo, sin vueltas.";
   return {
-    title: `Contratar a ${a.name}`,
-    description: `Cuéntanos el bolo para ${a.name}: fecha, sitio y qué tienes en mente. Te decimos disponibilidad y cómo montarlo.`,
-    alternates: { canonical: `${site.url}/contratar/${a.slug}` },
-    // Página de captación por artista: no queremos que compita en el índice con
-    // la ficha; es una herramienta, no contenido.
+    title,
+    description,
+    alternates: { canonical: `${site.url}/contratar` },
+    // Herramienta de captación, no contenido: fuera del índice.
     robots: { index: false, follow: true },
   };
 }
 
-export default function ContratarPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const a = getArtist(params.slug);
-  if (!a) notFound();
+export default function ContratarPage({ searchParams }: SP) {
+  const a = artistFrom(searchParams);
 
   return (
     <section style={{ backgroundColor: "#FBFAF6" }}>
       <div className="wrap py-16 md:py-24">
-        {/* volver a la ficha */}
-        <RevealOnScroll as="div">
-          <Link
-            href={`/artistas/${a.slug}`}
-            className="text-sm font-semibold text-text-muted underline-offset-4 transition-colors hover:text-text-primary hover:underline"
-          >
-            ← Volver a {a.name}
-          </Link>
-        </RevealOnScroll>
+        {/* volver a la ficha (solo si venimos de un artista) */}
+        {a && (
+          <RevealOnScroll as="div">
+            <Link
+              href={`/artistas/${a.slug}`}
+              className="text-sm font-semibold text-text-muted underline-offset-4 transition-colors hover:text-text-primary hover:underline"
+            >
+              ← Volver a {a.name}
+            </Link>
+          </RevealOnScroll>
+        )}
 
         <div className="mt-8 grid items-start gap-12 md:mt-12 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
           {/* Columna izquierda: mensaje + ilustración (el "rollo") */}
@@ -63,9 +62,19 @@ export default function ContratarPage({
               delay={0.05}
               className="display leading-[0.95] text-[clamp(2.4rem,6vw,4.4rem)]"
             >
-              <span style={{ color: NAVY }}>Hablemos de </span>
-              <span style={{ color: CYAN }}>{a.name}</span>
-              <span style={{ color: NAVY }}>.</span>
+              {a ? (
+                <>
+                  <span style={{ color: NAVY }}>Hablemos de </span>
+                  <span style={{ color: CYAN }}>{a.name}</span>
+                  <span style={{ color: NAVY }}>.</span>
+                </>
+              ) : (
+                <>
+                  <span style={{ color: NAVY }}>Hablemos de tu </span>
+                  <span style={{ color: CYAN }}>próximo bolo</span>
+                  <span style={{ color: NAVY }}>.</span>
+                </>
+              )}
             </RevealOnScroll>
             <RevealOnScroll
               as="p"
@@ -96,9 +105,9 @@ export default function ContratarPage({
             </RevealOnScroll>
           </div>
 
-          {/* Columna derecha: el formulario */}
+          {/* Columna derecha: el formulario (mismo componente, se adapta) */}
           <RevealOnScroll delay={0.1}>
-            <BookingForm artistName={a.name} artistGenre={a.genre} />
+            <BookingForm artistName={a?.name} artistGenre={a?.genre} />
           </RevealOnScroll>
         </div>
       </div>
