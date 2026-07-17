@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Section, Cta, JsonLd } from "@/components/ui";
 import { EventoCard } from "@/components/EventoCard";
+import { EventHeroVideo } from "@/components/eventos/EventHeroVideo";
 import {
   RevealOnScroll,
   StaggerGroup,
@@ -81,16 +82,7 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
         /* Hero cinematográfico: media a sangre + degradado + título encima. */
         <section className="relative flex h-[78svh] min-h-[520px] items-end overflow-hidden border-b border-subtle bg-text-primary">
           {e.video ? (
-            <video
-              src={e.video}
-              poster={cover ?? undefined}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              className="absolute inset-0 h-full w-full object-cover opacity-90"
-            />
+            <EventHeroVideo src={e.video} poster={cover ?? undefined} label={label ?? e.title} />
           ) : cover ? (
             <Image
               src={cover}
