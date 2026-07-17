@@ -124,8 +124,8 @@ export const scenes: HomeScene[] = [
   {
     id: "cierre",
     kicker: "Hablamos",
-    statement: "¿Marca, artista o promotor?",
-    accent: "Hablamos",
+    statement: "Marca, artista o promotor — cuéntanos lo tuyo.",
+    accent: "cuéntanos lo tuyo",
     support:
       "Treinta minutos. Tú cuentas qué necesitas, nosotros te decimos qué se puede hacer de verdad.",
     cta: { label: "Hablamos", href: "/contacto" },

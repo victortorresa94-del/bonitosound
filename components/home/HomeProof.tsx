@@ -23,8 +23,8 @@ export function ArtistsBand() {
   // Repetimos hasta densificar la fila: con pocas fotos reales el marquee
   // quedaba corto y dejaba hueco. Da igual que se repitan las caras — el
   // objetivo es que la banda siempre se vea llena y en bucle continuo.
-  const MIN_ITEMS = 28;
-  const times = Math.max(2, Math.ceil(MIN_ITEMS / artists.length));
+  const MIN_ITEMS = 36;
+  const times = Math.max(3, Math.ceil(MIN_ITEMS / artists.length));
   const filled = Array.from({ length: times }, () => artists).flat();
 
   return (

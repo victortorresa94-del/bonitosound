@@ -10,6 +10,11 @@ export type Artist = {
   name: string;
   genre: string;
   tier: "booking" | "distribucion";
+  /** Servicios de Bonito que usa este artista (plug-and-play, para el desglose
+   *  por servicio en /artistas/todos). Valores libres, ej:
+   *    services: ["Booking", "Management", "Sello"]
+   *  Si no está, el artista solo aparece en su grupo por `tier`. Nada inventado. */
+  services?: string[];
   spotifyArtistId?: string;
   /** Playlist propia del artista (si difiere de su perfil de artista). */
   spotifyPlaylistId?: string;

@@ -97,7 +97,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
     <section
       ref={sectionRef}
       aria-label="Bonito Sound"
-      className="relative flex h-[100svh] w-full items-center justify-center overflow-hidden bg-bg-primary"
+      className="relative flex h-[100svh] w-full items-center justify-center overflow-hidden bg-bg-primary pb-[10svh]"
     >
       <h1 className="sr-only">
         Bonito Sound — música, eventos para marcas, festival y tecnología del sector
@@ -124,7 +124,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
       >
         <video
           ref={videoRef}
-          className="h-full w-full origin-center scale-[1.37] object-contain md:scale-100"
+          className="h-full w-full origin-center scale-[1.5] object-contain md:scale-[1.12]"
           src={src}
           poster={poster}
           autoPlay

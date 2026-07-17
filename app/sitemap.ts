@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getArtists, getEventos } from "@/lib/content";
+import { getPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -24,9 +25,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/jaleo-sound",
     "/nosotros",
     "/contacto",
-    // /agenda y /diario quedan fuera del sitemap hasta que tengan
-    // contenido real — páginas finas dañan calidad de dominio.
+    // /agenda queda fuera del sitemap hasta que tenga contenido real —
+    // páginas finas dañan calidad de dominio.
   ];
+
+  const posts = getPosts();
+  const blog = posts.length
+    ? [
+        { route: "/diario", priority: 0.6 },
+        ...posts.map((p) => ({ route: `/diario/${p.slug}`, priority: 0.6 })),
+      ]
+    : [];
 
   const now = new Date();
   const base = routes.map((r) => ({
@@ -50,5 +59,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...base, ...artists, ...eventos];
+  const diario = blog.map((b) => ({
+    url: `${site.url}${b.route}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: b.priority,
+  }));
+
+  return [...base, ...artists, ...eventos, ...diario];
 }

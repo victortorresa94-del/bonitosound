@@ -1,12 +1,14 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { r2 } from "@/lib/site";
 
 /**
  * Reproductor de vídeo autoalojado (Cloudflare R2 / URL externa). Autoplay
  * silenciado en bucle (política de navegadores) con botón para activar sonido.
  * `src` puede ser una clave R2 ("resumen-bonito.mp4") o una URL completa.
+ * `start`: recorta los primeros segundos — arranca ahí y el bucle vuelve a ese
+ * punto (no al 0), para saltarse intros/efectos raros del inicio.
  */
 export function R2Video({
   src,
@@ -15,6 +17,7 @@ export function R2Video({
   ratio = "16 / 9",
   rounded = true,
   loop = true,
+  start = 0,
 }: {
   src: string;
   poster?: string;
@@ -22,9 +25,43 @@ export function R2Video({
   ratio?: string;
   rounded?: boolean;
   loop?: boolean;
+  start?: number;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
+
+  // Con `start`, gestionamos el loop a mano: al terminar (o si el navegador
+  // salta al 0) volvemos al segundo `start`, nunca al principio.
+  const nativeLoop = loop && start <= 0;
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v || start <= 0) return;
+    const seek = () => {
+      try {
+        if (Math.abs(v.currentTime - start) > 0.1 && v.currentTime < start) v.currentTime = start;
+      } catch {}
+    };
+    const onLoaded = () => {
+      try { v.currentTime = start; } catch {}
+      v.play().catch(() => {});
+    };
+    const onEnded = () => {
+      try { v.currentTime = start; } catch {}
+      v.play().catch(() => {});
+    };
+    v.addEventListener("loadedmetadata", onLoaded);
+    v.addEventListener("ended", onEnded);
+    v.addEventListener("timeupdate", seek);
+    if (v.readyState >= 1) {
+      try { v.currentTime = start; } catch {}
+    }
+    return () => {
+      v.removeEventListener("loadedmetadata", onLoaded);
+      v.removeEventListener("ended", onEnded);
+      v.removeEventListener("timeupdate", seek);
+    };
+  }, [start, src]);
 
   const toggleSound = () => {
     const v = ref.current;
@@ -46,7 +83,7 @@ export function R2Video({
         src={r2(src)}
         poster={poster}
         muted
-        loop={loop}
+        loop={nativeLoop}
         autoPlay
         playsInline
         preload="metadata"

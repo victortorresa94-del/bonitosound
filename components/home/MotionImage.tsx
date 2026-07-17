@@ -16,8 +16,11 @@ type MotionImageProps = {
    *  aire alrededor). Usa "contain" para logos/wordmarks anchos que no deben
    *  recortarse. Por defecto "cover" (encaja con las figuras del hero). */
   fit?: "cover" | "contain";
-  /** Tamaño de la caja. "lg" para escenas donde el media debe pesar más. */
-  size?: "md" | "lg";
+  /** Tamaño de la caja. "lg"/"xl" para escenas donde el media debe pesar más. */
+  size?: "md" | "lg" | "xl";
+  /** Si el vídeo debe loopear SOLO hasta este segundo (para quedarse con el
+   *  primer tramo y no llegar a una transición posterior). En segundos. */
+  loopEnd?: number;
 };
 
 const isVideo = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
@@ -34,6 +37,7 @@ export function MotionImage({
   className = "",
   fit = "cover",
   size = "md",
+  loopEnd,
 }: MotionImageProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
@@ -61,6 +65,22 @@ export function MotionImage({
     obs.observe(video);
     return () => obs.disconnect();
   }, [useVideo]);
+
+  // Loop parcial: si `loopEnd` está definido, el vídeo vuelve al 0 al llegar a
+  // ese segundo (se queda con el primer tramo, no llega a transiciones luego).
+  useEffect(() => {
+    if (!useVideo || !loopEnd) return;
+    const video = videoRef.current;
+    if (!video) return;
+    const onTime = () => {
+      if (video.currentTime >= loopEnd) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }
+    };
+    video.addEventListener("timeupdate", onTime);
+    return () => video.removeEventListener("timeupdate", onTime);
+  }, [useVideo, loopEnd]);
 
   useLayoutEffect(() => {
     const wrap = wrapRef.current;
@@ -169,7 +189,11 @@ export function MotionImage({
     <div
       ref={wrapRef}
       className={`relative mx-auto aspect-square w-full ${
-        size === "lg" ? "max-w-[22rem] sm:max-w-md md:max-w-xl" : "max-w-[17rem] sm:max-w-sm md:max-w-md"
+        size === "xl"
+          ? "max-w-[24rem] sm:max-w-lg md:max-w-2xl"
+          : size === "lg"
+            ? "max-w-[22rem] sm:max-w-md md:max-w-xl"
+            : "max-w-[17rem] sm:max-w-sm md:max-w-md"
       } ${className}`}
     >
       <div

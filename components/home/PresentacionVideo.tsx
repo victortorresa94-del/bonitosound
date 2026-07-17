@@ -36,7 +36,7 @@ export function PresentacionVideo() {
           </RevealOnScroll>
         </div>
         <RevealOnScroll delay={0.15}>
-          <R2Video src="resumen-bonito.mp4" ratio="16 / 9" />
+          <R2Video src="resumen-bonito.mp4" ratio="16 / 9" start={3} />
         </RevealOnScroll>
       </div>
     </Section>
