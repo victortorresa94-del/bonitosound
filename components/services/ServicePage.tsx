@@ -13,12 +13,11 @@ import {
   StaggerGroup,
   SplitTextReveal,
   MagneticButton,
-  MarqueeLogoWall,
 } from "@/components/motion";
 import type { Service } from "@/lib/services";
 import { serviceDetail } from "@/lib/servicesDetail";
 import { getEventos, getArtists } from "@/lib/content";
-import { findAsset } from "@/lib/assets";
+import { findAsset, findLogo } from "@/lib/assets";
 import { brands, site } from "@/lib/site";
 
 const NAVY = "#14283C";
@@ -201,8 +200,41 @@ export function ServicePage({
         </Section>
       )}
 
-      {/* NÚMEROS. */}
-      {d.stats && d.stats.length > 0 && (
+      {/* PRUEBA SOCIAL — con marcas: banda navy con números (blancos) + muro de
+          logos normalizados a blanco (visibles sí o sí), un solo bloque fuerte.
+          Sin marcas: banda de números sobre crema. */}
+      {d.showBrands ? (
+        <section className="w-full" style={{ backgroundColor: NAVY }}>
+          <div className="wrap py-16 md:py-24">
+            {d.stats && d.stats.length > 0 && (
+              <div className="grid grid-cols-2 gap-x-8 gap-y-10 border-b border-white/10 pb-12 md:grid-cols-4">
+                {d.stats.map((s) => (
+                  <div key={s.l}>
+                    <p className="font-round font-bold leading-none text-white" style={{ fontSize: "clamp(2.6rem,6vw,4.4rem)" }}>{s.n}</p>
+                    <p className="mt-2 text-sm font-semibold uppercase leading-tight tracking-wide text-white/60">{s.l}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="mt-12 flex flex-wrap items-end justify-between gap-4">
+              <p className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>Marcas que han confiado</p>
+              <Link href="/eventos" className="text-sm font-semibold text-white/70 underline-offset-4 hover:text-white hover:underline">Ver los eventos →</Link>
+            </div>
+            <StaggerGroup stagger={0.04} className="mt-8 flex flex-wrap items-center gap-3 md:gap-4">
+              {brands
+                .map((b) => ({ b, src: findLogo("marcas", b) }))
+                // Solo logos de verdad (fuera las fotos .jpg de monkey/sainte);
+                // cada uno en chip blanco → se ve en su color, sea el que sea.
+                .filter((x) => x.src && !/\.jpe?g$/i.test(x.src))
+                .map(({ b, src }) => (
+                  <div key={b} className="flex h-16 items-center justify-center rounded-xl bg-white px-5 md:h-[4.5rem] md:px-7">
+                    <Image src={src!} alt={b} width={150} height={44} className="h-7 w-auto max-w-[130px] object-contain md:h-9" />
+                  </div>
+                ))}
+            </StaggerGroup>
+          </div>
+        </section>
+      ) : d.stats && d.stats.length > 0 ? (
         <Section className="bg-bg-primary">
           <div className={`grid gap-x-8 gap-y-10 ${d.stats.length === 1 ? "" : "grid-cols-2 md:grid-cols-4"}`}>
             {d.stats.map((s) => (
@@ -213,15 +245,7 @@ export function ServicePage({
             ))}
           </div>
         </Section>
-      )}
-
-      {/* MARCAS (producciones/marketing). */}
-      {d.showBrands && (
-        <Section>
-          <RevealOnScroll as="p" className="eyebrow mb-8">Marcas que han confiado</RevealOnScroll>
-          <MarqueeLogoWall items={brands} dir="marcas" speed={42} />
-        </Section>
-      )}
+      ) : null}
 
       {/* FAQ */}
       <Section className="bg-bg-primary">
