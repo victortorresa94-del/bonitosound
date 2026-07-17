@@ -28,7 +28,7 @@ export function EventosBrands({ eventos }: { eventos: Evento[] }) {
           Marcas que han confiado
         </p>
         <h2 className="font-round text-3xl font-bold md:text-5xl" style={{ color: NAVY }}>
-          Cuántos hemos montado, marca por marca.
+          Marcas que han querido hacerlo bonito.
         </h2>
 
         <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-9 sm:grid-cols-3 lg:grid-cols-4">
