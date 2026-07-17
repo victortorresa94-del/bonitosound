@@ -1,9 +1,12 @@
 import type { Evento } from "@/lib/content";
 import { EventoCard } from "@/components/EventoCard";
-import { tourArtists } from "@/lib/site";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
+
+// Nombres que SÍ podemos afirmar como producción / tour management (respaldado
+// por sus eventos documentados). Ampliar solo con lo que Víctor confirme.
+const PRODUCCIONES = ["Albert Pla", "Anne Lukin", "Alfred García"];
 
 /**
  * Eventos de ARTISTA / giras (Albert Pla, Anne Lukin, Alfred García…): tour
@@ -34,13 +37,13 @@ export function EventosGiras({ eventos }: { eventos: Evento[] }) {
           </div>
         )}
 
-        {tourArtists.length > 0 && (
+        {PRODUCCIONES.length > 0 && (
           <div className="mt-12 border-t border-subtle pt-8">
             <p className="mb-4 text-sm text-text-muted">
-              Hemos producido y movido giras de:
+              Producción y tour management de:
             </p>
             <div className="flex flex-wrap gap-x-6 gap-y-2 font-round text-lg font-semibold md:text-xl" style={{ color: NAVY }}>
-              {tourArtists.map((name, i) => (
+              {PRODUCCIONES.map((name, i) => (
                 <span key={name} className="whitespace-nowrap">
                   {i > 0 && <span className="mr-6" style={{ color: CYAN }}>·</span>}
                   {name}
