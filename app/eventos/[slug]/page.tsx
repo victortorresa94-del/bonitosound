@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Section, Cta, JsonLd } from "@/components/ui";
+import { Section, JsonLd } from "@/components/ui";
+import { CtaBlock } from "@/components/CtaBlock";
 import { EventoCard } from "@/components/EventoCard";
 import { EventHeroVideo } from "@/components/eventos/EventHeroVideo";
 import {
   RevealOnScroll,
   StaggerGroup,
   SplitTextReveal,
-  MagneticButton,
 } from "@/components/motion";
 import { getEvento, getEventos } from "@/lib/content";
 import { findAsset, findLogo } from "@/lib/assets";
@@ -280,19 +280,12 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
       )}
 
       <Section className={others.length > 0 ? "pt-0" : undefined}>
-        <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
-          <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-            ¿Montamos el tuyo?
-          </SplitTextReveal>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">
-            Cuéntanos qué tienes en la cabeza. Te decimos qué se puede hacer de verdad.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <MagneticButton strength={0.4}>
-              <Cta href="/contacto">Hablamos de tu evento →</Cta>
-            </MagneticButton>
-          </div>
-        </RevealOnScroll>
+        <CtaBlock
+          title="¿Montamos el tuyo?"
+          desc="Cuéntanos qué tienes en la cabeza. Te decimos qué se puede hacer de verdad."
+          href="/contacto"
+          cta="Hablamos de tu evento →"
+        />
       </Section>
     </>
   );

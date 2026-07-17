@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Section, Heading, Cta } from "@/components/ui";
+import { Section, Cta } from "@/components/ui";
 import {
   RevealOnScroll,
   StaggerGroup,
@@ -9,6 +9,7 @@ import {
   MagneticButton,
 } from "@/components/motion";
 import { R2Video } from "@/components/R2Video";
+import { CtaBlock } from "@/components/CtaBlock";
 import { InstagramReel } from "@/components/Embeds";
 import { findLogo, findAsset } from "@/lib/assets";
 import { getPosts } from "@/lib/blog";
@@ -91,6 +92,11 @@ export default function Nosotros() {
   const posts = getPosts().slice(0, 3);
   const heroImg = findAsset("heroes", "nosotros") ?? findLogo("heroes", "nosotros");
   const daniPhoto = findLogo("equipo", "Dani Boada");
+
+  // Apoyos: los que tienen logo van como logo; los que no, más pequeños y abajo.
+  const apoyoAll = [...support, ...supportPending];
+  const apoyoConLogo = apoyoAll.filter((n) => findLogo("apoyos", n));
+  const apoyoSinLogo = apoyoAll.filter((n) => !findLogo("apoyos", n));
 
   return (
     <>
@@ -304,13 +310,15 @@ export default function Nosotros() {
             Con el apoyo de
           </p>
           <StaggerGroup stagger={0.05} className="flex flex-wrap gap-3 md:gap-4">
-            {support.map((name) => (
-              <LogoChip key={name} dir="apoyos" name={name} />
-            ))}
-            {supportPending.map((name) => (
+            {apoyoConLogo.map((name) => (
               <LogoChip key={name} dir="apoyos" name={name} />
             ))}
           </StaggerGroup>
+          {apoyoSinLogo.length > 0 && (
+            <p className="mt-6 max-w-3xl text-sm leading-relaxed text-white/45">
+              También con el apoyo de {apoyoSinLogo.join(" · ")}.
+            </p>
+          )}
         </div>
       </section>
 
@@ -352,15 +360,13 @@ export default function Nosotros() {
       )}
 
       {/* ── CTA ── */}
-      <Section className="bg-bg-primary">
-        <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
-          <Heading>¿Hablamos?</Heading>
-          <div className="mt-8 flex justify-center">
-            <MagneticButton strength={0.5}>
-              <Cta href="/contacto">Hablamos →</Cta>
-            </MagneticButton>
-          </div>
-        </RevealOnScroll>
+      <Section>
+        <CtaBlock
+          title="¿Hablamos?"
+          desc="Cuéntanos qué tienes en la cabeza. Te contestamos nosotros, no un bot."
+          href="/contacto"
+          cta="Hablamos →"
+        />
       </Section>
     </>
   );

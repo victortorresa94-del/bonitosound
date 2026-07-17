@@ -1,3 +1,4 @@
+import { CtaBlock } from "@/components/CtaBlock";
 import type { Metadata } from "next";
 import { Section, Cta, JsonLd } from "@/components/ui";
 import {
@@ -130,22 +131,12 @@ export default function Marketing() {
       </Section>
 
       <Section>
-        <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
-          <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-            ¿Tienes algo que sacar?
-          </SplitTextReveal>
-          <p className="mx-auto mt-4 max-w-xl text-text-secondary">
-            Cuéntanos qué lanzas y cuándo. Te decimos qué se puede hacer de
-            verdad y por dónde empezar.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <MagneticButton strength={0.5}>
-              <Cta href={`mailto:${site.emails.general}?subject=${encodeURIComponent("Marketing para artistas")}`}>
-                Hablamos →
-              </Cta>
-            </MagneticButton>
-          </div>
-        </RevealOnScroll>
+        <CtaBlock
+          title="¿Tienes algo que sacar?"
+          desc="Cuéntanos qué lanzas y cuándo. Te decimos qué se puede hacer de verdad y por dónde empezar."
+          href={`mailto:${site.emails.general}?subject=${encodeURIComponent("Marketing para artistas")}`}
+          cta="Hablamos →"
+        />
       </Section>
     </>
   );
