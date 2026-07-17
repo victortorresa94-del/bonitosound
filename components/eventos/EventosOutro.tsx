@@ -1,21 +1,16 @@
 import Link from "next/link";
-import { findLogo } from "@/lib/assets";
 
 const CREAM = "#FBFAF6";
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
 /**
- * Cierre de /eventos (mockup): franja navy en diagonal con la frase, cluster
- * de logos, doodles cyan (estrella, flecha, ×, puntos) y CTA en bloque cyan
- * diagonal en la esquina inferior derecha.
+ * Cierre de /eventos (mockup): franja navy en diagonal con la frase, doodles
+ * cyan (estrella, flecha, ×, puntos) y CTA en bloque cyan diagonal en la
+ * esquina inferior derecha. (Los logos de marca viven ahora en el banner de
+ * números "marca por marca", combinados con su cifra.)
  */
-export function EventosOutro({ brands }: { brands: readonly string[] }) {
-  const preferred = ["Ballantine's", "Schweppes", "Pepsico", "Pernod Ricard"];
-  const logos = preferred
-    .map((name) => ({ name, src: findLogo("marcas", name) }))
-    .filter((b): b is { name: string; src: string } => Boolean(b.src));
-
+export function EventosOutro() {
   return (
     <section className="relative w-full overflow-hidden" style={{ backgroundColor: CREAM }}>
       {/* Franja navy en diagonal con la frase */}
@@ -30,24 +25,10 @@ export function EventosOutro({ brands }: { brands: readonly string[] }) {
         </p>
       </div>
 
-      {/* Zona inferior: logos + doodles + CTA diagonal */}
+      {/* Zona inferior: doodles + CTA diagonal */}
       <div className="relative mx-auto max-w-6xl px-5 pb-0 pt-12 md:px-10 md:pt-16">
-        {/* Logos sueltos, cluster no alineado */}
-        <div className="flex flex-wrap items-center gap-x-8 gap-y-5 pr-0 md:gap-x-14 md:pr-[40%]">
-          {logos.map((b, i) => (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              key={b.name}
-              src={b.src}
-              alt={b.name}
-              className="h-6 w-auto object-contain opacity-95 md:h-8"
-              style={{ transform: `translateY(${i % 2 === 0 ? "0" : "14px"})` }}
-            />
-          ))}
-        </div>
-
         {/* Doodles cyan sueltos: × y puntos */}
-        <svg className="mt-8 h-24 w-full" viewBox="0 0 900 120" fill="none" aria-hidden preserveAspectRatio="xMidYMid meet">
+        <svg className="h-24 w-full" viewBox="0 0 900 120" fill="none" aria-hidden preserveAspectRatio="xMidYMid meet">
           {/* × */}
           <path d="M470 26 l16 16 M486 26 l-16 16" stroke={CYAN} strokeWidth="3" strokeLinecap="round" />
           {/* puntos */}

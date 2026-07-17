@@ -6,7 +6,7 @@ import { EventosBento } from "@/components/eventos/EventosBento";
 import { EventosBrands } from "@/components/eventos/EventosBrands";
 import { EventosOutro } from "@/components/eventos/EventosOutro";
 import { getEventos } from "@/lib/content";
-import { brands, site } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Eventos — Activaciones para marcas y giras",
@@ -25,7 +25,7 @@ export default function Eventos() {
       <EventosArtistasShowcase eventos={eventos} />
       <EventosBrands eventos={eventos} />
       <EventosBento eventos={eventos} />
-      <EventosOutro brands={brands} />
+      <EventosOutro />
     </div>
   );
 }
