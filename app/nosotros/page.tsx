@@ -212,14 +212,24 @@ export default function Nosotros() {
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           Gente con nombre y teléfono.
         </SplitTextReveal>
-        <StaggerGroup stagger={0.1} className="mx-auto mt-14 flex flex-wrap justify-center gap-x-8 gap-y-12">
+        <StaggerGroup stagger={0.1} className="mx-auto mt-14 grid grid-cols-1 justify-items-center gap-y-10 lg:grid-cols-5 lg:justify-items-stretch lg:gap-x-8 lg:gap-y-12">
           {team.map((p) => {
+            const illustration = findLogo("equipo/ilustracion", p.name);
             const photo = findLogo("equipo", p.name);
+            const image = illustration ?? photo;
             return (
-              <div key={p.name} className="group w-[45%] max-w-[230px] sm:w-[230px]">
-                <div className="relative mb-5 aspect-[4/5] overflow-hidden rounded-2xl bg-bg-tertiary">
-                  {photo && (
-                    <Image src={photo} alt={p.name} fill sizes="(max-width: 640px) 45vw, 230px" className="object-cover grayscale transition-transform duration-700 group-hover:scale-105" />
+              <div key={p.name} className="group w-full max-w-[240px] lg:max-w-none">
+                <div
+                  className={`relative mb-5 aspect-[4/5] ${illustration ? "" : "overflow-hidden rounded-2xl bg-bg-tertiary"}`}
+                >
+                  {image && (
+                    <Image
+                      src={image}
+                      alt={p.name}
+                      fill
+                      sizes="(max-width: 1024px) 240px, 20vw"
+                      className={`transition-transform duration-700 group-hover:scale-105 ${illustration ? "object-contain" : "object-cover grayscale"}`}
+                    />
                   )}
                 </div>
                 <h3 className="display text-2xl leading-tight">{p.name}</h3>
