@@ -1,6 +1,6 @@
 ---
 name: "Kanela"
-genre: "En distribución"
+genre: "Música urbana: reggaetón con toques de pop y house"
 tier: "distribucion"
 spotifyArtistId: "2IqxZH8QxR7KJ0C6JH5i39"
 instagram: "https://www.instagram.com/kanelaofficial/"

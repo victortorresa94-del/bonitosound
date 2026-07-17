@@ -1,6 +1,6 @@
 ---
-name: "Fabian"
-genre: "En distribución"
+name: "Fabián D. Cuesta"
+genre: "Indie pop, pop, rock y cantautor"
 tier: "booking"
 spotifyArtistId: "3NOAlABNpDcz4WxKSiBTh7"
 instagram: "https://www.instagram.com/fabiandcuesta/"

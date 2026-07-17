@@ -20,6 +20,13 @@ export type Artist = {
   spotifyPlaylistId?: string;
   instagram?: string;
   image?: string;
+  /** Vídeo corto para el hover del roster (mudo, en bucle). Se resuelve por
+   *  prioridad: /public/video/artistas/<slug>.mp4 → `video` forzado →
+   *  `videoUrl` (R2). Si no hay, en el hover cae al primer YouTube. */
+  video?: string;
+  /** Filename/URL del vídeo en R2 (ej. "natura.mp4"). Alternativa a subirlo a
+   *  /public. Se pasa por el helper r2(). */
+  videoUrl?: string;
   /** Stats para la cabecera de la ficha (texto libre, ej. "+18k oyentes
    *  mensuales" / "+9k seguidores"). Solo se pintan si están puestos — no se
    *  inventan cifras. */
@@ -110,18 +117,29 @@ function readDir(dir: string) {
   return fs.readdirSync(full).filter((f) => f.endsWith(".md"));
 }
 
+/** Ruta del vídeo autoalojado del artista si existe en /public (o undefined). */
+function resolveArtistVideo(slug: string): string | undefined {
+  const rel = `/video/artistas/${slug}.mp4`;
+  const abs = path.join(process.cwd(), "public", rel.replace(/^\//, ""));
+  return fs.existsSync(abs) ? rel : undefined;
+}
+
 export function getArtists(): Artist[] {
   return readDir("artistas")
     .map((file) => {
       const raw = fs.readFileSync(path.join(root, "artistas", file), "utf8");
       const { data, content } = matter(raw);
+      const slug = file.replace(/\.md$/, "");
+      const fm = data as Omit<Artist, "slug" | "bio">;
       return {
-        slug: file.replace(/\.md$/, ""),
+        slug,
         bio: content
           .split(/\n{2,}/)
           .map((p) => p.trim())
           .filter(Boolean),
-        ...(data as Omit<Artist, "slug" | "bio">),
+        ...fm,
+        // Mismo patrón que los eventos: local → forzado → R2.
+        video: resolveArtistVideo(slug) ?? fm.video ?? (fm.videoUrl ? r2(fm.videoUrl) : undefined),
       };
     })
     .filter((a) => !a.draft)

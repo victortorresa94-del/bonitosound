@@ -1,6 +1,6 @@
 ---
 name: "Daniel Giró"
-genre: "En distribución"
+genre: "Jazz"
 tier: "distribucion"
 spotifyArtistId: "6OlVyNGO5XzLb6YsKOHJHm"
 instagram: "https://www.instagram.com/danielgiroserratosa/"

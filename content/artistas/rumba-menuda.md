@@ -1,6 +1,6 @@
 ---
 name: "Rumba Menuda"
-genre: "En distribución"
+genre: "Música infantil con rumba catalana"
 tier: "distribucion"
 spotifyArtistId: "6TRII33dajYbLquqNZsxOr"
 youtubeIds: ["7CaVgLXder4"]

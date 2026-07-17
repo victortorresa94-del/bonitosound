@@ -1,6 +1,6 @@
 ---
 name: "Egon Calle"
-genre: "En distribución"
+genre: "Flamenco fusión, indie, folk, R&B y soul con detalles electrónicos"
 tier: "distribucion"
 spotifyArtistId: "73GXtlzsrh32dnAiAO2xpO"
 youtubeIds: ["NcKUictqtJk"]
