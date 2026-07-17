@@ -1,6 +1,6 @@
 ---
 brand: "Sainte Marguerite"
-title: "Sainte Marguerite: +20 eventos en 2025"
+title: "Sainte Marguerite: directo con clase, plaza a plaza"
 type: "marca"
 count: "+20 eventos"
 year: "2025"

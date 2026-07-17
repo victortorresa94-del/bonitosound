@@ -1,6 +1,6 @@
 ---
 brand: "Corona"
-title: "Corona: +40 eventos en un solo año"
+title: "Corona: la marca que sonó todo un año"
 type: "marca"
 videoUrl: "corona.mp4"
 count: "+40 eventos"

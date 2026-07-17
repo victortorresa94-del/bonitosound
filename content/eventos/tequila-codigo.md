@@ -1,6 +1,6 @@
 ---
 brand: "Tequila Código"
-title: "Tequila Código: +20 eventos de marca premium"
+title: "Tequila Código: noches de marca premium"
 type: "marca"
 videoUrl: "tequila-codigo.mp4"
 count: "+20 eventos"

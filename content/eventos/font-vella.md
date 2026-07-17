@@ -1,6 +1,6 @@
 ---
 brand: "Font Vella"
-title: "Font Vella: 30 activaciones en tres años"
+title: "Font Vella: tres años sonando juntos"
 type: "marca"
 count: "30 eventos"
 year: "2025"

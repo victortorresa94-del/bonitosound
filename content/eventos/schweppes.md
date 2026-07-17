@@ -1,6 +1,6 @@
 ---
 brand: "Schweppes"
-title: "Schweppes: +80 directos por el noroeste"
+title: "Schweppes: gira de marca por el noroeste"
 type: "marca"
 videoUrl: "schweppes.mp4"
 count: "+80 eventos"
