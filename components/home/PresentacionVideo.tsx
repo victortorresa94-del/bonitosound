@@ -28,7 +28,7 @@ export function PresentacionVideo() {
         {/* Vídeo vertical (reel) en el centro. */}
         <RevealOnScroll delay={0.15} className="mx-auto mt-10 w-full max-w-[300px] sm:max-w-[330px]">
           <div className="relative aspect-[9/16] overflow-hidden rounded-[1.6rem] shadow-xl ring-1 ring-black/5">
-            <EventHeroVideo src="/video/home/top-bonito.mp4" label="Bonito Sound" />
+            <EventHeroVideo src="/video/home/top-bonito.mp4" label="Bonito Sound" sound />
           </div>
         </RevealOnScroll>
 

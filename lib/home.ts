@@ -62,17 +62,6 @@ export const scenes: HomeScene[] = [
     ],
   },
   {
-    id: "giras",
-    kicker: "Giras",
-    statement: "Y las giras, las llenamos.",
-    accent: "llenamos",
-    support:
-      "Producción, ruta y management de directo. De Antonio Orozco a Maldita Nerea: el escenario montado y el aforo lleno.",
-    cta: { label: "Ver más", href: "/eventos/giras" },
-    motionPreset: "parallax",
-    mediaCandidates: ["/video/home/giras.mp4", "/img/home/giras.webp", "/img/marca/superheroe-eventos.png"],
-  },
-  {
     id: "records",
     kicker: "Records",
     statement: "Ayudamos a artistas a despegar.",
@@ -86,6 +75,17 @@ export const scenes: HomeScene[] = [
       "/img/marca/superheroe-records.png",
       "/img/secciones/records.png",
     ],
+  },
+  {
+    id: "giras",
+    kicker: "Giras",
+    statement: "Y las giras, las llenamos.",
+    accent: "llenamos",
+    support:
+      "Producción, ruta y management de directo. De Antonio Orozco a Maldita Nerea: el escenario montado y el aforo lleno.",
+    cta: { label: "Ver más", href: "/eventos/giras" },
+    motionPreset: "parallax",
+    mediaCandidates: ["/video/home/giras.mp4", "/img/home/giras.webp", "/img/marca/superheroe-eventos.png"],
   },
   {
     id: "marketing",
@@ -128,7 +128,7 @@ export const scenes: HomeScene[] = [
     accent: "cuéntanos lo tuyo",
     support:
       "Treinta minutos. Tú cuentas qué necesitas, nosotros te decimos qué se puede hacer de verdad.",
-    cta: { label: "Hablamos", href: "/contacto" },
+    cta: { label: "¿Hablamos?", href: "/contacto" },
     mediaCandidates: ["/video/home/cierre.mp4", "/img/home/cierre.webp"],
   },
 ];
