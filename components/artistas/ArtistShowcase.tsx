@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArtistPlayer, type PlayerTrack } from "./ArtistPlayer";
+import { SpotifyButton } from "@/components/SpotifyButton";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -21,14 +22,6 @@ export type ShowcaseArtist = {
   /** Temas de la micro-mezcla de 30 s que suena al darle a "Escuchar". */
   tracks?: PlayerTrack[];
 };
-
-function SpotifyIcon() {
-  return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill={NAVY} aria-hidden="true">
-      <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 1 1-.277-1.213c3.809-.871 7.076-.496 9.712 1.114a.623.623 0 0 1 .207.856Zm1.223-2.722a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.13-9.965-1.166a.779.779 0 1 1-.452-1.49c3.632-1.102 8.147-.568 11.232 1.327a.779.779 0 0 1 .257 1.072Zm.105-2.835c-3.223-1.914-8.54-2.09-11.617-1.156a.935.935 0 1 1-.542-1.79c3.532-1.072 9.404-.865 13.115 1.338a.935.935 0 1 1-.956 1.608Z" />
-    </svg>
-  );
-}
 
 function InstagramIcon() {
   return (
@@ -89,15 +82,21 @@ export function ArtistShowcase({
             {a.bioLine}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             {a.spotifyUrl && (
-              <a href={a.spotifyUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-70" style={{ color: NAVY }}>
-                <SpotifyIcon /> Escucha su música en Spotify
-              </a>
+              <SpotifyButton href={a.spotifyUrl} size="sm">
+                Escuchar en Spotify
+              </SpotifyButton>
             )}
             {a.instagramUrl && (
-              <a href={a.instagramUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-semibold transition-opacity hover:opacity-70" style={{ color: NAVY }}>
-                <InstagramIcon /> Síguele en Instagram
+              <a
+                href={a.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border-[1.5px] px-4 py-2 text-xs font-bold transition-all duration-200 hover:-translate-y-0.5"
+                style={{ color: NAVY, borderColor: NAVY }}
+              >
+                <InstagramIcon /> Instagram
               </a>
             )}
           </div>
