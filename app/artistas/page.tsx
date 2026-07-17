@@ -84,7 +84,6 @@ export default function Artistas() {
                   genre={a.genre}
                   photo={a.image ?? findAsset("artistas", a.slug)}
                   video={a.video}
-                  youtubeId={a.youtubeIds?.[0]}
                   aspect={l.aspect}
                   shift={l.shift}
                 />
