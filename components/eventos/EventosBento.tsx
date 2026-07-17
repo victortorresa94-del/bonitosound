@@ -1,11 +1,6 @@
-import { LazyVideo } from "@/components/LazyVideo";
-import Image from "next/image";
-import Link from "next/link";
 import type { Evento } from "@/lib/content";
 import { findAsset, findLogo } from "@/lib/assets";
-
-const NAVY = "#14283C";
-const CYAN = "#16b6d4";
+import { EventosBentoTabs, type BentoCardData, type Role } from "./EventosBentoTabs";
 
 const TYPE_LABEL: Record<Evento["type"], string> = {
   marca: "Marca",
@@ -15,81 +10,78 @@ const TYPE_LABEL: Record<Evento["type"], string> = {
 };
 
 /**
- * Patrón de tamaños para el bento asimétrico (grid de 6 columnas, filas densas).
- * Se repite; con auto-flow dense rellena huecos. Algunas con rotación sutil.
+ * Forma de celda por vídeo, decidida a partir de un análisis visual real
+ * (fotogramas recortados a varios ratios), no de la orientación en bruto del
+ * archivo: un vídeo vertical no implica una celda alta si su encuadre ya
+ * funciona bien en ancho (ver "corona"/"font-vella"). Solo 2 van a celda alta
+ * ("tall"), como acento de disrupción — el resto, formatos "normales"
+ * (rectangulares, estilo YouTube) que es lo que mejor les sienta.
+ *
+ * `four-roses`: el propio plano tiene el andamio + cielo en la mitad superior
+ * durante buena parte del clip, en CUALQUIER ratio de recorte — no es un
+ * problema de forma de celda. Se corrige sesgando el object-position hacia
+ * abajo para priorizar las rosas.
  */
-const SIZES = [
-  "col-span-6 row-span-3 sm:col-span-3", // big portrait
-  "col-span-3 row-span-2", // med
-  "col-span-3 row-span-2", // med
-  "col-span-6 row-span-2 sm:col-span-4", // wide
-  "col-span-3 row-span-2 sm:col-span-2", // small
-  "col-span-3 row-span-2", // med
-  "col-span-6 row-span-2 sm:col-span-3", // med
-];
-const ROTATE = ["", "sm:rotate-[-1.5deg]", "", "", "sm:rotate-[1.5deg]", "", ""];
+const ROLE_MAP: Record<string, { role: Role; objectPosition?: string }> = {
+  // Marca
+  corona: { role: "hero" },
+  schweppes: { role: "hero" },
+  "font-vella": { role: "wide" },
+  pepsi: { role: "wide" },
+  chateau: { role: "regular" },
+  "four-roses": { role: "regular", objectPosition: "center 85%" },
+  "tequila-codigo": { role: "regular" },
+  // Artista / gira
+  natura: { role: "tall" },
+  "anne-lukin": { role: "tall" },
+  "albert-pla": { role: "regular" },
+  "dani-directo": { role: "regular" },
+  cris: { role: "regular" },
+};
+/** Slugs sin vídeo (solo cover): ciclan por formatos ya validados visualmente. */
+const FALLBACK_ROLES: Role[] = ["regular", "wide", "regular"];
+const ROTATE = ["", "sm:rotate-[-1.4deg]", "", "sm:rotate-[1.2deg]", "", "sm:rotate-[-1deg]"];
 
-function BentoCard({ e, size, rot }: { e: Evento; size: string; rot: string }) {
+function resolveCard(e: Evento, fallbackIndex: number): BentoCardData {
   const cover = findAsset("eventos", e.slug);
   const label = e.brand ?? e.artist ?? TYPE_LABEL[e.type];
   const logo = e.brand ? findLogo("marcas", e.brand) : null;
+  const mapped = ROLE_MAP[e.slug];
+  const role: Role = mapped?.role ?? FALLBACK_ROLES[fallbackIndex % FALLBACK_ROLES.length];
 
-  return (
-    <Link
-      href={`/eventos/${e.slug}`}
-      className={`group relative overflow-hidden rounded-3xl border transition-transform duration-500 hover:z-10 hover:!rotate-0 hover:scale-[1.02] ${size} ${rot}`}
-      style={{ borderColor: "rgba(20,40,60,0.12)", backgroundColor: "#eef0ee" }}
-    >
-      {/* Media: vídeo (carga perezosa) > foto > logo */}
-      {e.video ? (
-        <LazyVideo
-          src={e.video}
-          poster={cover ?? undefined}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-      ) : cover ? (
-        <Image
-          src={cover}
-          alt={e.title}
-          fill
-          sizes="(max-width: 640px) 100vw, 40vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-        />
-      ) : logo ? (
-        <div className="absolute inset-0 flex items-center justify-center p-8">
-          <Image src={logo} alt={label} width={200} height={120} className="max-h-14 w-auto object-contain opacity-90" />
-        </div>
-      ) : (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="font-round text-2xl font-bold" style={{ color: NAVY }}>{label}</span>
-        </div>
-      )}
-
-      {/* Degradado para legibilidad del pill sobre media */}
-      {(e.video || cover) && (
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/45 via-transparent to-black/10" />
-      )}
-
-      {/* Pill "MARCA X / GIRA X" tipo bocadillo */}
-      <span
-        className="absolute left-4 top-4 z-10 rounded-2xl rounded-tl-sm px-3 py-1.5 text-[0.62rem] font-bold uppercase leading-tight tracking-wide"
-        style={{ backgroundColor: e.video || cover ? "rgba(251,250,246,0.95)" : CYAN, color: NAVY }}
-      >
-        {TYPE_LABEL[e.type]}
-        <br />
-        <span className="text-[0.7rem]">{label}</span>
-      </span>
-    </Link>
-  );
+  return {
+    slug: e.slug,
+    href: `/eventos/${e.slug}`,
+    typeLabel: TYPE_LABEL[e.type],
+    label,
+    cover: cover ?? null,
+    logo: logo ?? null,
+    video: e.video ?? null,
+    role,
+    objectPosition: mapped?.objectPosition,
+    rot: ROTATE[fallbackIndex % ROTATE.length],
+  };
 }
 
 export function EventosBento({ eventos }: { eventos: Evento[] }) {
   // Solo eventos con media real (vídeo/foto). Los demás quedan ocultos hasta
   // que caiga su clip: mismo sistema drop-in, nada de cajas vacías.
-  // Vídeo primero (van a los slots grandes y se autoreproducen).
   const withVideo = eventos.filter((e) => e.video);
   const withCover = eventos.filter((e) => !e.video && findAsset("eventos", e.slug));
   const ordered = [...withVideo, ...withCover];
+
+  let fallbackI = 0;
+  const cards = ordered.map((e) => {
+    const known = Boolean(ROLE_MAP[e.slug]);
+    const card = resolveCard(e, fallbackI);
+    if (!known) fallbackI += 1;
+    return card;
+  });
+
+  const marcas = cards.filter((c, i) => ordered[i].type === "marca");
+  const artistas = cards.filter((c, i) => ordered[i].type !== "marca");
+
+  if (cards.length === 0) return null;
 
   return (
     <section className="relative w-full overflow-hidden" style={{ backgroundColor: "#FBFAF6" }}>
@@ -100,16 +92,7 @@ export function EventosBento({ eventos }: { eventos: Evento[] }) {
         <h2 className="mb-8 font-round text-3xl font-bold md:text-5xl" style={{ color: "#14283C" }}>
           Míralo, no te lo contamos.
         </h2>
-        <div className="grid auto-rows-[76px] grid-cols-6 gap-3 md:auto-rows-[92px] md:gap-4">
-          {ordered.map((e, i) => (
-            <BentoCard
-              key={e.slug}
-              e={e}
-              size={SIZES[i % SIZES.length]}
-              rot={ROTATE[i % ROTATE.length]}
-            />
-          ))}
-        </div>
+        <EventosBentoTabs marcas={marcas} artistas={artistas} />
       </div>
     </section>
   );
