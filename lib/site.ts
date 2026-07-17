@@ -48,7 +48,9 @@ export const R2_BASE =
 /** Devuelve la URL completa de un vídeo a partir de su clave (o la deja tal
  *  cual si ya es una URL absoluta). */
 export function r2(key: string): string {
-  return key.startsWith("http")
+  // URL absoluta o ruta local (/video/...) → se deja tal cual. Solo las claves
+  // "sueltas" (resumen-bonito.mp4) se resuelven contra el bucket R2.
+  return key.startsWith("http") || key.startsWith("/")
     ? key
     : `${R2_BASE.replace(/\/$/, "")}/${key.replace(/^\//, "")}`;
 }
