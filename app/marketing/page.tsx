@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Section, Cta, JsonLd } from "@/components/ui";
 import {
   RevealOnScroll,
+  StaggerGroup,
   SplitTextReveal,
   MagneticButton,
 } from "@/components/motion";
@@ -20,7 +21,10 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/marketing` },
 };
 
-// Características del servicio (textos del mockup). La 3ª va en blob cian.
+const CYAN = "#16b6d4";
+
+// Características del servicio (con los iconos dibujados que ya tiene la página).
+// La de "Inversión propia" va como blob cian (el gancho).
 const features: ServiceFeature[] = [
   {
     icon: "megafono",
@@ -28,9 +32,9 @@ const features: ServiceFeature[] = [
     text: "Configuramos y optimizamos la campaña en cada plataforma. Presupuesto, targeting, creatividades.",
   },
   {
-    icon: "claqueta",
-    title: "Material",
-    text: "Vídeos, cortes verticales, artes para cada formato. Listos para pautar.",
+    icon: "globo",
+    title: "Estrategia de redes",
+    text: "Qué contar, cuándo y en qué formato. Calendario alineado con tus lanzamientos, no publicar por publicar.",
   },
   {
     icon: "moneda",
@@ -38,6 +42,29 @@ const features: ServiceFeature[] = [
     text: "Cuando creemos en el lanzamiento, ponemos nosotros parte del presupuesto de ads.",
     highlight: true,
   },
+  {
+    icon: "claqueta",
+    title: "Material y contenido",
+    text: "Vídeos, cortes verticales y artes para cada formato. Listos para pautar.",
+  },
+  {
+    icon: "vinilo",
+    title: "Lanzamientos",
+    text: "Plan de salida para un single, un álbum o un evento: teaser, día de estreno y sostenimiento.",
+  },
+  {
+    icon: "ticket",
+    title: "Vender entradas",
+    text: "Igual que movemos un single, montamos campañas para llenar un directo o dar empujón a un evento.",
+  },
+];
+
+// Cómo montamos una campaña (proceso, mismo nivel que las otras páginas).
+const proceso = [
+  { title: "El objetivo", desc: "Oyentes, entradas, territorio. Sobre lo que tengas de verdad encima de la mesa." },
+  { title: "El material", desc: "Vídeos, cortes verticales y artes para cada formato, listos para pautar." },
+  { title: "La campaña", desc: "Configuramos, pauteamos y optimizamos en cada plataforma." },
+  { title: "El seguimiento", desc: "Medimos lo que mueve la aguja y ajustamos mientras corre." },
 ];
 
 const faq = [
@@ -113,14 +140,42 @@ export default function Marketing() {
         </div>
       </section>
 
+      {/* Intro con garabato cian (el "rollo" Bonito, como el resto de servicios). */}
       <Section>
+        <RevealOnScroll as="p" className="statement mx-auto max-w-4xl text-center text-[clamp(1.5rem,3.4vw,2.5rem)] leading-tight text-text-primary">
+          Un buen lanzamiento no es suerte: es un plan corriendo en cada plataforma
+          el día que toca. Y venimos del sector — sabemos qué mueve oyentes y qué
+          llena una sala.
+        </RevealOnScroll>
+        <RevealOnScroll className="mx-auto mt-7 w-40" delay={0.15}>
+          <svg viewBox="0 0 160 16" fill="none" aria-hidden className="h-4 w-full">
+            <path d="M3 9 C 28 2, 52 2, 78 9 S 128 15, 157 6" stroke={CYAN} strokeWidth="3" strokeLinecap="round" />
+          </svg>
+        </RevealOnScroll>
+      </Section>
+
+      <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">Qué hacemos</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-          Tres piezas, un mismo objetivo.
+          Todo lo que movemos.
         </SplitTextReveal>
         <RevealOnScroll className="mt-12" delay={0.15}>
           <ServiceFeatures features={features} />
         </RevealOnScroll>
+      </Section>
+
+      {/* Proceso */}
+      <Section>
+        <RevealOnScroll as="p" className="eyebrow mb-10">Cómo montamos una campaña</RevealOnScroll>
+        <StaggerGroup stagger={0.08} className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          {proceso.map((p, i) => (
+            <div key={p.title}>
+              <span className="font-round text-5xl font-bold leading-none" style={{ color: CYAN }}>{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-4 display text-xl leading-tight">{p.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-text-secondary">{p.desc}</p>
+            </div>
+          ))}
+        </StaggerGroup>
       </Section>
 
       <Section className="bg-bg-primary">
