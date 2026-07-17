@@ -10,8 +10,10 @@ export type Service = {
   /** Ruta completa (para canonical / links). */
   path: string;
   eyebrow: string;
-  /** Titular provisional del hero (Víctor lo reemplaza con su diseño). */
+  /** Titular del hero. */
   h1: string;
+  /** Trozo del h1 que va en cian (opcional; debe ser subcadena literal de h1). */
+  h1Cyan?: string;
   desc: string;
   /** Asunto del mailto de contacto. */
   ctaSubject: string;
@@ -71,8 +73,9 @@ export const services: Record<string, Service> = {
     slug: "sello",
     path: "/records/sello",
     eyebrow: "Sello",
-    h1: "Del máster a la calle, con criterio.",
-    desc: "Producimos, publicamos y empujamos. Trabajamos pocos proyectos y los trabajamos en serio.",
+    h1: "Tu música, bien cuidada.",
+    h1Cyan: "bien cuidada.",
+    desc: "Editamos, producimos y distribuimos. Del máster a las plataformas, con criterio y sin prisas. Records 360: sello, editorial y distribución en un mismo sitio.",
     ctaSubject: "Sello",
     aspects: [
       { name: "Criterio", desc: "Te decimos qué single sale y por qué. Con argumentos, no con corazonadas." },
