@@ -130,7 +130,7 @@ export function ArtistShowcase({
                 </span>
               </button>
             )}
-            <Link href={`/contratar/${a.slug}`} className="btn btn-primary">
+            <Link href={`/contratar?a=${a.slug}`} className="btn btn-primary">
               Contratar booking →
             </Link>
           </div>

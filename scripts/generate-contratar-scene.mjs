@@ -1,4 +1,4 @@
-// Genera la ilustración de la página de contratación (/contratar/<artista>).
+// Genera la ilustración de la página de contratación (/contratar).
 // Estilo: el "rollo" de Bonito — teléfono hecho a mano, notas y textura — con
 // la PALETA ACTUAL (navy #14283C + único acento cian #16b6d4) sobre fondo
 // transparente, para que se apoye sobre el crema de la web.
@@ -66,4 +66,4 @@ if (!b64) {
 mkdirSync(dirname(DEST), { recursive: true });
 writeFileSync(DEST, Buffer.from(b64, "base64"));
 console.log(`✅ Guardado en ${DEST}`);
-console.log("Haz commit del PNG y la página /contratar/<artista> lo usará sola.");
+console.log("Haz commit del PNG y la página /contratar lo usará sola.");

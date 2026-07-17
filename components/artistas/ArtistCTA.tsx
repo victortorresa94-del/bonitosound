@@ -25,9 +25,9 @@ export function ArtistCTA({
   // El IG puede llegar vacío desde el frontmatter ("").
   const ig = instagram?.trim();
 
-  // El botón lleva al formulario de contratación de este artista (precargado),
-  // no a un mailto pelado: se pide la info que hace falta para responder bien.
-  const contratarHref = `/contratar/${slug}`;
+  // El botón lleva al formulario único de contratación ya precargado con este
+  // artista (?a=<slug>), no a un mailto pelado: se pide la info que hace falta.
+  const contratarHref = `/contratar?a=${slug}`;
 
   return (
     <Section id={slug ? `booking-${slug}` : "booking"}>

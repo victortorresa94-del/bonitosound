@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Section, Heading, Cta } from "@/components/ui";
 import {
   RevealOnScroll,
@@ -11,6 +12,7 @@ import {
 import { R2Video } from "@/components/R2Video";
 import { InstagramReel } from "@/components/Embeds";
 import { findLogo, findAsset } from "@/lib/assets";
+import { getPosts } from "@/lib/blog";
 import { team, memberships, support, site } from "@/lib/site";
 
 const NAVY = "#14283C";
@@ -24,6 +26,7 @@ export const metadata: Metadata = {
 };
 
 export default function Nosotros() {
+  const posts = getPosts().slice(0, 3);
   return (
     <>
       {/* Hero (mockup): eyebrow con contador + statement serif (2ª línea
@@ -189,6 +192,46 @@ export default function Nosotros() {
           </RevealOnScroll>
         </div>
       </Section>
+
+      {posts.length > 0 && (
+        <Section className="bg-bg-primary">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <RevealOnScroll as="p" className="eyebrow mb-4">
+                Diario
+              </RevealOnScroll>
+              <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
+                Lo que pensamos, escrito.
+              </SplitTextReveal>
+            </div>
+            <RevealOnScroll delay={0.1}>
+              <Link
+                href="/diario"
+                className="more-link"
+              >
+                Ver el diario <span className="arrow">→</span>
+              </Link>
+            </RevealOnScroll>
+          </div>
+          <StaggerGroup stagger={0.08} className="mt-12 grid gap-6 md:grid-cols-3">
+            {posts.map((p) => (
+              <Link
+                key={p.slug}
+                href={`/diario/${p.slug}`}
+                className="card group flex flex-col"
+                data-cursor="link"
+              >
+                <p className="eyebrow mb-3">{p.cluster ?? "Diario"}</p>
+                <h3 className="display text-xl leading-tight text-text-primary transition-colors group-hover:text-accent-cyan">
+                  {p.title}
+                </h3>
+                <p className="mt-3 line-clamp-3 text-sm text-text-secondary">{p.description}</p>
+                <span className="mt-5 text-sm font-semibold text-accent-cyan">Leer →</span>
+              </Link>
+            ))}
+          </StaggerGroup>
+        </Section>
+      )}
 
       <Section className="bg-bg-primary">
         <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary p-10 text-center md:p-16">
