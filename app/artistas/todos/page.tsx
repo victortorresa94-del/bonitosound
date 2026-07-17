@@ -253,30 +253,29 @@ export default function RosterCompleto() {
 
           {/* Resto del catálogo sin ficha aún: nombres (linkados si hay ficha). */}
           {catalogoResto.length > 0 && (
-            <RevealOnScroll
-              delay={0.15}
-              className="font-round mt-12 border-t border-subtle pt-8 text-[#14283C] text-[clamp(1.2rem,2.8vw,1.9rem)] font-semibold leading-[1.7]"
-            >
-              {catalogoResto.map((n, i) => {
-                const slug = slugForName(n);
-                return (
-                  <span key={n} className="whitespace-nowrap">
-                    {i > 0 && (
-                      <span className="mx-3 font-bold" style={{ color: CYAN }}>
-                        ·
-                      </span>
-                    )}
-                    {slug ? (
-                      <Link href={`/artistas/${slug}`} className="transition-opacity hover:opacity-70">
-                        {n}
-                      </Link>
-                    ) : (
-                      n
-                    )}
-                  </span>
-                );
-              })}
-            </RevealOnScroll>
+            <div className="mt-12 border-t border-subtle pt-8">
+              <RevealOnScroll className="flex flex-wrap items-baseline gap-x-4 gap-y-3 font-round text-[#14283C] text-[clamp(1.2rem,2.8vw,1.9rem)] font-semibold leading-tight">
+                {catalogoResto.map((n, i) => {
+                  const slug = slugForName(n);
+                  return (
+                    <span key={n} className="whitespace-nowrap">
+                      {slug ? (
+                        <Link href={`/artistas/${slug}`} className="transition-opacity hover:opacity-70">
+                          {n}
+                        </Link>
+                      ) : (
+                        n
+                      )}
+                      {i < catalogoResto.length - 1 && (
+                        <span className="ml-4 font-bold" style={{ color: CYAN }}>
+                          ·
+                        </span>
+                      )}
+                    </span>
+                  );
+                })}
+              </RevealOnScroll>
+            </div>
           )}
         </div>
       </section>

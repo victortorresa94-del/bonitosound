@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ServicePage } from "@/components/services/ServicePage";
-import { BrandsCase } from "@/components/services/cases";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 
@@ -11,6 +10,8 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}${s.path}` },
 };
 
+// Sin caseSlot: los casos en vídeo, los números y el muro de marcas los pinta
+// ServicePage desde lib/servicesDetail.ts (producciones).
 export default function Page() {
-  return <ServicePage service={s} caseSlot={<BrandsCase />} />;
+  return <ServicePage service={s} />;
 }
