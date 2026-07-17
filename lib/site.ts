@@ -29,10 +29,10 @@ export const site = {
     spotifyJaleoPlaylist:
       "https://open.spotify.com/playlist/2J24790mkalzNNsw4vFc2E",
     spotifyJaleoPlaylistId: "2J24790mkalzNNsw4vFc2E",
-    // Playlist de artistas de Bonito que suena con "siguiente" en el player
-    // flotante (fuera del home). TODO: reemplazar por la playlist real de
-    // Bonito Sound — de momento apunta a la de Jaleo como placeholder.
-    spotifyBonitoPlaylistId: "2J24790mkalzNNsw4vFc2E",
+    // Playlist de artistas de Bonito. El botón de Spotify del player flotante
+    // (fuera del home) la abre. No se incrusta: el embed de Spotify obliga a
+    // mostrar su banner de marca, así que enlazamos a la playlist real.
+    spotifyBonitoPlaylist: "https://open.spotify.com/playlist/2lxa6r7k0dthpANWR9wRWs",
   },
 } as const;
 
