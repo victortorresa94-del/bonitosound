@@ -36,11 +36,21 @@ export const site = {
 // misma URL sirve en dev (Vercel) y en producción (IONOS). Los .md/componentes
 // referencian solo la CLAVE del objeto (ej. "corona.mp4") y aquí se antepone
 // la base; si algún día cambia el bucket, se toca únicamente esta línea.
-export const R2_BASE = "https://pub-c9e7a562bfd645b5ac829874e2360807.r2.dev";
+// Base de los vídeos alojados fuera del repo. Configurable por env para poder
+// cambiar de host (R2 → Vercel Blob → lo que sea) SIN tocar código: basta con
+// poner NEXT_PUBLIC_VIDEO_BASE en Vercel a la URL base pública (sin barra final)
+// y redesplegar. Si un vídeo está en /public/video/... esa ruta local manda y
+// esto ni se usa.
+export const R2_BASE =
+  process.env.NEXT_PUBLIC_VIDEO_BASE ??
+  "https://pub-c9e7a562bfd645b5ac829874e2360807.r2.dev";
 
-/** Devuelve la URL completa de un vídeo en R2 a partir de su clave. */
+/** Devuelve la URL completa de un vídeo a partir de su clave (o la deja tal
+ *  cual si ya es una URL absoluta). */
 export function r2(key: string): string {
-  return key.startsWith("http") ? key : `${R2_BASE}/${key.replace(/^\//, "")}`;
+  return key.startsWith("http")
+    ? key
+    : `${R2_BASE.replace(/\/$/, "")}/${key.replace(/^\//, "")}`;
 }
 
 // Menú principal: 5 entradas. Categorías-servicio + institucional, en orden
