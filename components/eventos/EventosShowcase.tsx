@@ -77,7 +77,7 @@ export function EventosShowcase({ eventos }: { eventos: Evento[] }) {
   ];
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ backgroundColor: "#FBFAF6" }}>
+    <section className="relative w-full overflow-hidden pb-16 md:pb-28" style={{ backgroundColor: "#FBFAF6" }}>
       {/* Título de sección */}
       <div className="mx-auto max-w-6xl px-5 pt-6 md:px-10">
         <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>
