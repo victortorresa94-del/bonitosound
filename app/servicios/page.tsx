@@ -55,8 +55,17 @@ const SHAPE = [
 ];
 /** Cada tarjeta un pelín torcida (el "rollo dibujado"). */
 const TILT = ["-1.4deg", "1deg", "-0.8deg", "1.2deg", "-1.1deg", "0.7deg", "-0.6deg"];
-/** Alternamos Zilla Slab / Fredoka en los títulos de tarjeta (variedad). */
-const cardFont = (i: number) => (i % 2 === 0 ? "display" : "font-round");
+/** Combo por tarjeta: fuente (Zilla Slab / Fredoka) + color (navy / cian),
+ *  mezclado a mano para dinamismo. En grid de 3 columnas, i e i+3 caen en la
+ *  MISMA columna: ningún par comparte fuente ni color → nada de franjas. */
+const COMBO: { font: string; color: string }[] = [
+  { font: "font-round", color: NAVY }, // 01 Booking
+  { font: "display", color: CYAN }, //    02 Management
+  { font: "display", color: NAVY }, //    03 Producción
+  { font: "display", color: CYAN }, //    04 Editorial
+  { font: "font-round", color: NAVY }, // 05 Distribución
+  { font: "font-round", color: CYAN }, // 06 Marketing
+];
 
 /** Dibujo de la tarjeta (gpt-image-2) en /public/img/servicios/index/<slug>.png.
  *  Plug-and-play: si aún no está, la tarjeta se pinta sin ilustración. */
@@ -90,7 +99,7 @@ function Numero({ n }: { n: string }) {
 
 /** Estilo común de tarjeta interior (borde sutil + sombra + hover). */
 const CARD =
-  "flex h-full flex-col border border-[#14283C]/20 bg-white/70 p-3.5 shadow-[0_2px_20px_-14px_rgba(20,40,60,0.35)] transition-[box-shadow,border-color] duration-300 group-hover:border-[#14283C] group-hover:shadow-[0_22px_44px_-24px_rgba(20,40,60,0.45)] md:p-4";
+  "flex h-full flex-col border border-[#14283C]/20 bg-[#FBFAF6] p-3.5 shadow-[0_2px_20px_-14px_rgba(20,40,60,0.35)] transition-[box-shadow,border-color] duration-300 group-hover:border-[#14283C] group-hover:shadow-[0_22px_44px_-24px_rgba(20,40,60,0.45)] md:p-4";
 
 export default function Servicios() {
   return (
@@ -150,7 +159,7 @@ export default function Servicios() {
                     <div className="flex h-52 items-center justify-center md:h-60">
                       <Illu slug={s.slug} className="h-full w-auto max-w-full transition-transform duration-500 group-hover:scale-[1.05]" />
                     </div>
-                    <h2 className={`${cardFont(i)} mt-0.5 text-2xl font-bold leading-tight md:text-[1.6rem]`} style={{ color: NAVY }}>
+                    <h2 className={`${COMBO[i].font} mt-0.5 text-2xl font-bold leading-tight md:text-[1.6rem]`} style={{ color: COMBO[i].color }}>
                       {s.title}
                     </h2>
                     <p className="mt-1 line-clamp-2 text-[0.75rem] leading-snug text-text-secondary">
@@ -170,7 +179,7 @@ export default function Servicios() {
               className="group block transition-transform duration-300 hover:-translate-y-1.5"
             >
               <div
-                className="grid items-center gap-5 border border-[#14283C]/20 bg-white/70 p-4 shadow-[0_2px_20px_-14px_rgba(20,40,60,0.35)] transition-[box-shadow,border-color] duration-300 group-hover:border-[#14283C] group-hover:shadow-[0_22px_44px_-24px_rgba(20,40,60,0.45)] md:grid-cols-[0.82fr_1.18fr] md:p-5"
+                className="grid items-center gap-5 border border-[#14283C]/20 bg-[#FBFAF6] p-4 shadow-[0_2px_20px_-14px_rgba(20,40,60,0.35)] transition-[box-shadow,border-color] duration-300 group-hover:border-[#14283C] group-hover:shadow-[0_22px_44px_-24px_rgba(20,40,60,0.45)] md:grid-cols-[0.82fr_1.18fr] md:p-5"
                 style={{ transform: "rotate(-0.6deg)", borderRadius: SHAPE[6] }}
               >
                 <div className="flex h-52 items-center justify-center md:h-60 md:justify-start">
