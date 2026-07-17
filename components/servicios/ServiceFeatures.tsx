@@ -1,4 +1,8 @@
+import fs from "node:fs";
+import path from "node:path";
 import type { ReactNode } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 /**
  * Banner de CARACTERÍSTICAS de un servicio (calcado del mockup de Marketing).
@@ -27,7 +31,20 @@ export type ServiceFeature = {
   text: string;
   /** Se pinta como blob cian relleno en vez de tarjeta con borde. */
   highlight?: boolean;
+  /** Si se pasa, la tarjeta entera es clicable y lleva aquí. */
+  href?: string;
 };
+
+/**
+ * Dibujo generado (gpt-image-2) en /public/img/servicios/iconos/<icon>.png.
+ * Si aún no ha aterrizado, se cae al SVG line-art de abajo. Plug-and-play:
+ * dejas el PNG y aparece solo.
+ */
+function drawing(icon: FeatureIcon): string | null {
+  const rel = `/img/servicios/iconos/${icon}.png`;
+  const abs = path.join(process.cwd(), "public", rel.replace(/^\//, ""));
+  return fs.existsSync(abs) ? rel : null;
+}
 
 /** Iconos line-art navy con chispas cian (dibujados a mano). */
 function Icon({ k }: { k: FeatureIcon }): ReactNode {
@@ -111,20 +128,47 @@ export function ServiceFeatures({
     <div className={`grid gap-6 md:grid-cols-3 ${className}`}>
       {features.map((f, i) => {
         const tilt = TILT[i % TILT.length];
+        const png = drawing(f.icon);
+        // El dibujo: PNG generado si está, si no el SVG line-art.
+        const art = png ? (
+          <Image
+            src={png}
+            alt=""
+            width={128}
+            height={128}
+            className="h-20 w-20 object-contain mix-blend-multiply"
+          />
+        ) : (
+          <Icon k={f.icon} />
+        );
+        // Card clicable: se levanta y endereza al pasar por encima.
+        const Wrap = ({ children }: { children: ReactNode }) =>
+          f.href ? (
+            <Link
+              href={f.href}
+              data-cursor="link"
+              className="group block h-full transition-transform duration-300 hover:-translate-y-1.5"
+            >
+              {children}
+            </Link>
+          ) : (
+            <div className="h-full">{children}</div>
+          );
 
         if (f.highlight) {
           // Blob cian relleno: el gancho del bloque (el color es un evento).
           return (
             <div key={f.title} className="relative">
+              <Wrap>
               <div
-                className="h-full px-7 py-8"
+                className="h-full px-7 py-8 transition-transform duration-300 group-hover:rotate-0"
                 style={{
                   backgroundColor: CYAN,
                   borderRadius: "46% 54% 58% 42% / 8% 8% 10% 10%",
                   transform: `rotate(${tilt})`,
                 }}
               >
-                <Icon k={f.icon} />
+                {art}
                 <h3
                   className="mt-4 font-round text-2xl font-bold leading-tight md:text-3xl"
                   style={{ color: NAVY }}
@@ -139,6 +183,7 @@ export function ServiceFeatures({
                   {f.text}
                 </p>
               </div>
+              </Wrap>
               {/* chispas sueltas */}
               <svg className="absolute -right-3 -top-3 h-8 w-8" viewBox="0 0 32 32" fill="none" aria-hidden>
                 <path d="M24 3 v7 M28.5 7 h-7 M27 18 l4 2" stroke={CYAN} strokeWidth="2.6" strokeLinecap="round" />
@@ -148,16 +193,16 @@ export function ServiceFeatures({
         }
 
         return (
+          <Wrap key={f.title}>
           <div
-            key={f.title}
-            className="h-full rounded-[2rem] border-2 px-7 py-8"
+            className="h-full rounded-[2rem] border-2 px-7 py-8 transition-transform duration-300 group-hover:rotate-0"
             style={{
               borderColor: NAVY,
               backgroundColor: CREAM,
               transform: `rotate(${tilt})`,
             }}
           >
-            <Icon k={f.icon} />
+            {art}
             <h3
               className="mt-4 font-round text-2xl font-bold leading-tight md:text-3xl"
               style={{ color: NAVY }}
@@ -172,6 +217,7 @@ export function ServiceFeatures({
               {f.text}
             </p>
           </div>
+          </Wrap>
         );
       })}
     </div>

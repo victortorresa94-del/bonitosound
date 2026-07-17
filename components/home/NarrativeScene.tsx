@@ -116,7 +116,7 @@ export function NarrativeScene({
                 preset={scene.motionPreset ?? "kenburns"}
                 fit={media.includes("jaleo-sound") ? "contain" : "cover"}
                 size={scene.id === "tecnologia" ? "xl" : "md"}
-                loopEnd={scene.id === "tecnologia" ? 2 : undefined}
+                loopEnd={scene.id === "tecnologia" ? 1.5 : undefined}
               />
             </RevealOnScroll>
           </div>

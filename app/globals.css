@@ -212,6 +212,21 @@ body {
   50% { transform: scaleY(1); }
 }
 
+/* Marquee en bucle continuo (MarqueeRow). El contenido se renderiza 2×, así
+   que -50% deja el segundo set exactamente donde empezaba el primero: bucle
+   perfecto, sin hueco, sin depender de medir el DOM. */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-x-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [style*="marquee-x"] { animation: none !important; }
+}
+
 /* Mascota animada del hero (SVG inline + GSAP DrawSVG).
    Estado inicial antes de que JS tome el control: los paths quedan
    invisibles para que el "draw-on" empiece desde un lienzo vacío.

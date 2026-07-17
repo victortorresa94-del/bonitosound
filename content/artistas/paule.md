@@ -6,26 +6,37 @@ spotifyArtistId: "79qGj0n6B3skao1b5Ojt2V"
 instagram: "https://www.instagram.com/paulemusica"
 image: "/img/artistas/paule.jpeg"
 
-# ── PLACEHOLDERS de diseño — SUSTITUIR por datos reales ──
+
+# ── Contenido de DEMO (inventado) — sustituir por datos reales ──
 stats:
-  - { value: "22k", label: "oyentes/mes en Spotify" }
-  - { value: "18k", label: "seguidores en Instagram" }
-  - { value: "150k", label: "reproducciones del último single" }
-musicStyle: "PLACEHOLDER — describe aquí su sonido: de dónde viene, a dónde va y qué lo hace suyo."
+  - { value: "8.9k", label: "oyentes/mes en Spotify" }
+  - { value: "5.2k", label: "seguidores en Instagram" }
+  - { value: "45k", label: "reproducciones del último tema" }
+musicStyle: "Pop de autor con la guitarra por delante. Canciones que se entienden a la primera y duelen a la segunda."
 influences:
-  - "PLACEHOLDER"
-  - "Influencia 2"
-  - "Influencia 3"
-forWho: "PLACEHOLDER — para quién es su música."
+  - "Silvio Rodríguez"
+  - "Zahara"
+  - "Rufus T. Firefly"
+forWho: "Para quien escucha las letras."
 lastTrackId: "0VjIjW4GlUZAMYd2vXMi3b"
 featuredTracks:
   - "1BxfuPKGuaTgP7aM0Bbdwr"
-firstConcert: { date: "2019", venue: "PLACEHOLDER — sala", city: "Ciudad" }
-lastConcert: { date: "2026", venue: "PLACEHOLDER — sala", city: "Ciudad" }
+  - "5HCyWlXZPP0y6Gqq8TgA20"
+  - "7qiZfU4dY1lWllzX7mPBI3"
+playerTracks:
+  - { title: "Cantautor", src: "/audio/bonito.mp3" }
+  - { title: "De autor", src: "/audio/bonito.mp3" }
+  - { title: "Guitarra sola", src: "/audio/bonito.mp3" }
+  - { title: "Letra a letra", src: "/audio/bonito.mp3" }
+  - { title: "Segunda vez", src: "/audio/bonito.mp3" }
+firstConcert: { date: "2018", venue: "Sidecar", city: "Barcelona" }
+lastConcert: { date: "2026", venue: "Sala Sol", city: "Madrid" }
 reels:
   - "https://www.instagram.com/reel/C8QltIwosMV/"
 youtubeIds:
   - "dQw4w9WgXcQ"
+  - "9bZkp7q19f0"
+  - "kJQP7kiw5Fk"
 ---
 Paule escribe canciones que parecen fáciles hasta que intentas escribir una igual. Ahí está el truco: el oficio no se ve, se nota.
 

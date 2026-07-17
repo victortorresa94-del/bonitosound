@@ -1,6 +1,6 @@
 ---
 brand: "Four Roses"
-title: "Four Roses: 20 eventos desde 2024"
+title: "Four Roses: directo con el carácter del bourbon"
 type: "marca"
 count: "20 eventos"
 year: "2025"

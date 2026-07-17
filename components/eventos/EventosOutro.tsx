@@ -23,7 +23,7 @@ export function EventosOutro({ brands }: { brands: readonly string[] }) {
         className="relative px-5 py-14 md:px-10 md:py-20"
         style={{ backgroundColor: NAVY, clipPath: "polygon(0 14%, 100% 0, 100% 86%, 0 100%)" }}
       >
-        <p className="mx-auto max-w-5xl text-center font-round font-bold leading-[1.02] text-white" style={{ fontSize: "clamp(1.7rem, 5vw, 3.7rem)" }}>
+        <p className="display mx-auto max-w-5xl text-center font-bold leading-[1.02] text-white" style={{ fontSize: "clamp(1.7rem, 5vw, 3.7rem)" }}>
           <span style={{ color: CYAN }}>“</span>No organizamos eventos.
           <br />
           Creamos momentos que suenan.<span style={{ color: CYAN }}>”</span>
