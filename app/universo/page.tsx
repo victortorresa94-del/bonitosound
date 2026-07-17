@@ -18,27 +18,39 @@ export const metadata: Metadata = {
 
 // Las tres cosas que Bonito ha creado: dos apps y un festival. Cada tarjeta
 // lleva su logo y enlaza a su sitio (Jaleo, a su página interna).
+// logoH: altura en px del logo, tuneada por logo para EQUILIBRARLOS ópticamente
+// (Giraverse es un wordmark pesado y ancho → va más bajo; Jaleo es cuadrado →
+// va más alto). El ancho sale del ratio real de cada archivo.
 const BLOCKS = [
   {
     name: "Artiverse",
-    blurb: "software B2B en marcha",
+    status: "Software B2B · en marcha",
+    desc: "La plataforma que conecta agencias, programadores y promotores. Donde el sector deja de trabajar a ciegas y las fechas se cierran con datos, no a base de WhatsApp.",
     logo: findAsset("universo", "logo-artiverse"),
+    logoH: 30,
+    ratio: 639 / 138,
     href: site.external.artiverse,
     linkLabel: "artiverse.es",
     external: true,
   },
   {
     name: "Giraverse",
-    blurb: "software en desarrollo",
+    status: "Software · en desarrollo",
+    desc: "La circulación de giras, ordenada. Lo que hoy se resuelve con llamadas y suerte —qué artista pasa por dónde y cuándo— convertido en software. En desarrollo.",
     logo: findAsset("universo", "logo-giraverse"),
+    logoH: 22,
+    ratio: 7391 / 965,
     href: "https://giraverse.es",
     linkLabel: "giraverse.es",
     external: true,
   },
   {
     name: "Jaleo Sound",
-    blurb: "festival en Ámsterdam",
+    status: "Festival propio · Ámsterdam",
+    desc: "Nuestro festival de cultura española y latina en Ámsterdam. Sin escenarios enormes ni zonas VIP: buena música, buena comida y buena gente. 11–12 sep 2026.",
     logo: findAsset("marca", "jaleo-sound"),
+    logoH: 44,
+    ratio: 1000 / 561,
     href: "/jaleo-sound",
     linkLabel: "El festival",
     external: false,
@@ -48,15 +60,17 @@ const BLOCKS = [
 function Card({ b }: { b: (typeof BLOCKS)[number] }) {
   const inner = (
     <>
-      {/* Logo (el propio wordmark hace de título). */}
-      <div className="relative h-12 w-full">
+      {/* Fila de logo con altura común: los logos se centran en ella, así los
+          tres pesan lo mismo aunque cada archivo tenga proporciones distintas. */}
+      <div className="flex h-14 items-center">
         {b.logo ? (
           <Image
             src={b.logo}
             alt={b.name}
-            fill
-            sizes="(max-width: 640px) 80vw, 320px"
-            className="object-contain object-left"
+            height={b.logoH}
+            width={Math.round(b.logoH * b.ratio)}
+            className="w-auto"
+            style={{ height: b.logoH }}
           />
         ) : (
           <span className="display text-2xl" style={{ color: NAVY }}>
@@ -65,10 +79,17 @@ function Card({ b }: { b: (typeof BLOCKS)[number] }) {
         )}
       </div>
       <h2 className="sr-only">{b.name}</h2>
-      <p className="mt-5 text-sm text-text-muted">{b.blurb}</p>
-      <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: CYAN }}>
+
+      <p className="mt-6 text-[11px] font-bold uppercase tracking-[0.15em]" style={{ color: CYAN }}>
+        {b.status}
+      </p>
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-text-secondary">{b.desc}</p>
+
+      <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: NAVY }}>
         {b.linkLabel}
-        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        <span className="transition-transform duration-300 group-hover:translate-x-1" style={{ color: CYAN }}>
+          →
+        </span>
       </span>
     </>
   );
@@ -91,7 +112,7 @@ export default function Universo() {
   return (
     <>
       {/* ── HERO (recreación de la imagen 1, tipografía de la web) ── */}
-      <section style={{ backgroundColor: "#FDF8F0" }}>
+      <section style={{ backgroundColor: "#FBFAF6" }}>
         <div className="wrap pb-16 pt-20 md:pb-24 md:pt-28">
           <RevealOnScroll as="p" className="mb-6 text-xs font-bold uppercase tracking-[0.25em]">
             <span style={{ color: CYAN }}>Universo Bonito</span>
@@ -113,8 +134,8 @@ export default function Universo() {
             que le faltan. Dos apps y un festival, hechos por nosotros.
           </RevealOnScroll>
 
-          {/* 3 bloques con logo + enlace */}
-          <StaggerGroup stagger={0.1} className="mt-14 grid gap-5 sm:grid-cols-3">
+          {/* 3 bloques con logo + descripción + enlace */}
+          <StaggerGroup stagger={0.1} className="mt-14 grid gap-5 md:grid-cols-3">
             {BLOCKS.map((b) => (
               <Card key={b.name} b={b} />
             ))}
@@ -123,7 +144,7 @@ export default function Universo() {
       </section>
 
       {/* ── CIERRE ── */}
-      <section style={{ backgroundColor: "#FDF8F0" }} className="border-t border-subtle">
+      <section style={{ backgroundColor: "#FBFAF6" }} className="border-t border-subtle">
         <div className="wrap py-20 md:py-28">
           <RevealOnScroll
             as="h2"
