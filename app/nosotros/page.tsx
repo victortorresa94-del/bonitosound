@@ -11,6 +11,7 @@ import {
 import { R2Video } from "@/components/R2Video";
 import { CtaBlock } from "@/components/CtaBlock";
 import { InstagramReel } from "@/components/Embeds";
+import { ServiceIcon, type IconName } from "@/components/services/ServiceIcon";
 import { findLogo, findAsset } from "@/lib/assets";
 import { getPosts } from "@/lib/blog";
 import { team, memberships, support, supportPending, site } from "@/lib/site";
@@ -35,6 +36,7 @@ const STATS = [
 
 // Artistas con los que Dani ha trabajado en su carrera (a algunos los
 // descubrió). Es su trayectoria de 30 años, NO producciones de Bonito Sound.
+// Si algún día hay foto/logo en /img/artistas-dani/<slug>, la tarjeta la pinta.
 const DANI_ARTISTS = [
   "Antonio Orozco",
   "Maldita Nerea",
@@ -45,20 +47,22 @@ const DANI_ARTISTS = [
   "Albert Pla",
 ];
 
-// Lo que firmas con nosotros (principios, sin cifras). Recuperado de Records.
-const PRINCIPIOS = [
-  { t: "Pacto antes de empezar", d: "Lo que prometemos en la primera llamada acaba por escrito antes del primer movimiento. Cero acuerdos verbales que luego nadie recuerda." },
-  { t: "Exclusividad solo donde aporta", d: "Si te llevamos en booking no te obligamos a fichar también el sello. Cada servicio se contrata y se justifica por separado." },
-  { t: "Salida ordenada", d: "Si la cosa no va, se acaba sin pelea. Plazo de aviso corto, devolución de lo que es tuyo, y a otra cosa." },
-  { t: "Tu música, tus másters", d: "Lo que produzcamos juntos se acuerda en el papel: a quién pertenece, durante cuánto y cómo revierte. Sin ambigüedad." },
-  { t: "Sin cláusulas trampa", d: "Nada de obligar a sacar X canciones al año ni a cubrir gastos imposibles. Si hay que renegociar, se renegocia." },
-  { t: "Cuentas claras", d: "Liquidaciones a tiempo y trimestrales. Si una plataforma se retrasa, te lo decimos." },
+// Lo que firmas con nosotros (principios, sin cifras). Cada uno con su icono.
+const PRINCIPIOS: { t: string; d: string; icon: IconName }[] = [
+  { t: "Pacto antes de empezar", icon: "management", d: "Lo que prometemos en la primera llamada acaba por escrito antes del primer movimiento. Cero acuerdos verbales que luego nadie recuerda." },
+  { t: "Exclusividad solo donde aporta", icon: "estrategia", d: "Si te llevamos en booking no te obligamos a fichar también el sello. Cada servicio se contrata y se justifica por separado." },
+  { t: "Salida ordenada", icon: "calendario", d: "Si la cosa no va, se acaba sin pelea. Plazo de aviso corto, devolución de lo que es tuyo, y a otra cosa." },
+  { t: "Tu música, tus másters", icon: "disco", d: "Lo que produzcamos juntos se acuerda en el papel: a quién pertenece, durante cuánto y cómo revierte. Sin ambigüedad." },
+  { t: "Sin cláusulas trampa", icon: "derechos", d: "Nada de obligar a sacar X canciones al año ni a cubrir gastos imposibles. Si hay que renegociar, se renegocia." },
+  { t: "Cuentas claras", icon: "crecimiento", d: "Liquidaciones a tiempo y trimestrales. Si una plataforma se retrasa, te lo decimos." },
 ];
 
-const INSTITUCIONES = [
-  ["Fabra i Coats", "Proyecto residente 2025 de la fábrica de creación del Ajuntament de Barcelona."],
-  ["Redescena", "Compañía inscrita en la Red Española de Teatros, Auditorios, Circuitos y Festivales."],
-  ["Fundació Catalunya Cultura", "Proyecto acompañado por la fundación que conecta cultura y empresa en Catalunya."],
+// El sector nos conoce → tarjetas con enlace a la web de cada institución.
+// URLs oficiales; confirmar con Víctor si alguna cambia de dominio.
+const INSTITUCIONES: { t: string; d: string; url: string }[] = [
+  { t: "Fabra i Coats", url: "https://www.barcelona.cat/fabraicoats", d: "Proyecto residente 2025 de la fábrica de creación del Ajuntament de Barcelona." },
+  { t: "Redescena", url: "https://www.redescena.net", d: "Compañía inscrita en la Red Española de Teatros, Auditorios, Circuitos y Festivales." },
+  { t: "Fundació Catalunya Cultura", url: "https://www.catalunyacultura.cat", d: "Proyecto acompañado por la fundación que conecta cultura y empresa en Catalunya." },
 ];
 
 /** Logo del banner navy. Los logos de instituciones son blancos (y los de
@@ -84,6 +88,38 @@ function LogoChip({ dir, name }: { dir: string; name: string }) {
   return (
     <div className="flex h-16 items-center justify-center rounded-xl border border-white/25 px-5 md:h-20 md:px-7">
       <span className="text-center text-sm font-semibold text-white/85">{name}</span>
+    </div>
+  );
+}
+
+/** Tarjeta de artista de la trayectoria de Dani. Si hay foto/logo en
+ *  /img/artistas-dani/<slug>, se pinta; si no, iniciales sobre navy (limpio,
+ *  de galería) + el nombre debajo. Se puede subir la imagen cuando la haya. */
+function DaniArtistCard({ name }: { name: string }) {
+  const img = findLogo("artistas-dani", name);
+  const initials = name
+    .split(" ")
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join("");
+  return (
+    <div className="group overflow-hidden rounded-2xl border border-subtle bg-bg-primary">
+      <div
+        className="relative aspect-square overflow-hidden"
+        style={{ background: "radial-gradient(120% 120% at 30% 20%, #1b3a52 0%, #14283C 55%, #0d1a29 100%)" }}
+      >
+        {img ? (
+          <Image src={img} alt={name} fill sizes="(max-width: 640px) 45vw, 220px" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+        ) : (
+          <div aria-hidden className="absolute inset-0 flex items-center justify-center">
+            <span className="font-round text-4xl font-bold text-white/15 md:text-5xl">{initials}</span>
+            <span className="absolute bottom-3 right-3 h-2 w-2 rounded-full" style={{ backgroundColor: CYAN }} />
+          </div>
+        )}
+      </div>
+      <div className="px-3 py-3">
+        <h3 className="display text-sm leading-tight md:text-base">{name}</h3>
+      </div>
     </div>
   );
 }
@@ -126,32 +162,7 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* ── HISTORIA (a todo el ancho: lead grande + cuerpo) ── */}
-      <Section>
-        <div className="grid items-start gap-8 md:grid-cols-[0.95fr_1.05fr] md:gap-16">
-          <RevealOnScroll as="h2" className="display text-[clamp(1.9rem,3.6vw,3rem)] leading-[1.08]">
-            <span style={{ color: NAVY }}>Bonito Sound se monta en 2022 en Sabadell. </span>
-            <span style={{ color: CYAN }}>La empresa es joven; el oficio, no.</span>
-          </RevealOnScroll>
-          <RevealOnScroll delay={0.12} className="space-y-5 text-lg leading-relaxed text-text-secondary">
-            <p>
-              Dani lleva treinta años en la industria musical española. Treinta
-              años dan para ver de todo: sobre todo, para ver lo que no funciona y
-              por qué nadie lo arregla.
-            </p>
-            <p>
-              Montamos Bonito para arreglarlo, juntando bajo un mismo techo lo que
-              el sector te hace montar con cinco proveedores.
-            </p>
-            <p>
-              Somos pocos, hacemos mucho y cogemos el teléfono. No damos keynote:
-              montamos lo que se ve en el escenario.
-            </p>
-          </RevealOnScroll>
-        </div>
-      </Section>
-
-      {/* ── NÚMEROS ── */}
+      {/* ── NÚMEROS (2º banner) ── */}
       <Section className="bg-bg-primary">
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 md:grid-cols-4">
           {STATS.map((s) => (
@@ -165,24 +176,31 @@ export default function Nosotros() {
         </div>
       </Section>
 
-      {/* ── EL DÍA A DÍA (IG) — subido ── */}
+      {/* ── HISTORIA + VÍDEO (combinados: se lee mientras se ve) ── */}
       <Section>
-        <div className="grid items-center gap-8 md:grid-cols-[1fr_0.5fr]">
+        <div className="grid items-center gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-16">
           <div>
-            <RevealOnScroll as="p" className="eyebrow mb-4">El día a día</RevealOnScroll>
-            <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,3rem)]">
-              Lo que montamos, semana a semana.
-            </SplitTextReveal>
-            <RevealOnScroll as="p" className="mt-5 max-w-md text-text-secondary" delay={0.15}>
-              Lo de dentro está en Instagram: directos, backstage y lo que va cayendo.
+            <RevealOnScroll as="h2" className="display text-[clamp(1.9rem,3.6vw,3rem)] leading-[1.08]">
+              <span style={{ color: NAVY }}>Bonito Sound se monta en 2022 en Sabadell. </span>
+              <span style={{ color: CYAN }}>La empresa es joven; el oficio, no.</span>
             </RevealOnScroll>
-            <RevealOnScroll className="mt-7" delay={0.25}>
-              <MagneticButton strength={0.35}>
-                <Cta href={site.social.instagram} external>Síguenos en Instagram →</Cta>
-              </MagneticButton>
+            <RevealOnScroll delay={0.12} className="mt-7 space-y-5 text-lg leading-relaxed text-text-secondary">
+              <p>
+                Dani lleva treinta años en la industria musical española. Treinta
+                años dan para ver de todo: sobre todo, para ver lo que no funciona y
+                por qué nadie lo arregla.
+              </p>
+              <p>
+                Montamos Bonito para arreglarlo, juntando bajo un mismo techo lo que
+                el sector te hace montar con cinco proveedores.
+              </p>
+              <p>
+                Somos pocos, hacemos mucho y cogemos el teléfono. No damos keynote:
+                montamos lo que se ve en el escenario.
+              </p>
             </RevealOnScroll>
           </div>
-          <RevealOnScroll delay={0.15}>
+          <RevealOnScroll delay={0.15} className="mx-auto w-full max-w-[360px] md:max-w-none">
             <InstagramReel url="https://www.instagram.com/reel/DCOfx1YKHsP/" title="Presentación de Bonito Sound" />
           </RevealOnScroll>
         </div>
@@ -213,20 +231,23 @@ export default function Nosotros() {
         </StaggerGroup>
       </Section>
 
-      {/* ── DANI, EL CEO — bajado. Nombres a lo ancho, destacados ── */}
+      {/* ── DANI, EL FUNDADOR — rediseñado: dimensiones equilibradas + tarjetas ── */}
       <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">Dani Boada · Fundador</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display mb-10 text-[clamp(2rem,4.5vw,3.4rem)]">
           Treinta años. Y sigue cogiendo el teléfono.
         </SplitTextReveal>
-        <div className="grid items-start gap-10 md:grid-cols-2">
-          <RevealOnScroll className="space-y-5">
-            <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl bg-bg-tertiary">
+
+        {/* Foto contenida + texto a la izquierda; entrevista (local, con sonido)
+            a la derecha. Nada estirado ni pixelado. */}
+        <div className="grid items-center gap-10 md:grid-cols-2">
+          <RevealOnScroll className="flex flex-col gap-6 sm:flex-row sm:items-start md:flex-col lg:flex-row">
+            <div className="relative aspect-[4/5] w-40 shrink-0 overflow-hidden rounded-2xl bg-bg-tertiary sm:w-44">
               {daniPhoto && (
-                <Image src={daniPhoto} alt="Dani Boada" fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
+                <Image src={daniPhoto} alt="Dani Boada" fill sizes="180px" className="object-cover" />
               )}
             </div>
-            <p className="text-lg leading-relaxed text-text-secondary">
+            <p className="text-base leading-relaxed text-text-secondary md:text-lg">
               Management, contratos y la llamada que cierra el bolo. En treinta
               años en la industria, Dani ha trabajado con —y descubierto a—
               artistas que hoy llenan estadios. Ese oficio es lo que hay detrás de
@@ -234,26 +255,23 @@ export default function Nosotros() {
             </p>
           </RevealOnScroll>
           <RevealOnScroll delay={0.15}>
-            <R2Video src="entrevista-dani.mp4" ratio="16 / 9" />
+            <R2Video src="/video/nosotros/entrevista-dani.mp4" ratio="16 / 9" />
             <p className="mt-4 text-sm text-text-muted">La entrevista a Dani, sin guion.</p>
           </RevealOnScroll>
         </div>
 
-        {/* Nombres a lo ancho: los artistas de su carrera, destacados. */}
-        <RevealOnScroll className="mt-14 border-t border-subtle pt-9">
-          <p className="eyebrow mb-6">Ha trabajado con — y descubierto a —</p>
-          <div className="flex flex-wrap gap-x-8 gap-y-4 font-round font-bold leading-none" style={{ color: NAVY }}>
-            {DANI_ARTISTS.map((name, i) => (
-              <span key={name} className="flex items-center whitespace-nowrap text-[clamp(1.5rem,3.4vw,2.6rem)]">
-                {i > 0 && <span className="mr-8" style={{ color: CYAN }} aria-hidden>·</span>}
-                {name}
-              </span>
+        {/* Tarjetas de los artistas de su trayectoria (en condiciones). */}
+        <RevealOnScroll className="mt-14 border-t border-subtle pt-10">
+          <p className="eyebrow mb-7">Ha trabajado con — y descubierto a —</p>
+          <StaggerGroup stagger={0.06} className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            {DANI_ARTISTS.map((name) => (
+              <DaniArtistCard key={name} name={name} />
             ))}
-          </div>
+          </StaggerGroup>
         </RevealOnScroll>
       </Section>
 
-      {/* ── LO QUE FIRMAS ── */}
+      {/* ── LO QUE FIRMAS (con iconos) ── */}
       <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">Cómo trabajamos</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
@@ -266,38 +284,48 @@ export default function Nosotros() {
         </RevealOnScroll>
         <StaggerGroup stagger={0.08} className="mt-12 grid gap-6 md:grid-cols-2">
           {PRINCIPIOS.map((p) => (
-            <div key={p.t} className="card">
-              <h3 className="display text-xl">{p.t}</h3>
-              <p className="mt-3 text-text-secondary">{p.d}</p>
+            <div key={p.t} className="card flex gap-5">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl" style={{ backgroundColor: "rgba(22,182,212,0.1)", color: NAVY }}>
+                <ServiceIcon name={p.icon} />
+              </span>
+              <div>
+                <h3 className="display text-xl">{p.t}</h3>
+                <p className="mt-2 text-text-secondary">{p.d}</p>
+              </div>
             </div>
           ))}
         </StaggerGroup>
       </Section>
 
-      {/* ── EL SECTOR NOS CONOCE (cards) ── */}
+      {/* ── EL SECTOR NOS CONOCE (tarjetas con enlace) ── */}
       <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">El sector nos conoce</RevealOnScroll>
-        <StaggerGroup stagger={0.1} className="grid gap-6 md:grid-cols-3">
-          {INSTITUCIONES.map(([t, d]) => (
-            <div key={t} className="card">
-              <h3 className="display text-xl">{t}</h3>
-              <p className="mt-3 text-sm text-text-secondary">{d}</p>
-            </div>
+        <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,3rem)]">
+          Programas e instituciones con las que andamos.
+        </SplitTextReveal>
+        <StaggerGroup stagger={0.1} className="mt-12 grid gap-6 md:grid-cols-3">
+          {INSTITUCIONES.map((inst) => (
+            <a
+              key={inst.t}
+              href={inst.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card group flex flex-col"
+            >
+              <h3 className="display text-xl text-text-primary transition-colors group-hover:text-accent-cyan">{inst.t}</h3>
+              <p className="mt-3 flex-1 text-sm text-text-secondary">{inst.d}</p>
+              <span className="mt-5 text-sm font-semibold text-accent-cyan">
+                Ver <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+              </span>
+            </a>
           ))}
         </StaggerGroup>
       </Section>
 
-      {/* ── BANNER NAVY: LOGOS (visibles sobre chip blanco) ── */}
+      {/* ── BANNER NAVY: LOGOS (sin los títulos sobrantes) ── */}
       <section className="w-full" style={{ backgroundColor: NAVY }}>
         <div className="wrap py-16 md:py-24">
-          <RevealOnScroll as="p" className="mb-3 text-xs font-bold uppercase tracking-[0.22em]" >
-            <span style={{ color: CYAN }}>Respaldo institucional</span>
-          </RevealOnScroll>
-          <SplitTextReveal as="h2" split="lines" className="display text-white text-[clamp(1.9rem,4.5vw,3.2rem)]">
-            Con quién estamos.
-          </SplitTextReveal>
-
-          <p className="mb-5 mt-12 text-xs font-bold uppercase tracking-[0.18em] text-white/55">
+          <p className="mb-5 text-xs font-bold uppercase tracking-[0.18em] text-white/55">
             Miembros activos de
           </p>
           <StaggerGroup stagger={0.05} className="flex flex-wrap gap-3 md:gap-4">
