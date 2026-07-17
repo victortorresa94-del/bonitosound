@@ -130,6 +130,13 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       { icon: "sync", title: "Sincronizaciones", desc: "Tu música en anuncios, series o eventos cuando encaja. Una vía más para que suene y rinda." },
       { icon: "estrategia", title: "Seguimiento", desc: "No es registrar y olvidar. Vigilamos que los derechos acaben donde tienen que acabar." },
     ],
+    processTitle: "Cómo lo llevamos",
+    process: [
+      { title: "Registramos", desc: "Damos de alta tus obras y las documentamos: autoría, splits, todo en su sitio." },
+      { title: "Vigilamos", desc: "Seguimos dónde suena tu música y qué usos genera, aquí y fuera." },
+      { title: "Cobramos lo que toca", desc: "Nos aseguramos de que cada uso te llegue, sin que nada se pierda por el camino." },
+      { title: "Buscamos syncs", desc: "Cuando aparece una oportunidad en anuncio, serie o evento, la gestionamos entera." },
+    ],
   },
 
   distribucion: {
@@ -142,7 +149,13 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       { icon: "crecimiento", title: "Con seguimiento", desc: "No es subir y olvidarse. Miramos cómo se mueve y cuándo tiene sentido apoyar un lanzamiento." },
       { icon: "disco", title: "Parte del sistema", desc: "Si además estás en sello o management, la distribución trabaja con el resto. No vas por libre." },
     ],
-    stats: [{ n: "~20", l: "artistas distribuyen con nosotros" }],
+    processTitle: "Del archivo a las plataformas",
+    process: [
+      { title: "Preparamos el lanzamiento", desc: "Audio, metadatos, ISRC, créditos y portada. Todo en regla antes de subir." },
+      { title: "Entregamos con margen", desc: "Con semanas de antelación, para dar tiempo a las plataformas y optar a listas editoriales." },
+      { title: "Publicamos en todas", desc: "Spotify, Apple Music, YouTube, Amazon, Deezer y las demás, a la vez." },
+      { title: "Seguimos el dato", desc: "Miramos cómo se mueve y cuándo tiene sentido apoyarlo con marketing." },
+    ],
   },
 
   marketing: {
