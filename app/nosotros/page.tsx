@@ -123,7 +123,7 @@ export default function Nosotros() {
       <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">Dani Boada · Fundador</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display mb-10 text-[clamp(2rem,4.5vw,3.4rem)]">
-          Treinta años de oficio, contados por él.
+          Treinta años. Y sigue cogiendo el teléfono.
         </SplitTextReveal>
         <div className="grid items-start gap-10 md:grid-cols-2">
           <RevealOnScroll className="space-y-5">
@@ -133,9 +133,10 @@ export default function Nosotros() {
               )}
             </div>
             <p className="text-lg leading-relaxed text-text-secondary">
-              Management, contratos y la llamada que cierra el bolo. Dani lleva
-              treinta años en la industria musical española — y en ese recorrido
-              ha trabajado con artistas como estos, a algunos los descubrió:
+              Management, contratos y la llamada que cierra el bolo. En treinta
+              años en la industria, Dani ha trabajado con —y descubierto a—
+              artistas que hoy llenan estadios. Ese oficio es lo que hay detrás
+              de cada decisión de Bonito:
             </p>
             <div className="flex flex-wrap gap-x-5 gap-y-2 font-round text-lg font-semibold" style={{ color: NAVY }}>
               {DANI_ARTISTS.map((name, i) => (
@@ -185,8 +186,9 @@ export default function Nosotros() {
           Lo que firmas con nosotros.
         </SplitTextReveal>
         <RevealOnScroll as="p" className="mt-6 max-w-2xl text-text-secondary" delay={0.15}>
-          Los números se hablan en la llamada. Los principios, aquí. Si encajan,
-          seguimos; si no, mejor saberlo ya.
+          En este sector, demasiados artistas descubren la letra pequeña cuando
+          ya es tarde. Con nosotros no hay letra pequeña. Los números se hablan;
+          los principios, aquí.
         </RevealOnScroll>
         <StaggerGroup stagger={0.08} className="mt-12 grid gap-6 md:grid-cols-2">
           {PRINCIPIOS.map((p) => (
