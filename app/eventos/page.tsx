@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { EventosHero } from "@/components/eventos/EventosHero";
 import { EventosShowcase } from "@/components/eventos/EventosShowcase";
-import { EventosGiras } from "@/components/eventos/EventosGiras";
+import { EventosArtistasShowcase } from "@/components/eventos/EventosArtistasShowcase";
 import { EventosBento } from "@/components/eventos/EventosBento";
 import { EventosBrands } from "@/components/eventos/EventosBrands";
 import { EventosOutro } from "@/components/eventos/EventosOutro";
@@ -22,7 +22,7 @@ export default function Eventos() {
       {/* Orden: banda superior + showcase + marcas (marca por marca) + más vídeos + cierre. */}
       <EventosHero />
       <EventosShowcase eventos={eventos} />
-      <EventosGiras eventos={eventos} />
+      <EventosArtistasShowcase eventos={eventos} />
       <EventosBrands eventos={eventos} />
       <EventosBento eventos={eventos} />
       <EventosOutro brands={brands} />

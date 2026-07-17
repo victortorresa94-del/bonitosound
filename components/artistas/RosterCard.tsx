@@ -12,19 +12,20 @@ export type RosterCardProps = {
   name: string;
   genre: string;
   photo: string | null;
-  /** mp4 propio (R2/local). Si está, manda sobre YouTube. */
+  /** Vídeo NATIVO del artista (mp4 en R2/local). Se reproduce limpio en el
+   *  hover: autoplay, mudo, en bucle, sin controles — igual que los vídeos de
+   *  la página de eventos. Si no hay, la tarjeta se queda con la foto. */
   video?: string;
-  /** ID del primer YouTube del artista (fallback si no hay mp4). */
-  youtubeId?: string;
   aspect?: string;
   shift?: string;
 };
 
 /**
- * Tarjeta del roster: foto B/N que, al pasar el ratón por encima, se convierte
- * en el vídeo del artista (mudo, en bucle). Prioriza un mp4 propio; si no lo
- * hay, usa su primer YouTube. Sin vídeo, se comporta como la foto de siempre.
- * El vídeo es `pointer-events-none`: el clic sigue llevando a la ficha.
+ * Tarjeta del roster: foto B/N que, al pasar el ratón por encima (o al centrarse
+ * en pantalla en móvil), se convierte en el vídeo NATIVO del artista — mudo, en
+ * bucle y SIN reproductor (ni play ni pause), como los vídeos de eventos. Sin
+ * vídeo nativo, se comporta como la foto de siempre. El vídeo es
+ * `pointer-events-none`: el clic sigue llevando a la ficha.
  */
 export function RosterCard({
   slug,
@@ -32,14 +33,13 @@ export function RosterCard({
   genre,
   photo,
   video,
-  youtubeId,
   aspect = "aspect-[4/5]",
   shift = "",
 }: RosterCardProps) {
   const [hover, setHover] = useState(false);
   const [inView, setInView] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  const hasVideo = Boolean(video || youtubeId);
+  const hasVideo = Boolean(video);
 
   // Móvil/táctil: no hay hover. El vídeo arranca solo cuando la tarjeta está
   // bien centrada en pantalla (estilo feed) y se para al salir. En escritorio
@@ -84,8 +84,9 @@ export function RosterCard({
           />
         )}
 
-        {/* Activo (hover en escritorio, en-pantalla en móvil) → vídeo. Solo se
-            monta cuando toca (no carga 6 a la vez). */}
+        {/* Activo (hover en escritorio, en-pantalla en móvil) → vídeo nativo.
+            Sin controles (ni play ni pause), como los vídeos de eventos. Solo
+            se monta cuando toca (no carga varios a la vez). */}
         {active && video && (
           <video
             src={video}
@@ -94,18 +95,11 @@ export function RosterCard({
             autoPlay
             playsInline
             preload="metadata"
+            controls={false}
+            disablePictureInPicture
+            controlsList="nodownload noplaybackrate nofullscreen"
             className="pointer-events-none absolute inset-0 h-full w-full animate-[fadeIn_.4s_ease] object-cover"
           />
-        )}
-        {active && !video && youtubeId && (
-          <div className="pointer-events-none absolute inset-0 overflow-hidden animate-[fadeIn_.5s_ease]">
-            <iframe
-              title={name}
-              src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${youtubeId}&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3`}
-              allow="autoplay; encrypted-media"
-              className="absolute left-1/2 top-1/2 aspect-video h-full -translate-x-1/2 -translate-y-1/2"
-            />
-          </div>
         )}
 
         {/* Badge "reproducible": solo si hay vídeo, se desvanece al hacer hover. */}
