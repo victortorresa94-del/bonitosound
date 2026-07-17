@@ -60,7 +60,7 @@ function Illu({ slug, className }: { slug: string; className?: string }) {
       alt=""
       width={320}
       height={320}
-      className={`object-contain mix-blend-multiply ${className ?? ""}`}
+      className={`object-contain ${className ?? ""}`}
     />
   );
 }
@@ -124,11 +124,11 @@ export default function Servicios() {
                 key={s.slug}
                 href={s.href}
                 data-cursor="link"
-                className="group flex flex-col rounded-[1.75rem] border border-subtle bg-white/40 p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#14283C] md:p-9"
+                className="group flex flex-col rounded-[1.75rem] border border-subtle bg-white/60 p-7 shadow-[0_2px_22px_-14px_rgba(20,40,60,0.3)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#14283C] hover:shadow-[0_20px_44px_-22px_rgba(20,40,60,0.4)] md:p-9"
               >
                 <Numero n={s.n} />
-                <div className="mt-2 flex h-40 items-center justify-center">
-                  <Illu slug={s.slug} className="h-full w-auto max-w-[70%] transition-transform duration-500 group-hover:scale-[1.05]" />
+                <div className="mt-2 flex h-44 items-center justify-center">
+                  <Illu slug={s.slug} className="h-full w-auto max-w-[80%] transition-transform duration-500 group-hover:scale-[1.06]" />
                 </div>
                 <h2 className="font-round text-2xl font-bold md:text-3xl" style={{ color: NAVY }}>
                   {s.title}
@@ -145,7 +145,7 @@ export default function Servicios() {
             <Link
               href={RECORDS.href}
               data-cursor="link"
-              className="group grid items-center gap-6 rounded-[1.75rem] border border-subtle bg-white/40 p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#14283C] md:grid-cols-[0.7fr_1.3fr] md:p-10"
+              className="group grid items-center gap-6 rounded-[1.75rem] border border-subtle bg-white/60 p-7 shadow-[0_2px_22px_-14px_rgba(20,40,60,0.3)] transition-all duration-300 hover:-translate-y-1.5 hover:border-[#14283C] hover:shadow-[0_20px_44px_-22px_rgba(20,40,60,0.4)] md:grid-cols-[0.7fr_1.3fr] md:p-10"
             >
               <div className="flex h-44 items-center justify-center md:justify-start">
                 <Illu slug={RECORDS.slug} className="h-full w-auto max-w-[80%] transition-transform duration-500 group-hover:scale-[1.05]" />
