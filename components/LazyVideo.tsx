@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 
 /**
  * Vídeo que solo se carga y reproduce cuando entra en el viewport, y se pausa
@@ -11,10 +12,12 @@ export function LazyVideo({
   src,
   poster,
   className = "",
+  style,
 }: {
   src: string;
   poster?: string;
   className?: string;
+  style?: CSSProperties;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -45,6 +48,7 @@ export function LazyVideo({
       playsInline
       preload="none"
       className={className}
+      style={style}
     />
   );
 }
