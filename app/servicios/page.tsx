@@ -90,7 +90,7 @@ function Numero({ n }: { n: string }) {
 
 /** Estilo común de tarjeta interior (borde sutil + sombra + hover). */
 const CARD =
-  "flex h-full flex-col border border-[#14283C]/20 bg-white/70 p-5 shadow-[0_2px_20px_-14px_rgba(20,40,60,0.35)] transition-[box-shadow,border-color] duration-300 group-hover:border-[#14283C] group-hover:shadow-[0_22px_44px_-24px_rgba(20,40,60,0.45)] md:p-6";
+  "flex h-full flex-col border border-[#14283C]/20 bg-white/70 p-3.5 shadow-[0_2px_20px_-14px_rgba(20,40,60,0.35)] transition-[box-shadow,border-color] duration-300 group-hover:border-[#14283C] group-hover:shadow-[0_22px_44px_-24px_rgba(20,40,60,0.45)] md:p-4";
 
 export default function Servicios() {
   return (
@@ -137,7 +137,7 @@ export default function Servicios() {
       {/* ── GRID de servicios ── */}
       <section style={{ backgroundColor: "#FBFAF6" }}>
         <div className="wrap pb-16 pt-2">
-          <StaggerGroup stagger={0.06} className="grid gap-5 sm:grid-cols-2">
+          <StaggerGroup stagger={0.06} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICIOS.map((s, i) => (
               <div key={s.slug} className="h-full">
                 <Link
@@ -147,13 +147,13 @@ export default function Servicios() {
                 >
                   <div className={CARD} style={{ transform: `rotate(${TILT[i % TILT.length]})`, borderRadius: SHAPE[i % SHAPE.length] }}>
                     <Numero n={s.n} />
-                    <div className="mt-1 flex h-44 items-center justify-center md:h-52">
-                      <Illu slug={s.slug} className="h-full w-auto max-w-[96%] transition-transform duration-500 group-hover:scale-[1.05]" />
+                    <div className="flex h-52 items-center justify-center md:h-60">
+                      <Illu slug={s.slug} className="h-full w-auto max-w-full transition-transform duration-500 group-hover:scale-[1.05]" />
                     </div>
-                    <h2 className={`${cardFont(i)} text-2xl font-bold leading-tight md:text-[1.7rem]`} style={{ color: NAVY }}>
+                    <h2 className={`${cardFont(i)} mt-0.5 text-2xl font-bold leading-tight md:text-[1.6rem]`} style={{ color: NAVY }}>
                       {s.title}
                     </h2>
-                    <p className="mt-1.5 text-[0.82rem] leading-relaxed text-text-secondary">
+                    <p className="mt-1 line-clamp-2 text-[0.75rem] leading-snug text-text-secondary">
                       {s.desc}
                     </p>
                   </div>
@@ -163,18 +163,18 @@ export default function Servicios() {
           </StaggerGroup>
 
           {/* Records: tarjeta ancha al final (ilustración a un lado, texto al otro) */}
-          <RevealOnScroll className="mt-5">
+          <RevealOnScroll className="mt-4">
             <Link
               href={RECORDS.href}
               data-cursor="link"
               className="group block transition-transform duration-300 hover:-translate-y-1.5"
             >
               <div
-                className="grid items-center gap-6 border border-[#14283C]/20 bg-white/70 p-5 shadow-[0_2px_20px_-14px_rgba(20,40,60,0.35)] transition-[box-shadow,border-color] duration-300 group-hover:border-[#14283C] group-hover:shadow-[0_22px_44px_-24px_rgba(20,40,60,0.45)] md:grid-cols-[0.8fr_1.2fr] md:p-7"
+                className="grid items-center gap-5 border border-[#14283C]/20 bg-white/70 p-4 shadow-[0_2px_20px_-14px_rgba(20,40,60,0.35)] transition-[box-shadow,border-color] duration-300 group-hover:border-[#14283C] group-hover:shadow-[0_22px_44px_-24px_rgba(20,40,60,0.45)] md:grid-cols-[0.82fr_1.18fr] md:p-5"
                 style={{ transform: "rotate(-0.6deg)", borderRadius: SHAPE[6] }}
               >
-                <div className="flex h-44 items-center justify-center md:h-52 md:justify-start">
-                  <Illu slug={RECORDS.slug} className="h-full w-auto max-w-[92%] transition-transform duration-500 group-hover:scale-[1.04]" />
+                <div className="flex h-52 items-center justify-center md:h-60 md:justify-start">
+                  <Illu slug={RECORDS.slug} className="h-full w-auto max-w-full transition-transform duration-500 group-hover:scale-[1.04]" />
                 </div>
                 <div>
                   <Numero n={RECORDS.n} />
