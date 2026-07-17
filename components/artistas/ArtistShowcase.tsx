@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArtistPlayer } from "./ArtistPlayer";
-import { SpotifyButton } from "@/components/SpotifyButton";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -23,16 +22,6 @@ export type ShowcaseArtist = {
    *  Bonito como fallback). */
   audioSrc?: string;
 };
-
-function InstagramIcon() {
-  return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke={NAVY} strokeWidth="2" aria-hidden="true">
-      <rect x="2" y="2" width="20" height="20" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="1" fill={NAVY} stroke="none" />
-    </svg>
-  );
-}
 
 /**
  * Showcase de artistas tipo carrusel (calcado del mockup): a un lado el nombre
@@ -107,37 +96,47 @@ export function ArtistShowcase({
             {a.bioLine}
           </p>
 
-          {/* Cuatro botones en 2×2. Escuchar (oscuro, suena en vivo) y
-              Contratar (azul bonito) son los protagonistas; Spotify e Instagram
-              acompañan. */}
-          <div className="mt-8 grid max-w-md grid-cols-2 items-stretch gap-3">
+          {/* Propuesta 3: tres botones redondos (Play invertido + Spotify +
+              Instagram) y "Contratar booking" en pill cian. Play invertido =
+              fondo oscuro (mismo navy que el resto); Spotify e Instagram con
+              borde. Los tres salen SIEMPRE; sin link real, caen a una búsqueda
+              del artista (se sustituye por el link directo en cuanto esté). */}
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <ArtistPlayer key={a.slug} artistName={a.name} src={a.audioSrc ?? "/audio/bonito.mp3"} />
 
-            {a.spotifyUrl ? (
-              <SpotifyButton href={a.spotifyUrl} className="h-full w-full justify-center">
-                Spotify
-              </SpotifyButton>
-            ) : (
-              <span aria-hidden />
-            )}
+            <a
+              href={a.spotifyUrl ?? `https://open.spotify.com/search/${encodeURIComponent(a.name)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Escuchar a ${a.name} en Spotify`}
+              title="Escuchar en Spotify"
+              className="grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 transition-transform duration-200 hover:scale-105"
+              style={{ borderColor: NAVY, color: NAVY }}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 1 1-.277-1.213c3.809-.871 7.076-.496 9.712 1.114a.623.623 0 0 1 .207.856Zm1.223-2.722a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.13-9.965-1.166a.779.779 0 1 1-.452-1.49c3.632-1.102 8.147-.568 11.232 1.327a.779.779 0 0 1 .257 1.072Zm.105-2.835c-3.223-1.914-8.54-2.09-11.617-1.156a.935.935 0 1 1-.542-1.79c3.532-1.072 9.404-.865 13.115 1.338a.935.935 0 1 1-.956 1.608Z" />
+              </svg>
+            </a>
 
-            {a.instagramUrl ? (
-              <a
-                href={a.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-full w-full items-center justify-center gap-2 rounded-full border-2 py-3 text-sm font-bold transition-transform duration-200 hover:scale-[1.01]"
-                style={{ color: NAVY, borderColor: NAVY }}
-              >
-                <InstagramIcon /> Instagram
-              </a>
-            ) : (
-              <span aria-hidden />
-            )}
+            <a
+              href={a.instagramUrl ?? `https://www.instagram.com/explore/search/keyword/?q=${encodeURIComponent(a.name)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Instagram de ${a.name}`}
+              title="Instagram"
+              className="grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 transition-transform duration-200 hover:scale-105"
+              style={{ borderColor: NAVY, color: NAVY }}
+            >
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
 
             <Link
               href={`/contacto?a=${a.slug}`}
-              className="flex h-full w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-bold text-white transition-transform duration-200 hover:scale-[1.01]"
+              className="ml-1 inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold text-white transition-transform duration-200 hover:scale-[1.02]"
               style={{ backgroundColor: CYAN }}
             >
               Contratar booking →
