@@ -21,7 +21,7 @@ export function EventosOutro() {
         <p className="display mx-auto max-w-5xl text-center font-bold leading-[1.02] text-white" style={{ fontSize: "clamp(1.7rem, 5vw, 3.7rem)" }}>
           <span style={{ color: CYAN }}>“</span>No organizamos eventos.
           <br />
-          Creamos momentos que suenan.<span style={{ color: CYAN }}>”</span>
+          Creamos momentos que suenan bonito.<span style={{ color: CYAN }}>”</span>
         </p>
       </div>
 

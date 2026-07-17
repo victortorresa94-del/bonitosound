@@ -87,9 +87,17 @@ export function ServicePage({
         <div className={`wrap grid items-center gap-10 py-16 md:py-24 ${illo ? "md:grid-cols-[1.05fr_0.95fr]" : ""}`}>
           <div className={illo ? "" : "max-w-3xl"}>
             <RevealOnScroll as="p" className="eyebrow mb-4">{service.eyebrow}</RevealOnScroll>
-            <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
-              {service.h1}
-            </SplitTextReveal>
+            {service.h1Cyan && service.h1.includes(service.h1Cyan) ? (
+              <RevealOnScroll as="h1" className="display text-[clamp(2.6rem,7vw,5.4rem)] leading-[1.02]">
+                {service.h1.slice(0, service.h1.indexOf(service.h1Cyan))}
+                <span style={{ color: CYAN }}>{service.h1Cyan}</span>
+                {service.h1.slice(service.h1.indexOf(service.h1Cyan) + service.h1Cyan.length)}
+              </RevealOnScroll>
+            ) : (
+              <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
+                {service.h1}
+              </SplitTextReveal>
+            )}
             <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>{service.desc}</RevealOnScroll>
             <RevealOnScroll className="mt-9" delay={0.35}>
               <MagneticButton strength={0.35}><Cta href={mailto}>Hablamos →</Cta></MagneticButton>
