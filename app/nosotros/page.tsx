@@ -289,28 +289,34 @@ export default function Nosotros() {
       <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">Dani Boada · Fundador</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display mb-10 text-[clamp(2rem,4.5vw,3.4rem)]">
-          Treinta años. Y sigue cogiendo el teléfono.
+          Treinta años en esto. Y sigue al teléfono.
         </SplitTextReveal>
 
-        {/* Foto contenida + texto a la izquierda; entrevista (local, con sonido)
-            a la derecha. Nada estirado ni pixelado. */}
-        <div className="grid items-center gap-10 md:grid-cols-2">
+        {/* Foto contenida + experiencia a la izquierda; entrevista (vertical,
+            local, con sonido) a la derecha en formato reel — así no se recorta. */}
+        <div className="grid items-center gap-10 md:grid-cols-[1fr_0.8fr] md:gap-14">
           <RevealOnScroll className="flex flex-col gap-6 sm:flex-row sm:items-start md:flex-col lg:flex-row">
             <div className="relative aspect-[4/5] w-40 shrink-0 overflow-hidden rounded-2xl bg-bg-tertiary sm:w-44">
               {daniPhoto && (
                 <Image src={daniPhoto} alt="Dani Boada" fill sizes="180px" className="object-cover" />
               )}
             </div>
-            <p className="text-base leading-relaxed text-text-secondary md:text-lg">
-              Management, contratos y la llamada que cierra el bolo. En treinta
-              años en la industria, Dani ha trabajado con —y descubierto a—
-              artistas que hoy llenan estadios. Ese oficio es lo que hay detrás de
-              cada decisión de Bonito.
-            </p>
+            <div className="space-y-4 text-base leading-relaxed text-text-secondary md:text-lg">
+              <p>
+                Management, contratos y la llamada que cierra el bolo: ese es el
+                día a día de Dani. En treinta años en la industria ha llevado —y
+                descubierto— a artistas que hoy llenan estadios.
+              </p>
+              <p>
+                Ha visto de todo lo que se puede ver en este oficio: lo que
+                funciona, lo que no, y por qué. Ese recorrido es lo que hay detrás
+                de cada decisión que tomamos en Bonito.
+              </p>
+            </div>
           </RevealOnScroll>
-          <RevealOnScroll delay={0.15}>
-            <R2Video src="/video/nosotros/entrevista-dani.mp4" ratio="16 / 9" />
-            <p className="mt-4 text-sm text-text-muted">La entrevista a Dani, sin guion.</p>
+          <RevealOnScroll delay={0.15} className="mx-auto w-full max-w-[300px]">
+            <R2Video src="/video/nosotros/entrevista-dani.mp4" ratio="9 / 16" />
+            <p className="mt-4 text-center text-sm text-text-muted">La entrevista a Dani, sin guion.</p>
           </RevealOnScroll>
         </div>
 
