@@ -6,7 +6,7 @@ spotifyArtistId: "3NOAlABNpDcz4WxKSiBTh7"
 instagram: "https://www.instagram.com/fabiandcuesta/"
 youtubeIds: ["sWhxJAGcbGo", "Q2Pnaaa8HfA", "RS0NsdwXJ_U"]
 musicStyle: "Indie pop, pop y rock de cantautor, con más de quince años rodando de forma independiente. Suena igual de suyo en banda que en solitario."
-forWho: "Para salas que quieran canción de autor, con banda detrás o en formato desnudo."
+forWho: "Para salas que quieran canción de autor, en banda o a voz y guitarra."
 influences: ["indie pop", "pop", "rock"]
 ---
 
