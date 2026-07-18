@@ -58,9 +58,11 @@ export function InstagramReel({
   title?: string;
 }) {
   const id = url.match(/\/(?:reel|p|tv)\/([\w-]+)/)?.[1] ?? url;
-  // El embed de IG trae cabecera (Ver perfil) + vídeo + una barra inferior
-  // fea (likes, comentarios, "Ver más en Instagram"). Recortamos esa barra:
-  // el iframe es más alto que el contenedor y el overflow-hidden corta el pie.
+  // Importante: el embed de reels vía /reel/{id}/embed falla a menudo ("enlace
+  // incorrecto o suprimido"). El endpoint /p/{id}/embed sí carga el reel (un
+  // reel también es un post). /captioned evita algún redirect raro.
+  // El iframe trae cabecera + una barra inferior fea (likes, "Ver más"): el
+  // contenedor es más bajo que el iframe y el overflow-hidden corta ese pie.
   return (
     <div className="mx-auto w-full max-w-[300px]">
       <div
@@ -69,7 +71,7 @@ export function InstagramReel({
       >
         <iframe
           title={title}
-          src={`https://www.instagram.com/reel/${id}/embed`}
+          src={`https://www.instagram.com/p/${id}/embed/captioned`}
           loading="lazy"
           scrolling="no"
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
