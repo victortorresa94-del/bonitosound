@@ -131,20 +131,18 @@ export default function ArtistPage({
         featuredTrackIds={a.featuredTracks}
         spotifyArtistId={a.spotifyArtistId}
         spotifyPlaylistId={a.spotifyPlaylistId}
-        instagram={a.instagram}
       />
 
       {/* 4. Su mundo: reels + YouTube intercalados. Va aquí, pegado a la
           música, mientras el visitante está en modo "ver y escuchar" — no
           tirado al final de la página. */}
-      <ArtistLiveFeed name={a.name} reels={a.reels} youtubeIds={a.youtubeIds} />
+      <ArtistLiveFeed name={a.name} reels={a.reels} youtubeIds={a.youtubeIds} instagram={a.instagram} tiktok={a.tiktok} />
 
       {/* 5. Su sonido. */}
       <ArtistStyle
         genre={a.genre}
         style={a.musicStyle}
         influences={a.influences}
-        forWho={a.forWho}
       />
 
       {/* 6. Su historia: la bio currada (el 1er párrafo ya va en el hero). */}

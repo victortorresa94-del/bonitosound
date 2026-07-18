@@ -29,6 +29,11 @@ export function R2Video({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
+  // Dimensiones reales del vídeo (para ajustar el marco a su orientación en vez
+  // de forzar 16:9 y reescalar un vertical hasta pixelarlo).
+  const [dims, setDims] = useState<{ w: number; h: number } | null>(null);
+  const portrait = dims ? dims.h > dims.w : false;
+  const aspect = dims ? `${dims.w} / ${dims.h}` : ratio;
 
   // Con `start`, gestionamos el loop a mano: al terminar (o si el navegador
   // salta al 0) volvemos al segundo `start`, nunca al principio.
@@ -71,12 +76,19 @@ export function R2Video({
     setMuted(v.muted);
   };
 
+  const goFullscreen = () => {
+    const v = ref.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
+    if (!v) return;
+    if (v.requestFullscreen) v.requestFullscreen().catch(() => {});
+    else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen(); // iOS Safari
+  };
+
   return (
     <div
-      className={`relative overflow-hidden bg-bg-tertiary shadow-sm ${
+      className={`relative overflow-hidden bg-black shadow-sm ${
         rounded ? "rounded-2xl" : ""
-      } ${className}`}
-      style={{ aspectRatio: ratio }}
+      } ${portrait ? "mx-auto w-full max-w-[400px]" : "w-full"} ${className}`}
+      style={{ aspectRatio: aspect }}
     >
       <video
         ref={ref}
@@ -87,28 +99,44 @@ export function R2Video({
         autoPlay
         playsInline
         preload="metadata"
-        className="absolute inset-0 h-full w-full object-cover"
+        onLoadedMetadata={(e) => {
+          const v = e.currentTarget;
+          if (v.videoWidth && v.videoHeight) setDims({ w: v.videoWidth, h: v.videoHeight });
+        }}
+        className="absolute inset-0 h-full w-full object-contain"
       />
-      <button
-        type="button"
-        onClick={toggleSound}
-        aria-label={muted ? "Activar sonido" : "Silenciar"}
-        className="absolute bottom-3 right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur transition-colors hover:bg-black/75"
-      >
-        {muted ? (
+      <div className="absolute bottom-3 right-3 z-10 flex items-center gap-2">
+        <button
+          type="button"
+          onClick={toggleSound}
+          aria-label={muted ? "Activar sonido" : "Silenciar"}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur transition-colors hover:bg-black/75"
+        >
+          {muted ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M11 5 6 9H2v6h4l5 4V5z" />
+              <line x1="23" y1="9" x2="17" y2="15" />
+              <line x1="17" y1="9" x2="23" y2="15" />
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M11 5 6 9H2v6h4l5 4V5z" />
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+            </svg>
+          )}
+        </button>
+        <button
+          type="button"
+          onClick={goFullscreen}
+          aria-label="Pantalla completa"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur transition-colors hover:bg-black/75"
+        >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M11 5 6 9H2v6h4l5 4V5z" />
-            <line x1="23" y1="9" x2="17" y2="15" />
-            <line x1="17" y1="9" x2="23" y2="15" />
+            <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3" />
           </svg>
-        ) : (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M11 5 6 9H2v6h4l5 4V5z" />
-            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-          </svg>
-        )}
-      </button>
+        </button>
+      </div>
     </div>
   );
 }

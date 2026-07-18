@@ -2,26 +2,23 @@ import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 
 /**
- * ArtistStyle — "Su sonido": género grande, descripción del sonido,
- * influencias en chips y para quién es. Plug-and-play: si falta el género
- * (dato esencial) no renderiza nada; el resto de bloques son opcionales.
+ * ArtistStyle — "Su sonido": género grande, descripción del sonido e
+ * influencias en chips. Plug-and-play: si falta el género (dato esencial) no
+ * renderiza nada; el resto de bloques son opcionales.
  */
 export function ArtistStyle({
   genre,
   style,
   influences,
-  forWho,
 }: {
   genre: string;
   style?: string;
   influences?: string[];
-  forWho?: string;
 }) {
   const genreClean = genre?.trim();
   if (!genreClean) return null;
 
   const soundClean = style?.trim();
-  const forWhoClean = forWho?.trim();
   // Limpiamos vacíos y duplicados: el chip vacío nunca llega al DOM y una
   // influencia repetida no rompe las keys de React.
   const tags = Array.from(
@@ -35,10 +32,10 @@ export function ArtistStyle({
   const lead = canTint ? words.slice(0, -1).join(" ") : genreClean;
   const tail = canTint ? words[words.length - 1] : null;
 
-  const hasAside = Boolean(soundClean || tags.length > 0 || forWhoClean);
+  const hasAside = Boolean(soundClean || tags.length > 0);
   // El género YA sale en el hero (bajo el nombre, en cursiva cian). Esta
-  // sección solo se gana su sitio si aporta algo más: sonido, influencias o
-  // para quién. Si no, no se pinta — nada de cabeceras con hueco vacío.
+  // sección solo se gana su sitio si aporta algo más: sonido o influencias.
+  // Si no, no se pinta — nada de cabeceras con hueco vacío.
   if (!hasAside) return null;
 
   return (
@@ -108,21 +105,6 @@ export function ArtistStyle({
                   ))}
                 </StaggerGroup>
               </div>
-            )}
-
-            {forWhoClean && (
-              <RevealOnScroll
-                as="div"
-                delay={0.1}
-                className="mt-11 border-l-2 border-[#16b6d4] pl-5"
-              >
-                <p className="font-round mb-1.5 text-xs uppercase tracking-[0.18em] text-text-muted">
-                  Para quién
-                </p>
-                <p className="display text-[clamp(1.15rem,2vw,1.6rem)] italic leading-snug text-text-primary">
-                  {forWhoClean}
-                </p>
-              </RevealOnScroll>
             )}
           </div>
         )}

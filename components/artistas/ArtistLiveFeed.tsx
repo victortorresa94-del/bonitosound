@@ -2,6 +2,45 @@ import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { InstagramReel, YouTubeEmbed } from "@/components/Embeds";
 
+function IgGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden>
+      <defs>
+        <linearGradient id="ig-lf" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stopColor="#F58529" />
+          <stop offset="45%" stopColor="#DD2A7B" />
+          <stop offset="80%" stopColor="#8134AF" />
+          <stop offset="100%" stopColor="#515BD4" />
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="20" height="20" rx="5.5" stroke="url(#ig-lf)" strokeWidth="1.9" />
+      <circle cx="12" cy="12" r="4.2" stroke="url(#ig-lf)" strokeWidth="1.9" />
+      <circle cx="17.2" cy="6.8" r="1.2" fill="url(#ig-lf)" />
+    </svg>
+  );
+}
+
+function TikTokGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
+      <path d="M16.5 3c.3 2.1 1.5 3.6 3.5 4v2.6c-1.3.1-2.5-.2-3.6-.9v5.9c0 3.2-2.3 5.4-5.2 5.4-2.9 0-5.2-2.2-5.2-5s2.2-5 5-5c.3 0 .6 0 .9.1v2.7a2.3 2.3 0 0 0-1-.2 2.4 2.4 0 1 0 2.4 2.4V3h3.2Z" />
+    </svg>
+  );
+}
+
+function SocialPill({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2 rounded-full border border-subtle bg-bg-secondary px-5 py-2.5 text-sm font-bold text-text-primary transition-transform duration-200 hover:scale-[1.04] hover:border-text-primary/25"
+    >
+      {children}
+    </a>
+  );
+}
+
 type FeedItem = {
   kind: "reel" | "video";
   value: string;
@@ -56,14 +95,20 @@ export function ArtistLiveFeed({
   name,
   reels,
   youtubeIds,
+  instagram,
+  tiktok,
 }: {
   name: string;
   reels?: string[];
   youtubeIds?: string[];
+  instagram?: string;
+  tiktok?: string;
 }) {
   // Datos por props: si no hay nada que enseñar, la sección no existe.
   const reelList = (reels ?? []).map((r) => r?.trim()).filter((r): r is string => Boolean(r));
   const videoList = (youtubeIds ?? []).map((v) => v?.trim()).filter((v): v is string => Boolean(v));
+  const ig = instagram?.trim();
+  const tt = tiktok?.trim();
   if (reelList.length === 0 && videoList.length === 0) return null;
 
   const feed = buildFeed(reelList, videoList);
@@ -112,6 +157,24 @@ export function ArtistLiveFeed({
           </figure>
         ))}
       </StaggerGroup>
+
+      {/* CTA de redes: además del botón del hero, invita a seguirle aquí, justo
+          después de ver su contenido. */}
+      {(ig || tt) && (
+        <RevealOnScroll className="mt-14 flex flex-wrap items-center gap-3 border-t border-subtle pt-8">
+          <span className="mr-1 text-sm font-bold uppercase tracking-[0.16em] text-text-muted">Síguele en</span>
+          {ig && (
+            <SocialPill href={ig}>
+              <IgGlyph /> Instagram
+            </SocialPill>
+          )}
+          {tt && (
+            <SocialPill href={tt}>
+              <TikTokGlyph /> TikTok
+            </SocialPill>
+          )}
+        </RevealOnScroll>
+      )}
     </Section>
   );
 }
