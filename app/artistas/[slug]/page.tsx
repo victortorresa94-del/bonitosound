@@ -7,6 +7,7 @@ import { ArtistInfo } from "@/components/artistas/ArtistInfo";
 import { ArtistVideos } from "@/components/artistas/ArtistVideos";
 import { ArtistFeaturedMusic } from "@/components/artistas/ArtistFeaturedMusic";
 import { ArtistSocial } from "@/components/artistas/ArtistSocial";
+import { ArtistExtras } from "@/components/artistas/ArtistExtras";
 import { ArtistCTA } from "@/components/artistas/ArtistCTA";
 import { getArtist, getArtists } from "@/lib/content";
 import { findAsset, findArtistAudio } from "@/lib/assets";
@@ -144,7 +145,10 @@ export default function ArtistPage({
       {/* 6. Redes: reels + CTA a Instagram / TikTok. */}
       <ArtistSocial name={a.name} reels={a.reels} instagram={a.instagram} tiktok={a.tiktok} />
 
-      {/* 7. Cierre: booking. */}
+      {/* 7. Más de X: recursos extra (prensa, web…) si los hay. */}
+      <ArtistExtras name={a.name} extras={a.extras} />
+
+      {/* 8. Cierre: booking. */}
       <ArtistCTA
         name={a.name}
         bookingEmail={site.emails.booking}

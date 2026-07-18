@@ -65,6 +65,9 @@ export type Artist = {
   youtubeIds?: string[];
   /** URL del canal de YouTube (para el CTA "ver el canal"). */
   youtubeChannel?: string;
+  /** Recursos extra para el bloque "Más de X": prensa, web oficial, etc.
+   *  kind: "prensa" | "web" | "enlace" (icono/etiqueta). Solo lo que tengamos. */
+  extras?: { label: string; url: string; kind?: string; source?: string }[];
   /** Hitos verificables: año + frase corta. Si está vacío no se pinta nada.
    *  Ej. frontmatter:
    *    milestones:

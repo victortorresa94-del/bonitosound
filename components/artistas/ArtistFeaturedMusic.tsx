@@ -74,28 +74,29 @@ export function ArtistFeaturedMusic({
           </RevealOnScroll>
         )}
 
-        {/* DERECHA — último + destacados */}
+        {/* DERECHA — último + destacados, en compacto (80px) y pegados: un
+            listado, no tarjetas con hueco muerto debajo. */}
         {hasRight && (
-          <RevealOnScroll as="div" delay={0.1} className="space-y-8">
+          <RevealOnScroll as="div" delay={0.1} className="space-y-6">
             {last && big?.type !== "track" && (
               <div>
-                <h4 className="mb-3 font-round text-sm font-bold uppercase tracking-[0.14em] text-text-muted">Lo último que ha sacado</h4>
-                <SpotifyEmbed type="track" id={last} height={152} title={`Último tema de ${name}`} />
+                <h4 className="mb-2.5 font-round text-sm font-bold uppercase tracking-[0.14em] text-text-muted">Lo último que ha sacado</h4>
+                <SpotifyEmbed type="track" id={last} height={80} title={`Último tema de ${name}`} />
               </div>
             )}
             {featured.length > 0 && (
               <div>
-                <h4 className="mb-3 font-round text-sm font-bold uppercase tracking-[0.14em] text-text-muted">Temas destacados</h4>
-                <StaggerGroup stagger={0.06} className="space-y-3">
+                <h4 className="mb-2.5 font-round text-sm font-bold uppercase tracking-[0.14em] text-text-muted">Temas destacados</h4>
+                <StaggerGroup stagger={0.05} className="space-y-2">
                   {featured.map((id, i) => (
-                    <SpotifyEmbed key={id} type="track" id={id} height={152} title={`Tema destacado ${i + 1} de ${name}`} />
+                    <SpotifyEmbed key={id} type="track" id={id} height={80} title={`Tema destacado ${i + 1} de ${name}`} />
                   ))}
                 </StaggerGroup>
               </div>
             )}
             {playlist && artist && (
               <div>
-                <h4 className="mb-3 font-round text-sm font-bold uppercase tracking-[0.14em] text-text-muted">Su playlist</h4>
+                <h4 className="mb-2.5 font-round text-sm font-bold uppercase tracking-[0.14em] text-text-muted">Su playlist</h4>
                 <SpotifyEmbed type="playlist" id={playlist} height={352} title={`Playlist de ${name}`} />
               </div>
             )}
