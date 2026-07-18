@@ -29,6 +29,11 @@ export function R2Video({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
+  // Dimensiones reales del vídeo (para ajustar el marco a su orientación en vez
+  // de forzar 16:9 y reescalar un vertical hasta pixelarlo).
+  const [dims, setDims] = useState<{ w: number; h: number } | null>(null);
+  const portrait = dims ? dims.h > dims.w : false;
+  const aspect = dims ? `${dims.w} / ${dims.h}` : ratio;
 
   // Con `start`, gestionamos el loop a mano: al terminar (o si el navegador
   // salta al 0) volvemos al segundo `start`, nunca al principio.
@@ -80,10 +85,10 @@ export function R2Video({
 
   return (
     <div
-      className={`relative overflow-hidden bg-bg-tertiary shadow-sm ${
+      className={`relative overflow-hidden bg-black shadow-sm ${
         rounded ? "rounded-2xl" : ""
-      } ${className}`}
-      style={{ aspectRatio: ratio }}
+      } ${portrait ? "mx-auto w-full max-w-[400px]" : "w-full"} ${className}`}
+      style={{ aspectRatio: aspect }}
     >
       <video
         ref={ref}
@@ -94,7 +99,11 @@ export function R2Video({
         autoPlay
         playsInline
         preload="metadata"
-        className="absolute inset-0 h-full w-full object-cover"
+        onLoadedMetadata={(e) => {
+          const v = e.currentTarget;
+          if (v.videoWidth && v.videoHeight) setDims({ w: v.videoWidth, h: v.videoHeight });
+        }}
+        className="absolute inset-0 h-full w-full object-contain"
       />
       <div className="absolute bottom-3 right-3 z-10 flex items-center gap-2">
         <button
