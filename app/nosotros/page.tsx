@@ -26,6 +26,16 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/nosotros` },
 };
 
+// Reels de Instagram del banner "El día a día". TODO(Víctor): sustituir por
+// los 2-3 reels reales que quieras enganchar. De momento el primero es el de
+// la presentación (único confirmado) y los otros dos son placeholders con la
+// misma URL para poder ver la fila montada — cámbialos por sus enlaces.
+const DIA_A_DIA_REELS = [
+  { url: "https://www.instagram.com/reel/DCOfx1YKHsP/", title: "Presentación de Bonito Sound" },
+  { url: "https://www.instagram.com/reel/DCOfx1YKHsP/", title: "Bonito Sound en Instagram — reel 2 (placeholder)" },
+  { url: "https://www.instagram.com/reel/DCOfx1YKHsP/", title: "Bonito Sound en Instagram — reel 3 (placeholder)" },
+];
+
 // Números reales (nada inventado): fundación, sello, eventos.
 const STATS = [
   { n: "30", l: ["años", "de oficio"] },
@@ -239,6 +249,40 @@ export default function Nosotros() {
             );
           })}
         </StaggerGroup>
+      </Section>
+
+      {/* ── BANNER INSTAGRAM: el día a día (ilustración + CTA + reels) ── */}
+      <Section>
+        <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary px-7 py-10 md:px-12 md:py-14">
+          <div className="grid items-center gap-8 md:grid-cols-[1fr_0.5fr]">
+            <div>
+              <p className="eyebrow mb-4">El día a día</p>
+              <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,3rem)]">
+                Lo que montamos, semana a semana.
+              </SplitTextReveal>
+              <p className="mt-5 max-w-md text-text-secondary">
+                Lo de dentro está en Instagram: directos, backstage y lo que va cayendo.
+              </p>
+              <div className="mt-7">
+                <MagneticButton strength={0.35}>
+                  <Cta href={site.social.instagram} external>Síguenos en Instagram →</Cta>
+                </MagneticButton>
+              </div>
+            </div>
+            <div className="relative mx-auto aspect-square w-full max-w-[200px] md:max-w-[240px]">
+              <Image src="/img/marca/banner-instagram.png" alt="" fill sizes="(max-width: 768px) 200px, 240px" className="object-contain" aria-hidden />
+            </div>
+          </div>
+
+          <StaggerGroup
+            stagger={0.1}
+            className="mt-10 flex justify-center gap-5 overflow-x-auto pb-1 md:mt-12 md:gap-6"
+          >
+            {DIA_A_DIA_REELS.map((r, i) => (
+              <InstagramReel key={`${r.url}-${i}`} url={r.url} title={r.title} />
+            ))}
+          </StaggerGroup>
+        </RevealOnScroll>
       </Section>
 
       {/* ── DANI, EL FUNDADOR — rediseñado: dimensiones equilibradas + tarjetas ── */}
