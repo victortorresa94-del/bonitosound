@@ -79,7 +79,8 @@ export function ArtistSocial({
         >
           {reelList.map((r) =>
             r.startsWith("/") ? (
-              // Vídeo LOCAL (.mp4) → marco reel fiable, como en Nosotros.
+              // Vídeo LOCAL (.mp4) → marco reel fiable, se reproduce inline
+              // (como en Nosotros). Es la vía recomendada.
               <div
                 key={r}
                 className="relative aspect-[9/16] w-[62vw] max-w-[240px] shrink-0 snap-center overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 sm:w-[240px]"
@@ -87,8 +88,8 @@ export function ArtistSocial({
                 <EventHeroVideo src={r} label={name} />
               </div>
             ) : (
-              // URL de Instagram → embed (menos fiable: IG bloquea embeds).
-              <div key={r} className="w-[78vw] max-w-[300px] shrink-0 snap-center sm:w-[300px]">
+              // URL de Instagram → tarjeta-enlace (los embeds de IG salen rotos).
+              <div key={r} className="w-[62vw] max-w-[240px] shrink-0 snap-center sm:w-[240px]">
                 <InstagramReel url={r} title={`Reel de ${name}`} />
               </div>
             ),
