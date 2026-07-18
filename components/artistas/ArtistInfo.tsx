@@ -1,7 +1,24 @@
 import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
+import { ServiceIcon, type IconName } from "@/components/services/ServiceIcon";
 
 const CYAN = "#16b6d4";
+const NAVY = "#14283C";
+
+// Servicio de Bonito → su iconito. Se normaliza (minúsculas, sin tildes).
+const SERVICE_ICON: Record<string, IconName> = {
+  booking: "calendario",
+  management: "management",
+  distribucion: "distribucion",
+  sello: "disco",
+  editorial: "derechos",
+  marketing: "megafono",
+  producciones: "escenario",
+};
+function iconFor(s: string): IconName {
+  const key = s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  return SERVICE_ICON[key] ?? "disco";
+}
 const PARRAFO = "text-pretty text-lg leading-relaxed text-text-secondary";
 const ENTRADA = `${PARRAFO} md:text-xl md:leading-relaxed first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-display first-letter:text-[3.2rem] first-letter:leading-[0.78] first-letter:text-[#14283C] md:first-letter:text-[3.8rem]`;
 
@@ -52,24 +69,38 @@ export function ArtistInfo({
           <RevealOnScroll delay={0.1} className="space-y-9 md:border-l md:border-subtle md:pl-10">
             {miles.length > 0 && (
               <div>
-                <p className="eyebrow mb-4">Trayectoria</p>
-                <ul className="space-y-3.5">
+                <p className="eyebrow mb-5">Trayectoria</p>
+                {/* Timeline: línea vertical + puntos cian. */}
+                <ol className="relative space-y-5 border-l-2 pl-6" style={{ borderColor: "rgba(20,40,60,0.12)" }}>
                   {miles.map((m) => (
-                    <li key={`${m.year}-${m.text}`} className="flex gap-4">
-                      <span className="shrink-0 font-mono text-sm font-bold tabular-nums" style={{ color: CYAN }}>{m.year}</span>
-                      <span className="text-sm leading-snug text-text-secondary">{m.text}</span>
+                    <li key={`${m.year}-${m.text}`} className="relative">
+                      <span
+                        className="absolute top-1.5 h-3 w-3 rounded-full ring-4 ring-bg-primary"
+                        style={{ left: "-1.85rem", backgroundColor: CYAN }}
+                      />
+                      <p className="font-mono text-xs font-bold tabular-nums" style={{ color: NAVY }}>{m.year}</p>
+                      <p className="mt-0.5 text-sm leading-snug text-text-secondary">{m.text}</p>
                     </li>
                   ))}
-                </ul>
+                </ol>
               </div>
             )}
 
             {servs.length > 0 && (
               <div>
                 <p className="eyebrow mb-4">Con Bonito</p>
-                <div className="flex flex-wrap gap-2">
+                {/* Chips navy con el iconito de cada servicio (icono blanco,
+                    acento cian) — juega con el azul oscuro de la marca. */}
+                <div className="flex flex-wrap gap-2.5">
                   {servs.map((s) => (
-                    <span key={s} className="rounded-full border border-subtle bg-bg-tertiary px-4 py-1.5 text-sm font-semibold text-text-primary">{s}</span>
+                    <span
+                      key={s}
+                      className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white [&_svg]:h-4 [&_svg]:w-4"
+                      style={{ backgroundColor: NAVY }}
+                    >
+                      <ServiceIcon name={iconFor(s)} className="text-white" />
+                      {s}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -80,7 +111,7 @@ export function ArtistInfo({
                 <p className="eyebrow mb-4">Estilos</p>
                 <div className="flex flex-wrap gap-2">
                   {styles.map((t) => (
-                    <span key={t} className="rounded-full border border-subtle px-4 py-1.5 text-sm text-text-secondary">{t}</span>
+                    <span key={t} className="rounded-full border border-subtle px-3.5 py-1.5 text-sm text-text-secondary">{t}</span>
                   ))}
                 </div>
               </div>
