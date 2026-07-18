@@ -22,9 +22,6 @@ export function ArtistCTA({
   const email = bookingEmail?.trim();
   if (!nombre || !email) return null;
 
-  // El IG puede llegar vacío desde el frontmatter ("").
-  const ig = instagram?.trim();
-
   // El botón lleva al formulario único de contratación ya precargado con este
   // artista (?a=<slug>), no a un mailto pelado: se pide la info que hace falta.
   const contratarHref = `/contacto?a=${slug}`;
@@ -62,14 +59,6 @@ export function ArtistCTA({
               Contratar a {nombre} →
             </Cta>
           </MagneticButton>
-
-          {ig && (
-            <MagneticButton strength={0.3}>
-              <Cta href={ig} variant="ghost" external>
-                Síguele en Instagram
-              </Cta>
-            </MagneticButton>
-          )}
         </RevealOnScroll>
 
         <RevealOnScroll delay={0.24} className="mt-8">

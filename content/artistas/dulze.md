@@ -2,12 +2,23 @@
 name: "Dulze"
 genre: "Indie pop / Raíz flamenca"
 tier: "distribucion"
+services: ["Booking", "Management", "Distribución"]
 spotifyArtistId: "1PNJOvNCIMG9dN4cy7IG4D"
 instagram: "https://www.instagram.com/duuuulze/"
+tiktok: "https://www.tiktok.com/@duuuulze"
 image: "/img/artistas/dulze.png"
+reels:
+  - "https://www.instagram.com/reel/C6OYK_KMD1C/"
+  - "https://www.instagram.com/reel/DWOyI3eCirq/"
+  - "https://www.instagram.com/reel/DKhBR02s-ln/"
 lastTrackId: "5b9Q8sW1SiK7JuFPI0uQVq"
 featuredTracks: ["5b9Q8sW1SiK7JuFPI0uQVq", "7LHaCtAde5bPtvyeWDPOC5", "4AqsdS864QAPwDMLmgSxdo"]
-youtubeIds: ["LYFpMB7AHJM", "Zu8RrDZHcso", "639CdU5pSy0", "pSJLRA0m29w"]
+youtubeIds: ["zKINBgONQHk", "AH886pykUkI", "XLQjfbqTS7U", "Zu8RrDZHcso"]
+youtubeChannel: "https://www.youtube.com/@duuuulze"
+extras:
+  - { label: "Web oficial", url: "https://dulze.es", kind: "web" }
+  - { label: "Entrevista en Diario de Cádiz", url: "https://www.diariodecadiz.es/vivir_en_cadiz/dulze-nueva-promesa-gaditana-necesito-volver-chipiona-me-da-calma-madrid-quita_0_2006879827.html", kind: "prensa", source: "Diario de Cádiz" }
+  - { label: "Seleccionada por Girando Por Salas", url: "https://jenesaispop.com/2026/03/04/518201/dulze-gps-fechas/", kind: "prensa", source: "Jenesaispop" }
 stats:
   - { value: "829", label: "oyentes/mes en Spotify" }
   - { value: "4.172", label: "seguidores en Instagram" }

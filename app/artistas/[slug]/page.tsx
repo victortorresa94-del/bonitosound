@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
-import { Section, JsonLd } from "@/components/ui";
-import { RevealOnScroll, StaggerGroup } from "@/components/motion";
+import { JsonLd } from "@/components/ui";
 import { ArtistShowcase, type ShowcaseArtist } from "@/components/artistas/ArtistShowcase";
 import { ArtistNumbers } from "@/components/artistas/ArtistNumbers";
+import { ArtistInfo } from "@/components/artistas/ArtistInfo";
+import { ArtistVideos } from "@/components/artistas/ArtistVideos";
 import { ArtistFeaturedMusic } from "@/components/artistas/ArtistFeaturedMusic";
-import { ArtistStyle } from "@/components/artistas/ArtistStyle";
-import { ArtistBio } from "@/components/artistas/ArtistBio";
-import { ArtistLiveFeed } from "@/components/artistas/ArtistLiveFeed";
-import { ArtistConcerts } from "@/components/artistas/ArtistConcerts";
+import { ArtistSocial } from "@/components/artistas/ArtistSocial";
+import { ArtistExtras } from "@/components/artistas/ArtistExtras";
 import { ArtistCTA } from "@/components/artistas/ArtistCTA";
 import { getArtist, getArtists } from "@/lib/content";
 import { findAsset, findArtistAudio } from "@/lib/assets";
@@ -93,8 +91,6 @@ export default function ArtistPage({
     };
   });
 
-  const hasGallery = a.gallery && a.gallery.length > 0;
-
   const sameAs: string[] = [];
   if (a.spotifyArtistId)
     sameAs.push(`https://open.spotify.com/artist/${a.spotifyArtistId}`);
@@ -121,10 +117,23 @@ export default function ArtistPage({
       {/* 1. Hero: carrusel (nombre + género cian + bio + Spotify/IG + flechas). */}
       <ArtistShowcase artists={showcase} startSlug={a.slug} />
 
-      {/* 2. Números: prueba social de un vistazo. */}
+      {/* 2. Números arriba: prueba social de un vistazo. */}
       <ArtistNumbers stats={a.stats ?? []} />
 
-      {/* 3. Música: que se escuche ya. */}
+      {/* 3. Info unificada a 2 columnas: historia | trayectoria + Con Bonito
+          + estilos. Foto no, que ya está en el hero. */}
+      <ArtistInfo
+        name={a.name}
+        bio={a.bio.slice(1)}
+        milestones={a.milestones}
+        services={a.services}
+        influences={a.influences}
+      />
+
+      {/* 4. Vídeos: una sola fila (2-3), con CTA al canal de YouTube. */}
+      <ArtistVideos name={a.name} youtubeIds={a.youtubeIds} youtubeChannel={a.youtubeChannel} />
+
+      {/* 5. Spotify a 2 columnas: reproductor grande | último + destacados. */}
       <ArtistFeaturedMusic
         name={a.name}
         lastTrackId={a.lastTrackId}
@@ -133,54 +142,13 @@ export default function ArtistPage({
         spotifyPlaylistId={a.spotifyPlaylistId}
       />
 
-      {/* 4. Su mundo: reels + YouTube intercalados. Va aquí, pegado a la
-          música, mientras el visitante está en modo "ver y escuchar" — no
-          tirado al final de la página. */}
-      <ArtistLiveFeed name={a.name} reels={a.reels} youtubeIds={a.youtubeIds} />
+      {/* 6. Redes: reels + CTA a Instagram / TikTok. */}
+      <ArtistSocial name={a.name} reels={a.reels} instagram={a.instagram} tiktok={a.tiktok} />
 
-      {/* 5. Su sonido. */}
-      <ArtistStyle
-        genre={a.genre}
-        style={a.musicStyle}
-        influences={a.influences}
-      />
+      {/* 7. Más de X: recursos extra (prensa, web…) si los hay. */}
+      <ArtistExtras name={a.name} extras={a.extras} />
 
-      {/* 6. Su historia: la bio currada (el 1er párrafo ya va en el hero). */}
-      <ArtistBio paragraphs={a.bio.slice(1)} name={a.name} photo={photo} />
-
-      {/* 7. Directo: de su primer bolo a hoy + trayectoria. */}
-      <ArtistConcerts
-        firstConcert={a.firstConcert}
-        lastConcert={a.lastConcert}
-        milestones={a.milestones}
-      />
-
-      {/* 8. Galería (si hay fotos). */}
-      {hasGallery && (
-        <Section className="bg-bg-primary">
-          <RevealOnScroll as="p" className="eyebrow mb-8">
-            Galería
-          </RevealOnScroll>
-          <StaggerGroup stagger={0.08} className="grid grid-cols-2 gap-4 md:grid-cols-4">
-            {a.gallery!.map((src) => (
-              <div
-                key={src}
-                className="relative aspect-[3/4] overflow-hidden rounded-xl border border-subtle"
-              >
-                <Image
-                  src={src}
-                  alt={a.name}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-700 hover:scale-105"
-                />
-              </div>
-            ))}
-          </StaggerGroup>
-        </Section>
-      )}
-
-      {/* 9. Cierre. */}
+      {/* 8. Cierre: booking. */}
       <ArtistCTA
         name={a.name}
         bookingEmail={site.emails.booking}

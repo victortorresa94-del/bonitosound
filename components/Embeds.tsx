@@ -58,9 +58,11 @@ export function InstagramReel({
   title?: string;
 }) {
   const id = url.match(/\/(?:reel|p|tv)\/([\w-]+)/)?.[1] ?? url;
-  // El embed de IG trae cabecera (Ver perfil) + vídeo + una barra inferior
-  // fea (likes, comentarios, "Ver más en Instagram"). Recortamos esa barra:
-  // el iframe es más alto que el contenedor y el overflow-hidden corta el pie.
+  // Embed del reel: muestra la portada y se reproduce al hacer clic. Funciona
+  // con reels de cuentas PÚBLICAS (como @bonito_sound). Si una cuenta es
+  // privada o el reel no admite embed, Instagram muestra su error — en ese caso
+  // la vía fiable es un .mp4 local. El iframe es más alto que el contenedor y el
+  // overflow-hidden recorta la barra inferior fea (likes, "Ver más").
   return (
     <div className="mx-auto w-full max-w-[300px]">
       <div

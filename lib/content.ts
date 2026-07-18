@@ -19,6 +19,8 @@ export type Artist = {
   /** Playlist propia del artista (si difiere de su perfil de artista). */
   spotifyPlaylistId?: string;
   instagram?: string;
+  /** Perfil de TikTok (URL completa). Se muestra en el CTA de redes. */
+  tiktok?: string;
   image?: string;
   /** Vídeo corto para el hover del roster (mudo, en bucle). Se resuelve por
    *  prioridad: /public/video/artistas/<slug>.mp4 → `video` forzado →
@@ -61,6 +63,11 @@ export type Artist = {
   reels?: string[];
   /** IDs de vídeos de YouTube (directos, videoclips, backstage…). */
   youtubeIds?: string[];
+  /** URL del canal de YouTube (para el CTA "ver el canal"). */
+  youtubeChannel?: string;
+  /** Recursos extra para el bloque "Más de X": prensa, web oficial, etc.
+   *  kind: "prensa" | "web" | "enlace" (icono/etiqueta). Solo lo que tengamos. */
+  extras?: { label: string; url: string; kind?: string; source?: string }[];
   /** Hitos verificables: año + frase corta. Si está vacío no se pinta nada.
    *  Ej. frontmatter:
    *    milestones:
