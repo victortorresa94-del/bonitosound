@@ -36,7 +36,7 @@ const DIA_A_DIA_TILES = [
   { kind: "video", src: "/video/nosotros/cris.mp4", label: "Cris" },
   { kind: "video", src: "/video/home/top-bonito.mp4", label: "Bonito Sound" },
   { kind: "video", src: "/video/eventos/natura.mp4", label: "Nàtura" },
-  { kind: "reel", url: "https://www.instagram.com/reel/DQ97C_yDJD6/" },
+  { kind: "video", src: "/video/eventos/corona.mp4", label: "Corona" },
 ] as const;
 
 // Números reales (nada inventado): fundación, sello, eventos.
