@@ -5,6 +5,9 @@ tier: "distribucion"
 spotifyArtistId: "5KYVUnPDSlv6g86mQ0EBsp"
 instagram: "https://www.instagram.com/d__nacar/"
 image: "/img/artistas/d-nacar.jpeg"
+musicStyle: "Rap y música urbana, con colaboraciones dentro del propio roster."
+forWho: "Para playlist urbana y directo de rap."
+influences: ["rap", "música urbana"]
 ---
 
 D Nácar se mueve en el rap y la música urbana, representado por Bonito Sound desde Sabadell. Ha compartido tema con su compañero de agencia Marco la Testa en "1 Feeling (Remix)".
