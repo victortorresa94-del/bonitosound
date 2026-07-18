@@ -27,15 +27,17 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/nosotros` },
 };
 
-// Vídeos verticales LOCALES para el banner de Instagram (nada de embeds de IG,
-// que en móvil salen apretados y con toda su UI). Formato reel 9:16, mudos en
-// bucle. Cris hablando + el vídeo "top" + Nàtura. Para meter el reel
-// DQ97C_yDJD6 u otro, baja su .mp4 a /public/video/nosotros/ y añádelo aquí.
-const DIA_A_DIA_VIDEOS = [
-  { src: "/video/eventos/cris.mp4", label: "Cris" },
-  { src: "/video/home/top-bonito.mp4", label: "Bonito Sound" },
-  { src: "/video/eventos/natura.mp4", label: "Nàtura" },
-];
+// Tiles del banner de Instagram. Vídeos verticales LOCALES (formato reel 9:16,
+// mudos en bucle) + el reel de IG que pasó Víctor como embed. Cris hablando
+// solo vive AQUÍ (fuera de eventos). Para que el reel de IG quede idéntico a
+// los locales, basta bajar su .mp4 a /public/video/nosotros/ y cambiar su tile
+// a { kind: "video", src: "…" }.
+const DIA_A_DIA_TILES = [
+  { kind: "video", src: "/video/nosotros/cris.mp4", label: "Cris" },
+  { kind: "video", src: "/video/home/top-bonito.mp4", label: "Bonito Sound" },
+  { kind: "video", src: "/video/eventos/natura.mp4", label: "Nàtura" },
+  { kind: "reel", url: "https://www.instagram.com/reel/DQ97C_yDJD6/" },
+] as const;
 
 // Números reales (nada inventado): fundación, sello, eventos.
 const STATS = [
@@ -290,20 +292,26 @@ export default function Nosotros() {
             </div>
           </div>
 
-          {/* Vídeos verticales locales en marco reel: scroll horizontal con snap
-              en móvil, fila centrada en escritorio. Con fallback navy detrás. */}
+          {/* Vídeos verticales locales (marco reel) + el reel de IG. Scroll
+              horizontal con snap en móvil; fila centrada en escritorio. */}
           <StaggerGroup
             stagger={0.1}
-            className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:mt-12 md:justify-center md:gap-6 md:overflow-visible"
+            className="mt-10 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto pb-2 md:mt-12 md:justify-center md:gap-6 md:overflow-visible"
           >
-            {DIA_A_DIA_VIDEOS.map((v) => (
-              <div
-                key={v.src}
-                className="relative aspect-[9/16] w-[58vw] max-w-[220px] shrink-0 snap-center overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 sm:w-[42vw] md:w-[200px]"
-              >
-                <EventHeroVideo src={v.src} label={v.label} />
-              </div>
-            ))}
+            {DIA_A_DIA_TILES.map((t) =>
+              t.kind === "video" ? (
+                <div
+                  key={t.src}
+                  className="relative aspect-[9/16] w-[58vw] max-w-[220px] shrink-0 snap-center overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 sm:w-[42vw] md:w-[200px]"
+                >
+                  <EventHeroVideo src={t.src} label={t.label} />
+                </div>
+              ) : (
+                <div key={t.url} className="w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-[280px]">
+                  <InstagramReel url={t.url} title="Reel de Bonito Sound" />
+                </div>
+              ),
+            )}
           </StaggerGroup>
         </RevealOnScroll>
       </Section>
