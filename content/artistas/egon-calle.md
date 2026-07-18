@@ -4,7 +4,7 @@ genre: "Flamenco fusión, indie, folk, R&B y soul con detalles electrónicos"
 tier: "distribucion"
 spotifyArtistId: "73GXtlzsrh32dnAiAO2xpO"
 youtubeIds: ["NcKUictqtJk"]
-musicStyle: "Flamenco de fusión cruzado con indie, folk, R&B y soul, con detalles electrónicos por encima. Un directo que suele coger desprevenido."
+musicStyle: "Flamenco de fusión cruzado con indie, folk, R&B y soul, con detalles electrónicos por encima. Un directo que suele pillar desprevenido."
 forWho: "Para quien busca raíz flamenca sin ortodoxia, abierta a soul e indie."
 influences: ["flamenco fusión", "R&B", "soul", "indie"]
 ---

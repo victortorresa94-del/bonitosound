@@ -118,7 +118,8 @@ export const services: Record<string, Service> = {
     slug: "distribucion",
     path: "/records/distribucion",
     eyebrow: "Distribución",
-    h1: "Súbela con quien sabe. Suena en todo el mundo.",
+    h1: "Llevamos tu música a todo el mundo.",
+    h1Cyan: "a todo el mundo.",
     desc: "Distribuimos tu música en Spotify, Apple Music, YouTube y las demás, con los metadatos en orden y gente del sector detrás. Ya distribuyen unos veinte artistas con nosotros.",
     ctaSubject: "Distribución",
     aspects: [

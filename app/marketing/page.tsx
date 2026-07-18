@@ -115,8 +115,8 @@ export default function Marketing() {
             Marketing musical
           </RevealOnScroll>
           <h1 className="display max-w-[16ch] text-[clamp(2.8rem,7.5vw,6rem)] leading-[0.98] text-[#14283C]">
-            Cuando sale,<br />
-            se entera <span className="text-[#16b6d4]">quien debe</span>.
+            Movemos tu lanzamiento<br />
+            como <span className="text-[#16b6d4]">se merece</span>.
           </h1>
           <RevealOnScroll
             as="p"
