@@ -150,6 +150,49 @@ Al final: "DUDAS" con lo no confirmado y por qué.
 
 ---
 
+## FASE 1B — IMÁGENES de cada artista (recolecta de fotos)
+
+```
+[PEGA EL CONTEXTO (§0) + LAS ANCLAS (§1) de los artistas que trabajes]
+
+Para CADA artista, recopila 3-6 FOTOS suyas de la mejor calidad posible, SIEMPRE
+de la persona correcta (usa las anclas). Fuentes por orden de preferencia:
+1) Su web oficial / press kit / dossier de prensa.
+2) Su Spotify (foto de artista) y su Instagram (fotos de prensa/directo, no memes).
+3) Medios/prensa con foto suya acreditada.
+Evita: fotos borrosas, con marca de agua ajena, capturas, o de terceros con
+copyright dudoso. Si una foto tiene autor/crédito, anótalo.
+
+Para cada foto dame: URL DIRECTA a la imagen (que termine en .jpg/.png/.webp si
+puede), orientación (vertical/horizontal/cuadrada), resolución aprox y fuente.
+
+⭐ FOTO PRINCIPAL (la de la ficha y el roster) — muy importante:
+- VERTICAL (retrato), cara o medio cuerpo, buena resolución (≥1000 px de ancho).
+- Que quede bien en BLANCO Y NEGRO (la web las muestra en B/N y a color al pasar
+  el ratón), fondo no recargado.
+- Márcala con "★".
+
+Formato por artista:
+
+### dulze
+principal: "★ https://…/foto.jpg  (vertical, ~1200x1600, fuente: web oficial)"
+galeria:
+  - "https://…/foto2.jpg  (horizontal, prensa, autor: …)"
+  - "https://…/foto3.jpg  (vertical, Instagram)"
+FUENTES: [todas las URLs]
+
+Si puedes DESCARGAR las imágenes, nómbralas así y pásamelas:
+  <slug>.jpg           → la principal (ej. dulze.jpg)
+  <slug>-2.jpg, -3.jpg → galería
+Si no puedes descargarlas, con las URLs directas me vale.
+```
+
+Haz esto sobre todo para los que **NO tienen buena foto** o ninguna, pero recoge
+para todos (mejor tener galería). Los `draft` (OTEM, 96Grados, Belbaka,
+Overpulation, Sotrac, Soylapau): solo si confirmas que es la persona correcta.
+
+---
+
 ## FASE 2 — Noticias y prensa de Bonito Sound (para el blog)
 
 ```
@@ -232,7 +275,8 @@ E) EQUIPO — datos públicos (LinkedIn/prensa) de Dani Boada, Manu Rojo, Xavi J
 | first/lastConcert | `firstConcert`/`lastConcert` | bloque "Directo" |
 | youtubeIds | `youtubeIds` | vídeos |
 | reels | `reels` | feed de reels |
-| fotos | `public/img/artistas/<slug>` | foto de ficha/roster |
+| foto principal | `public/img/artistas/<slug>.jpg` | foto de la ficha y del roster (B/N → color al hover) |
+| galería | `content/artistas/<slug>.md` → `gallery: [...]` | bloque de galería de la ficha |
 | noticias | `content/diario/*.md` | posts del blog (SEO) |
 | enlaces/membresías/marcas/Jaleo | `lib/site.ts` + páginas | credibilidad, casos, footer |
 
