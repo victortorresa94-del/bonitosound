@@ -27,8 +27,8 @@ type Servicio = {
 
 // Copy y orden del mockup. Records va ancho al final.
 const SERVICIOS: Servicio[] = [
-  { n: "01", slug: "booking", title: "Booking", href: "/records/booking", desc: "Conectamos tu música con el público adecuado. Giras, festivales y conciertos a medida para que tu directo llegue más lejos." },
-  { n: "02", slug: "management", title: "Management", href: "/records/management", desc: "Acompañamos tu carrera con visión, estrategia y experiencia para que tomes las mejores decisiones en cada etapa." },
+  { n: "01", slug: "booking", title: "Booking", href: "/booking", desc: "Conectamos tu música con el público adecuado. Giras, festivales y conciertos a medida para que tu directo llegue más lejos." },
+  { n: "02", slug: "management", title: "Management", href: "/management", desc: "Acompañamos tu carrera con visión, estrategia y experiencia para que tomes las mejores decisiones en cada etapa." },
   { n: "03", slug: "produccion", title: "Producción", href: "/records/producciones", desc: "Damos forma a tu sonido. Producción musical, grabación, mezcla y mastering con criterio y sin prisas." },
   { n: "04", slug: "editorial", title: "Editorial", href: "/records/editorial", desc: "Publicamos y administramos tus derechos para que tus canciones generen ingresos y lleguen a todas partes." },
   { n: "05", slug: "distribucion", title: "Distribución", href: "/records/distribucion", desc: "Tu música en todas las plataformas. Distribución digital global, gestión de derechos y cuentas claras." },

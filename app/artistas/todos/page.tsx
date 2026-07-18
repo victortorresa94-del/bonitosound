@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 
 // Enlaces a "cada cosa de nuestros servicios" — para bajar al detalle.
 const SERVICE_LINKS = [
-  { label: "Booking", href: "/records/booking" },
-  { label: "Management", href: "/records/management" },
+  { label: "Booking", href: "/booking" },
+  { label: "Management", href: "/management" },
   { label: "Sello", href: "/records/sello" },
   { label: "Editorial", href: "/records/editorial" },
   { label: "Distribución", href: "/records/distribucion" },

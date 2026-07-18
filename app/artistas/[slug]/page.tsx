@@ -131,7 +131,6 @@ export default function ArtistPage({
         featuredTrackIds={a.featuredTracks}
         spotifyArtistId={a.spotifyArtistId}
         spotifyPlaylistId={a.spotifyPlaylistId}
-        instagram={a.instagram}
       />
 
       {/* 4. Su mundo: reels + YouTube intercalados. Va aquí, pegado a la
@@ -144,7 +143,6 @@ export default function ArtistPage({
         genre={a.genre}
         style={a.musicStyle}
         influences={a.influences}
-        forWho={a.forWho}
       />
 
       {/* 6. Su historia: la bio currada (el 1er párrafo ya va en el hero). */}

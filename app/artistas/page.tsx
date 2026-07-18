@@ -83,7 +83,9 @@ export default function Artistas() {
                   name={a.name}
                   genre={a.genre}
                   photo={a.image ?? findAsset("artistas", a.slug)}
-                  video={a.video}
+                  // Hover-vídeo desactivado a propósito: no tenemos vídeos por
+                  // artista bien alojados aún. Se reactiva pasando `video={a.video}`
+                  // cuando los haya. Mientras, la tarjeta se queda con la foto.
                   aspect={l.aspect}
                   shift={l.shift}
                 />
