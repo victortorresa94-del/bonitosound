@@ -136,7 +136,7 @@ export default function ArtistPage({
       {/* 4. Su mundo: reels + YouTube intercalados. Va aquí, pegado a la
           música, mientras el visitante está en modo "ver y escuchar" — no
           tirado al final de la página. */}
-      <ArtistLiveFeed name={a.name} reels={a.reels} youtubeIds={a.youtubeIds} />
+      <ArtistLiveFeed name={a.name} reels={a.reels} youtubeIds={a.youtubeIds} instagram={a.instagram} tiktok={a.tiktok} />
 
       {/* 5. Su sonido. */}
       <ArtistStyle
