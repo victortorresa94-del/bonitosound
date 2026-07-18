@@ -16,8 +16,8 @@ type MotionImageProps = {
    *  aire alrededor). Usa "contain" para logos/wordmarks anchos que no deben
    *  recortarse. Por defecto "cover" (encaja con las figuras del hero). */
   fit?: "cover" | "contain";
-  /** Tamaño de la caja. "lg"/"xl" para escenas donde el media debe pesar más. */
-  size?: "md" | "lg" | "xl";
+  /** Tamaño de la caja. "lg"/"xl"/"2xl" para escenas donde el media debe pesar más. */
+  size?: "md" | "lg" | "xl" | "2xl";
   /** Segundo en el que ARRANCA el loop (para saltarse una intro). En segundos. */
   loopStart?: number;
   /** Segundo en el que TERMINA el loop y vuelve a `loopStart`. En segundos.
@@ -208,11 +208,13 @@ export function MotionImage({
     <div
       ref={wrapRef}
       className={`relative mx-auto aspect-square w-full ${
-        size === "xl"
-          ? "max-w-[24rem] sm:max-w-lg md:max-w-2xl"
-          : size === "lg"
-            ? "max-w-[22rem] sm:max-w-md md:max-w-xl"
-            : "max-w-[17rem] sm:max-w-sm md:max-w-md"
+        size === "2xl"
+          ? "max-w-[28rem] sm:max-w-xl md:max-w-3xl"
+          : size === "xl"
+            ? "max-w-[24rem] sm:max-w-lg md:max-w-2xl"
+            : size === "lg"
+              ? "max-w-[22rem] sm:max-w-md md:max-w-xl"
+              : "max-w-[17rem] sm:max-w-sm md:max-w-md"
       } ${className}`}
     >
       <div
