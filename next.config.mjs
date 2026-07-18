@@ -28,8 +28,11 @@ const nextConfig = {
       { source: "/quienes-somos", destination: "/nosotros", statusCode: 301 },
       { source: "/sobre-nosotros", destination: "/nosotros", statusCode: 301 },
       { source: "/equipo", destination: "/nosotros", statusCode: 301 },
-      { source: "/booking", destination: "/records/booking-management", statusCode: 301 },
-      { source: "/management", destination: "/records/booking-management", statusCode: 301 },
+      // Booking y Management salieron de /records (no son música grabada):
+      // ahora viven en /booking y /management; redirigimos las URLs antiguas.
+      { source: "/records/booking", destination: "/booking", statusCode: 301 },
+      { source: "/records/management", destination: "/management", statusCode: 301 },
+      { source: "/records/booking-management", destination: "/booking", statusCode: 301 },
       { source: "/sello", destination: "/records/sello", statusCode: 301 },
       { source: "/distribucion", destination: "/records/distribucion", statusCode: 301 },
       { source: "/roster", destination: "/artistas", statusCode: 301 },

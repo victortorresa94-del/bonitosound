@@ -63,7 +63,7 @@ function Arrow({ flip = false }: { flip?: boolean }) {
 }
 
 const TAGS: { label: string; sub?: string; href: string; icon: IconKey; nuevo?: boolean }[] = [
-  { label: "Booking Engine", href: "/records/booking-management", icon: "ticket" },
+  { label: "Booking Engine", href: "/booking", icon: "ticket" },
   { label: "Records 360", sub: "(Sello)", href: "/records/sello", icon: "vinyl" },
   { label: "Editorial 360", href: "/contacto", icon: "doc" },
   { label: "Distribución", href: "/records/distribucion", icon: "globe" },

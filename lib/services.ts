@@ -26,7 +26,7 @@ export type Service = {
 export const services: Record<string, Service> = {
   booking: {
     slug: "booking",
-    path: "/records/booking",
+    path: "/booking",
     eyebrow: "Booking",
     h1: "Cerramos la fecha y montamos el directo.",
     h1Cyan: "montamos el directo.",
@@ -50,7 +50,7 @@ export const services: Record<string, Service> = {
 
   management: {
     slug: "management",
-    path: "/records/management",
+    path: "/management",
     eyebrow: "Management",
     h1: "Una carrera, llevada a mano.",
     desc: "Gestionamos la carrera del artista de principio a fin: estrategia, calendario y las decisiones que importan.",
