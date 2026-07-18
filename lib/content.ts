@@ -19,6 +19,8 @@ export type Artist = {
   /** Playlist propia del artista (si difiere de su perfil de artista). */
   spotifyPlaylistId?: string;
   instagram?: string;
+  /** Perfil de TikTok (URL completa). Se muestra en el CTA de redes. */
+  tiktok?: string;
   image?: string;
   /** Vídeo corto para el hover del roster (mudo, en bucle). Se resuelve por
    *  prioridad: /public/video/artistas/<slug>.mp4 → `video` forzado →
