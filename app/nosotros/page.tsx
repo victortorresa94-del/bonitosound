@@ -32,12 +32,16 @@ export const metadata: Metadata = {
 // solo vive AQUÍ (fuera de eventos). Para que el reel de IG quede idéntico a
 // los locales, basta bajar su .mp4 a /public/video/nosotros/ y cambiar su tile
 // a { kind: "video", src: "…" }.
-const DIA_A_DIA_TILES = [
+type DiaTile =
+  | { kind: "video"; src: string; label: string }
+  | { kind: "reel"; url: string };
+
+const DIA_A_DIA_TILES: DiaTile[] = [
   { kind: "video", src: "/video/nosotros/cris.mp4", label: "Cris" },
   { kind: "video", src: "/video/home/top-bonito.mp4", label: "Bonito Sound" },
   { kind: "video", src: "/video/eventos/natura.mp4", label: "Nàtura" },
   { kind: "video", src: "/video/eventos/corona.mp4", label: "Corona" },
-] as const;
+];
 
 // Números reales (nada inventado): fundación, sello, eventos.
 const STATS = [
