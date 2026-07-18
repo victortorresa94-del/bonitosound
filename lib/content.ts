@@ -63,6 +63,8 @@ export type Artist = {
   reels?: string[];
   /** IDs de vídeos de YouTube (directos, videoclips, backstage…). */
   youtubeIds?: string[];
+  /** URL del canal de YouTube (para el CTA "ver el canal"). */
+  youtubeChannel?: string;
   /** Hitos verificables: año + frase corta. Si está vacío no se pinta nada.
    *  Ej. frontmatter:
    *    milestones:

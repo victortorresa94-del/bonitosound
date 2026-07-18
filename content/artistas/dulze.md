@@ -2,6 +2,7 @@
 name: "Dulze"
 genre: "Indie pop / Raíz flamenca"
 tier: "distribucion"
+services: ["Booking", "Management", "Distribución"]
 spotifyArtistId: "1PNJOvNCIMG9dN4cy7IG4D"
 instagram: "https://www.instagram.com/duuuulze/"
 tiktok: "https://www.tiktok.com/@duuuulze"
@@ -13,6 +14,7 @@ reels:
 lastTrackId: "5b9Q8sW1SiK7JuFPI0uQVq"
 featuredTracks: ["5b9Q8sW1SiK7JuFPI0uQVq", "7LHaCtAde5bPtvyeWDPOC5", "4AqsdS864QAPwDMLmgSxdo"]
 youtubeIds: ["LYFpMB7AHJM", "Zu8RrDZHcso", "639CdU5pSy0", "pSJLRA0m29w"]
+youtubeChannel: "https://www.youtube.com/@duuuulze"
 stats:
   - { value: "829", label: "oyentes/mes en Spotify" }
   - { value: "4.172", label: "seguidores en Instagram" }
