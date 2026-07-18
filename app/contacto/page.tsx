@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { ContactForm } from "@/components/ContactForm";
 import { BookingScene } from "@/components/artistas/BookingScene";
 import { RevealOnScroll } from "@/components/motion";
-import { getArtist } from "@/lib/content";
+import { ContactIntro, ContactFormDynamic } from "@/components/contacto/ContactPersonalized";
+import { getArtists } from "@/lib/content";
 import { site } from "@/lib/site";
 
 const NAVY = "#14283C";
@@ -14,8 +14,6 @@ export const metadata: Metadata = {
     "Cuéntanos tu proyecto, tu idea o lo que necesites. Te respondemos rápido, y por personas. Bonito Sound — Sabadell, Barcelona.",
   alternates: { canonical: `${site.url}/contacto` },
 };
-
-type SP = { searchParams: { a?: string } };
 
 function InfoRow({
   icon,
@@ -50,10 +48,9 @@ function InfoRow({
   );
 }
 
-export default function Contacto({ searchParams }: SP) {
-  const slug = typeof searchParams.a === "string" ? searchParams.a : undefined;
-  const found = slug ? getArtist(slug) : undefined;
-  const artist = found ? { name: found.name, genre: found.genre } : undefined;
+export default function Contacto() {
+  // Mapa de artistas resuelto en build; el ?a= se lee en cliente (export estático).
+  const artists = getArtists().map((a) => ({ slug: a.slug, name: a.name, genre: a.genre }));
 
   return (
     <section style={{ backgroundColor: "#FBFAF6" }}>
@@ -68,11 +65,7 @@ export default function Contacto({ searchParams }: SP) {
           <span className="italic" style={{ color: CYAN }}>no un formulario</span>
         </RevealOnScroll>
         <RevealOnScroll as="p" delay={0.12} className="mt-6 max-w-xl text-lg leading-relaxed text-text-secondary">
-          {artist ? (
-            <>Cuéntanos el bolo para <span className="font-semibold" style={{ color: NAVY }}>{artist.name}</span>: fecha, sitio y qué tienes en mente. Te respondemos rápido, y por personas.</>
-          ) : (
-            <>Cuéntanos tu proyecto, tu idea o lo que necesites. Te respondemos rápido, y por personas.</>
-          )}
+          <ContactIntro artists={artists} />
         </RevealOnScroll>
 
         {/* Ilustración + formulario */}
@@ -82,7 +75,7 @@ export default function Contacto({ searchParams }: SP) {
           </RevealOnScroll>
 
           <RevealOnScroll delay={0.1}>
-            <ContactForm artist={artist} />
+            <ContactFormDynamic artists={artists} />
 
             {/* Datos de contacto */}
             <div className="mt-8">

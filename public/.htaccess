@@ -1,0 +1,49 @@
+# Bonito Sound — export estático en IONOS Deploy Now (servido por Apache).
+# Este archivo se copia de /public a /out en cada build y viaja al servidor.
+# Hace dos cosas: (1) URLs limpias (/nosotros -> nosotros.html) y (2) los 301
+# de las URLs viejas de WordPress (SEO). Los redirects de next.config NO se
+# aplican con output:export — esta es la fuente de verdad en producción.
+
+Options -MultiViews
+RewriteEngine On
+
+# ─────────────────────────────────────────────────────────────
+# 1) 301 desde URLs viejas de WordPress/WPML y atajos de marca
+#    (van ANTES del rewrite de URLs limpias)
+# ─────────────────────────────────────────────────────────────
+
+# WPML: prefijos de idioma viejos -> estructura plana
+RewriteRule ^(ca|es)/(.*)$ /$2 [R=301,L]
+
+# Atajos de marca / verticales del ecosistema
+RewriteRule ^artiverse/?$   /lab/artiverse   [R=301,L]
+RewriteRule ^giraverse/?$   /lab/giraverse   [R=301,L]
+RewriteRule ^jaleo/?$       /jaleo-sound      [R=301,L]
+RewriteRule ^jaleosound/?$  /jaleo-sound      [R=301,L]
+RewriteRule ^festival/?$    /jaleo-sound      [R=301,L]
+
+# Slugs típicos del WordPress anterior
+RewriteRule ^home/?$            /                             [R=301,L]
+RewriteRule ^inicio/?$          /                             [R=301,L]
+RewriteRule ^quienes-somos/?$   /nosotros                     [R=301,L]
+RewriteRule ^sobre-nosotros/?$  /nosotros                     [R=301,L]
+RewriteRule ^equipo/?$          /nosotros                     [R=301,L]
+RewriteRule ^booking/?$         /records/booking-management   [R=301,L]
+RewriteRule ^management/?$      /records/booking-management   [R=301,L]
+RewriteRule ^sello/?$           /records/sello                [R=301,L]
+RewriteRule ^distribucion/?$    /records/distribucion         [R=301,L]
+RewriteRule ^roster/?$          /artistas                     [R=301,L]
+RewriteRule ^contacto-2/?$      /contacto                     [R=301,L]
+RewriteRule ^noticias/?$        /diario                       [R=301,L]
+RewriteRule ^blog/?$            /diario                       [R=301,L]
+
+# ─────────────────────────────────────────────────────────────
+# 2) URLs limpias: sirve nosotros.html cuando piden /nosotros
+#    (Next export genera archivos .html; Apache los sirve sin extensión)
+# ─────────────────────────────────────────────────────────────
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*?)/?$ $1.html [L]
+
+# 404 de marca
+ErrorDocument 404 /404.html

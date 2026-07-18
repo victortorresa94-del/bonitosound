@@ -1,8 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+
+  // IONOS Deploy Now solo sirve estático (sin runtime Node) → export estático.
+  // Produce /out con HTML/CSS/JS/imágenes listos para publicar.
+  output: "export",
+
   images: {
-    formats: ["image/avif", "image/webp"],
+    // Sin servidor no hay optimización on-the-fly; se sirven tal cual.
+    // (Las imágenes pesadas se pre-optimizan en el repo.)
+    unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "**.bonitosound.com" },
       { protocol: "https", hostname: "**.scdn.co" },
@@ -12,7 +19,9 @@ const nextConfig = {
   },
 
   // 301 desde URLs viejas de WordPress/WPML y atajos de marca.
-  // Validar contra el sitemap real de WordPress en Fase 7 (§15) antes del go-live.
+  // ⚠ Con output:"export" estos NO se aplican (requieren servidor) → están
+  // portados a .deploy-now/config.yaml, que es quien los ejecuta en IONOS.
+  // Se dejan aquí como fuente de verdad / por si se vuelve a SSR.
   async redirects() {
     return [
       // Atajos de marca / verticales del ecosistema
