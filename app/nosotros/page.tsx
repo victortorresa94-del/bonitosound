@@ -9,6 +9,7 @@ import {
   MagneticButton,
 } from "@/components/motion";
 import { R2Video } from "@/components/R2Video";
+import { EventHeroVideo } from "@/components/eventos/EventHeroVideo";
 import { CtaBlock } from "@/components/CtaBlock";
 import { InstagramReel } from "@/components/Embeds";
 import { ServiceIcon, type IconName } from "@/components/services/ServiceIcon";
@@ -26,14 +27,14 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/nosotros` },
 };
 
-// Reels de Instagram del banner "El día a día". TODO(Víctor): sustituir por
-// los 2-3 reels reales que quieras enganchar. De momento el primero es el de
-// la presentación (único confirmado) y los otros dos son placeholders con la
-// misma URL para poder ver la fila montada — cámbialos por sus enlaces.
-const DIA_A_DIA_REELS = [
-  { url: "https://www.instagram.com/reel/DCOfx1YKHsP/", title: "Presentación de Bonito Sound" },
-  { url: "https://www.instagram.com/reel/DCOfx1YKHsP/", title: "Bonito Sound en Instagram — reel 2 (placeholder)" },
-  { url: "https://www.instagram.com/reel/DCOfx1YKHsP/", title: "Bonito Sound en Instagram — reel 3 (placeholder)" },
+// Vídeos verticales LOCALES para el banner de Instagram (nada de embeds de IG,
+// que en móvil salen apretados y con toda su UI). Formato reel 9:16, mudos en
+// bucle. Cris hablando + el vídeo "top" + Nàtura. Para meter el reel
+// DQ97C_yDJD6 u otro, baja su .mp4 a /public/video/nosotros/ y añádelo aquí.
+const DIA_A_DIA_VIDEOS = [
+  { src: "/video/eventos/cris.mp4", label: "Cris" },
+  { src: "/video/home/top-bonito.mp4", label: "Bonito Sound" },
+  { src: "/video/eventos/natura.mp4", label: "Nàtura" },
 ];
 
 // Números reales (nada inventado): fundación, sello, eventos.
@@ -144,6 +145,9 @@ export default function Nosotros() {
   const apoyoConLogo = apoyoAll.filter((n) => findLogo("apoyos", n));
   const apoyoSinLogo = apoyoAll.filter((n) => !findLogo("apoyos", n));
 
+  // WhatsApp a partir del teléfono real de Bonito (sin inventar número).
+  const waLink = `https://wa.me/${site.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent("¡Hola Bonito! Os escribo desde la web.")}`;
+
   return (
     <>
       {/* ── HERO ── */}
@@ -251,35 +255,54 @@ export default function Nosotros() {
         </StaggerGroup>
       </Section>
 
-      {/* ── BANNER INSTAGRAM: el día a día (ilustración + CTA + reels) ── */}
+      {/* ── BANNER INSTAGRAM: el día a día (vídeos verticales locales, no embeds) ── */}
       <Section>
-        <RevealOnScroll className="rounded-3xl border border-subtle bg-bg-tertiary px-7 py-10 md:px-12 md:py-14">
-          <div className="grid items-center gap-8 md:grid-cols-[1fr_0.5fr]">
+        <RevealOnScroll className="overflow-hidden rounded-3xl border border-subtle bg-bg-tertiary px-6 py-10 md:px-12 md:py-14">
+          <div className="grid items-center gap-8 md:grid-cols-[1fr_0.45fr]">
             <div>
               <p className="eyebrow mb-4">El día a día</p>
               <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,3rem)]">
                 Lo que montamos, semana a semana.
               </SplitTextReveal>
               <p className="mt-5 max-w-md text-text-secondary">
-                Lo de dentro está en Instagram: directos, backstage y lo que va cayendo.
+                Directos, backstage y lo que va cayendo. Como el vídeo de Cris:
+                así trabajamos. Hay mucho más de esto ahí dentro.
               </p>
-              <div className="mt-7">
+              <div className="mt-7 flex flex-wrap items-center gap-3">
                 <MagneticButton strength={0.35}>
-                  <Cta href={site.social.instagram} external>Síguenos en Instagram →</Cta>
+                  <Cta href={site.social.instagram} external>Míranos en Instagram →</Cta>
                 </MagneticButton>
+                <a
+                  href={waLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-subtle px-5 py-3 text-sm font-semibold text-text-primary transition-colors hover:border-text-primary/30"
+                >
+                  <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#25D366]" fill="currentColor" aria-hidden>
+                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.004c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.09c-.24.68-1.42 1.32-1.96 1.36-.5.05-1.14.07-1.84-.12-.42-.13-.96-.31-1.66-.61-2.92-1.26-4.82-4.2-4.97-4.4-.14-.19-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.26-.29.57-.36.76-.36l.55.01c.18.01.41-.07.64.49.24.58.82 2 .89 2.14.07.14.12.31.02.5-.28.55-.57.53-.28.9-.14.16-.29.37-.42.49-.14.14-.28.29-.12.57.16.29.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.16-.19.69-.8.87-1.08.18-.29.36-.24.61-.14.24.09 1.55.73 1.82.86.27.14.45.2.51.31.07.12.07.66-.17 1.34Z" />
+                  </svg>
+                  WhatsApp
+                </a>
               </div>
             </div>
-            <div className="relative mx-auto aspect-square w-full max-w-[200px] md:max-w-[240px]">
-              <Image src="/img/marca/banner-instagram.png" alt="" fill sizes="(max-width: 768px) 200px, 240px" className="object-contain" aria-hidden />
+            <div className="relative mx-auto hidden aspect-square w-full max-w-[220px] md:block">
+              <Image src="/img/marca/banner-instagram.png" alt="" fill sizes="220px" className="object-contain" aria-hidden />
             </div>
           </div>
 
+          {/* Vídeos verticales locales en marco reel: scroll horizontal con snap
+              en móvil, fila centrada en escritorio. Con fallback navy detrás. */}
           <StaggerGroup
             stagger={0.1}
-            className="mt-10 flex justify-center gap-5 overflow-x-auto pb-1 md:mt-12 md:gap-6"
+            className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:mt-12 md:justify-center md:gap-6 md:overflow-visible"
           >
-            {DIA_A_DIA_REELS.map((r, i) => (
-              <InstagramReel key={`${r.url}-${i}`} url={r.url} title={r.title} />
+            {DIA_A_DIA_VIDEOS.map((v) => (
+              <div
+                key={v.src}
+                className="relative aspect-[9/16] w-[58vw] max-w-[220px] shrink-0 snap-center overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 sm:w-[42vw] md:w-[200px]"
+              >
+                <EventHeroVideo src={v.src} label={v.label} />
+              </div>
             ))}
           </StaggerGroup>
         </RevealOnScroll>
