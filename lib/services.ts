@@ -28,7 +28,8 @@ export const services: Record<string, Service> = {
     slug: "booking",
     path: "/records/booking",
     eyebrow: "Booking",
-    h1: "Fechas de verdad. No promesas.",
+    h1: "Cerramos la fecha y montamos el directo.",
+    h1Cyan: "montamos el directo.",
     desc: "Contratamos y cerramos los directos de nuestros artistas. Agenda real, con quien coge el teléfono.",
     ctaSubject: "Booking",
     aspects: [
