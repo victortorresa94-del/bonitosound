@@ -1,11 +1,10 @@
 import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
-import { InstagramReel } from "@/components/Embeds";
 import { EventHeroVideo } from "@/components/eventos/EventHeroVideo";
 
-function IgGlyph() {
+function IgGlyph({ className = "h-5 w-5" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden>
+    <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden>
       <defs>
         <linearGradient id="ig-soc" x1="0" y1="1" x2="1" y2="0">
           <stop offset="0%" stopColor="#F58529" />
@@ -43,8 +42,11 @@ function SocialPill({ href, children }: { href: string; children: React.ReactNod
 }
 
 /**
- * Bloque de redes: los reels del artista (los que tenga) + CTA a su Instagram y
- * TikTok. Si no hay ni reels ni redes, no se pinta.
+ * Bloque de redes. Los reels solo se muestran como tile si son VÍDEOS LOCALES
+ * (.mp4, ruta empezando por "/"): los embeds de Instagram salen rotos para
+ * reels con música (a los artistas les pasa siempre), así que NO se incrustan.
+ * Si no hay reels locales, se pinta un CTA de Instagram/TikTok en condiciones
+ * (nada de cajas vacías). Si no hay ni reels ni redes, la sección no existe.
  */
 export function ArtistSocial({
   name,
@@ -57,10 +59,28 @@ export function ArtistSocial({
   instagram?: string;
   tiktok?: string;
 }) {
-  const reelList = (reels ?? []).map((r) => r?.trim()).filter(Boolean).slice(0, 3) as string[];
+  const localReels = (reels ?? [])
+    .map((r) => r?.trim())
+    .filter((r): r is string => Boolean(r) && r.startsWith("/"))
+    .slice(0, 3);
   const ig = instagram?.trim();
   const tt = tiktok?.trim();
-  if (reelList.length === 0 && !ig && !tt) return null;
+  if (localReels.length === 0 && !ig && !tt) return null;
+
+  const pills = (ig || tt) && (
+    <div className="flex flex-wrap items-center justify-center gap-3">
+      {ig && (
+        <SocialPill href={ig}>
+          <IgGlyph /> Instagram
+        </SocialPill>
+      )}
+      {tt && (
+        <SocialPill href={tt}>
+          <TikTokGlyph /> TikTok
+        </SocialPill>
+      )}
+    </div>
+  );
 
   return (
     <Section id="redes" className="pt-10 md:pt-14">
@@ -68,48 +88,48 @@ export function ArtistSocial({
       <RevealOnScroll as="h2" delay={0.05} className="display text-[clamp(1.8rem,4vw,3rem)]">
         El día a día de <span style={{ color: "#16b6d4" }}>{name}</span>.
       </RevealOnScroll>
-      <RevealOnScroll as="p" delay={0.12} className="mt-4 max-w-md text-text-secondary">
-        Directos, backstage y lo que va cayendo. Lo de dentro está aquí.
-      </RevealOnScroll>
 
-      {reelList.length > 0 && (
-        <StaggerGroup
-          stagger={0.1}
-          className="mt-8 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto pb-2 md:justify-center md:gap-6 md:overflow-visible"
-        >
-          {reelList.map((r) =>
-            r.startsWith("/") ? (
-              // Vídeo LOCAL (.mp4) → marco reel fiable, se reproduce inline
-              // (como en Nosotros). Es la vía recomendada.
+      {localReels.length > 0 ? (
+        <>
+          <RevealOnScroll as="p" delay={0.12} className="mt-4 max-w-md text-text-secondary">
+            Directos, backstage y lo que va cayendo.
+          </RevealOnScroll>
+          <StaggerGroup
+            stagger={0.1}
+            className="mt-8 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto pb-2 md:justify-center md:gap-6 md:overflow-visible"
+          >
+            {localReels.map((r) => (
               <div
                 key={r}
                 className="relative aspect-[9/16] w-[62vw] max-w-[240px] shrink-0 snap-center overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 sm:w-[240px]"
               >
                 <EventHeroVideo src={r} label={name} />
               </div>
-            ) : (
-              // URL de Instagram → tarjeta-enlace (los embeds de IG salen rotos).
-              <div key={r} className="w-[62vw] max-w-[240px] shrink-0 snap-center sm:w-[240px]">
-                <InstagramReel url={r} title={`Reel de ${name}`} />
-              </div>
-            ),
+            ))}
+          </StaggerGroup>
+          {pills && (
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+              <span className="mr-1 text-sm font-bold uppercase tracking-[0.16em] text-text-muted">Síguele en</span>
+              {pills}
+            </div>
           )}
-        </StaggerGroup>
-      )}
-
-      {(ig || tt) && (
-        <RevealOnScroll className="mt-9 flex flex-wrap items-center justify-center gap-3" delay={0.15}>
-          <span className="mr-1 text-sm font-bold uppercase tracking-[0.16em] text-text-muted">Síguele en</span>
-          {ig && (
-            <SocialPill href={ig}>
-              <IgGlyph /> Instagram
-            </SocialPill>
-          )}
-          {tt && (
-            <SocialPill href={tt}>
-              <TikTokGlyph /> TikTok
-            </SocialPill>
-          )}
+        </>
+      ) : (
+        // Sin reels locales → CTA de Instagram/TikTok en condiciones (navy).
+        <RevealOnScroll delay={0.12} className="mt-8">
+          <div
+            className="relative overflow-hidden rounded-3xl px-6 py-14 text-center md:py-16"
+            style={{ background: "radial-gradient(120% 120% at 30% 20%, #1b3a52 0%, #14283C 55%, #0d1a29 100%)" }}
+          >
+            <span className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-white/10">
+              <IgGlyph className="h-8 w-8" />
+            </span>
+            <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-white/85">
+              Directos, backstage y el día a día de {name}: todo eso está en su
+              Instagram. Dale un vistazo.
+            </p>
+            <div className="mt-8">{pills}</div>
+          </div>
         </RevealOnScroll>
       )}
     </Section>
