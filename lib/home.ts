@@ -31,6 +31,12 @@ export type HomeScene = {
   mediaCandidates?: string[];
   /** Preset de movimiento aplicado al media en scroll (ver MotionImage). */
   motionPreset?: MotionPreset;
+  /** Tamaño de la caja del media (para escenas que deben pesar más). */
+  mediaSize?: "md" | "lg" | "xl" | "2xl";
+  /** Segundo en el que arranca el loop del vídeo (se salta la intro rara). */
+  loopStart?: number;
+  /** Segundo en el que termina el loop y vuelve a loopStart. */
+  loopEnd?: number;
 };
 
 // Para añadir/cambiar la mascota de una escena: deja un archivo en
@@ -96,6 +102,9 @@ export const scenes: HomeScene[] = [
       "Campañas de ads, estrategia de redes y lanzamientos de álbum y de evento. Cuando salga, se entera quien se tiene que enterar.",
     cta: { label: "Ver más", href: "/marketing" },
     motionPreset: "pulse",
+    // El vídeo del teléfono tiene un efecto raro al principio: el loop arranca a
+    // los 2,5 s y así se salta esa entrada.
+    loopStart: 2.5,
     mediaCandidates: ["/video/home/marketing.mp4", "/img/home/marketing.webp", "/img/marca/heroe-volando.jpeg"],
   },
   {
@@ -105,6 +114,10 @@ export const scenes: HomeScene[] = [
     accent: "las herramientas que haga falta",
     support: "Hacemos webs, software, y tenemos nuestra propia app: Artiverse.",
     cta: { label: "Ver más", href: "/universo" },
+    // Solo el tramo del tocadiscos ya formado, más grande para equilibrar.
+    mediaSize: "2xl",
+    loopStart: 2.0,
+    loopEnd: 4.0,
     mediaCandidates: ["/video/home/tecnologia.mp4", "/img/home/tecnologia.webp", "/img/secciones/lab.png"],
   },
   {
@@ -124,10 +137,10 @@ export const scenes: HomeScene[] = [
   {
     id: "cierre",
     kicker: "Hablamos",
-    statement: "Marca, artista o promotor — cuéntanos lo tuyo.",
-    accent: "cuéntanos lo tuyo",
+    statement: "Marca, artista o sala. Cuéntanos qué tienes en mente.",
+    accent: "qué tienes en mente",
     support:
-      "Treinta minutos. Tú cuentas qué necesitas, nosotros te decimos qué se puede hacer de verdad.",
+      "Una llamada de media hora: nos lo cuentas, lo miramos de verdad y te decimos qué haríamos con ello. Con honestidad, aunque a veces sea decirte que todavía no.",
     cta: { label: "¿Hablamos?", href: "/contacto" },
     mediaCandidates: ["/video/home/cierre.mp4", "/img/home/cierre.webp"],
   },

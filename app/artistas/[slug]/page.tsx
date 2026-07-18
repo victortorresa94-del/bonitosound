@@ -143,11 +143,10 @@ export default function ArtistPage({
         genre={a.genre}
         style={a.musicStyle}
         influences={a.influences}
-        forWho={a.forWho}
       />
 
       {/* 6. Su historia: la bio currada (el 1er párrafo ya va en el hero). */}
-      <ArtistBio paragraphs={a.bio.slice(1)} name={a.name} />
+      <ArtistBio paragraphs={a.bio.slice(1)} name={a.name} photo={photo} />
 
       {/* 7. Directo: de su primer bolo a hoy + trayectoria. */}
       <ArtistConcerts

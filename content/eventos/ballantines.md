@@ -3,10 +3,10 @@ brand: "Ballantine's"
 title: "Ballantine's: una activación que la gente recuerda"
 type: "marca"
 year: "2023"
-context: "Activación de marca con directo: del brief al evento, con dirección artística, booking y producción técnica en el mismo equipo."
-result: "Producción de principio a fin coordinada por un solo equipo, sin rebotar entre cinco proveedores."
+context: "Activación de marca con directo de principio a fin: dirección artística, booking y producción técnica, en el mismo equipo."
+result: "Del boceto a la última canción, todo salió del mismo sitio."
 ---
 
-Ballantine's quería una activación que la gente recordara, no un bolo de relleno. Nos encargamos de todo: elegir al artista, dirigir el directo y montar la técnica.
+Ballantine's quería una activación de las que se recuerdan. Elegimos al artista, dirigimos el directo y montamos la técnica: todo en casa.
 
-Un único equipo del brief al escenario. Cuando no hay cinco proveedores pisándose, el evento sale como se pensó.
+Del primer boceto a la última canción, el mismo equipo. Así el evento llega a la noche tal y como se dibujó.

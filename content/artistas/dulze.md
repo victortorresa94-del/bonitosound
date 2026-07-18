@@ -9,6 +9,9 @@ milestones:
   - { year: "2026", text: "Primera gira nacional, Qué Fantasía Tour, con ayuda de Girando Por Salas" }
   - { year: "2026", text: "Nuevo single, Verde aceituna" }
   - { year: "2024", text: "EP debut, GATEA" }
+musicStyle: "Indie-pop de fantasía que cambia de piel tema a tema: pop brillante, bachata, raíz flamenca. Y una voz que no necesita subir el volumen para que te calles."
+forWho: "Para quien busca pop con raíz y no sabe por dónde va a salir el próximo tema."
+influences: ["indie pop", "flamenco", "bachata"]
 ---
 
 Dulze es María Lorenzo, de Chipiona. Creció entre el flamenco de los tablaos de Cádiz y de ahí salió hacia un indie-pop de fantasía que no se deja etiquetar: un tema suena a pop brillante, el siguiente a bachata, el de más allá a raíz flamenca. Tiene una voz que no necesita subir el volumen para que te calles — y eso, en directo, vale oro.

@@ -8,6 +8,9 @@ milestones:
   - { year: "2025", text: "Nuevo single, FCK PENA" }
   - { year: "2023", text: "Finalistas del Sona9 (23ª edición); actuación en las Festes de la Mercè" }
   - { year: "2023", text: "Single Tot Canvia — pop + drum'n'bass en valencià" }
+musicStyle: "Pop, drum'n'bass y calle en la misma canción, cantado en valencià. Mezclan sin miedo y en directo se siente."
+forWho: "Para salas, festivales o eventos que quieran identidad y un directo que no deja frío a nadie."
+influences: ["urbano", "drum'n'bass", "pop"]
 ---
 
 Sa Pena viene de La Safor, canta en valencià y no le tiene miedo a mezclar: pop, drum'n'bass y calle en la misma canción. Un proyecto entre primos que en 2023 llegó a la final del Sona9 por votación popular — o sea, gente de verdad votándoles, no un jurado de compromiso.

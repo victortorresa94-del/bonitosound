@@ -32,31 +32,32 @@ function Tag({ e }: { e: Evento }) {
  *  fallback de marca (navy + nombre) para los que aún no tienen clip subido. */
 function CardMedia({ e }: { e: Evento }) {
   const cover = findAsset("eventos", e.slug);
-  if (e.youtubeId) {
-    return (
-      <div className="absolute inset-0 overflow-hidden">
-        <iframe
-          title={e.title}
-          src={`https://www.youtube-nocookie.com/embed/${e.youtubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${e.youtubeId}&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3`}
-          allow="autoplay; encrypted-media"
-          className="pointer-events-none absolute left-1/2 top-1/2 aspect-video h-full min-w-full -translate-x-1/2 -translate-y-1/2"
-        />
-      </div>
-    );
-  }
-  if (e.video) {
-    return <LazyVideo src={e.video} poster={cover ?? undefined} className="absolute inset-0 h-full w-full object-cover" />;
-  }
-  if (cover) {
-    return <Image src={cover} alt={e.title} fill sizes="40vw" className="object-cover" />;
-  }
   return (
-    <div
-      className="absolute inset-0 flex items-center justify-center p-6 text-center"
-      style={{ background: "radial-gradient(120% 120% at 30% 20%, #1b3a52 0%, #14283C 55%, #0d1a29 100%)" }}
-    >
-      <span className="font-round text-2xl font-bold leading-tight text-white/85 md:text-3xl">{e.artist}</span>
-    </div>
+    <>
+      {/* Fallback de marca SIEMPRE detrás: mientras el vídeo carga (o si no hay
+          media), se ve el nombre en navy — nunca un hueco gris. */}
+      <div
+        aria-hidden
+        className="absolute inset-0 flex items-center justify-center p-6 text-center"
+        style={{ background: "radial-gradient(120% 120% at 30% 20%, #1b3a52 0%, #14283C 55%, #0d1a29 100%)" }}
+      >
+        <span className="font-round text-2xl font-bold leading-tight text-white/25 md:text-3xl">{e.artist ?? e.brand}</span>
+      </div>
+      {e.youtubeId ? (
+        <div className="absolute inset-0 overflow-hidden">
+          <iframe
+            title={e.title}
+            src={`https://www.youtube-nocookie.com/embed/${e.youtubeId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${e.youtubeId}&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3`}
+            allow="autoplay; encrypted-media"
+            className="pointer-events-none absolute left-1/2 top-1/2 aspect-video h-full min-w-full -translate-x-1/2 -translate-y-1/2"
+          />
+        </div>
+      ) : e.video ? (
+        <LazyVideo src={e.video} poster={cover ?? undefined} className="absolute inset-0 h-full w-full object-cover" />
+      ) : cover ? (
+        <Image src={cover} alt={e.title} fill sizes="40vw" className="object-cover" />
+      ) : null}
+    </>
   );
 }
 
@@ -76,7 +77,7 @@ export function EventosArtistasShowcase({ eventos }: { eventos: Evento[] }) {
   // Los que renderizan ya (YouTube) primero, para que la sección luzca sin
   // depender de que estén subidos los R2.
   const ordered = [...arts].sort((a, b) => (b.youtubeId ? 1 : 0) - (a.youtubeId ? 1 : 0));
-  const cluster = ordered.slice(0, 3);
+  const cluster = ordered.slice(0, 6);
   if (cluster.length === 0) return null;
 
   return (
@@ -99,7 +100,7 @@ export function EventosArtistasShowcase({ eventos }: { eventos: Evento[] }) {
             <Link
               key={e.slug}
               href={`/eventos/${e.slug}`}
-              className={`group relative block transition-transform duration-500 hover:z-10 hover:!rotate-0 hover:scale-[1.02] ${TILT[i] ?? ""}`}
+              className={`group relative block transition-transform duration-500 hover:z-10 hover:!rotate-0 hover:scale-[1.02] ${TILT[i % TILT.length]}`}
             >
               <div
                 className="relative aspect-video overflow-hidden rounded-[1.4rem] shadow-xl ring-1 ring-black/5"

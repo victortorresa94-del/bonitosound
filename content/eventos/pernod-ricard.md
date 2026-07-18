@@ -3,10 +3,10 @@ brand: "Pernod Ricard"
 title: "Pernod Ricard: la música en el centro del evento"
 type: "marca"
 year: "2023"
-context: "Experiencia cultural para marca premium: curaduría musical, artista y producción alineados con el mensaje de la marca."
-result: "La música tratada como decisión de marca, no como hilo de fondo."
+context: "Experiencia de marca premium: artista, repertorio y producción elegidos con la misma cabeza que el resto de la campaña."
+result: "La música, tratada como una decisión de marca más."
 ---
 
-Para Pernod Ricard la música no era ambiente: era parte del mensaje. Así que la elegimos como se elige cualquier pieza estratégica, pensando en qué dice de la marca.
+Para Pernod Ricard la música pesaba tanto como el resto de la campaña. Así que la elegimos con esa cabeza: pensando en qué contaba de la marca cada tema.
 
-Artista, repertorio y producción, alineados con lo que la marca quería contar esa noche. Cada decisión, con una razón detrás.
+Artista, repertorio y producción, en la misma línea de lo que querían decir esa noche. Nada puesto por poner.

@@ -10,6 +10,9 @@ milestones:
   - { year: "2025", text: "Primer álbum, MARCA DIVINA, producido con Bonito Sound" }
   - { year: "2023", text: "Primer EP, afilá" }
   - { year: "2021", text: "Debut autoeditado con La Tarara" }
+musicStyle: "Pop con la voz siempre delante y, por debajo, electrónica y folclore andaluz que asoman sin hacer ruido. Melodías que entran fáciles sobre letras de dolor, fuerza y reconstrucción."
+forWho: "Para escuchar con atención: engancha por la melodía y se queda por lo que cuenta."
+influences: ["pop", "electrónica", "folclore andaluz"]
 ---
 
 Eva Calyza estudió flauta travesera y un máster en gestión cultural, y con esa base montó lo que ella llama "pop mental": melodías pop y voz por delante, electrónica y folclore andaluz por debajo. En 2025 publicó su primer álbum, MARCA DIVINA, producido con Bonito Sound — diez canciones sobre dolor, fuerza y reconstrucción.

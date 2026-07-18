@@ -36,7 +36,6 @@ const ROLE_MAP: Record<string, { role: Role; objectPosition?: string }> = {
   "anne-lukin": { role: "tall" },
   "albert-pla": { role: "regular" },
   "dani-directo": { role: "regular" },
-  cris: { role: "regular" },
 };
 /** Slugs sin vídeo (solo cover): ciclan por formatos ya validados visualmente. */
 const FALLBACK_ROLES: Role[] = ["regular", "wide", "regular"];

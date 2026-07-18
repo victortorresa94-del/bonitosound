@@ -42,15 +42,16 @@ function CardMedia({ e }: { e: Evento }) {
   const cover = findAsset("eventos", e.slug);
   return (
     <>
+      {/* Fallback de marca SIEMPRE detrás: mientras el vídeo carga (Corona y
+          demás no tienen poster), se ve el nombre en navy — nunca un hueco gris. */}
+      <div aria-hidden className="absolute inset-0 flex items-center justify-center p-6 text-center" style={{ backgroundColor: NAVY }}>
+        <span className="font-round text-3xl font-bold leading-none text-white/25 md:text-4xl">{e.brand ?? e.artist}</span>
+      </div>
       {e.video ? (
-        <LazyVideo src={e.video} poster={cover ?? undefined} className="h-full w-full object-cover" />
+        <LazyVideo src={e.video} poster={cover ?? undefined} className="absolute inset-0 h-full w-full object-cover" />
       ) : cover ? (
         <Image src={cover} alt={e.title} fill sizes="40vw" className="object-cover" />
-      ) : (
-        <div className="flex h-full w-full items-center justify-center p-6 text-center" style={{ backgroundColor: NAVY }}>
-          <span className="font-round text-3xl font-bold leading-none text-white md:text-4xl">{e.brand ?? e.artist}</span>
-        </div>
-      )}
+      ) : null}
       <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/25 to-transparent" />
     </>
   );
@@ -127,7 +128,7 @@ export function EventosShowcase({ eventos }: { eventos: Evento[] }) {
       <div className="px-5 pb-10 md:hidden">
         <div className="relative mb-8">
           {stats.map((s, i) => (
-            <div key={s.n} className="mb-3" style={{ marginLeft: i === 1 ? "28%" : i === 2 ? "6%" : "0" }}>
+            <div key={s.n} className="mb-3" style={{ marginLeft: i === 1 ? "14%" : i === 2 ? "5%" : "0" }}>
               <p className="font-round font-bold leading-none" style={{ fontSize: i === 0 ? "3.6rem" : i === 1 ? "3rem" : "2.5rem", color: NAVY }}>{s.n}</p>
               <p className="text-[0.7rem] font-bold uppercase leading-tight tracking-wide" style={{ color: NAVY }}>{s.l[0]} {s.l[1]}</p>
             </div>
@@ -135,7 +136,7 @@ export function EventosShowcase({ eventos }: { eventos: Evento[] }) {
         </div>
         <div className="space-y-5">
           {cluster.map((e, i) => (
-            <Link key={e.slug} href={`/eventos/${e.slug}`} className="group relative block" style={{ transform: `rotate(${i % 2 === 0 ? -1.5 : 1.5}deg)` }}>
+            <Link key={e.slug} href={`/eventos/${e.slug}`} className="group relative block">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[1.4rem] shadow-lg ring-1 ring-black/5">
                 <CardMedia e={e} />
               </div>

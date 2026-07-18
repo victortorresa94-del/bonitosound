@@ -5,6 +5,8 @@ tier: "distribucion"
 spotifyArtistId: "79qGj0n6B3skao1b5Ojt2V"
 instagram: "https://www.instagram.com/paulemusica/"
 image: "/img/artistas/paule.jpeg"
+musicStyle: "Canción de autor que parece sencilla hasta que intentas escribir una igual. El oficio no se ve, se nota."
+forWho: "Para quien escucha las letras y valora una canción bien hecha."
 ---
 
 Paule escribe canciones que parecen fáciles hasta que intentas escribir una igual. Ahí está el truco: el oficio no se ve, se nota.

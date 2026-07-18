@@ -115,13 +115,9 @@ export function NarrativeScene({
                 alt={scene.statement}
                 preset={scene.motionPreset ?? "kenburns"}
                 fit={media.includes("jaleo-sound") ? "contain" : "cover"}
-                size={scene.id === "tecnologia" ? "xl" : "md"}
-                // Solo el tramo del tocadiscos: arranca ya formado (2.0s) y
-                // vuelve antes de que el morph traiga la guitarra (4.0s). Entra
-                // y sale en el mismo fotograma limpio → loop sin salto, con el
-                // vinilo de Bonito Sound girando en medio.
-                loopStart={scene.id === "tecnologia" ? 2.0 : undefined}
-                loopEnd={scene.id === "tecnologia" ? 4.0 : undefined}
+                size={scene.mediaSize ?? "md"}
+                loopStart={scene.loopStart}
+                loopEnd={scene.loopEnd}
               />
             </RevealOnScroll>
           </div>

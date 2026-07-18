@@ -26,9 +26,10 @@ export type Service = {
 export const services: Record<string, Service> = {
   booking: {
     slug: "booking",
-    path: "/records/booking",
+    path: "/booking",
     eyebrow: "Booking",
-    h1: "Fechas de verdad. No promesas.",
+    h1: "Cerramos la fecha y montamos el directo.",
+    h1Cyan: "montamos el directo.",
     desc: "Contratamos y cerramos los directos de nuestros artistas. Agenda real, con quien coge el teléfono.",
     ctaSubject: "Booking",
     aspects: [
@@ -49,7 +50,7 @@ export const services: Record<string, Service> = {
 
   management: {
     slug: "management",
-    path: "/records/management",
+    path: "/management",
     eyebrow: "Management",
     h1: "Una carrera, llevada a mano.",
     desc: "Gestionamos la carrera del artista de principio a fin: estrategia, calendario y las decisiones que importan.",
@@ -118,7 +119,8 @@ export const services: Record<string, Service> = {
     slug: "distribucion",
     path: "/records/distribucion",
     eyebrow: "Distribución",
-    h1: "Súbela con quien sabe. Suena en todo el mundo.",
+    h1: "Llevamos tu música a todo el mundo.",
+    h1Cyan: "a todo el mundo.",
     desc: "Distribuimos tu música en Spotify, Apple Music, YouTube y las demás, con los metadatos en orden y gente del sector detrás. Ya distribuyen unos veinte artistas con nosotros.",
     ctaSubject: "Distribución",
     aspects: [
