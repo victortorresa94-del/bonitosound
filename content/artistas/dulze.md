@@ -4,7 +4,12 @@ genre: "Indie pop / Raíz flamenca"
 tier: "distribucion"
 spotifyArtistId: "1PNJOvNCIMG9dN4cy7IG4D"
 instagram: "https://www.instagram.com/duuuulze/"
+tiktok: "https://www.tiktok.com/@duuuulze"
 image: "/img/artistas/dulze.png"
+reels:
+  - "https://www.instagram.com/reel/C6OYK_KMD1C/"
+  - "https://www.instagram.com/reel/DWOyI3eCirq/"
+  - "https://www.instagram.com/reel/DKhBR02s-ln/"
 lastTrackId: "5b9Q8sW1SiK7JuFPI0uQVq"
 featuredTracks: ["5b9Q8sW1SiK7JuFPI0uQVq", "7LHaCtAde5bPtvyeWDPOC5", "4AqsdS864QAPwDMLmgSxdo"]
 youtubeIds: ["LYFpMB7AHJM", "Zu8RrDZHcso", "639CdU5pSy0", "pSJLRA0m29w"]
