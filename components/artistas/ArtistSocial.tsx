@@ -1,6 +1,7 @@
 import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { InstagramReel } from "@/components/Embeds";
+import { EventHeroVideo } from "@/components/eventos/EventHeroVideo";
 
 function IgGlyph() {
   return (
@@ -62,7 +63,7 @@ export function ArtistSocial({
   if (reelList.length === 0 && !ig && !tt) return null;
 
   return (
-    <Section id="redes">
+    <Section id="redes" className="pt-10 md:pt-14">
       <RevealOnScroll as="p" className="eyebrow mb-4">En Instagram</RevealOnScroll>
       <RevealOnScroll as="h2" delay={0.05} className="display text-[clamp(1.8rem,4vw,3rem)]">
         El día a día de <span style={{ color: "#16b6d4" }}>{name}</span>.
@@ -76,11 +77,22 @@ export function ArtistSocial({
           stagger={0.1}
           className="mt-8 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto pb-2 md:justify-center md:gap-6 md:overflow-visible"
         >
-          {reelList.map((r) => (
-            <div key={r} className="w-[78vw] max-w-[300px] shrink-0 snap-center sm:w-[300px]">
-              <InstagramReel url={r} title={`Reel de ${name}`} />
-            </div>
-          ))}
+          {reelList.map((r) =>
+            r.startsWith("/") ? (
+              // Vídeo LOCAL (.mp4) → marco reel fiable, como en Nosotros.
+              <div
+                key={r}
+                className="relative aspect-[9/16] w-[62vw] max-w-[240px] shrink-0 snap-center overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5 sm:w-[240px]"
+              >
+                <EventHeroVideo src={r} label={name} />
+              </div>
+            ) : (
+              // URL de Instagram → embed (menos fiable: IG bloquea embeds).
+              <div key={r} className="w-[78vw] max-w-[300px] shrink-0 snap-center sm:w-[300px]">
+                <InstagramReel url={r} title={`Reel de ${name}`} />
+              </div>
+            ),
+          )}
         </StaggerGroup>
       )}
 

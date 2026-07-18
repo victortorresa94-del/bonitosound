@@ -3,9 +3,9 @@ import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { YouTubeEmbed } from "@/components/Embeds";
 
 /**
- * Bloque de vídeos del artista: UNA sola fila. 3 vídeos → 3 columnas; 2 → 2.
- * (Se cortan a 3 para no pasar de una fila.) Con CTA al canal de YouTube si lo
- * hay. Si no hay vídeos, no se pinta.
+ * Bloque de vídeos del artista. La rejilla se adapta a cuántos hay para que
+ * quede compacto: 2 → 2 columnas; 3 → 3 en una fila; 4 → 2×2; 5-6 → 3 por fila.
+ * Con CTA al canal de YouTube si lo hay. Si no hay vídeos, no se pinta.
  *
  * Ojo: algunos vídeos (subidos por sellos/distribuidoras tipo VEVO) tienen el
  * embed DESACTIVADO por su dueño y no se pueden incrustar — conviene poner en
@@ -20,10 +20,16 @@ export function ArtistVideos({
   youtubeIds?: string[];
   youtubeChannel?: string;
 }) {
-  const vids = (youtubeIds ?? []).map((v) => v?.trim()).filter(Boolean).slice(0, 3) as string[];
+  const vids = (youtubeIds ?? []).map((v) => v?.trim()).filter(Boolean).slice(0, 6) as string[];
   if (vids.length === 0) return null;
 
-  const cols = vids.length >= 3 ? "md:grid-cols-3" : vids.length === 2 ? "md:grid-cols-2" : "max-w-2xl";
+  const n = vids.length;
+  const cols =
+    n === 1
+      ? "max-w-2xl"
+      : n === 2 || n === 4
+        ? "sm:grid-cols-2"
+        : "sm:grid-cols-2 md:grid-cols-3";
   const channel = youtubeChannel?.trim();
 
   return (
