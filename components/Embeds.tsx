@@ -57,30 +57,41 @@ export function InstagramReel({
   url: string;
   title?: string;
 }) {
-  const id = url.match(/\/(?:reel|p|tv)\/([\w-]+)/)?.[1] ?? url;
-  // Importante: el embed de reels vía /reel/{id}/embed falla a menudo ("enlace
-  // incorrecto o suprimido"). El endpoint /p/{id}/embed sí carga el reel (un
-  // reel también es un post). /captioned evita algún redirect raro.
-  // El iframe trae cabecera + una barra inferior fea (likes, "Ver más"): el
-  // contenedor es más bajo que el iframe y el overflow-hidden corta ese pie.
+  const id = url.match(/\/(?:reel|p|tv)\/([\w-]+)/)?.[1] ?? "ig";
+  // IMPORTANTE: Instagram ha bloqueado los embeds de terceros — los iframes
+  // salen rotos ("el enlace es incorrecto o se ha suprimido") aunque el reel
+  // sea público y válido. Así que NO incrustamos: pintamos una tarjeta navy que
+  // enlaza al reel (siempre funciona). Para verlo INLINE, usar un .mp4 local.
   return (
-    <div className="mx-auto w-full max-w-[300px]">
-      <div
-        className="relative overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary shadow-sm"
-        style={{ height: 520 }}
-      >
-        <iframe
-          title={title}
-          src={`https://www.instagram.com/p/${id}/embed/captioned`}
-          loading="lazy"
-          scrolling="no"
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          allowFullScreen
-          className="absolute inset-x-0 top-0 w-full border-0"
-          style={{ height: 640 }}
-        />
-      </div>
-    </div>
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={title}
+      className="group relative mx-auto flex aspect-[9/16] w-full max-w-[300px] flex-col items-center justify-center gap-4 overflow-hidden rounded-2xl p-6 text-center shadow-sm ring-1 ring-white/10 transition-transform duration-300 hover:scale-[1.02]"
+      style={{ background: "radial-gradient(120% 120% at 30% 20%, #1b3a52 0%, #14283C 55%, #0d1a29 100%)" }}
+    >
+      <span className="grid h-14 w-14 place-items-center rounded-2xl bg-white/10">
+        <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" aria-hidden>
+          <defs>
+            <linearGradient id={`igc-${id}`} x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stopColor="#F58529" />
+              <stop offset="45%" stopColor="#DD2A7B" />
+              <stop offset="80%" stopColor="#8134AF" />
+              <stop offset="100%" stopColor="#515BD4" />
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="20" height="20" rx="5.5" stroke={`url(#igc-${id})`} strokeWidth="1.9" />
+          <circle cx="12" cy="12" r="4.2" stroke={`url(#igc-${id})`} strokeWidth="1.9" />
+          <circle cx="17.2" cy="6.8" r="1.2" fill={`url(#igc-${id})`} />
+        </svg>
+      </span>
+      <span className="font-round text-base font-bold text-white">Ver en Instagram</span>
+      <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-white/60 transition-colors group-hover:text-white">
+        Abrir el reel
+        <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+      </span>
+    </a>
   );
 }
 
