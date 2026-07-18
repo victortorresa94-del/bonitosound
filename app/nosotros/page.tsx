@@ -140,7 +140,6 @@ function DaniArtistCard({ name }: { name: string }) {
 export default function Nosotros() {
   const posts = getPosts().slice(0, 3);
   const heroImg = findAsset("heroes", "nosotros") ?? findLogo("heroes", "nosotros");
-  const daniPhoto = findLogo("equipo", "Dani Boada");
 
   // Apoyos: los que tienen logo van como logo; los que no, más pequeños y abajo.
   const apoyoAll = [...support, ...supportPending];
@@ -323,31 +322,24 @@ export default function Nosotros() {
           Treinta años en esto. Y sigue al teléfono.
         </SplitTextReveal>
 
-        {/* Foto contenida + experiencia a la izquierda; entrevista (vertical,
-            local, con sonido) a la derecha en formato reel — así no se recorta. */}
-        <div className="grid items-center gap-10 md:grid-cols-[1fr_0.8fr] md:gap-14">
-          <RevealOnScroll className="flex flex-col gap-6 sm:flex-row sm:items-start md:flex-col lg:flex-row">
-            <div className="relative aspect-[4/5] w-40 shrink-0 overflow-hidden rounded-2xl bg-bg-tertiary sm:w-44">
-              {daniPhoto && (
-                <Image src={daniPhoto} alt="Dani Boada" fill sizes="180px" className="object-cover" />
-              )}
-            </div>
-            <div className="space-y-4 text-base leading-relaxed text-text-secondary md:text-lg">
-              <p>
-                Management, contratos y la llamada que cierra el bolo: ese es el
-                día a día de Dani. En treinta años en la industria ha llevado —y
-                descubierto— a artistas que hoy llenan estadios.
-              </p>
-              <p>
-                Ha visto de todo lo que se puede ver en este oficio: lo que
-                funciona, lo que no, y por qué. Ese recorrido es lo que hay detrás
-                de cada decisión que tomamos en Bonito.
-              </p>
-            </div>
-          </RevealOnScroll>
-          <RevealOnScroll delay={0.15} className="mx-auto w-full max-w-[300px]">
+        {/* Entrevista (vertical, local, con sonido) a la IZQUIERDA en formato
+            reel; experiencia a la DERECHA. Dos columnas equilibradas. */}
+        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
+          <RevealOnScroll className="mx-auto w-full max-w-[300px] md:order-1">
             <R2Video src="/video/nosotros/entrevista-dani.mp4" ratio="9 / 16" />
             <p className="mt-4 text-center text-sm text-text-muted">La entrevista a Dani, sin guion.</p>
+          </RevealOnScroll>
+          <RevealOnScroll delay={0.15} className="space-y-5 text-base leading-relaxed text-text-secondary md:order-2 md:text-lg">
+            <p>
+              Management, contratos y la llamada que cierra el bolo: ese es el
+              día a día de Dani. En treinta años en la industria ha llevado —y
+              descubierto— a artistas que hoy llenan estadios.
+            </p>
+            <p>
+              Ha visto de todo lo que se puede ver en este oficio: lo que
+              funciona, lo que no, y por qué. Ese recorrido es lo que hay detrás
+              de cada decisión que tomamos en Bonito.
+            </p>
           </RevealOnScroll>
         </div>
 
