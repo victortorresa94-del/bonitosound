@@ -78,7 +78,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Diario", item: `${site.url}/diario` },
+            { "@type": "ListItem", position: 1, name: "Blog", item: `${site.url}/diario` },
             { "@type": "ListItem", position: 2, name: p.title, item: url },
           ],
         }}
@@ -104,11 +104,11 @@ export default function PostPage({ params }: { params: { slug: string } }) {
             href="/diario"
             className="text-sm font-semibold text-text-muted underline-offset-4 transition-colors hover:text-text-primary hover:underline"
           >
-            ← Diario
+            ← Blog
           </Link>
           <div className="mt-8 max-w-3xl">
             <RevealOnScroll as="p" className="eyebrow mb-4">
-              {p.cluster ?? "Diario"} · {fmtDate(p.date)}
+              {p.cluster ?? "Blog"} · {fmtDate(p.date)}
             </RevealOnScroll>
             <RevealOnScroll
               as="h1"

@@ -8,9 +8,9 @@ import { site } from "@/lib/site";
 const posts = getPosts();
 
 export const metadata: Metadata = {
-  title: "Diario — Bonito Sound",
+  title: "Blog — Bonito Sound",
   description:
-    "El diario de Bonito Sound: cómo funciona la industria de la música por dentro, booking, sellos, distribución y eventos de marca. Sin postureo.",
+    "El blog de Bonito Sound: cómo funciona la industria de la música por dentro, booking, sellos, distribución y eventos de marca. Sin postureo.",
   alternates: { canonical: `${site.url}/diario` },
   // Se indexa solo cuando hay al menos un artículo real.
   robots: posts.length > 0 ? undefined : { index: false, follow: true },
@@ -35,7 +35,7 @@ export default function Diario() {
         <div className="wrap py-24 md:py-32">
           <div className="max-w-3xl">
             <RevealOnScroll as="p" className="eyebrow mb-4">
-              Diario
+              Blog
             </RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
               Lo que va pasando, sin postureo.
@@ -61,7 +61,7 @@ export default function Diario() {
               >
                 <div>
                   <p className="eyebrow mb-3">
-                    {p.cluster ?? "Diario"} · {fmtDate(p.date)}
+                    {p.cluster ?? "Blog"} · {fmtDate(p.date)}
                   </p>
                   <h2 className="display text-[clamp(1.4rem,3vw,2rem)] leading-tight text-text-primary transition-colors group-hover:text-accent-cyan">
                     {p.title}
@@ -93,7 +93,7 @@ export default function Diario() {
               Todavía no hemos escrito nada aquí.
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mx-auto mt-4 max-w-lg text-text-secondary" delay={0.2}>
-              El diario se llena cuando hay algo que contar de verdad. Mientras
+              El blog se llena cuando hay algo que contar de verdad. Mientras
               tanto, lo que se cuece está en Instagram.
             </RevealOnScroll>
             <RevealOnScroll className="mt-8 flex justify-center" delay={0.35}>

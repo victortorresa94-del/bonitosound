@@ -18,7 +18,7 @@ const cols = [
     links: [
       { label: "Nosotros", href: "/nosotros" },
       { label: "Jaleo Sound", href: "/jaleo-sound" },
-      { label: "Diario", href: "/diario" },
+      { label: "Blog", href: "/diario" },
       { label: "Contacto", href: "/contacto" },
       // Agenda queda fuera mientras esté vacía — se reintroduce con contenido real.
     ],

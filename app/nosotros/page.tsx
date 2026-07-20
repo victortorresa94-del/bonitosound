@@ -442,7 +442,7 @@ export default function Nosotros() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <RevealOnScroll as="p" className="eyebrow mb-4">
-                Diario
+                Blog
               </RevealOnScroll>
               <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
                 Lo que pensamos, escrito.
@@ -450,7 +450,7 @@ export default function Nosotros() {
             </div>
             <RevealOnScroll delay={0.1}>
               <Link href="/diario" className="more-link">
-                Ver el diario <span className="arrow">→</span>
+                Ver el blog <span className="arrow">→</span>
               </Link>
             </RevealOnScroll>
           </div>
@@ -462,7 +462,7 @@ export default function Nosotros() {
                 className="card group flex flex-col"
                 data-cursor="link"
               >
-                <p className="eyebrow mb-3">{p.cluster ?? "Diario"}</p>
+                <p className="eyebrow mb-3">{p.cluster ?? "Blog"}</p>
                 <h3 className="display text-xl leading-tight text-text-primary transition-colors group-hover:text-accent-cyan">
                   {p.title}
                 </h3>
