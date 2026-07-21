@@ -122,7 +122,9 @@ export function ArtistShowcase({
               borde. Los tres salen SIEMPRE; sin link real, caen a una búsqueda
               del artista (se sustituye por el link directo en cuanto esté). */}
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <ArtistPlayer key={a.slug} artistName={a.name} src={a.audioSrc ?? "/audio/bonito.mp3"} />
+            {a.audioSrc && (
+              <ArtistPlayer key={a.slug} artistName={a.name} src={a.audioSrc} />
+            )}
 
             <a
               href={a.spotifyUrl ?? `https://open.spotify.com/search/${encodeURIComponent(a.name)}`}

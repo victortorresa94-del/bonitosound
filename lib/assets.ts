@@ -35,15 +35,15 @@ export function findLogo(dir: string, name: string): string | null {
 }
 
 /**
- * Canción para el botón "Escuchar a X" de la ficha. Si el artista tiene su
- * propio audio en /public/audio/artistas/<slug>.(mp3|m4a), suena ese; si no,
- * cae a la canción de Bonito Sound (igual que el botón del home). Así el botón
- * SIEMPRE reproduce algo en vivo, y se personaliza en cuanto se sube el tema.
+ * Canción propia para el botón "Escuchar a X" de la ficha: SOLO si el artista
+ * tiene su audio en /public/audio/artistas/<slug>.(mp3|m4a) — su propia música,
+ * que sí podemos reproducir. Si no hay, devuelve undefined y el botón no se
+ * pinta (nada de reproducir música de terceros sin derechos).
  */
-export function findArtistAudio(slug: string): string {
+export function findArtistAudio(slug: string): string | undefined {
   for (const ext of ["mp3", "m4a"]) {
     const rel = path.join("audio", "artistas", `${slug}.${ext}`);
     if (fs.existsSync(path.join(pub, rel))) return "/" + rel.split(path.sep).join("/");
   }
-  return "/audio/bonito.mp3";
+  return undefined;
 }
