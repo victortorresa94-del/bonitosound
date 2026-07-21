@@ -285,7 +285,7 @@ export default function EventosMarcas() {
         <CtaBlock
           title="¿Lo hablamos?"
           desc="Una llamada de 30 minutos. Tú cuentas el evento, nosotros te decimos qué se puede hacer de verdad."
-          href={`mailto:${site.emails.general}?subject=Llamada%20activación`}
+          href="/contacto"
           cta="Reservar llamada →"
         />
       </Section>
