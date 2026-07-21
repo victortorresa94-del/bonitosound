@@ -100,9 +100,13 @@ export function SpotifyDock() {
         {/* Host del embed de Spotify (siempre montado). */}
         <div ref={hostRef} />
 
-        {/* Antes de arrancar: tapamos el reproductor con NUESTRO CTA. */}
+        {/* Antes de arrancar: tapamos el reproductor de Spotify por completo
+            (fondo navy sólido) para que solo se vea NUESTRO CTA. */}
         {!started && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-4 text-center">
+          <div
+            className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 px-4 text-center"
+            style={{ backgroundColor: "#14283C" }}
+          >
             <button
               type="button"
               onClick={handlePlay}
