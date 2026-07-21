@@ -281,6 +281,15 @@ export default function EventosMarcas() {
         </StaggerGroup>
       </Section>
 
+      <Section>
+        <CtaBlock
+          title="¿Lo hablamos?"
+          desc="Una llamada de 30 minutos. Tú cuentas el evento, nosotros te decimos qué se puede hacer de verdad."
+          href={`mailto:${site.emails.general}?subject=Llamada%20activación`}
+          cta="Reservar llamada →"
+        />
+      </Section>
+
       <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">
           Preguntas frecuentes
@@ -295,15 +304,6 @@ export default function EventosMarcas() {
         <RevealOnScroll className="mt-10" delay={0.2}>
           <FaqOpen items={faq} />
         </RevealOnScroll>
-      </Section>
-
-      <Section>
-        <CtaBlock
-          title="¿Lo hablamos?"
-          desc="Una llamada de 30 minutos. Tú cuentas el evento, nosotros te decimos qué se puede hacer de verdad."
-          href={`mailto:${site.emails.general}?subject=Llamada%20activación`}
-          cta="Reservar llamada →"
-        />
       </Section>
     </>
   );

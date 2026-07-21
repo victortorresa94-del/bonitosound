@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Section, Cta, JsonLd } from "@/components/ui";
 import { YouTubeEmbed } from "@/components/Embeds";
+import { CtaBlock } from "@/components/CtaBlock";
 import {
   RevealOnScroll,
   StaggerGroup,
@@ -114,6 +115,15 @@ export default function Giras() {
         <div className="mt-10 max-w-3xl">
           <YouTubeEmbed id="r47SP4OULcI" title="Final de la Gira 1016 — Alfred García" />
         </div>
+      </Section>
+
+      <Section>
+        <CtaBlock
+          title="¿Tienes una gira que mover?"
+          desc="Cuéntanos las fechas y el proyecto. Te decimos cómo la montamos y por dónde empezaríamos."
+          href="/contacto"
+          cta="Cuéntanos tu gira →"
+        />
       </Section>
 
       <Section>
