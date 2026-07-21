@@ -2,7 +2,6 @@
 
 import { useLayoutEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { usePlayer } from "@/components/player/PlayerProvider";
 
 type HeroVideoProps = {
   src: string;
@@ -14,19 +13,11 @@ type HeroVideoProps = {
  * object-cover a pantalla completa, entrada con fade y salida con parallax
  * al hacer scroll. Respeta prefers-reduced-motion: no reproduce, muestra el
  * poster fijo. El poster carga al instante y evita parpadeo mientras baja el mp4.
- *
- * El audio ("Bonito" de Jarabe de Palo) es opcional y NO bloquea nada: un CTA
- * centrado en el hero lo activa, pero el scroll siempre está libre — el
- * visitante puede bajar sin darle al play. Tras activarlo, una pastilla
- * flotante controla el play/pause.
  */
 export function HeroVideo({ src, poster }: HeroVideoProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  // La canción vive en el player GLOBAL (no se corta al navegar). El hero solo
-  // la arranca; el control (play/pausa) es el botón flotante.
-  const { start, everStarted } = usePlayer();
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -116,23 +107,6 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
           }}
         />
       </div>
-
-      {/* CTA de audio: centrado en el hero, no bloquea nada — el scroll
-          funciona igual con o sin pulsarlo. Arranca el player GLOBAL; el
-          control luego es el botón flotante. */}
-      {!everStarted && (
-        <div className="absolute inset-x-0 bottom-[14%] z-20 flex justify-center px-6">
-          <button
-            onClick={start}
-            className="group inline-flex items-center gap-3 rounded-full bg-text-primary px-7 py-3.5 text-bg-primary shadow-xl transition-transform hover:scale-105"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-              <path d="M8 5v14l11-7z" />
-            </svg>
-            <span className="text-sm font-semibold tracking-wide">Dale al play</span>
-          </button>
-        </div>
-      )}
 
       <div className="absolute bottom-4 z-20 flex flex-col items-center gap-2">
         <span className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-text-muted">
