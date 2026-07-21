@@ -177,13 +177,6 @@ export default function Marketing() {
         </StaggerGroup>
       </Section>
 
-      <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
-        <div className="mt-8">
-          <FaqOpen items={faq} />
-        </div>
-      </Section>
-
       <Section>
         <CtaBlock
           title="¿Tienes algo que sacar?"
@@ -191,6 +184,13 @@ export default function Marketing() {
           href={`mailto:${site.emails.general}?subject=${encodeURIComponent("Marketing para artistas")}`}
           cta="Hablamos →"
         />
+      </Section>
+
+      <Section className="bg-bg-primary">
+        <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
+        <div className="mt-8">
+          <FaqOpen items={faq} />
+        </div>
       </Section>
     </>
   );

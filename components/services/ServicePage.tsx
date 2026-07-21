@@ -266,13 +266,8 @@ export function ServicePage({
         </Section>
       ) : null}
 
-      {/* FAQ */}
-      <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-8">Preguntas frecuentes</RevealOnScroll>
-        <FaqOpen items={service.faq} />
-      </Section>
-
-      {/* CTA de cierre */}
+      {/* CTA de contacto — justo ANTES de las FAQ (cierra la venta y deja las
+          dudas para el final). */}
       <Section>
         <CtaBlock
           title={service.cta.h2}
@@ -285,6 +280,12 @@ export function ServicePage({
             </a>
           }
         />
+      </Section>
+
+      {/* FAQ (cierre de la página) */}
+      <Section className="bg-bg-primary">
+        <RevealOnScroll as="p" className="eyebrow mb-8">Preguntas frecuentes</RevealOnScroll>
+        <FaqOpen items={service.faq} />
       </Section>
     </>
   );
