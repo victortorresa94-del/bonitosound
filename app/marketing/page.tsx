@@ -181,7 +181,7 @@ export default function Marketing() {
         <CtaBlock
           title="¿Tienes algo que sacar?"
           desc="Cuéntanos qué lanzas y cuándo. Te decimos qué se puede hacer de verdad y por dónde empezar."
-          href={`mailto:${site.emails.general}?subject=${encodeURIComponent("Marketing para artistas")}`}
+          href="/contacto"
           cta="Hablamos →"
         />
       </Section>

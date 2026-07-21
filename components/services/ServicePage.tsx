@@ -272,13 +272,8 @@ export function ServicePage({
         <CtaBlock
           title={service.cta.h2}
           desc={service.cta.desc}
-          href={mailto}
+          href="/contacto"
           cta="Contactar →"
-          secondary={
-            <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="transition-colors hover:text-accent-cyan">
-              o llama al {site.phone}
-            </a>
-          }
         />
       </Section>
 
