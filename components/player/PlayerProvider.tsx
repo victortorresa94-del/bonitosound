@@ -29,6 +29,8 @@ type PlayerCtx = {
   playing: boolean;
   everStarted: boolean;
   isHome: boolean;
+  /** Hay al menos un tema (con licencia) en la playlist. Si no, no hay player. */
+  hasTracks: boolean;
   /** "siguiente" disponible: fuera del home, con música arrancada y ≥2 temas. */
   canNext: boolean;
   /** Playlist de Bonito en Spotify (se abre en pestaña nueva). */
@@ -128,6 +130,7 @@ export function PlayerProvider({
     return () => document.removeEventListener("play", onMediaPlay, true);
   }, []);
 
+  const hasTracks = playlist.length > 0;
   const canNext = everStarted && !isHome && playlist.length > 1;
 
   return (
@@ -136,6 +139,7 @@ export function PlayerProvider({
         playing,
         everStarted,
         isHome,
+        hasTracks,
         canNext,
         spotifyUrl: site.external.spotifyBonitoPlaylist,
         start,
@@ -145,10 +149,14 @@ export function PlayerProvider({
     >
       {children}
 
-      {/* Audio persistente. Primer tema = la canción de Bonito. */}
-      <audio ref={audioRef} src={playlist[0]} loop={playlist.length < 2} preload="none" />
-
-      <FloatingPlayer />
+      {/* Reproductor solo si hay algún tema (con licencia) en la playlist:
+          sin canción no se pinta nada, para no dejar un botón muerto. */}
+      {hasTracks && (
+        <>
+          <audio ref={audioRef} src={playlist[0]} loop={playlist.length < 2} preload="none" />
+          <FloatingPlayer />
+        </>
+      )}
     </Ctx.Provider>
   );
 }
