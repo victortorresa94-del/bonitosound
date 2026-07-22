@@ -29,6 +29,7 @@ export function R2Video({
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
+  const [playing, setPlaying] = useState(true);
   // Dimensiones reales del vídeo (para ajustar el marco a su orientación en vez
   // de forzar 16:9 y reescalar un vertical hasta pixelarlo).
   const [dims, setDims] = useState<{ w: number; h: number } | null>(null);
@@ -68,6 +69,27 @@ export function R2Video({
     };
   }, [start, src]);
 
+  // Sincroniza el estado play/pausa con lo que hace el vídeo de verdad.
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    const onPlay = () => setPlaying(true);
+    const onPause = () => setPlaying(false);
+    v.addEventListener("play", onPlay);
+    v.addEventListener("pause", onPause);
+    return () => {
+      v.removeEventListener("play", onPlay);
+      v.removeEventListener("pause", onPause);
+    };
+  }, []);
+
+  const togglePlay = () => {
+    const v = ref.current;
+    if (!v) return;
+    if (v.paused) v.play().catch(() => {});
+    else v.pause();
+  };
+
   const toggleSound = () => {
     const v = ref.current;
     if (!v) return;
@@ -106,6 +128,23 @@ export function R2Video({
         className="absolute inset-0 h-full w-full object-contain"
       />
       <div className="absolute bottom-3 right-3 z-10 flex items-center gap-2">
+        <button
+          type="button"
+          onClick={togglePlay}
+          aria-label={playing ? "Pausar" : "Reproducir"}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur transition-colors hover:bg-black/75"
+        >
+          {playing ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <rect x="6" y="5" width="4" height="14" rx="1" />
+              <rect x="14" y="5" width="4" height="14" rx="1" />
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          )}
+        </button>
         <button
           type="button"
           onClick={toggleSound}
