@@ -65,7 +65,8 @@ export function r2(key: string): string {
 export const nav = [
   { label: "¿Qué hacemos?", href: "/servicios" },
   { label: "Artistas", href: "/artistas" },
-  { label: "Eventos", href: "/eventos" },
+  { label: "Giras", href: "/giras" },
+  { label: "Experiencias", href: "/eventos" },
   { label: "Universo Bonito", href: "/universo" },
   { label: "Qué somos", href: "/nosotros" },
 ] as const;

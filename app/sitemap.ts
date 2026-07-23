@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/servicios",
     "/eventos",
     "/eventos/marcas",
-    "/eventos/giras",
+    "/giras",
     "/records",
     "/booking",
     "/management",

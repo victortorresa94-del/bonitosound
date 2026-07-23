@@ -21,6 +21,8 @@ const nextConfig = {
       { source: "/jaleo", destination: "/jaleo-sound", statusCode: 301 },
       { source: "/jaleosound", destination: "/jaleo-sound", statusCode: 301 },
       { source: "/festival", destination: "/jaleo-sound", statusCode: 301 },
+      // Giras salió de /eventos a su propia página principal
+      { source: "/eventos/giras", destination: "/giras", statusCode: 301 },
 
       // Slugs típicos del WordPress anterior
       { source: "/home", destination: "/", statusCode: 301 },
