@@ -89,7 +89,7 @@ export const scenes: HomeScene[] = [
     accent: "llenamos",
     support:
       "Producción, ruta y management de directo. De Antonio Orozco a Maldita Nerea: el escenario montado y el aforo lleno.",
-    cta: { label: "Ver más", href: "/eventos/giras" },
+    cta: { label: "Ver más", href: "/giras" },
     motionPreset: "parallax",
     mediaCandidates: ["/video/home/giras.mp4", "/img/home/giras.webp", "/img/marca/superheroe-eventos.png"],
   },
