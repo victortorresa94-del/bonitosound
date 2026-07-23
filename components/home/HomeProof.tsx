@@ -29,10 +29,10 @@ export function ArtistsBand() {
 
   return (
     <section
-      aria-label="Artistas que llevamos"
+      aria-label="Artistas con los que trabajamos"
       className="overflow-hidden border-t border-subtle py-16 md:py-20"
     >
-      <p className="eyebrow mb-10 px-6 text-center">Artistas que llevamos</p>
+      <p className="eyebrow mb-10 px-6 text-center">Artistas con los que trabajamos</p>
       <MarqueeRow speed={50} gap="2.25rem" className={FADE_MASK}>
         {filled.map((a, i) => (
           <div

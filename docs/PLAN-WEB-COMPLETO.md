@@ -26,21 +26,21 @@
 
 ## 1. ESTRUCTURA / MENÚ
 
-- [ ] `[B]` ✅ Menú: **¿Qué hacemos? · Artistas · Giras · Experiencias · Universo Bonito · Qué somos · Hablamos**.
+- [x] `[B]` ✅ Menú: **¿Qué hacemos? · Artistas · Giras · Experiencias · Universo Bonito · Qué somos · Hablamos**. *(Nota: URL de Experiencias sigue en `/eventos`; el rename a `/experiencias` va con el bloque 3.)*
   - `Eventos` → **Experiencias**. Añadir **Giras** como página propia.
-- [ ] `[B]` ✅ **Eliminar la página vieja de giras** `app/eventos/giras` (la "perdida"). El **banner 5 del home** ("Y las giras, las llenamos", hoy `href:/eventos/giras`) debe apuntar a la **nueva /giras**.
+- [x] `[B]` ✅ **Eliminada la página vieja de giras** `app/eventos/giras` + redirect 301 → `/giras`. Banner 5 del home, footer y sitemap ya apuntan a **/giras**. Nueva `/giras` creada (versión funcional; diseño fino con Aura en §4).
 
 ---
 
 ## 2. HOME / LANDING
 
-- [ ] `[B]` ✅ **Quitar la numeración `0X/09`** de los banners (ver §12).
-- [ ] `[B]` ✅ Marquee de artistas → frase **"Artistas con los que trabajamos"**. Meter más artistas (incl. **Albert Pla y Alfred García**), con estrategia (famosos con cuidado; no enlazar a perfil si ya no están en Bonito). (§9)
-- [ ] `[B]` ✅ **Enlaces de banners:** "Hacemos que las marcas suenen" → **Experiencias**. "Ayudamos a los artistas a despegar" → **/servicios ("Qué hacemos")** (hoy va a Records). Banner 5 "las giras las llenamos" → **/giras** nueva.
-- [ ] `[B]` ✅ **Scroll cue "Baja" responsive**: que se vea en todas las pantallas (a Dani no le salía → pantalla en blanco confusa).
-- [ ] `[B]` ✅ **Bloque institucional** bajo el 1er banner "Llevamos la música a todas partes": "con el apoyo de / miembros de". **Los logos YA están en el repo** (`public/img/instituciones/`: ufi, sgae, arte, agedi, european-music-council · `public/img/apoyos/`: ministerio-de-cultura, plan-de-recuperacion-ue, institut-ramon-llull). **Quitar AEDEM** (ya no son miembros). Falta buscar **ARC** y **PROMUSICAE** → `[B/V]` los buscamos nosotros.
-- [ ] `[B]` ✅/⏳ **Muro de marcas**: añadir logos de marcas/agencias/artistas que faltan. **Los NOMBRES los pasa Dani; los LOGOS los buscamos nosotros** (Señor Wilson, Corre Lola, GTS, etc.).
-- [ ] `[B]` ✅ No alargar más el home (Dani).
+- [x] `[B]` ✅ **Quitada la numeración `0X/09`** de los banners.
+- [x] `[B]` ✅ Marquee → frase **"Artistas con los que trabajamos"**. *(Meter más artistas —Albert Pla, Alfred García, etc.— queda pendiente de nombres/fotos → §7/§9.)*
+- [x] `[B]` ✅ **Enlaces de banners:** "marcas suenen" → Experiencias (/eventos) · "artistas despegar" → **/servicios** (antes /records) · banner 5 → **/giras**.
+- [x] `[B]` ✅ **Scroll cue "Baja" responsive**: centrado + safe-area, visible en todas las pantallas.
+- [x] `[B]` ✅ **Bloque institucional** bajo "Llevamos la música a todas partes" (franja navy discreta, logos que ya hay, **AEDEM fuera**). Pendiente `[B/V]`: buscar **ARC** y **PROMUSICAE**.
+- [ ] `[B]` ⏳ **Muro de marcas**: añadir logos de marcas/agencias/artistas que faltan. Los NOMBRES los pasa Dani; los LOGOS los buscamos nosotros (Señor Wilson, Corre Lola, GTS, etc.).
+- [x] `[B]` ✅ No alargar más el home (respetado).
 
 ---
 
