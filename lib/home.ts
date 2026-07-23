@@ -72,9 +72,12 @@ export const scenes: HomeScene[] = [
     kicker: "Records",
     statement: "Ayudamos a artistas a despegar.",
     accent: "despegar",
+    // Este banner engloba TODOS los servicios (booking, management, sello,
+    // distribución, editorial…), así que lleva a "¿Qué hacemos?" (/servicios),
+    // no solo a Records.
     support:
       "Sello, booking, management, distribución y editorial. Todo lo que necesita una carrera para crecer, en un solo sitio.",
-    cta: { label: "Ver más", href: "/records" },
+    cta: { label: "Ver más", href: "/servicios" },
     motionPreset: "kenburns",
     mediaCandidates: [
       "/video/home/records.mp4", "/img/home/records.webp",

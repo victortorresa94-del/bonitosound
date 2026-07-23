@@ -38,8 +38,6 @@ export function NarrativeScene({
   displayIndex,
 }: NarrativeSceneProps) {
   const flip = index % 2 === 1;
-  const shown = displayIndex ?? index + 1;
-  const counter = total ? `${String(shown).padStart(2, "0")} / ${String(total).padStart(2, "0")}` : null;
 
   const text = (
     <div className={media ? "md:max-w-xl" : "mx-auto max-w-3xl text-center"}>
@@ -50,11 +48,6 @@ export function NarrativeScene({
           }`}
         >
           <span>{scene.kicker}</span>
-          {counter && (
-            <span className="text-text-muted" aria-hidden="true">
-              · {counter}
-            </span>
-          )}
         </div>
       </RevealOnScroll>
 

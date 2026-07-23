@@ -129,7 +129,12 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
         </div>
       )}
 
-      <div className="absolute bottom-4 z-20 flex flex-col items-center gap-2">
+      {/* Indicador de scroll: centrado y por encima de la barra del navegador
+          (safe-area) para que se vea en TODAS las pantallas desde el inicio. */}
+      <div
+        className="absolute inset-x-0 z-20 flex flex-col items-center gap-2"
+        style={{ bottom: "max(1.5rem, env(safe-area-inset-bottom, 0px))" }}
+      >
         <span className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-text-muted">
           Baja
         </span>

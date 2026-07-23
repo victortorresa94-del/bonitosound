@@ -104,7 +104,6 @@ export const memberships = [
   "SGAE",
   "AGEDI",
   "ARTE",
-  "AEDEM",
   "European Music Council",
 ] as const;
 
