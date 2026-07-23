@@ -38,8 +38,8 @@
 - [ ] `[B]` ✅ Marquee de artistas → frase **"Artistas con los que trabajamos"**. Meter más artistas (incl. **Albert Pla y Alfred García**), con estrategia (famosos con cuidado; no enlazar a perfil si ya no están en Bonito). (§9)
 - [ ] `[B]` ✅ **Enlaces de banners:** "Hacemos que las marcas suenen" → **Experiencias**. "Ayudamos a los artistas a despegar" → **/servicios ("Qué hacemos")** (hoy va a Records). Banner 5 "las giras las llenamos" → **/giras** nueva.
 - [ ] `[B]` ✅ **Scroll cue "Baja" responsive**: que se vea en todas las pantallas (a Dani no le salía → pantalla en blanco confusa).
-- [ ] `[B]` ⏳ **Bloque institucional** bajo el 1er banner "Llevamos la música a todas partes": "con el apoyo de / miembros de" **ARTE, SGAE, Ministerio de Cultura, UFI, PROMUSICAE…** (discreto). **Quitar AEDEM/EDEM**. Lista y logos exactos = Víctor/Dani.
-- [ ] `[B]` ⏳ **Muro de marcas**: faltan logos (Víctor busca) + más marcas y **agencias** que pasa Dani (nombres + vídeos) + logos artistas **Señor Wilson, Corre Lola**.
+- [ ] `[B]` ✅ **Bloque institucional** bajo el 1er banner "Llevamos la música a todas partes": "con el apoyo de / miembros de". **Los logos YA están en el repo** (`public/img/instituciones/`: ufi, sgae, arte, agedi, european-music-council · `public/img/apoyos/`: ministerio-de-cultura, plan-de-recuperacion-ue, institut-ramon-llull). **Quitar AEDEM** (ya no son miembros). Falta buscar **ARC** y **PROMUSICAE** → `[B/V]` los buscamos nosotros.
+- [ ] `[B]` ✅/⏳ **Muro de marcas**: añadir logos de marcas/agencias/artistas que faltan. **Los NOMBRES los pasa Dani; los LOGOS los buscamos nosotros** (Señor Wilson, Corre Lola, GTS, etc.).
 - [ ] `[B]` ✅ No alargar más el home (Dani).
 
 ---
@@ -205,15 +205,33 @@ Etiquetas: **records** (no "sello"), editorial, distribución, marketing, bookin
 
 ---
 
-## 14. TAREAS DE DANI *(material a enviar)*
+## 14. TAREAS DE DANI  *(solo lo que depende de él — una tarea por línea)*
 
-- [ ] Canciones con derechos (mín. 5) de artistas Bonito.
-- [ ] Marcas y **agencias** que faltan (nombres + vídeos) + logos de marcas + logos artistas (Señor Wilson, Corre Lola).
-- [ ] **Fotos**: 6 del roster, giras (rostros §4), equipo (Quim + colaboradora), "ha trabajado con".
-- [ ] **Logos institucionales**: UFI, ARTE, ARC, SGAE, PROMUSICAE, Europa Music + Ministerio de Cultura.
-- [ ] **Vídeos**: mapping, Jaleo edición 2025, y material de eventos para el mix de 30 s.
-- [ ] Confirmar **relaciones** exactas por artista y nombres del equipo nuevo.
-- [ ] Material/vídeos de **Paule**.
+**NOMBRES** *(los logos ya los buscamos nosotros; Dani solo da los nombres):*
+- [ ] Nombres de los **artistas de Bonito que faltan** (a añadir) **+ la relación de cada uno** (management / booking / records / editorial / producción).
+- [ ] Nombres de las **marcas** con las que se ha trabajado que faltan.
+- [ ] Nombres de las **agencias** (booking, management, etc.) con/para las que se ha trabajado.
+
+**FOTOS:**
+- [ ] Las **fotos que enseñó hoy** (material histórico de giras / trabajando en directo).
+- [ ] Fotos de los **6 artistas del roster**.
+- [ ] Fotos de los artistas de **"ha trabajado con"**.
+- [ ] Fotos del **equipo nuevo**: Quim y la colaboradora nueva (+ sus roles).
+
+**VÍDEOS:**
+- [ ] Vídeos de **mapping / espectáculos visuales**.
+- [ ] **Vídeo oficial de Jaleo Sound** (edición 2025).
+
+**MÚSICA:**
+- [ ] **Canciones con derechos** (mín. 5) de artistas de Bonito → carpeta Drive.
+
+---
+
+### NO es tarea de Dani (lo hacemos nosotros)
+- **Logos institucionales** → ya en el repo (falta buscar ARC + PROMUSICAE).
+- **Logos de marcas y artistas** → los buscamos nosotros con los nombres que dé Dani.
+- **Vídeos de artistas/giras** (para /giras y producciones) → los sacamos nosotros (YouTube/links).
+- **Material/vídeos de Paule** → ✅ ya descargados hoy por Víctor.
 
 ---
 
