@@ -1,75 +1,70 @@
-# Bonito Sound · Web — Plan maestro de cambios (v1)
+# Bonito Sound · Web — Plan maestro de cambios (v2)
 
-> Documento vivo. Combina las **3 fuentes**: reunión con Dani (23/07, notas Gemini),
-> el PDF **"cambios web"** de Víctor, y los **apuntes de voz** de Víctor.
-> Objetivo: tenerlo TODO en un sitio para decidir por dónde empezar y enviarle a
-> Dani su parte. Todavía **no se codifica nada** hasta cerrar el orden.
+> Documento de trabajo de Víctor + Sesión B. Combina las **3 fuentes**: reunión con
+> Dani (23/07, notas Gemini), el PDF **"cambios web"** y los **apuntes de voz** de Víctor.
+> Es NUESTRO plan para hacerlo todo de una tirada (excepto el material que envía Dani).
+> **Aún no se codifica**: primero cerrar alcance y orden.
 
-**Leyenda de responsable:** `[B]` = Sesión B (Claude) · `[V]` = Víctor · `[D]` = Dani
-**Estado:** ✅ se puede hacer ya (sin material) · ⏳ bloqueado esperando material · ❓ decisión pendiente
+**Responsable:** `[B]` Sesión B (Claude) · `[V]` Víctor · `[D]` Dani
+**Estado:** ✅ se puede ya · ⏳ espera material de Dani · 🎨 requiere Aura MCP (generar/editar) · ❓ decisión
 
-**Reglas duras (no negociables):**
-- **Cero cifras de dinero** en la web pública. (Los precios de la reunión —1000€/2000€/comisiones— son charla interna, NO van a la web.)
-- Nº de conciertos, "+300 obras", años de gira, etc. **sí** son datos válidos (prueba real, no dinero).
-- Género neutro. Nada inventado: sin dato real → el bloque no se pinta.
+**Reglas duras:** Cero cifras de dinero en la web (los precios de la reunión son internos). Nº de conciertos / "+300 obras" / años **sí** valen. Género neutro. Nada inventado.
 
 ---
 
-## 1. DECISIONES A CERRAR ANTES DE EMPEZAR ❓
+## 0. DECISIONES YA CERRADAS (respuestas de Víctor)
 
-1. **¿"Eventos" o "Experiencias"?** para la sección de marcas+teatro+mapping.
-   - Reunión: Víctor propuso *"Experiencias"* (agrupa marcas + mapping + logística).
-   - PDF: Dani lo deja en *"Eventos"* / *"Eventos para marca"*.
-2. **Frase del banner marquee del home** (el que hoy dice "Artistas que llevamos"):
-   - PDF → *"Artistas editados"* · Reunión → *"editados"* o *"con el rollo bonito"* · Apuntes voz → *"Artistas con los que trabajamos"*. **Elegir una.**
-3. **Numeración de banners `01/09 … 09/09`**: ¿quitar, mantener o análisis a fondo? (ver §13).
-4. **Menú: ¿"Giras" entra fijo?** (Dani lo dejó con interrogante, pero la reestructura lo pide). Propuesta: sí.
-5. **Idiomas:** ¿solo castellano + catalán? (inglés se descartó por ahora).
+- **Sección de marcas → se llama "EXPERIENCIAS"** (la actual `/eventos` se convierte en Experiencias).
+- **"GIRAS" = página NUEVA e independiente**, principal en el menú (portfolio de giras). NO es el renombre de "producciones".
+- **"Producciones"** sigue siendo un **servicio** (dentro de ¿Qué hacemos?), pero reenfocado a **producción de giras de artistas** (hay que rehacerlo entero).
+- **"Sello" → "records"** en todas partes.
+- Frase del marquee del home → **"Artistas con los que trabajamos"**.
+- **Numeración `0X/09`**: decisión rápida (ver §12, recomendación: quitar).
+- Idiomas: **castellano + catalán** (inglés no).
+
+---
+
+## 1. ESTRUCTURA / MENÚ
+
+- [ ] `[B]` ✅ Menú: **¿Qué hacemos? · Artistas · Giras · Experiencias · Universo Bonito · Qué somos · Hablamos**.
+  - `Eventos` → **Experiencias**. Añadir **Giras** como página propia.
+- [ ] `[B]` ✅ **Eliminar la página vieja de giras** `app/eventos/giras` (la "perdida"). El **banner 5 del home** ("Y las giras, las llenamos", hoy `href:/eventos/giras`) debe apuntar a la **nueva /giras**.
 
 ---
 
 ## 2. HOME / LANDING
 
-- [ ] `[B]` ✅ **Quitar la numeración `0X/09`** de los banners (confunde; Dani y terceros no la entienden). *Ver análisis §13.* (R+P+A)
-- [ ] `[B]` ✅ **Banner marquee "Artistas que llevamos" → nueva frase** (decisión §1.2). (R+P+A)
-- [ ] `[B]` ⏳ **Meter en ese marquee más artistas**, incluidos **Albert Pla y Alfred García** (antes escondidos, ahora protagonistas). Faltan muchos; Dani mandará más "pequeños". (A)
-- [ ] `[B]` ✅ **Arreglar enlaces de los banners del home:**
-  - "Hacemos que las marcas suenen" → **Eventos de marca** (se queda).
-  - "Ayudamos a los artistas a despegar" → hoy va a **Records**; debe ir a **/servicios ("Qué hacemos")** porque engloba booking, management, sello, distribución y editorial. (R+P+A)
-- [ ] `[B]` ✅ **Scroll cue "Baja" responsive:** a Dani no le aparecía hasta hacer scroll → pantalla "en blanco" que confunde. Revisar/reposicionar para que se vea en **todos los tamaños de pantalla**. (R+A)
-- [ ] `[B]` ⏳ **Bloque institucional en el home**, **debajo del primer banner "Llevamos la música a todas partes"**, con un "con el apoyo de / miembros de": **ARTE, SGAE, Ministerio de Cultura**, etc. Discreto pero presente (aporta prestigio, contactos, subvenciones). **Quitar AEDEM/EDEM** (ya no son miembros). Lista exacta la pasa Víctor. (A) — *logos = ⏳*
-- [ ] `[B]` ⏳ **Muro de marcas del home:** faltan logos (Víctor los busca) + **más marcas y agencias** que enviará Dani (nombres + vídeos). Incluir **agencias** de booking/management con y para las que se ha trabajado (muchas "marcas" son agencias). Añadir logos de artistas que faltan: **Señor Wilson, Corre Lola**. (R+P+A)
-- [ ] `[B]` ⏳ **Vídeo resumen corporativo** único (en vez de un vídeo por marca; no hay calidad para todos). Se montará con la herramienta de vídeo de Víctor. (R)
-- [ ] `[B]` ✅ Estructura del home: **no alargarlo más** (Dani prefiere no añadir secciones nuevas). (R)
+- [ ] `[B]` ✅ **Quitar la numeración `0X/09`** de los banners (ver §12).
+- [ ] `[B]` ✅ Marquee de artistas → frase **"Artistas con los que trabajamos"**. Meter más artistas (incl. **Albert Pla y Alfred García**), con estrategia (famosos con cuidado; no enlazar a perfil si ya no están en Bonito). (§9)
+- [ ] `[B]` ✅ **Enlaces de banners:** "Hacemos que las marcas suenen" → **Experiencias**. "Ayudamos a los artistas a despegar" → **/servicios ("Qué hacemos")** (hoy va a Records). Banner 5 "las giras las llenamos" → **/giras** nueva.
+- [ ] `[B]` ✅ **Scroll cue "Baja" responsive**: que se vea en todas las pantallas (a Dani no le salía → pantalla en blanco confusa).
+- [ ] `[B]` ⏳ **Bloque institucional** bajo el 1er banner "Llevamos la música a todas partes": "con el apoyo de / miembros de" **ARTE, SGAE, Ministerio de Cultura, UFI, PROMUSICAE…** (discreto). **Quitar AEDEM/EDEM**. Lista y logos exactos = Víctor/Dani.
+- [ ] `[B]` ⏳ **Muro de marcas**: faltan logos (Víctor busca) + más marcas y **agencias** que pasa Dani (nombres + vídeos) + logos artistas **Señor Wilson, Corre Lola**.
+- [ ] `[B]` ✅ No alargar más el home (Dani).
 
 ---
 
-## 3. MENÚ / NAVEGACIÓN
+## 3. EXPERIENCIAS  *(antes "Eventos" — marcas · teatro · mapping)*
 
-- [ ] `[B]` ✅ Nuevo menú: **¿Qué hacemos? · Artistas · Giras · Eventos · Universo Bonito · Qué somos · Hablamos** (añadir **Giras**). (R+P)
-- [ ] `[B]` ✅ Verificar que cada entrada del menú apunta a su página real. (R)
-
----
-
-## 4. EVENTOS  *(solo marcas · teatro · visuales/mapping — separado de Giras)*  ❓nombre
-
-- [ ] `[B]` ✅ **Separar Eventos de Giras**: aquí SOLO eventos para marcas, teatro y espectáculos visuales. **Quitar todo lo de "giras y directos que montamos"** (se va a §5). (R+P)
-- [ ] `[B]` ✅ **Texto nuevo** bajo "Hacemos que las marcas suenen":
-  > *"Creamos y producimos experiencias de marca donde la música, las artes en vivo y el entretenimiento se convierten en herramientas para conectar con el público. Participamos en todo el proceso creativo o ejecutamos proyectos ya diseñados, coordinando artistas, producción y equipos técnicos para hacer realidad cada evento. Porque una marca no solo debe verse. Debe vivirse."* (P)
-- [ ] `[B]` ✅ **Bloque Teatro**: *"No todo es música, también trabajamos para Teatro y espectáculos visuales"* — **Dumbo** (gira verano 2023, 8 actuaciones), **El Rey León** (verano 2022, 8 actuaciones), **Pinocho** (invierno 2022, 3 actuaciones). (P+R)
-- [ ] `[B]` ✅/⏳ **Bloque Mapping / Espectáculos visuales**:
-  > *"Especialistas en producción de mapping, instalaciones de luz y experiencias visuales para eventos y marcas. Transformamos fachadas, espacios urbanos y escenarios en espectáculos únicos mediante tecnología, creatividad e innovación."* — texto ✅ / **vídeos y fotos de mapping = ⏳** (Dani). (P+R)
-- [ ] `[B]` ✅ Mantener todas las marcas actuales + CTA **"¿Quieres crear un evento? Hablemos"** con formulario. (R+P)
-- [ ] `[B]` ✅ **No explicar cada activación**: solo foto + para qué marca (sin detallar el trabajo). (P)
+- [ ] `[B]` 🎨 **Vídeo resumen al inicio**: editar con **Aura MCP** un **mix de ~30 s** de todos los eventos, con música guay, que resuma "qué son nuestras experiencias". (petición directa de Víctor)
+- [ ] `[B]` ✅ Texto bajo "Hacemos que las marcas suenen":
+  > *"Creamos y producimos experiencias de marca donde la música, las artes en vivo y el entretenimiento se convierten en herramientas para conectar con el público. Participamos en todo el proceso creativo o ejecutamos proyectos ya diseñados, coordinando artistas, producción y equipos técnicos para hacer realidad cada evento. Porque una marca no solo debe verse. Debe vivirse."*
+- [ ] `[B]` ✅ **Quitar todo lo de "giras y directos que montamos"** (se va a /giras).
+- [ ] `[B]` ✅ Bloque **Teatro**: Dumbo (verano 2023, 8), El Rey León (verano 2022, 8), Pinocho (invierno 2022, 3).
+- [ ] `[B]` ✅/⏳ Bloque **Mapping / espectáculos visuales** (decorar fachadas para empresas): texto listo; **vídeos/fotos = Dani**.
+  > *"Especialistas en producción de mapping, instalaciones de luz y experiencias visuales para eventos y marcas. Transformamos fachadas, espacios urbanos y escenarios en espectáculos únicos mediante tecnología, creatividad e innovación."*
+- [ ] `[B]` ✅ **CAMBIO estructural: una página por MARCA/empresa** (hoy hay una por evento en `app/eventos/[slug]`). Dentro de cada marca: nº de eventos hechos + vídeo/imagen. Debajo del vídeo resumen, **listado de marcas** para entrar y profundizar.
+- [ ] `[B]` ✅ CTA "¿Quieres crear un evento? Hablemos".
+- [ ] `[D]` ⏳ Más marcas (hoy solo bebidas), **agencias musicales y empresas**, nombres + vídeos.
 
 ---
 
-## 5. GIRAS  *(página nueva e independiente)*
+## 4. GIRAS  *(página NUEVA — de las más importantes)*  🎨
 
-- [ ] `[B]` ✅ **Nueva leyenda** (fuera "Producción, ruta y management de directo. De Antonio Orozco a Maldita Nerea…"):
-  > *"Producción técnica, logística, road management y dirección de giras. Coordinamos cada detalle, desde la planificación previa hasta el desmontaje final, porque sabemos que la diferencia entre un buen concierto y una gran producción está en los detalles."* (P)
-- [ ] `[B]` ✅ Título **"LO QUE HEMOS LLEVADO"**; subtítulo "Giras y carreras que sostenemos" → **"Giras Bonitas"** (contratación/booking, gestión, logística, técnica, asesoramiento, producción…). (P)
-- [ ] `[B]` ✅/⏳ **Listado cronológico de giras** (de lo más actual hacia atrás), con **foto** en vez de recuadro (foto = ⏳ Dani; de momento fallback navy). Datos ya confirmados (P):
+- [ ] `[B]` 🎨 **Diseñarla con Aura MCP** usando el **lienzo "Bonito Sound / diseños"** (donde están los diseños de todas las páginas) y pasarla a código. Vía libre pero **impactante**, al nivel del resto — no solo nombres/fotos/vídeos.
+- [ ] `[B]` ✅ Leyenda: *"Producción técnica, logística, road management y dirección de giras. Coordinamos cada detalle, desde la planificación previa hasta el desmontaje final, porque sabemos que la diferencia entre un buen concierto y una gran producción está en los detalles."*
+- [ ] `[B]` ✅ Título **"LO QUE HEMOS LLEVADO"**; subtítulo → **"Giras Bonitas"** (contratación/booking, gestión, logística, técnica, asesoramiento, producción…).
+- [ ] `[B]` ✅/⏳ **Listado cronológico de giras** (actual → atrás), foto en vez de recuadro (foto = ⏳). Datos confirmados (PDF):
 
   | Artista | Gira | Años | Conciertos |
   |---|---|---|---|
@@ -83,140 +78,153 @@
   | Ernest Prana | "Torno a casa" | prim–ver 2025 | 12 |
   | Laura Andrés | Gira Zero | prim–ver 2025 | +20 |
   | Eva Calyza | "Marca Divina" | 2024–2025 | +15 |
-  | Pablo Rojo | On Tour in Spain (desde Ámsterdam) | abril 2025 | +8 |
+  | Pablo Rojo | On Tour in Spain (desde Ámsterdam) | abr 2025 | +8 |
   | Egon Calle | Gira Invierno | 2024 | 6 |
   | Vicente García | Gira en España | verano 2022 | 8 |
   | Nerea Rodríguez | "Doble o Nada Tour" | 2021 | +15 |
   | Anne Lukin | Gira | 2021–2022 | +20 |
   | Fabián | Gira Acústica | 2021 | +10 |
-  | Ramón Mirabet | "Gira del Mar" (ruta mediterráneo) | 2021 | +12 |
+  | Ramón Mirabet | "Gira del Mar" | 2021 | +12 |
   | Ramón Mirabet | "Free" | 2022–2023 | +30 |
   | Ruth Lorenzo | Gira | 2022 | — |
   | Bemba Saoco | Gira (fundacional) | 2022 | — |
 
-  *Orden de rostros sugerido (banner):* Orozco · Efecto Pasillo · Maldita Nerea · Ruth Lorenzo · Ramón Mirabet · Albert Pla · Alfred García · Anne Lukin · Dulze · Nàtura · Ernest Prana · Laura Andrés · Eva Calyza · Egon Calle · Nerea Rodríguez · Pablo Rojo. (P)
-- [ ] `[B]` ✅ 3 bloques en la página: **listado de artistas · vídeos de conciertos · servicios logísticos**. (R)
+- [ ] `[B]` ✅ 3 bloques: listado de artistas · vídeos de conciertos · servicios logísticos.
+- [ ] `[B]` 🎨 **Páginas de gira por artista dentro de /giras** (ej. Albert Pla, Alfred García): banner dedicado → página con más vídeos, números, etc. **El botón de Alfred/Albert en /artistas dirige AQUÍ**, no a un perfil. (§8)
 
 ---
 
-## 6. RECORDS Y PÁGINAS DE SERVICIO
+## 5. SERVICIOS (¿Qué hacemos?) — records · editorial · distribución · booking · management · marketing · producciones
 
-- [ ] `[B]` ✅ **Records → "Artistas que llevamos"**: sustituir por **playlist "Sona Bonito" (Spotify)** + (si se quiere) dejar booking con **NÀTURA · PAULE · SA PENA** + "ver el resto de artistas". Quitar el catálogo manual de lanzamientos (inviable de mantener). (R+P)
-- [ ] `[B]` ✅ **Sello**: cambiar el ejemplo, **quitar Eva Calyza → poner Dulze o Nàtura**. (P)
-- [ ] `[B]` ✅ **Editorial**: mencionar **"más de 300 obras (canciones) donde somos editorial"**. (P)
-- [ ] `[B]` ✅ **Distribución**: quitar la sección "ya distribuyen con nosotros" (**dejarlo solo en cifras**). (P)
-- [ ] `[B]` ❓ **Nomenclatura**: Dani propuso "sello" → **"records"** y ordenar editorial / distribución / marketing / **"giras"** (en vez de "producciones gira"). Confirmar etiquetas. (R)
-- [ ] `[B]` ✅ **Producción → "Giras" / producción técnica**: fuera grabación/mezcla/máster (no hacen estudio). 4 puntos: 1) Producción previa con promotores · 2) Hojas de ruta · 3) Road management y transporte · 4) El evento en vivo (escenarios y luces). Enfocado a artistas/managers externos que externalizan la logística. (R)
-- [ ] `[B]` ⏳ **Artistas en cada banner de página de servicio**: poner los que correspondan (Víctor los especificará). (A)
+Etiquetas: **records** (no "sello"), editorial, distribución, marketing, booking, management, **producciones (= producción de giras)**.
+
+### 5.1 Records (servicio)
+- [ ] `[B]` ✅ Quitar "+150 lanzamientos + 6 lanzamientos sin cover/link". Poner un **pop-up grande de Spotify con la playlist de Bonito** (la que ya tuvimos, en repo) que **ocupe el banner**.
+
+### 5.2 Editorial
+- [ ] `[B]` ✅ Mencionar **"más de 300 obras (canciones) donde somos editorial"**.
+
+### 5.3 Distribución
+- [ ] `[B]` ✅ Cambiar el título feo **"Donde se escucha música, estás."** (`cases.tsx:179`) por algo más **rollo bonito / callejero**.
+- [ ] `[B]` ✅ Quitar sección "ya distribuyen con nosotros" → dejar solo cifras.
+- [ ] `[B/V]` ❓ **Logos** dentro de distribución (plataformas/DSPs). ¿Los busco yo en internet o me pasas los links? *(pregunta abierta)*
+
+### 5.4 Booking
+- [ ] `[B]` ✅ Poner los artistas correctos: **Dulze · Sa Pena · Nàtura · Paule** (hoy hay otros).
+
+### 5.5 Management
+- [ ] `[B]` ✅ **Quitar "a Eva Calyza la lleva Manu"** (ni Manu ni Eva: Eva ya no está en management). Revisar en la conversación quién sí/no. **Confirmado en reunión:** fuera de booking/management → **Fabián Cuesta y Eva Calyza**. Management actual → **Dulze, Nàtura**.
+- [ ] `[B]` ✅ Banner de management: poner a **Nàtura**; cambiar el título "a mano" (suena raro) por otro.
+
+### 5.6 Producciones (= producción de giras) — **REHACER ENTERA** 🎨
+- [ ] `[B]` ✅ **Cliente ideal**: artista/manager que busca empresa que le **produzca la gira** (no estudio, no marcas). Replantear toda la página + **plan de trabajo** + landing mucho mejor en información.
+- [ ] `[B]` ✅ **Quitar textos que no aplican**: "concepto y dirección artística", "el artista que encaja" (eso es de marcas; en giras no buscamos artista, producimos alrededor del artista) y todo lo de producción musical de estudio (grabación/mezcla/máster).
+- [ ] `[B]` ✅ **Bloques "qué hacemos"**: mantener los 4 buenos (**producción técnica · escenario · logística · coordinación integral**) + **crear 2 nuevos**.
+- [ ] `[B]` ✅ **Proceso "del brief al evento"** (rescatado de la reunión): **producción previa con promotores → hojas de ruta → road management y transporte → el evento en vivo** (escenario + luces).
+- [ ] `[B]` ✅ **Texto de abajo**: hoy muy largo (no da tiempo a leerlo) → **frase de 2 líneas máximo**.
+- [ ] `[B]` 🎨 **Nuevo dibujo** (el de fuera): la mesa de mezclas no representa producciones grandes de giras → generar uno nuevo con **Aura MCP**, mismo estilo.
+- [ ] `[B]` ⏳/🎨 **Vídeos de abajo**: quitar los de marcas, poner los de **artistas a los que hacemos producción de giras** (hoy Alfred García y Albert Pla; más luego). Buscar links/vídeos.
+- [ ] `[B]` ⏳ Artistas concretos por banner de cada servicio (Víctor los especificará).
 
 ---
 
-## 7. ARTISTAS / ROSTER
+## 6. ARTISTAS / ROSTER
 
-- [ ] `[B]` ✅ **Reducir a 6 perfiles completos** en la página de artistas ("Artistas con el rollo bonito"), con foto/Spotify/descripción. Los 6 son:
-  | Artista | Relación con Bonito |
-  |---|---|
-  | **Dulze** | management · records · editorial · booking |
-  | **Nàtura** | management · records · editorial · booking |
-  | **Paule** | booking |
-  | **Sa Pena** | records · booking |
-  | **Alfred García** | producción de giras (clic → su página de gira, sin perfil/play propio) |
-  | **Albert Pla** | producción técnica de giras |
-  *(4 de booking = Dulze, Paule, Sa Pena, Nàtura · 2 de producción de giras = Alfred, Albert.)* (R+A)
-- [ ] `[B]` ✅ **Mostrar la relación de cada artista de forma minimalista** (según la estética actual): "Booking", "Producción de giras", etc., en el banner y en el perfil. (A)
-- [ ] `[B]` ✅ **Aclaración Alfred/Albert**: trabajan **como Bonito Sound** (no Dani a título personal) llevando la **producción de sus giras** (no route management). Marco honesto. (A)
-- [ ] `[B]` ✅ **Quitar de booking/management: Fabián Cuesta y Eva Calyza** (contratos terminados; con Eva rescindido management). Pueden seguir apareciendo como editados/distribuidos, pero **no como titular**. (R+P+A)
-- [ ] `[B]` ✅ **Resto de artistas históricos** (Rumba Menuda, Sotrac, etc.): **solo foto + leyenda flotante** de lo que se editó/distribuyó, sin perfil individual. Listar en distribución/editorial. (R)
-- [ ] `[V/D]` ⏳ Definir/confirmar los artistas "pequeños" que se añaden y sus relaciones. (A)
+- [ ] `[B]` ✅ **6 perfiles principales** en /artistas ("Artistas con el rollo bonito"), con la **relación** mostrada minimalista:
+  | Artista | Relación | Perfil |
+  |---|---|---|
+  | **Dulze** | management · records · editorial · booking | perfil completo |
+  | **Nàtura** | management · records · editorial · booking | perfil completo |
+  | **Paule** | booking | perfil completo |
+  | **Sa Pena** | records · booking | perfil completo |
+  | **Alfred García** | producción de giras | **sin perfil** → botón lleva a su página en /giras |
+  | **Albert Pla** | producción técnica de giras | **sin perfil** → botón lleva a su página en /giras |
+- [ ] `[B]` ✅ **Quitar de booking/management: Fabián Cuesta y Eva Calyza**.
+- [ ] `[B]` ✅ **No todos tienen perfil**: los que ya no trabajan / no hacen música → se mencionan (foto + leyenda) pero **sin perfil**. Varios cambios en el roster (según la conversación).
+- [ ] `[B]` ✅ **Distinguir 2 ejes** (con estrategia):
+  - **Actuales (bajo contrato)** → sí en /artistas. **Pasados/colaboraciones** → NO en /artistas (no se pueden contratar), pero sí en **/giras, Qué somos, marquee home, vídeos de producciones**.
+  - **Famosos vs no famosos** → los famosos se destacan **con mimo** (giras, qué somos, "ha trabajado con"), sin ponerlos por todas partes ni enlazar perfil si ya no están (p. ej. no página de Antonio Orozco).
 
 ---
 
-## 8. NOSOTROS / QUÉ SOMOS
+## 7. LISTA MAESTRA DE ARTISTAS *(para no perder a nadie)*
 
-- [ ] `[B]` ✅ **Historia "¿De dónde venimos?"** — texto nuevo (P):
+> Recopilación de reunión + PDF + apuntes. Ubicar cada uno donde corresponda.
+
+- **Roster actual Bonito (perfil):** Dulze, Nàtura, Paule, Sa Pena. *(Alfred García y Albert Pla = principales pero sin perfil → /giras.)*
+- **Producción de giras (Bonito):** Alfred García, Albert Pla (+ los que aparezcan en la lista de giras §4).
+- **"Ha trabajado con" (Qué somos, 8 nombres):** Fabián, Vicente García, Anne Lukin, Laura Andrés, Nerea Rodríguez (+ los existentes para cuadrar 8).
+- **Famosos / prestigio (con mimo):** Antonio Orozco, Vicente García (Grammy), Maldita Nerea, Ruth Lorenzo, Iván Ferreiro, Amaya, Efecto Pasillo, Ramón Mirabet, Nerea Rodríguez, Anne Lukin.
+- **Históricos / inactivos (mención sin perfil):** Rumba Menuda, Sotrac, Bemba Saoco, Egon Calle, Ernest Prana, Laura Andrés, Pablo Rojo, Eva Calyza (ex-management).
+- **A INVESTIGAR:** `[B]` **Fabián** — Dani lo menciona mucho ("un crack"), no está claro si trabajan con él ahora. **Tarea: investigar quién es y su relación**; luego decidir si va en "ha trabajado con". Sin fotos → material pendiente.
+
+---
+
+## 8. QUÉ SOMOS
+
+- [ ] `[B]` ✅ **Historia "¿De dónde venimos?"** — texto nuevo:
   > *"Nuestra historia empieza sobre los escenarios. Antes de producir conciertos, los vivimos como músicos y artistas. Esa experiencia nos permite entender las necesidades de cada proyecto desde dentro. Desde finales de los años 90 hemos acompañado el crecimiento de numerosos artistas y trabajado junto a agencias y profesionales del sector, colaborando en el desarrollo de proyectos como Antonio Orozco, Dani Flaco, Efecto Pasillo, Maldita Nerea, Fabián, 91 Suite y muchos otros."*
-- [ ] `[B]` ⏳ **Equipo**: quitar **Xavi/Chavi Julià** (ya no está). Añadir **Quim/Kim** (sube canciones a plataformas) y **Pau** (producciones de marca + road management) + nueva colaboradora de producción. **Cristina Solé → "Operaciones"** (no comunicación). **Quitar "Manu es manager de Eva"** (no lo es). Fotos/descripciones = ⏳ Dani. (R+P)
-- [ ] `[B]` ⏳ **"Ha trabajado con"**: quitar el apartado tras "ha descubierto a" y ampliar a un bloque de **8 nombres** añadiendo estos **5**: **Fabián, Vicente García, Anne Lukin, Laura Andrés, Nerea Rodríguez**. (Descartado un cantautor por mala relación personal.) Fotos = ⏳. (R+P)
-- [ ] `[B]` ⏳ **Foto/ilustración del equipo**: sustituir por la de Instagram / ilustración nueva coherente. (R+P)
-- [ ] `[B]` ⏳ **Galería histórica de giras** (opcional, valor comercial): Dani como backliner/productor con Vicente García, Amaya, Iván Ferreiro, Ruth Lorenzo, Maldita Nerea, "Tu cara me suena"… Material = ⏳ Dani. (R)
+- [ ] `[B]` 🎨 **Foto del equipo (la de arriba "Ya somos la gente del sector")**: hoy son personas random. Generar una **igual de estilo pero con los avatares/dibujos del equipo real** (los dibujos ya están abajo) → **dibujo combinado del equipo** con Aura MCP.
+- [ ] `[B]` ⏳ **Equipo**: quitar **Xavier Julià**. Añadir **Quim** (sube canciones a plataformas) y **una colaboradora nueva** (nombre por confirmar; producciones de marca/road mgmt). **Equilibrar el banner** (uno más). **Cristina Solé → "Operaciones"**. Fotos/nombres = ⏳ Dani.
+- [ ] `[B]` ✅ **Quitar "y descubierto a"**. Dejar solo **"Ha trabajado con"** y añadir los nuevos (Vicente García, etc.).
 
 ---
 
-## 9. FOOTER / INSTITUCIONAL
+## 9. JALEO SOUND
 
-- [ ] `[B]` ⏳ Logos institucionales pequeños y discretos en el **footer de páginas secundarias** (artistas/servicios): **UFI, ARTE, ARC, SGAE, PROMUSICAE, Europa Music** + apoyo **Plan de Recuperación / Ministerio de Cultura**. **Quitar AEDEM/EDEM**. Logos = ⏳. (R+P+A)
+- [ ] `[B]` ✅ En **Universo Bonito**, el link a Jaleo Sound (hoy a una página interna) → **dirigir directo a la web externa oficial de Jaleo Sound**.
+- [ ] `[B]` ⏳ (si se mantiene sección) logo Jaleo + **vídeo oficial edición 2025**.
 
 ---
 
 ## 10. IDIOMAS
 
-- [ ] `[B]` ✅ **Selector de idioma arriba** + **traducir toda la web al catalán** (castellano + catalán). Inglés, de momento no. (R+A)
+- [ ] `[B]` ✅ **Selector de idioma arriba** + traducir toda la web a **catalán** (castellano + catalán).
 
 ---
 
-## 11. REPRODUCTOR DE MÚSICA · "RADIO BONITO"
+## 11. REPRODUCTOR · "RADIO BONITO"
 
-- [ ] `[B]` ✅ **Botón/reproductor personalizado** (como el que había) **SIN el pop-up de Spotify**. El reproductor ya está montado y desconectado; falta la música con licencia.
-- [ ] `[B]` 💡 **Idea "Radio vieja"**: reproductor con estética ilustrada tipo radio antigua que "sintoniza": hace el **ruidito de sintonización** al cambiar de canción y la aguja/dial se mueve de una emisora a otra. Mix de ~20 temas, ~10 s cada uno. **Darle forma al concepto (diseño + interacción).**
-- [ ] `[D]` ⏳ **Canciones con derechos** (temas de artistas de Bonito, o playlist "Sona Bonito") → a `public/audio/playlist/`. Mínimo 5 para empezar a probar. (R+A)
-
----
-
-## 12. INFRAESTRUCTURA · IMÁGENES Y VÍDEO (MCP Aura Studio)
-
-- [ ] `[B]` 🔎 **Explorar el MCP de Aura Studio** (ya conectado): acceder al **lienzo "Bonito Sound / diseños"** donde Víctor generó las imágenes de la web. Ver si puedo **leer/descargar** esos assets e **incrustarlos directo** en la web.
-- [ ] `[B]` 🔎 Si NO puedo incrustarlos directamente → **especificar qué necesita la app de Aura** para que sí pueda (¿endpoint de descarga? ¿export a URL pública? ¿alojamiento tipo Firebase/Storage?).
-- [ ] `[B]` 🔎 Flujo ideal a validar: **generar imagen → animar a vídeo → subir el vídeo alojado** y colocarlo en la web (¿reglas de Firebase que Víctor estaba desplegando?).
-- [ ] `[V]` Confirmar acceso/permisos del lienzo y del almacenamiento.
-
-*(Con Aura ya no hace falta la "pelea" de generación de imágenes de sesiones anteriores.)*
+- [ ] `[B]` ✅ Botón/reproductor **personalizado sin pop-up de Spotify** (el player ya está montado, desconectado).
+- [ ] `[B]` 🎨💡 **Concepto "Radio vieja"**: ilustración tipo radio antigua que **sintoniza** (ruidito de sintonización al cambiar de tema, dial que se mueve de emisora a emisora). Mix ~20 temas, ~10 s cada uno. Diseñar interacción + arte (Aura).
+- [ ] `[D]` ⏳ Canciones con derechos (mín. 5) de artistas Bonito → `public/audio/playlist/`.
 
 ---
 
-## 13. ANÁLISIS PENDIENTE · Numeración `0X/09` (neurodesign)
+## 12. NUMERACIÓN `0X/09` — mi recomendación
 
-- [ ] `[B]` **Analizar con lente de neurociencia/UX** (skill neurodesign + bonito-super-team) si la cuenta `01/09…09/09`:
-  - **A favor (mantener):** da sensación de progreso/orientación ("¿cuánto me queda?"), señal de estructura.
-  - **En contra (quitar):** sin etiqueta clara es un jeroglífico → **carga cognitiva** y confusión (le pasó a Dani y a terceros). En banners de marca sin contexto, el coste supera al beneficio.
-  - **Recomendación preliminar:** *quitarla* (o sustituirla por una barra de progreso sutil sin números). Confirmar en §1.3.
+**Quitarla.** Es un contador **sin etiqueta** → el cerebro no sabe qué es (le pasó a Dani y a terceros) = carga cognitiva sin recompensa clara. El supuesto beneficio (orientación "cuánto queda") no compensa la confusión en banners de marca. Si más adelante queremos dar sensación de progreso, mejor una **barra sutil sin números**. → Propongo eliminar.
 
 ---
 
-## 14. TAREAS DE DANI  *(material a enviar — copiar/pegar para él)*
+## 13. AURA MCP · IMÁGENES / VÍDEO / DISEÑO 🎨🔎
 
-- [ ] **Canciones** con derechos (mín. 5) de artistas Bonito → carpeta Drive, para la radio.
-- [ ] **Logos de marcas** que faltan + **lista completa de marcas y agencias** con/para las que se ha trabajado (nombres) + **vídeos**.
-- [ ] Logos de artistas que faltan: **Señor Wilson, Corre Lola**.
-- [ ] **Fotos**: de los 6 artistas del roster, de las giras (rostros del listado §5), del **equipo** (Quim, Pau, nueva colaboradora) y de "ha trabajado con".
-- [ ] **Logos institucionales**: UFI, ARTE, ARC, SGAE, PROMUSICAE, Europa Music + Ministerio de Cultura/Plan de Recuperación.
-- [ ] **Vídeos**: resumen corporativo, **mapping/espectáculos visuales**, y **vídeo oficial de Jaleo Sound edición 2025**.
-- [ ] **Confirmar relaciones** exactas de cada artista (booking/management/records/editorial/producción).
-- [ ] Info del servicio de **mapping** y datos de los nuevos integrantes.
-- [ ] Material/vídeos de **Paule** para editar.
+- [ ] `[B]` 🔎 **Explorar el MCP de Aura Studio** (ya conectado): acceder al **lienzo "Bonito Sound / diseños"** (imágenes + diseños de todas las páginas). Ver si puedo **leer/descargar assets** e incrustarlos en la web; y **diseñar las páginas nuevas** (giras, gira de artista) desde ahí → pasar a código.
+- [ ] `[B]` 🔎 Si no puedo incrustar directo → **decir a Víctor qué necesita la app de Aura** (export/URL pública/almacenamiento tipo Firebase).
+- [ ] `[B]` 🎨 Encargos concretos con Aura: **vídeo experiencias 30 s** (§3) · **dibujo nuevo de producciones** (§5.6) · **foto/dibujo combinado del equipo** (§8) · **diseño de /giras y página de gira** (§4).
 
 ---
 
-## 15. JALEO SOUND
+## 14. TAREAS DE DANI *(material a enviar)*
 
-- [ ] `[B]` ✅/⏳ Mantener el **logo de Jaleo** + mostrar el **vídeo oficial edición 2025** (⏳ vídeo). Convertir la sección en **enlace directo** a la web externa oficial de Jaleo (no una web paralela). Integrar playlist "Sona Bonito". (R+P)
-
----
-
-## 16. FUERA DE LA WEB *(no bloquea la web; solo para no perderlo)*
-
-- Artiverse: reactivar (bugs de hace 1 mes), panel de noticias/licitaciones arriba, modelo freemium (subir 1 artista gratis, plan Pro con analíticas cuando haya 30–50 promotores/día).
-- RRSS: automatizar Instagram de Bonito/Artiverse (herramienta de Víctor) a partir de septiembre.
-- Festival Jaleo (Ámsterdam, septiembre): Víctor graba/genera contenido.
+- [ ] Canciones con derechos (mín. 5) de artistas Bonito.
+- [ ] Marcas y **agencias** que faltan (nombres + vídeos) + logos de marcas + logos artistas (Señor Wilson, Corre Lola).
+- [ ] **Fotos**: 6 del roster, giras (rostros §4), equipo (Quim + colaboradora), "ha trabajado con".
+- [ ] **Logos institucionales**: UFI, ARTE, ARC, SGAE, PROMUSICAE, Europa Music + Ministerio de Cultura.
+- [ ] **Vídeos**: mapping, Jaleo edición 2025, y material de eventos para el mix de 30 s.
+- [ ] Confirmar **relaciones** exactas por artista y nombres del equipo nuevo.
+- [ ] Material/vídeos de **Paule**.
 
 ---
 
-## 17. PREGUNTAS ABIERTAS (para Víctor)
+## 15. FUERA DE LA WEB *(no bloquea)*
+- Artiverse (reactivar, panel de noticias/licitaciones, freemium), automatización RRSS (sept.), festival Jaleo Ámsterdam.
 
-1. §1.1 ¿**"Eventos"** o **"Experiencias"**?
-2. §1.2 Frase del marquee: ¿**"Artistas con los que trabajamos"** / "editados" / "con el rollo bonito"?
-3. §1.3 Numeración `0X/09`: ¿quitar directamente o quieres el análisis neurodesign a fondo antes?
-4. §6 Nomenclatura de servicios: ¿"sello" pasa a "records"? ¿"producciones" pasa a "giras"?
-5. **Orden de ataque**: ¿empezamos por el bloque "sin material" (home: quitar 0X/09 + enlaces + menú Giras + textos de Giras/Historia/Records/Producción) mientras Dani reúne fotos/logos/canciones?
-6. ¿Este documento va bien de formato o lo prefieres como página web (artifact) para enseñárselo/enviárselo mejor?
+---
 
-> **Pendiente:** Víctor dijo que aún no ha terminado de dictar apuntes (artistas concretos que faltan, artistas por banner de servicio, lista institucional exacta). Se irá ampliando este documento.
+## 16. PREGUNTAS ABIERTAS
+1. §5.3 **Logos de distribución**: ¿los busco yo en internet o me pasas los links?
+2. §8 Nombre de la **colaboradora nueva** del equipo (¿es "Pau"? el PDF puso "Pau" como road/producciones de marca).
+3. **Orden de ataque**: propongo empezar por el **bloque "sin material"** (menú+Giras link, quitar 0X/09, enlaces banners, textos de Experiencias/Historia/Records/Editorial/Distribución/Booking/Management, scroll cue) mientras Dani reúne material y yo exploro Aura para las páginas nuevas y los assets. ¿OK?
+
+> Pendiente de Víctor: artistas concretos por banner de servicio, lista institucional exacta, nombres del equipo. Se sigue ampliando.
