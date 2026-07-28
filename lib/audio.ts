@@ -14,14 +14,25 @@ function parseName(file: string): { title: string; artist?: string } {
   const base = file.replace(/\.(mp3|m4a)$/i, "");
   // El prefijo numérico solo sirve para ordenar; no se muestra.
   const sinOrden = base.replace(/^\d+[-_\s]+/, "");
-  const partes = sinOrden.split(/[-_]/).map((p) => p.trim()).filter(Boolean);
 
   const capitalizar = (s: string) =>
     s
+      .replace(/[-_]+/g, " ")
       .split(/\s+/)
+      .filter(Boolean)
       .map((w) => (w.length > 2 ? w[0].toUpperCase() + w.slice(1) : w))
       .join(" ");
 
+  // El separador oficial es el DOBLE guion: los nombres de artista llevan
+  // guiones simples dentro ("kenai-white"), así que partir por el primero
+  // dejaba a Kenai sin apellido.
+  if (sinOrden.includes("--")) {
+    const [artista, ...resto] = sinOrden.split("--");
+    return { artist: capitalizar(artista), title: capitalizar(resto.join("--")) };
+  }
+
+  // Ficheros subidos a mano sin el doble guion: primer tramo = artista.
+  const partes = sinOrden.split(/[-_]/).filter(Boolean);
   if (partes.length >= 2) {
     const [artista, ...resto] = partes;
     return { artist: capitalizar(artista), title: capitalizar(resto.join(" ")) };
