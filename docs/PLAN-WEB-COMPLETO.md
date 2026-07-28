@@ -219,7 +219,14 @@ Etiquetas: **records** (no "sello"), editorial, distribución, marketing, bookin
 - Evidencia: con la URL de R2 fal dice `422 Could not download`; con la de Vercel dice `500 Internal server error` → **fal sí descarga los ficheros**, lo que falla es el **compose (ffmpeg)**.
 - El proyecto Vercel **no tiene dominio propio** conectado (solo `bonitosound.vercel.app` + alias de equipo) → `bonitosound.com` todavía no es esta web.
 
+### 🐞 BUG confirmado: Aura sustituye el modelo en silencio
+- Pedí `model: "gpt-image-2"` en los 2 mockups y Aura generó con **`flux-dev`** (queda registrado así en el asset). Por eso el texto salió en garabato: flux-dev es malo con tipografía; gpt-image-2 la clava (el mockup antiguo de Servicios, hecho con gpt-image-2, tiene el texto perfecto).
+- **Causa**: con `projectId`, `onBrand` es `true` por defecto → inyecta referencias del lienzo → la generación pasa a modo edición con referencias (flux/kontext) y **se pierde el modelo pedido**. Poniendo `onBrand: false` sí usa gpt-image-2.
+- Contradice la propia regla del MCP: *"Nunca sustituyas parámetros en silencio"*.
+- **Fix sugerido**: (a) respetar `model` aunque haya refs, o (b) avisar en la respuesta ("onBrand activó refs → modelo cambiado a X"), o (c) que `onBrand` inyecte solo texto de estilo (paleta/tono) y NO imágenes de referencia cuando el modelo pedido no soporta refs.
+
 ### Backlog para la app de Aura (por prioridad)
+0. **No cambiar el modelo en silencio** (ver bug arriba) — el más importante: rompe la confianza en el resultado y quema dinero.
 1. **Ingesta de material propio** (el gap gordo): `aura_import_media({url})` y `aura_request_upload/finalize` (como Higgsfield `media_upload`/`media_import_url` o Magnific `creations_request_upload`). Así se puede editar material del usuario sin depender de dónde viva.
 2. **Normalizar clips antes de concatenar** (mismo codec/fps/resolución/pix_fmt): `ffmpeg concat` exige uniformidad; sin eso, montar clips heterogéneos revienta con 500.
 3. **Preflight sin coste**: `dryRun:true` o `aura_check_media({urls})` (HEAD + content-type). Hoy cada fallo cuesta ~0,05€.
