@@ -5,6 +5,7 @@ import { RevealOnScroll, MagneticButton } from "@/components/motion";
 import { GirasHero } from "@/components/giras/GirasHero";
 import { GirasRuta } from "@/components/giras/GirasRuta";
 import { GirasNumeros } from "@/components/giras/GirasNumeros";
+import { GirasVideos } from "@/components/giras/GirasVideos";
 import { giras } from "@/lib/giras";
 import { getGiraSlugs } from "@/lib/content";
 import { site } from "@/lib/site";
@@ -54,6 +55,9 @@ export default function Giras() {
 
       {/* La ruta: las giras colgando de la carretera. */}
       <GirasRuta giras={giras} conPagina={getGiraSlugs()} />
+
+      {/* Las giras que tienen vídeo, aquí mismo (sin entrar en ficha). */}
+      <GirasVideos giras={giras} />
 
       {/* Los números que convencen a quien contrata. */}
       <GirasNumeros />
