@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getArtists, getEventos } from "@/lib/content";
+import { getArtists, getEventos, getGiraSlugs } from "@/lib/content";
 import { getPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 
@@ -61,6 +61,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  const girasDetalle = getGiraSlugs().map((slug) => ({
+    url: `${site.url}/giras/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
   const diario = blog.map((b) => ({
     url: `${site.url}${b.route}`,
     lastModified: now,
@@ -68,5 +75,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: b.priority,
   }));
 
-  return [...base, ...artists, ...eventos, ...diario];
+  return [...base, ...artists, ...eventos, ...girasDetalle, ...diario];
 }

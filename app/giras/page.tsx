@@ -6,6 +6,7 @@ import { GirasHero } from "@/components/giras/GirasHero";
 import { GirasRuta } from "@/components/giras/GirasRuta";
 import { GirasNumeros } from "@/components/giras/GirasNumeros";
 import { giras } from "@/lib/giras";
+import { getGiraSlugs } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -52,7 +53,7 @@ export default function Giras() {
       </Section>
 
       {/* La ruta: las giras colgando de la carretera. */}
-      <GirasRuta giras={giras} />
+      <GirasRuta giras={giras} conPagina={getGiraSlugs()} />
 
       {/* Los números que convencen a quien contrata. */}
       <GirasNumeros />

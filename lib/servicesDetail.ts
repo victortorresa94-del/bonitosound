@@ -80,7 +80,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
     // Los artistas los pinta el RosterGridCase de la página (dinámico, todo el
     // roster de booking) — no los duplicamos aquí.
     caseVideosTitle: "Directos y giras que hemos montado",
-    caseVideos: ["natura", "gira-1016"],
+    caseVideos: ["natura", "alfred-garcia-1016"],
   },
 
   management: {
