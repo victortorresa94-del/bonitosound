@@ -364,7 +364,7 @@ export default function Nosotros() {
 
         {/* Tarjetas de los artistas de su trayectoria (en condiciones). */}
         <RevealOnScroll className="mt-14 border-t border-subtle pt-10">
-          <p className="eyebrow mb-7">Ha trabajado con — y descubierto a —</p>
+          <p className="eyebrow mb-7">Ha trabajado con</p>
           <StaggerGroup stagger={0.06} className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {DANI_ARTISTS.map((name) => (
               <DaniArtistCard key={name} name={name} />

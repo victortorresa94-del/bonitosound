@@ -7,6 +7,7 @@ import { Section, Cta, JsonLd } from "@/components/ui";
 import { CtaBlock } from "@/components/CtaBlock";
 import { FaqOpen } from "@/components/FaqOpen";
 import { EventoCard } from "@/components/EventoCard";
+import { SpotifyEmbed } from "@/components/Embeds";
 import { ServiceIcon } from "@/components/services/ServiceIcon";
 import {
   RevealOnScroll,
@@ -256,6 +257,24 @@ export function ServicePage({
             </StaggerGroup>
           </div>
         </section>
+      ) : d.spotifyPlaylistId ? (
+        /* En records la prueba no es un número, es poder darle al play: la
+           playlist ocupa el banner entero. */
+        <Section className="bg-bg-primary">
+          {d.spotifyPlaylistTitle && (
+            <RevealOnScroll as="p" className="eyebrow mb-6">
+              {d.spotifyPlaylistTitle}
+            </RevealOnScroll>
+          )}
+          <RevealOnScroll delay={0.08}>
+            <SpotifyEmbed
+              type="playlist"
+              id={d.spotifyPlaylistId}
+              height={420}
+              title={d.spotifyPlaylistTitle ?? "Playlist de Bonito Sound"}
+            />
+          </RevealOnScroll>
+        </Section>
       ) : d.stats && d.stats.length > 0 ? (
         <Section className="bg-bg-primary">
           <div className={`grid gap-x-8 gap-y-10 ${d.stats.length === 1 ? "" : "grid-cols-2 md:grid-cols-4"}`}>

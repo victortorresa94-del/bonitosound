@@ -27,6 +27,9 @@ export type ServiceDetail = {
   artistsTitle?: string;
   /** Muro de marcas (producciones/marketing). */
   showBrands?: boolean;
+  /** Playlist de Spotify a incrustar a lo ancho, en vez de la banda de números. */
+  spotifyPlaylistId?: string;
+  spotifyPlaylistTitle?: string;
 };
 
 export const serviceDetail: Record<string, ServiceDetail> = {
@@ -119,7 +122,10 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       { title: "Publicamos", desc: "Sacamos con los metadatos y la estrategia en orden, no a lo loco." },
       { title: "Empujamos", desc: "Ads, playlists, directo. Movemos la canción con el resto de la casa." },
     ],
-    stats: [{ n: "+150", l: "lanzamientos desde 2022" }],
+    // Fuera la banda de "+150 lanzamientos": lo que convence aquí es poder
+    // escuchar lo que sacamos, no un número. El banner lo ocupa la playlist.
+    spotifyPlaylistId: "2lxa6r7k0dthpANWR9wRWs",
+    spotifyPlaylistTitle: "Escucha lo que sacamos",
   },
 
   editorial: {
@@ -139,6 +145,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       { title: "Cobramos lo que toca", desc: "Nos aseguramos de que cada uso te llegue, sin que nada se pierda por el camino." },
       { title: "Buscamos syncs", desc: "Cuando aparece una oportunidad en anuncio, serie o evento, la gestionamos entera." },
     ],
+    stats: [{ n: "+300", l: "obras donde somos editorial" }],
   },
 
   distribucion: {
