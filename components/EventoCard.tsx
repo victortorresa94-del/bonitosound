@@ -25,7 +25,7 @@ export function EventoCard({ evento }: { evento: Evento }) {
 
   return (
     <Link
-      href={`/eventos/${evento.slug}`}
+      href={`/experiencias/${evento.slug}`}
       className="group block overflow-hidden rounded-2xl border border-subtle"
     >
       <div

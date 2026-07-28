@@ -87,6 +87,19 @@ export function EventosShowcase({ eventos }: { eventos: Evento[] }) {
         <h2 className="font-round text-3xl font-bold md:text-5xl" style={{ color: NAVY }}>
           Hacemos que las marcas suenen.
         </h2>
+        {/* Qué es una experiencia de marca (texto de Dani). */}
+        <div className="mt-6 max-w-2xl space-y-4">
+          <p className="text-base leading-relaxed text-text-secondary md:text-lg">
+            Creamos y producimos experiencias de marca donde la música, las artes
+            en vivo y el entretenimiento se convierten en herramientas para
+            conectar con el público. Participamos en todo el proceso creativo o
+            ejecutamos proyectos ya diseñados, coordinando artistas, producción y
+            equipos técnicos para hacer realidad cada evento.
+          </p>
+          <p className="text-lg font-bold md:text-xl" style={{ color: NAVY }}>
+            Porque una marca no solo debe verse. Debe vivirse.
+          </p>
+        </div>
       </div>
 
       {/* ============ DESKTOP: stats izq + clúster solapado der ============ */}
@@ -113,7 +126,7 @@ export function EventosShowcase({ eventos }: { eventos: Evento[] }) {
           const slot = SLOTS[i];
           if (!slot) return null;
           return (
-            <Link key={e.slug} href={`/eventos/${e.slug}`} className="group absolute block overflow-visible" style={{ ...slot.style }}>
+            <Link key={e.slug} href={`/experiencias/${e.slug}`} className="group absolute block overflow-visible" style={{ ...slot.style }}>
               <div className="relative h-full w-full overflow-hidden rounded-[1.6rem] shadow-xl ring-1 ring-black/5 transition-transform duration-500 group-hover:z-40 group-hover:scale-[1.03]" style={{ aspectRatio: slot.style.aspectRatio }}>
                 <CardMedia e={e} />
               </div>
@@ -136,7 +149,7 @@ export function EventosShowcase({ eventos }: { eventos: Evento[] }) {
         </div>
         <div className="space-y-5">
           {cluster.map((e, i) => (
-            <Link key={e.slug} href={`/eventos/${e.slug}`} className="group relative block">
+            <Link key={e.slug} href={`/experiencias/${e.slug}`} className="group relative block">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[1.4rem] shadow-lg ring-1 ring-black/5">
                 <CardMedia e={e} />
               </div>

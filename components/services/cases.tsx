@@ -236,7 +236,7 @@ export function BrandsCase() {
     <Section>
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <RevealOnScroll as="p" className="eyebrow">Marcas que han confiado</RevealOnScroll>
-        <Link href="/eventos" className="link-underline text-sm text-text-secondary">Ver los eventos →</Link>
+        <Link href="/experiencias" className="link-underline text-sm text-text-secondary">Ver los eventos →</Link>
       </div>
       <MarqueeLogoWall items={brands} dir="marcas" speed={42} direction="right" />
     </Section>

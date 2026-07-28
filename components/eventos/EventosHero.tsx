@@ -12,10 +12,10 @@ export function EventosHero() {
       {/* EVENTOS gigante, inclinado, en outline + onda cyan cruzando */}
       <div className="pointer-events-none relative">
         <h1
-          aria-label="Eventos"
+          aria-label="Experiencias"
           className="select-none whitespace-nowrap font-round font-bold leading-[0.82]"
           style={{
-            fontSize: "clamp(4.2rem, 18vw, 16rem)",
+            fontSize: "clamp(2.6rem, 12.5vw, 11rem)",
             letterSpacing: "-0.015em",
             color: "transparent",
             WebkitTextStroke: `clamp(1.5px, 0.3vw, 3.5px) ${NAVY}`,
@@ -24,7 +24,7 @@ export function EventosHero() {
             marginLeft: "-0.5vw",
           }}
         >
-          EVENTOS
+          EXPERIENCIAS
         </h1>
 
         {/* Onda cyan hand-drawn cruzando el título, con caída a la derecha */}

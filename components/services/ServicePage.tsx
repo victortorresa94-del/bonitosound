@@ -193,7 +193,7 @@ export function ServicePage({
             ))}
           </StaggerGroup>
           <RevealOnScroll className="mt-10">
-            <Link href="/eventos" className="link-underline text-sm font-semibold" style={{ color: CYAN }}>
+            <Link href="/experiencias" className="link-underline text-sm font-semibold" style={{ color: CYAN }}>
               Ver todos los eventos →
             </Link>
           </RevealOnScroll>
@@ -237,7 +237,7 @@ export function ServicePage({
             )}
             <div className="mt-12 flex flex-wrap items-end justify-between gap-4">
               <p className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>Marcas que han confiado</p>
-              <Link href="/eventos" className="text-sm font-semibold text-white/70 underline-offset-4 hover:text-white hover:underline">Ver los eventos →</Link>
+              <Link href="/experiencias" className="text-sm font-semibold text-white/70 underline-offset-4 hover:text-white hover:underline">Ver los eventos →</Link>
             </div>
             <StaggerGroup stagger={0.04} className="mt-8 flex flex-wrap items-center gap-3 md:gap-4">
               {brands

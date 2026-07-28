@@ -66,7 +66,7 @@ export const nav = [
   { label: "¿Qué hacemos?", href: "/servicios" },
   { label: "Artistas", href: "/artistas" },
   { label: "Giras", href: "/giras" },
-  { label: "Experiencias", href: "/eventos" },
+  { label: "Experiencias", href: "/experiencias" },
   { label: "Universo Bonito", href: "/universo" },
   { label: "Qué somos", href: "/nosotros" },
 ] as const;

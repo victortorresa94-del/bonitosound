@@ -58,7 +58,7 @@ export const scenes: HomeScene[] = [
     accent: "suenen",
     support:
       "Activaciones, eventos y experiencias de marca que la gente recuerda. Del brief al titular en seis semanas.",
-    cta: { label: "Ver más", href: "/eventos" },
+    cta: { label: "Ver más", href: "/experiencias" },
     motionPreset: "glow",
     mediaCandidates: [
       "/video/home/marcas.mp4", "/img/home/marcas.webp",
