@@ -61,7 +61,10 @@
 
 ## 4. GIRAS  *(página NUEVA — de las más importantes)*  🎨
 
-- [ ] `[B]` 🎨 **Diseñarla con Aura MCP** usando el **lienzo "Bonito Sound / diseños"** (donde están los diseños de todas las páginas) y pasarla a código. Vía libre pero **impactante**, al nivel del resto — no solo nombres/fotos/vídeos.
+- [~] `[B]` **v1 funcional creada** (`/giras`): leyenda, "Giras Bonitas", listado cronológico real con nº de conciertos, tarjetas con hueco de foto (fallback navy). **FALTA el estudio de diseño de verdad** (abajo).
+- [ ] `[B]` 🎨 **DEDICAR UN BUEN ESTUDIO DE DISEÑO** a esta página (es de las más importantes): tiene que ser **impactante**, al nivel del resto, no solo nombres/fotos/vídeos. Diseñarla con **Aura MCP** (lienzo "Bonito Sound / diseños") y pasarla a código.
+- [ ] `[B]` ⏳ **VÍDEOS**: ahora mismo `/giras` **no tiene ni un vídeo**. Conseguir/embeber vídeos de las giras de artistas (YouTube/links — los sacamos nosotros) y páginas de gira por artista con sus vídeos.
+- [x] `[B]` ✅ **Sacar las giras/artistas de Experiencias**: la página de eventos ya no incluye giras (el showcase de artistas se retira en el rework de Experiencias, §3).
 - [ ] `[B]` ✅ Leyenda: *"Producción técnica, logística, road management y dirección de giras. Coordinamos cada detalle, desde la planificación previa hasta el desmontaje final, porque sabemos que la diferencia entre un buen concierto y una gran producción está en los detalles."*
 - [ ] `[B]` ✅ Título **"LO QUE HEMOS LLEVADO"**; subtítulo → **"Giras Bonitas"** (contratación/booking, gestión, logística, técnica, asesoramiento, producción…).
 - [ ] `[B]` ✅/⏳ **Listado cronológico de giras** (actual → atrás), foto en vez de recuadro (foto = ⏳). Datos confirmados (PDF):
@@ -202,6 +205,14 @@ Etiquetas: **records** (no "sello"), editorial, distribución, marketing, bookin
 - [ ] `[B]` 🔎 **Explorar el MCP de Aura Studio** (ya conectado): acceder al **lienzo "Bonito Sound / diseños"** (imágenes + diseños de todas las páginas). Ver si puedo **leer/descargar assets** e incrustarlos en la web; y **diseñar las páginas nuevas** (giras, gira de artista) desde ahí → pasar a código.
 - [ ] `[B]` 🔎 Si no puedo incrustar directo → **decir a Víctor qué necesita la app de Aura** (export/URL pública/almacenamiento tipo Firebase).
 - [ ] `[B]` 🎨 Encargos concretos con Aura: **vídeo experiencias 30 s** (§3) · **dibujo nuevo de producciones** (§5.6) · **foto/dibujo combinado del equipo** (§8) · **diseño de /giras y página de gira** (§4).
+
+### Aura — estado y aprendizajes (sesión 28/07)
+- ✅ **Aura conecta y VEO los diseños** del lienzo "Bonito Sound" (proyecto `R01qvgskRzo110Qt7HLW`). Mockups por página: nosotros, records, universo, eventos-artistas, servicios, contacto. **NO hay mockup de Giras ni Experiencias**.
+- ✅ **Generé 2 mockups** (Giras y Experiencias) → buenas referencias de estructura (gpt-image-2 escribe el texto en garabato, pero el layout vale).
+- ✅ **Montaje de vídeo funciona** (Aura ensambla N clips, ~0,05€).
+- ⛔ **Bloqueo para editar NUESTRO material**: los clips de eventos se sirven locales (`/video/eventos/*.mp4`) y el R2 `pub-…r2.dev` da **403** → fal no puede descargarlos. **Necesita una URL pública** (deploy público sin protección, o bucket público / que Aura permita subir el clip local). → decisión de Víctor.
+- ⚠️ **Lyria (música)** dio falso positivo de moderación con un prompt inocuo → reintentar con otro prompt/modelo.
+- Los assets que genera Aura quedan en **URLs firebase públicas** → la web desplegada SÍ podría cargarlas directamente.
 
 ---
 
