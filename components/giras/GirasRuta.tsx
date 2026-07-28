@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { RevealOnScroll } from "@/components/motion";
-import { findAsset } from "@/lib/assets";
+import { findAsset, findLogo } from "@/lib/assets";
 import type { Gira } from "@/lib/giras";
 
 const NAVY = "#14283C";
@@ -21,7 +21,13 @@ function Tape({ className = "" }: { className?: string }) {
 /** Tarjeta-polaroid de una gira. Foto si existe; si no, fallback navy.
  *  Si la gira tiene página de detalle (`href`), la tarjeta es un enlace. */
 function GiraCard({ g, tilt, href }: { g: Gira; tilt: number; href?: string }) {
-  const photo = findAsset("giras", g.slug);
+  // Foto por prioridad: la de ESA gira → la del artista en el roster → la de
+  // su ficha de trayectoria. Así casi todas las tarjetas llevan cara aunque no
+  // tengamos foto específica de la gira.
+  const photo =
+    findAsset("giras", g.slug) ??
+    findLogo("artistas", g.artist) ??
+    findLogo("artistas-dani", g.artist);
   const Tag = (href ? Link : "div") as React.ElementType;
 
   return (
