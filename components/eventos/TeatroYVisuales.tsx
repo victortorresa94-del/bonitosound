@@ -1,10 +1,20 @@
 import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
+import { VimeoEmbed, YouTubeEmbed } from "@/components/Embeds";
 import { findAsset } from "@/lib/assets";
 import Image from "next/image";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
+
+/** Vídeos de mapping y espectáculos visuales (links aportados por Dani). */
+const MAPPING_VIDEOS = [
+  { kind: "vimeo", id: "536427671" },
+  { kind: "vimeo", id: "294375960" },
+  { kind: "vimeo", id: "269001449" },
+  { kind: "vimeo", id: "258058124" },
+  { kind: "youtube", id: "xT-EYMZGuF8" },
+] as const;
 
 /**
  * "No todo es música": teatro y espectáculos visuales (mapping). Datos reales
@@ -99,6 +109,20 @@ export function TeatroYVisuales() {
           </div>
         </RevealOnScroll>
       </div>
+
+      {/* Vídeos de mapping: el trabajo se explica solo viéndolo. */}
+      <RevealOnScroll as="p" className="eyebrow mb-5 mt-16 md:mt-20">
+        Míralo en movimiento
+      </RevealOnScroll>
+      <StaggerGroup stagger={0.08} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {MAPPING_VIDEOS.map((v) =>
+          v.kind === "vimeo" ? (
+            <VimeoEmbed key={v.id} id={v.id} title="Mapping y espectáculos visuales" />
+          ) : (
+            <YouTubeEmbed key={v.id} id={v.id} title="Mapping y espectáculos visuales" />
+          ),
+        )}
+      </StaggerGroup>
     </Section>
   );
 }
