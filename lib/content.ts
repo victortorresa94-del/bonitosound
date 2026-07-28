@@ -190,3 +190,53 @@ export function getEventos(): Evento[] {
 export function getEvento(slug: string): Evento | undefined {
   return getEventos().find((e) => e.slug === slug);
 }
+
+/** Vídeo local a partir del nombre suelto del frontmatter ("albert-pla.mp4").
+ *  Hace falta porque al mover las giras a su propia carpeta el slug cambió,
+ *  pero los .mp4 siguen en /public/video/eventos/ con el nombre antiguo. */
+function resolveNamedVideo(name?: string): string | undefined {
+  if (!name || name.startsWith("http")) return undefined;
+  const rel = `/video/eventos/${name.replace(/^.*\//, "")}`;
+  return fs.existsSync(path.join(process.cwd(), "public", rel.replace(/^\//, "")))
+    ? rel
+    : undefined;
+}
+
+/**
+ * Giras con página de detalle. Viven en /content/giras/<slug>.md, donde <slug>
+ * es EXACTAMENTE el de lib/giras.ts: así la tarjeta de la ruta sabe si tiene
+ * página o no. Reutiliza el tipo Evento (mismos campos: services, lineup,
+ * context, result, youtubeId…), no hace falta uno nuevo.
+ */
+export function getGiras(): Evento[] {
+  return readDir("giras")
+    .map((file) => {
+      const raw = fs.readFileSync(path.join(root, "giras", file), "utf8");
+      const { data, content } = matter(raw);
+      const slug = file.replace(/\.md$/, "");
+      const fm = data as Omit<Evento, "slug" | "body">;
+      return {
+        slug,
+        body: content
+          .split(/\n{2,}/)
+          .map((p) => p.trim())
+          .filter(Boolean),
+        ...fm,
+        video:
+          resolveEventoVideo(slug) ??
+          resolveNamedVideo(fm.videoUrl) ??
+          fm.video ??
+          (fm.videoUrl ? r2(fm.videoUrl) : undefined),
+      };
+    })
+    .sort((a, b) => b.year.localeCompare(a.year));
+}
+
+export function getGira(slug: string): Evento | undefined {
+  return getGiras().find((g) => g.slug === slug);
+}
+
+/** Slugs de giras que TIENEN página de detalle (las que tienen .md). */
+export function getGiraSlugs(): string[] {
+  return readDir("giras").map((f) => f.replace(/\.md$/, ""));
+}

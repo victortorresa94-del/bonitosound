@@ -16,7 +16,7 @@ import {
 } from "@/components/motion";
 import type { Service } from "@/lib/services";
 import { serviceDetail } from "@/lib/servicesDetail";
-import { getEventos, getArtists } from "@/lib/content";
+import { getEventos, getGiras, getArtists } from "@/lib/content";
 import { findAsset, findLogo } from "@/lib/assets";
 import { brands, site } from "@/lib/site";
 
@@ -48,8 +48,11 @@ export function ServicePage({
   const illo = heroIllo(service.slug);
   const d = serviceDetail[service.slug] ?? {};
 
+  // Los casos pueden ser eventos de marca o giras (viven en carpetas distintas).
   const caseEventos = d.caseVideos
-    ? d.caseVideos.map((s) => getEventos().find((e) => e.slug === s)).filter(Boolean)
+    ? d.caseVideos
+        .map((s) => getEventos().find((e) => e.slug === s) ?? getGiras().find((g) => g.slug === s))
+        .filter(Boolean)
     : [];
   const caseArtists = d.artistSlugs
     ? d.artistSlugs

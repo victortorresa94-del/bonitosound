@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { RevealOnScroll } from "@/components/motion";
 import { findAsset } from "@/lib/assets";
 import type { Gira } from "@/lib/giras";
@@ -17,13 +18,18 @@ function Tape({ className = "" }: { className?: string }) {
   );
 }
 
-/** Tarjeta-polaroid de una gira. Foto si existe; si no, fallback navy. */
-function GiraCard({ g, tilt }: { g: Gira; tilt: number }) {
+/** Tarjeta-polaroid de una gira. Foto si existe; si no, fallback navy.
+ *  Si la gira tiene página de detalle (`href`), la tarjeta es un enlace. */
+function GiraCard({ g, tilt, href }: { g: Gira; tilt: number; href?: string }) {
   const photo = findAsset("giras", g.slug);
+  const Tag = (href ? Link : "div") as React.ElementType;
 
   return (
-    <div
-      className="relative w-full max-w-[19rem] bg-white p-3 pb-4 shadow-[0_10px_30px_rgba(20,40,60,0.13)] transition-transform duration-300 hover:!rotate-0 hover:scale-[1.03]"
+    <Tag
+      {...(href ? { href } : {})}
+      className={`relative block w-full max-w-[19rem] bg-white p-3 pb-4 shadow-[0_10px_30px_rgba(20,40,60,0.13)] transition-transform duration-300 hover:!rotate-0 hover:scale-[1.03] ${
+        href ? "cursor-pointer" : ""
+      }`}
       style={{ transform: `rotate(${tilt}deg)` }}
     >
       <Tape />
@@ -72,8 +78,13 @@ function GiraCard({ g, tilt }: { g: Gira; tilt: number }) {
         {g.credit && photo && (
           <p className="mt-1 text-[0.6rem] text-text-muted/70">© {g.credit}</p>
         )}
+        {href && (
+          <p className="mt-2 text-[0.68rem] font-bold" style={{ color: CYAN }}>
+            Ver la gira →
+          </p>
+        )}
       </div>
-    </div>
+    </Tag>
   );
 }
 
@@ -86,7 +97,14 @@ function GiraCard({ g, tilt }: { g: Gira; tilt: number }) {
  * - Móvil: la ruta se endereza a la izquierda y las tarjetas van en columna
  *   (mismo concepto, legible en pantalla pequeña).
  */
-export function GirasRuta({ giras }: { giras: Gira[] }) {
+export function GirasRuta({
+  giras,
+  conPagina = [],
+}: {
+  giras: Gira[];
+  /** Slugs que tienen página de detalle (los que tienen .md en content/giras). */
+  conPagina?: string[];
+}) {
   return (
     <section className="relative overflow-hidden py-16 md:py-24">
       <div className="wrap">
@@ -148,7 +166,8 @@ export function GirasRuta({ giras }: { giras: Gira[] }) {
                 {g.year}
               </span>
             );
-            const card = <GiraCard g={g} tilt={tilt} />;
+            const href = conPagina.includes(g.slug) ? `/giras/${g.slug}` : undefined;
+            const card = <GiraCard g={g} tilt={tilt} href={href} />;
 
             return (
               <li
