@@ -14,6 +14,7 @@ import { CtaBlock } from "@/components/CtaBlock";
 import { InstagramReel } from "@/components/Embeds";
 import { ServiceIcon, type IconName } from "@/components/services/ServiceIcon";
 import { findLogo, findAsset } from "@/lib/assets";
+import { DaniGaleria } from "@/components/nosotros/DaniGaleria";
 import { getPosts } from "@/lib/blog";
 import { team, memberships, support, supportPending, site } from "@/lib/site";
 
@@ -340,12 +341,22 @@ export default function Nosotros() {
               descubierto— a artistas que hoy llenan estadios.
             </p>
             <p>
+              Empezó donde se aprende de verdad: cargando y montando. Backliner,
+              producción técnica y dirección de giras por toda España, de sala en
+              sala y de furgoneta en furgoneta. También producción en televisión,
+              en <em>Tu Cara Me Suena</em>. Nada de lo que pide hoy a un equipo es
+              algo que no haya hecho antes él.
+            </p>
+            <p>
               Ha visto de todo lo que se puede ver en este oficio: lo que
               funciona, lo que no, y por qué. Ese recorrido es lo que hay detrás
               de cada decisión que tomamos en Bonito.
             </p>
           </RevealOnScroll>
         </div>
+
+        {/* Su archivo: las fotos justifican lo que cuenta el texto. */}
+        <DaniGaleria />
 
         {/* Tarjetas de los artistas de su trayectoria (en condiciones). */}
         <RevealOnScroll className="mt-14 border-t border-subtle pt-10">
