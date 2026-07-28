@@ -61,8 +61,13 @@
 
 ## 4. GIRAS  *(página NUEVA — de las más importantes)*  🎨
 
-- [~] `[B]` **v1 funcional creada** (`/giras`): leyenda, "Giras Bonitas", listado cronológico real con nº de conciertos, tarjetas con hueco de foto (fallback navy). **FALTA el estudio de diseño de verdad** (abajo).
-- [ ] `[B]` 🎨 **DEDICAR UN BUEN ESTUDIO DE DISEÑO** a esta página (es de las más importantes): tiene que ser **impactante**, al nivel del resto, no solo nombres/fotos/vídeos. Diseñarla con **Aura MCP** (lienzo "Bonito Sound / diseños") y pasarla a código.
+- [x] `[B]` 🎨 **Estudio de diseño hecho y codificado** — concepto **"la ruta"**, aprobado por Víctor sobre mockup de Aura (gpt-image-2):
+  - Hero: "GIRAS" gigante en **outline navy inclinado** + **carretera cian** cruzándolo con chinchetas.
+  - **La ruta**: carretera cian que serpentea por el centro; las giras cuelgan alternas izq/der como **polaroids pegadas con cinta**, rotadas, con el **año gigante en marca de agua** por fuera y un punto cian que las engancha.
+  - **Franja navy** con los números derivados de los datos reales: **+600 conciertos · 20 giras · 16 artistas**.
+  - Móvil: la ruta se endereza a la izquierda y las tarjetas van en columna (verificado, sin overflow).
+  - Datos reales del PDF en `lib/giras.ts` (20 giras). Fotos plug-and-play en `public/img/giras/<slug>` → mientras no haya, fallback navy con iniciales.
+- [ ] `[V]` ⚠️ **Verificar el "+600 conciertos"**: es la SUMA de las cifras que dio Dani (redondeada a la baja). Confirmar con él antes de publicar.
 - [ ] `[B]` ⏳ **VÍDEOS**: ahora mismo `/giras` **no tiene ni un vídeo**. Conseguir/embeber vídeos de las giras de artistas (YouTube/links — los sacamos nosotros) y páginas de gira por artista con sus vídeos.
 - [x] `[B]` ✅ **Sacar las giras/artistas de Experiencias**: la página de eventos ya no incluye giras (el showcase de artistas se retira en el rework de Experiencias, §3).
 - [ ] `[B]` ✅ Leyenda: *"Producción técnica, logística, road management y dirección de giras. Coordinamos cada detalle, desde la planificación previa hasta el desmontaje final, porque sabemos que la diferencia entre un buen concierto y una gran producción está en los detalles."*
