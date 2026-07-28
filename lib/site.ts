@@ -146,6 +146,130 @@ export const brands = [
   "Sr. Wilson",
 ] as const;
 
+/**
+ * Empresas y entidades que han confiado en Bonito Sound, agrupadas por tipo.
+ * Material aportado por Dani (carpeta de Drive, ver docs/MATERIAL-DANI-DRIVE.md).
+ *
+ * Reglas:
+ *  - `brands` (arriba) se mantiene intacto: lo usan el home, servicios y eventos.
+ *    Aquí se referencia, NO se duplica.
+ *  - Un nombre vive en UNA sola categoría (si no, la key de React colisiona):
+ *    Global Talent Services, Sweet Bird y Corre Lola Corre ya están en `brands`,
+ *    así que no se repiten en agencias. "Concert Estudio" es la misma empresa
+ *    que "Concert Studio" de `brands`.
+ *  - Los PROVEEDORES no son clientes: van en su propio bloque, aparte del muro
+ *    de "han confiado en nosotros".
+ */
+export type TrustedCategory = {
+  id: "marcas" | "agencias" | "ayuntamientos" | "asociaciones" | "proveedores";
+  label: string;
+  /** Subcarpeta en /public/img/ donde viven sus logos. */
+  dir: string;
+  /** Escudos municipales piden celda cuadrada; los logotipos, apaisada. */
+  layout?: "wide" | "shield";
+  /** Los que salen en el home (subconjunto por nombre exacto). */
+  featured?: readonly string[];
+  items: readonly string[];
+};
+
+const AGENCIAS = [
+  "Arenal Sound", "Festival Pedralbes", "Desalia", "Share Festival Barcelona",
+  "Pirata Festival", "Mediterrànea Festival", "Música Global", "Propaganda pel Fet!",
+  "Heliogàbal", "Sala Búho Real", "Quality Artist Management",
+  "Planning General d'Espectacles", "Nauw Ur Music", "Midnight Entertainment",
+  "M2 Music Group", "LT Music", "La Tornada", "La Bombilla Media",
+  "Radiocat XXL", "Wilson Agencia Creativa", "Up & Down Tempo", "Jolssen Events",
+  "Events91", "Espectacles La Traca", "Emergen-disc", "Barcelona Events Musicals",
+  "Bética Trade", "FOMO Gastronomía y Cultura", "Produccions Artístiques Victori",
+  "Federación Coordinadora del Circuito de Músicas Populares",
+] as const;
+
+const AYUNTAMIENTOS = [
+  "Ajuntament de Sabadell", "Ajuntament de Granollers", "Ajuntament de Calella",
+  "Ajuntament de Tossa de Mar", "Ajuntament de Banyoles", "Ajuntament de Sant Boi de Llobregat",
+  "Ajuntament de Sant Celoni", "Ajuntament de Montcada i Reixac", "Ajuntament de Pineda de Mar",
+  "Ajuntament de Ripollet", "Ajuntament del Masnou", "Ajuntament de Moià",
+  "Ajuntament de Polinyà", "Ajuntament de Palafolls", "Ajuntament de Castellbisbal",
+  "Ajuntament de Caldes de Montbui", "Ajuntament de Caldes d'Estrac", "Ajuntament de Canet de Mar",
+  "Ajuntament de Masquefa", "Ajuntament de l'Ametlla del Vallès", "Ajuntament de la Roca del Vallès",
+  "Ajuntament de Santa Perpètua de la Mogoda", "Ajuntament de Sant Andreu de Llavaneres",
+  "Ajuntament de Sant Sadurní d'Anoia", "Ajuntament de Sant Esteve Sesrovires",
+  "Ajuntament de Sant Esteve de Palautordera", "Ajuntament de Vila-seca",
+  "Ajuntament de Vallmoll", "Ajuntament de Vilassar de Dalt", "Ajuntament de Vilobí d'Onyar",
+  "Ajuntament d'Olesa de Montserrat", "Ajuntament del Pla de Santa Maria",
+  "Ajuntament de Palau-solità i Plegamans", "Ajuntament de Campins",
+  "Ajuntament de Montesquiu", "Ayuntamiento de Cuevas del Valle",
+] as const;
+
+const ASOCIACIONES = [
+  "Fundación Colección Thyssen-Bornemisza", "Universitat Autònoma de Barcelona",
+  "Universidad Carlos III de Madrid", "Minyons Escoltes i Guies de Catalunya",
+  "Castellers del Poble Sec", "Colla de Castellers Xiquets del Serrallo",
+  "Blaus de Granollers", "Col·legi Oficial de Criminologia de Catalunya",
+  "SPM Viladecans Qualitat", "Tritoma", "Harmony Games", "FUNADER",
+  "L'Afluent", "Col·lectiu l'Aresta", "Associació Cultural TGK",
+  "Associació Festa Major Jove de Sentmenat", "Associació Juvenil Corberenca",
+  "Associació Cultural i Popular de l'Esquerra de l'Eixample",
+  "Associació de Comissions de Festes de Carrers del Poblenou",
+  "Associació de Joves Seniencs", "Associació Jovent Ignorat", "Associació la Garrinada",
+  "Associació Veïns Sant Oleguer Sol i Padrís", "Comissió de Festes de Bescanó",
+  "La Veu del Jovent Aubesa", "Nostra Llar Sant Oleguer",
+  "Plataforma Infantil i Juvenil de Les Corts", "Societat Coral l'Esperança",
+  "Asociación Club Matador", "BPM Grup",
+] as const;
+
+const PROVEEDORES = [
+  "Block Audiovisuals", "Visual Sonora", "Solfesa", "Transit Projectes",
+  "Xtra Event & Communication", "Tàndem Projects", "BestWay Events",
+  "Ben Aisit", "Lari Music", "Crocantickets", "Mancomunitat de la Vall de Camprodon",
+  "Meliá Hotels International",
+] as const;
+
+/** Marcas nuevas que aportó Dani, además de las de `brands`. */
+const MARCAS_EXTRA = ["La Casera", "Bartender Spirits Awards", "Intruso Bar"] as const;
+
+export const trustedBy: readonly TrustedCategory[] = [
+  {
+    id: "marcas",
+    label: "Marcas",
+    dir: "marcas",
+    featured: ["Ballantine's", "Pepsico", "Corona", "Schweppes", "Universal", "Gestmusic"],
+    items: [...brands, ...MARCAS_EXTRA],
+  },
+  {
+    id: "agencias",
+    label: "Agencias y festivales",
+    dir: "agencias",
+    featured: ["Arenal Sound", "Festival Pedralbes", "Desalia", "Música Global"],
+    items: AGENCIAS,
+  },
+  {
+    id: "ayuntamientos",
+    label: "Ayuntamientos",
+    dir: "ayuntamientos",
+    layout: "shield",
+    featured: ["Ajuntament de Sabadell", "Ajuntament de Granollers", "Ajuntament de Banyoles"],
+    items: AYUNTAMIENTOS,
+  },
+  {
+    id: "asociaciones",
+    label: "Asociaciones e instituciones",
+    dir: "asociaciones",
+    featured: [
+      "Fundación Colección Thyssen-Bornemisza",
+      "Universitat Autònoma de Barcelona",
+      "Universidad Carlos III de Madrid",
+    ],
+    items: ASOCIACIONES,
+  },
+  {
+    id: "proveedores",
+    label: "Con quién lo hacemos",
+    dir: "proveedores",
+    items: PROVEEDORES,
+  },
+] as const;
+
 export const tourArtists = [
   "Albert Pla",
   "Alfred García",

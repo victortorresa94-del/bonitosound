@@ -7,6 +7,7 @@ const cols = [
     title: "Qué hacemos",
     links: [
       { label: "Eventos para marcas", href: "/experiencias/marcas" },
+      { label: "Clientes", href: "/clientes" },
       { label: "Giras", href: "/giras" },
       { label: "Records", href: "/records" },
       { label: "Artistas", href: "/artistas" },

@@ -34,6 +34,27 @@ export function findLogo(dir: string, name: string): string | null {
   return findAsset(dir, assetSlug(name));
 }
 
+export type ResolvedLogo = {
+  name: string;
+  slug: string;
+  src: string | null;
+  /** .jpg/.jpeg = foto con fondo, NO admite el filtro de silueta blanca. */
+  isPhoto: boolean;
+};
+
+/**
+ * Resuelve una lista de nombres a sus logos. Devuelve SIEMPRE una entrada por
+ * nombre (con `src: null` si aún no hay fichero) para que el componente pueda
+ * caer al nombre en texto: así el muro funciona antes de subir un solo logo.
+ */
+export function resolveLogos(dir: string, items: readonly string[]): ResolvedLogo[] {
+  return items.map((name) => {
+    const slug = assetSlug(name);
+    const src = findAsset(dir, slug);
+    return { name, slug, src, isPhoto: Boolean(src && /\.jpe?g$/i.test(src)) };
+  });
+}
+
 /**
  * Canción propia para el botón "Escuchar a X" de la ficha: SOLO si el artista
  * tiene su audio en /public/audio/artistas/<slug>.(mp3|m4a) — su propia música,
