@@ -2,6 +2,7 @@
 name: "Nàtura"
 genre: "DJ / Productora"
 tier: "booking"
+services: ["Booking", "Management", "Records", "Editorial"]
 spotifyArtistId: "07Epl3n2QMYOUTYqZNfj3F"
 instagram: "https://www.instagram.com/dj.natura/"
 image: "/img/artistas/natura.jpg"

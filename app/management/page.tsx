@@ -18,10 +18,10 @@ export default function Page() {
       caseSlot={
         <ArtistFeatureCase
           eyebrow="A mano, un ejemplo"
-          h2="A Eva Calyza la lleva Manu."
-          body="Management personal: estrategia, calendario y las decisiones que importan, con un interlocutor que coge el teléfono. Su álbum MARCA DIVINA salió en 2025 con todo el sistema de Bonito detrás."
-          slug="eva-calyza"
-          spotifyId="6rUgNfaBgUk0WCQbNafgKh"
+          h2="A Nàtura la llevamos a mano."
+          body="Management personal: estrategia, calendario y las decisiones que importan, con un interlocutor que coge el teléfono. Booking, records y editorial en la misma casa, así que nadie va rebotando entre empresas."
+          slug="natura"
+          spotifyId="07Epl3n2QMYOUTYqZNfj3F"
         />
       }
     />

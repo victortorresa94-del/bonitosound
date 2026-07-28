@@ -1,8 +1,8 @@
 ---
 name: "Dulze"
 genre: "Indie pop / Raíz flamenca"
-tier: "distribucion"
-services: ["Booking", "Management", "Distribución"]
+tier: "booking"
+services: ["Booking", "Management", "Records", "Editorial"]
 spotifyArtistId: "1PNJOvNCIMG9dN4cy7IG4D"
 instagram: "https://www.instagram.com/duuuulze/"
 tiktok: "https://www.tiktok.com/@duuuulze"

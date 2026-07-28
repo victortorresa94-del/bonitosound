@@ -19,16 +19,56 @@ export const metadata: Metadata = {
   alternates: { canonical: `${site.url}/artistas` },
 };
 
-// Orden del mockup + tratamiento asimétrico por posición (aspecto + desplazamiento).
-const ORDER = ["dulze", "eva-calyza", "natura", "pablo-rojo", "paule", "sa-pena"];
-const LAYOUT: Record<string, { aspect: string; shift: string }> = {
-  dulze: { aspect: "aspect-[4/5]", shift: "" },
-  "eva-calyza": { aspect: "aspect-[4/5]", shift: "md:mt-16" },
-  natura: { aspect: "aspect-[3/4]", shift: "md:-mt-2" },
-  "pablo-rojo": { aspect: "aspect-[4/5]", shift: "" },
-  paule: { aspect: "aspect-[4/5]", shift: "md:mt-16" },
-  "sa-pena": { aspect: "aspect-[5/4]", shift: "md:-mt-2" },
+/**
+ * Los 6 del roster (decisión de Dani, reunión 23/07): los que queremos que se
+ * contraten. Cuatro de booking y dos de producción de giras.
+ *
+ * Alfred García y Albert Pla NO tienen ficha de artista: no están en el roster
+ * de Bonito, les producimos las giras. Por eso su tarjeta lleva a su página de
+ * gira y sus datos van aquí, no en /content/artistas.
+ *
+ * Fuera de esta parrilla: Eva Calyza y Fabián (ya no están en booking ni
+ * management) y Pablo Rojo. Siguen en el roster completo y en distribución.
+ */
+type RosterEntry = {
+  slug: string;
+  relation: string;
+  aspect: string;
+  shift: string;
+  /** Solo para los que no tienen ficha (Alfred, Albert). */
+  external?: { name: string; genre: string; href: string; photoDir: string };
 };
+
+const ROSTER: RosterEntry[] = [
+  { slug: "dulze", relation: "Management · Records · Booking", aspect: "aspect-[4/5]", shift: "" },
+  { slug: "natura", relation: "Management · Records · Booking", aspect: "aspect-[3/4]", shift: "md:mt-16" },
+  {
+    slug: "alfred-garcia",
+    relation: "Producción de giras",
+    aspect: "aspect-[4/5]",
+    shift: "md:-mt-2",
+    external: {
+      name: "Alfred García",
+      genre: "Producción y dirección de gira",
+      href: "/giras/alfred-garcia-1016",
+      photoDir: "artistas-dani",
+    },
+  },
+  { slug: "paule", relation: "Booking", aspect: "aspect-[4/5]", shift: "" },
+  { slug: "sa-pena", relation: "Records · Booking", aspect: "aspect-[5/4]", shift: "md:mt-16" },
+  {
+    slug: "albert-pla",
+    relation: "Producción técnica de giras",
+    aspect: "aspect-[4/5]",
+    shift: "md:-mt-2",
+    external: {
+      name: "Albert Pla",
+      genre: "Producción técnica y logística",
+      href: "/giras/albert-pla-rumbagenarios",
+      photoDir: "artistas-dani",
+    },
+  },
+];
 
 export default function Artistas() {
   const all = getArtists();
@@ -37,9 +77,28 @@ export default function Artistas() {
   // sigue mandando en /artistas/todos y en la ficha; aquí la selección es fija
   // para que la cuadrícula quede como el diseño, sin huecos por foto que falte.
   const bySlug = new Map(all.map((a) => [a.slug, a] as const));
-  const booking = ORDER.map((slug) => bySlug.get(slug)).filter(
-    (a): a is NonNullable<typeof a> => Boolean(a),
-  );
+  // Cada entrada se resuelve contra su ficha; las externas (Alfred, Albert)
+  // traen sus propios datos y apuntan a su página de gira.
+  const roster = ROSTER.map((r) => {
+    if (r.external) {
+      return {
+        ...r,
+        name: r.external.name,
+        genre: r.external.genre,
+        href: r.external.href,
+        photo: findAsset(r.external.photoDir, r.slug),
+      };
+    }
+    const a = bySlug.get(r.slug);
+    if (!a) return null;
+    return {
+      ...r,
+      name: a.name,
+      genre: a.genre,
+      href: undefined,
+      photo: a.image ?? findAsset("artistas", a.slug),
+    };
+  }).filter((r): r is NonNullable<typeof r> => Boolean(r));
 
   return (
     <>
@@ -74,23 +133,22 @@ export default function Artistas() {
             stagger={0.08}
             className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 md:grid-cols-3"
           >
-            {booking.map((a) => {
-              const l = LAYOUT[a.slug] ?? { aspect: "aspect-[4/5]", shift: "" };
-              return (
-                <RosterCard
-                  key={a.slug}
-                  slug={a.slug}
-                  name={a.name}
-                  genre={a.genre}
-                  photo={a.image ?? findAsset("artistas", a.slug)}
-                  // Hover-vídeo desactivado a propósito: no tenemos vídeos por
-                  // artista bien alojados aún. Se reactiva pasando `video={a.video}`
-                  // cuando los haya. Mientras, la tarjeta se queda con la foto.
-                  aspect={l.aspect}
-                  shift={l.shift}
-                />
-              );
-            })}
+            {roster.map((a) => (
+              <RosterCard
+                key={a.slug}
+                slug={a.slug}
+                name={a.name}
+                genre={a.genre}
+                photo={a.photo}
+                href={a.href}
+                relation={a.relation}
+                // Hover-vídeo desactivado a propósito: no tenemos vídeos por
+                // artista bien alojados aún. Se reactiva pasando `video={a.video}`
+                // cuando los haya. Mientras, la tarjeta se queda con la foto.
+                aspect={a.aspect}
+                shift={a.shift}
+              />
+            ))}
           </StaggerGroup>
           <RevealOnScroll className="mt-10 flex justify-end">
             <Link

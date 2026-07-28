@@ -89,7 +89,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
     whatWeDoTitle: "Qué llevamos",
     whatWeDo: [
       { icon: "estrategia", title: "Estrategia con criterio", desc: "Qué sale, cuándo y por qué. Decidimos el siguiente paso con argumentos, no con prisas." },
-      { icon: "management", title: "A mano", desc: "Aquí no hay artistas de primera y de segunda. A Eva Calyza la lleva Manu personalmente; así trabajamos con todos." },
+      { icon: "management", title: "A mano", desc: "Aquí no hay artistas de primera y de segunda: a cada artista lo lleva una persona con nombre, que coge el teléfono." },
       { icon: "calendario", title: "Calendario ordenado", desc: "Lanzamientos, bolos y contenido en un mismo plan, para que no choquen entre sí." },
       { icon: "disco", title: "Todo en la misma casa", desc: "Booking, sello y distribución hablan entre sí porque están bajo el mismo techo. El artista no va rebotando." },
     ],

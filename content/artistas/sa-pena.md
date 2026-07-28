@@ -2,6 +2,7 @@
 name: "Sa Pena"
 genre: "Urbano valencià / pop + drum'n'bass"
 tier: "booking"
+services: ["Booking", "Records"]
 instagram: "https://www.instagram.com/sa_pena_"
 image: "/img/artistas/sa-pena.jpg"
 milestones:

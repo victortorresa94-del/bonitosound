@@ -18,6 +18,11 @@ export type RosterCardProps = {
   video?: string;
   aspect?: string;
   shift?: string;
+  /** Destino. Por defecto la ficha del artista; Alfred y Albert van a su gira. */
+  href?: string;
+  /** Relación con Bonito ("Booking", "Producción de giras"…). Se pinta como
+   *  chip sobre la foto: es el dato que pidió Dani, más útil que el género. */
+  relation?: string;
 };
 
 /**
@@ -35,6 +40,8 @@ export function RosterCard({
   video,
   aspect = "aspect-[4/5]",
   shift = "",
+  href,
+  relation,
 }: RosterCardProps) {
   const [hover, setHover] = useState(false);
   const [inView, setInView] = useState(false);
@@ -64,7 +71,7 @@ export function RosterCard({
 
   return (
     <Link
-      href={`/artistas/${slug}`}
+      href={href ?? `/artistas/${slug}`}
       data-cursor="link"
       className={`group block ${shift}`}
       onMouseEnter={() => setHover(true)}
@@ -113,6 +120,16 @@ export function RosterCard({
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
               <path d="M8 5v14l11-7z" />
             </svg>
+          </span>
+        )}
+
+        {/* Relación con Bonito: chip discreto abajo a la izquierda. */}
+        {relation && (
+          <span
+            className="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.1em] backdrop-blur-sm"
+            style={{ color: NAVY }}
+          >
+            {relation}
           </span>
         )}
 
