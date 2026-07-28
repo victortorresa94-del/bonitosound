@@ -2,7 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { Fragment } from "react";
 import { HeroVideo } from "@/components/home/HeroVideo";
-import { ArtistsBand, BrandsBand } from "@/components/home/HomeProof";
+import { ArtistsBand } from "@/components/home/HomeProof";
+import { TrustedWall } from "@/components/home/TrustedWall";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
 import { InstitutionalStrip } from "@/components/home/InstitutionalStrip";
 import { PresentacionVideo } from "@/components/home/PresentacionVideo";
@@ -46,7 +47,7 @@ export default function HomePage() {
           />
           {scene.id === "que-es" && <InstitutionalStrip />}
           {scene.id === "marketing" && <PresentacionVideo />}
-          {scene.id === "marcas" && <BrandsBand />}
+          {scene.id === "marcas" && <TrustedWall />}
           {scene.id === "giras" && <ArtistsBand />}
         </Fragment>
       ))}

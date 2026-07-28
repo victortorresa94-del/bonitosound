@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/experiencias",
     "/experiencias/marcas",
     "/giras",
+    "/clientes",
     "/records",
     "/booking",
     "/management",

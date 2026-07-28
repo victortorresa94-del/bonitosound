@@ -1,0 +1,142 @@
+
+MARCAS  16/24
+  Faltan (guardar como <slug>.png|jpg|svg|webp):
+    le-souffle                                       ← Le Souffle
+    codigo-1530                                      ← Código 1530
+    lighthouse                                       ← Lighthouse
+    corre-lola-corre                                 ← Corre Lola Corre
+    sr-wilson                                        ← Sr. Wilson
+    la-casera                                        ← La Casera
+    bartender-spirits-awards                         ← Bartender Spirits Awards
+    intruso-bar                                      ← Intruso Bar
+
+AGENCIAS  1/30
+  Faltan (guardar como <slug>.png|jpg|svg|webp):
+    festival-pedralbes                               ← Festival Pedralbes
+    desalia                                          ← Desalia
+    share-festival-barcelona                         ← Share Festival Barcelona
+    pirata-festival                                  ← Pirata Festival
+    mediterranea-festival                            ← Mediterrànea Festival
+    musica-global                                    ← Música Global
+    propaganda-pel-fet                               ← Propaganda pel Fet!
+    heliogabal                                       ← Heliogàbal
+    sala-buho-real                                   ← Sala Búho Real
+    quality-artist-management                        ← Quality Artist Management
+    planning-general-despectacles                    ← Planning General d'Espectacles
+    nauw-ur-music                                    ← Nauw Ur Music
+    midnight-entertainment                           ← Midnight Entertainment
+    m2-music-group                                   ← M2 Music Group
+    lt-music                                         ← LT Music
+    la-tornada                                       ← La Tornada
+    la-bombilla-media                                ← La Bombilla Media
+    radiocat-xxl                                     ← Radiocat XXL
+    wilson-agencia-creativa                          ← Wilson Agencia Creativa
+    up-down-tempo                                    ← Up & Down Tempo
+    jolssen-events                                   ← Jolssen Events
+    events91                                         ← Events91
+    espectacles-la-traca                             ← Espectacles La Traca
+    emergen-disc                                     ← Emergen-disc
+    barcelona-events-musicals                        ← Barcelona Events Musicals
+    betica-trade                                     ← Bética Trade
+    fomo-gastronomia-y-cultura                       ← FOMO Gastronomía y Cultura
+    produccions-artistiques-victori                  ← Produccions Artístiques Victori
+    federacion-coordinadora-del-circuito-de-musicas-populares ← Federación Coordinadora del Circuito de Músicas Populares
+
+AYUNTAMIENTOS  0/36
+  Faltan (guardar como <slug>.png|jpg|svg|webp):
+    ajuntament-de-sabadell                           ← Ajuntament de Sabadell
+    ajuntament-de-granollers                         ← Ajuntament de Granollers
+    ajuntament-de-calella                            ← Ajuntament de Calella
+    ajuntament-de-tossa-de-mar                       ← Ajuntament de Tossa de Mar
+    ajuntament-de-banyoles                           ← Ajuntament de Banyoles
+    ajuntament-de-sant-boi-de-llobregat              ← Ajuntament de Sant Boi de Llobregat
+    ajuntament-de-sant-celoni                        ← Ajuntament de Sant Celoni
+    ajuntament-de-montcada-i-reixac                  ← Ajuntament de Montcada i Reixac
+    ajuntament-de-pineda-de-mar                      ← Ajuntament de Pineda de Mar
+    ajuntament-de-ripollet                           ← Ajuntament de Ripollet
+    ajuntament-del-masnou                            ← Ajuntament del Masnou
+    ajuntament-de-moia                               ← Ajuntament de Moià
+    ajuntament-de-polinya                            ← Ajuntament de Polinyà
+    ajuntament-de-palafolls                          ← Ajuntament de Palafolls
+    ajuntament-de-castellbisbal                      ← Ajuntament de Castellbisbal
+    ajuntament-de-caldes-de-montbui                  ← Ajuntament de Caldes de Montbui
+    ajuntament-de-caldes-destrac                     ← Ajuntament de Caldes d'Estrac
+    ajuntament-de-canet-de-mar                       ← Ajuntament de Canet de Mar
+    ajuntament-de-masquefa                           ← Ajuntament de Masquefa
+    ajuntament-de-lametlla-del-valles                ← Ajuntament de l'Ametlla del Vallès
+    ajuntament-de-la-roca-del-valles                 ← Ajuntament de la Roca del Vallès
+    ajuntament-de-santa-perpetua-de-la-mogoda        ← Ajuntament de Santa Perpètua de la Mogoda
+    ajuntament-de-sant-andreu-de-llavaneres          ← Ajuntament de Sant Andreu de Llavaneres
+    ajuntament-de-sant-sadurni-danoia                ← Ajuntament de Sant Sadurní d'Anoia
+    ajuntament-de-sant-esteve-sesrovires             ← Ajuntament de Sant Esteve Sesrovires
+    ajuntament-de-sant-esteve-de-palautordera        ← Ajuntament de Sant Esteve de Palautordera
+    ajuntament-de-vila-seca                          ← Ajuntament de Vila-seca
+    ajuntament-de-vallmoll                           ← Ajuntament de Vallmoll
+    ajuntament-de-vilassar-de-dalt                   ← Ajuntament de Vilassar de Dalt
+    ajuntament-de-vilobi-donyar                      ← Ajuntament de Vilobí d'Onyar
+    ajuntament-dolesa-de-montserrat                  ← Ajuntament d'Olesa de Montserrat
+    ajuntament-del-pla-de-santa-maria                ← Ajuntament del Pla de Santa Maria
+    ajuntament-de-palau-solita-i-plegamans           ← Ajuntament de Palau-solità i Plegamans
+    ajuntament-de-campins                            ← Ajuntament de Campins
+    ajuntament-de-montesquiu                         ← Ajuntament de Montesquiu
+    ayuntamiento-de-cuevas-del-valle                 ← Ayuntamiento de Cuevas del Valle
+
+ASOCIACIONES  0/30
+  Faltan (guardar como <slug>.png|jpg|svg|webp):
+    fundacion-coleccion-thyssen-bornemisza           ← Fundación Colección Thyssen-Bornemisza
+    universitat-autonoma-de-barcelona                ← Universitat Autònoma de Barcelona
+    universidad-carlos-iii-de-madrid                 ← Universidad Carlos III de Madrid
+    minyons-escoltes-i-guies-de-catalunya            ← Minyons Escoltes i Guies de Catalunya
+    castellers-del-poble-sec                         ← Castellers del Poble Sec
+    colla-de-castellers-xiquets-del-serrallo         ← Colla de Castellers Xiquets del Serrallo
+    blaus-de-granollers                              ← Blaus de Granollers
+    col-legi-oficial-de-criminologia-de-catalunya    ← Col·legi Oficial de Criminologia de Catalunya
+    spm-viladecans-qualitat                          ← SPM Viladecans Qualitat
+    tritoma                                          ← Tritoma
+    harmony-games                                    ← Harmony Games
+    funader                                          ← FUNADER
+    lafluent                                         ← L'Afluent
+    col-lectiu-laresta                               ← Col·lectiu l'Aresta
+    associacio-cultural-tgk                          ← Associació Cultural TGK
+    associacio-festa-major-jove-de-sentmenat         ← Associació Festa Major Jove de Sentmenat
+    associacio-juvenil-corberenca                    ← Associació Juvenil Corberenca
+    associacio-cultural-i-popular-de-lesquerra-de-leixample ← Associació Cultural i Popular de l'Esquerra de l'Eixample
+    associacio-de-comissions-de-festes-de-carrers-del-poblenou ← Associació de Comissions de Festes de Carrers del Poblenou
+    associacio-de-joves-seniencs                     ← Associació de Joves Seniencs
+    associacio-jovent-ignorat                        ← Associació Jovent Ignorat
+    associacio-la-garrinada                          ← Associació la Garrinada
+    associacio-veins-sant-oleguer-sol-i-padris       ← Associació Veïns Sant Oleguer Sol i Padrís
+    comissio-de-festes-de-bescano                    ← Comissió de Festes de Bescanó
+    la-veu-del-jovent-aubesa                         ← La Veu del Jovent Aubesa
+    nostra-llar-sant-oleguer                         ← Nostra Llar Sant Oleguer
+    plataforma-infantil-i-juvenil-de-les-corts       ← Plataforma Infantil i Juvenil de Les Corts
+    societat-coral-lesperanca                        ← Societat Coral l'Esperança
+    asociacion-club-matador                          ← Asociación Club Matador
+    bpm-grup                                         ← BPM Grup
+
+PROVEEDORES  0/12
+  Faltan (guardar como <slug>.png|jpg|svg|webp):
+    block-audiovisuals                               ← Block Audiovisuals
+    visual-sonora                                    ← Visual Sonora
+    solfesa                                          ← Solfesa
+    transit-projectes                                ← Transit Projectes
+    xtra-event-communication                         ← Xtra Event & Communication
+    tandem-projects                                  ← Tàndem Projects
+    bestway-events                                   ← BestWay Events
+    ben-aisit                                        ← Ben Aisit
+    lari-music                                       ← Lari Music
+    crocantickets                                    ← Crocantickets
+    mancomunitat-de-la-vall-de-camprodon             ← Mancomunitat de la Vall de Camprodon
+    melia-hotels-international                       ← Meliá Hotels International
+
+INSTITUCIONES  5/5
+
+APOYOS  4/8
+  Faltan (guardar como <slug>.png|jpg|svg|webp):
+    instituto-cervantes                              ← Instituto Cervantes
+    embajada-de-espana-en-holanda                    ← Embajada de España en Holanda
+    aie                                              ← AIE
+    stadsdeel-amsterdam                              ← Stadsdeel Amsterdam
+
+──────
+Logos puestos: 26 · Faltan: 119
