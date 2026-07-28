@@ -4,143 +4,118 @@ import { usePlayer } from "./PlayerProvider";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
+const CREMA = "#f3ead6";
 
 /**
- * La Radio Bonito: una radio vieja dibujada en SVG que sintoniza los temas de
- * los artistas de la casa. Cada tema suena 10 s y salta solo al siguiente, con
- * su ráfaga de sintonía en medio y la aguja moviéndose de emisora a emisora.
+ * La Radio Bonito: el panel que se despliega sobre el botón flotante, abajo a
+ * la derecha, en TODAS las páginas. Una radio vieja en miniatura que va
+ * sintonizando los temas de los artistas de la casa: 10 s de cada uno, con su
+ * ráfaga de sintonía al cambiar y la aguja moviéndose de emisora a emisora.
  *
- * Si no hay temas en /public/audio/playlist/ no se pinta NADA: sin música, una
- * radio dibujada es un adorno muerto. En cuanto se suba el primer mp3 aparece.
- *
- * Convive con FloatingPlayer: esta es la pieza grande (home) y el flotante
- * sigue siendo el control persistente al navegar.
+ * No se pinta si no hay temas: sin música, una radio dibujada es un adorno
+ * muerto. Y va en el mismo contenedor fixed que FloatingPlayer, así que no
+ * añade otro elemento flotante compitiendo por la esquina.
  */
-export function RadioBonito() {
-  const { hasTracks, playing, tuning, current, index, total, start, toggle, goTo } = usePlayer();
-
-  if (!hasTracks) return null;
-
-  // Las emisoras son columnas de igual ancho, así que el centro de la nº i cae
-  // en (i + 0,5) / total. La aguja tiene que ir exactamente ahí.
-  const aguja = ((index + 0.5) / Math.max(total, 1)) * 100;
+export function RadioBonito({ onClose }: { onClose: () => void }) {
+  const { current, index, total, tuning, playing, goTo } = usePlayer();
 
   return (
-    <section className="wrap py-16 md:py-24">
-      <div className="grid items-center gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-14">
-        {/* ── La radio ── */}
-        <div className="mx-auto w-full max-w-[26rem]">
-          <div
-            className="relative rounded-[1.6rem] p-5 shadow-[0_18px_50px_rgba(20,40,60,0.22)]"
-            style={{ backgroundColor: NAVY }}
-          >
-            {/* Dial */}
-            <div className="relative h-16 overflow-hidden rounded-lg bg-[#f3ead6] px-3">
-              {/* Marcas de emisora: una por tema. */}
-              <div className="absolute inset-x-3 top-0 flex h-full items-center justify-between">
-                {Array.from({ length: total }).map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => goTo(i)}
-                    aria-label={`Emisora ${i + 1}`}
-                    className="group flex h-full flex-1 items-center justify-center"
-                  >
-                    <span
-                      className="block w-px transition-all duration-300"
-                      style={{
-                        height: i === index ? "60%" : "34%",
-                        backgroundColor: i === index ? CYAN : "rgba(20,40,60,0.28)",
-                      }}
-                    />
-                  </button>
-                ))}
-              </div>
+    <div
+      className="w-[17.5rem] rounded-2xl p-3.5 shadow-[0_18px_50px_rgba(20,40,60,0.28)]"
+      style={{ backgroundColor: NAVY }}
+      role="region"
+      aria-label="Radio Bonito"
+    >
+      {/* Cabecera: marca + cerrar. */}
+      <div className="mb-2.5 flex items-center justify-between">
+        <p className="font-mono text-[0.6rem] uppercase tracking-[0.22em] text-white/45">
+          Radio Bonito
+        </p>
+        <button
+          onClick={onClose}
+          aria-label="Cerrar la radio"
+          className="grid h-5 w-5 place-items-center rounded-full text-white/45 transition-colors hover:text-white"
+        >
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden>
+            <path d="M5 5l14 14M19 5L5 19" strokeLinecap="round" />
+          </svg>
+        </button>
+      </div>
 
-              {/* La aguja. Vive en el MISMO contenedor que las marcas (inset-x-3)
-                  para que los porcentajes midan sobre el mismo ancho y caiga
-                  clavada sobre la emisora. */}
-              <div className="pointer-events-none absolute inset-x-3 top-1.5 bottom-1.5">
-                <span
-                  aria-hidden
-                  className="absolute top-0 bottom-0 w-[3px] -translate-x-1/2 rounded-full transition-[left] duration-700 ease-out"
-                  style={{ left: `${aguja}%`, backgroundColor: "#c8452f" }}
-                />
-              </div>
-            </div>
-
-            {/* Qué suena */}
-            <div className="mt-4 min-h-[3.2rem]">
-              {tuning ? (
-                <p className="font-mono text-xs uppercase tracking-[0.2em] text-white/50">
-                  sintonizando…
-                </p>
-              ) : (
-                <>
-                  <p className="font-round text-lg font-bold leading-tight text-white">
-                    {current?.title}
-                  </p>
-                  {current?.artist && (
-                    <p className="mt-0.5 text-sm text-white/55">{current.artist}</p>
-                  )}
-                </>
-              )}
-            </div>
-
-            {/* Rejilla del altavoz (ecualizador) + botón de encendido. */}
-            <div className="mt-5 flex items-end justify-between gap-4">
-              <div className="flex flex-1 items-end gap-[3px]" aria-hidden>
-                {Array.from({ length: 22 }).map((_, i) => (
-                  <span
-                    key={i}
-                    className="block flex-1 rounded-sm"
-                    style={{
-                      height: playing && !tuning ? "1.6rem" : "0.5rem",
-                      transformOrigin: "bottom",
-                      backgroundColor: "rgba(255,255,255,0.16)",
-                      animation:
-                        playing && !tuning
-                          ? `eq ${0.7 + (i % 5) * 0.16}s ease-in-out ${i * 0.04}s infinite`
-                          : undefined,
-                    }}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={playing ? toggle : start}
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full transition-transform duration-300 hover:scale-105"
-                style={{ backgroundColor: CYAN }}
-                aria-label={playing ? "Pausar la radio" : "Encender la radio"}
-              >
-                {playing ? (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill={NAVY} aria-hidden>
-                    <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
-                  </svg>
-                ) : (
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill={NAVY} aria-hidden>
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                )}
-              </button>
-            </div>
-          </div>
+      {/* El dial. */}
+      <div className="relative h-10 overflow-hidden rounded-md px-2.5" style={{ backgroundColor: CREMA }}>
+        <div className="absolute inset-x-2.5 top-0 flex h-full items-center">
+          {Array.from({ length: total }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              aria-label={`Emisora ${i + 1}`}
+              title={`Emisora ${i + 1}`}
+              className="flex h-full flex-1 items-center justify-center"
+            >
+              <span
+                className="block w-px transition-all duration-300"
+                style={{
+                  height: i === index ? "58%" : "30%",
+                  backgroundColor: i === index ? CYAN : "rgba(20,40,60,0.3)",
+                }}
+              />
+            </button>
+          ))}
         </div>
 
-        {/* ── El texto ── */}
-        <div>
-          <p className="eyebrow mb-4">Radio Bonito</p>
-          <h2 className="display text-[clamp(1.9rem,4.4vw,3rem)] leading-[1.05]" style={{ color: NAVY }}>
-            Diez segundos de cada uno.
-          </h2>
-          <p className="mt-5 max-w-lg text-lg leading-relaxed text-text-secondary">
-            Un trozo de cada artista de la casa, uno detrás de otro, como quien
-            va pasando emisoras. Dale al play y déjala puesta.
-          </p>
-          <p className="mt-4 text-sm text-text-muted">
-            {total} {total === 1 ? "tema" : "temas"} · toca el dial para saltar
-          </p>
+        {/* La aguja vive en el MISMO contenedor que las marcas para que los
+            porcentajes midan sobre el mismo ancho y caiga clavada. */}
+        <div className="pointer-events-none absolute inset-x-2.5 top-1 bottom-1">
+          <span
+            aria-hidden
+            className="absolute top-0 bottom-0 w-[2.5px] -translate-x-1/2 rounded-full transition-[left] duration-700 ease-out"
+            style={{
+              left: `${((index + 0.5) / Math.max(total, 1)) * 100}%`,
+              backgroundColor: "#c8452f",
+            }}
+          />
         </div>
       </div>
-    </section>
+
+      {/* Qué suena. Altura fija para que el panel no dé saltos al cambiar. */}
+      <div className="mt-2.5 flex min-h-[2.6rem] items-center justify-between gap-3">
+        <div className="min-w-0">
+          {tuning ? (
+            <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/45">
+              sintonizando…
+            </p>
+          ) : (
+            <>
+              <p className="truncate font-round text-sm font-bold leading-tight text-white">
+                {current?.title}
+              </p>
+              {current?.artist && (
+                <p className="truncate text-xs text-white/50">{current.artist}</p>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* Rejilla del altavoz: se mueve solo cuando de verdad está sonando. */}
+        <div className="flex shrink-0 items-end gap-[2px]" aria-hidden>
+          {Array.from({ length: 9 }).map((_, i) => (
+            <span
+              key={i}
+              className="block w-[2.5px] rounded-full"
+              style={{
+                height: playing && !tuning ? "0.85rem" : "0.25rem",
+                transformOrigin: "bottom",
+                backgroundColor: "rgba(255,255,255,0.22)",
+                animation:
+                  playing && !tuning
+                    ? `eq ${0.7 + (i % 4) * 0.18}s ease-in-out ${i * 0.05}s infinite`
+                    : undefined,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
