@@ -7,6 +7,7 @@ import { TrustedWall } from "@/components/home/TrustedWall";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
 import { InstitutionalStrip } from "@/components/home/InstitutionalStrip";
 import { PresentacionVideo } from "@/components/home/PresentacionVideo";
+import { RadioBonito } from "@/components/player/RadioBonito";
 import { scenes } from "@/lib/home";
 
 const HERO_VIDEO = "/video/home/hero.mp4";
@@ -48,6 +49,9 @@ export default function HomePage() {
           {scene.id === "que-es" && <InstitutionalStrip />}
           {scene.id === "marketing" && <PresentacionVideo />}
           {scene.id === "marcas" && <TrustedWall />}
+          {/* La radio va después de records, que es donde se habla de la música
+              que sacamos. Si no hay temas subidos no se pinta nada. */}
+          {scene.id === "records" && <RadioBonito />}
           {scene.id === "giras" && <ArtistsBand />}
         </Fragment>
       ))}
