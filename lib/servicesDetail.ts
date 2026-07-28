@@ -1,4 +1,5 @@
 import type { IconName } from "@/components/services/ServiceIcon";
+import { giras } from "@/lib/giras";
 
 // Contenido PROFUNDO de cada página de servicio (aditivo sobre lib/services.ts).
 // Todo con voz bonito, sin cifras de dinero, nada inventado. Cada bloque se
@@ -30,37 +31,45 @@ export type ServiceDetail = {
   /** Playlist de Spotify a incrustar a lo ancho, en vez de la banda de números. */
   spotifyPlaylistId?: string;
   spotifyPlaylistTitle?: string;
+  /** Slugs de gira (lib/giras.ts) a enlazar como casos: van a /giras/[slug]. */
+  giraSlugs?: string[];
+  giraSlugsTitle?: string;
 };
 
 export const serviceDetail: Record<string, ServiceDetail> = {
   producciones: {
+    // Esta página es SOLO producción de giras de artista. Ni eventos de marca
+    // (eso es /experiencias) ni producción musical de estudio (eso es records).
+    // Quien entra aquí es un artista o su manager buscando quien le lleve la gira.
     intro:
-      "Un evento con música en directo tiene cincuenta piezas y todas tienen que encajar la misma noche. Las montamos todas —del concepto al último foco— con un solo equipo, para que la marca solo tenga que aparecer.",
-    whatWeDoTitle: "Todo lo que montamos",
+      "Una gira son veinte noches distintas que tienen que salir igual de bien. Nosotros ponemos todo lo que hay alrededor del artista —técnica, escenario, transporte y coordinación— para que él solo tenga que subirse y tocar.",
+    whatWeDoTitle: "Qué ponemos en una gira",
     whatWeDo: [
-      { icon: "brief", title: "Concepto y dirección artística", desc: "Cogemos tu brief y decidimos qué artista, qué formato y qué momento cuentan lo que la marca quiere contar. No un bolo suelto: una idea." },
-      { icon: "roster", title: "El artista que encaja", desc: "Roster propio y treinta años de agenda en la industria. Elegimos al que va con tu marca y tu público, no el que toca por agenda." },
       { icon: "mixer", title: "Producción técnica", desc: "Sonido, backline, monitores, microfonía y la ingeniería del directo. Con equipo propio, para que suene igual de bien en cada plaza." },
-      { icon: "escenario", title: "Escenario, luces y set", desc: "Montaje de escenario, iluminación y puesta en escena. Lo que promete el deck, montado de verdad." },
-      { icon: "logistica", title: "Logística y road", desc: "Transporte, tiempos, permisos y el plan B. Tour y stage management cuando la cosa se va de gira, plaza a plaza." },
-      { icon: "calendario", title: "Coordinación integral", desc: "Un solo interlocutor del brief al desmontaje. Nadie rebotando entre cinco proveedores; una sola persona que responde." },
+      { icon: "escenario", title: "Escenario y luces", desc: "Montaje de escenario, iluminación y puesta en escena. Lo mismo en un teatro que en un festival, adaptado a lo que da cada sala." },
+      { icon: "logistica", title: "Logística y transporte", desc: "Furgonetas, tiempos, permisos y el plan B. Que el equipo y la banda estén donde tienen que estar, a la hora que tienen que estar." },
+      { icon: "calendario", title: "Coordinación integral", desc: "Un solo interlocutor de la primera llamada al desmontaje. Nadie rebotando entre cinco proveedores; una persona que responde." },
+      { icon: "brief", title: "Avance con promotores y salas", desc: "Hablamos con cada promotor antes de llegar: qué hay en la sala, qué falta, qué horarios hay. Los problemas se resuelven por teléfono, no en el load-in." },
+      { icon: "management", title: "Road management", desc: "Alguien de los nuestros en la carretera con la gira: cuadrar el día, resolver lo que salga y que el artista no tenga que ocuparse de nada." },
     ],
-    processTitle: "Del brief al evento",
+    processTitle: "Cómo se lleva una gira",
     process: [
-      { title: "Brief", desc: "Nos cuentas la marca, el público y el momento. Escuchamos antes de proponer." },
-      { title: "Concepto y artista", desc: "Elegimos formato y artista y te enseñamos por dónde iría antes de mover nada." },
-      { title: "Producción", desc: "Montamos técnica, escenario y logística. Cada tiempo cuadrado antes de abrir puertas." },
-      { title: "El evento", desc: "La marca aparece; nosotros nos ocupamos de que todo salga y de que la gente se vaya hablando de la noche." },
+      { title: "Producción previa", desc: "Avance con promotores y salas plaza a plaza: qué equipo hay, qué llevamos nosotros y qué horarios maneja cada una." },
+      { title: "Hojas de ruta", desc: "Cada fecha documentada: tiempos, contactos, accesos, catering y transporte. Todo el mundo sabe qué pasa y cuándo." },
+      { title: "Road y transporte", desc: "Salimos a carretera con la gira. Equipo, banda y material moviéndose según lo previsto, con quien resuelve al lado." },
+      { title: "El directo", desc: "Montaje, prueba de sonido, show y desmontaje. Y a la mañana siguiente, la plaza que toca." },
     ],
+    // Cifras reales, calculadas desde lib/giras.ts para que no se queden viejas.
     stats: [
-      { n: "250", l: "eventos realizados" },
-      { n: "58", l: "marcas que han confiado" },
-      { n: "53", l: "artistas en directo" },
+      { n: `${giras.length}`, l: "giras llevadas" },
+      { n: `${new Set(giras.map((g) => g.artist)).size}`, l: "artistas de gira" },
       { n: "30", l: "años de oficio" },
     ],
-    caseVideosTitle: "Míralo, no te lo contamos",
-    caseVideos: ["corona", "schweppes", "tequila-codigo", "font-vella", "four-roses", "pepsi"],
-    showBrands: true,
+    // Las giras con página propia: enlazan a /giras/[slug] en vez de repetir
+    // aquí el contenido. Fuera los vídeos de marcas, que son de /experiencias.
+    giraSlugsTitle: "Giras que hemos llevado",
+    giraSlugs: ["albert-pla-rumbagenarios", "alfred-garcia-1016", "anne-lukin"],
+    showBrands: false,
   },
 
   booking: {

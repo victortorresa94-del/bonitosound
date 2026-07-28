@@ -8,6 +8,7 @@ import { CtaBlock } from "@/components/CtaBlock";
 import { FaqOpen } from "@/components/FaqOpen";
 import { EventoCard } from "@/components/EventoCard";
 import { SpotifyEmbed } from "@/components/Embeds";
+import { giras as girasData } from "@/lib/giras";
 import { ServiceIcon } from "@/components/services/ServiceIcon";
 import {
   RevealOnScroll,
@@ -55,6 +56,13 @@ export function ServicePage({
         .map((s) => getEventos().find((e) => e.slug === s) ?? getGiras().find((g) => g.slug === s))
         .filter(Boolean)
     : [];
+  // Giras a destacar: los datos duros salen de lib/giras.ts, y la tarjeta
+  // enlaza a /giras/[slug]. Si un slug no existe, se cae solo.
+  const giraCases = (d.giraSlugs ?? []).flatMap((s) => {
+    const g = girasData.find((x) => x.slug === s);
+    return g ? [g] : [];
+  });
+
   const caseArtists = d.artistSlugs
     ? d.artistSlugs
         .map((s) => {
@@ -183,6 +191,49 @@ export function ServicePage({
 
       {/* Caso destacado por página (slot: artista + Spotify, ediciones…). */}
       {caseSlot}
+
+      {/* GIRAS REALES — para producción de giras. Enlazan a /giras/[slug], que
+          es donde vive el relato completo: no se duplica aquí. */}
+      {giraCases.length > 0 && (
+        <Section className="bg-bg-primary">
+          <RevealOnScroll as="p" className="eyebrow mb-3">
+            {d.giraSlugsTitle ?? "Giras"}
+          </RevealOnScroll>
+          <SplitTextReveal as="h2" split="lines" className="display mb-10 text-[clamp(1.8rem,4vw,3rem)]">
+            Lo hemos llevado. No lo contamos.
+          </SplitTextReveal>
+          <StaggerGroup stagger={0.08} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {giraCases.map((g) => (
+              <Link
+                key={g.slug}
+                href={`/giras/${g.slug}`}
+                className="group rounded-2xl border border-subtle p-6 transition-colors duration-300 hover:border-text-primary/25"
+              >
+                <p className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-text-muted">
+                  {g.artist}
+                </p>
+                <h3 className="display mt-1.5 text-xl leading-tight" style={{ color: NAVY }}>
+                  {g.tour}
+                </h3>
+                <p className="mt-2 font-mono text-xs tabular-nums text-text-muted">
+                  {[g.years ?? g.year, g.shows].filter(Boolean).join(" · ")}
+                </p>
+                <span
+                  className="mt-4 inline-block text-sm font-semibold transition-transform duration-300 group-hover:translate-x-1"
+                  style={{ color: CYAN }}
+                >
+                  Ver la gira →
+                </span>
+              </Link>
+            ))}
+          </StaggerGroup>
+          <RevealOnScroll className="mt-10">
+            <Link href="/giras" className="link-underline text-sm font-semibold" style={{ color: CYAN }}>
+              Todas las giras →
+            </Link>
+          </RevealOnScroll>
+        </Section>
+      )}
 
       {/* CASOS EN VÍDEO — eventos reales. */}
       {caseEventos.length > 0 && (
