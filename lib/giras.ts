@@ -19,6 +19,8 @@ export type Gira = {
   /** Nº de conciertos confirmado (texto) + valor mínimo para sumar. */
   shows?: string;
   showsCount?: number;
+  /** Autoría de la foto, cuando la tiene. Se pinta bajo la polaroid. */
+  credit?: string;
 };
 
 export const giras: Gira[] = [
@@ -41,7 +43,7 @@ export const giras: Gira[] = [
   { slug: "ramon-mirabet-del-mar", artist: "Ramón Mirabet", tour: "Gira del Mar — ruta por el Mediterráneo", year: "2021", shows: "+12 conciertos", showsCount: 12 },
   { slug: "nerea-rodriguez-doble-o-nada", artist: "Nerea Rodríguez", tour: "Doble o Nada Tour", year: "2021", shows: "+15 conciertos", showsCount: 15 },
   { slug: "fabian-acustica", artist: "Fabián", tour: "Gira Acústica", year: "2021", shows: "+10 conciertos", showsCount: 10 },
-  { slug: "alfred-garcia-1016", artist: "Alfred García", tour: "Gira 1016", year: "2019", years: "2019–2021", shows: "+40 conciertos", showsCount: 40 },
+  { slug: "alfred-garcia-1016", artist: "Alfred García", tour: "Gira 1016", year: "2019", years: "2019–2021", shows: "+40 conciertos", showsCount: 40, credit: "Roser Gamonal" },
 ];
 
 /** Números de la sección, DERIVADOS de los datos de arriba (no inventados). */

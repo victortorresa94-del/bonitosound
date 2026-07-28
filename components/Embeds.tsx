@@ -45,6 +45,32 @@ export function YouTubeEmbed({
 }
 
 /**
+ * Vídeo de Vimeo embebido. Mismo patrón que YouTubeEmbed: iframe oficial, sin
+ * script de terceros. Acepta la URL completa o solo el id numérico.
+ */
+export function VimeoEmbed({
+  id,
+  title = "Vídeo",
+}: {
+  id: string;
+  title?: string;
+}) {
+  const vid = id.match(/vimeo\.com\/(?:video\/)?(\d+)/)?.[1] ?? id;
+  return (
+    <div className="relative aspect-video overflow-hidden rounded-2xl border border-subtle bg-black">
+      <iframe
+        title={title}
+        src={`https://player.vimeo.com/video/${vid}?dnt=1`}
+        loading="lazy"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowFullScreen
+        className="absolute inset-0 h-full w-full"
+      />
+    </div>
+  );
+}
+
+/**
  * Reel de Instagram embebido vía iframe oficial (`/embed`). No necesita
  * script de terceros ni token: el navegador del visitante lo carga directo
  * de Instagram. Portrait 9:16, pensado para la presentación de marca.
