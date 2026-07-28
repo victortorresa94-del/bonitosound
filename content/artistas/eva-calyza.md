@@ -1,7 +1,7 @@
 ---
 name: "Eva Calyza"
 genre: "Pop mental / Electrónica y folclore"
-tier: "booking"
+tier: "distribucion"
 spotifyArtistId: "6rUgNfaBgUk0WCQbNafgKh"
 instagram: "https://www.instagram.com/evacalyza/"
 image: "/img/artistas/eva-calyza.jpg"
@@ -17,6 +17,4 @@ influences: ["pop", "electrónica", "folclore andaluz"]
 
 Eva Calyza estudió flauta travesera y un máster en gestión cultural, y con esa base montó lo que ella llama "pop mental": melodías pop y voz por delante, electrónica y folclore andaluz por debajo. En 2025 publicó su primer álbum, MARCA DIVINA, producido con Bonito Sound — diez canciones sobre dolor, fuerza y reconstrucción.
 
-A Eva la gestiona Manu personalmente. Eso ya te dice algo: aquí no hay artistas de primera y de segunda, hay gente a la que llevamos a mano.
-
-Está en booking, management y en el catálogo de distribución de Bonito. Para fechas y disponibilidad, escríbenos a booking. Te contestamos nosotros, no un formulario.
+MARCA DIVINA salió con nosotros y su gira la llevamos en 2024 y 2025. Hoy Eva sigue en el catálogo de Bonito, aunque ya no la llevamos en booking ni en management.

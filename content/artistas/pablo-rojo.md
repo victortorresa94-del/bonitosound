@@ -1,7 +1,7 @@
 ---
 name: "Pablo Rojo"
 genre: "Funk / Jazz"
-tier: "booking"
+tier: "distribucion"
 spotifyArtistId: "3oEmG4GjzHpKvCYYMvad67"
 instagram: "https://www.instagram.com/pablorojomusic"
 image: "/img/artistas/pablo-rojo.jpg"

@@ -1,7 +1,7 @@
 ---
 name: "Fabián D. Cuesta"
 genre: "Indie pop, pop, rock y cantautor"
-tier: "booking"
+tier: "distribucion"
 spotifyArtistId: "3NOAlABNpDcz4WxKSiBTh7"
 instagram: "https://www.instagram.com/fabiandcuesta/"
 youtubeIds: ["sWhxJAGcbGo", "Q2Pnaaa8HfA", "RS0NsdwXJ_U"]

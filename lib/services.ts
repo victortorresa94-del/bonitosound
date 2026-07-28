@@ -57,7 +57,7 @@ export const services: Record<string, Service> = {
     ctaSubject: "Management",
     aspects: [
       { name: "Estrategia con criterio", desc: "Qué sale, cuándo y por qué. Decidimos el siguiente paso con argumentos, no con prisas." },
-      { name: "A mano", desc: "Aquí no hay artistas de primera y de segunda. A Eva Calyza la lleva Manu personalmente; así trabajamos con todos." },
+      { name: "A mano", desc: "Aquí no hay artistas de primera y de segunda: a cada artista lo lleva una persona con nombre, que coge el teléfono." },
       { name: "Un solo interlocutor", desc: "Booking, sello y distribución hablan entre sí porque están en la misma casa. El artista no va rebotando." },
     ],
     faq: [
