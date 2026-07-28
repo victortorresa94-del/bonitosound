@@ -39,7 +39,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   return {
     title: e.title,
     description: e.context,
-    alternates: { canonical: `${site.url}/eventos/${e.slug}` },
+    alternates: { canonical: `${site.url}/experiencias/${e.slug}` },
   };
 }
 
@@ -283,7 +283,7 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
         <Section className="bg-bg-primary">
           <div className="mb-10 flex items-end justify-between gap-6">
             <p className="eyebrow">{MORE_TITLE[e.type] ?? "Más eventos"}</p>
-            <Link href="/eventos" className="link-underline text-sm text-text-secondary">Ver todos →</Link>
+            <Link href="/experiencias" className="link-underline text-sm text-text-secondary">Ver todos →</Link>
           </div>
           <StaggerGroup stagger={0.08} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((o) => (

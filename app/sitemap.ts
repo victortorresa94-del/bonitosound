@@ -7,8 +7,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/servicios",
-    "/eventos",
-    "/eventos/marcas",
+    "/experiencias",
+    "/experiencias/marcas",
     "/giras",
     "/records",
     "/booking",
@@ -43,7 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${site.url}${r}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: r === "" ? 1 : r === "/eventos/marcas" ? 0.9 : 0.7,
+    priority: r === "" ? 1 : r === "/experiencias/marcas" ? 0.9 : 0.7,
   }));
 
   const artists = getArtists().map((a) => ({
@@ -54,7 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const eventos = getEventos().map((e) => ({
-    url: `${site.url}/eventos/${e.slug}`,
+    url: `${site.url}/experiencias/${e.slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
     priority: 0.6,

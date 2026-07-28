@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: "Agencia de eventos musicales para marcas",
   description:
     "Productora de eventos corporativos con música y activaciones de marca en España. Del brief al titular en 6 semanas. Ballantine's, Pernod Ricard, Pepsico, Absolut.",
-  alternates: { canonical: `${site.url}/eventos/marcas` },
+  alternates: { canonical: `${site.url}/experiencias/marcas` },
 };
 
 const services = [
@@ -178,7 +178,7 @@ export default function EventosMarcas() {
             return (
               <Link
                 key={c.slug}
-                href={`/eventos/${c.slug}`}
+                href={`/experiencias/${c.slug}`}
                 className="card group overflow-hidden p-0"
               >
                 <div className="relative aspect-[4/3] overflow-hidden border-b border-subtle bg-bg-primary">

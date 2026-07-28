@@ -50,7 +50,7 @@ function resolveCard(e: Evento, fallbackIndex: number): BentoCardData {
 
   return {
     slug: e.slug,
-    href: `/eventos/${e.slug}`,
+    href: `/experiencias/${e.slug}`,
     typeLabel: TYPE_LABEL[e.type],
     label,
     cover: cover ?? null,

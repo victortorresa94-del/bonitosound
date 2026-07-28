@@ -46,16 +46,16 @@
 
 ## 3. EXPERIENCIAS  *(antes "Eventos" — marcas · teatro · mapping)*
 
-- [ ] `[B]` 🎨 **Vídeo resumen al inicio**: editar con **Aura MCP** un **mix de ~30 s** de todos los eventos, con música guay, que resuma "qué son nuestras experiencias". (petición directa de Víctor)
-- [ ] `[B]` ✅ Texto bajo "Hacemos que las marcas suenen":
-  > *"Creamos y producimos experiencias de marca donde la música, las artes en vivo y el entretenimiento se convierten en herramientas para conectar con el público. Participamos en todo el proceso creativo o ejecutamos proyectos ya diseñados, coordinando artistas, producción y equipos técnicos para hacer realidad cada evento. Porque una marca no solo debe verse. Debe vivirse."*
-- [ ] `[B]` ✅ **Quitar todo lo de "giras y directos que montamos"** (se va a /giras).
-- [ ] `[B]` ✅ Bloque **Teatro**: Dumbo (verano 2023, 8), El Rey León (verano 2022, 8), Pinocho (invierno 2022, 3).
-- [ ] `[B]` ✅/⏳ Bloque **Mapping / espectáculos visuales** (decorar fachadas para empresas): texto listo; **vídeos/fotos = Dani**.
-  > *"Especialistas en producción de mapping, instalaciones de luz y experiencias visuales para eventos y marcas. Transformamos fachadas, espacios urbanos y escenarios en espectáculos únicos mediante tecnología, creatividad e innovación."*
-- [ ] `[B]` ✅ **CAMBIO estructural: una página por MARCA/empresa** (hoy hay una por evento en `app/eventos/[slug]`). Dentro de cada marca: nº de eventos hechos + vídeo/imagen. Debajo del vídeo resumen, **listado de marcas** para entrar y profundizar.
-- [ ] `[B]` ✅ CTA "¿Quieres crear un evento? Hablemos".
-- [ ] `[D]` ⏳ Más marcas (hoy solo bebidas), **agencias musicales y empresas**, nombres + vídeos.
+- [x] `[B]` ✅ **Ruta renombrada** `/eventos` → **`/experiencias`** (+ redirects 301 de `/eventos` y `/eventos/:path*`). Hero: "EVENTOS" → **"EXPERIENCIAS"**.
+- [x] `[B]` ✅ Texto bajo "Hacemos que las marcas suenen" (+ *"Porque una marca no solo debe verse. Debe vivirse."*).
+- [x] `[B]` ✅ **Fuera las giras y directos de artista**: Experiencias filtra a `type === "marca"` (12 marcas). Las 3 giras y 2 directos ya no salen aquí.
+- [x] `[B]` ✅ Bloque **Teatro**: Dumbo (verano 2023, 8), El Rey León (verano 2022, 8), Pinocho (invierno 2022, 3).
+- [x] `[B]` ✅ Bloque **Mapping / espectáculos visuales**: texto puesto + fallback navy con carácter. ⏳ **fotos/vídeos de mapping = Dani** (se enchufan en `public/img/experiencias/mapping.*`).
+- [x] `[B]` ✅ CTA de cierre → **"¿Quieres crear un evento?"** (antes "¿Marca o gira?").
+- [ ] `[B]` 🎨 **Vídeo resumen al inicio** (~30 s, mix de eventos): **BLOQUEADO** por el montaje de Aura (ver §13). El hueco está listo para enchufarlo.
+- [ ] `[B]` **CAMBIO estructural pendiente: una página por MARCA** (hoy sigue habiendo una por evento en `app/experiencias/[slug]`). Dentro de cada marca: nº de eventos + vídeo/imagen. Necesita decidir agrupación (Corona tiene varios eventos, etc.).
+- [ ] `[B]` **Mover las páginas de gira/directo**: `/experiencias/albert-pla`, `/anne-lukin`, `/gira-1016`, `/natura`, `/dani-directo` siguen generándose bajo Experiencias aunque ya no se enlacen. Deben pasar a **/giras/[slug]** (va con §4).
+- [ ] `[D]` ⏳ Más marcas (hoy solo bebidas), **agencias musicales y empresas** — nombres.
 
 ---
 
@@ -213,6 +213,25 @@ Etiquetas: **records** (no "sello"), editorial, distribución, marketing, bookin
 - ⛔ **Bloqueo para editar NUESTRO material**: los clips de eventos se sirven locales (`/video/eventos/*.mp4`) y el R2 `pub-…r2.dev` da **403** → fal no puede descargarlos. **Necesita una URL pública** (deploy público sin protección, o bucket público / que Aura permita subir el clip local). → decisión de Víctor.
 - ⚠️ **Lyria (música)** dio falso positivo de moderación con un prompt inocuo → reintentar con otro prompt/modelo.
 - Los assets que genera Aura quedan en **URLs firebase públicas** → la web desplegada SÍ podría cargarlas directamente.
+
+### Diagnóstico final del montaje de vídeo (28/07)
+- ❌ Mi 403 inicial era **el proxy del sandbox**, no la web (`connect_rejected — policy denial`). Los vídeos **SÍ son públicos**.
+- Evidencia: con la URL de R2 fal dice `422 Could not download`; con la de Vercel dice `500 Internal server error` → **fal sí descarga los ficheros**, lo que falla es el **compose (ffmpeg)**.
+- El proyecto Vercel **no tiene dominio propio** conectado (solo `bonitosound.vercel.app` + alias de equipo) → `bonitosound.com` todavía no es esta web.
+
+### Backlog para la app de Aura (por prioridad)
+1. **Ingesta de material propio** (el gap gordo): `aura_import_media({url})` y `aura_request_upload/finalize` (como Higgsfield `media_upload`/`media_import_url` o Magnific `creations_request_upload`). Así se puede editar material del usuario sin depender de dónde viva.
+2. **Normalizar clips antes de concatenar** (mismo codec/fps/resolución/pix_fmt): `ffmpeg concat` exige uniformidad; sin eso, montar clips heterogéneos revienta con 500.
+3. **Preflight sin coste**: `dryRun:true` o `aura_check_media({urls})` (HEAD + content-type). Hoy cada fallo cuesta ~0,05€.
+4. **Errores accionables** en `assemble_video`: el hint actual habla de *keyframes* y *regenerar el modelo* (eso es de generación, no de montaje) → despista.
+5. **`textTracks`** (cartelas/subtítulos quemados): hoy confirmado roto (422). Necesario para un reel de marca.
+6. **Transiciones y trim reales**: `crossfade` y `trimStartSec` marcados experimentales/no verificados.
+7. **Música con fallback**: Lyria dio falso positivo de moderación con un prompt inocuo → reintento automático con ElevenLabs Music o parámetro `musicModel`.
+8. (menor) **Mezcla de audio**: sin control de volumen/ducking música vs audio de clips.
+
+### Backlog para la web (no bloqueante)
+- **Host de assets estable** (R2 bien configurado o Vercel Blob): hoy hay ~48 MB de vídeo dentro de git y las URLs dependen del deploy.
+- **Conectar bonitosound.com** al proyecto de Vercel cuando se publique.
 
 ---
 

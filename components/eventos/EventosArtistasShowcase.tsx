@@ -99,7 +99,7 @@ export function EventosArtistasShowcase({ eventos }: { eventos: Evento[] }) {
           {cluster.map((e, i) => (
             <Link
               key={e.slug}
-              href={`/eventos/${e.slug}`}
+              href={`/experiencias/${e.slug}`}
               className={`group relative block transition-transform duration-500 hover:z-10 hover:!rotate-0 hover:scale-[1.02] ${TILT[i % TILT.length]}`}
             >
               <div
