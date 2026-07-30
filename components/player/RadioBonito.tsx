@@ -34,28 +34,24 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
   const vivo = playing && !tuning;
 
   return (
+    /* Sin tarjeta: la radio va suelta sobre la página, como los demás dibujos
+       de la casa. Más estrecha en móvil, donde antes se comía media pantalla. */
     <div
-      className="w-[14.5rem] rounded-2xl border p-2.5 shadow-[0_18px_50px_rgba(20,40,60,0.28)]"
-      style={{ backgroundColor: CREMA, borderColor: "rgba(20,40,60,0.12)" }}
+      className="relative w-[10.5rem] sm:w-[13rem]"
       role="region"
       aria-label="Radio Bonito"
     >
-      {/* Cabecera */}
-      <div className="mb-1.5 flex items-center justify-between px-1">
-        <p className="font-mono text-[0.58rem] uppercase tracking-[0.22em]" style={{ color: "rgba(20,40,60,0.45)" }}>
-          Radio Bonito
-        </p>
-        <button
-          onClick={onClose}
-          aria-label="Cerrar la radio"
-          className="grid h-5 w-5 place-items-center rounded-full transition-opacity hover:opacity-60"
-          style={{ color: NAVY }}
-        >
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" aria-hidden>
-            <path d="M5 5l14 14M19 5L5 19" strokeLinecap="round" />
-          </svg>
-        </button>
-      </div>
+      {/* Cerrar: pegado a la esquina de la propia radio, sin cabecera. */}
+      <button
+        onClick={onClose}
+        aria-label="Cerrar la radio"
+        className="absolute -top-1 right-0 z-10 grid h-6 w-6 place-items-center rounded-full transition-opacity hover:opacity-60"
+        style={{ color: NAVY, backgroundColor: "rgba(251,250,246,0.9)" }}
+      >
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" aria-hidden>
+          <path d="M5 5l14 14M19 5L5 19" strokeLinecap="round" />
+        </svg>
+      </button>
 
       {/* ── La radio dibujada ── */}
       <svg viewBox="0 0 400 290" className="w-full" role="img" aria-label="Radio de válvulas">
@@ -151,18 +147,18 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
       </svg>
 
       {/* ── Qué suena ── */}
-      <div className="mt-1 flex min-h-[2.5rem] items-center px-1">
+      <div className="mt-0.5 flex min-h-[2.1rem] items-center">
         {tuning ? (
-          <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em]" style={{ color: "rgba(20,40,60,0.5)" }}>
+          <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em]" style={{ color: "rgba(20,40,60,0.5)" }}>
             sintonizando…
           </p>
         ) : (
           <div className="min-w-0">
-            <p className="truncate font-round text-sm font-bold leading-tight" style={{ color: NAVY }}>
+            <p className="truncate font-round text-xs font-bold leading-tight sm:text-sm" style={{ color: NAVY }}>
               {current?.title}
             </p>
             {current?.artist && (
-              <p className="truncate text-xs" style={{ color: "rgba(20,40,60,0.55)" }}>
+              <p className="truncate text-[0.65rem] sm:text-xs" style={{ color: "rgba(20,40,60,0.55)" }}>
                 {current.artist}
               </p>
             )}
