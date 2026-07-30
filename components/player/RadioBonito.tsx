@@ -35,7 +35,7 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
 
   return (
     <div
-      className="w-[19rem] rounded-2xl border p-3 shadow-[0_18px_50px_rgba(20,40,60,0.28)]"
+      className="w-[14.5rem] rounded-2xl border p-2.5 shadow-[0_18px_50px_rgba(20,40,60,0.28)]"
       style={{ backgroundColor: CREMA, borderColor: "rgba(20,40,60,0.12)" }}
       role="region"
       aria-label="Radio Bonito"

@@ -2,60 +2,44 @@ import fs from "node:fs";
 import path from "node:path";
 
 export type Track = {
-  src: string;
-  /** Título del tema, sacado del nombre del fichero. */
+  /** Título del tema. */
   title: string;
-  /** Artista, si el nombre del fichero lo trae. */
+  /** Artista. */
   artist?: string;
+  /** Segundo de la sesión en el que entra este tema. */
+  at: number;
 };
 
-/** "03-dulze-que-fantasia.mp3" → { artist: "Dulze", title: "Que Fantasia" } */
-function parseName(file: string): { title: string; artist?: string } {
-  const base = file.replace(/\.(mp3|m4a)$/i, "");
-  // El prefijo numérico solo sirve para ordenar; no se muestra.
-  const sinOrden = base.replace(/^\d+[-_\s]+/, "");
-
-  const capitalizar = (s: string) =>
-    s
-      .replace(/[-_]+/g, " ")
-      .split(/\s+/)
-      .filter(Boolean)
-      .map((w) => (w.length > 2 ? w[0].toUpperCase() + w.slice(1) : w))
-      .join(" ");
-
-  // El separador oficial es el DOBLE guion: los nombres de artista llevan
-  // guiones simples dentro ("kenai-white"), así que partir por el primero
-  // dejaba a Kenai sin apellido.
-  if (sinOrden.includes("--")) {
-    const [artista, ...resto] = sinOrden.split("--");
-    return { artist: capitalizar(artista), title: capitalizar(resto.join("--")) };
-  }
-
-  // Ficheros subidos a mano sin el doble guion: primer tramo = artista.
-  const partes = sinOrden.split(/[-_]/).filter(Boolean);
-  if (partes.length >= 2) {
-    const [artista, ...resto] = partes;
-    return { artist: capitalizar(artista), title: capitalizar(resto.join(" ")) };
-  }
-  return { title: capitalizar(sinOrden || base) };
-}
+export type Radio = {
+  /** El mp3 continuo de la sesión. */
+  src: string;
+  /** Duración total en segundos. */
+  duration: number;
+  /** Los temas, con el momento en que entra cada uno. */
+  tracks: Track[];
+};
 
 /**
- * Playlist del reproductor global. Coge los audios que se dejen en
- * /public/audio/playlist/ (mp3 o m4a), por orden alfabético — de ahí que
- * convenga nombrarlos `NN-artista-titulo.mp3`: el número ordena y el resto se
- * muestra en la radio.
+ * La Radio Bonito es UNA sesión continua mezclada tipo DJ, no una lista de
+ * ficheros sueltos: los temas se solapan con crossfade, así que no se puede
+ * trocear en mp3 independientes sin perder la mezcla. La genera
+ * `scripts/radio-mix.mjs` a partir de los másters, y deja el mp3 junto a un
+ * JSON con el minutaje de cada tema.
  *
- * Plug-and-play: sube un tema CON LICENCIA ahí y el reproductor aparece y suena;
- * con dos o más se activan el "siguiente" y el modo radio. Si no hay ninguno, no
- * se pinta nada. Nada hardcodeado: la canción sin derechos se retiró.
+ * Si no existe el mp3, devuelve null y no se pinta ninguna radio.
  */
-export function getPlaylist(): Track[] {
-  const dir = path.join(process.cwd(), "public", "audio", "playlist");
-  if (!fs.existsSync(dir)) return [];
-  return fs
-    .readdirSync(dir)
-    .filter((f) => /\.(mp3|m4a)$/i.test(f))
-    .sort()
-    .map((f) => ({ src: `/audio/playlist/${f}`, ...parseName(f) }));
+export function getRadio(): Radio | null {
+  const dir = path.join(process.cwd(), "public", "audio");
+  const mp3 = path.join(dir, "radio-bonito.mp3");
+  const meta = path.join(dir, "radio-bonito.json");
+  if (!fs.existsSync(mp3) || !fs.existsSync(meta)) return null;
+
+  try {
+    const { duration, tracks } = JSON.parse(fs.readFileSync(meta, "utf8"));
+    if (!Array.isArray(tracks) || !tracks.length) return null;
+    return { src: "/audio/radio-bonito.mp3", duration, tracks };
+  } catch {
+    // Un JSON corrupto no debe tumbar la web entera: sin radio y a seguir.
+    return null;
+  }
 }

@@ -11,7 +11,7 @@ import {
 } from "react";
 import { usePathname } from "next/navigation";
 import { site } from "@/lib/site";
-import type { Track } from "@/lib/audio";
+import type { Radio, Track } from "@/lib/audio";
 import { playTuningNoise } from "@/lib/radio-static";
 import { FloatingPlayer } from "./FloatingPlayer";
 
@@ -19,24 +19,25 @@ import { FloatingPlayer } from "./FloatingPlayer";
  * Player GLOBAL de la web. Vive en el layout raíz (que no se desmonta al
  * navegar), así la música no se corta al cambiar de página.
  *
- * Fuente: una playlist PROPIA (audios en /public/audio). Empieza por la canción
- * de Bonito; "siguiente" avanza por el resto (cuando haya). Nada de Spotify: su
- * embed obliga a mostrar el banner de marca.
+ * Fuente: la Radio Bonito, UNA sesión continua mezclada tipo DJ (los temas se
+ * solapan con crossfade). Por eso no hay "siguiente fichero": cambiar de
+ * emisora es SALTAR EN EL TIEMPO dentro del mismo mp3, y el tema que suena se
+ * deduce del `currentTime`. Así la mezcla se oye fluida y no cortada.
  *
  * Regla: cualquier vídeo CON sonido u otro audio (p. ej. "Escuchar a X" en una
  * ficha) pausa la música, para que nunca suenen dos cosas a la vez.
  */
 
-/** Cuánto suena cada tema en modo radio: 10 s, como pidió Víctor. */
-const RADIO_SEGMENT_MS = 10_000;
+/** La radio entra suave: es fondo, no protagonista. */
+const VOLUMEN = 0.55;
 
 type PlayerCtx = {
   playing: boolean;
   everStarted: boolean;
   isHome: boolean;
-  /** Hay al menos un tema (con licencia) en la playlist. Si no, no hay player. */
+  /** Hay radio disponible. Si no, no se pinta reproductor. */
   hasTracks: boolean;
-  /** "siguiente" disponible: fuera del home, con música arrancada y ≥2 temas. */
+  /** "siguiente" disponible: con música arrancada y ≥2 temas. */
   canNext: boolean;
   /** Playlist de Bonito en Spotify (se abre en pestaña nueva). */
   spotifyUrl: string;
@@ -65,17 +66,16 @@ export function usePlayer() {
 
 export function PlayerProvider({
   children,
-  playlist,
+  radio,
 }: {
   children: ReactNode;
-  playlist: Track[];
+  radio: Radio | null;
 }) {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const tracks = radio?.tracks ?? [];
 
   const audioRef = useRef<HTMLAudioElement>(null);
-  // El índice es ESTADO (antes era un ref): la radio necesita repintarse al
-  // cambiar de tema para mover la aguja y escribir quién suena.
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [everStarted, setEverStarted] = useState(false);
@@ -97,27 +97,31 @@ export function PlayerProvider({
     }
   }, []);
 
-  /** Cambia de emisora con su ráfaga de sintonía delante. */
+  /**
+   * Cambiar de emisora = saltar al segundo donde entra ese tema. Va precedido
+   * de la ráfaga de sintonía, pero el audio NO se para del todo: se baja el
+   * volumen y se vuelve a subir, para que el salto también suene a mezcla.
+   */
   const goTo = useCallback(
     (i: number) => {
       const a = audioRef.current;
-      if (!a || playlist.length < 2) return;
-      const destino = ((i % playlist.length) + playlist.length) % playlist.length;
+      if (!a || tracks.length < 2) return;
+      const destino = ((i % tracks.length) + tracks.length) % tracks.length;
 
       setTuning(true);
       const ms = playTuningNoise();
-      a.pause();
+      a.volume = 0.12;
 
       window.setTimeout(() => {
-        setIndex(destino);
-        a.src = playlist[destino].src;
-        a.load();
+        a.currentTime = tracks[destino].at;
+        a.volume = VOLUMEN;
         a.play().catch(() => {});
+        setIndex(destino);
         setEverStarted(true);
         setTuning(false);
       }, ms);
     },
-    [playlist],
+    [tracks],
   );
 
   const next = useCallback(() => goTo(index + 1), [goTo, index]);
@@ -126,6 +130,7 @@ export function PlayerProvider({
   useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
+    a.volume = VOLUMEN;
     const onPlay = () => setPlaying(true);
     const onPause = () => setPlaying(false);
     a.addEventListener("play", onPlay);
@@ -136,25 +141,25 @@ export function PlayerProvider({
     };
   }, []);
 
-  // Con varios temas, al acabar uno salta al siguiente (con uno solo, loop).
+  /**
+   * El tema que suena se DEDUCE del tiempo, no de un temporizador: como es una
+   * sesión continua, basta con mirar por qué segundo va. Así la aguja del dial
+   * y el nombre siempre concuerdan con lo que de verdad se está oyendo, aunque
+   * el usuario haya saltado a mano.
+   */
   useEffect(() => {
     const a = audioRef.current;
-    if (!a) return;
-    const onEnded = () => {
-      if (playlist.length > 1) next();
+    if (!a || tracks.length < 2) return;
+    const onTime = () => {
+      if (tuning) return;
+      const t = a.currentTime;
+      let i = 0;
+      for (let n = 0; n < tracks.length; n++) if (t >= tracks[n].at) i = n;
+      setIndex((prev) => (prev === i ? prev : i));
     };
-    a.addEventListener("ended", onEnded);
-    return () => a.removeEventListener("ended", onEnded);
-  }, [next, playlist.length]);
-
-  // MODO RADIO: cada tema suena 10 s y salta solo al siguiente. Es lo que
-  // convierte la playlist en una radio. El contador solo corre mientras suena
-  // de verdad: si se pausa o está sintonizando, se para.
-  useEffect(() => {
-    if (!playing || tuning || playlist.length < 2) return;
-    const t = window.setTimeout(next, RADIO_SEGMENT_MS);
-    return () => window.clearTimeout(t);
-  }, [playing, tuning, index, next, playlist.length]);
+    a.addEventListener("timeupdate", onTime);
+    return () => a.removeEventListener("timeupdate", onTime);
+  }, [tracks, tuning]);
 
   // Cualquier otro media CON sonido pausa la música (los vídeos mudos de la web
   // no la tocan). 'play' no burbujea → captura.
@@ -172,8 +177,8 @@ export function PlayerProvider({
     return () => document.removeEventListener("play", onMediaPlay, true);
   }, []);
 
-  const hasTracks = playlist.length > 0;
-  const canNext = everStarted && !isHome && playlist.length > 1;
+  const hasTracks = tracks.length > 0;
+  const canNext = everStarted && tracks.length > 1;
 
   return (
     <Ctx.Provider
@@ -184,9 +189,9 @@ export function PlayerProvider({
         hasTracks,
         canNext,
         spotifyUrl: site.external.spotifyBonitoPlaylist,
-        current: playlist[index] ?? null,
+        current: tracks[index] ?? null,
         index,
-        total: playlist.length,
+        total: tracks.length,
         tuning,
         start,
         toggle,
@@ -196,11 +201,11 @@ export function PlayerProvider({
     >
       {children}
 
-      {/* Reproductor solo si hay algún tema (con licencia) en la playlist:
-          sin canción no se pinta nada, para no dejar un botón muerto. */}
-      {hasTracks && (
+      {/* Sin sesión generada no se pinta nada, para no dejar un botón muerto.
+          La sesión va en bucle: al acabar vuelve a empezar sola. */}
+      {radio && (
         <>
-          <audio ref={audioRef} src={playlist[0].src} loop={playlist.length < 2} preload="none" />
+          <audio ref={audioRef} src={radio.src} loop preload="none" />
           <FloatingPlayer />
         </>
       )}

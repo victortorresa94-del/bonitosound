@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 import { JsonLd } from "@/components/ui";
 import { MotionProvider, PageTransitionShell } from "@/components/motion";
 import { PlayerProvider } from "@/components/player/PlayerProvider";
-import { getPlaylist } from "@/lib/audio";
+import { getRadio } from "@/lib/audio";
 import { site, memberships, team } from "@/lib/site";
 
 // Display: Zilla Slab — slab serif tipo Clarendon (la referencia de Hello Monday
@@ -106,7 +106,7 @@ export default function RootLayout({
       <body style={{ ["--font-body" as string]: "var(--font-geist-sans)" }}>
         <JsonLd data={orgLd} />
         <MotionProvider>
-          <PlayerProvider playlist={getPlaylist()}>
+          <PlayerProvider radio={getRadio()}>
             <Nav />
             <PageTransitionShell>
               <main>{children}</main>

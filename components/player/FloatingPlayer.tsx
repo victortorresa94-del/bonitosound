@@ -62,7 +62,9 @@ function SpotifyIcon() {
 export function FloatingPlayer() {
   const { playing, everStarted, isHome, canNext, spotifyUrl, total, start, toggle, next } = usePlayer();
   const [revealed, setRevealed] = useState(false);
-  const [radioOpen, setRadioOpen] = useState(false);
+  // La radio arranca ABIERTA: es una pieza de la web, no un widget escondido
+  // detrás de un botón. Se puede cerrar y volver a abrir con el iconito.
+  const [radioOpen, setRadioOpen] = useState(true);
   const wrapRef = useRef<HTMLDivElement>(null);
   const shownOnce = useRef(false);
 
