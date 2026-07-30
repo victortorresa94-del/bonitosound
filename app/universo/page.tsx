@@ -51,9 +51,11 @@ const BLOCKS = [
     logo: findAsset("marca", "jaleo-sound"),
     logoH: 44,
     ratio: 1000 / 561,
-    href: "/jaleo-sound",
+    // Va a la web oficial del festival, no a la página interna: es un proyecto
+    // con vida propia y su sitio está más actualizado que cualquier resumen.
+    href: "https://jaleosound.com",
     linkLabel: "El festival",
-    external: false,
+    external: true,
   },
 ];
 

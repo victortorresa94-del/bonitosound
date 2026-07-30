@@ -38,9 +38,20 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
   const meta = giras.find((x) => x.slug === params.slug);
   const cover = findAsset("giras", g.slug);
 
+  // El mp4 sube a la polaroid de la cabecera: es la mejor prueba de una gira y
+  // enterrado a media página no hacía nada. YouTube NO sirve ahí (no se puede
+  // reproducir mudo y en bucle como fondo), así que ese caso sigue abajo.
+  // OJO: el vídeo puede venir del markdown (g.video) O de lib/giras.ts (meta.video,
+  // que es donde está el de Rumbagenarios). Mirar solo uno deja la polaroid vacía.
+  // Solo un mp4 servido por nosotros vale como fondo de la polaroid. El campo
+  // `video` de lib/giras.ts admite también un id de YouTube (ver su comentario),
+  // que ahí no se puede reproducir mudo en bucle: ese caso se queda abajo.
+  const candidato = g.video ?? meta?.video ?? null;
+  const heroVideo = candidato?.startsWith("/") ? candidato : null;
+
   const facts = [
     ...(meta?.years || g.year ? [{ k: "Años", v: meta?.years ?? g.year }] : []),
-    ...(meta?.shows ? [{ k: "Conciertos", v: meta.shows }] : []),
+    // "Conciertos" no se repite aquí: va escrito a mano bajo el titular.
     ...(g.location ? [{ k: "Dónde", v: g.location }] : []),
   ];
 
@@ -75,23 +86,57 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
             </Link>
           </RevealOnScroll>
 
-          <div className="grid items-center gap-10 md:grid-cols-[1.1fr_0.9fr] md:gap-14">
-            <div>
-              <RevealOnScroll as="p" className="eyebrow mb-4">
-                {meta?.artist ?? g.artist}
+          <div className="relative grid items-center gap-10 md:grid-cols-[1.1fr_0.9fr] md:gap-14">
+            {/* Año gigante de marca de agua, como en la ruta de /giras: ancla la
+                gira en el tiempo sin gastar una línea de texto. Recortado por el
+                borde izquierdo a propósito. */}
+            {(meta?.year ?? g.year) && (
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -left-4 top-8 select-none font-round text-[9rem] font-bold leading-none tracking-tight md:-left-8 md:top-6 md:text-[15rem]"
+                style={{ color: NAVY, opacity: 0.045 }}
+              >
+                {meta?.year ?? g.year}
+              </span>
+            )}
+
+            <div className="relative">
+              {/* Nombre del artista en outline, el gesto de la cabecera de /giras. */}
+              <RevealOnScroll as="p">
+                <span
+                  className="display block text-[clamp(1.6rem,4.4vw,3rem)] font-bold uppercase leading-[1] tracking-tight"
+                  style={{ color: "transparent", WebkitTextStroke: `1.5px ${NAVY}` }}
+                >
+                  {meta?.artist ?? g.artist}
+                </span>
               </RevealOnScroll>
+
               <SplitTextReveal
                 as="h1"
                 split="lines"
-                className="display text-[clamp(2.2rem,5.5vw,4rem)] leading-[1.04]"
+                className="display mt-1 text-[clamp(2.4rem,6.5vw,4.6rem)] leading-[1.02] text-[#14283C]"
               >
                 {meta?.tour ?? g.title}
               </SplitTextReveal>
+
+              {/* El nº de conciertos, escrito a mano sobre el impreso. Es dato
+                  real de lib/giras.ts, no un adorno: por eso no se repite abajo. */}
+              {meta?.shows && (
+                <RevealOnScroll as="p" delay={0.2} className="mt-2">
+                  <span
+                    className="inline-block font-hand text-[clamp(1.6rem,3.4vw,2.4rem)] font-bold leading-none"
+                    style={{ color: CYAN, transform: "rotate(-2.2deg)" }}
+                  >
+                    {meta.shows}
+                  </span>
+                </RevealOnScroll>
+              )}
+
               {g.context && (
                 <RevealOnScroll
                   as="p"
                   delay={0.15}
-                  className="mt-6 max-w-xl text-lg leading-relaxed text-text-secondary"
+                  className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary"
                 >
                   {g.context}
                 </RevealOnScroll>
@@ -113,27 +158,50 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
               )}
             </div>
 
-            {/* Foto de la gira, en polaroid como en la ruta. */}
-            {cover && (
+            {/* Polaroid: el VÍDEO de la gira si lo hay (es la mejor prueba que
+                tenemos), y si no la foto. La foto hace de póster mientras carga.
+                Mudo y en bucle: así no dispara el listener de PlayerProvider
+                que pausa la radio cuando suena un vídeo. */}
+            {(heroVideo || cover) && (
               <RevealOnScroll delay={0.12}>
                 <figure
-                  className="relative mx-auto max-w-[24rem] bg-white p-3 pb-4 shadow-[0_10px_30px_rgba(20,40,60,0.13)]"
+                  className="relative mx-auto max-w-[26rem] bg-white p-3 pb-4 shadow-[0_10px_30px_rgba(20,40,60,0.13)]"
                   style={{ transform: "rotate(1.6deg)" }}
                 >
+                  {/* Toda la transformación en el style: el `rotate-[]` de
+                      Tailwind pisaba al `-translate-x-1/2` y la cinta salía
+                      descentrada a la derecha. */}
                   <span
                     aria-hidden
-                    className="absolute left-1/2 top-0 h-6 w-20 -translate-x-1/2 -translate-y-1/2 rotate-[-4deg] rounded-[2px]"
-                    style={{ backgroundColor: "rgba(214,199,166,0.75)" }}
+                    className="absolute left-1/2 top-0 h-6 w-20 rounded-[2px]"
+                    style={{
+                      backgroundColor: "rgba(214,199,166,0.75)",
+                      transform: "translate(-50%, -50%) rotate(-4deg)",
+                    }}
                   />
                   <div className="relative aspect-[4/3] overflow-hidden" style={{ backgroundColor: NAVY }}>
-                    <Image
-                      src={cover}
-                      alt={`${g.artist} — ${meta?.tour ?? g.title}`}
-                      fill
-                      sizes="(max-width: 768px) 90vw, 380px"
-                      className="object-cover"
-                      priority
-                    />
+                    {heroVideo ? (
+                      <video
+                        className="h-full w-full object-cover"
+                        src={heroVideo}
+                        poster={cover ?? undefined}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="auto"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <Image
+                        src={cover!}
+                        alt={`${g.artist} — ${meta?.tour ?? g.title}`}
+                        fill
+                        sizes="(max-width: 768px) 90vw, 410px"
+                        className="object-cover"
+                        priority
+                      />
+                    )}
                   </div>
                   {meta?.credit && (
                     <figcaption className="pt-2 text-center text-[0.6rem] text-text-muted/70">
@@ -183,16 +251,13 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
         </div>
       </Section>
 
-      {/* VÍDEO */}
-      {(g.video || g.youtubeId) && (
+      {/* VÍDEO — solo YouTube. El mp4 ya se ve arriba, en la polaroid, y
+          enseñarlo dos veces en la misma página no aporta nada. */}
+      {g.youtubeId && (
         <Section className="bg-bg-primary">
           <RevealOnScroll as="p" className="eyebrow mb-6">El vídeo lo cuenta mejor</RevealOnScroll>
           <RevealOnScroll delay={0.08} className="mx-auto max-w-3xl">
-            {g.youtubeId ? (
-              <YouTubeEmbed id={g.youtubeId} title={g.title} />
-            ) : (
-              <R2Video src={g.video!} ratio="16 / 9" />
-            )}
+            <YouTubeEmbed id={g.youtubeId} title={g.title} />
           </RevealOnScroll>
         </Section>
       )}

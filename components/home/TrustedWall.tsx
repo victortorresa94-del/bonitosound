@@ -21,9 +21,12 @@ export function TrustedWall() {
 
   // Los destacados de cada categoría, mezclados a propósito (marca + festival +
   // institución + ayuntamiento) para que se vea la variedad de un vistazo.
-  const featured = clientes.flatMap((c) =>
-    resolveLogos(c.dir, c.featured ?? []).map((l) => ({ ...l, cat: c.id })),
-  );
+  // SOLO los que tienen logo de verdad: un chip con el nombre escrito canta
+  // como un hueco y desluce la fila entera. Los que falten aparecen solos en
+  // cuanto se suba su fichero a public/img/<categoría>/.
+  const featured = clientes
+    .flatMap((c) => resolveLogos(c.dir, c.featured ?? []).map((l) => ({ ...l, cat: c.id })))
+    .filter((l) => l.src);
 
   if (total === 0) return null;
 
@@ -67,20 +70,14 @@ export function TrustedWall() {
                 key={`${l.cat}-${l.slug}`}
                 className="flex h-14 items-center justify-center rounded-xl bg-white px-5"
               >
-                {l.src ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={l.src}
-                    alt={l.name}
-                    loading="lazy"
-                    decoding="async"
-                    className="max-h-8 w-auto max-w-[130px] object-contain"
-                  />
-                ) : (
-                  <span className="text-sm font-bold" style={{ color: NAVY }}>
-                    {l.name}
-                  </span>
-                )}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={l.src!}
+                  alt={l.name}
+                  loading="lazy"
+                  decoding="async"
+                  className="max-h-8 w-auto max-w-[130px] object-contain"
+                />
               </span>
             ))}
           </StaggerGroup>

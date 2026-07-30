@@ -3,8 +3,22 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { usePlayer } from "./PlayerProvider";
+import { RadioBonito } from "./RadioBonito";
 
 const NAVY = "#14283C";
+const CYAN = "#16b6d4";
+
+/** Radio vieja en miniatura: cuerpo, dial y antena. */
+function RadioIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden>
+      <path d="M4 10h16v9H4z" strokeLinejoin="round" />
+      <path d="M7 6.5l7-3" strokeLinecap="round" />
+      <path d="M7 13.5h6" strokeLinecap="round" />
+      <circle cx="16.5" cy="14.5" r="1.6" />
+    </svg>
+  );
+}
 
 /** Play blanco clásico. */
 function PlayIcon() {
@@ -46,8 +60,11 @@ function SpotifyIcon() {
 }
 
 export function FloatingPlayer() {
-  const { playing, everStarted, isHome, canNext, spotifyUrl, start, toggle, next } = usePlayer();
+  const { playing, everStarted, isHome, canNext, spotifyUrl, total, start, toggle, next } = usePlayer();
   const [revealed, setRevealed] = useState(false);
+  // La radio arranca ABIERTA: es una pieza de la web, no un widget escondido
+  // detrás de un botón. Se puede cerrar y volver a abrir con el iconito.
+  const [radioOpen, setRadioOpen] = useState(true);
   const wrapRef = useRef<HTMLDivElement>(null);
   const shownOnce = useRef(false);
 
@@ -101,9 +118,34 @@ export function FloatingPlayer() {
   return (
     <div
       ref={wrapRef}
-      className="fixed bottom-5 right-5 z-50 flex items-center gap-2 opacity-0 print:hidden"
+      className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2.5 opacity-0 print:hidden"
       style={{ willChange: "transform, opacity" }}
     >
+      {/* La radio, desplegada sobre los botones. Solo con ≥2 temas: con uno
+          solo no hay emisoras que sintonizar y sobra el dial. */}
+      {radioOpen && total > 1 && <RadioBonito onClose={() => setRadioOpen(false)} />}
+
+      <div className="flex items-center gap-2">
+      {/* Abrir/cerrar la radio. */}
+      {total > 1 && (
+        <button
+          type="button"
+          onClick={() => setRadioOpen((v) => !v)}
+          aria-label={radioOpen ? "Cerrar la radio" : "Abrir la Radio Bonito"}
+          aria-expanded={radioOpen}
+          title="Radio Bonito"
+          className="grid h-9 w-9 place-items-center rounded-full border transition-all duration-200 hover:scale-110"
+          style={{
+            borderColor: radioOpen ? CYAN : "rgba(20,40,60,0.25)",
+            color: radioOpen ? CYAN : NAVY,
+            background: "rgba(251,250,246,0.85)",
+            backdropFilter: "blur(6px)",
+          }}
+        >
+          <RadioIcon />
+        </button>
+      )}
+
       {/* Siguiente tema propio (solo si hay ≥2 en la playlist local). */}
       {canNext && (
         <button
@@ -168,6 +210,7 @@ export function FloatingPlayer() {
           </span>
         )}
       </button>
+      </div>
     </div>
   );
 }
