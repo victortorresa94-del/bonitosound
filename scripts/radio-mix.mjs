@@ -133,6 +133,11 @@ function mejorVentana(pcm, sr, segundos) {
 /** Nombre bonito: fuera códigos internos y coletillas de estudio. */
 function nombreSalida(archivo, i) {
   let s = archivo.replace(/\.wav$/i, "");
+  // GitHub Releases sustituye los espacios del nombre original por puntos al
+  // subir el adjunto ("BS0076 Roky - Master.wav" → "BS0076.Roky.-.Master.wav").
+  // Sin deshacerlo aquí, el split por " - " nunca encuentra el separador
+  // (queda ".-." sin espacios) y el título se pierde.
+  s = s.replace(/\./g, " ");
   s = s.replace(/\bBS\d+\b/gi, "");                        // BS0077
   s = s.replace(/[\[(][^\])]*[\])]/g, "");                 // [MIX], (24_48)
   // Los separadores van ANTES de limpiar coletillas: en "Master_verdeaceituna"
