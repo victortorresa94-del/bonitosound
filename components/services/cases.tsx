@@ -176,7 +176,7 @@ export function DistribucionCase() {
       <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">En todas las plataformas</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,3rem)]">
-          Donde se escucha música, estás.
+          Que suene donde tenga que sonar.
         </SplitTextReveal>
         <StaggerGroup stagger={0.05} className="mt-10 flex flex-wrap gap-3 md:gap-4">
           {distributionPlatforms.map((p) => (

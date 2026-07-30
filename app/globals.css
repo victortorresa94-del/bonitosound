@@ -212,6 +212,26 @@ body {
   50% { transform: scaleY(1); }
 }
 
+/* Radio Bonito: la carcasa bota suave mientras suena, igual que la furgoneta
+   del home bota en su bucle. Movimiento mínimo a propósito — es un guiño, no
+   una animación que distraiga. */
+@keyframes bs-radio-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(-0.5deg); }
+}
+.bs-radio-bob { animation: bs-radio-bob 2.4s ease-in-out infinite; }
+
+/* Ondas que salen de la antena cuando hay señal (o sea, cuando suena). */
+@keyframes bs-radio-signal {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 1; }
+}
+
+/* Sin movimiento para quien lo pida: la radio se queda quieta y legible. */
+@media (prefers-reduced-motion: reduce) {
+  .bs-radio-bob { animation: none; }
+}
+
 /* Marquee en bucle continuo (MarqueeRow). El contenido se renderiza 2×, así
    que -50% deja el segundo set exactamente donde empezaba el primero: bucle
    perfecto, sin hueco, sin depender de medir el DOM. */

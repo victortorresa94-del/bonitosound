@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import fs from "node:fs";
+import path from "node:path";
 import { EventosHero } from "@/components/eventos/EventosHero";
+import { ExperienciasResumen } from "@/components/eventos/ExperienciasResumen";
 import { EventosShowcase } from "@/components/eventos/EventosShowcase";
 import { EventosBento } from "@/components/eventos/EventosBento";
 import { EventosBrands } from "@/components/eventos/EventosBrands";
@@ -20,11 +23,19 @@ export default function Experiencias() {
   // de artista viven ahora en /giras: aquí ya no se mezclan.
   const marcas = getEventos().filter((e) => e.type === "marca");
 
+  // El resumen solo se pinta si el mp4 existe: lo genera scripts/experiencias-video.sh
+  // a partir de los vídeos de evento, y no queremos un hueco si falta.
+  const resumen = "/video/experiencias/resumen.mp4";
+  const hayResumen = fs.existsSync(
+    path.join(process.cwd(), "public", resumen.replace(/^\//, "")),
+  );
+
   return (
     <div style={{ backgroundColor: "#FBFAF6" }}>
       {/* Orden: banda superior + showcase con el texto de experiencias +
           marca por marca + más vídeos + teatro/mapping + cierre. */}
       <EventosHero />
+      {hayResumen && <ExperienciasResumen src={resumen} />}
       <EventosShowcase eventos={marcas} />
       <EventosBrands eventos={marcas} />
       <EventosBento eventos={marcas} />
