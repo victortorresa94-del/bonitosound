@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Zilla_Slab, Fredoka } from "next/font/google";
+import { Zilla_Slab, Fredoka, Caveat } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
@@ -24,6 +24,15 @@ const display = Zilla_Slab({
 const round = Fredoka({
   subsets: ["latin"],
   variable: "--font-round",
+  display: "swap",
+  weight: ["500", "600", "700"],
+});
+
+// Manuscrita para los acentos "a mano" sobre el impreso (cabecera de gira).
+// Se usa con MUCHA contención: una frase corta, nunca párrafos.
+const hand = Caveat({
+  subsets: ["latin"],
+  variable: "--font-hand",
   display: "swap",
   weight: ["500", "600", "700"],
 });
@@ -90,7 +99,10 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="es" className={`${display.variable} ${round.variable} ${GeistSans.variable}`}>
+    <html
+      lang="es"
+      className={`${display.variable} ${round.variable} ${hand.variable} ${GeistSans.variable}`}
+    >
       <body style={{ ["--font-body" as string]: "var(--font-geist-sans)" }}>
         <JsonLd data={orgLd} />
         <MotionProvider>
