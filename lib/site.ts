@@ -225,8 +225,22 @@ const PROVEEDORES = [
   "Meliá Hotels International",
 ] as const;
 
-/** Marcas nuevas que aportó Dani, además de las de `brands`. */
-const MARCAS_EXTRA = ["La Casera", "Bartender Spirits Awards", "Intruso Bar"] as const;
+/**
+ * Marcas que NO están en `brands` pero sí han trabajado con nosotros.
+ *  - Las tres primeras las aportó Dani (carpeta de Drive).
+ *  - Château, Pepsi y Tequila Código tienen su propia experiencia escrita en
+ *    content/eventos/ pero faltaban en esta lista, así que se caían del muro de
+ *    /experiencias. Ojo: "Pepsi" y "Pepsico" son entradas distintas a propósito
+ *    (la experiencia está firmada como Pepsi).
+ */
+const MARCAS_EXTRA = [
+  "La Casera",
+  "Bartender Spirits Awards",
+  "Intruso Bar",
+  "Château",
+  "Pepsi",
+  "Tequila Código",
+] as const;
 
 export const trustedBy: readonly TrustedCategory[] = [
   {
