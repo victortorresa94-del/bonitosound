@@ -128,37 +128,6 @@ function PlatformChip({ name }: { name: string }) {
   );
 }
 
-/** Tarjeta de artista del catálogo: foto en gris (a color en hover) o, si no
- *  hay foto, iniciales sobre navy. Uniforme — nada de fotos y logos sueltos. */
-function CatalogCard({ name }: { name: string }) {
-  const slug = assetSlug(name);
-  const photo = findAsset("artistas", slug);
-  const inRoster = getArtists().some((a) => a.slug === slug);
-  const initials = name.split(" ").map((w) => w[0]).slice(0, 2).join("");
-
-  const inner = (
-    <div className="relative aspect-square overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary" style={{ background: "radial-gradient(120% 120% at 30% 20%, #1b3a52 0%, #14283C 55%, #0d1a29 100%)" }}>
-      {photo ? (
-        <Image src={photo} alt={name} fill sizes="(max-width: 640px) 33vw, 160px" className="object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0" />
-      ) : (
-        <div aria-hidden className="absolute inset-0 flex items-center justify-center">
-          <span className="font-round text-3xl font-bold text-white/15">{initials}</span>
-          <span className="absolute bottom-2.5 right-2.5 h-2 w-2 rounded-full" style={{ backgroundColor: CYAN }} />
-        </div>
-      )}
-      <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-2.5">
-        <span className="font-round text-sm font-bold text-white">{name}</span>
-      </span>
-    </div>
-  );
-
-  return inRoster ? (
-    <Link href={`/artistas/${slug}`} className="group block">{inner}</Link>
-  ) : (
-    <div className="group">{inner}</div>
-  );
-}
-
 /**
  * Caso de la página de distribución: la prueba de que esto funciona.
  * Plataformas (dónde llega) + números + catálogo de artistas (con quién) +
@@ -199,12 +168,6 @@ export function DistribucionCase() {
           ))}
         </div>
 
-        <RevealOnScroll as="p" className="eyebrow mb-8 mt-14">Ya distribuyen con nosotros</RevealOnScroll>
-        <StaggerGroup stagger={0.04} className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:gap-4 lg:grid-cols-6">
-          {distributionCatalog.map((name) => (
-            <CatalogCard key={name} name={name} />
-          ))}
-        </StaggerGroup>
       </Section>
 
       {/* PRECIO (genérico, sin cifras — Dani cierra el modelo) */}

@@ -52,7 +52,7 @@ export const services: Record<string, Service> = {
     slug: "management",
     path: "/management",
     eyebrow: "Management",
-    h1: "Una carrera, llevada a mano.",
+    h1: "Tu carrera, con alguien al mando.",
     desc: "Gestionamos la carrera del artista de principio a fin: estrategia, calendario y las decisiones que importan.",
     ctaSubject: "Management",
     aspects: [
