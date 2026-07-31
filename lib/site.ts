@@ -80,7 +80,7 @@ export const team = [
   {
     name: "Manu Rojo",
     role: "Cofundador",
-    line: "Project management, financiación y booking. Lleva a Eva Calyza de la mano.",
+    line: "Project management, financiación y booking. Cuadra los números y cierra las fechas.",
   },
   {
     name: "Xavi Julià",
