@@ -75,6 +75,17 @@ const UI: Record<Locale, Dict> = {
     "footer.legal": "Legal",
     "footer.siguenos": "Síguenos",
     "footer.derechos": "Todos los derechos reservados.",
+    "footer.queHacemos": "Qué hacemos",
+    "footer.contacto": "Contacto",
+    "footer.tagline":
+      "En la música nadie te regala nada. Tres décadas de oficio detrás, tres años montando la agencia para hacerlo como hay que hacerlo.",
+    "footer.marcas": "Eventos para marcas",
+    "footer.clientes": "Clientes",
+    "footer.records": "Records",
+    "footer.nosotros": "Nosotros",
+    "footer.blog": "Blog",
+    "footer.avisoLegal": "Aviso legal",
+    "footer.privacidad": "Privacidad",
 
     // Reproductor / radio
     "radio.titulo": "Radio Bonito",
@@ -90,6 +101,7 @@ const UI: Record<Locale, Dict> = {
 
     // Genéricos
     "a11y.baja": "Baja",
+    "hero.play": "Dale al play",
   },
   ca: {
     // Navegació
@@ -120,6 +132,17 @@ const UI: Record<Locale, Dict> = {
     "footer.legal": "Legal",
     "footer.siguenos": "Segueix-nos",
     "footer.derechos": "Tots els drets reservats.",
+    "footer.queHacemos": "Què fem",
+    "footer.contacto": "Contacte",
+    "footer.tagline":
+      "A la música ningú no et regala res. Tres dècades d'ofici al darrere, tres anys muntant l'agència per fer-ho com s'ha de fer.",
+    "footer.marcas": "Esdeveniments per a marques",
+    "footer.clientes": "Clients",
+    "footer.records": "Records",
+    "footer.nosotros": "Nosaltres",
+    "footer.blog": "Blog",
+    "footer.avisoLegal": "Avís legal",
+    "footer.privacidad": "Privacitat",
 
     // Reproductor / ràdio
     "radio.titulo": "Radio Bonito",
@@ -135,6 +158,7 @@ const UI: Record<Locale, Dict> = {
 
     // Genèrics
     "a11y.baja": "Baixa",
+    "hero.play": "Dona-li al play",
   },
 };
 

@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { RevealOnScroll, SplitTextReveal, MagneticButton } from "@/components/motion";
+import { serverLocale } from "@/lib/locale-server";
+import { t } from "@/lib/i18n";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -14,7 +16,7 @@ export function CtaBlock({
   title,
   desc,
   href,
-  cta = "Hablamos →",
+  cta,
   secondary,
 }: {
   title: string;
@@ -24,6 +26,8 @@ export function CtaBlock({
   /** Enlace secundario opcional (p.ej. un teléfono) bajo el botón. */
   secondary?: ReactNode;
 }) {
+  // Sin etiqueta explícita, el botón habla el idioma de la página.
+  const etiqueta = cta ?? `${t(serverLocale(), "cta.hablamos")} →`;
   return (
     <div
       className="relative overflow-hidden rounded-[2rem] px-7 py-16 text-center md:px-16 md:py-24"
@@ -59,7 +63,7 @@ export function CtaBlock({
               className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-bold transition-transform duration-200 hover:scale-[1.03]"
               style={{ backgroundColor: CYAN, color: NAVY }}
             >
-              {cta}
+              {etiqueta}
             </Link>
           </MagneticButton>
           {secondary && <div className="text-sm text-white/60">{secondary}</div>}

@@ -1,6 +1,8 @@
 "use client";
 
 import { usePlayer } from "./PlayerProvider";
+import { useLocale } from "@/components/LocaleProvider";
+import { t } from "@/lib/i18n";
 
 const NAVY = "#14283C";
 const TEAL = "#3E93AC";
@@ -24,6 +26,7 @@ const ROJO = "#c8452f";
  */
 export function RadioBonito({ onClose }: { onClose: () => void }) {
   const { current, index, total, tuning, playing, goTo } = usePlayer();
+  const locale = useLocale();
 
   // El dial útil va de x=62 a x=338 en el viewBox. La aguja se coloca en el
   // centro de la emisora: (i + 0,5) / total.
@@ -39,12 +42,12 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
     <div
       className="relative w-[10.5rem] sm:w-[13rem]"
       role="region"
-      aria-label="Radio Bonito"
+      aria-label={t(locale, "radio.titulo")}
     >
       {/* Cerrar: pegado a la esquina de la propia radio, sin cabecera. */}
       <button
         onClick={onClose}
-        aria-label="Cerrar la radio"
+        aria-label={t(locale, "radio.cerrar")}
         className="absolute -top-1 right-0 z-10 grid h-6 w-6 place-items-center rounded-full transition-opacity hover:opacity-60"
         style={{ color: NAVY, backgroundColor: "rgba(251,250,246,0.9)" }}
       >
@@ -54,7 +57,7 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
       </button>
 
       {/* ── La radio dibujada ── */}
-      <svg viewBox="0 0 400 290" className="w-full" role="img" aria-label="Radio de válvulas">
+      <svg viewBox="0 0 400 290" className="w-full" role="img" aria-label={t(locale, "radio.titulo")}>
         <g className={vivo ? "bs-radio-bob" : undefined} style={{ transformOrigin: "200px 260px" }}>
           {/* Antena + ondas de señal */}
           <g stroke={NAVY} strokeWidth="7" strokeLinecap="round" fill="none">
@@ -107,7 +110,7 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
                   onClick={() => goTo(i)}
                   style={{ cursor: "pointer" }}
                   role="button"
-                  aria-label={`Emisora ${i + 1}`}
+                  aria-label={`${t(locale, "radio.emisora")} ${i + 1}`}
                 />
               </g>
             );
@@ -150,7 +153,7 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
       <div className="mt-0.5 flex min-h-[2.1rem] items-center">
         {tuning ? (
           <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em]" style={{ color: "rgba(20,40,60,0.5)" }}>
-            sintonizando…
+            {t(locale, "radio.sintonizando")}
           </p>
         ) : (
           <div className="min-w-0">

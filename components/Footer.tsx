@@ -1,32 +1,37 @@
 import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
+import { serverLocale } from "@/lib/locale-server";
+import { localePath, t } from "@/lib/i18n";
 
+/** Las columnas se guardan por CLAVE, no por texto: el idioma se resuelve al
+ *  pintar y los enlaces pasan por localePath para no salirse de /ca. */
 const cols = [
   {
-    title: "Qué hacemos",
+    title: "footer.queHacemos",
     links: [
-      { label: "Eventos para marcas", href: "/experiencias/marcas" },
-      { label: "Clientes", href: "/clientes" },
-      { label: "Giras", href: "/giras" },
-      { label: "Records", href: "/records" },
-      { label: "Artistas", href: "/artistas" },
-      { label: "Universo Bonito", href: "/universo" },
+      { key: "footer.marcas", href: "/experiencias/marcas" },
+      { key: "footer.clientes", href: "/clientes" },
+      { key: "nav.giras", href: "/giras" },
+      { key: "footer.records", href: "/records" },
+      { key: "nav.artistas", href: "/artistas" },
+      { key: "nav.universo", href: "/universo" },
     ],
   },
   {
-    title: "Bonito",
+    title: "footer.bonito",
     links: [
-      { label: "Nosotros", href: "/nosotros" },
-      { label: "Jaleo Sound", href: "/jaleo-sound" },
-      { label: "Blog", href: "/diario" },
-      { label: "Contacto", href: "/contacto" },
+      { key: "footer.nosotros", href: "/nosotros" },
+      { key: null, label: "Jaleo Sound", href: "/jaleo-sound" },
+      { key: "footer.blog", href: "/diario" },
+      { key: "footer.contacto", href: "/contacto" },
       // Agenda queda fuera mientras esté vacía — se reintroduce con contenido real.
     ],
   },
-];
+] as const;
 
 export function Footer() {
+  const locale = serverLocale();
   return (
     <footer className="border-t border-subtle bg-bg-primary">
       <div className="wrap grid gap-12 py-16 md:grid-cols-[1.4fr_1fr_1fr_1.2fr] md:py-20">
@@ -39,22 +44,21 @@ export function Footer() {
             className="h-11 w-auto"
           />
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-text-secondary">
-            En la música nadie te regala nada. Tres décadas de oficio detrás,
-            tres años montando la agencia para hacerlo como hay que hacerlo.
+            {t(locale, "footer.tagline")}
           </p>
         </div>
 
         {cols.map((c) => (
           <div key={c.title}>
-            <p className="mb-4 text-sm font-bold text-text-primary">{c.title}</p>
+            <p className="mb-4 text-sm font-bold text-text-primary">{t(locale, c.title)}</p>
             <ul className="space-y-2.5">
               {c.links.map((l) => (
                 <li key={l.href}>
                   <Link
-                    href={l.href}
+                    href={localePath(l.href, locale)}
                     className="text-sm text-text-secondary transition-colors hover:text-accent-cyan"
                   >
-                    {l.label}
+                    {"key" in l && l.key ? t(locale, l.key) : (l as { label: string }).label}
                   </Link>
                 </li>
               ))}
@@ -63,7 +67,7 @@ export function Footer() {
         ))}
 
         <div>
-          <p className="mb-4 text-sm font-bold text-text-primary">Contacto</p>
+          <p className="mb-4 text-sm font-bold text-text-primary">{t(locale, "footer.contacto")}</p>
           <ul className="space-y-2.5 text-sm text-text-secondary">
             <li>
               <a
@@ -120,11 +124,11 @@ export function Footer() {
             © {new Date().getFullYear()} {site.legalName} · CIF {site.cif}
           </p>
           <div className="flex gap-5">
-            <Link href="/aviso-legal" className="hover:text-text-secondary">
-              Aviso legal
+            <Link href={localePath("/aviso-legal", locale)} className="hover:text-text-secondary">
+              {t(locale, "footer.avisoLegal")}
             </Link>
-            <Link href="/privacidad" className="hover:text-text-secondary">
-              Privacidad
+            <Link href={localePath("/privacidad", locale)} className="hover:text-text-secondary">
+              {t(locale, "footer.privacidad")}
             </Link>
           </div>
         </div>
