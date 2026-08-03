@@ -6,6 +6,9 @@ import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
+import { localePath } from "@/lib/i18n";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -46,7 +49,7 @@ function ArtistCard({
   services?: string[];
 }) {
   return (
-    <Link href={`/artistas/${slug}`} className="group block" data-cursor="link">
+    <Link href={localePath(`/artistas/${slug}`, serverLocale())} className="group block" data-cursor="link">
       <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
         {photo ? (
           <Image
@@ -126,6 +129,7 @@ function GroupHeader({
 }
 
 export default function RosterCompleto() {
+  const locale = serverLocale();
   const all = getArtists();
 
   const booking = all
@@ -153,15 +157,15 @@ export default function RosterCompleto() {
       <section style={{ backgroundColor: "#FBFAF6" }}>
         <div className="wrap pb-8 pt-20 md:pt-28">
           <RevealOnScroll as="p" className="eyebrow mb-4">
-            Roster completo
+            {tr(locale, "Roster completo")}
           </RevealOnScroll>
           <RevealOnScroll
             as="h1"
             delay={0.05}
             className="display leading-[0.95] text-[clamp(2.6rem,8vw,5.6rem)]"
           >
-            <span style={{ color: NAVY }}>Todos los que </span>
-            <span style={{ color: CYAN }}>llevamos</span>
+            <span style={{ color: NAVY }}>{tr(locale, "Todos los que ")}</span>
+            <span style={{ color: CYAN }}>{tr(locale, "llevamos")}</span>
             <span style={{ color: NAVY }}>.</span>
           </RevealOnScroll>
           <RevealOnScroll
@@ -169,8 +173,8 @@ export default function RosterCompleto() {
             delay={0.12}
             className="mt-5 max-w-2xl text-lg text-text-secondary"
           >
-            El roster propio —booking, management y sello— y el catálogo que
-            distribuimos y editamos. {all.length} artistas, cada uno con su ficha.
+            {tr(locale, "El roster propio —booking, management y sello— y el catálogo que distribuimos y editamos.")}{" "}
+            {all.length} {tr(locale, "artistas, cada uno con su ficha.")}
           </RevealOnScroll>
 
           {/* Navegación a cada servicio */}
@@ -178,11 +182,11 @@ export default function RosterCompleto() {
             {SERVICE_LINKS.map((s) => (
               <Link
                 key={s.href}
-                href={s.href}
+                href={localePath(s.href, locale)}
                 className="rounded-full border px-4 py-2 text-sm font-semibold transition-colors hover:bg-black/[0.03]"
                 style={{ borderColor: "rgba(20,40,60,0.2)", color: NAVY }}
               >
-                {s.label}
+                {tr(locale, s.label)}
               </Link>
             ))}
           </RevealOnScroll>
@@ -193,9 +197,9 @@ export default function RosterCompleto() {
       <section style={{ backgroundColor: "#FBFAF6" }}>
         <div className="wrap py-14 md:py-20">
           <GroupHeader
-            eyebrow="Booking · Management · Sello"
-            title="El roster propio"
-            note={`${booking.length} artistas que llevamos de la mano`}
+            eyebrow={tr(locale, "Booking · Management · Sello")}
+            title={tr(locale, "El roster propio")}
+            note={`${booking.length} ${tr(locale, "artistas que llevamos de la mano")}`}
           />
           <StaggerGroup
             stagger={0.06}
@@ -231,9 +235,9 @@ export default function RosterCompleto() {
       <section id="distribucion" style={{ backgroundColor: "#FBFAF6" }}>
         <div className="wrap py-14 md:py-20">
           <GroupHeader
-            eyebrow="Distribución · Editorial"
-            title="El catálogo"
-            note="~20 artistas, una distribuidora"
+            eyebrow={tr(locale, "Distribución · Editorial")}
+            title={tr(locale, "El catálogo")}
+            note={tr(locale, "~20 artistas, una distribuidora")}
           />
 
           {distribucion.length > 0 && (
@@ -263,7 +267,7 @@ export default function RosterCompleto() {
                   return (
                     <span key={n} className="whitespace-nowrap">
                       {slug ? (
-                        <Link href={`/artistas/${slug}`} className="transition-opacity hover:opacity-70">
+                        <Link href={localePath(`/artistas/${slug}`, locale)} className="transition-opacity hover:opacity-70">
                           {n}
                         </Link>
                       ) : (
@@ -287,10 +291,10 @@ export default function RosterCompleto() {
       <section style={{ backgroundColor: "#FBFAF6" }}>
         <div className="wrap pb-24">
           <Link
-            href="/artistas"
+            href={localePath("/artistas", locale)}
             className="text-sm font-semibold text-text-muted underline-offset-4 transition-colors hover:text-text-primary hover:underline"
           >
-            ← Volver a Artistas
+            {tr(locale, "← Volver a Artistas")}
           </Link>
         </div>
       </section>

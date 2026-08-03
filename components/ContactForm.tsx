@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { site } from "@/lib/site";
+import { useLocale } from "@/components/LocaleProvider";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -23,6 +25,7 @@ export function ContactForm({
 }: {
   artist?: { name: string; genre?: string };
 }) {
+  const locale = useLocale();
   const starter = artist
     ? `Hola, me gustaría contratar a ${artist.name}. Os cuento: (evento, fecha, ciudad o sala y aforo aproximado).`
     : "";
@@ -68,10 +71,10 @@ export function ContactForm({
           </svg>
         </div>
         <p className="display mt-5 text-2xl" style={{ color: NAVY }}>
-          Te hemos abierto el correo.
+          {tr(locale, "Te hemos abierto el correo.")}
         </p>
         <p className="mx-auto mt-2 max-w-sm text-sm text-text-secondary">
-          Dale a enviar y lo tenemos. Si no se abrió nada, escríbenos directo a{" "}
+          {tr(locale, "Dale a enviar y lo tenemos. Si no se abrió nada, escríbenos directo a")}{" "}
           <a className="font-semibold underline underline-offset-4" href={`mailto:${to}`}>{to}</a>.
         </p>
         <button
@@ -79,7 +82,7 @@ export function ContactForm({
           onClick={() => setSent(false)}
           className="mt-6 text-sm font-semibold text-text-muted underline-offset-4 hover:text-text-primary hover:underline"
         >
-          ← Volver a editar
+          {tr(locale, "← Volver a editar")}
         </button>
       </div>
     );
@@ -93,7 +96,7 @@ export function ContactForm({
             ♪
           </span>
           <p className="text-sm text-text-secondary">
-            Contratando a <span className="font-bold" style={{ color: NAVY }}>{artist.name}</span>
+            {tr(locale, "Contratando a")} <span className="font-bold" style={{ color: NAVY }}>{artist.name}</span>
             {artist.genre ? <span className="text-text-muted"> · {artist.genre}</span> : null}
           </p>
         </div>
@@ -101,26 +104,26 @@ export function ContactForm({
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="cf-name" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>Nombre</label>
+          <label htmlFor="cf-name" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>{tr(locale, "Nombre")}</label>
           <input
             id="cf-name"
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Tu nombre"
+            placeholder={tr(locale, "Tu nombre")}
             className={inputCls}
             style={{ borderColor: "rgba(20,40,60,0.2)" }}
           />
         </div>
         <div>
           <label htmlFor="cf-company" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>
-            Empresa <span className="font-normal text-text-muted">(opcional)</span>
+            {tr(locale, "Empresa")} <span className="font-normal text-text-muted">{tr(locale, "(opcional)")}</span>
           </label>
           <input
             id="cf-company"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
-            placeholder="Tu empresa o marca"
+            placeholder={tr(locale, "Tu empresa o marca")}
             className={inputCls}
             style={{ borderColor: "rgba(20,40,60,0.2)" }}
           />
@@ -143,7 +146,7 @@ export function ContactForm({
         </div>
         <div>
           <label htmlFor="cf-phone" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>
-            Teléfono <span className="font-normal text-text-muted">(opcional)</span>
+            {tr(locale, "Teléfono")} <span className="font-normal text-text-muted">{tr(locale, "(opcional)")}</span>
           </label>
           <input
             id="cf-phone"
@@ -158,14 +161,14 @@ export function ContactForm({
       </div>
 
       <div>
-        <label htmlFor="cf-msg" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>Mensaje</label>
+        <label htmlFor="cf-msg" className="mb-2 block text-sm font-bold" style={{ color: NAVY }}>{tr(locale, "Mensaje")}</label>
         <textarea
           id="cf-msg"
           required
           rows={5}
           value={msg}
           onChange={(e) => setMsg(e.target.value)}
-          placeholder={artist ? "Cuéntanos el bolo…" : "Cuéntanos en qué podemos ayudarte…"}
+          placeholder={tr(locale, artist ? "Cuéntanos el bolo…" : "Cuéntanos en qué podemos ayudarte…")}
           className={inputCls}
           style={{ borderColor: "rgba(20,40,60,0.2)" }}
         />
@@ -176,9 +179,9 @@ export function ContactForm({
         className="w-full rounded-xl py-4 text-base font-bold text-white transition-transform duration-200 hover:-translate-y-0.5"
         style={{ backgroundColor: CYAN }}
       >
-        Enviar
+        {tr(locale, "Enviar")}
       </button>
-      <p className="text-xs text-text-muted">Te respondemos rápido, y por personas. No un bot.</p>
+      <p className="text-xs text-text-muted">{tr(locale, "Te respondemos rápido, y por personas. No un bot.")}</p>
     </form>
   );
 }

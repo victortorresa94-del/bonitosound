@@ -12,6 +12,9 @@ import { getEvento, getEventos } from "@/lib/content";
 import { findAsset, findLogo } from "@/lib/assets";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
+import { localePath } from "@/lib/i18n";
 
 const NAVY = "#14283C";
 
@@ -45,6 +48,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 }
 
 export default function EventoPage({ params }: { params: { slug: string } }) {
+  const locale = serverLocale();
   const e = getEvento(params.slug);
   if (!e) notFound();
 
@@ -107,7 +111,7 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
           <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
           <div className="wrap relative z-10 pb-14 md:pb-20">
             <RevealOnScroll as="p" className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-white/80">
-              {TYPE_LABEL[e.type]}
+              {tr(locale, TYPE_LABEL[e.type] as string)}
               {label ? ` · ${label}` : ""}
             </RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display max-w-4xl text-[clamp(2.4rem,6vw,5rem)] leading-[0.98] text-white">
@@ -133,7 +137,7 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
           )}
           <div className="wrap relative z-10 py-20 md:py-28">
             <RevealOnScroll as="p" className="mb-4 text-xs font-semibold uppercase tracking-[0.22em] text-accent-cyan">
-              {TYPE_LABEL[e.type]}
+              {tr(locale, TYPE_LABEL[e.type] as string)}
               {label ? ` · ${label}` : ""}
             </RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display max-w-4xl text-[clamp(2.4rem,6vw,4.8rem)] leading-[1.0] text-white">
@@ -153,7 +157,7 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
         <div className="flex flex-wrap gap-x-10 gap-y-6 border-b border-subtle pb-8">
           {facts.map((f) => (
             <div key={f.k} className="min-w-[7rem]">
-              <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-accent-cyan-text">{f.k}</p>
+              <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-accent-cyan-text">{tr(locale, f.k)}</p>
               <p className="mt-1 font-round text-lg font-bold leading-tight text-text-primary md:text-xl">{f.v}</p>
             </div>
           ))}
@@ -161,7 +165,7 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
 
         {e.services && e.services.length > 0 && (
           <div className="mt-8">
-            <p className="eyebrow mb-4">Qué montó Bonito</p>
+            <p className="eyebrow mb-4">{tr(locale, "Qué montó Bonito")}</p>
             <StaggerGroup stagger={0.04} className="flex flex-wrap gap-2.5">
               {e.services.map((s) => (
                 <span key={s} className="rounded-full border border-subtle bg-bg-tertiary px-4 py-1.5 text-sm font-semibold text-text-primary">
@@ -177,11 +181,11 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
       <Section className="pt-0">
         <div className="grid items-start gap-10 md:grid-cols-2 md:gap-14">
           <RevealOnScroll>
-            <p className="eyebrow mb-4">El encargo</p>
+            <p className="eyebrow mb-4">{tr(locale, "El encargo")}</p>
             <div className="space-y-5 text-lg leading-relaxed text-text-secondary">
               {e.body.length > 0 ? e.body.map((p, i) => <p key={i}>{p}</p>) : <p>{e.context}</p>}
             </div>
-            <p className="eyebrow mb-3 mt-10">El resultado</p>
+            <p className="eyebrow mb-3 mt-10">{tr(locale, "El resultado")}</p>
             <p className="statement text-[clamp(1.5rem,3vw,2.2rem)] leading-tight text-text-primary">{e.result}</p>
           </RevealOnScroll>
 
@@ -215,9 +219,9 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
       {/* ── MÍRALO: el vídeo del evento, reproducible de verdad (con sonido) ── */}
       {(e.video || e.youtubeId) && (
         <Section className="bg-bg-primary pt-0">
-          <RevealOnScroll as="p" className="eyebrow mb-3">El vídeo lo cuenta mejor</RevealOnScroll>
+          <RevealOnScroll as="p" className="eyebrow mb-3">{tr(locale, "El vídeo lo cuenta mejor")}</RevealOnScroll>
           <SplitTextReveal as="h2" split="lines" className="display mb-8 text-[clamp(1.8rem,4vw,3rem)]">
-            Míralo.
+            {tr(locale, "Míralo.")}
           </SplitTextReveal>
           <RevealOnScroll delay={0.1}>
             {e.video ? (
@@ -244,7 +248,7 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
           <div className="grid gap-12 md:grid-cols-2 md:items-center">
             {e.lineup && e.lineup.length > 0 && (
               <RevealOnScroll>
-                <p className="eyebrow mb-5">En el cartel</p>
+                <p className="eyebrow mb-5">{tr(locale, "En el cartel")}</p>
                 <div className="flex flex-wrap gap-x-6 gap-y-3">
                   {e.lineup.map((name, i) => (
                     <span key={name} className="flex items-center gap-3 font-round text-2xl font-bold text-text-primary md:text-3xl">
@@ -268,7 +272,7 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
       {/* ── GALERÍA (si hay) ── */}
       {e.gallery && e.gallery.length > 0 && (
         <Section className="pt-0">
-          <RevealOnScroll as="p" className="eyebrow mb-8">Galería</RevealOnScroll>
+          <RevealOnScroll as="p" className="eyebrow mb-8">{tr(locale, "Galería")}</RevealOnScroll>
           <StaggerGroup stagger={0.08} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {e.gallery.map((src) => (
               <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-xl border border-subtle">
@@ -283,8 +287,8 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
       {related.length > 0 && (
         <Section className="bg-bg-primary">
           <div className="mb-10 flex items-end justify-between gap-6">
-            <p className="eyebrow">{MORE_TITLE[e.type] ?? "Más eventos"}</p>
-            <Link href="/experiencias" className="link-underline text-sm text-text-secondary">Ver todos →</Link>
+            <p className="eyebrow">{tr(locale, MORE_TITLE[e.type] ?? "Más eventos")}</p>
+            <Link href={localePath("/experiencias", locale)} className="link-underline text-sm text-text-secondary">{tr(locale, "Ver todos →")}</Link>
           </div>
           <StaggerGroup stagger={0.08} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((o) => (
@@ -296,10 +300,10 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
 
       <Section className={related.length > 0 ? "pt-0" : undefined}>
         <CtaBlock
-          title="¿Montamos el tuyo?"
-          desc="Cuéntanos qué tienes en la cabeza. Te decimos qué se puede hacer de verdad."
+          title={tr(locale, "¿Montamos el tuyo?")}
+          desc={tr(locale, "Cuéntanos qué tienes en la cabeza. Te decimos qué se puede hacer de verdad.")}
           href="/contacto"
-          cta="Hablamos de tu evento →"
+          cta={tr(locale, "Hablamos de tu evento →")}
         />
       </Section>
     </>

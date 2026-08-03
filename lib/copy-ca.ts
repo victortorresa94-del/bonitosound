@@ -758,6 +758,174 @@ const CA: Record<string, string> = {
   "Jazz melódico afrolatino.": "Jazz melòdic afrollatí.",
   "Dúo español de jazz-fusión. Disco REELAX.": "Duo espanyol de jazz-fusió. Disc REELAX.",
   "Flamenco, danza española y electrónica.": "Flamenc, dansa espanyola i electrònica.",
+
+  // ── Listados y páginas de detalle ──
+  "Roster completo — todos los artistas de Bonito Sound":
+    "Roster complet — tots els artistes de Bonito Sound",
+  "Todo el roster de Bonito Sound organizado: artistas de booking, management y sello, y el catálogo de distribución y editorial. Fotos, géneros y ficha de cada uno.":
+    "Tot el roster de Bonito Sound organitzat: artistes de booking, management i segell, i el catàleg de distribució i editorial. Fotos, gèneres i fitxa de cadascun.",
+  "Todos los que ": "Tots els que ",
+  "llevamos": "portem",
+  "El roster propio —booking, management y sello— y el catálogo que distribuimos y editamos.":
+    "El roster propi —booking, management i segell— i el catàleg que distribuïm i editem.",
+  "artistas, cada uno con su ficha.": "artistes, cadascun amb la seva fitxa.",
+  "El roster propio": "El roster propi",
+  "artistas que llevamos de la mano": "artistes que portem de la mà",
+  "Distribución · Editorial": "Distribució · Editorial",
+  "El catálogo": "El catàleg",
+  "~20 artistas, una distribuidora": "~20 artistes, una distribuïdora",
+  "← Volver a Artistas": "← Tornar a Artistes",
+  "Producciones": "Produccions",
+  "Dónde": "On",
+  "← Todas las giras": "← Totes les gires",
+  "Más eventos de marca": "Més esdeveniments de marca",
+  "Más giras y directos": "Més gires i directes",
+  "Más directos que hemos montado": "Més directes que hem muntat",
+  "Marca": "Marca",
+  "Artista": "Artista",
+  "Volumen": "Volum",
+  "Míralo.": "Mira-ho.",
+  "¿Montamos el tuyo?": "Muntem el teu?",
+  "Cuéntanos qué tienes en la cabeza. Te decimos qué se puede hacer de verdad.":
+    "Explica'ns què tens al cap. Et diem què es pot fer de debò.",
+  "Hablamos de tu evento →": "Parlem del teu esdeveniment →",
+  "Blog — Bonito Sound": "Blog — Bonito Sound",
+  "El blog de Bonito Sound: cómo funciona la industria de la música por dentro, booking, sellos, distribución y eventos de marca. Sin postureo.":
+    "El blog de Bonito Sound: com funciona la indústria de la música per dins, booking, segells, distribució i esdeveniments de marca. Sense postureig.",
+  "Lo que va pasando, sin postureo.": "El que va passant, sense postureig.",
+  "Todavía no hemos escrito nada aquí.": "Encara no hi hem escrit res.",
+  "Agencia de eventos musicales para marcas": "Agència d'esdeveniments musicals per a marques",
+  "Productora de eventos corporativos con música y activaciones de marca en España. Del brief al titular en 6 semanas. Ballantine's, Pernod Ricard, Pepsico, Absolut.":
+    "Productora d'esdeveniments corporatius amb música i activacions de marca a Espanya. Del brief al titular en 6 setmanes. Ballantine's, Pernod Ricard, Pepsico, Absolut.",
+  "Del brief al titular en 6 semanas. Concepto, artista, producción y dirección artística.":
+    "Del brief al titular en 6 setmanes. Concepte, artista, producció i direcció artística.",
+  "Tu marca de gira. Road, tour y stage management con experiencia real en gira nacional.":
+    "La teva marca de gira. Road, tour i stage management amb experiència real en gira nacional.",
+  "Formatos íntimos de música en directo donde la curaduría manda sobre el tamaño.":
+    "Formats íntims de música en directe on el criteri mana per damunt de la mida.",
+  "Un solo equipo del brief al desmontaje. No rebotas entre cinco proveedores.":
+    "Un sol equip del brief al desmuntatge. No reboteges entre cinc proveïdors.",
+  "Tres décadas de oficio de nuestro fundador: sabemos qué artista funciona en qué evento.":
+    "Tres dècades d'ofici del nostre fundador: sabem quin artista funciona en quin esdeveniment.",
+  "La música no es decoración: la elegimos como decisión estratégica.":
+    "La música no és decoració: l'escollim com una decisió estratègica.",
+  "Producción técnica propia. Lo que prometemos en el deck, lo montamos.":
+    "Producció tècnica pròpia. El que prometem al deck, ho muntem.",
+  "¿Cuánto cuesta producir un evento de marca?": "Quant costa produir un esdeveniment de marca?",
+  "Depende del formato, el artista y la escala — no hay dos iguales. Lo cerramos sobre tu brief real, hablándolo, no con una tarifa de escaparate.":
+    "Depèn del format, l'artista i l'escala — no n'hi ha dos d'iguals. Ho tanquem sobre el teu brief real, parlant-ho, no amb una tarifa d'aparador.",
+  "¿Necesito traer mi propio artista?": "Necessito portar el meu propi artista?",
+  "No. Bonito Sound tiene roster propio y un fundador con tres décadas de agenda en la industria española. Elegimos al artista que encaja con tu marca y tu público, no el que toca por agenda.":
+    "No. Bonito Sound té roster propi i un fundador amb tres dècades d'agenda a la indústria espanyola. Escollim l'artista que encaixa amb la teva marca i el teu públic, no el que toca per agenda.",
+  "¿En qué se diferencia una agencia de eventos de una productora?":
+    "En què es diferencia una agència d'esdeveniments d'una productora?",
+  "Una agencia conecta proveedores. Una productora lo ejecuta. Bonito Sound hace las dos cosas con el mismo equipo: concepto, booking y producción técnica integradas.":
+    "Una agència connecta proveïdors. Una productora ho executa. Bonito Sound fa totes dues coses amb el mateix equip: concepte, booking i producció tècnica integrades.",
+  "¿En cuánto tiempo podéis montar un evento?": "En quant de temps podeu muntar un esdeveniment?",
+  "El formato Brand Live va del brief al titular en 6 semanas. Con menos margen también se puede, pero lo honesto es decírtelo antes de cobrarlo.":
+    "El format Brand Live va del brief al titular en 6 setmanes. Amb menys marge també es pot, però l'honest és dir-t'ho abans de cobrar-ho.",
+  "Qué pusimos": "Què hi vam posar",
+  "Más de": "Més de",
+  "Tipo": "Tipus",
+  "Qué montó Bonito": "Què hi va muntar Bonito",
+  "El encargo": "L'encàrrec",
+  "El resultado": "El resultat",
+  "En el cartel": "Al cartell",
+  "Galería": "Galeria",
+  "Más eventos": "Més esdeveniments",
+  "Ver todos →": "Veure'ls tots →",
+  "Gira": "Gira",
+  "Festival": "Festival",
+  "Showcase": "Showcase",
+
+  // ── Formularios y fichas de artista ──
+  "Concierto": "Concert",
+  "Activación de marca": "Activació de marca",
+  "Evento privado": "Esdeveniment privat",
+  "Corporativo": "Corporatiu",
+  "Aún no lo sé": "Encara no ho sé",
+  "Menos de 200": "Menys de 200",
+  "Más de 5.000": "Més de 5.000",
+  "No lo sé": "No ho sé",
+  "Todavía por definir": "Encara per definir",
+  "Ajustado": "Ajustat",
+  "Con margen": "Amb marge",
+  "Sin problema": "Sense problema",
+  "Promotor/a": "Promotor/a",
+  "Empresa o institución": "Empresa o institució",
+  "Particular": "Particular",
+  "Otro": "Altres",
+  "Te hemos abierto el correo.": "T'hem obert el correu.",
+  "Dale a enviar y lo tenemos. Si no se te ha abierto nada, escríbenos directo a":
+    "Dona-li a enviar i ja el tenim. Si no se t'ha obert res, escriu-nos directament a",
+  "y te contestamos nosotros, no un bot.": "i et contestem nosaltres, no un bot.",
+  "← Volver a editar la solicitud": "← Tornar a editar la sol·licitud",
+  "¿Qué artista te interesa?": "Quin artista t'interessa?",
+  "Nombre del artista (o cuéntanos qué buscas)": "Nom de l'artista (o explica'ns què busques)",
+  "¿Para cuándo?": "Per a quan?",
+  "Aún sin fecha cerrada": "Encara sense data tancada",
+  "¿Dónde?": "On?",
+  "Ciudad, sala o festival": "Ciutat, sala o festival",
+  "¿Cuánta gente esperáis?": "Quanta gent espereu?",
+  "Presupuesto orientativo": "Pressupost orientatiu",
+  "Opcional. Nos ayuda a proponerte algo realista, sin sorpresas.":
+    "Opcional. Ens ajuda a proposar-te alguna cosa realista, sense sorpreses.",
+  "¿Qué tienes en la cabeza?": "Què tens al cap?",
+  "¿Quién eres?": "Qui ets?",
+  "Tu nombre *": "El teu nom *",
+  "Tu email *": "El teu email *",
+  "Teléfono (opcional)": "Telèfon (opcional)",
+  "Empresa / marca (opcional)": "Empresa / marca (opcional)",
+  "Enviar solicitud →": "Enviar la sol·licitud →",
+  "Te contestamos nosotros, no un bot. Sin compromiso.":
+    "Et contestem nosaltres, no un bot. Sense compromís.",
+  "Tu nombre": "El teu nom",
+  "Tu empresa o marca": "La teva empresa o marca",
+  "Enviar": "Enviar",
+  "Cuéntanos fecha, sitio y qué tienes en mente. Te contamos disponibilidad":
+    "Explica'ns data, lloc i què tens al cap. T'expliquem disponibilitat",
+  "Ver todo el roster →": "Veure tot el roster →",
+  "Todas sus canciones.": "Totes les seves cançons.",
+  "Abrir en Spotify": "Obrir a Spotify",
+  "En números": "En números",
+  "Escuchar en Spotify": "Escoltar a Spotify",
+  "Contratar booking →": "Contractar booking →",
+  "Ver ficha →": "Veure fitxa →",
+  "Directos, backstage y lo que va cayendo.": "Directes, backstage i el que va caient.",
+  "Instagram. Dale un vistazo.": "Instagram. Fes-hi un cop d'ull.",
+  "Cogemos el teléfono, no un formulario": "Despengem el telèfon, no un formulari",
+  "Dale a enviar y lo tenemos. Si no se abrió nada, escríbenos directo a":
+    "Dona-li a enviar i ja el tenim. Si no s'ha obert res, escriu-nos directament a",
+  "← Volver a editar": "← Tornar a editar",
+  "Contratando a": "Contractant",
+  "Nombre": "Nom",
+  "Empresa": "Empresa",
+  "(opcional)": "(opcional)",
+  "Mensaje": "Missatge",
+  "Cuéntanos el bolo…": "Explica'ns el bolo…",
+  "Cuéntanos en qué podemos ayudarte…": "Explica'ns en què et podem ajudar…",
+  "Te respondemos rápido, y por personas. No un bot.":
+    "Et responem ràpid, i persones de veritat. No un bot.",
+
+  // ── Eventos para marcas ──
+  "Música que la gente recuerda. No decorado.": "Música que la gent recorda. No decorat.",
+  "Producimos activaciones, lanzamientos y experiencias culturales para marcas premium. Del brief al titular, con un solo equipo.":
+    "Produïm activacions, llançaments i experiències culturals per a marques premium. Del brief al titular, amb un sol equip.",
+  "Reservar llamada de 30 min →": "Reservar trucada de 30 min →",
+  "Diseña tu activación": "Dissenya la teva activació",
+  "Diseña tu activación en 90 segundos": "Dissenya la teva activació en 90 segons",
+  "Cuatro preguntas. Sin email para usarlo. Al final te enseñamos qué del portfolio se parece a lo tuyo.":
+    "Quatre preguntes. Sense email per fer-lo servir. Al final t'ensenyem què del porfoli s'assembla al teu.",
+  "Lo hemos hecho. No lo contamos, lo montamos.": "Ho hem fet. No ho expliquem, ho muntem.",
+  "Tres formas de hacerlo bien.": "Tres maneres de fer-ho bé.",
+  "Marcas con las que hemos trabajado": "Marques amb qui hem treballat",
+  "Por qué nosotros": "Per què nosaltres",
+  "Cuatro razones, ninguna de relleno.": "Quatre raons, cap de farciment.",
+  "¿Lo hablamos?": "Ho parlem?",
+  "Una llamada de 30 minutos. Tú cuentas el evento, nosotros te decimos qué se puede hacer de verdad.":
+    "Una trucada de 30 minuts. Tu expliques l'esdeveniment, nosaltres et diem què es pot fer de debò.",
+  "Reservar llamada →": "Reservar trucada →",
+  "Lo que nos preguntáis antes de la llamada.": "El que ens pregunteu abans de la trucada.",
 };
 
 /**

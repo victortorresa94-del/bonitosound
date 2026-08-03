@@ -17,6 +17,9 @@ import { getEventos } from "@/lib/content";
 import { findAsset, findLogo } from "@/lib/assets";
 import { brands, site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
+import { localePath } from "@/lib/i18n";
 
 export function generateMetadata(): Metadata {
   return {
@@ -69,6 +72,7 @@ const faq = [
 ];
 
 export default function EventosMarcas() {
+  const locale = serverLocale();
   const cases = getEventos().filter((e) => e.type === "marca");
   const heroImg = findAsset("heroes", "eventos-marcas");
   return (
@@ -99,26 +103,25 @@ export default function EventosMarcas() {
         <div className="wrap grid items-center gap-10 py-24 md:grid-cols-[1.3fr_1fr] md:py-32">
           <div>
             <RevealOnScroll as="p" className="eyebrow mb-4">
-              Eventos para marcas
+              {tr(locale, "Eventos para marcas")}
             </RevealOnScroll>
             <SplitTextReveal
               as="h1"
               split="lines"
               className="display text-[clamp(2.6rem,7vw,5.4rem)]"
             >
-              Música que la gente recuerda. No decorado.
+              {tr(locale, "Música que la gente recuerda. No decorado.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mt-7 max-w-xl text-lg text-text-secondary" delay={0.2}>
-              Producimos activaciones, lanzamientos y experiencias culturales
-              para marcas premium. Del brief al titular, con un solo equipo.
+              {tr(locale, "Producimos activaciones, lanzamientos y experiencias culturales para marcas premium. Del brief al titular, con un solo equipo.")}
             </RevealOnScroll>
             <RevealOnScroll className="mt-9 flex flex-wrap gap-4" delay={0.35}>
               <MagneticButton strength={0.35}>
-                <Cta href="/contacto">Reservar llamada de 30 min →</Cta>
+                <Cta href={localePath("/contacto", locale)}>{tr(locale, "Reservar llamada de 30 min →")}</Cta>
               </MagneticButton>
               <MagneticButton strength={0.25}>
                 <Cta href="#disena" variant="ghost">
-                  Diseña tu activación
+                  {tr(locale, "Diseña tu activación")}
                 </Cta>
               </MagneticButton>
             </RevealOnScroll>
@@ -142,18 +145,17 @@ export default function EventosMarcas() {
 
       <Section id="disena">
         <RevealOnScroll as="p" className="eyebrow mb-4">
-          Diseña tu activación en 90 segundos
+          {tr(locale, "Diseña tu activación en 90 segundos")}
         </RevealOnScroll>
         <SplitTextReveal
           as="h2"
           split="lines"
           className="display text-[clamp(2rem,4.5vw,3.4rem)]"
         >
-          Cuéntanos qué tienes en la cabeza.
+          {tr(locale, "Cuéntanos qué tienes en la cabeza.")}
         </SplitTextReveal>
         <RevealOnScroll as="p" className="mt-5 max-w-2xl text-text-secondary" delay={0.15}>
-          Cuatro preguntas. Sin email para usarlo. Al final te enseñamos qué
-          del portfolio se parece a lo tuyo.
+          {tr(locale, "Cuatro preguntas. Sin email para usarlo. Al final te enseñamos qué del portfolio se parece a lo tuyo.")}
         </RevealOnScroll>
         <RevealOnScroll className="mt-10 max-w-3xl" delay={0.25}>
           <LeadMagnetBrands />
@@ -162,14 +164,14 @@ export default function EventosMarcas() {
 
       <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">
-          Casos
+          {tr(locale, "Casos")}
         </RevealOnScroll>
         <SplitTextReveal
           as="h2"
           split="lines"
           className="display text-[clamp(2rem,4.5vw,3.4rem)]"
         >
-          Lo hemos hecho. No lo contamos, lo montamos.
+          {tr(locale, "Lo hemos hecho. No lo contamos, lo montamos.")}
         </SplitTextReveal>
         <StaggerGroup
           stagger={0.12}
@@ -227,14 +229,14 @@ export default function EventosMarcas() {
 
       <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">
-          Servicios
+          {tr(locale, "Servicios")}
         </RevealOnScroll>
         <SplitTextReveal
           as="h2"
           split="lines"
           className="display text-[clamp(2rem,4.5vw,3.4rem)]"
         >
-          Tres formas de hacerlo bien.
+          {tr(locale, "Tres formas de hacerlo bien.")}
         </SplitTextReveal>
         <StaggerGroup
           stagger={0.1}
@@ -242,8 +244,8 @@ export default function EventosMarcas() {
         >
           {services.map((s) => (
             <div key={s.name} className="card">
-              <h3 className="display text-2xl">{s.name}</h3>
-              <p className="mt-3 text-text-secondary">{s.desc}</p>
+              <h3 className="display text-2xl">{tr(locale, s.name)}</h3>
+              <p className="mt-3 text-text-secondary">{tr(locale, s.desc)}</p>
             </div>
           ))}
         </StaggerGroup>
@@ -251,7 +253,7 @@ export default function EventosMarcas() {
 
       <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">
-          Marcas con las que hemos trabajado
+          {tr(locale, "Marcas con las que hemos trabajado")}
         </RevealOnScroll>
         <RevealOnScroll className="mt-8">
           <MarqueeLogoWall items={brands} dir="marcas" speed={40} />
@@ -260,14 +262,14 @@ export default function EventosMarcas() {
 
       <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">
-          Por qué nosotros
+          {tr(locale, "Por qué nosotros")}
         </RevealOnScroll>
         <SplitTextReveal
           as="h2"
           split="lines"
           className="display text-[clamp(2rem,4.5vw,3.4rem)]"
         >
-          Cuatro razones, ninguna de relleno.
+          {tr(locale, "Cuatro razones, ninguna de relleno.")}
         </SplitTextReveal>
         <StaggerGroup
           stagger={0.1}
@@ -278,7 +280,7 @@ export default function EventosMarcas() {
               <span className="display text-3xl text-accent-blue">
                 0{i + 1}
               </span>
-              <p className="text-text-secondary">{w}</p>
+              <p className="text-text-secondary">{tr(locale, w)}</p>
             </div>
           ))}
         </StaggerGroup>
@@ -286,26 +288,26 @@ export default function EventosMarcas() {
 
       <Section>
         <CtaBlock
-          title="¿Lo hablamos?"
-          desc="Una llamada de 30 minutos. Tú cuentas el evento, nosotros te decimos qué se puede hacer de verdad."
-          href="/contacto"
-          cta="Reservar llamada →"
+          title={tr(locale, "¿Lo hablamos?")}
+          desc={tr(locale, "Una llamada de 30 minutos. Tú cuentas el evento, nosotros te decimos qué se puede hacer de verdad.")}
+          href={localePath("/contacto", locale)}
+          cta={tr(locale, "Reservar llamada →")}
         />
       </Section>
 
       <Section className="bg-bg-primary">
         <RevealOnScroll as="p" className="eyebrow mb-4">
-          Preguntas frecuentes
+          {tr(locale, "Preguntas frecuentes")}
         </RevealOnScroll>
         <SplitTextReveal
           as="h2"
           split="lines"
           className="display text-[clamp(2rem,4.5vw,3.4rem)]"
         >
-          Lo que nos preguntáis antes de la llamada.
+          {tr(locale, "Lo que nos preguntáis antes de la llamada.")}
         </SplitTextReveal>
         <RevealOnScroll className="mt-10" delay={0.2}>
-          <FaqOpen items={faq} />
+          <FaqOpen items={faq.map((f) => ({ ...f, q: tr(locale, f.q), a: tr(locale, f.a) }))} />
         </RevealOnScroll>
       </Section>
     </>

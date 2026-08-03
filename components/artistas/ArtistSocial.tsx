@@ -1,6 +1,8 @@
 import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { EventHeroVideo } from "@/components/eventos/EventHeroVideo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 function IgGlyph({ className = "h-5 w-5" }: { className?: string }) {
   return (
@@ -59,6 +61,7 @@ export function ArtistSocial({
   instagram?: string;
   tiktok?: string;
 }) {
+  const locale = serverLocale();
   const localReels = (reels ?? [])
     .map((r) => r?.trim())
     .filter((r): r is string => Boolean(r) && r.startsWith("/"))
@@ -92,7 +95,7 @@ export function ArtistSocial({
       {localReels.length > 0 ? (
         <>
           <RevealOnScroll as="p" delay={0.12} className="mt-4 max-w-md text-text-secondary">
-            Directos, backstage y lo que va cayendo.
+            {tr(locale, "Directos, backstage y lo que va cayendo.")}
           </RevealOnScroll>
           <StaggerGroup
             stagger={0.1}
@@ -126,7 +129,7 @@ export function ArtistSocial({
             </span>
             <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-white/85">
               Directos, backstage y el día a día de {name}: todo eso está en su
-              Instagram. Dale un vistazo.
+              {tr(locale, "Instagram. Dale un vistazo.")}
             </p>
             <div className="mt-8">{pills}</div>
           </div>
