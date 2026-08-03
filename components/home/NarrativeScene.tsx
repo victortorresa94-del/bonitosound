@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { MotionImage } from "@/components/home/MotionImage";
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
+import { useLocale } from "@/components/LocaleProvider";
+import { localePath } from "@/lib/i18n";
+import { escenaCa } from "@/lib/content-i18n";
 import type { HomeScene } from "@/lib/home";
 
 type NarrativeSceneProps = {
@@ -39,6 +42,16 @@ export function NarrativeScene({
 }: NarrativeSceneProps) {
   const flip = index % 2 === 1;
 
+  // En catalán se sustituye el copy de la escena; si una escena aún no está
+  // traducida, se queda en castellano en vez de desaparecer.
+  const locale = useLocale();
+  const trad = locale === "ca" ? escenaCa(scene.id) : undefined;
+  const kicker = trad?.kicker ?? scene.kicker;
+  const statement = trad?.statement ?? scene.statement;
+  const accent = trad?.accent ?? scene.accent;
+  const support = trad?.support ?? scene.support;
+  const ctaLabel = trad?.cta ?? scene.cta?.label;
+
   const text = (
     <div className={media ? "md:max-w-xl" : "mx-auto max-w-3xl text-center"}>
       <RevealOnScroll y={20}>
@@ -47,13 +60,13 @@ export function NarrativeScene({
             media ? "" : "justify-center"
           }`}
         >
-          <span>{scene.kicker}</span>
+          <span>{kicker}</span>
         </div>
       </RevealOnScroll>
 
       <RevealOnScroll y={28} delay={0.06}>
         <h2 className="statement text-[clamp(2.1rem,5vw,4.2rem)]">
-          {renderStatement(scene.statement, scene.accent)}
+          {renderStatement(statement, accent)}
         </h2>
       </RevealOnScroll>
 
@@ -63,7 +76,7 @@ export function NarrativeScene({
             media ? "" : "mx-auto"
           } max-w-prose`}
         >
-          {scene.support}
+          {support}
         </p>
       </RevealOnScroll>
 
@@ -71,13 +84,13 @@ export function NarrativeScene({
         <RevealOnScroll y={16} delay={0.2}>
           <div className={`mt-9 ${media ? "" : "flex justify-center"}`}>
             {scene.id === "cierre" ? (
-              <Link href={scene.cta.href} className="btn btn-primary px-8 py-4 text-base">
-                {scene.cta.label}
+              <Link href={localePath(scene.cta.href, locale)} className="btn btn-primary px-8 py-4 text-base">
+                {ctaLabel}
                 <span aria-hidden="true">→</span>
               </Link>
             ) : (
-              <Link href={scene.cta.href} className="more-link">
-                {scene.cta.label}
+              <Link href={localePath(scene.cta.href, locale)} className="more-link">
+                {ctaLabel}
                 <span className="arrow" aria-hidden="true">
                   →
                 </span>
@@ -105,7 +118,7 @@ export function NarrativeScene({
             <RevealOnScroll y={36} delay={0.1}>
               <MotionImage
                 src={media}
-                alt={scene.statement}
+                alt={statement}
                 preset={scene.motionPreset ?? "kenburns"}
                 fit={media.includes("jaleo-sound") ? "contain" : "cover"}
                 size={scene.mediaSize ?? "md"}

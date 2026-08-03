@@ -21,6 +21,9 @@ import { serviceDetail } from "@/lib/servicesDetail";
 import { getEventos, getGiras, getArtists } from "@/lib/content";
 import { findAsset, findLogo } from "@/lib/assets";
 import { brands, site } from "@/lib/site";
+import { serverLocale } from "@/lib/locale-server";
+import { t } from "@/lib/i18n";
+import { servicioCa } from "@/lib/content-i18n";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -46,6 +49,15 @@ export function ServicePage({
   service: Service;
   caseSlot?: ReactNode;
 }) {
+  // En catalán se sustituye la cabecera (rótulo, titular y entradilla). Lo que
+  // aún no esté traducido se queda en castellano en vez de desaparecer.
+  const locale = serverLocale();
+  const trad = locale === "ca" ? servicioCa(service.slug) : undefined;
+  const eyebrow = trad?.eyebrow ?? service.eyebrow;
+  const h1 = trad?.h1 ?? service.h1;
+  const h1Cyan = trad ? trad.h1Cyan : service.h1Cyan;
+  const desc = trad?.desc ?? service.desc;
+
   const mailto = `mailto:${site.emails.booking}?subject=${encodeURIComponent(service.ctaSubject)}`;
   const illo = heroIllo(service.slug);
   const d = serviceDetail[service.slug] ?? {};
@@ -78,8 +90,8 @@ export function ServicePage({
         data={{
           "@context": "https://schema.org",
           "@type": "Service",
-          name: `${service.eyebrow} — Bonito Sound`,
-          description: service.desc,
+          name: `${eyebrow} — Bonito Sound`,
+          description: desc,
           provider: { "@type": "Organization", name: site.legalName },
           areaServed: "ES",
           url: `${site.url}${service.path}`,
@@ -98,21 +110,21 @@ export function ServicePage({
       <section className="border-b border-subtle">
         <div className={`wrap grid items-center gap-10 py-16 md:py-24 ${illo ? "md:grid-cols-[1.05fr_0.95fr]" : ""}`}>
           <div className={illo ? "" : "max-w-3xl"}>
-            <RevealOnScroll as="p" className="eyebrow mb-4">{service.eyebrow}</RevealOnScroll>
-            {service.h1Cyan && service.h1.includes(service.h1Cyan) ? (
+            <RevealOnScroll as="p" className="eyebrow mb-4">{eyebrow}</RevealOnScroll>
+            {h1Cyan && h1.includes(h1Cyan) ? (
               <RevealOnScroll as="h1" className="display text-[clamp(2.6rem,7vw,5.4rem)] leading-[1.02]">
-                {service.h1.slice(0, service.h1.indexOf(service.h1Cyan))}
-                <span style={{ color: CYAN }}>{service.h1Cyan}</span>
-                {service.h1.slice(service.h1.indexOf(service.h1Cyan) + service.h1Cyan.length)}
+                {h1.slice(0, h1.indexOf(h1Cyan))}
+                <span style={{ color: CYAN }}>{h1Cyan}</span>
+                {h1.slice(h1.indexOf(h1Cyan) + h1Cyan.length)}
               </RevealOnScroll>
             ) : (
               <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
-                {service.h1}
+                {h1}
               </SplitTextReveal>
             )}
-            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>{service.desc}</RevealOnScroll>
+            <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>{desc}</RevealOnScroll>
             <RevealOnScroll className="mt-9" delay={0.35}>
-              <MagneticButton strength={0.35}><Cta href={mailto}>Hablamos →</Cta></MagneticButton>
+              <MagneticButton strength={0.35}><Cta href={mailto}>{t(locale, "cta.hablamos")} →</Cta></MagneticButton>
             </RevealOnScroll>
           </div>
           {illo && (
