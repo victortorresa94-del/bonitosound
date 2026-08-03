@@ -93,9 +93,7 @@ export function EventosArtistasShowcase({ eventos }: { eventos: Evento[] }) {
           {tr(locale, "Giras y directos que montamos.")}
         </h2>
         <p className="mb-12 max-w-2xl text-base text-text-secondary md:text-lg">
-          No solo activamos marcas. Cuando el que sube al escenario es el artista,
-          ponemos la producción, la técnica y la logística de la gira — para que lo
-          único que se vea sea el directo.
+          {tr(locale, "No solo activamos marcas. Cuando el que sube al escenario es el artista, ponemos la producción, la técnica y la logística de la gira — para que lo único que se vea sea el directo.")}
         </p>
 
         <div className="grid gap-6 md:grid-cols-3 md:gap-8">

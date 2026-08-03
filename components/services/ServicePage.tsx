@@ -305,7 +305,7 @@ export function ServicePage({
             )}
             <div className="mt-12 flex flex-wrap items-end justify-between gap-4">
               <p className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>{tr(locale, "Marcas que han confiado")}</p>
-              <Link href="/experiencias" className="text-sm font-semibold text-white/70 underline-offset-4 hover:text-white hover:underline">Ver los eventos →</Link>
+              <Link href={localePath("/experiencias", locale)} className="text-sm font-semibold text-white/70 underline-offset-4 hover:text-white hover:underline">{tr(locale, "Ver los eventos →")}</Link>
             </div>
             <StaggerGroup stagger={0.04} className="mt-8 flex flex-wrap items-center gap-3 md:gap-4">
               {brands

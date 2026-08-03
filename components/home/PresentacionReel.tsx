@@ -28,8 +28,7 @@ export function PresentacionReel() {
             {tr(locale, "Míranos un minuto. Luego hablamos.")}
           </SplitTextReveal>
           <RevealOnScroll as="p" className="mt-6 text-lg text-text-secondary" delay={0.2}>
-            Nuestra presentación, en vídeo. Si te encaja lo que ves, el día a día
-            lo contamos en Instagram — ahí está lo que montamos, semana a semana.
+            {tr(locale, "Nuestra presentación, en vídeo. Si te encaja lo que ves, el día a día lo contamos en Instagram — ahí está lo que montamos, semana a semana.")}
           </RevealOnScroll>
           <RevealOnScroll className="mt-8" delay={0.35}>
             <MagneticButton strength={0.35}>

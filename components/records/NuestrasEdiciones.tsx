@@ -45,8 +45,7 @@ export function NuestrasEdiciones() {
         {tr(locale, "Más de 150 lanzamientos desde 2022.")}
       </SplitTextReveal>
       <RevealOnScroll as="p" className="mt-4 max-w-2xl text-lg text-text-secondary" delay={0.15}>
-        El sello no es una promesa: es un catálogo. Estas son algunas de las
-        ediciones que han salido con nosotros — del máster a las plataformas.
+        {tr(locale, "El sello no es una promesa: es un catálogo. Estas son algunas de las ediciones que han salido con nosotros — del máster a las plataformas.")}
       </RevealOnScroll>
 
       <StaggerGroup stagger={0.06} className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

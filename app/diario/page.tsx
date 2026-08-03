@@ -47,9 +47,7 @@ export default function Diario() {
               {tr(locale, "Lo que va pasando, sin postureo.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" delay={0.2} className="mt-6 max-w-2xl text-lg text-text-secondary">
-              Cómo funciona esto por dentro: booking, sellos, distribución,
-              eventos de marca. Lo que nos gustaría que alguien nos hubiera
-              contado cuando empezamos.
+              {tr(locale, "Cómo funciona esto por dentro: booking, sellos, distribución, eventos de marca. Lo que nos gustaría que alguien nos hubiera contado cuando empezamos.")}
             </RevealOnScroll>
           </div>
         </div>
@@ -99,8 +97,7 @@ export default function Diario() {
               {tr(locale, "Todavía no hemos escrito nada aquí.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mx-auto mt-4 max-w-lg text-text-secondary" delay={0.2}>
-              El blog se llena cuando hay algo que contar de verdad. Mientras
-              tanto, lo que se cuece está en Instagram.
+              {tr(locale, "El blog se llena cuando hay algo que contar de verdad. Mientras tanto, lo que se cuece está en Instagram.")}
             </RevealOnScroll>
             <RevealOnScroll className="mt-8 flex justify-center" delay={0.35}>
               <MagneticButton strength={0.35}>

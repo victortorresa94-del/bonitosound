@@ -14,6 +14,7 @@ import { findAsset, findLogo, assetSlug } from "@/lib/assets";
 import { brands, distributionCatalog, distributionPlatforms } from "@/lib/site";
 import { serverLocale } from "@/lib/locale-server";
 import { tr } from "@/lib/copy-ca";
+import { localePath } from "@/lib/i18n";
 
 const CYAN = "#16b6d4";
 
@@ -184,9 +185,7 @@ export function DistribucionCase() {
             {tr(locale, "Hablado antes de empezar. Sin sorpresas.")}
           </SplitTextReveal>
           <RevealOnScroll as="p" className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary" delay={0.15}>
-            La distribución se ajusta a lo que necesitas —un single suelto o todo tu
-            catálogo— y lo cerramos contigo antes de subir nada. Sin letra pequeña:
-            tu música sigue siendo tuya.
+            {tr(locale, "La distribución se ajusta a lo que necesitas —un single suelto o todo tu catálogo— y lo cerramos contigo antes de subir nada. Sin letra pequeña: tu música sigue siendo tuya.")}
           </RevealOnScroll>
           <RevealOnScroll className="mx-auto mt-7 w-40" delay={0.2}>
             <svg viewBox="0 0 160 16" fill="none" aria-hidden className="h-4 w-full">
@@ -206,7 +205,7 @@ export function BrandsCase() {
     <Section>
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <RevealOnScroll as="p" className="eyebrow">{tr(locale, "Marcas que han confiado")}</RevealOnScroll>
-        <Link href="/experiencias" className="link-underline text-sm text-text-secondary">Ver los eventos →</Link>
+        <Link href={localePath("/experiencias", locale)} className="link-underline text-sm text-text-secondary">{tr(locale, "Ver los eventos →")}</Link>
       </div>
       <MarqueeLogoWall items={brands} dir="marcas" speed={42} direction="right" />
     </Section>

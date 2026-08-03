@@ -54,8 +54,7 @@ export default function Giraverse() {
               {tr(locale, "Las giras dejan de montarse a mano.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
-              Circulación de giras nacional e internacional, ordenada. Lo que
-              ahora resuelven cien llamadas y una hoja de cálculo compartida.
+              {tr(locale, "Circulación de giras nacional e internacional, ordenada. Lo que ahora resuelven cien llamadas y una hoja de cálculo compartida.")}
             </RevealOnScroll>
             <RevealOnScroll className="mt-9" delay={0.35}>
               <MagneticButton strength={0.35}>

@@ -73,8 +73,7 @@ export default function Agenda() {
               {tr(locale, "Agenda en construcción.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mx-auto mt-4 max-w-lg text-text-secondary" delay={0.2}>
-              Estamos cerrando las próximas fechas. Si quieres a alguien del
-              roster en tu sala o festival, no esperes a la agenda: escríbenos.
+              {tr(locale, "Estamos cerrando las próximas fechas. Si quieres a alguien del roster en tu sala o festival, no esperes a la agenda: escríbenos.")}
             </RevealOnScroll>
             <RevealOnScroll className="mt-8 flex justify-center" delay={0.35}>
               <MagneticButton strength={0.35}>

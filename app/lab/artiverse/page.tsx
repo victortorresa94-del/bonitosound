@@ -63,9 +63,7 @@ export default function Artiverse() {
               {tr(locale, "Deja de trabajar a ciegas.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
-              La app de la programación artística: artistas, promotores,
-              salas y agencias en la misma plataforma, con datos reales en
-              vez de corazonadas. La parte del sector que decidió ordenarse.
+              {tr(locale, "La app de la programación artística: artistas, promotores, salas y agencias en la misma plataforma, con datos reales en vez de corazonadas. La parte del sector que decidió ordenarse.")}
             </RevealOnScroll>
             <RevealOnScroll className="mt-9" delay={0.35}>
               <MagneticButton strength={0.35}>

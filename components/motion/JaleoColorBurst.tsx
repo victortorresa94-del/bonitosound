@@ -37,8 +37,7 @@ export function JaleoColorBurst() {
                 {tr(locale, "Y un festival propio en Amsterdam, porque por qué no.")}
               </h2>
               <p className="mt-5 max-w-2xl" style={{ opacity: 0.85 }}>
-                Cultura española y latina. No massive stages, no VIP fences, no
-                nonsense. Just music, good taste, great food and people.
+                {tr(locale, "Cultura española y latina. No massive stages, no VIP fences, no nonsense. Just music, good taste, great food and people.")}
               </p>
               <div className="mt-9 flex flex-wrap gap-4">
                 <MagneticButton strength={0.35}>

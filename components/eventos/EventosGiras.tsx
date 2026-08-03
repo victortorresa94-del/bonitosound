@@ -32,9 +32,7 @@ export function EventosGiras({ eventos }: { eventos: Evento[] }) {
           {tr(locale, "También llenamos giras.")}
         </h2>
         <p className="mb-10 max-w-2xl text-base text-text-secondary md:text-lg">
-          No solo activamos marcas. Cuando el que sube al escenario es el artista,
-          ponemos la producción, la técnica y la logística de la gira — para que
-          lo único que se vea sea el directo.
+          {tr(locale, "No solo activamos marcas. Cuando el que sube al escenario es el artista, ponemos la producción, la técnica y la logística de la gira — para que lo único que se vea sea el directo.")}
         </p>
 
         {giras.length > 0 && (

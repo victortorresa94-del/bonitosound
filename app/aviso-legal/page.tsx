@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Section, Heading, Eyebrow } from "@/components/ui";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 export function generateMetadata(): Metadata {
   return {
@@ -12,6 +14,7 @@ export function generateMetadata(): Metadata {
 }
 
 export default function AvisoLegal() {
+  const locale = serverLocale();
   return (
     <Section>
       <Eyebrow>Legal</Eyebrow>
@@ -26,12 +29,10 @@ export default function AvisoLegal() {
           Contacto: {site.emails.general} · {site.phone}.
         </p>
         <p>
-          Actividad: actividades de grabación de sonido y edición musical (CNAE
-          5920).
+          {tr(locale, "Actividad: actividades de grabación de sonido y edición musical (CNAE 5920).")}
         </p>
         <p className="text-sm text-text-muted">
-          Texto legal completo pendiente de revisión jurídica antes del go-live
-          (§16 del brief: no publicar en producción sin revisión).
+          {tr(locale, "Texto legal completo pendiente de revisión jurídica antes del go-live (§16 del brief: no publicar en producción sin revisión).")}
         </p>
       </div>
     </Section>

@@ -124,8 +124,7 @@ export function LeadMagnetBrands() {
             ))}
           </ul>
           <p className="mb-6 max-w-lg text-text-secondary">
-            No te calculamos el precio por una web. Eso lo hablamos. Cuéntanos
-            el tuyo y te decimos qué se puede hacer de verdad.
+            {tr(locale, "No te calculamos el precio por una web. Eso lo hablamos. Cuéntanos el tuyo y te decimos qué se puede hacer de verdad.")}
           </p>
           <a
             href={`mailto:${site.emails.general}?subject=Activación de marca&body=${encodeURIComponent(

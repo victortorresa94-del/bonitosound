@@ -1012,6 +1012,40 @@ const CA: Record<string, string> = {
   "Bonito Sound se monta en 2022 en Sabadell. ": "Bonito Sound es munta el 2022 a Sabadell. ",
   "La empresa es joven; el oficio, no.": "L'empresa és jove; l'ofici, no.",
   "Activación de marca con música — Bonito Sound": "Activació de marca amb música — Bonito Sound",
+
+  // ── Párrafos largos que quedaban ──
+  "Estamos cerrando las próximas fechas. Si quieres a alguien del roster en tu sala o festival, no esperes a la agenda: escríbenos.":
+    "Estem tancant les properes dates. Si vols algú del roster a la teva sala o festival, no esperis a l'agenda: escriu-nos.",
+  "Los datos que nos facilites a través de los formularios se usan solo para responderte y gestionar tu solicitud. No los vendemos ni los cedemos a terceros.":
+    "Les dades que ens facilitis a través dels formularis només es fan servir per respondre't i gestionar la teva sol·licitud. No les venem ni les cedim a tercers.",
+  "Puedes ejercer tus derechos de acceso, rectificación y supresión escribiendo a":
+    "Pots exercir els teus drets d'accés, rectificació i supressió escrivint a",
+  "Política RGPD completa pendiente de revisión jurídica antes del go-live.":
+    "Política RGPD completa pendent de revisió jurídica abans del go-live.",
+  "Actividad: actividades de grabación de sonido y edición musical (CNAE 5920).":
+    "Activitat: activitats d'enregistrament de so i edició musical (CNAE 5920).",
+  "Texto legal completo pendiente de revisión jurídica antes del go-live (§16 del brief: no publicar en producción sin revisión).":
+    "Text legal complet pendent de revisió jurídica abans del go-live (§16 del brief: no publicar en producció sense revisió).",
+  "Cómo funciona esto por dentro: booking, sellos, distribución, eventos de marca. Lo que nos gustaría que alguien nos hubiera contado cuando empezamos.":
+    "Com funciona això per dins: booking, segells, distribució, esdeveniments de marca. El que ens hauria agradat que algú ens hagués explicat quan vam començar.",
+  "El blog se llena cuando hay algo que contar de verdad. Mientras tanto, lo que se cuece está en Instagram.":
+    "El blog s'omple quan hi ha alguna cosa a explicar de debò. Mentrestant, el que es cou és a Instagram.",
+  "La app de la programación artística: artistas, promotores, salas y agencias en la misma plataforma, con datos reales en vez de corazonadas. La parte del sector que decidió ordenarse.":
+    "L'app de la programació artística: artistes, promotors, sales i agències a la mateixa plataforma, amb dades reals en comptes de pressentiments. La part del sector que va decidir ordenar-se.",
+  "Circulación de giras nacional e internacional, ordenada. Lo que ahora resuelven cien llamadas y una hoja de cálculo compartida.":
+    "Circulació de gires nacional i internacional, ordenada. El que ara resolen cent trucades i un full de càlcul compartit.",
+  "No solo activamos marcas. Cuando el que sube al escenario es el artista, ponemos la producción, la técnica y la logística de la gira — para que lo único que se vea sea el directo.":
+    "No només activem marques. Quan qui puja a l'escenari és l'artista, hi posem la producció, la tècnica i la logística de la gira — perquè l'única cosa que es vegi sigui el directe.",
+  "No te calculamos el precio por una web. Eso lo hablamos. Cuéntanos el tuyo y te decimos qué se puede hacer de verdad.":
+    "No et calculem el preu per una web. Això ho parlem. Explica'ns el teu i et diem què es pot fer de debò.",
+  "Nuestra presentación, en vídeo. Si te encaja lo que ves, el día a día lo contamos en Instagram — ahí está lo que montamos, semana a semana.":
+    "La nostra presentació, en vídeo. Si t'encaixa el que veus, el dia a dia l'expliquem a Instagram — allà hi ha el que muntem, setmana a setmana.",
+  "Cultura española y latina. No massive stages, no VIP fences, no nonsense. Just music, good taste, great food and people.":
+    "Cultura espanyola i llatina. No massive stages, no VIP fences, no nonsense. Just music, good taste, great food and people.",
+  "Ver los eventos →":
+    "Veure els esdeveniments →",
+  "Bonito Sound — música, eventos para marcas, festival y tecnología del sector":
+    "Bonito Sound — música, esdeveniments per a marques, festival i tecnologia del sector",
 };
 
 /**
