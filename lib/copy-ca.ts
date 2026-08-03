@@ -231,6 +231,209 @@ const CA: Record<string, string> = {
   "Qué ponemos": "Què hi posem",
   "Casos": "Casos",
   "Playlist de Bonito Sound": "Playlist de Bonito Sound",
+
+  // ── Páginas de servicio (contenido profundo) ──
+  "Una gira son veinte noches distintas que tienen que salir igual de bien. Nosotros ponemos todo lo que hay alrededor del artista —técnica, escenario, transporte y coordinación— para que él solo tenga que subirse y tocar.":
+    "Una gira són vint nits diferents que han de sortir igual de bé. Nosaltres hi posem tot el que hi ha al voltant de l'artista —tècnica, escenari, transport i coordinació— perquè ell només s'hagi de pujar a l'escenari i tocar.",
+  "Sonido, backline, monitores, microfonía y la ingeniería del directo. Con equipo propio, para que suene igual de bien en cada plaza.":
+    "So, backline, monitors, microfonia i l'enginyeria del directe. Amb equip propi, perquè soni igual de bé a cada plaça.",
+  "Escenario y luces": "Escenari i llums",
+  "Montaje de escenario, iluminación y puesta en escena. Lo mismo en un teatro que en un festival, adaptado a lo que da cada sala.":
+    "Muntatge d'escenari, il·luminació i posada en escena. Tant en un teatre com en un festival, adaptat al que dona cada sala.",
+  "Logística y transporte": "Logística i transport",
+  "Furgonetas, tiempos, permisos y el plan B. Que el equipo y la banda estén donde tienen que estar, a la hora que tienen que estar.":
+    "Furgonetes, temps, permisos i el pla B. Que l'equip i la banda siguin on han de ser, a l'hora que han de ser-hi.",
+  "Un solo interlocutor de la primera llamada al desmontaje. Nadie rebotando entre cinco proveedores; una persona que responde.":
+    "Un sol interlocutor de la primera trucada al desmuntatge. Ningú rebotant entre cinc proveïdors; una persona que respon.",
+  "Avance con promotores y salas": "Avançament amb promotors i sales",
+  "Hablamos con cada promotor antes de llegar: qué hay en la sala, qué falta, qué horarios hay. Los problemas se resuelven por teléfono, no en el load-in.":
+    "Parlem amb cada promotor abans d'arribar: què hi ha a la sala, què falta, quins horaris hi ha. Els problemes es resolen per telèfon, no al load-in.",
+  "Alguien de los nuestros en la carretera con la gira: cuadrar el día, resolver lo que salga y que el artista no tenga que ocuparse de nada.":
+    "Algú dels nostres a la carretera amb la gira: quadrar el dia, resoldre el que surti i que l'artista no s'hagi d'ocupar de res.",
+  "Cómo se lleva una gira": "Com es porta una gira",
+  "Producción previa": "Producció prèvia",
+  "Avance con promotores y salas plaza a plaza: qué equipo hay, qué llevamos nosotros y qué horarios maneja cada una.":
+    "Avançament amb promotors i sales plaça a plaça: quin equip hi ha, què hi portem nosaltres i quins horaris manega cadascuna.",
+  "Hojas de ruta": "Fulls de ruta",
+  "Cada fecha documentada: tiempos, contactos, accesos, catering y transporte. Todo el mundo sabe qué pasa y cuándo.":
+    "Cada data documentada: temps, contactes, accessos, càtering i transport. Tothom sap què passa i quan.",
+  "Road y transporte": "Road i transport",
+  "Salimos a carretera con la gira. Equipo, banda y material moviéndose según lo previsto, con quien resuelve al lado.":
+    "Sortim a carretera amb la gira. Equip, banda i material movent-se segons el previst, amb qui ho resol al costat.",
+  "El directo": "El directe",
+  "Montaje, prueba de sonido, show y desmontaje. Y a la mañana siguiente, la plaza que toca.":
+    "Muntatge, prova de so, xou i desmuntatge. I l'endemà al matí, la plaça que toca.",
+  "giras llevadas": "gires portades",
+  "artistas de gira": "artistes de gira",
+  "años de oficio": "anys d'ofici",
+  "Giras que hemos llevado": "Gires que hem portat",
+  "Cerrar un bolo no es mandar un dossier y esperar. Es saber qué sala, qué fecha y qué cartel encajan, y tener a quién llamar. Eso es lo que ponemos.":
+    "Tancar un bolo no és enviar un dossier i esperar. És saber quina sala, quina data i quin cartell encaixen, i tenir a qui trucar. Això és el que hi posem.",
+  "Agenda real": "Agenda real",
+  "Sabemos qué salas y festivales encajan con cada artista, y en qué fecha. No disparamos a todo a ver qué cae.":
+    "Sabem quines sales i festivals encaixen amb cada artista, i en quina data. No disparem a tot a veure què cau.",
+  "Trato directo": "Tracte directe",
+  "Hablas con quien lleva al artista, no con un buzón. Treinta años de contactos en la industria detrás de cada llamada.":
+    "Parles amb qui porta l'artista, no amb una bústia. Trenta anys de contactes a la indústria darrere de cada trucada.",
+  "El directo montado": "El directe muntat",
+  "Cerramos la fecha y montamos lo que hace falta para que salga: producción, técnica y logística.":
+    "Tanquem la data i muntem el que calgui perquè surti: producció, tècnica i logística.",
+  "Dentro y fuera": "Dins i fora",
+  "Giras nacionales e internacionales. Tenemos artistas con base fuera de España y sabemos moverlos.":
+    "Gires nacionals i internacionals. Tenim artistes amb base fora d'Espanya i els sabem moure.",
+  "Cómo cerramos una fecha": "Com tanquem una data",
+  "Escuchamos el proyecto": "Escoltem el projecte",
+  "Dónde está el artista, qué directo tiene y hacia dónde quiere ir.":
+    "On és l'artista, quin directe té i cap on vol anar.",
+  "Trazamos la ruta": "Tracem la ruta",
+  "Qué salas y festivales tienen sentido, en qué fechas y en qué orden.":
+    "Quines sales i festivals tenen sentit, en quines dates i en quin ordre.",
+  "Cerramos y negociamos": "Tanquem i negociem",
+  "Llamamos, cuadramos condiciones y aseguramos la fecha.":
+    "Truquem, quadrem condicions i assegurem la data.",
+  "Montamos el directo": "Muntem el directe",
+  "Producción, técnica y road para que el artista solo tenga que subir al escenario.":
+    "Producció, tècnica i road perquè l'artista només hagi de pujar a l'escenari.",
+  "Directos y giras que hemos montado": "Directes i gires que hem muntat",
+  "El booking cierra fechas; el management lleva la carrera entera. Estrategia, calendario y las decisiones que importan a medio plazo — con alguien que tiene la foto completa.":
+    "El booking tanca dates; el management porta la carrera sencera. Estratègia, calendari i les decisions que importen a mitjà termini — amb algú que té la foto completa.",
+  "Qué llevamos": "Què portem",
+  "Estrategia con criterio": "Estratègia amb criteri",
+  "Qué sale, cuándo y por qué. Decidimos el siguiente paso con argumentos, no con prisas.":
+    "Què surt, quan i per què. Decidim el pas següent amb arguments, no amb presses.",
+  "A mano": "A mà",
+  "Aquí no hay artistas de primera y de segunda: a cada artista lo lleva una persona con nombre, que coge el teléfono.":
+    "Aquí no hi ha artistes de primera i de segona: cada artista el porta una persona amb nom, que despenja el telèfon.",
+  "Calendario ordenado": "Calendari ordenat",
+  "Lanzamientos, bolos y contenido en un mismo plan, para que no choquen entre sí.":
+    "Llançaments, bolos i contingut en un mateix pla, perquè no xoquin entre ells.",
+  "Todo en la misma casa": "Tot a la mateixa casa",
+  "Booking, sello y distribución hablan entre sí porque están bajo el mismo techo. El artista no va rebotando.":
+    "Booking, segell i distribució es parlen perquè són sota el mateix sostre. L'artista no va rebotant.",
+  "Cómo entramos": "Com hi entrem",
+  "Foto completa": "Foto completa",
+  "Vemos dónde estás: música, directo, números y equipo.":
+    "Veiem on ets: música, directe, números i equip.",
+  "Plan a medio plazo": "Pla a mitjà termini",
+  "Ordenamos lanzamientos, bolos y decisiones en un calendario con sentido.":
+    "Ordenem llançaments, bolos i decisions en un calendari amb sentit.",
+  "Ejecución": "Execució",
+  "Lo movemos con el resto de la casa: sello, distribución, booking.":
+    "Ho movem amb la resta de la casa: segell, distribució, booking.",
+  "Revisión": "Revisió",
+  "Miramos qué funciona y ajustamos. La carrera es larga; se lleva, no se improvisa.":
+    "Mirem què funciona i ho ajustem. La carrera és llarga; es porta, no s'improvisa.",
+  "Producimos, publicamos y empujamos la música de nuestros artistas asumiendo parte del riesgo. Pocos proyectos, en serio: del primer demo al máster listo para plataformas.":
+    "Produïm, publiquem i empenyem la música dels nostres artistes assumint part del risc. Pocs projectes, de debò: de la primera maqueta al màster llest per a plataformes.",
+  "Producción propia": "Producció pròpia",
+  "Del primer demo al máster. El álbum MARCA DIVINA de Eva Calyza salió de aquí.":
+    "De la primera maqueta al màster. L'àlbum MARCA DIVINA d'Eva Calyza va sortir d'aquí.",
+  "Criterio": "Criteri",
+  "Te decimos qué single sale y por qué. Con argumentos, no con corazonadas.":
+    "Et diem quin single surt i per què. Amb arguments, no amb pressentiments.",
+  "Empuje": "Empenta",
+  "Publicar es el minuto uno. Sabemos qué hacer al día siguiente para que la canción llegue.":
+    "Publicar és el minut u. Sabem què fer l'endemà perquè la cançó arribi.",
+  "Un sistema, no un cajón": "Un sistema, no un calaix",
+  "Sello, booking y distribución trabajan juntos. No sueltas la música y a ver qué pasa.":
+    "Segell, booking i distribució treballen junts. No amolles la música i a veure què passa.",
+  "Del máster a la calle": "Del màster al carrer",
+  "Escuchamos": "Escoltem",
+  "Nos mandas lo que tienes. Si encaja y hay ganas por las dos partes, seguimos.":
+    "Ens envies el que tens. Si encaixa i hi ha ganes per les dues bandes, seguim.",
+  "Producimos": "Produïm",
+  "Del demo al máster, decidiendo repertorio y calendario contigo.":
+    "De la maqueta al màster, decidint repertori i calendari amb tu.",
+  "Publicamos": "Publiquem",
+  "Sacamos con los metadatos y la estrategia en orden, no a lo loco.":
+    "Traiem amb les metadades i l'estratègia en ordre, no a la babalà.",
+  "Empujamos": "Empenyem",
+  "Ads, playlists, directo. Movemos la canción con el resto de la casa.":
+    "Ads, playlists, directe. Movem la cançó amb la resta de la casa.",
+  "Escucha lo que sacamos": "Escolta el que traiem",
+  "La parte menos vistosa y de las más importantes: los derechos de autor de tus canciones. Registrarlos, seguir sus usos y asegurar que cada uno genere lo que debe.":
+    "La part menys vistosa i de les més importants: els drets d'autor de les teves cançons. Registrar-los, seguir-ne els usos i assegurar que cadascun generi el que ha de generar.",
+  "Qué gestionamos": "Què gestionem",
+  "Registro en orden": "Registre en ordre",
+  "Tus obras registradas y bien documentadas, para que nada se pierda por el camino.":
+    "Les teves obres registrades i ben documentades, perquè no es perdi res pel camí.",
+  "Que rinda": "Que rendeixi",
+  "Seguimos los usos de tu música y nos ocupamos de que cada uno genere lo que tiene que generar.":
+    "Seguim els usos de la teva música i ens ocupem que cadascun generi el que ha de generar.",
+  "Sincronizaciones": "Sincronitzacions",
+  "Tu música en anuncios, series o eventos cuando encaja. Una vía más para que suene y rinda.":
+    "La teva música en anuncis, sèries o esdeveniments quan encaixa. Una via més perquè soni i rendeixi.",
+  "Seguimiento": "Seguiment",
+  "No es registrar y olvidar. Vigilamos que los derechos acaben donde tienen que acabar.":
+    "No és registrar i oblidar. Vigilem que els drets acabin on han d'acabar.",
+  "Cómo lo llevamos": "Com ho portem",
+  "Registramos": "Registrem",
+  "Damos de alta tus obras y las documentamos: autoría, splits, todo en su sitio.":
+    "Donem d'alta les teves obres i les documentem: autoria, splits, tot al seu lloc.",
+  "Vigilamos": "Vigilem",
+  "Seguimos dónde suena tu música y qué usos genera, aquí y fuera.":
+    "Seguim on sona la teva música i quins usos genera, aquí i fora.",
+  "Cobramos lo que toca": "Cobrem el que toca",
+  "Nos aseguramos de que cada uso te llegue, sin que nada se pierda por el camino.":
+    "Ens assegurem que cada ús t'arribi, sense que es perdi res pel camí.",
+  "Buscamos syncs": "Busquem syncs",
+  "Cuando aparece una oportunidad en anuncio, serie o evento, la gestionamos entera.":
+    "Quan apareix una oportunitat en anunci, sèrie o esdeveniment, la gestionem sencera.",
+  "obras donde somos editorial": "obres on som editorial",
+  "Llevamos tu música a todas las plataformas con los metadatos en orden, para que se pueda escuchar, encontrar y pagar como toca. Subir la canción es el minuto uno; distribuir bien es todo lo demás.":
+    "Portem la teva música a totes les plataformes amb les metadades en ordre, perquè es pugui escoltar, trobar i pagar com toca. Pujar la cançó és el minut u; distribuir bé és tota la resta.",
+  "A todas partes": "A tot arreu",
+  "Spotify, Apple Music, YouTube, Amazon, Deezer y las demás. Tu música donde tiene que estar.":
+    "Spotify, Apple Music, YouTube, Amazon, Deezer i la resta. La teva música on ha de ser.",
+  "Metadatos en orden": "Metadades en ordre",
+  "Título, autoría, ISRC, créditos. Bien puestos, para que te encuentren y los derechos no acaben donde no deben.":
+    "Títol, autoria, ISRC, crèdits. Ben posats, perquè et trobin i els drets no acabin on no toca.",
+  "Con seguimiento": "Amb seguiment",
+  "No es subir y olvidarse. Miramos cómo se mueve y cuándo tiene sentido apoyar un lanzamiento.":
+    "No és pujar i oblidar-se'n. Mirem com es mou i quan té sentit donar suport a un llançament.",
+  "Parte del sistema": "Part del sistema",
+  "Si además estás en sello o management, la distribución trabaja con el resto. No vas por libre.":
+    "Si a més ets al segell o al management, la distribució treballa amb la resta. No vas per lliure.",
+  "Del archivo a las plataformas": "De l'arxiu a les plataformes",
+  "Preparamos el lanzamiento": "Preparem el llançament",
+  "Audio, metadatos, ISRC, créditos y portada. Todo en regla antes de subir.":
+    "Àudio, metadades, ISRC, crèdits i portada. Tot en regla abans de pujar.",
+  "Entregamos con margen": "Lliurem amb marge",
+  "Con semanas de antelación, para dar tiempo a las plataformas y optar a listas editoriales.":
+    "Amb setmanes d'antelació, per donar temps a les plataformes i optar a llistes editorials.",
+  "Publicamos en todas": "Publiquem a totes",
+  "Spotify, Apple Music, YouTube, Amazon, Deezer y las demás, a la vez.":
+    "Spotify, Apple Music, YouTube, Amazon, Deezer i la resta, alhora.",
+  "Seguimos el dato": "Seguim la dada",
+  "Miramos cómo se mueve y cuándo tiene sentido apoyarlo con marketing.":
+    "Mirem com es mou i quan té sentit donar-hi suport amb màrqueting.",
+  "Ads, estrategia de redes y planes de lanzamiento para artistas y eventos. Venimos del sector musical: sabemos cómo se mueve un lanzamiento y cómo se llena una sala. No lo aprendemos sobre la marcha.":
+    "Ads, estratègia de xarxes i plans de llançament per a artistes i esdeveniments. Venim del sector musical: sabem com es mou un llançament i com s'omple una sala. No ho aprenem sobre la marxa.",
+  "Ads y paid media": "Ads i paid media",
+  "Campañas en Meta, TikTok y YouTube para mover oyentes y vender entradas. Medimos escuchas nuevas y entradas vendidas.":
+    "Campanyes a Meta, TikTok i YouTube per moure oients i vendre entrades. Mesurem escoltes noves i entrades venudes.",
+  "Contenido y redes": "Contingut i xarxes",
+  "Qué contar, cuándo y en qué formato. Calendario alineado con tus lanzamientos, no publicar por publicar.":
+    "Què explicar, quan i en quin format. Calendari alineat amb els teus llançaments, no publicar per publicar.",
+  "Lanzamientos": "Llançaments",
+  "Plan de salida para un single, un álbum o un evento: teaser, día de estreno y sostenimiento.":
+    "Pla de sortida per a un single, un àlbum o un esdeveniment: tràiler, dia d'estrena i sosteniment.",
+  "Vender entradas": "Vendre entrades",
+  "Igual que movemos un single, montamos campañas para llenar un directo o dar empujón a un evento.":
+    "Igual que movem un single, muntem campanyes per omplir un directe o donar empenta a un esdeveniment.",
+  "Cómo montamos una campaña": "Com muntem una campanya",
+  "El objetivo": "L'objectiu",
+  "Oyentes, entradas, territorio. Sobre lo que tengas de verdad encima de la mesa.":
+    "Oients, entrades, territori. Sobre el que tinguis de debò damunt la taula.",
+  "El material": "El material",
+  "Vídeos, cortes verticales y artes para cada formato, listos para pautar.":
+    "Vídeos, talls verticals i arts per a cada format, llestos per pautar.",
+  "La campaña": "La campanya",
+  "Configuramos, pauteamos y optimizamos en cada plataforma.":
+    "Configurem, pautem i optimitzem a cada plataforma.",
+  "El seguimiento": "El seguiment",
+  "Medimos lo que mueve la aguja y ajustamos mientras corre.":
+    "Mesurem el que mou l'agulla i ho ajustem mentre corre.",
 };
 
 /**

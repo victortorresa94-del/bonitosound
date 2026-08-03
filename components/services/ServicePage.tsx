@@ -22,8 +22,9 @@ import { getEventos, getGiras, getArtists } from "@/lib/content";
 import { findAsset, findLogo } from "@/lib/assets";
 import { brands, site } from "@/lib/site";
 import { serverLocale } from "@/lib/locale-server";
-import { t } from "@/lib/i18n";
+import { localePath, t } from "@/lib/i18n";
 import { servicioCa } from "@/lib/content-i18n";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -140,7 +141,7 @@ export function ServicePage({
           filas de tres. */}
       {d.whatWeDo ? (
         <Section className="bg-bg-primary">
-          <RevealOnScroll as="p" className="eyebrow mb-10">{d.whatWeDoTitle ?? "Qué hacemos"}</RevealOnScroll>
+          <RevealOnScroll as="p" className="eyebrow mb-10">{tr(locale, d.whatWeDoTitle ?? "Qué hacemos")}</RevealOnScroll>
           <StaggerGroup
             stagger={0.07}
             className={`grid gap-6 sm:grid-cols-2 ${d.whatWeDo.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}
@@ -150,20 +151,20 @@ export function ServicePage({
                 <span className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-accent-cyan/10 transition-all duration-300 group-hover:-rotate-6 group-hover:bg-accent-cyan/20" style={{ color: NAVY }}>
                   <ServiceIcon name={w.icon} className="transition-transform duration-300 group-hover:scale-110" />
                 </span>
-                <h3 className="display text-xl leading-tight">{w.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-text-secondary">{w.desc}</p>
+                <h3 className="display text-xl leading-tight">{tr(locale, w.title)}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-text-secondary">{tr(locale, w.desc)}</p>
               </div>
             ))}
           </StaggerGroup>
         </Section>
       ) : (
         <Section className="bg-bg-primary">
-          <RevealOnScroll as="p" className="eyebrow mb-8">Qué ponemos</RevealOnScroll>
+          <RevealOnScroll as="p" className="eyebrow mb-8">{tr(locale, "Qué ponemos")}</RevealOnScroll>
           <StaggerGroup stagger={0.08} className="grid gap-6 md:grid-cols-3">
             {service.aspects.map((a) => (
               <div key={a.name} className="card flex flex-col">
-                <h3 className="display text-xl">{a.name}</h3>
-                <p className="mt-3 text-sm text-text-secondary">{a.desc}</p>
+                <h3 className="display text-xl">{tr(locale, a.name)}</h3>
+                <p className="mt-3 text-sm text-text-secondary">{tr(locale, a.desc)}</p>
               </div>
             ))}
           </StaggerGroup>
@@ -175,7 +176,7 @@ export function ServicePage({
       {d.intro && (
         <Section>
           <RevealOnScroll as="p" className="statement mx-auto max-w-4xl text-center text-[clamp(1.5rem,3.4vw,2.5rem)] leading-tight text-text-primary">
-            {d.intro}
+            {tr(locale, d.intro)}
           </RevealOnScroll>
           <RevealOnScroll className="mx-auto mt-7 w-40" delay={0.15}>
             <svg viewBox="0 0 160 16" fill="none" aria-hidden className="h-4 w-full">
@@ -188,13 +189,13 @@ export function ServicePage({
       {/* PROCESO — pasos numerados. */}
       {d.process && (
         <Section>
-          <RevealOnScroll as="p" className="eyebrow mb-10">{d.processTitle ?? "Cómo trabajamos"}</RevealOnScroll>
+          <RevealOnScroll as="p" className="eyebrow mb-10">{tr(locale, d.processTitle ?? "Cómo trabajamos")}</RevealOnScroll>
           <StaggerGroup stagger={0.08} className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {d.process.map((p, i) => (
               <div key={p.title} className="relative">
                 <span className="font-round text-5xl font-bold leading-none" style={{ color: CYAN }}>{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-4 display text-xl leading-tight">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-text-secondary">{p.desc}</p>
+                <h3 className="mt-4 display text-xl leading-tight">{tr(locale, p.title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-text-secondary">{tr(locale, p.desc)}</p>
               </div>
             ))}
           </StaggerGroup>
@@ -209,7 +210,7 @@ export function ServicePage({
       {giraCases.length > 0 && (
         <Section className="bg-bg-primary">
           <RevealOnScroll as="p" className="eyebrow mb-3">
-            {d.giraSlugsTitle ?? "Giras"}
+            {tr(locale, d.giraSlugsTitle ?? "Giras")}
           </RevealOnScroll>
           <SplitTextReveal as="h2" split="lines" className="display mb-10 text-[clamp(1.8rem,4vw,3rem)]">
             Lo hemos llevado. No lo contamos.
@@ -250,7 +251,7 @@ export function ServicePage({
       {/* CASOS EN VÍDEO — eventos reales. */}
       {caseEventos.length > 0 && (
         <Section className="bg-bg-primary">
-          <RevealOnScroll as="p" className="eyebrow mb-3">{d.caseVideosTitle ?? "Casos"}</RevealOnScroll>
+          <RevealOnScroll as="p" className="eyebrow mb-3">{tr(locale, d.caseVideosTitle ?? "Casos")}</RevealOnScroll>
           <SplitTextReveal as="h2" split="lines" className="display mb-10 text-[clamp(1.8rem,4vw,3rem)]">
             Lo hemos montado. No lo contamos.
           </SplitTextReveal>
@@ -270,10 +271,10 @@ export function ServicePage({
       {/* ARTISTAS destacados. */}
       {caseArtists.length > 0 && (
         <Section>
-          <RevealOnScroll as="p" className="eyebrow mb-8">{d.artistsTitle ?? "A quién llevamos"}</RevealOnScroll>
+          <RevealOnScroll as="p" className="eyebrow mb-8">{tr(locale, d.artistsTitle ?? "A quién llevamos")}</RevealOnScroll>
           <StaggerGroup stagger={0.06} className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
             {caseArtists.map((a) => (
-              <Link key={a.slug} href={`/artistas/${a.slug}`} className="group">
+              <Link key={a.slug} href={localePath(`/artistas/${a.slug}`, locale)} className="group">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-subtle bg-bg-tertiary">
                   <Image src={a.photo!} alt={a.name} fill sizes="(max-width: 768px) 50vw, 20vw" className="object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0" />
                   <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/65 to-transparent p-3">
@@ -297,7 +298,7 @@ export function ServicePage({
                 {d.stats.map((s) => (
                   <div key={s.l}>
                     <p className="font-round font-bold leading-none text-white" style={{ fontSize: "clamp(2.6rem,6vw,4.4rem)" }}>{s.n}</p>
-                    <p className="mt-2 text-sm font-semibold uppercase leading-tight tracking-wide text-white/60">{s.l}</p>
+                    <p className="mt-2 text-sm font-semibold uppercase leading-tight tracking-wide text-white/60">{tr(locale, s.l)}</p>
                   </div>
                 ))}
               </div>
@@ -326,7 +327,7 @@ export function ServicePage({
         <Section className="bg-bg-primary">
           {d.spotifyPlaylistTitle && (
             <RevealOnScroll as="p" className="eyebrow mb-6">
-              {d.spotifyPlaylistTitle}
+              {tr(locale, d.spotifyPlaylistTitle)}
             </RevealOnScroll>
           )}
           <RevealOnScroll delay={0.08}>
@@ -344,7 +345,7 @@ export function ServicePage({
             {d.stats.map((s) => (
               <div key={s.l}>
                 <p className="font-round font-bold leading-none" style={{ color: NAVY, fontSize: "clamp(2.6rem,6vw,4.4rem)" }}>{s.n}</p>
-                <p className="mt-2 text-sm font-semibold uppercase leading-tight tracking-wide" style={{ color: NAVY }}>{s.l}</p>
+                <p className="mt-2 text-sm font-semibold uppercase leading-tight tracking-wide" style={{ color: NAVY }}>{tr(locale, s.l)}</p>
               </div>
             ))}
           </div>
@@ -355,17 +356,16 @@ export function ServicePage({
           dudas para el final). */}
       <Section>
         <CtaBlock
-          title={service.cta.h2}
-          desc={service.cta.desc}
-          href="/contacto"
-          cta="Contactar →"
+          title={tr(locale, service.cta.h2)}
+          desc={tr(locale, service.cta.desc)}
+          href={localePath("/contacto", locale)}
         />
       </Section>
 
       {/* FAQ (cierre de la página) */}
       <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-8">Preguntas frecuentes</RevealOnScroll>
-        <FaqOpen items={service.faq} />
+        <RevealOnScroll as="p" className="eyebrow mb-8">{tr(locale, "Preguntas frecuentes")}</RevealOnScroll>
+        <FaqOpen items={service.faq.map((f) => ({ ...f, q: tr(locale, f.q), a: tr(locale, f.a) }))} />
       </Section>
     </>
   );
