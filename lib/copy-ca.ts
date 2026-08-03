@@ -43,9 +43,23 @@ const CA: Record<string, string> = {
   "Coordinación integral": "Coordinació integral",
 
   // ── Artistas ──
+  "Artistas con": "Artistes amb",
+  "el rollo": "el rotllo",
+  "Booking · Management · Sello": "Booking · Management · Segell",
+  "Roster completo": "Roster complet",
+  "Catálogo de": "Catàleg de",
+  "distribución": "distribució",
+  "~20 artistas,": "~20 artistes,",
+  "una distribuidora.": "una distribuïdora.",
+  "Entre ellos,": "Entre ells,",
+  "— cantautor y actor salmantino con discografía propia.":
+    "— cantautor i actor salmantí amb discografia pròpia.",
+  "Producción de giras": "Producció de gires",
+  "Producción y dirección de gira": "Producció i direcció de gira",
+  "Producción técnica de giras": "Producció tècnica de gires",
+  "Producción técnica y logística": "Producció tècnica i logística",
   "El roster": "El roster",
   "A quién llevamos": "A qui portem",
-  "Roster completo": "Roster complet",
   "Ver la ficha": "Veure la fitxa",
   "Booking": "Booking",
   "Management": "Management",
@@ -98,6 +112,35 @@ const CA: Record<string, string> = {
   "Ha trabajado con": "Ha treballat amb",
   "Quiénes somos": "Qui som",
   "Dónde estamos": "On som",
+
+  // ── Contacto ──
+  "Hablemos": "Parlem-ne",
+  "Cogemos el teléfono,": "Despengem el telèfon,",
+  "no un formulario": "no un formulari",
+  "Cuéntanos tu proyecto, tu idea o lo que necesites. Te respondemos rápido, y por personas.":
+    "Explica'ns el teu projecte, la teva idea o el que necessitis. Et responem ràpid, i persones de veritat.",
+  "Cuéntanos el bolo para": "Explica'ns el bolo per a",
+  ": fecha, sitio y qué tienes en mente. Te respondemos rápido, y por personas.":
+    ": data, lloc i què tens al cap. Et responem ràpid, i persones de veritat.",
+  "Teléfono": "Telèfon",
+  "Ubicación": "Ubicació",
+
+  // ── Clientes ──
+  "Clientes": "Clients",
+  "Empresas que han confiado en hacerlo bonito.": "Empreses que han confiat a fer-ho bonic.",
+  "Marcas, agencias, festivales, ayuntamientos y asociaciones para las que ha trabajado Bonito Sound.":
+    "Marques, agències, festivals, ajuntaments i associacions per a qui ha treballat Bonito Sound.",
+  "Categorías": "Categories",
+  "Agencias y festivales": "Agències i festivals",
+  "Ayuntamientos": "Ajuntaments",
+  "Asociaciones e instituciones": "Associacions i institucions",
+  "Con quién lo hacemos": "Amb qui ho fem",
+  "Los que ponen la técnica, la logística y el músculo para que cada proyecto salga.":
+    "Els qui hi posen la tècnica, la logística i el múscul perquè cada projecte surti.",
+  "en total.": "en total.",
+  "¿Sumamos tu marca a la lista?": "Hi sumem la teva marca?",
+  "Cuéntanos qué tienes en mente y te decimos cómo lo montaríamos.":
+    "Explica'ns què tens al cap i et diem com ho muntaríem.",
 
   // ── Contacto y CTA ──
   "Hablamos": "Parlem",

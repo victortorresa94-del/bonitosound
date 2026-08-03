@@ -11,6 +11,8 @@ import { distributionCatalog, site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
 import { serverLocale } from "@/lib/locale-server";
 import { paginaCa } from "@/lib/content-i18n";
+import { tr } from "@/lib/copy-ca";
+import { localePath } from "@/lib/i18n";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -78,6 +80,7 @@ const ROSTER: RosterEntry[] = [
 ];
 
 export default function Artistas() {
+  const locale = serverLocale();
   const all = getArtists();
   // Parrilla curada del mockup (por slug, no por tier): estos 6 son el roster
   // de /artistas —Dulze incluida—, cada uno con su layout asimétrico. El `tier`
@@ -91,7 +94,7 @@ export default function Artistas() {
       return {
         ...r,
         name: r.external.name,
-        genre: r.external.genre,
+        genre: tr(locale, r.external.genre),
         href: r.external.href,
         photo: findAsset(r.external.photoDir, r.slug),
       };
@@ -117,9 +120,9 @@ export default function Artistas() {
             className="display leading-[0.95] text-[clamp(2.8rem,8.5vw,6.4rem)]"
           >
             <span style={{ color: NAVY }}>
-              Artistas con
+              {tr(locale, "Artistas con")}
               <br />
-              el rollo{" "}
+              {tr(locale, "el rollo")}{" "}
             </span>
             <span style={{ color: CYAN }}>bonito</span>
           </RevealOnScroll>
@@ -128,7 +131,7 @@ export default function Artistas() {
             delay={0.2}
             className="mt-4 text-lg font-medium text-[#14283C]"
           >
-            Booking · Management · Sello
+            {tr(locale, "Booking · Management · Sello")}
           </RevealOnScroll>
         </div>
       </section>
@@ -147,8 +150,8 @@ export default function Artistas() {
                 name={a.name}
                 genre={a.genre}
                 photo={a.photo}
-                href={a.href}
-                relation={a.relation}
+                href={a.href ? localePath(a.href, locale) : undefined}
+                relation={tr(locale, a.relation)}
                 // Hover-vídeo desactivado a propósito: no tenemos vídeos por
                 // artista bien alojados aún. Se reactiva pasando `video={a.video}`
                 // cuando los haya. Mientras, la tarjeta se queda con la foto.
@@ -159,11 +162,11 @@ export default function Artistas() {
           </StaggerGroup>
           <RevealOnScroll className="mt-10 flex justify-end">
             <Link
-              href="/artistas/todos"
+              href={localePath("/artistas/todos", locale)}
               className="group inline-flex items-center gap-2 text-lg font-semibold"
               style={{ color: CYAN }}
             >
-              Roster completo
+              {tr(locale, "Roster completo")}
               <span className="transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>
@@ -197,18 +200,18 @@ export default function Artistas() {
               as="h2"
               className="font-round text-[clamp(2.2rem,5.5vw,3.8rem)] font-bold leading-[0.95] text-[#14283C]"
             >
-              Catálogo de
+              {tr(locale, "Catálogo de")}
               <br />
-              distribución
+              {tr(locale, "distribución")}
             </RevealOnScroll>
             <RevealOnScroll
               as="p"
               delay={0.1}
               className="text-right text-lg leading-snug text-text-secondary"
             >
-              ~20 artistas,
+              {tr(locale, "~20 artistas,")}
               <br />
-              una distribuidora.
+              {tr(locale, "una distribuidora.")}
             </RevealOnScroll>
           </div>
 
@@ -240,11 +243,11 @@ export default function Artistas() {
               *
             </span>
             <p className="max-w-2xl text-text-secondary">
-              Entre ellos,{" "}
+              {tr(locale, "Entre ellos,")}{" "}
               <span className="font-medium italic" style={{ color: NAVY }}>
                 Kenai White
               </span>{" "}
-              — cantautor y actor salmantino con discografía propia.
+              {tr(locale, "— cantautor y actor salmantino con discografía propia.")}
             </p>
           </RevealOnScroll>
         </div>
