@@ -24,18 +24,27 @@ function navKey(href: string) {
   return "nav." + (href === "/" ? "inicio" : href.replace(/^\//, "").split("/")[0]);
 }
 
-/** Selector de idioma: mantiene la página actual y solo cambia el prefijo. */
+/**
+ * Selector de idioma: mantiene la página actual y solo cambia el prefijo.
+ *
+ * Va con <a> y NO con <Link> a propósito. El idioma lo decide el layout raíz
+ * leyendo la cabecera que pone el middleware, y el App Router conserva ese
+ * layout al navegar por cliente: al saltar de /giras a /ca/giras cambiaba la
+ * URL pero el menú y el pie se quedaban en el idioma anterior. Con una
+ * navegación completa el servidor vuelve a decidir el idioma y todo cuadra.
+ * Cambiar de idioma se hace una vez por visita: la recarga no molesta.
+ */
 function LangSwitch({ pathname, locale }: { pathname: string; locale: Locale }) {
   const base = stripLocale(pathname);
   const otro: Locale = locale === "es" ? "ca" : "es";
   return (
-    <Link
+    <a
       href={localePath(base, otro)}
       aria-label={t(locale, "lang.switch")}
       className="text-sm font-semibold uppercase tracking-wide text-text-secondary transition-colors hover:text-text-primary"
     >
       {otro === "ca" ? "CA" : "ES"}
-    </Link>
+    </a>
   );
 }
 
