@@ -5,15 +5,19 @@ import { RevealOnScroll } from "@/components/motion";
 import { getArtist } from "@/lib/content";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { paginaCa } from "@/lib/content-i18n";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
 export function generateMetadata(): Metadata {
+  // En catalán manda la traducción; si faltara, se queda el castellano.
+  const trad = serverLocale() === "ca" ? paginaCa("contacto") : undefined;
   return {
-  title: "Contacto — Cogemos el teléfono, no un formulario",
+  title: trad?.title ?? "Contacto — Cogemos el teléfono, no un formulario",
   description:
-    "Cuéntanos tu proyecto, tu idea o lo que necesites. Te respondemos rápido, y por personas. Bonito Sound — Sabadell, Barcelona.",
+    trad?.desc ?? "Cuéntanos tu proyecto, tu idea o lo que necesites. Te respondemos rápido, y por personas. Bonito Sound — Sabadell, Barcelona.",
   alternates: alternatesFor(`/contacto`),
   };
 }

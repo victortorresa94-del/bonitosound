@@ -10,17 +10,24 @@ import { giras } from "@/lib/giras";
 import { getGiraSlugs } from "@/lib/content";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { localePath } from "@/lib/i18n";
+import { serverLocale } from "@/lib/locale-server";
+import { paginaCa } from "@/lib/content-i18n";
+import { tr } from "@/lib/copy-ca";
 
 export function generateMetadata(): Metadata {
+  // En catalán manda la traducción; si faltara, se queda el castellano.
+  const trad = serverLocale() === "ca" ? paginaCa("giras") : undefined;
   return {
-  title: "Giras — Producción y dirección de giras de artistas | Bonito Sound",
+  title: trad?.title ?? "Giras — Producción y dirección de giras de artistas | Bonito Sound",
   description:
-    "Producción técnica, logística, road management y dirección de giras. Coordinamos cada detalle, de la planificación previa al desmontaje final. Giras de Albert Pla, Alfred García, Dulze, Nàtura y muchos más.",
+    trad?.desc ?? "Producción técnica, logística, road management y dirección de giras. Coordinamos cada detalle, de la planificación previa al desmontaje final. Giras de Albert Pla, Alfred García, Dulze, Nàtura y muchos más.",
   alternates: alternatesFor(`/giras`),
   };
 }
 
 export default function Giras() {
+  const locale = serverLocale();
   return (
     <div style={{ backgroundColor: "#FBFAF6" }}>
       <JsonLd
@@ -44,13 +51,11 @@ export default function Giras() {
             as="p"
             className="statement text-[clamp(1.4rem,3.2vw,2.3rem)] leading-tight text-text-primary"
           >
-            Una gira no se improvisa. Se lleva. Coordinamos cada detalle, desde la
-            planificación previa hasta el desmontaje final, porque la diferencia
-            entre un buen concierto y una gran producción está en los detalles.
+            {tr(locale, "Una gira no se improvisa. Se lleva. Coordinamos cada detalle, desde la planificación previa hasta el desmontaje final, porque la diferencia entre un buen concierto y una gran producción está en los detalles.")}
           </RevealOnScroll>
           <RevealOnScroll className="mt-8" delay={0.15}>
             <MagneticButton strength={0.35}>
-              <Cta href="/contacto">Cuéntanos tu gira →</Cta>
+              <Cta href={localePath("/contacto", locale)}>{tr(locale, "Cuéntanos tu gira →")}</Cta>
             </MagneticButton>
           </RevealOnScroll>
         </div>
@@ -68,10 +73,10 @@ export default function Giras() {
       {/* Cierre. */}
       <Section>
         <CtaBlock
-          title="¿Tienes una gira que mover?"
-          desc="Cuéntanos las fechas y el proyecto. Te decimos cómo la montamos y por dónde empezaríamos."
-          href="/contacto"
-          cta="Cuéntanos tu gira →"
+          title={tr(locale, "¿Tienes una gira que mover?")}
+          desc={tr(locale, "Cuéntanos las fechas y el proyecto. Te decimos cómo la montamos y por dónde empezaríamos.")}
+          href={localePath("/contacto", locale)}
+          cta={tr(locale, "Cuéntanos tu gira →")}
         />
       </Section>
     </div>

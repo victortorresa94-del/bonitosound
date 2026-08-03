@@ -18,15 +18,19 @@ import { DaniGaleria } from "@/components/nosotros/DaniGaleria";
 import { getPosts } from "@/lib/blog";
 import { team, memberships, support, supportPending, site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { paginaCa } from "@/lib/content-i18n";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
 export function generateMetadata(): Metadata {
+  // En catalán manda la traducción; si faltara, se queda el castellano.
+  const trad = serverLocale() === "ca" ? paginaCa("nosotros") : undefined;
   return {
-  title: "Nosotros — Quiénes están detrás de Bonito Sound",
+  title: trad?.title ?? "Nosotros — Quiénes están detrás de Bonito Sound",
   description:
-    "El equipo de Bonito Sound en Sabadell: 30 años de oficio, +150 lanzamientos desde 2022, 250 eventos. Dani Boada y la gente que lo lleva.",
+    trad?.desc ?? "El equipo de Bonito Sound en Sabadell: 30 años de oficio, +150 lanzamientos desde 2022, 250 eventos. Dani Boada y la gente que lo lleva.",
   alternates: alternatesFor(`/nosotros`),
   };
 }

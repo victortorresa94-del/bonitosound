@@ -9,15 +9,19 @@ import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { paginaCa } from "@/lib/content-i18n";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
 export function generateMetadata(): Metadata {
+  // En catalán manda la traducción; si faltara, se queda el castellano.
+  const trad = serverLocale() === "ca" ? paginaCa("artistas") : undefined;
   return {
-  title: "Artistas — el roster de Bonito Sound",
+  title: trad?.title ?? "Artistas — el roster de Bonito Sound",
   description:
-    "A estos los llevamos nosotros: booking, management y sello. Pocos artistas, bien llevados, más un catálogo de distribución de ~20 nombres.",
+    trad?.desc ?? "A estos los llevamos nosotros: booking, management y sello. Pocos artistas, bien llevados, más un catálogo de distribución de ~20 nombres.",
   alternates: alternatesFor(`/artistas`),
   };
 }
