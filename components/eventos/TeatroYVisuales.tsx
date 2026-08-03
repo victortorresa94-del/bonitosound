@@ -3,6 +3,8 @@ import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { VimeoEmbed, YouTubeEmbed } from "@/components/Embeds";
 import { findAsset } from "@/lib/assets";
 import Image from "next/image";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -28,13 +30,14 @@ const TEATRO = [
 ];
 
 export function TeatroYVisuales() {
+  const locale = serverLocale();
   const mappingImg = findAsset("experiencias", "mapping");
 
   return (
     <Section id="teatro-visuales">
       {/* ---- Teatro ---- */}
       <RevealOnScroll as="p" className="eyebrow mb-4">
-        No todo es música
+        {tr(locale, "No todo es música")}
       </RevealOnScroll>
       <RevealOnScroll
         as="h2"
@@ -71,10 +74,7 @@ export function TeatroYVisuales() {
             <span style={{ color: CYAN }}>espectáculo</span>.
           </h3>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-text-secondary md:text-lg">
-            Especialistas en producción de mapping, instalaciones de luz y
-            experiencias visuales para eventos y marcas. Transformamos fachadas,
-            espacios urbanos y escenarios en espectáculos únicos mediante
-            tecnología, creatividad e innovación.
+            {tr(locale, "Especialistas en producción de mapping, instalaciones de luz y experiencias visuales para eventos y marcas. Transformamos fachadas, espacios urbanos y escenarios en espectáculos únicos mediante tecnología, creatividad e innovación.")}
           </p>
         </RevealOnScroll>
 
@@ -86,7 +86,7 @@ export function TeatroYVisuales() {
             {mappingImg ? (
               <Image
                 src={mappingImg}
-                alt="Proyección de mapping en una fachada"
+                alt={tr(locale, "Proyección de mapping en una fachada")}
                 fill
                 sizes="(max-width: 768px) 100vw, 45vw"
                 className="object-cover"
@@ -101,7 +101,7 @@ export function TeatroYVisuales() {
                     <path d="M4 74 L60 40 L116 74" stroke={CYAN} strokeWidth="2.5" strokeLinecap="round" />
                   </svg>
                   <p className="mt-5 text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
-                    Mapping
+                    {tr(locale, "Mapping")}
                   </p>
                 </div>
               </div>
@@ -112,14 +112,14 @@ export function TeatroYVisuales() {
 
       {/* Vídeos de mapping: el trabajo se explica solo viéndolo. */}
       <RevealOnScroll as="p" className="eyebrow mb-5 mt-16 md:mt-20">
-        Míralo en movimiento
+        {tr(locale, "Míralo en movimiento")}
       </RevealOnScroll>
       <StaggerGroup stagger={0.08} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {MAPPING_VIDEOS.map((v) =>
           v.kind === "vimeo" ? (
-            <VimeoEmbed key={v.id} id={v.id} title="Mapping y espectáculos visuales" />
+            <VimeoEmbed key={v.id} id={v.id} title={tr(locale, "Mapping y espectáculos visuales")} />
           ) : (
-            <YouTubeEmbed key={v.id} id={v.id} title="Mapping y espectáculos visuales" />
+            <YouTubeEmbed key={v.id} id={v.id} title={tr(locale, "Mapping y espectáculos visuales")} />
           ),
         )}
       </StaggerGroup>

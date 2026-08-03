@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Evento } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -66,15 +68,16 @@ const SLOTS = [
 ];
 
 export function EventosShowcase({ eventos }: { eventos: Evento[] }) {
+  const locale = serverLocale();
   // Orden fijo del clúster (grande → resto). Sainte Marguerite fuera.
   const bySlug = Object.fromEntries(eventos.map((e) => [e.slug, e]));
   const clusterSlugs = ["corona", "four-roses", "chateau", "font-vella"];
   const cluster = clusterSlugs.map((s) => bySlug[s]).filter(Boolean) as Evento[];
 
   const stats = [
-    { n: "250", l: ["Eventos", "realizados"] },
-    { n: "58", l: ["Marcas", "que han confiado"] },
-    { n: "53", l: ["Artistas con los que", "hemos colaborado"] },
+    { n: "250", l: [tr(locale, "Eventos"), tr(locale, "realizados")] },
+    { n: "58", l: [tr(locale, "Marcas"), tr(locale, "que han confiado")] },
+    { n: "53", l: [tr(locale, "Artistas con los que"), tr(locale, "hemos colaborado")] },
   ];
 
   return (
@@ -82,22 +85,18 @@ export function EventosShowcase({ eventos }: { eventos: Evento[] }) {
       {/* Título de sección */}
       <div className="mx-auto max-w-6xl px-5 pt-6 md:px-10">
         <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>
-          Eventos de marca
+          {tr(locale, "Eventos de marca")}
         </p>
         <h2 className="font-round text-3xl font-bold md:text-5xl" style={{ color: NAVY }}>
-          Hacemos que las marcas suenen.
+          {tr(locale, "Hacemos que las marcas suenen.")}
         </h2>
         {/* Qué es una experiencia de marca (texto de Dani). */}
         <div className="mt-6 max-w-2xl space-y-4">
           <p className="text-base leading-relaxed text-text-secondary md:text-lg">
-            Creamos y producimos experiencias de marca donde la música, las artes
-            en vivo y el entretenimiento se convierten en herramientas para
-            conectar con el público. Participamos en todo el proceso creativo o
-            ejecutamos proyectos ya diseñados, coordinando artistas, producción y
-            equipos técnicos para hacer realidad cada evento.
+            {tr(locale, "Creamos y producimos experiencias de marca donde la música, las artes en vivo y el entretenimiento se convierten en herramientas para conectar con el público. Participamos en todo el proceso creativo o ejecutamos proyectos ya diseñados, coordinando artistas, producción y equipos técnicos para hacer realidad cada evento.")}
           </p>
           <p className="text-lg font-bold md:text-xl" style={{ color: NAVY }}>
-            Porque una marca no solo debe verse. Debe vivirse.
+            {tr(locale, "Porque una marca no solo debe verse. Debe vivirse.")}
           </p>
         </div>
       </div>

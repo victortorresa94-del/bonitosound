@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { Evento } from "@/lib/content";
 import { findLogo, assetSlug } from "@/lib/assets";
 import { trustedBy } from "@/lib/site";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -33,6 +35,7 @@ function splitCount(count?: string) {
  * giras: solo tiene página lo que tiene contenido de verdad.
  */
 export function EventosBrands({ eventos }: { eventos: Evento[] }) {
+  const locale = serverLocale();
   const conHistoria = new Map(
     eventos.filter((e) => e.type === "marca" && e.brand).map((e) => [e.brand!, e]),
   );
@@ -53,7 +56,7 @@ export function EventosBrands({ eventos }: { eventos: Evento[] }) {
     <section className="w-full" style={{ backgroundColor: "#FBFAF6" }}>
       <div className="mx-auto max-w-6xl px-5 pb-20 pt-6 md:px-10 md:pb-28">
         <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>
-          Marcas que han confiado
+          {tr(locale, "Marcas que han confiado")}
         </p>
         <h2 className="display leading-[1.04] text-[clamp(2rem,5vw,3.6rem)]" style={{ color: NAVY }}>
           Marcas que han querido <span style={{ color: CYAN }}>hacerlo bonito.</span>
@@ -96,7 +99,7 @@ export function EventosBrands({ eventos }: { eventos: Evento[] }) {
                   </p>
                 ) : (
                   <p className="mt-3 text-sm font-medium italic text-text-muted">
-                    {evento ? "Evento de marca" : "Han confiado en nosotros"}
+                    {tr(locale, evento ? "Evento de marca" : "Han confiado en nosotros")}
                   </p>
                 )}
 
@@ -111,7 +114,7 @@ export function EventosBrands({ eventos }: { eventos: Evento[] }) {
                     className="mt-2 inline-block text-sm font-semibold transition-transform duration-300 group-hover:translate-x-1"
                     style={{ color: CYAN }}
                   >
-                    Ver la experiencia →
+                    {tr(locale, "Ver la experiencia →")}
                   </span>
                 )}
               </>

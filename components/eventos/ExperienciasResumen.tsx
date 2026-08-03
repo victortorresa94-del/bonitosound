@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 // MarqueeLogoWall → lib/assets → node:path, que no existe en el navegador y
 // rompe el build de este componente cliente.
 import { RevealOnScroll } from "@/components/motion/RevealOnScroll";
+import { useLocale } from "@/components/LocaleProvider";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -18,6 +20,7 @@ const CYAN = "#16b6d4";
  * —tiene un listener que se ocupa—, para que nunca suenen dos cosas a la vez.
  */
 export function ExperienciasResumen({ src }: { src: string }) {
+  const locale = useLocale();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [conSonido, setConSonido] = useState(false);
 
@@ -75,7 +78,7 @@ export function ExperienciasResumen({ src }: { src: string }) {
 
           <button
             onClick={alternarSonido}
-            aria-label={conSonido ? "Quitar el sonido" : "Poner el sonido"}
+            aria-label={tr(locale, conSonido ? "Quitar el sonido" : "Poner el sonido")}
             className="absolute bottom-4 right-4 grid h-11 w-11 place-items-center rounded-full transition-transform duration-200 hover:scale-110"
             style={{ backgroundColor: CYAN, color: NAVY }}
           >

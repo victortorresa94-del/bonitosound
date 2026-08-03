@@ -1,3 +1,5 @@
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 /**
  * Banda superior de /eventos (mockup): título EVENTOS gigante en outline,
  * LIGERAMENTE INCLINADO, con una onda cyan hand-drawn cruzándolo, y la
@@ -47,8 +49,7 @@ export function EventosHero() {
       {/* Descripción a la derecha, bajo el título (no la solapa) */}
       <div className="ml-auto mt-2 max-w-[15rem] md:-mt-2 md:max-w-[17rem]">
         <p className="text-[0.8rem] font-semibold uppercase leading-snug tracking-[0.03em] md:text-sm" style={{ color: NAVY }}>
-          Diseñamos experiencias musicales que conectan marcas, artistas y
-          personas.
+          {tr(serverLocale(), "Diseñamos experiencias musicales que conectan marcas, artistas y personas.")}
         </p>
         <svg className="mt-2 h-3 w-24" viewBox="0 0 96 12" fill="none" aria-hidden>
           <path d="M2 8 Q 12 2, 24 7 T 48 7 T 72 7 T 94 5" stroke={CYAN} strokeWidth="2.5" strokeLinecap="round" />
