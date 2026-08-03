@@ -169,7 +169,7 @@ export function ArtistShowcase({
           </div>
 
           <div className="mt-8 flex items-center justify-between gap-4">
-            <span className="text-sm text-text-muted">Desliza o usa las flechas para ver más artistas</span>
+            <span className="text-sm text-text-muted">{tr(locale, "Desliza o usa las flechas para ver más artistas")}</span>
             <div className="flex items-center gap-3">
               <button onClick={() => go(-1)} aria-label="Artista anterior" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>←</button>
               <button onClick={() => go(1)} aria-label="Siguiente artista" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>→</button>

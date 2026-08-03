@@ -166,7 +166,7 @@ export default function Records() {
 
       {/* ── ROSTER ── */}
       <Section>
-        <RevealOnScroll as="p" className="eyebrow mb-4">Roster</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "Roster")}</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           {tr(locale, "Artistas que llevamos.")}
         </SplitTextReveal>

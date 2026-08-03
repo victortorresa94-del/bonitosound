@@ -1,5 +1,7 @@
 import type { Evento } from "@/lib/content";
 import { EventoCard } from "@/components/EventoCard";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -15,6 +17,7 @@ const PRODUCCIONES = ["Albert Pla", "Anne Lukin", "Alfred García"];
  * movido de gira.
  */
 export function EventosGiras({ eventos }: { eventos: Evento[] }) {
+  const locale = serverLocale();
   const giras = eventos.filter(
     (e) => e.type === "gira" || (e.type === "showcase" && e.artist)
   );
@@ -23,10 +26,10 @@ export function EventosGiras({ eventos }: { eventos: Evento[] }) {
     <section className="w-full" style={{ backgroundColor: "#FBFAF6" }}>
       <div className="mx-auto max-w-6xl px-5 pb-16 md:px-10 md:pb-24">
         <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>
-          Giras y directos de artista
+          {tr(locale, "Giras y directos de artista")}
         </p>
         <h2 className="mb-4 font-round text-3xl font-bold md:text-5xl" style={{ color: NAVY }}>
-          También llenamos giras.
+          {tr(locale, "También llenamos giras.")}
         </h2>
         <p className="mb-10 max-w-2xl text-base text-text-secondary md:text-lg">
           No solo activamos marcas. Cuando el que sube al escenario es el artista,
@@ -45,7 +48,7 @@ export function EventosGiras({ eventos }: { eventos: Evento[] }) {
         {PRODUCCIONES.length > 0 && (
           <div className="mt-12 border-t border-subtle pt-8">
             <p className="mb-4 text-sm text-text-muted">
-              Producción y tour management de:
+              {tr(locale, "Producción y tour management de:")}
             </p>
             <div className="flex flex-wrap gap-x-6 gap-y-2 font-round text-lg font-semibold md:text-xl" style={{ color: NAVY }}>
               {PRODUCCIONES.map((name, i) => (

@@ -1,6 +1,8 @@
 import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { YouTubeEmbed } from "@/components/Embeds";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 /**
  * Bloque de vídeos del artista. La rejilla se adapta a cuántos hay para que
@@ -20,6 +22,7 @@ export function ArtistVideos({
   youtubeIds?: string[];
   youtubeChannel?: string;
 }) {
+  const locale = serverLocale();
   const vids = (youtubeIds ?? []).map((v) => v?.trim()).filter(Boolean).slice(0, 6) as string[];
   if (vids.length === 0) return null;
 
@@ -36,7 +39,7 @@ export function ArtistVideos({
     <Section id="videos" className="bg-bg-primary">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <RevealOnScroll as="p" className="eyebrow mb-3">En vídeo</RevealOnScroll>
+          <RevealOnScroll as="p" className="eyebrow mb-3">{tr(locale, "En vídeo")}</RevealOnScroll>
           <RevealOnScroll as="h2" delay={0.05} className="display text-[clamp(1.8rem,4vw,3rem)]">
             Lo último de <span style={{ color: "#16b6d4" }}>{name}</span>
           </RevealOnScroll>

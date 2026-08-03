@@ -2,6 +2,8 @@ import Image from "next/image";
 import { MarqueeRow, MarqueeLogoWall } from "@/components/motion";
 import { brands, distributionCatalog } from "@/lib/site";
 import { findLogo } from "@/lib/assets";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const FADE_MASK =
   "[mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]";
@@ -14,6 +16,7 @@ const FADE_MASK =
  * Maldita Nerea…) entran en cuanto suban su foto.
  */
 export function ArtistsBand() {
+  const locale = serverLocale();
   const artists = distributionCatalog
     .map((name) => ({ name, photo: findLogo("artistas", name) }))
     .filter((a) => Boolean(a.photo)) as { name: string; photo: string }[];
@@ -29,10 +32,10 @@ export function ArtistsBand() {
 
   return (
     <section
-      aria-label="Artistas con los que trabajamos"
+      aria-label={tr(locale, "Artistas con los que trabajamos")}
       className="overflow-hidden border-t border-subtle py-16 md:py-20"
     >
-      <p className="eyebrow mb-10 px-6 text-center">Artistas con los que trabajamos</p>
+      <p className="eyebrow mb-10 px-6 text-center">{tr(locale, "Artistas con los que trabajamos")}</p>
       <MarqueeRow speed={50} gap="2.25rem" className={FADE_MASK}>
         {filled.map((a, i) => (
           <div
@@ -64,12 +67,13 @@ export function ArtistsBand() {
  * la escena "marcas" — prueba social inmediata sobre lo que se acaba de leer.
  */
 export function BrandsBand() {
+  const locale = serverLocale();
   return (
     <section
-      aria-label="Marcas que han sonado con nosotros"
+      aria-label={tr(locale, "Marcas que han sonado con nosotros")}
       className="overflow-hidden border-t border-subtle py-16 md:py-20"
     >
-      <p className="eyebrow mb-10 px-6 text-center">Marcas que han sonado con nosotros</p>
+      <p className="eyebrow mb-10 px-6 text-center">{tr(locale, "Marcas que han sonado con nosotros")}</p>
       <MarqueeLogoWall items={brands} dir="marcas" speed={42} direction="right" />
     </section>
   );

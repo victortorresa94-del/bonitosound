@@ -49,7 +49,7 @@ export function ArtistFeaturedMusic({
 
   return (
     <Section id="escuchale" className="bg-bg-primary">
-      <RevealOnScroll as="p" className="eyebrow">Escúchale</RevealOnScroll>
+      <RevealOnScroll as="p" className="eyebrow">{tr(locale, "Escúchale")}</RevealOnScroll>
       <h2 className="sr-only">La música de {name}</h2>
       <RevealOnScroll as="h3" delay={0.05} className="mt-2 display text-3xl leading-tight text-text-primary md:text-4xl">
         {tr(locale, "Todas sus canciones.")}
@@ -83,7 +83,7 @@ export function ArtistFeaturedMusic({
           <RevealOnScroll as="div" delay={0.1} className="space-y-6">
             {last && big?.type !== "track" && (
               <div>
-                <h4 className="mb-2.5 font-round text-sm font-bold uppercase tracking-[0.14em] text-text-muted">Lo último que ha sacado</h4>
+                <h4 className="mb-2.5 font-round text-sm font-bold uppercase tracking-[0.14em] text-text-muted">{tr(locale, "Lo último que ha sacado")}</h4>
                 <SpotifyEmbed type="track" id={last} height={80} title={`Último tema de ${name}`} />
               </div>
             )}

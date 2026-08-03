@@ -49,7 +49,7 @@ export function ArtistCTA({
           delay={0.12}
           className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-text-secondary md:text-lg"
         >
-          Cuéntanos fecha, sitio y qué tienes en mente. Te contamos disponibilidad
+          {tr(locale, "Cuéntanos fecha, sitio y qué tienes en mente. Te contamos disponibilidad")}
           y cómo montarlo, sin vueltas.
         </RevealOnScroll>
 

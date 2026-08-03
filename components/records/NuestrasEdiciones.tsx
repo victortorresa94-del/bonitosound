@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup, SplitTextReveal } from "@/components/motion";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -33,13 +35,14 @@ const EDICIONES: Edicion[] = [
  * Spotify. Solo datos confirmados; el bloque crece a medida que se confirmen más.
  */
 export function NuestrasEdiciones() {
+  const locale = serverLocale();
   return (
     <Section className="bg-bg-primary">
       <RevealOnScroll as="p" className="eyebrow mb-4">
-        Nuestras ediciones
+        {tr(locale, "Nuestras ediciones")}
       </RevealOnScroll>
       <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,5vw,3.6rem)]">
-        Más de 150 lanzamientos desde 2022.
+        {tr(locale, "Más de 150 lanzamientos desde 2022.")}
       </SplitTextReveal>
       <RevealOnScroll as="p" className="mt-4 max-w-2xl text-lg text-text-secondary" delay={0.15}>
         El sello no es una promesa: es un catálogo. Estas son algunas de las
@@ -68,7 +71,7 @@ export function NuestrasEdiciones() {
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 1 1-.277-1.213c3.809-.871 7.076-.496 9.712 1.114a.623.623 0 0 1 .207.856Zm1.223-2.722a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.13-9.965-1.166a.779.779 0 1 1-.452-1.49c3.632-1.102 8.147-.568 11.232 1.327a.779.779 0 0 1 .257 1.072Zm.105-2.835c-3.223-1.914-8.54-2.09-11.617-1.156a.935.935 0 1 1-.542-1.79c3.532-1.072 9.404-.865 13.115 1.338a.935.935 0 1 1-.956 1.608Z" />
                   </svg>
-                  Escuchar
+                  {tr(locale, "Escuchar")}
                 </span>
               )}
             </>

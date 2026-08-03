@@ -68,7 +68,7 @@ export function TeatroYVisuales() {
       {/* ---- Espectáculos visuales / mapping ---- */}
       <div className="mt-16 grid gap-10 md:mt-20 md:grid-cols-[1fr_1fr] md:items-center md:gap-14">
         <RevealOnScroll>
-          <p className="eyebrow mb-4">Espectáculos visuales</p>
+          <p className="eyebrow mb-4">{tr(locale, "Espectáculos visuales")}</p>
           <h3 className="display text-[clamp(1.7rem,3.6vw,2.6rem)] leading-[1.06]">
             Convertimos una fachada en un{" "}
             <span style={{ color: CYAN }}>espectáculo</span>.

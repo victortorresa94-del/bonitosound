@@ -4,6 +4,8 @@ import { RevealOnScroll, SplitTextReveal, MagneticButton } from "@/components/mo
 import { getShows } from "@/lib/agenda";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 export function generateMetadata(): Metadata {
   return {
@@ -23,6 +25,7 @@ const fmt = new Intl.DateTimeFormat("es-ES", {
 });
 
 export default function Agenda() {
+  const locale = serverLocale();
   const shows = getShows();
 
   return (
@@ -57,7 +60,7 @@ export default function Agenda() {
           <div className="max-w-3xl">
             <RevealOnScroll as="p" className="eyebrow mb-4">Agenda</RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
-              Dónde estamos sonando.
+              {tr(locale, "Dónde estamos sonando.")}
             </SplitTextReveal>
           </div>
         </div>
@@ -67,7 +70,7 @@ export default function Agenda() {
         {shows.length === 0 ? (
           <div className="rounded-3xl border border-subtle bg-bg-primary p-12 text-center">
             <SplitTextReveal as="h3" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-              Agenda en construcción.
+              {tr(locale, "Agenda en construcción.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mx-auto mt-4 max-w-lg text-text-secondary" delay={0.2}>
               Estamos cerrando las próximas fechas. Si quieres a alguien del
@@ -100,7 +103,7 @@ export default function Agenda() {
                   </span>
                   {s.ticketsUrl && (
                     <Cta href={s.ticketsUrl} variant="ghost">
-                      Entradas →
+                      {tr(locale, "Entradas →")}
                     </Cta>
                   )}
                 </div>

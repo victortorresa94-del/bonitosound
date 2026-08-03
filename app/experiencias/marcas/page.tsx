@@ -131,7 +131,7 @@ export default function EventosMarcas() {
               <ParallaxLayer speed={0.2} className="absolute inset-0">
                 <Image
                   src={heroImg}
-                  alt="Activación de marca con música — Bonito Sound"
+                  alt={tr(locale, "Activación de marca con música — Bonito Sound")}
                   fill
                   sizes="(max-width: 768px) 100vw, 40vw"
                   className="object-cover scale-110"

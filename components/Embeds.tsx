@@ -1,3 +1,5 @@
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 export function SpotifyEmbed({
   type,
   id,
@@ -127,6 +129,7 @@ export function InstagramFeed({
   posts?: string[];
   count?: number;
 }) {
+  const locale = serverLocale();
   if (posts.length === 0) {
     return (
       <div>
@@ -172,7 +175,7 @@ export function InstagramFeed({
               rel="noopener noreferrer"
               className="block p-6 text-center text-sm text-text-muted hover:text-text-primary"
             >
-              Ver publicación en Instagram →
+              {tr(locale, "Ver publicación en Instagram →")}
             </a>
           </blockquote>
         );

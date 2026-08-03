@@ -12,6 +12,8 @@ import {
 import { getArtists } from "@/lib/content";
 import { findAsset, findLogo, assetSlug } from "@/lib/assets";
 import { brands, distributionCatalog, distributionPlatforms } from "@/lib/site";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const CYAN = "#16b6d4";
 
@@ -29,6 +31,7 @@ export function ArtistFeatureCase({
   slug: string;
   spotifyId: string;
 }) {
+  const locale = serverLocale();
   const photo = findAsset("artistas", slug);
   return (
     <Section className="bg-bg-primary">
@@ -43,7 +46,7 @@ export function ArtistFeatureCase({
           </RevealOnScroll>
           <RevealOnScroll className="mt-8" delay={0.25}>
             <MagneticButton strength={0.3}>
-              <Cta href={`/artistas/${slug}`} variant="ghost">Ver la ficha →</Cta>
+              <Cta href={`/artistas/${slug}`} variant="ghost">{tr(locale, "Ver la ficha →")}</Cta>
             </MagneticButton>
           </RevealOnScroll>
         </div>
@@ -62,6 +65,7 @@ export function ArtistFeatureCase({
 
 /** Grid de artistas del roster de booking (con foto). */
 export function RosterGridCase() {
+  const locale = serverLocale();
   const artists = getArtists()
     .filter((a) => a.tier === "booking")
     .map((a) => ({ ...a, photo: a.image ?? findAsset("artistas", a.slug) }))
@@ -69,7 +73,7 @@ export function RosterGridCase() {
   if (artists.length === 0) return null;
   return (
     <Section>
-      <RevealOnScroll as="p" className="eyebrow mb-8">A quién llevamos</RevealOnScroll>
+      <RevealOnScroll as="p" className="eyebrow mb-8">{tr(locale, "A quién llevamos")}</RevealOnScroll>
       <StaggerGroup stagger={0.06} className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
         {artists.map((a) => (
           <Link key={a.slug} href={`/artistas/${a.slug}`} className="group">
@@ -84,7 +88,7 @@ export function RosterGridCase() {
       </StaggerGroup>
       <RevealOnScroll className="mt-10">
         <MagneticButton strength={0.3}>
-          <Cta href="/artistas/todos" variant="ghost">Roster completo →</Cta>
+          <Cta href="/artistas/todos" variant="ghost">{tr(locale, "Roster completo →")}</Cta>
         </MagneticButton>
       </RevealOnScroll>
     </Section>
@@ -93,9 +97,10 @@ export function RosterGridCase() {
 
 /** Marquee del catálogo de distribución (~20 artistas). */
 export function CatalogMarqueeCase() {
+  const locale = serverLocale();
   return (
     <Section>
-      <RevealOnScroll as="p" className="eyebrow mb-8">Ya distribuyen con nosotros</RevealOnScroll>
+      <RevealOnScroll as="p" className="eyebrow mb-8">{tr(locale, "Ya distribuyen con nosotros")}</RevealOnScroll>
       <MarqueeLogoWall items={distributionCatalog} dir="artistas" speed={35} />
     </Section>
   );
@@ -134,6 +139,7 @@ function PlatformChip({ name }: { name: string }) {
  * cómo funciona el precio (genérico, sin cifras — pendiente de cerrar con Dani).
  */
 export function DistribucionCase() {
+  const locale = serverLocale();
   const stats = [
     { n: "+150", l: "lanzamientos" },
     { n: "~20", l: "artistas" },
@@ -143,9 +149,9 @@ export function DistribucionCase() {
     <>
       {/* PLATAFORMAS */}
       <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-4">En todas las plataformas</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "En todas las plataformas")}</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,3rem)]">
-          Que suene donde tenga que sonar.
+          {tr(locale, "Que suene donde tenga que sonar.")}
         </SplitTextReveal>
         <StaggerGroup stagger={0.05} className="mt-10 flex flex-wrap gap-3 md:gap-4">
           {distributionPlatforms.map((p) => (
@@ -153,7 +159,7 @@ export function DistribucionCase() {
           ))}
         </StaggerGroup>
         <RevealOnScroll as="p" className="mt-6 text-sm text-text-muted" delay={0.1}>
-          Y en el resto de tiendas y redes donde la gente descubre y guarda música.
+          {tr(locale, "Y en el resto de tiendas y redes donde la gente descubre y guarda música.")}
         </RevealOnScroll>
       </Section>
 
@@ -173,9 +179,9 @@ export function DistribucionCase() {
       {/* PRECIO (genérico, sin cifras — Dani cierra el modelo) */}
       <Section className="bg-bg-primary">
         <div className="mx-auto max-w-3xl text-center">
-          <RevealOnScroll as="p" className="eyebrow mb-4">El precio</RevealOnScroll>
+          <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "El precio")}</RevealOnScroll>
           <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,2.8rem)]">
-            Hablado antes de empezar. Sin sorpresas.
+            {tr(locale, "Hablado antes de empezar. Sin sorpresas.")}
           </SplitTextReveal>
           <RevealOnScroll as="p" className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary" delay={0.15}>
             La distribución se ajusta a lo que necesitas —un single suelto o todo tu
@@ -195,10 +201,11 @@ export function DistribucionCase() {
 
 /** Caso de producciones: muro de marcas + enlace a los eventos reales. */
 export function BrandsCase() {
+  const locale = serverLocale();
   return (
     <Section>
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-        <RevealOnScroll as="p" className="eyebrow">Marcas que han confiado</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow">{tr(locale, "Marcas que han confiado")}</RevealOnScroll>
         <Link href="/experiencias" className="link-underline text-sm text-text-secondary">Ver los eventos →</Link>
       </div>
       <MarqueeLogoWall items={brands} dir="marcas" speed={42} direction="right" />

@@ -2,6 +2,8 @@ import Link from "next/link";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { resolveLogos } from "@/lib/assets";
 import { trustedBy } from "@/lib/site";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -16,6 +18,7 @@ const CYAN = "#16b6d4";
  * Sin marquee a propósito: el home ya tiene dos (BrandsBand y ArtistsBand).
  */
 export function TrustedWall() {
+  const locale = serverLocale();
   const clientes = trustedBy.filter((c) => c.id !== "proveedores");
   const total = clientes.reduce((n, c) => n + c.items.length, 0);
 
@@ -31,10 +34,10 @@ export function TrustedWall() {
   if (total === 0) return null;
 
   return (
-    <section aria-label="Empresas que han confiado en Bonito Sound" style={{ backgroundColor: NAVY }}>
+    <section aria-label={tr(locale, "Empresas que han confiado en Bonito Sound")} style={{ backgroundColor: NAVY }}>
       <div className="wrap py-16 md:py-24">
         <RevealOnScroll as="p" className="mb-4 text-xs font-semibold uppercase tracking-[0.2em]" >
-          <span style={{ color: CYAN }}>Confían en nosotros</span>
+          <span style={{ color: CYAN }}>{tr(locale, "Confían en nosotros")}</span>
         </RevealOnScroll>
         <RevealOnScroll
           as="h2"

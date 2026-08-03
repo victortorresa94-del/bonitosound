@@ -209,8 +209,8 @@ export default function Nosotros() {
         <div className="grid items-center gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-16">
           <div>
             <RevealOnScroll as="h2" className="display text-[clamp(1.9rem,3.6vw,3rem)] leading-[1.08]">
-              <span style={{ color: NAVY }}>Bonito Sound se monta en 2022 en Sabadell. </span>
-              <span style={{ color: CYAN }}>La empresa es joven; el oficio, no.</span>
+              <span style={{ color: NAVY }}>{tr(locale, "Bonito Sound se monta en 2022 en Sabadell. ")}</span>
+              <span style={{ color: CYAN }}>{tr(locale, "La empresa es joven; el oficio, no.")}</span>
             </RevealOnScroll>
             <RevealOnScroll delay={0.12} className="mt-7 space-y-5 text-lg leading-relaxed text-text-secondary">
               <p>

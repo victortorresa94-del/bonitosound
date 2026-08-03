@@ -9,6 +9,8 @@ import {
 } from "@/components/motion";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 export function generateMetadata(): Metadata {
   return {
@@ -39,6 +41,7 @@ const faq = [
 ];
 
 export default function Artiverse() {
+  const locale = serverLocale();
   return (
     <>
       <JsonLd
@@ -57,7 +60,7 @@ export default function Artiverse() {
           <div className="max-w-3xl">
             <RevealOnScroll as="p" className="eyebrow mb-4">Lab · Artiverse</RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
-              Deja de trabajar a ciegas.
+              {tr(locale, "Deja de trabajar a ciegas.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
               La app de la programación artística: artistas, promotores,
@@ -74,7 +77,7 @@ export default function Artiverse() {
       </section>
 
       <Section>
-        <RevealOnScroll as="p" className="eyebrow mb-4">Qué resuelve</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "Qué resuelve")}</RevealOnScroll>
         <StaggerGroup stagger={0.08} className="mt-10 grid gap-6 md:grid-cols-3">
           {[
             [
@@ -99,7 +102,7 @@ export default function Artiverse() {
       </Section>
 
       <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "Preguntas frecuentes")}</RevealOnScroll>
         <div className="mt-8 max-w-3xl">
           <FaqMotion items={faq} />
         </div>

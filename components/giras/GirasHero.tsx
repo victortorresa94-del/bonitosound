@@ -15,7 +15,7 @@ export function GirasHero() {
     <div className="relative px-5 pt-14 md:px-10 md:pt-16">
       <div className="pointer-events-none relative">
         <h1
-          aria-label="Giras"
+          aria-label={tr(locale, "Giras")}
           className="select-none whitespace-nowrap text-center font-round font-bold leading-[0.82]"
           style={{
             fontSize: "clamp(4rem, 20vw, 17rem)",

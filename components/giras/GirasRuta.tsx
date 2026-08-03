@@ -115,11 +115,12 @@ export function GirasRuta({
   /** Slugs que tienen página de detalle (los que tienen .md en content/giras). */
   conPagina?: string[];
 }) {
+  const locale = serverLocale();
   return (
     <section className="relative overflow-hidden py-16 md:py-24">
       <div className="wrap">
         <RevealOnScroll as="p" className="eyebrow mb-3">
-          Lo que hemos llevado
+          {tr(locale, "Lo que hemos llevado")}
         </RevealOnScroll>
         <RevealOnScroll
           as="h2"

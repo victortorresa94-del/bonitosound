@@ -5,6 +5,8 @@ import { RevealOnScroll, SplitTextReveal, MagneticButton, StaggerGroup } from "@
 import { getPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const posts = getPosts();
 
@@ -32,6 +34,7 @@ function fmtDate(iso: string) {
 }
 
 export default function Diario() {
+  const locale = serverLocale();
   return (
     <>
       <section className="border-b border-subtle">
@@ -41,7 +44,7 @@ export default function Diario() {
               Blog
             </RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
-              Lo que va pasando, sin postureo.
+              {tr(locale, "Lo que va pasando, sin postureo.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" delay={0.2} className="mt-6 max-w-2xl text-lg text-text-secondary">
               Cómo funciona esto por dentro: booking, sellos, distribución,
@@ -82,7 +85,7 @@ export default function Diario() {
                     </div>
                   )}
                   <span className="text-sm font-semibold text-accent-cyan transition-transform group-hover:translate-x-1">
-                    Leer →
+                    {tr(locale, "Leer →")}
                   </span>
                 </div>
               </Link>
@@ -93,7 +96,7 @@ export default function Diario() {
         <Section>
           <div className="rounded-3xl border border-subtle bg-bg-primary p-12 text-center">
             <SplitTextReveal as="h3" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-              Todavía no hemos escrito nada aquí.
+              {tr(locale, "Todavía no hemos escrito nada aquí.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mx-auto mt-4 max-w-lg text-text-secondary" delay={0.2}>
               El blog se llena cuando hay algo que contar de verdad. Mientras

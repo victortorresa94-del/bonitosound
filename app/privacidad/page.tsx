@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Section, Heading, Eyebrow } from "@/components/ui";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 export function generateMetadata(): Metadata {
   return {
@@ -12,10 +14,11 @@ export function generateMetadata(): Metadata {
 }
 
 export default function Privacidad() {
+  const locale = serverLocale();
   return (
     <Section>
       <Eyebrow>Legal</Eyebrow>
-      <Heading as="h1">Política de privacidad</Heading>
+      <Heading as="h1">{tr(locale, "Política de privacidad")}</Heading>
       <div className="mt-8 max-w-2xl space-y-4 text-text-secondary">
         <p>
           Responsable del tratamiento: {site.legalName} (CIF {site.cif}).

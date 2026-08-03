@@ -2,6 +2,8 @@ import Image from "next/image";
 import { RevealOnScroll } from "@/components/motion";
 import { findLogo } from "@/lib/assets";
 import { memberships, support, supportPending } from "@/lib/site";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 
@@ -30,17 +32,18 @@ function Logo({ dir, name }: { dir: string; name: string }) {
 }
 
 export function InstitutionalStrip() {
+  const locale = serverLocale();
   const members = memberships.filter((n) => findLogo("instituciones", n));
   const apoyos = [...support, ...supportPending].filter((n) => findLogo("apoyos", n));
   if (members.length === 0 && apoyos.length === 0) return null;
 
   return (
-    <section aria-label="Miembros y apoyos institucionales" style={{ backgroundColor: NAVY }}>
+    <section aria-label={tr(locale, "Miembros y apoyos institucionales")} style={{ backgroundColor: NAVY }}>
       <RevealOnScroll className="wrap flex flex-col items-center gap-7 py-8 text-center md:flex-row md:justify-center md:gap-14 md:py-9">
         {members.length > 0 && (
           <div className="flex flex-col items-center gap-3 md:flex-row md:gap-5">
             <span className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/45">
-              Miembros de
+              {tr(locale, "Miembros de")}
             </span>
             <div className="flex flex-wrap items-center justify-center gap-5 md:gap-7">
               {members.map((n) => (
@@ -57,7 +60,7 @@ export function InstitutionalStrip() {
         {apoyos.length > 0 && (
           <div className="flex flex-col items-center gap-3 md:flex-row md:gap-5">
             <span className="text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-white/45">
-              Con el apoyo de
+              {tr(locale, "Con el apoyo de")}
             </span>
             <div className="flex flex-wrap items-center justify-center gap-5 md:gap-7">
               {apoyos.map((n) => (

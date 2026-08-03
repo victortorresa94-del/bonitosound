@@ -1,6 +1,8 @@
 import type { Evento } from "@/lib/content";
 import { findAsset, findLogo } from "@/lib/assets";
 import { EventosBentoTabs, type BentoCardData, type Role } from "./EventosBentoTabs";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const TYPE_LABEL: Record<Evento["type"], string> = {
   marca: "Marca",
@@ -63,6 +65,7 @@ function resolveCard(e: Evento, fallbackIndex: number): BentoCardData {
 }
 
 export function EventosBento({ eventos }: { eventos: Evento[] }) {
+  const locale = serverLocale();
   // Solo eventos con media real (vídeo/foto). Los demás quedan ocultos hasta
   // que caiga su clip: mismo sistema drop-in, nada de cajas vacías.
   const withVideo = eventos.filter((e) => e.video);
@@ -86,10 +89,10 @@ export function EventosBento({ eventos }: { eventos: Evento[] }) {
     <section className="relative w-full overflow-hidden" style={{ backgroundColor: "#FBFAF6" }}>
       <div className="mx-auto max-w-6xl px-5 pb-16 md:px-10 md:pb-24">
         <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "#16b6d4" }}>
-          Más eventos en vídeo
+          {tr(locale, "Más eventos en vídeo")}
         </p>
         <h2 className="mb-8 font-round text-3xl font-bold md:text-5xl" style={{ color: "#14283C" }}>
-          Míralo, no te lo contamos.
+          {tr(locale, "Míralo, no te lo contamos.")}
         </h2>
         <EventosBentoTabs marcas={marcas} artistas={artistas} />
       </div>

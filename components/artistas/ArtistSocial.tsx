@@ -112,7 +112,7 @@ export function ArtistSocial({
           </StaggerGroup>
           {pills && (
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-              <span className="mr-1 text-sm font-bold uppercase tracking-[0.16em] text-text-muted">Síguele en</span>
+              <span className="mr-1 text-sm font-bold uppercase tracking-[0.16em] text-text-muted">{tr(locale, "Síguele en")}</span>
               {pills}
             </div>
           )}

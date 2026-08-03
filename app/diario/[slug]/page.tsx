@@ -8,6 +8,8 @@ import { PostBody } from "@/components/blog/PostBody";
 import { getPost, getPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 export function generateStaticParams() {
   return getPosts().map((p) => ({ slug: p.slug }));
@@ -48,6 +50,7 @@ export function generateMetadata({
 }
 
 export default function PostPage({ params }: { params: { slug: string } }) {
+  const locale = serverLocale();
   const p = getPost(params.slug);
   if (!p) notFound();
 
@@ -147,7 +150,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         <Section className="bg-bg-primary">
           <div className="mx-auto max-w-2xl">
             <RevealOnScroll as="p" className="eyebrow mb-8">
-              Preguntas frecuentes
+              {tr(locale, "Preguntas frecuentes")}
             </RevealOnScroll>
             <Faq items={p.faq} />
           </div>
@@ -157,14 +160,14 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       {/* CTA al pillar relacionado */}
       <Section>
         <CtaBlock
-          title="¿Hablamos de lo tuyo?"
+          title={tr(locale, "¿Hablamos de lo tuyo?")}
           desc="Si esto te ha sonado a algo que necesitas, cuéntanoslo. Te respondemos nosotros, no un bot."
           href="/contacto"
           cta="Hablamos →"
           secondary={
             p.pillarHref ? (
               <Link href={p.pillarHref} className="underline-offset-4 hover:text-accent-cyan hover:underline">
-                Ver más →
+                {tr(locale, "Ver más →")}
               </Link>
             ) : undefined
           }

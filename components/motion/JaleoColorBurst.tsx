@@ -3,8 +3,11 @@
 import Link from "next/link";
 import { StickyScene } from "./StickyScene";
 import { MagneticButton } from "./MagneticButton";
+import { useLocale } from "@/components/LocaleProvider";
+import { tr } from "@/lib/copy-ca";
 
 export function JaleoColorBurst() {
+  const locale = useLocale();
   return (
     <StickyScene pinDuration="+=80%">
       {(progress) => {
@@ -31,7 +34,7 @@ export function JaleoColorBurst() {
                 Festival propio
               </p>
               <h2 className="display mt-4 text-[clamp(2rem,5vw,4rem)]">
-                Y un festival propio en Amsterdam, porque por qué no.
+                {tr(locale, "Y un festival propio en Amsterdam, porque por qué no.")}
               </h2>
               <p className="mt-5 max-w-2xl" style={{ opacity: 0.85 }}>
                 Cultura española y latina. No massive stages, no VIP fences, no
@@ -46,7 +49,7 @@ export function JaleoColorBurst() {
                     className="btn"
                     style={{ background: "#ffffff", color: "var(--jaleo-red)" }}
                   >
-                    Web del festival →
+                    {tr(locale, "Web del festival →")}
                   </a>
                 </MagneticButton>
                 <MagneticButton strength={0.25}>
