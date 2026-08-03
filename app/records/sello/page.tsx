@@ -3,13 +3,16 @@ import { ServicePage } from "@/components/services/ServicePage";
 import { ArtistFeatureCase } from "@/components/services/cases";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 const s = services.sello;
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Sello discográfico independiente en España",
   description: s.desc,
-  alternates: { canonical: `${site.url}${s.path}` },
-};
+  alternates: alternatesFor(`${s.path}`),
+  };
+}
 
 export default function Page() {
   return (

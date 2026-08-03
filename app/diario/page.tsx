@@ -4,17 +4,20 @@ import { Section, Cta } from "@/components/ui";
 import { RevealOnScroll, SplitTextReveal, MagneticButton, StaggerGroup } from "@/components/motion";
 import { getPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 const posts = getPosts();
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Blog — Bonito Sound",
   description:
     "El blog de Bonito Sound: cómo funciona la industria de la música por dentro, booking, sellos, distribución y eventos de marca. Sin postureo.",
-  alternates: { canonical: `${site.url}/diario` },
+  alternates: alternatesFor(`/diario`),
   // Se indexa solo cuando hay al menos un artículo real.
   robots: posts.length > 0 ? undefined : { index: false, follow: true },
-};
+  };
+}
 
 function fmtDate(iso: string) {
   try {

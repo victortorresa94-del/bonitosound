@@ -14,16 +14,19 @@ import {
 } from "@/components/motion";
 import { getArtists } from "@/lib/content";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Records — Sello, editorial y distribución | Bonito Sound",
   description:
     "La división de música grabada de Bonito Sound: sello discográfico, editorial y distribución digital. Producimos, publicamos, registramos y llevamos tu música a donde se escucha. Más de 150 lanzamientos desde 2022.",
-  alternates: { canonical: `${site.url}/records` },
-};
+  alternates: alternatesFor(`/records`),
+  };
+}
 
 // Las tres patas de Records, cada una con su página de detalle.
 const PATAS: { icon: IconName; t: string; d: string; href: string; cta: string }[] = [
@@ -83,7 +86,7 @@ export default function Records() {
           name: "Bonito Sound Records",
           "@id": `${site.url}/records`,
           url: `${site.url}/records`,
-          description: metadata.description,
+          description: generateMetadata().description,
         }}
       />
       <JsonLd

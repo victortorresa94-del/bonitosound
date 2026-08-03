@@ -4,16 +4,19 @@ import { BookingScene } from "@/components/artistas/BookingScene";
 import { RevealOnScroll } from "@/components/motion";
 import { getArtist } from "@/lib/content";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Contacto — Cogemos el teléfono, no un formulario",
   description:
     "Cuéntanos tu proyecto, tu idea o lo que necesites. Te respondemos rápido, y por personas. Bonito Sound — Sabadell, Barcelona.",
-  alternates: { canonical: `${site.url}/contacto` },
-};
+  alternates: alternatesFor(`/contacto`),
+  };
+}
 
 type SP = { searchParams: { a?: string } };
 

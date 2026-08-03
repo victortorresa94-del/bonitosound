@@ -17,16 +17,19 @@ import { findLogo, findAsset } from "@/lib/assets";
 import { DaniGaleria } from "@/components/nosotros/DaniGaleria";
 import { getPosts } from "@/lib/blog";
 import { team, memberships, support, supportPending, site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Nosotros — Quiénes están detrás de Bonito Sound",
   description:
     "El equipo de Bonito Sound en Sabadell: 30 años de oficio, +150 lanzamientos desde 2022, 250 eventos. Dani Boada y la gente que lo lleva.",
-  alternates: { canonical: `${site.url}/nosotros` },
-};
+  alternates: alternatesFor(`/nosotros`),
+  };
+}
 
 // Tiles del banner de Instagram. Vídeos verticales LOCALES (formato reel 9:16,
 // mudos en bucle) + el reel de IG que pasó Víctor como embed. Cris hablando

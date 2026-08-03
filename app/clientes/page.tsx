@@ -4,13 +4,16 @@ import { CtaBlock } from "@/components/CtaBlock";
 import { RevealOnScroll, SplitTextReveal } from "@/components/motion";
 import { LogoGrid } from "@/components/trusted/LogoGrid";
 import { trustedBy, site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Clientes — Empresas que han confiado en hacerlo bonito",
   description:
     "Marcas, agencias, festivales, ayuntamientos y asociaciones para las que ha trabajado Bonito Sound.",
-  alternates: { canonical: `${site.url}/clientes` },
-};
+  alternates: alternatesFor(`/clientes`),
+  };
+}
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -29,7 +32,7 @@ export default function Clientes() {
           "@type": "Organization",
           name: site.legalName,
           url: `${site.url}/clientes`,
-          description: metadata.description,
+          description: generateMetadata().description,
         }}
       />
 

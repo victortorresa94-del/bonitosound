@@ -5,16 +5,19 @@ import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Roster completo — todos los artistas de Bonito Sound",
   description:
     "Todo el roster de Bonito Sound organizado: artistas de booking, management y sello, y el catálogo de distribución y editorial. Fotos, géneros y ficha de cada uno.",
-  alternates: { canonical: `${site.url}/artistas/todos` },
-};
+  alternates: alternatesFor(`/artistas/todos`),
+  };
+}
 
 // Enlaces a "cada cosa de nuestros servicios" — para bajar al detalle.
 const SERVICE_LINKS = [

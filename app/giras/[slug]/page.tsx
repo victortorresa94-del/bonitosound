@@ -11,6 +11,7 @@ import { getGira, getGiraSlugs, getGiras } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { giras } from "@/lib/giras";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -25,7 +26,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   return {
     title: `${g.title} | Bonito Sound`,
     description: g.context,
-    alternates: { canonical: `${site.url}/giras/${g.slug}` },
+    alternates: alternatesFor(`/giras/${g.slug}`),
   };
 }
 

@@ -13,13 +13,16 @@ import {
   type ServiceFeature,
 } from "@/components/servicios/ServiceFeatures";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Marketing musical para artistas — ads y lanzamientos",
   description:
     "Campañas de ads, estrategia de redes y lanzamientos de álbum y de evento para artistas. Cuando salga, se entera quien se tiene que enterar.",
-  alternates: { canonical: `${site.url}/marketing` },
-};
+  alternates: alternatesFor(`/marketing`),
+  };
+}
 
 const CYAN = "#16b6d4";
 
@@ -92,7 +95,7 @@ export default function Marketing() {
           serviceType: "Marketing musical para artistas",
           provider: { "@type": "Organization", name: site.legalName },
           areaServed: "ES",
-          description: metadata.description,
+          description: generateMetadata().description,
         }}
       />
       <JsonLd

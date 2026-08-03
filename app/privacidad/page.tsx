@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Section, Heading, Eyebrow } from "@/components/ui";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Política de privacidad",
   robots: { index: false },
-  alternates: { canonical: `${site.url}/privacidad` },
-};
+  alternates: alternatesFor(`/privacidad`),
+  };
+}
 
 export default function Privacidad() {
   return (

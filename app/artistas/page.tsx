@@ -8,16 +8,19 @@ import { RosterCard } from "@/components/artistas/RosterCard";
 import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Artistas — el roster de Bonito Sound",
   description:
     "A estos los llevamos nosotros: booking, management y sello. Pocos artistas, bien llevados, más un catálogo de distribución de ~20 nombres.",
-  alternates: { canonical: `${site.url}/artistas` },
-};
+  alternates: alternatesFor(`/artistas`),
+  };
+}
 
 /**
  * Los 6 del roster (decisión de Dani, reunión 23/07): los que queremos que se

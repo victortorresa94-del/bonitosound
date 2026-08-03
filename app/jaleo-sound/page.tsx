@@ -7,13 +7,16 @@ import { JsonLd } from "@/components/ui";
 import { MarqueeRow } from "@/components/motion";
 import { findAsset } from "@/lib/assets";
 import { site, support } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Jaleo Sound — Festival de cultura española en Amsterdam",
   description:
     "Jaleo Sound: festival de cultura española y latina en Amsterdam. 11-12 de septiembre de 2026, Posthoornkerk Cultural Church.",
-  alternates: { canonical: `${site.url}/jaleo-sound` },
-};
+  alternates: alternatesFor(`/jaleo-sound`),
+  };
+}
 
 // Line-up de la edición 2025 (verificado: jaleosound.com / spainculture.nl).
 // Las confirmaciones de 2026 se añadirán cuando el festival las anuncie.

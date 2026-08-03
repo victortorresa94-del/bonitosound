@@ -6,16 +6,19 @@ import Image from "next/image";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { JsonLd } from "@/components/ui";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Servicios — todo lo que tu música necesita, en un sitio",
   description:
     "Booking, management, producción, editorial, distribución, marketing y sello propio. Lo que la mayoría te hace montar con cinco proveedores, en Bonito Sound está en uno.",
-  alternates: { canonical: `${site.url}/servicios` },
-};
+  alternates: alternatesFor(`/servicios`),
+  };
+}
 
 type Servicio = {
   n: string;

@@ -9,13 +9,16 @@ import { GirasVideos } from "@/components/giras/GirasVideos";
 import { giras } from "@/lib/giras";
 import { getGiraSlugs } from "@/lib/content";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Giras — Producción y dirección de giras de artistas | Bonito Sound",
   description:
     "Producción técnica, logística, road management y dirección de giras. Coordinamos cada detalle, de la planificación previa al desmontaje final. Giras de Albert Pla, Alfred García, Dulze, Nàtura y muchos más.",
-  alternates: { canonical: `${site.url}/giras` },
-};
+  alternates: alternatesFor(`/giras`),
+  };
+}
 
 export default function Giras() {
   return (
@@ -27,7 +30,7 @@ export default function Giras() {
           serviceType: "Producción y dirección de giras musicales",
           provider: { "@type": "Organization", name: site.legalName },
           areaServed: "ES",
-          description: metadata.description,
+          description: generateMetadata().description,
         }}
       />
 

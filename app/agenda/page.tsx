@@ -3,15 +3,18 @@ import { Section, Cta, JsonLd } from "@/components/ui";
 import { RevealOnScroll, SplitTextReveal, MagneticButton } from "@/components/motion";
 import { getShows } from "@/lib/agenda";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Agenda — Próximos shows del roster",
   description:
     "Próximos conciertos de los artistas de Bonito Sound. Filtra por artista, mes y ciudad.",
-  alternates: { canonical: `${site.url}/agenda` },
+  alternates: alternatesFor(`/agenda`),
   // Sin shows poblados: no indexar hasta que la agenda tenga fechas reales.
   robots: { index: false, follow: true },
-};
+  };
+}
 
 const fmt = new Intl.DateTimeFormat("es-ES", {
   day: "2-digit",
