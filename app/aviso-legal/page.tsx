@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { Section, Heading, Eyebrow } from "@/components/ui";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Aviso legal",
   robots: { index: false },
-  alternates: { canonical: `${site.url}/aviso-legal` },
-};
+  alternates: alternatesFor(`/aviso-legal`),
+  };
+}
 
 export default function AvisoLegal() {
   return (

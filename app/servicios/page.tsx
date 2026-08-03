@@ -6,16 +6,22 @@ import Image from "next/image";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { JsonLd } from "@/components/ui";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
+import { localePath } from "@/lib/i18n";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Servicios — todo lo que tu música necesita, en un sitio",
   description:
     "Booking, management, producción, editorial, distribución, marketing y sello propio. Lo que la mayoría te hace montar con cinco proveedores, en Bonito Sound está en uno.",
-  alternates: { canonical: `${site.url}/servicios` },
-};
+  alternates: alternatesFor(`/servicios`),
+  };
+}
 
 type Servicio = {
   n: string;
@@ -102,6 +108,7 @@ const CARD =
   "flex h-full flex-col border border-[#14283C]/20 bg-[#FBFAF6] p-3.5 shadow-[0_2px_20px_-14px_rgba(20,40,60,0.35)] transition-[box-shadow,border-color] duration-300 group-hover:border-[#14283C] group-hover:shadow-[0_22px_44px_-24px_rgba(20,40,60,0.45)] md:p-4";
 
 export default function Servicios() {
+  const locale = serverLocale();
   return (
     <>
       <JsonLd
@@ -122,23 +129,21 @@ export default function Servicios() {
       <section style={{ backgroundColor: "#FBFAF6" }}>
         <div className="wrap pb-4 pt-14 md:pb-6 md:pt-16">
           <RevealOnScroll as="p" className="eyebrow mb-4">
-            Servicios
+            {tr(locale, "Servicios")}
           </RevealOnScroll>
           <h1
             className="display font-bold leading-[0.95] text-[clamp(2.1rem,5.4vw,4rem)]"
             style={{ color: NAVY }}
           >
-            Lo que la mayoría te hace montar con cinco proveedores,{" "}
-            <span style={{ color: CYAN }}>aquí está en uno.</span>
+            {tr(locale, "Lo que la mayoría te hace montar con cinco proveedores,")}{" "}
+            <span style={{ color: CYAN }}>{tr(locale, "aquí está en uno.")}</span>
           </h1>
           <RevealOnScroll
             as="p"
             delay={0.15}
             className="mt-5 max-w-[52ch] text-base leading-relaxed text-text-secondary"
           >
-            En Bonito Sound reunimos todo lo que tu proyecto necesita para
-            crecer, sonar mejor y llegar más lejos. Menos complicaciones, más
-            música.
+            {tr(locale, "En Bonito Sound reunimos todo lo que tu proyecto necesita para crecer, sonar mejor y llegar más lejos. Menos complicaciones, más música.")}
           </RevealOnScroll>
         </div>
       </section>
@@ -150,7 +155,7 @@ export default function Servicios() {
             {SERVICIOS.map((s, i) => (
               <div key={s.slug} className="h-full">
                 <Link
-                  href={s.href}
+                  href={localePath(s.href, locale)}
                   data-cursor="link"
                   className="group block h-full transition-transform duration-300 hover:-translate-y-1.5"
                 >
@@ -160,10 +165,10 @@ export default function Servicios() {
                       <Illu slug={s.slug} className="h-full w-auto max-w-full transition-transform duration-500 group-hover:scale-[1.05]" />
                     </div>
                     <h2 className={`${COMBO[i].font} mt-0.5 text-2xl font-bold leading-tight md:text-[1.6rem]`} style={{ color: COMBO[i].color }}>
-                      {s.title}
+                      {tr(locale, s.title)}
                     </h2>
                     <p className="mt-1 line-clamp-2 text-[0.75rem] leading-snug text-text-secondary">
-                      {s.desc}
+                      {tr(locale, s.desc)}
                     </p>
                   </div>
                 </Link>
@@ -174,7 +179,7 @@ export default function Servicios() {
           {/* Records: tarjeta ancha al final (ilustración a un lado, texto al otro) */}
           <RevealOnScroll className="mt-4">
             <Link
-              href={RECORDS.href}
+              href={localePath(RECORDS.href, locale)}
               data-cursor="link"
               className="group block transition-transform duration-300 hover:-translate-y-1.5"
             >
@@ -188,10 +193,10 @@ export default function Servicios() {
                 <div>
                   <Numero n={RECORDS.n} />
                   <h2 className="display mt-1 text-3xl font-bold md:text-4xl" style={{ color: NAVY }}>
-                    {RECORDS.title}
+                    {tr(locale, RECORDS.title)}
                   </h2>
                   <p className="mt-2 max-w-[52ch] text-sm leading-relaxed text-text-secondary">
-                    {RECORDS.desc}
+                    {tr(locale, RECORDS.desc)}
                   </p>
                 </div>
               </div>

@@ -10,13 +10,20 @@ import { TeatroYVisuales } from "@/components/eventos/TeatroYVisuales";
 import { EventosOutro } from "@/components/eventos/EventosOutro";
 import { getEventos } from "@/lib/content";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { paginaCa } from "@/lib/content-i18n";
 
-export const metadata: Metadata = {
-  title: "Experiencias — Eventos para marcas, teatro y espectáculos visuales",
+export function generateMetadata(): Metadata {
+  // En catalán manda la traducción; si faltara, se queda el castellano.
+  const trad = serverLocale() === "ca" ? paginaCa("experiencias") : undefined;
+  return {
+  title: trad?.title ?? "Experiencias — Eventos para marcas, teatro y espectáculos visuales",
   description:
-    "Creamos y producimos experiencias de marca donde la música y las artes en vivo conectan con el público. También teatro y espectáculos visuales: mapping, luz y proyección.",
-  alternates: { canonical: `${site.url}/experiencias` },
-};
+    trad?.desc ?? "Creamos y producimos experiencias de marca donde la música y las artes en vivo conectan con el público. También teatro y espectáculos visuales: mapping, luz y proyección.",
+  alternates: alternatesFor(`/experiencias`),
+  };
+}
 
 export default function Experiencias() {
   // Experiencias = SOLO marcas (+ teatro y visuales). Las giras y los directos

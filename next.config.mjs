@@ -53,8 +53,11 @@ const nextConfig = {
       { source: "/noticias", destination: "/diario", statusCode: 301 },
       { source: "/blog", destination: "/diario", statusCode: 301 },
 
-      // WPML: prefijos de idioma viejos -> estructura plana en ES
-      { source: "/ca/:path*", destination: "/:path*", statusCode: 301 },
+      // WPML: prefijos de idioma viejos -> estructura plana en ES.
+      // OJO: el /ca YA NO se redirige. Cuando se montó esto la web era solo en
+      // castellano y /ca era basura heredada de WordPress; ahora /ca es la
+      // versión catalana de verdad (la sirve middleware.ts por reescritura), y
+      // dejar el 301 aquí se la comía antes de que el middleware actuase.
       { source: "/es/:path*", destination: "/:path*", statusCode: 301 },
     ];
   },

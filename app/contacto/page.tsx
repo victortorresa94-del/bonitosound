@@ -4,16 +4,24 @@ import { BookingScene } from "@/components/artistas/BookingScene";
 import { RevealOnScroll } from "@/components/motion";
 import { getArtist } from "@/lib/content";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { paginaCa } from "@/lib/content-i18n";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
-export const metadata: Metadata = {
-  title: "Contacto — Cogemos el teléfono, no un formulario",
+export function generateMetadata(): Metadata {
+  // En catalán manda la traducción; si faltara, se queda el castellano.
+  const trad = serverLocale() === "ca" ? paginaCa("contacto") : undefined;
+  return {
+  title: trad?.title ?? "Contacto — Cogemos el teléfono, no un formulario",
   description:
-    "Cuéntanos tu proyecto, tu idea o lo que necesites. Te respondemos rápido, y por personas. Bonito Sound — Sabadell, Barcelona.",
-  alternates: { canonical: `${site.url}/contacto` },
-};
+    trad?.desc ?? "Cuéntanos tu proyecto, tu idea o lo que necesites. Te respondemos rápido, y por personas. Bonito Sound — Sabadell, Barcelona.",
+  alternates: alternatesFor(`/contacto`),
+  };
+}
 
 type SP = { searchParams: { a?: string } };
 
@@ -52,6 +60,7 @@ function InfoRow({
 
 export default function Contacto({ searchParams }: SP) {
   const slug = typeof searchParams.a === "string" ? searchParams.a : undefined;
+  const locale = serverLocale();
   const found = slug ? getArtist(slug) : undefined;
   const artist = found ? { name: found.name, genre: found.genre } : undefined;
 
@@ -60,18 +69,18 @@ export default function Contacto({ searchParams }: SP) {
       <div className="wrap py-14 md:py-20">
         {/* Hero */}
         <RevealOnScroll as="p" className="mb-5 text-sm font-bold uppercase tracking-[0.22em]">
-          <span style={{ color: CYAN }}>Hablemos</span>
+          <span style={{ color: CYAN }}>{tr(locale, "Hablemos")}</span>
         </RevealOnScroll>
         <RevealOnScroll as="h1" delay={0.05} className="display leading-[0.92] text-[clamp(2.8rem,8vw,5.6rem)]">
-          <span style={{ color: NAVY }}>Cogemos el teléfono,</span>
+          <span style={{ color: NAVY }}>{tr(locale, "Cogemos el teléfono,")}</span>
           <br />
-          <span className="italic" style={{ color: CYAN }}>no un formulario</span>
+          <span className="italic" style={{ color: CYAN }}>{tr(locale, "no un formulario")}</span>
         </RevealOnScroll>
         <RevealOnScroll as="p" delay={0.12} className="mt-6 max-w-xl text-lg leading-relaxed text-text-secondary">
           {artist ? (
-            <>Cuéntanos el bolo para <span className="font-semibold" style={{ color: NAVY }}>{artist.name}</span>: fecha, sitio y qué tienes en mente. Te respondemos rápido, y por personas.</>
+            <>{tr(locale, "Cuéntanos el bolo para")} <span className="font-semibold" style={{ color: NAVY }}>{artist.name}</span>{tr(locale, ": fecha, sitio y qué tienes en mente. Te respondemos rápido, y por personas.")}</>
           ) : (
-            <>Cuéntanos tu proyecto, tu idea o lo que necesites. Te respondemos rápido, y por personas.</>
+            <>{tr(locale, "Cuéntanos tu proyecto, tu idea o lo que necesites. Te respondemos rápido, y por personas.")}</>
           )}
         </RevealOnScroll>
 
@@ -87,7 +96,7 @@ export default function Contacto({ searchParams }: SP) {
             {/* Datos de contacto */}
             <div className="mt-8">
               <InfoRow
-                label="Teléfono"
+                label={tr(locale, "Teléfono")}
                 value={site.phone}
                 href={`tel:${site.phone.replace(/\s/g, "")}`}
                 icon={
@@ -108,7 +117,7 @@ export default function Contacto({ searchParams }: SP) {
                 }
               />
               <InfoRow
-                label="Ubicación"
+                label={tr(locale, "Ubicación")}
                 value={`${site.address.city}, ${site.address.region}`}
                 icon={
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

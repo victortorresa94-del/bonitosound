@@ -3,6 +3,8 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { usePlayer } from "@/components/player/PlayerProvider";
+import { useLocale } from "@/components/LocaleProvider";
+import { t } from "@/lib/i18n";
 
 type HeroVideoProps = {
   src: string;
@@ -23,6 +25,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const { start, everStarted, hasTracks } = usePlayer();
+  const locale = useLocale();
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -124,7 +127,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
               <path d="M8 5v14l11-7z" />
             </svg>
-            <span className="text-sm font-semibold tracking-wide">Dale al play</span>
+            <span className="text-sm font-semibold tracking-wide">{t(locale, "hero.play")}</span>
           </button>
         </div>
       )}
@@ -136,7 +139,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
         style={{ bottom: "max(1.5rem, env(safe-area-inset-bottom, 0px))" }}
       >
         <span className="text-[0.7rem] font-medium uppercase tracking-[0.25em] text-text-muted">
-          Baja
+          {t(locale, "a11y.baja")}
         </span>
         <span className="scroll-cue-dark" aria-hidden="true" />
       </div>

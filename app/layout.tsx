@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+import { LocaleProvider } from "@/components/LocaleProvider";
+import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
 import { Zilla_Slab, Fredoka, Caveat } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
@@ -98,13 +101,19 @@ export default function RootLayout({
     sameAs: [site.social.instagram, site.social.linkedin],
   };
 
+  // El middleware marca las rutas /ca con esta cabecera. Decidir el idioma
+  // AQUÍ (una sola vez, en servidor) es lo que evita que servidor y cliente
+  // pinten cosas distintas y salten errores de hidratación.
+  const locale: Locale = headers().get("x-locale") === "ca" ? "ca" : DEFAULT_LOCALE;
+
   return (
     <html
-      lang="es"
+      lang={locale}
       className={`${display.variable} ${round.variable} ${hand.variable} ${GeistSans.variable}`}
     >
       <body style={{ ["--font-body" as string]: "var(--font-geist-sans)" }}>
         <JsonLd data={orgLd} />
+        <LocaleProvider locale={locale}>
         <MotionProvider>
           <PlayerProvider radio={getRadio()}>
             <Nav />
@@ -114,6 +123,7 @@ export default function RootLayout({
             <Footer />
           </PlayerProvider>
         </MotionProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

@@ -7,13 +7,16 @@ import {
   FaqMotion,
 } from "@/components/motion";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Giraverse — La circulación de giras, ordenada",
   description:
     "Giraverse: plataforma en desarrollo para gestionar la circulación de giras a nivel nacional e internacional.",
-  alternates: { canonical: `${site.url}/lab/giraverse` },
-};
+  alternates: alternatesFor(`/lab/giraverse`),
+  };
+}
 
 const faq = [
   {

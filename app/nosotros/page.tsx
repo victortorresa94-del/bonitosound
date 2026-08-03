@@ -17,16 +17,25 @@ import { findLogo, findAsset } from "@/lib/assets";
 import { DaniGaleria } from "@/components/nosotros/DaniGaleria";
 import { getPosts } from "@/lib/blog";
 import { team, memberships, support, supportPending, site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { paginaCa } from "@/lib/content-i18n";
+import { tr } from "@/lib/copy-ca";
+import { localePath } from "@/lib/i18n";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
-export const metadata: Metadata = {
-  title: "Nosotros — Quiénes están detrás de Bonito Sound",
+export function generateMetadata(): Metadata {
+  // En catalán manda la traducción; si faltara, se queda el castellano.
+  const trad = serverLocale() === "ca" ? paginaCa("nosotros") : undefined;
+  return {
+  title: trad?.title ?? "Nosotros — Quiénes están detrás de Bonito Sound",
   description:
-    "El equipo de Bonito Sound en Sabadell: 30 años de oficio, +150 lanzamientos desde 2022, 250 eventos. Dani Boada y la gente que lo lleva.",
-  alternates: { canonical: `${site.url}/nosotros` },
-};
+    trad?.desc ?? "El equipo de Bonito Sound en Sabadell: 30 años de oficio, +150 lanzamientos desde 2022, 250 eventos. Dani Boada y la gente que lo lleva.",
+  alternates: alternatesFor(`/nosotros`),
+  };
+}
 
 // Tiles del banner de Instagram. Vídeos verticales LOCALES (formato reel 9:16,
 // mudos en bucle) + el reel de IG que pasó Víctor como embed. Cris hablando
@@ -143,6 +152,7 @@ function DaniArtistCard({ name }: { name: string }) {
 }
 
 export default function Nosotros() {
+  const locale = serverLocale();
   const posts = getPosts().slice(0, 3);
   const heroImg = findAsset("heroes", "nosotros") ?? findLogo("heroes", "nosotros");
 
@@ -161,22 +171,20 @@ export default function Nosotros() {
         <div className="wrap grid items-center gap-10 py-16 md:grid-cols-[1.1fr_1fr] md:py-24">
           <div>
             <RevealOnScroll as="p" className="eyebrow mb-5">
-              Qué somos
+              {tr(locale, "Qué somos")}
             </RevealOnScroll>
             <RevealOnScroll as="h1" className="display leading-[1.02] text-[clamp(2.6rem,6.5vw,4.6rem)]">
-              <span style={{ color: NAVY }}>Somos la gente</span>
+              <span style={{ color: NAVY }}>{tr(locale, "Somos la gente")}</span>
               <br />
-              <span style={{ color: CYAN }}>del sector.</span>
+              <span style={{ color: CYAN }}>{tr(locale, "del sector.")}</span>
             </RevealOnScroll>
             <RevealOnScroll as="p" delay={0.2} className="mt-6 max-w-md text-lg leading-relaxed text-text-secondary">
-              Booking, management, sello, distribución y eventos. Una agencia
-              musical joven con treinta años de oficio detrás. Hacemos las cosas
-              bonitas, sin postureo, porque nos gusta de verdad.
+              {tr(locale, "Booking, management, sello, distribución y eventos. Una agencia musical joven con treinta años de oficio detrás. Hacemos las cosas bonitas, sin postureo, porque nos gusta de verdad.")}
             </RevealOnScroll>
           </div>
           {heroImg ? (
             <RevealOnScroll delay={0.15} className="relative mx-auto aspect-square w-full max-w-lg">
-              <Image src={heroImg} alt="El equipo de Bonito Sound" fill sizes="(max-width: 768px) 100vw, 45vw" className="object-contain" priority />
+              <Image src={heroImg} alt={tr(locale, "El equipo de Bonito Sound")} fill sizes="(max-width: 768px) 100vw, 45vw" className="object-contain" priority />
             </RevealOnScroll>
           ) : null}
         </div>
@@ -189,7 +197,7 @@ export default function Nosotros() {
             <div key={s.n}>
               <p className="font-round font-bold leading-none" style={{ color: NAVY, fontSize: "clamp(2.6rem,6vw,4.4rem)" }}>{s.n}</p>
               <p className="mt-2 text-sm font-semibold uppercase leading-tight tracking-wide" style={{ color: NAVY }}>
-                {s.l[0]}<br />{s.l[1]}
+                {tr(locale, s.l[0])}<br />{tr(locale, s.l[1])}
               </p>
             </div>
           ))}
@@ -206,31 +214,27 @@ export default function Nosotros() {
             </RevealOnScroll>
             <RevealOnScroll delay={0.12} className="mt-7 space-y-5 text-lg leading-relaxed text-text-secondary">
               <p>
-                Dani lleva treinta años en la industria musical española. Treinta
-                años dan para ver de todo: sobre todo, para ver lo que no funciona y
-                por qué nadie lo arregla.
+                {tr(locale, "Dani lleva treinta años en la industria musical española. Treinta años dan para ver de todo: sobre todo, para ver lo que no funciona y por qué nadie lo arregla.")}
               </p>
               <p>
-                Montamos Bonito para arreglarlo, juntando bajo un mismo techo lo que
-                el sector te hace montar con cinco proveedores.
+                {tr(locale, "Montamos Bonito para arreglarlo, juntando bajo un mismo techo lo que el sector te hace montar con cinco proveedores.")}
               </p>
               <p>
-                Somos pocos, hacemos mucho y cogemos el teléfono. No damos keynote:
-                montamos lo que se ve en el escenario.
+                {tr(locale, "Somos pocos, hacemos mucho y cogemos el teléfono. No damos keynote: montamos lo que se ve en el escenario.")}
               </p>
             </RevealOnScroll>
           </div>
           <RevealOnScroll delay={0.15} className="mx-auto w-full max-w-[360px] md:max-w-none">
-            <InstagramReel url="https://www.instagram.com/reel/DCOfx1YKHsP/" title="Presentación de Bonito Sound" />
+            <InstagramReel url="https://www.instagram.com/reel/DCOfx1YKHsP/" title={tr(locale, "Presentación de Bonito Sound")} />
           </RevealOnScroll>
         </div>
       </Section>
 
       {/* ── EQUIPO ── */}
       <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-4">El equipo</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "El equipo")}</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-          Gente con nombre y teléfono.
+          {tr(locale, "Gente con nombre y teléfono.")}
         </SplitTextReveal>
         <StaggerGroup stagger={0.1} className="mx-auto mt-14 grid grid-cols-1 justify-items-center gap-y-10 lg:grid-cols-5 lg:justify-items-stretch lg:gap-x-8 lg:gap-y-12">
           {team.map((p) => {
@@ -266,17 +270,16 @@ export default function Nosotros() {
         <RevealOnScroll className="overflow-hidden rounded-3xl border border-subtle bg-bg-tertiary px-6 py-10 md:px-12 md:py-14">
           <div className="grid items-center gap-8 md:grid-cols-[1fr_0.45fr]">
             <div>
-              <p className="eyebrow mb-4">El día a día</p>
+              <p className="eyebrow mb-4">{tr(locale, "El día a día")}</p>
               <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,3rem)]">
-                Lo que montamos, semana a semana.
+                {tr(locale, "Lo que montamos, semana a semana.")}
               </SplitTextReveal>
               <p className="mt-5 max-w-md text-text-secondary">
-                Directos, backstage y lo que va cayendo. Como el vídeo de Cris:
-                así trabajamos. Hay mucho más de esto ahí dentro.
+                {tr(locale, "Directos, backstage y lo que va cayendo. Como el vídeo de Cris: así trabajamos. Hay mucho más de esto ahí dentro.")}
               </p>
               <div className="mt-7 flex flex-wrap items-center gap-3">
                 <MagneticButton strength={0.35}>
-                  <Cta href={site.social.instagram} external>Míranos en Instagram →</Cta>
+                  <Cta href={site.social.instagram} external>{tr(locale, "Míranos en Instagram →")}</Cta>
                 </MagneticButton>
                 <a
                   href={waLink}
@@ -312,7 +315,7 @@ export default function Nosotros() {
                 </div>
               ) : (
                 <div key={t.url} className="w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-[280px]">
-                  <InstagramReel url={t.url} title="Reel de Bonito Sound" />
+                  <InstagramReel url={t.url} title={tr(locale, "Reel de Bonito Sound")} />
                 </div>
               ),
             )}
@@ -322,9 +325,9 @@ export default function Nosotros() {
 
       {/* ── DANI, EL FUNDADOR — rediseñado: dimensiones equilibradas + tarjetas ── */}
       <Section>
-        <RevealOnScroll as="p" className="eyebrow mb-4">Dani Boada · Fundador</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "Dani Boada · Fundador")}</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display mb-10 text-[clamp(2rem,4.5vw,3.4rem)]">
-          Treinta años en esto. Y sigue al teléfono.
+          {tr(locale, "Treinta años en esto. Y sigue al teléfono.")}
         </SplitTextReveal>
 
         {/* Entrevista (vertical, local, con sonido) a la IZQUIERDA en formato
@@ -332,25 +335,19 @@ export default function Nosotros() {
         <div className="grid items-center gap-10 md:grid-cols-2 md:gap-14">
           <RevealOnScroll className="mx-auto w-full max-w-[300px] md:order-1">
             <R2Video src="/video/nosotros/entrevista-dani.mp4" ratio="9 / 16" />
-            <p className="mt-4 text-center text-sm text-text-muted">La entrevista a Dani, sin guion.</p>
+            <p className="mt-4 text-center text-sm text-text-muted">{tr(locale, "La entrevista a Dani, sin guion.")}</p>
           </RevealOnScroll>
           <RevealOnScroll delay={0.15} className="space-y-5 text-base leading-relaxed text-text-secondary md:order-2 md:text-lg">
             <p>
-              Management, contratos y la llamada que cierra el bolo: ese es el
-              día a día de Dani. En treinta años en la industria ha llevado —y
-              descubierto— a artistas que hoy llenan estadios.
+              {tr(locale, "Management, contratos y la llamada que cierra el bolo: ese es el día a día de Dani. En treinta años en la industria ha llevado a artistas que hoy llenan estadios.")}
             </p>
             <p>
-              Empezó donde se aprende de verdad: cargando y montando. Backliner,
-              producción técnica y dirección de giras por toda España, de sala en
-              sala y de furgoneta en furgoneta. También producción en televisión,
-              en <em>Tu Cara Me Suena</em>. Nada de lo que pide hoy a un equipo es
-              algo que no haya hecho antes él.
+              {tr(locale, "Empezó donde se aprende de verdad: cargando y montando. Backliner, producción técnica y dirección de giras por toda España, de sala en sala y de furgoneta en furgoneta. También producción en televisión, en")}{" "}
+              <em>Tu Cara Me Suena</em>
+              {tr(locale, ". Nada de lo que pide hoy a un equipo es algo que no haya hecho antes él.")}
             </p>
             <p>
-              Ha visto de todo lo que se puede ver en este oficio: lo que
-              funciona, lo que no, y por qué. Ese recorrido es lo que hay detrás
-              de cada decisión que tomamos en Bonito.
+              {tr(locale, "Ha visto de todo lo que se puede ver en este oficio: lo que funciona, lo que no, y por qué. Ese recorrido es lo que hay detrás de cada decisión que tomamos en Bonito.")}
             </p>
           </RevealOnScroll>
         </div>
@@ -360,7 +357,7 @@ export default function Nosotros() {
 
         {/* Tarjetas de los artistas de su trayectoria (en condiciones). */}
         <RevealOnScroll className="mt-14 border-t border-subtle pt-10">
-          <p className="eyebrow mb-7">Ha trabajado con</p>
+          <p className="eyebrow mb-7">{tr(locale, "Ha trabajado con")}</p>
           <StaggerGroup stagger={0.06} className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {DANI_ARTISTS.map((name) => (
               <DaniArtistCard key={name} name={name} />
@@ -371,14 +368,12 @@ export default function Nosotros() {
 
       {/* ── LO QUE FIRMAS (con iconos) ── */}
       <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-4">Cómo trabajamos</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "Cómo trabajamos")}</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-          Lo que firmas con nosotros.
+          {tr(locale, "Lo que firmas con nosotros.")}
         </SplitTextReveal>
         <RevealOnScroll as="p" className="mt-6 max-w-2xl text-text-secondary" delay={0.15}>
-          En este sector, demasiados artistas descubren la letra pequeña cuando
-          ya es tarde. Con nosotros no hay letra pequeña. Los números se hablan;
-          los principios, aquí.
+          {tr(locale, "En este sector, demasiados artistas descubren la letra pequeña cuando ya es tarde. Con nosotros no hay letra pequeña. Los números se hablan; los principios, aquí.")}
         </RevealOnScroll>
         <StaggerGroup stagger={0.08} className="mt-12 grid gap-6 md:grid-cols-2">
           {PRINCIPIOS.map((p) => (
@@ -387,8 +382,8 @@ export default function Nosotros() {
                 <ServiceIcon name={p.icon} />
               </span>
               <div>
-                <h3 className="display text-xl">{p.t}</h3>
-                <p className="mt-2 text-text-secondary">{p.d}</p>
+                <h3 className="display text-xl">{tr(locale, p.t)}</h3>
+                <p className="mt-2 text-text-secondary">{tr(locale, p.d)}</p>
               </div>
             </div>
           ))}
@@ -397,9 +392,9 @@ export default function Nosotros() {
 
       {/* ── EL SECTOR NOS CONOCE (tarjetas con enlace) ── */}
       <Section>
-        <RevealOnScroll as="p" className="eyebrow mb-4">El sector nos conoce</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "El sector nos conoce")}</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.8rem,4vw,3rem)]">
-          Programas e instituciones con las que andamos.
+          {tr(locale, "Programas e instituciones con las que andamos.")}
         </SplitTextReveal>
         <StaggerGroup stagger={0.1} className="mt-12 grid gap-6 md:grid-cols-3">
           {INSTITUCIONES.map((inst) => (
@@ -411,9 +406,9 @@ export default function Nosotros() {
               className="card group flex flex-col"
             >
               <h3 className="display text-xl text-text-primary transition-colors group-hover:text-accent-cyan">{inst.t}</h3>
-              <p className="mt-3 flex-1 text-sm text-text-secondary">{inst.d}</p>
+              <p className="mt-3 flex-1 text-sm text-text-secondary">{tr(locale, inst.d)}</p>
               <span className="mt-5 text-sm font-semibold text-accent-cyan">
-                Ver <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                {tr(locale, "Ver")} <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
               </span>
             </a>
           ))}
@@ -424,7 +419,7 @@ export default function Nosotros() {
       <section className="w-full" style={{ backgroundColor: NAVY }}>
         <div className="wrap py-16 md:py-24">
           <p className="mb-5 text-xs font-bold uppercase tracking-[0.18em] text-white/55">
-            Miembros activos de
+            {tr(locale, "Miembros activos de")}
           </p>
           <StaggerGroup stagger={0.05} className="flex flex-wrap gap-3 md:gap-4">
             {memberships.map((name) => (
@@ -433,7 +428,7 @@ export default function Nosotros() {
           </StaggerGroup>
 
           <p className="mb-5 mt-12 text-xs font-bold uppercase tracking-[0.18em] text-white/55">
-            Con el apoyo de
+            {tr(locale, "Con el apoyo de")}
           </p>
           <StaggerGroup stagger={0.05} className="flex flex-wrap gap-3 md:gap-4">
             {apoyoConLogo.map((name) => (
@@ -442,7 +437,7 @@ export default function Nosotros() {
           </StaggerGroup>
           {apoyoSinLogo.length > 0 && (
             <p className="mt-6 max-w-3xl text-sm leading-relaxed text-white/45">
-              También con el apoyo de {apoyoSinLogo.join(" · ")}.
+              {tr(locale, "También con el apoyo de")} {apoyoSinLogo.join(" · ")}.
             </p>
           )}
         </div>
@@ -456,12 +451,12 @@ export default function Nosotros() {
                 Blog
               </RevealOnScroll>
               <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-                Lo que pensamos, escrito.
+                {tr(locale, "Lo que pensamos, escrito.")}
               </SplitTextReveal>
             </div>
             <RevealOnScroll delay={0.1}>
-              <Link href="/diario" className="more-link">
-                Ver el blog <span className="arrow">→</span>
+              <Link href={localePath("/diario", locale)} className="more-link">
+                {tr(locale, "Ver el blog")} <span className="arrow">→</span>
               </Link>
             </RevealOnScroll>
           </div>
@@ -469,7 +464,7 @@ export default function Nosotros() {
             {posts.map((p) => (
               <Link
                 key={p.slug}
-                href={`/diario/${p.slug}`}
+                href={localePath(`/diario/${p.slug}`, locale)}
                 className="card group flex flex-col"
                 data-cursor="link"
               >
@@ -478,7 +473,7 @@ export default function Nosotros() {
                   {p.title}
                 </h3>
                 <p className="mt-3 line-clamp-3 text-sm text-text-secondary">{p.description}</p>
-                <span className="mt-5 text-sm font-semibold text-accent-cyan">Leer →</span>
+                <span className="mt-5 text-sm font-semibold text-accent-cyan">{tr(locale, "Leer →")}</span>
               </Link>
             ))}
           </StaggerGroup>
@@ -488,10 +483,9 @@ export default function Nosotros() {
       {/* ── CTA ── */}
       <Section>
         <CtaBlock
-          title="¿Hablamos?"
-          desc="Cuéntanos qué tienes en la cabeza. Te contestamos nosotros, no un bot."
-          href="/contacto"
-          cta="Hablamos →"
+          title={tr(locale, "¿Hablamos?")}
+          desc={tr(locale, "Cuéntanos qué tienes en la cabeza. Te contestamos nosotros, no un bot.")}
+          href={localePath("/contacto", locale)}
         />
       </Section>
     </>

@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "@/lib/gsap";
 import { usePlayer } from "./PlayerProvider";
+import { useLocale } from "@/components/LocaleProvider";
+import { t } from "@/lib/i18n";
 import { RadioBonito } from "./RadioBonito";
 
 const NAVY = "#14283C";
@@ -61,6 +63,7 @@ function SpotifyIcon() {
 
 export function FloatingPlayer() {
   const { playing, everStarted, isHome, canNext, spotifyUrl, total, start, toggle, next } = usePlayer();
+  const locale = useLocale();
   const [revealed, setRevealed] = useState(false);
   // La radio arranca ABIERTA: es una pieza de la web, no un widget escondido
   // detrás de un botón. Se puede cerrar y volver a abrir con el iconito.
@@ -112,7 +115,7 @@ export function FloatingPlayer() {
 
   if (!revealed) return null;
 
-  const label = playing ? "Pausar la música" : everStarted ? "Reanudar la música" : "Poner música";
+  const label = t(locale, playing ? "radio.pausar" : everStarted ? "radio.reanudar" : "radio.poner");
   const onMain = () => (everStarted ? toggle() : start());
 
   return (
@@ -131,9 +134,9 @@ export function FloatingPlayer() {
         <button
           type="button"
           onClick={() => setRadioOpen((v) => !v)}
-          aria-label={radioOpen ? "Cerrar la radio" : "Abrir la Radio Bonito"}
+          aria-label={t(locale, radioOpen ? "radio.cerrar" : "radio.abrir")}
           aria-expanded={radioOpen}
-          title="Radio Bonito"
+          title={t(locale, "radio.titulo")}
           className="grid h-9 w-9 place-items-center rounded-full border transition-all duration-200 hover:scale-110"
           style={{
             borderColor: radioOpen ? CYAN : "rgba(20,40,60,0.25)",
@@ -151,8 +154,8 @@ export function FloatingPlayer() {
         <button
           type="button"
           onClick={next}
-          aria-label="Siguiente tema"
-          title="Siguiente"
+          aria-label={t(locale, "radio.siguiente")}
+          title={t(locale, "radio.siguiente")}
           className="grid h-9 w-9 place-items-center rounded-full border transition-all duration-200 hover:scale-110"
           style={{
             borderColor: "rgba(20,40,60,0.25)",
@@ -172,8 +175,8 @@ export function FloatingPlayer() {
           href={spotifyUrl}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="La playlist de Bonito en Spotify"
-          title="La playlist de Bonito en Spotify"
+          aria-label={t(locale, "radio.spotify")}
+          title={t(locale, "radio.spotify")}
           className="grid h-9 w-9 place-items-center rounded-full transition-all duration-200 hover:scale-110"
           style={{ backgroundColor: "#1DB954", color: "#fff" }}
         >

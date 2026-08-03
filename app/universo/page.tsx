@@ -5,16 +5,19 @@ import { RevealOnScroll, StaggerGroup, MagneticButton } from "@/components/motio
 import { Cta } from "@/components/ui";
 import { findAsset } from "@/lib/assets";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Universo Bonito — Artiverse, Giraverse y Jaleo Sound",
   description:
     "Lo que Bonito construye por su cuenta: Artiverse conecta el sector, Giraverse ordena las giras y Jaleo Sound lleva la cultura española a Ámsterdam.",
-  alternates: { canonical: `${site.url}/universo` },
-};
+  alternates: alternatesFor(`/universo`),
+  };
+}
 
 // Las tres cosas que Bonito ha creado: dos apps y un festival. Cada tarjeta
 // lleva su logo y enlaza a su sitio (Jaleo, a su página interna).

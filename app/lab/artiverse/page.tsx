@@ -8,13 +8,16 @@ import {
   FaqMotion,
 } from "@/components/motion";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Artiverse — La app de la programación artística",
   description:
     "Artiverse conecta artistas, promotores, salas y agencias: datos reales de seguidores, streams y presencia por ciudad para programar y cerrar acuerdos.",
-  alternates: { canonical: `${site.url}/lab/artiverse` },
-};
+  alternates: alternatesFor(`/lab/artiverse`),
+  };
+}
 
 const faq = [
   {

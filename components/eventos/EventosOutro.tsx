@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const CREAM = "#FBFAF6";
 const NAVY = "#14283C";
@@ -11,6 +13,7 @@ const CYAN = "#16b6d4";
  * números "marca por marca", combinados con su cifra.)
  */
 export function EventosOutro() {
+  const locale = serverLocale();
   return (
     <section className="relative w-full overflow-hidden" style={{ backgroundColor: CREAM }}>
       {/* Franja navy en diagonal con la frase */}
@@ -19,9 +22,9 @@ export function EventosOutro() {
         style={{ backgroundColor: NAVY, clipPath: "polygon(0 14%, 100% 0, 100% 86%, 0 100%)" }}
       >
         <p className="display mx-auto max-w-5xl text-center font-bold leading-[1.02] text-white" style={{ fontSize: "clamp(1.7rem, 5vw, 3.7rem)" }}>
-          <span style={{ color: CYAN }}>“</span>No organizamos eventos.
+          <span style={{ color: CYAN }}>“</span>{tr(locale, "No organizamos eventos.")}
           <br />
-          Creamos momentos que suenan bonito.<span style={{ color: CYAN }}>”</span>
+          {tr(locale, "Creamos momentos que suenan bonito.")}<span style={{ color: CYAN }}>”</span>
         </p>
       </div>
 
@@ -47,7 +50,7 @@ export function EventosOutro() {
             <path d="M8 8 l3 3 M38 6 l-3 3" stroke={CYAN} strokeWidth="2" strokeLinecap="round" />
           </svg>
           <p className="mt-5 text-xs font-semibold uppercase tracking-wide" style={{ color: NAVY }}>
-            ¿Tienes algo en mente?<br />Cuéntanoslo.
+            {tr(locale, "¿Tienes algo en mente?")}<br />{tr(locale, "Cuéntanoslo.")}
           </p>
         </div>
 
@@ -56,7 +59,7 @@ export function EventosOutro() {
             (z-10, a todo el ancho) que si no se comía el click. */}
         <Link
           href="/contacto"
-          aria-label="¿Quieres crear un evento? Hablemos"
+          aria-label={tr(locale, "¿Quieres crear un evento? Hablemos")}
           className="group absolute bottom-0 right-0 z-20 flex w-[72%] flex-col items-start px-6 pb-8 pt-10 sm:w-[52%] md:w-[46%] md:px-12 md:pb-12 md:pt-16"
           style={{ backgroundColor: CYAN, clipPath: "polygon(14% 0, 100% 22%, 100% 100%, 0 100%)" }}
         >
@@ -67,7 +70,7 @@ export function EventosOutro() {
             className="ml-6 mt-5 inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-xs font-bold uppercase tracking-[0.15em] transition-transform group-hover:scale-105 md:ml-10"
             style={{ color: NAVY }}
           >
-            Hablemos →
+            {tr(locale, "Hablemos →")}
           </span>
         </Link>
       </div>

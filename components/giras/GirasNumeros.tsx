@@ -1,5 +1,8 @@
 import { RevealOnScroll } from "@/components/motion";
 import { girasStats } from "@/lib/giras";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
+
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -9,10 +12,11 @@ const CYAN = "#16b6d4";
  * conciertos, giras y artistas. Todo derivado de lib/giras.ts (nada inventado).
  */
 export function GirasNumeros() {
+  const locale = serverLocale();
   const items = [
-    { n: `+${girasStats.conciertos}`, l: "Conciertos" },
-    { n: String(girasStats.giras), l: "Giras" },
-    { n: String(girasStats.artistas), l: "Artistas" },
+    { n: `+${girasStats.conciertos}`, l: tr(locale, "Conciertos") },
+    { n: String(girasStats.giras), l: tr(locale, "Giras") },
+    { n: String(girasStats.artistas), l: tr(locale, "Artistas") },
   ];
 
   return (

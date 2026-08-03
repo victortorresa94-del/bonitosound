@@ -1,3 +1,5 @@
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
@@ -8,6 +10,7 @@ const CYAN = "#16b6d4";
  * ruta en vez de onda. Todo SVG/CSS: no depende de ninguna imagen.
  */
 export function GirasHero() {
+  const locale = serverLocale();
   return (
     <div className="relative px-5 pt-14 md:px-10 md:pt-16">
       <div className="pointer-events-none relative">
@@ -56,7 +59,7 @@ export function GirasHero() {
           className="text-[0.72rem] font-bold uppercase leading-snug tracking-[0.06em] md:text-[0.82rem]"
           style={{ color: NAVY }}
         >
-          Producción técnica, logística y road management
+          {tr(locale, "Producción técnica, logística y road management")}
         </p>
         <svg className="ml-auto mt-2 h-3 w-40" viewBox="0 0 160 12" fill="none" aria-hidden>
           <path

@@ -3,6 +3,10 @@ import Link from "next/link";
 import { RevealOnScroll } from "@/components/motion";
 import { findAsset, findLogo } from "@/lib/assets";
 import type { Gira } from "@/lib/giras";
+import { localePath } from "@/lib/i18n";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
+
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -86,7 +90,7 @@ function GiraCard({ g, tilt, href }: { g: Gira; tilt: number; href?: string }) {
         )}
         {href && (
           <p className="mt-2 text-[0.68rem] font-bold" style={{ color: CYAN }}>
-            Ver la gira →
+            {tr(serverLocale(), "Ver la gira →")}
           </p>
         )}
       </div>
@@ -122,7 +126,7 @@ export function GirasRuta({
           delay={0.05}
           className="display text-[clamp(2.2rem,6vw,4.2rem)] leading-[1] text-[#14283C]"
         >
-          Giras Bonitas.
+          {tr(serverLocale(), "Giras Bonitas.")}
         </RevealOnScroll>
       </div>
 
@@ -172,7 +176,9 @@ export function GirasRuta({
                 {g.year}
               </span>
             );
-            const href = conPagina.includes(g.slug) ? `/giras/${g.slug}` : undefined;
+            const href = conPagina.includes(g.slug)
+              ? localePath(`/giras/${g.slug}`, serverLocale())
+              : undefined;
             const card = <GiraCard g={g} tilt={tilt} href={href} />;
 
             return (

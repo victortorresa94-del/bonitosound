@@ -11,6 +11,7 @@ import { RevealOnScroll, StaggerGroup, SplitTextReveal } from "@/components/moti
 import { getEvento, getEventos } from "@/lib/content";
 import { findAsset, findLogo } from "@/lib/assets";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 const NAVY = "#14283C";
 
@@ -39,7 +40,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   return {
     title: e.title,
     description: e.context,
-    alternates: { canonical: `${site.url}/experiencias/${e.slug}` },
+    alternates: alternatesFor(`/experiencias/${e.slug}`),
   };
 }
 

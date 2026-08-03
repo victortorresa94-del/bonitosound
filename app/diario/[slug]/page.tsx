@@ -7,6 +7,7 @@ import { RevealOnScroll, MagneticButton } from "@/components/motion";
 import { PostBody } from "@/components/blog/PostBody";
 import { getPost, getPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 export function generateStaticParams() {
   return getPosts().map((p) => ({ slug: p.slug }));
@@ -35,7 +36,7 @@ export function generateMetadata({
   return {
     title: p.title,
     description: p.description,
-    alternates: { canonical: url },
+    alternates: alternatesFor(`/diario/${p.slug}`),
     openGraph: {
       type: "article",
       title: p.title,

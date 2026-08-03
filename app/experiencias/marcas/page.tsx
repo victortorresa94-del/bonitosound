@@ -16,13 +16,16 @@ import {
 import { getEventos } from "@/lib/content";
 import { findAsset, findLogo } from "@/lib/assets";
 import { brands, site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export function generateMetadata(): Metadata {
+  return {
   title: "Agencia de eventos musicales para marcas",
   description:
     "Productora de eventos corporativos con música y activaciones de marca en España. Del brief al titular en 6 semanas. Ballantine's, Pernod Ricard, Pepsico, Absolut.",
-  alternates: { canonical: `${site.url}/experiencias/marcas` },
-};
+  alternates: alternatesFor(`/experiencias/marcas`),
+  };
+}
 
 const services = [
   {
@@ -77,7 +80,7 @@ export default function EventosMarcas() {
           serviceType: "Agencia de eventos musicales para marcas",
           provider: { "@type": "Organization", name: site.legalName },
           areaServed: "ES",
-          description: metadata.description,
+          description: generateMetadata().description,
         }}
       />
       <JsonLd

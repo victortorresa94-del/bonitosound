@@ -8,6 +8,14 @@ import { NarrativeScene } from "@/components/home/NarrativeScene";
 import { InstitutionalStrip } from "@/components/home/InstitutionalStrip";
 import { PresentacionVideo } from "@/components/home/PresentacionVideo";
 import { scenes } from "@/lib/home";
+import { alternatesFor } from "@/lib/seo";
+import type { Metadata } from "next";
+
+/** El home hereda del layout todo menos la canónica, que aquí es
+ *  autorreferente por idioma y lleva su par de hreflang. */
+export function generateMetadata(): Metadata {
+  return { alternates: alternatesFor("/") };
+}
 
 const HERO_VIDEO = "/video/home/hero.mp4";
 const HERO_POSTER = "/img/marca/hero-poster.webp";

@@ -75,5 +75,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: b.priority,
   }));
 
-  return [...base, ...artists, ...eventos, ...girasDetalle, ...diario];
+  const es = [...base, ...artists, ...eventos, ...girasDetalle, ...diario];
+
+  // Cada URL, también en catalán, con su par de alternates: es la forma que
+  // Google entiende de decir "son la misma página en dos idiomas".
+  return es.flatMap((entrada) => {
+    const ruta = entrada.url.slice(site.url.length);
+    const urlCa = `${site.url}/ca${ruta}`;
+    const languages = { es: entrada.url, ca: urlCa };
+    return [
+      { ...entrada, alternates: { languages } },
+      { ...entrada, url: urlCa, alternates: { languages } },
+    ];
+  });
 }

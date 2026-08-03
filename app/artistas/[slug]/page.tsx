@@ -12,6 +12,7 @@ import { ArtistCTA } from "@/components/artistas/ArtistCTA";
 import { getArtist, getArtists } from "@/lib/content";
 import { findAsset, findArtistAudio } from "@/lib/assets";
 import { site } from "@/lib/site";
+import { alternatesFor } from "@/lib/seo";
 
 // Los 6 destacados del roster (orden del mockup de /artistas) van primero en el
 // carrusel; detrás, el resto de artistas. Es un ORDEN ÚNICO: entres por donde
@@ -32,7 +33,7 @@ export function generateMetadata({
   return {
     title: `${a.name} — ${a.genre}`,
     description: `${a.name} en Bonito Sound. ${a.bio[0] ?? ""}`,
-    alternates: { canonical: `${site.url}/artistas/${a.slug}` },
+    alternates: alternatesFor(`/artistas/${a.slug}`),
   };
 }
 
