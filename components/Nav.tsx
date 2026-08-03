@@ -6,23 +6,49 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { nav } from "@/lib/site";
+import { localePath, stripLocale, t, type Locale } from "@/lib/i18n";
+import { useLocale } from "@/components/LocaleProvider";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/** ¿La ruta actual pertenece a este item de nav? (activo también en subrutas) */
+/** ¿La ruta actual pertenece a este item de nav? (activo también en subrutas).
+ *  Compara SIN el prefijo de idioma: /ca/giras debe marcar "Gires" igual que
+ *  /giras marca "Giras". */
 function isActive(pathname: string, href: string) {
-  return pathname === href || pathname.startsWith(href + "/");
+  const p = stripLocale(pathname);
+  return p === href || p.startsWith(href + "/");
+}
+
+/** Clave de traducción de cada entrada del menú, a partir de su ruta. */
+function navKey(href: string) {
+  return "nav." + (href === "/" ? "inicio" : href.replace(/^\//, "").split("/")[0]);
+}
+
+/** Selector de idioma: mantiene la página actual y solo cambia el prefijo. */
+function LangSwitch({ pathname, locale }: { pathname: string; locale: Locale }) {
+  const base = stripLocale(pathname);
+  const otro: Locale = locale === "es" ? "ca" : "es";
+  return (
+    <Link
+      href={localePath(base, otro)}
+      aria-label={t(locale, "lang.switch")}
+      className="text-sm font-semibold uppercase tracking-wide text-text-secondary transition-colors hover:text-text-primary"
+    >
+      {otro === "ca" ? "CA" : "ES"}
+    </Link>
+  );
 }
 
 export function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname() ?? "/";
+  const locale = useLocale();
   return (
     <header className="sticky top-0 z-50 bg-bg-primary/85 backdrop-blur-md">
       <div className="wrap flex h-16 items-center justify-between md:h-20">
         <Link
-          href="/"
-          aria-label="Bonito Sound — inicio"
+          href={localePath("/", locale)}
+          aria-label={t(locale, "nav.inicio")}
           className="flex items-center"
           onClick={() => setOpen(false)}
         >
@@ -43,24 +69,25 @@ export function Nav() {
             return (
               <Link
                 key={item.href}
-                href={item.href}
+                href={localePath(item.href, locale)}
                 aria-current={active ? "page" : undefined}
                 className={`link-underline text-sm font-medium ${
                   active ? "text-text-primary" : "text-text-secondary hover:text-text-primary"
                 }`}
               >
-                {item.label}
+                {t(locale, navKey(item.href))}
               </Link>
             );
           })}
-          <Link href="/contacto" className="btn btn-primary px-5 py-2">
-            Hablamos
+          <LangSwitch pathname={pathname} locale={locale} />
+          <Link href={localePath("/contacto", locale)} className="btn btn-primary px-5 py-2">
+            {t(locale, "cta.hablamos")}
           </Link>
         </nav>
 
         <button
           className="relative h-6 w-6 md:hidden"
-          aria-label="Menú"
+          aria-label={t(locale, "nav.menu")}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
@@ -100,14 +127,14 @@ export function Nav() {
                   transition={{ duration: 0.3, delay: 0.06 * idx, ease: EASE }}
                 >
                   <Link
-                    href={item.href}
+                    href={localePath(item.href, locale)}
                     aria-current={isActive(pathname, item.href) ? "page" : undefined}
                     className={`block py-3 ${
                       isActive(pathname, item.href) ? "text-text-primary" : "text-text-secondary"
                     }`}
                     onClick={() => setOpen(false)}
                   >
-                    {item.label}
+                    {t(locale, navKey(item.href))}
                   </Link>
                 </motion.div>
               ))}
@@ -117,12 +144,16 @@ export function Nav() {
                 transition={{ duration: 0.3, delay: 0.06 * nav.length, ease: EASE }}
               >
                 <Link
-                  href="/contacto"
+                  href={localePath("/contacto", locale)}
                   className="btn btn-primary mt-3"
                   onClick={() => setOpen(false)}
                 >
-                  Hablamos
+                  {t(locale, "cta.hablamos")}
                 </Link>
+                {/* Selector de idioma también en móvil, donde no cabe arriba. */}
+                <div className="mt-4 border-t border-subtle pt-4">
+                  <LangSwitch pathname={pathname} locale={locale} />
+                </div>
               </motion.div>
             </div>
           </motion.nav>
