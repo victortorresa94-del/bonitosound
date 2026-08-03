@@ -595,6 +595,76 @@ const CA: Record<string, string> = {
     "De la primera maqueta al màster llest per a plataformes. L'àlbum MARCA DIVINA d'Eva Calyza va sortir d'aquí.",
   "Sello, booking y distribución trabajan juntos. Publicamos y sabemos qué hacer al día siguiente.":
     "Segell, booking i distribució treballen junts. Publiquem i sabem què fer l'endemà.",
+
+  // ── Índice de servicios ──
+  "Servicios": "Serveis",
+  "Servicios — todo lo que tu música necesita, en un sitio":
+    "Serveis — tot el que la teva música necessita, en un lloc",
+  "Booking, management, producción, editorial, distribución, marketing y sello propio. Lo que la mayoría te hace montar con cinco proveedores, en Bonito Sound está en uno.":
+    "Booking, management, producció, editorial, distribució, màrqueting i segell propi. El que la majoria et fa muntar amb cinc proveïdors, a Bonito Sound és en un de sol.",
+  "Lo que la mayoría te hace montar con cinco proveedores,":
+    "El que la majoria et fa muntar amb cinc proveïdors,",
+  "aquí está en uno.": "aquí és en un de sol.",
+  "En Bonito Sound reunimos todo lo que tu proyecto necesita para crecer, sonar mejor y llegar más lejos. Menos complicaciones, más música.":
+    "A Bonito Sound reunim tot el que el teu projecte necessita per créixer, sonar millor i arribar més lluny. Menys complicacions, més música.",
+  "Conectamos tu música con el público adecuado. Giras, festivales y conciertos a medida para que tu directo llegue más lejos.":
+    "Connectem la teva música amb el públic adequat. Gires, festivals i concerts a mida perquè el teu directe arribi més lluny.",
+  "Acompañamos tu carrera con visión, estrategia y experiencia para que tomes las mejores decisiones en cada etapa.":
+    "Acompanyem la teva carrera amb visió, estratègia i experiència perquè prenguis les millors decisions a cada etapa.",
+  "Producción": "Producció",
+  "Damos forma a tu sonido. Producción musical, grabación, mezcla y mastering con criterio y sin prisas.":
+    "Donem forma al teu so. Producció musical, gravació, mescla i masterització amb criteri i sense presses.",
+  "Publicamos y administramos tus derechos para que tus canciones generen ingresos y lleguen a todas partes.":
+    "Publiquem i administrem els teus drets perquè les teves cançons generin ingressos i arribin a tot arreu.",
+  "Tu música en todas las plataformas. Distribución digital global, gestión de derechos y cuentas claras.":
+    "La teva música a totes les plataformes. Distribució digital global, gestió de drets i comptes clars.",
+  "Marketing": "Màrqueting",
+  "Campañas para dar a conocer tu proyecto, conectar con tu audiencia y que el lanzamiento no pase desapercibido.":
+    "Campanyes per donar a conèixer el teu projecte, connectar amb la teva audiència i que el llançament no passi desapercebut.",
+  "Sello discográfico propio para desarrollar y lanzar proyectos con identidad, libertad creativa y una red que impulsa tu música.":
+    "Segell discogràfic propi per desenvolupar i llançar projectes amb identitat, llibertat creativa i una xarxa que impulsa la teva música.",
+
+  // ── Records ──
+  "Records — Sello, editorial y distribución | Bonito Sound":
+    "Records — Segell, editorial i distribució | Bonito Sound",
+  "La división de música grabada de Bonito Sound: sello discográfico, editorial y distribución digital. Producimos, publicamos, registramos y llevamos tu música a donde se escucha. Más de 150 lanzamientos desde 2022.":
+    "La divisió de música gravada de Bonito Sound: segell discogràfic, editorial i distribució digital. Produïm, publiquem, registrem i portem la teva música on s'escolta. Més de 150 llançaments des del 2022.",
+  "Tu música grabada, ": "La teva música gravada, ",
+  "de principio a fin.": "de principi a fi.",
+  "La división de música grabada de Bonito: sello, editorial y distribución. Producimos, publicamos, registramos los derechos y llevamos tu música a donde se escucha. Todo bajo el mismo techo.":
+    "La divisió de música gravada de Bonito: segell, editorial i distribució. Produïm, publiquem, registrem els drets i portem la teva música on s'escolta. Tot sota el mateix sostre.",
+  "Tres patas, un sistema": "Tres potes, un sistema",
+  "Lo que le pasa a tu música, ordenado.": "El que li passa a la teva música, ordenat.",
+  "Producimos, publicamos y empujamos tu música. Pocos proyectos y en serio: del primer demo al máster listo para plataformas.":
+    "Produïm, publiquem i empenyem la teva música. Pocs projectes i de debò: de la primera maqueta al màster llest per a plataformes.",
+  "El sello": "El segell",
+  "Registramos tus obras y seguimos sus usos para que cada vez que suena tu música, rinda lo que tiene que rendir.":
+    "Registrem les teves obres i en seguim els usos perquè cada vegada que sona la teva música rendeixi el que ha de rendir.",
+  "La editorial": "L'editorial",
+  "Llevamos tu música a Spotify, Apple Music, YouTube y las demás, con los metadatos en orden y gente del sector detrás.":
+    "Portem la teva música a Spotify, Apple Music, YouTube i la resta, amb les metadades en ordre i gent del sector al darrere.",
+  "La distribución": "La distribució",
+  "Publicar es el minuto uno. Hacerlo bien —máster, metadatos, derechos y un plan para el día después— es todo lo demás. Eso es Records.":
+    "Publicar és el minut u. Fer-ho bé —màster, metadades, drets i un pla per a l'endemà— és tota la resta. Això és Records.",
+  "Roster": "Roster",
+  "Artistas que llevamos.": "Artistes que portem.",
+  "Roster completo →": "Roster complet →",
+  "¿Qué es exactamente Records?": "Què és exactament Records?",
+  "Es la división de música grabada de Bonito Sound: sello, editorial y distribución. Todo lo que le pasa a tu música desde que existe la grabación hasta que suena y se cobra en las plataformas. El booking y el management van aparte.":
+    "És la divisió de música gravada de Bonito Sound: segell, editorial i distribució. Tot el que li passa a la teva música des que existeix la gravació fins que sona i es cobra a les plataformes. El booking i el management van a part.",
+  "Sello vs distribución vs editorial: ¿qué hace cada uno?":
+    "Segell, distribució i editorial: què fa cadascun?",
+  "El sello produce y publica tu música y asume parte del riesgo. La distribución la lleva a las plataformas con los metadatos en orden. La editorial gestiona los derechos de autor de las canciones. Puedes contratar una, dos o las tres.":
+    "El segell produeix i publica la teva música i n'assumeix part del risc. La distribució la porta a les plataformes amb les metadades en ordre. L'editorial gestiona els drets d'autor de les cançons. En pots contractar una, dues o totes tres.",
+  "¿Hace falta fichar por el sello para distribuir o llevar la editorial?":
+    "Cal fitxar pel segell per distribuir o portar l'editorial?",
+  "No. La distribución y la editorial son servicios independientes: puedes usarlos aunque publiques por tu cuenta. Cada pata se contrata y se justifica por separado.":
+    "No. La distribució i l'editorial són serveis independents: els pots fer servir encara que publiquis pel teu compte. Cada pota es contracta i es justifica per separat.",
+  "¿Cómo se ficha por el sello?": "Com es fitxa pel segell?",
+  "Escribiéndonos. Escuchamos lo que tienes, te decimos con honestidad si hay encaje y, si lo hay, montamos un plan concreto. No fichamos por volumen.":
+    "Escrivint-nos. Escoltem el que tens, et diem amb honestedat si hi ha encaix i, si n'hi ha, muntem un pla concret. No fitxem per volum.",
+  "Mándanosla. Escuchamos lo que tienes y te decimos, sin humo, cómo la sacaríamos.":
+    "Envia-nos-la. Escoltem el que tens i et diem, sense fum, com la trauríem.",
 };
 
 /**

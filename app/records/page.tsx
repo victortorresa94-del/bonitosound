@@ -15,6 +15,9 @@ import {
 import { getArtists } from "@/lib/content";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
+import { localePath, t as ui } from "@/lib/i18n";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -75,6 +78,7 @@ const faq = [
 export default function Records() {
   const roster = getArtists().filter((a) => a.tier === "booking");
   const illo = "/img/servicios/heroes/sello.png";
+  const locale = serverLocale();
   const mailto = `mailto:${site.emails.general}?subject=${encodeURIComponent("Records")}`;
 
   return (
@@ -107,16 +111,14 @@ export default function Records() {
           <div>
             <RevealOnScroll as="p" className="eyebrow mb-4">Records</RevealOnScroll>
             <RevealOnScroll as="h1" className="display leading-[1.02] text-[clamp(2.6rem,7vw,5rem)]">
-              <span style={{ color: NAVY }}>Tu música grabada, </span>
-              <span style={{ color: CYAN }}>de principio a fin.</span>
+              <span style={{ color: NAVY }}>{tr(locale, "Tu música grabada, ")}</span>
+              <span style={{ color: CYAN }}>{tr(locale, "de principio a fin.")}</span>
             </RevealOnScroll>
             <RevealOnScroll as="p" delay={0.2} className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">
-              La división de música grabada de Bonito: sello, editorial y
-              distribución. Producimos, publicamos, registramos los derechos y
-              llevamos tu música a donde se escucha. Todo bajo el mismo techo.
+              {tr(locale, "La división de música grabada de Bonito: sello, editorial y distribución. Producimos, publicamos, registramos los derechos y llevamos tu música a donde se escucha. Todo bajo el mismo techo.")}
             </RevealOnScroll>
             <RevealOnScroll className="mt-9" delay={0.35}>
-              <MagneticButton strength={0.35}><Cta href={mailto}>Hablamos →</Cta></MagneticButton>
+              <MagneticButton strength={0.35}><Cta href={mailto}>{ui(locale, "cta.hablamos")} →</Cta></MagneticButton>
             </RevealOnScroll>
           </div>
           <RevealOnScroll className="order-first md:order-none" delay={0.15}>
@@ -127,20 +129,20 @@ export default function Records() {
 
       {/* ── LAS 3 PATAS ── */}
       <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-4">Tres patas, un sistema</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "Tres patas, un sistema")}</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-          Lo que le pasa a tu música, ordenado.
+          {tr(locale, "Lo que le pasa a tu música, ordenado.")}
         </SplitTextReveal>
         <StaggerGroup stagger={0.08} className="mt-12 grid gap-6 md:grid-cols-3">
           {PATAS.map((p) => (
-            <Link key={p.t} href={p.href} className="card group flex flex-col transition-transform duration-300 hover:-translate-y-1">
+            <Link key={p.t} href={localePath(p.href, locale)} className="card group flex flex-col transition-transform duration-300 hover:-translate-y-1">
               <span className="mb-4 grid h-12 w-12 place-items-center rounded-xl bg-accent-cyan/10 transition-all duration-300 group-hover:-rotate-6 group-hover:bg-accent-cyan/20" style={{ color: NAVY }}>
                 <ServiceIcon name={p.icon} />
               </span>
-              <h3 className="display text-2xl leading-tight">{p.t}</h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-text-secondary">{p.d}</p>
+              <h3 className="display text-2xl leading-tight">{tr(locale, p.t)}</h3>
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-text-secondary">{tr(locale, p.d)}</p>
               <span className="mt-5 text-sm font-semibold text-accent-cyan">
-                {p.cta} <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
+                {tr(locale, p.cta)} <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
               </span>
             </Link>
           ))}
@@ -150,8 +152,7 @@ export default function Records() {
       {/* ── STATEMENT ── */}
       <Section>
         <RevealOnScroll as="p" className="statement mx-auto max-w-4xl text-center text-[clamp(1.5rem,3.4vw,2.5rem)] leading-tight text-text-primary">
-          Publicar es el minuto uno. Hacerlo bien —máster, metadatos, derechos y un
-          plan para el día después— es todo lo demás. Eso es Records.
+          {tr(locale, "Publicar es el minuto uno. Hacerlo bien —máster, metadatos, derechos y un plan para el día después— es todo lo demás. Eso es Records.")}
         </RevealOnScroll>
         <RevealOnScroll className="mx-auto mt-7 w-40" delay={0.15}>
           <svg viewBox="0 0 160 16" fill="none" aria-hidden className="h-4 w-full">
@@ -167,33 +168,32 @@ export default function Records() {
       <Section>
         <RevealOnScroll as="p" className="eyebrow mb-4">Roster</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-          Artistas que llevamos.
+          {tr(locale, "Artistas que llevamos.")}
         </SplitTextReveal>
         <StaggerGroup stagger={0.04} className="mt-10 flex flex-wrap gap-3">
           {roster.map((a) => (
-            <Link key={a.slug} href={`/artistas/${a.slug}`} className="btn btn-ghost" data-cursor="link">
+            <Link key={a.slug} href={localePath(`/artistas/${a.slug}`, locale)} className="btn btn-ghost" data-cursor="link">
               {a.name}
             </Link>
           ))}
           <MagneticButton strength={0.3}>
-            <Link href="/artistas/todos" className="btn btn-primary">Roster completo →</Link>
+            <Link href={localePath("/artistas/todos", locale)} className="btn btn-primary">{tr(locale, "Roster completo →")}</Link>
           </MagneticButton>
         </StaggerGroup>
       </Section>
 
       {/* ── FAQ ── */}
       <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-8">Preguntas frecuentes</RevealOnScroll>
-        <FaqOpen items={faq} />
+        <RevealOnScroll as="p" className="eyebrow mb-8">{tr(locale, "Preguntas frecuentes")}</RevealOnScroll>
+        <FaqOpen items={faq.map((f) => ({ ...f, q: tr(locale, f.q), a: tr(locale, f.a) }))} />
       </Section>
 
       {/* ── CTA ── */}
       <Section>
         <CtaBlock
-          title="¿Tienes música?"
-          desc="Mándanosla. Escuchamos lo que tienes y te decimos, sin humo, cómo la sacaríamos."
+          title={tr(locale, "¿Tienes música?")}
+          desc={tr(locale, "Mándanosla. Escuchamos lo que tienes y te decimos, sin humo, cómo la sacaríamos.")}
           href={mailto}
-          cta="Hablamos →"
         />
       </Section>
     </>
