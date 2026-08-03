@@ -87,9 +87,9 @@ export function ArtistSocial({
 
   return (
     <Section id="redes" className="pt-10 md:pt-14">
-      <RevealOnScroll as="p" className="eyebrow mb-4">En Instagram</RevealOnScroll>
+      <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "En Instagram")}</RevealOnScroll>
       <RevealOnScroll as="h2" delay={0.05} className="display text-[clamp(1.8rem,4vw,3rem)]">
-        El día a día de <span style={{ color: "#16b6d4" }}>{name}</span>.
+        {tr(locale, "El día a día de")} <span style={{ color: "#16b6d4" }}>{name}</span>.
       </RevealOnScroll>
 
       {localReels.length > 0 ? (
@@ -128,7 +128,8 @@ export function ArtistSocial({
               <IgGlyph className="h-8 w-8" />
             </span>
             <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-white/85">
-              Directos, backstage y el día a día de {name}: todo eso está en su
+              {tr(locale, "Directos, backstage y el día a día de")} {name}
+              {tr(locale, ": todo eso está en su")}{" "}
               {tr(locale, "Instagram. Dale un vistazo.")}
             </p>
             <div className="mt-8">{pills}</div>

@@ -1,4 +1,6 @@
 ---
+title: "Producció i tour management de la gira d'Anne Lukin"
+location: "Espanya"
 services:
   - "Producció tècnica"
   - "Logística"

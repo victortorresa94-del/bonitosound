@@ -1,4 +1,5 @@
 ---
+title: "Four Roses: directe amb el caràcter del bourbon"
 count: "20 esdeveniments"
 context: "20 esdeveniments per a Four Roses des del 2024. Directe i producció per a una marca que té clar com vol sonar."
 result: "Vint dates, i les que vindran."

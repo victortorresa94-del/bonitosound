@@ -1,4 +1,6 @@
 ---
+title: "Final de la Gira 1016 al Sant Jordi Club"
+location: "Sant Jordi Club, Barcelona"
 services:
   - "Road management"
   - "Tour management"

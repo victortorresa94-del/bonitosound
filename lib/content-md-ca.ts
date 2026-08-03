@@ -64,6 +64,8 @@ export function eventoCa(e: Evento, locale: Locale, dir: "eventos" | "giras"): E
   const body = parrafos(o.body);
   return {
     ...e,
+    ...(d.title ? { title: d.title as string } : {}),
+    ...(d.location ? { location: d.location as string } : {}),
     ...(d.context ? { context: d.context as string } : {}),
     ...(d.result ? { result: d.result as string } : {}),
     ...(d.services ? { services: d.services as string[] } : {}),

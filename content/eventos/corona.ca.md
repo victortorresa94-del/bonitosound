@@ -1,4 +1,5 @@
 ---
+title: "Corona: la marca que va sonar tot un any"
 count: "+40 esdeveniments"
 services:
   - "Selecció d'artista"

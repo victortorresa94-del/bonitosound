@@ -1,4 +1,5 @@
 ---
+title: "Ballantine's: una activació que la gent recorda"
 context: "Activació de marca amb directe de dalt a baix: direcció artística, booking i producció tècnica, dins del mateix equip."
 result: "De l'esbós a l'última cançó, tot va sortir del mateix lloc."
 ---

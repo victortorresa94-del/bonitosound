@@ -1,4 +1,5 @@
 ---
+title: "Font Vella: tres anys sonant junts"
 count: "30 esdeveniments"
 context: "30 activacions per a Font Vella entre el 2023 i el 2025. Directe que acompanya la marca en cada format que va caldre."
 result: "Tres anys i trenta dates: ja ens coneixem de memòria."

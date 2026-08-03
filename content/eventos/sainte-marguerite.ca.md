@@ -1,4 +1,5 @@
 ---
+title: "Sainte Marguerite: directe amb classe, data a data"
 count: "+20 esdeveniments"
 context: "Més de 20 esdeveniments per a Sainte Marguerite el 2025. Directe per a una marca de vi de la Provença, amb el gust que demana."
 result: "Vint dates, cadascuna cuidada com si fos l'única."

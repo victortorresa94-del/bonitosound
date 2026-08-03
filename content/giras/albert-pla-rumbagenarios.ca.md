@@ -1,4 +1,6 @@
 ---
+title: "Gira Rumbagenarios d'Albert Pla"
+location: "Espanya"
 services:
   - "Producció"
   - "Coordinació tècnica"

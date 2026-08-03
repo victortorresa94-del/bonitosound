@@ -1,4 +1,5 @@
 ---
+title: "Pepsi: música per a una marca que omple estadis"
 context: "Activació amb directe per a Pepsi. Un sol interlocutor del primer correu a l'últim focus."
 result: "Una marca enorme i un esdeveniment que no se li va quedar petit."
 ---

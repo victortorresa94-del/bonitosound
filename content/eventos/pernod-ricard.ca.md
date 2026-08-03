@@ -1,4 +1,5 @@
 ---
+title: "Pernod Ricard: la música al centre de l'esdeveniment"
 context: "Experiència de marca premium: artista, repertori i producció triats amb el mateix cap que la resta de la campanya."
 result: "La música, tractada com una decisió de marca més."
 ---

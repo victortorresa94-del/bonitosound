@@ -1046,6 +1046,33 @@ const CA: Record<string, string> = {
     "Veure els esdeveniments →",
   "Bonito Sound — música, eventos para marcas, festival y tecnología del sector":
     "Bonito Sound — música, esdeveniments per a marques, festival i tecnologia del sector",
+
+  // ── El equipo y microcopy de ficha ──
+  "En Instagram": "A Instagram",
+  "El día a día de": "El dia a dia de",
+  "Directos, backstage y el día a día de": "Directes, backstage i el dia a dia de",
+  ": todo eso está en su": ": tot això és al seu",
+  "Fundador": "Fundador",
+  "30 años en la industria. Management, contratos, la llamada que cierra el bolo.":
+    "30 anys a la indústria. Management, contractes, la trucada que tanca el bolo.",
+  "Cofundador": "Cofundador",
+  "Project management, financiación y booking. Cuadra los números y cierra las fechas.":
+    "Project management, finançament i booking. Quadra els números i tanca les dates.",
+  "El que convierte el deck en evento. La producción que se ve en el escenario.":
+    "El que converteix el deck en esdeveniment. La producció que es veu a l'escenari.",
+  "Comunicación": "Comunicació",
+  "Coordina lo de dentro y lo de fuera. Lo que ves publicado, ha pasado por ella.":
+    "Coordina el de dins i el de fora. El que veus publicat, hi ha passat per ella.",
+  "Marketing Artístico & IA": "Màrqueting Artístic i IA",
+  "Campañas, contenido y la IA que hace que cada lanzamiento llegue más lejos.":
+    "Campanyes, contingut i la IA que fa que cada llançament arribi més lluny.",
+  "Un ejemplo": "Un exemple",
+  "MARCA DIVINA, de Eva Calyza.": "MARCA DIVINA, d'Eva Calyza.",
+  "El primer álbum de Eva Calyza — diez canciones que fusionan folclore andaluz y electrónica oscura — se produjo con nosotros y salió en 2025. Del máster a la calle, con criterio.":
+    "El primer àlbum d'Eva Calyza — deu cançons que fusionen folklore andalús i electrònica fosca — es va produir amb nosaltres i va sortir el 2025. Del màster al carrer, amb criteri.",
+  "A Nàtura la lleva una persona, no un buzón.": "La Nàtura la porta una persona, no una bústia.",
+  "Management personal: estrategia, calendario y las decisiones que importan, con un interlocutor que coge el teléfono. Booking, records y editorial en la misma casa, así que nadie va rebotando entre empresas.":
+    "Management personal: estratègia, calendari i les decisions que importen, amb un interlocutor que despenja el telèfon. Booking, records i editorial a la mateixa casa, així ningú no va rebotant entre empreses.",
 };
 
 /**

@@ -21,6 +21,7 @@ import { alternatesFor } from "@/lib/seo";
 import { serverLocale } from "@/lib/locale-server";
 import { paginaCa } from "@/lib/content-i18n";
 import { tr } from "@/lib/copy-ca";
+import { postCa } from "@/lib/content-md-ca";
 import { localePath } from "@/lib/i18n";
 
 const NAVY = "#14283C";
@@ -153,7 +154,7 @@ function DaniArtistCard({ name }: { name: string }) {
 
 export default function Nosotros() {
   const locale = serverLocale();
-  const posts = getPosts().slice(0, 3);
+  const posts = getPosts().slice(0, 3).map((x) => postCa(x, locale));
   const heroImg = findAsset("heroes", "nosotros") ?? findLogo("heroes", "nosotros");
 
   // Apoyos: los que tienen logo van como logo; los que no, más pequeños y abajo.
@@ -257,8 +258,8 @@ export default function Nosotros() {
                   )}
                 </div>
                 <h3 className="display text-2xl leading-tight">{p.name}</h3>
-                <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.15em] text-text-muted">{p.role}</p>
-                <p className="mt-3 text-sm leading-relaxed text-text-secondary">{p.line}</p>
+                <p className="mt-1.5 text-xs font-medium uppercase tracking-[0.15em] text-text-muted">{tr(locale, p.role)}</p>
+                <p className="mt-3 text-sm leading-relaxed text-text-secondary">{tr(locale, p.line)}</p>
               </div>
             );
           })}

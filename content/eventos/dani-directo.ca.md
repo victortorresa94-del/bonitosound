@@ -1,4 +1,5 @@
 ---
+title: "En Dani en directe: el cap també toca"
 context: "En Dani, ànima de Bonito Sound, en directe. Trenta anys d'ofici que no s'aprenen en un despatx."
 result: "Aquí la música es toca."
 ---

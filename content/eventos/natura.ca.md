@@ -1,4 +1,5 @@
 ---
+title: "Nàtura: del club a qualsevol escenari"
 services:
   - "Booking"
   - "Producció"

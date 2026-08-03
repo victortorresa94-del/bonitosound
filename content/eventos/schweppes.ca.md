@@ -1,4 +1,6 @@
 ---
+title: "Schweppes: gira de marca pel nord-oest"
+location: "Nord-oest d'Espanya"
 count: "+80 esdeveniments"
 context: "Més de 80 activacions amb directe per a Schweppes entre el 2023 i el 2024 per tot el nord-oest. Booking, direcció artística i producció, gira rere gira."
 result: "Un format que es va repetir perquè funcionava: mateix equip, mateixa qualitat, vuitanta vegades."

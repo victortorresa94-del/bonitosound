@@ -1,4 +1,5 @@
 ---
+title: "Monkey: una nit de marca ben sonada"
 context: "Esdeveniment de marca per a Monkey amb directe i producció tècnica de dalt a baix."
 result: "Marca, música i sala, quadrades en una sola nit."
 ---

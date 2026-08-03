@@ -1,4 +1,5 @@
 ---
+title: "Seagram's: el punt just de directe"
 context: "Activació per a Seagram's: directe i ambient a la mida de la ginebra."
 result: "Música al seu punt just, perquè la nit no decaigui."
 ---
