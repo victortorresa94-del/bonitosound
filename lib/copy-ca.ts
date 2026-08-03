@@ -113,6 +113,85 @@ const CA: Record<string, string> = {
   "Quiénes somos": "Qui som",
   "Dónde estamos": "On som",
 
+  // ── Qué somos ──
+  "Qué somos": "Qui som",
+  "Somos la gente": "Som la gent",
+  "del sector.": "del sector.",
+  "Booking, management, sello, distribución y eventos. Una agencia musical joven con treinta años de oficio detrás. Hacemos las cosas bonitas, sin postureo, porque nos gusta de verdad.":
+    "Booking, management, segell, distribució i esdeveniments. Una agència musical jove amb trenta anys d'ofici al darrere. Fem les coses boniques, sense postureig, perquè ens agrada de debò.",
+  "El equipo de Bonito Sound": "L'equip de Bonito Sound",
+  "años": "anys",
+  "de oficio": "d'ofici",
+  "montamos": "vam muntar",
+  "lanzamientos": "llançaments",
+  "desde 2022": "des del 2022",
+  "eventos": "esdeveniments",
+  "Dani lleva treinta años en la industria musical española. Treinta años dan para ver de todo: sobre todo, para ver lo que no funciona y por qué nadie lo arregla.":
+    "En Dani fa trenta anys que és a la indústria musical espanyola. Trenta anys donen per veure de tot: sobretot, per veure què no funciona i per què ningú no ho arregla.",
+  "Montamos Bonito para arreglarlo, juntando bajo un mismo techo lo que el sector te hace montar con cinco proveedores.":
+    "Vam muntar Bonito per arreglar-ho, ajuntant sota un mateix sostre el que el sector et fa muntar amb cinc proveïdors.",
+  "Somos pocos, hacemos mucho y cogemos el teléfono. No damos keynote: montamos lo que se ve en el escenario.":
+    "Som pocs, fem molt i despengem el telèfon. No fem keynotes: muntem el que es veu a l'escenari.",
+  "Presentación de Bonito Sound": "Presentació de Bonito Sound",
+  "Gente con nombre y teléfono.": "Gent amb nom i telèfon.",
+  "El día a día": "El dia a dia",
+  "Lo que montamos, semana a semana.": "El que muntem, setmana a setmana.",
+  "Directos, backstage y lo que va cayendo. Como el vídeo de Cris: así trabajamos. Hay mucho más de esto ahí dentro.":
+    "Directes, backstage i el que va caient. Com el vídeo de la Cris: així treballem. Hi ha molt més d'això aquí dins.",
+  "Míranos en Instagram →": "Mira'ns a Instagram →",
+  "Reel de Bonito Sound": "Reel de Bonito Sound",
+  "Dani Boada · Fundador": "Dani Boada · Fundador",
+  "Treinta años en esto. Y sigue al teléfono.": "Trenta anys en això. I encara despenja el telèfon.",
+  "La entrevista a Dani, sin guion.": "L'entrevista a en Dani, sense guió.",
+  "Management, contratos y la llamada que cierra el bolo: ese es el día a día de Dani. En treinta años en la industria ha llevado a artistas que hoy llenan estadios.":
+    "Management, contractes i la trucada que tanca el bolo: aquest és el dia a dia d'en Dani. En trenta anys a la indústria ha portat artistes que avui omplen estadis.",
+  "Empezó donde se aprende de verdad: cargando y montando. Backliner, producción técnica y dirección de giras por toda España, de sala en sala y de furgoneta en furgoneta. También producción en televisión, en":
+    "Va començar on s'aprèn de debò: carregant i muntant. Backliner, producció tècnica i direcció de gires per tot Espanya, de sala en sala i de furgoneta en furgoneta. També producció en televisió, a",
+  ". Nada de lo que pide hoy a un equipo es algo que no haya hecho antes él.":
+    ". Res del que demana avui a un equip no ho hagi fet ell abans.",
+  "Ha visto de todo lo que se puede ver en este oficio: lo que funciona, lo que no, y por qué. Ese recorrido es lo que hay detrás de cada decisión que tomamos en Bonito.":
+    "Ha vist tot el que es pot veure en aquest ofici: el que funciona, el que no, i per què. Aquest recorregut és el que hi ha darrere de cada decisió que prenem a Bonito.",
+  "Cómo trabajamos": "Com treballem",
+  "Lo que firmas con nosotros.": "El que signes amb nosaltres.",
+  "En este sector, demasiados artistas descubren la letra pequeña cuando ya es tarde. Con nosotros no hay letra pequeña. Los números se hablan; los principios, aquí.":
+    "En aquest sector, massa artistes descobreixen la lletra petita quan ja és tard. Amb nosaltres no hi ha lletra petita. Els números es parlen; els principis, aquí.",
+  "Pacto antes de empezar": "Pacte abans de començar",
+  "Lo que prometemos en la primera llamada acaba por escrito antes del primer movimiento. Cero acuerdos verbales que luego nadie recuerda.":
+    "El que prometem a la primera trucada acaba per escrit abans del primer moviment. Cap acord verbal que després ningú no recorda.",
+  "Exclusividad solo donde aporta": "Exclusivitat només on aporta",
+  "Si te llevamos en booking no te obligamos a fichar también el sello. Cada servicio se contrata y se justifica por separado.":
+    "Si et portem el booking no t'obliguem a fitxar també el segell. Cada servei es contracta i es justifica per separat.",
+  "Salida ordenada": "Sortida ordenada",
+  "Si la cosa no va, se acaba sin pelea. Plazo de aviso corto, devolución de lo que es tuyo, y a otra cosa.":
+    "Si la cosa no rutlla, s'acaba sense baralla. Termini d'avís curt, devolució del que és teu, i a una altra cosa.",
+  "Tu música, tus másters": "La teva música, els teus màsters",
+  "Lo que produzcamos juntos se acuerda en el papel: a quién pertenece, durante cuánto y cómo revierte. Sin ambigüedad.":
+    "El que produïm junts s'acorda al paper: a qui pertany, durant quant i com reverteix. Sense ambigüitat.",
+  "Sin cláusulas trampa": "Sense clàusules trampa",
+  "Nada de obligar a sacar X canciones al año ni a cubrir gastos imposibles. Si hay que renegociar, se renegocia.":
+    "Res d'obligar a treure X cançons l'any ni a cobrir despeses impossibles. Si cal renegociar, es renegocia.",
+  "Cuentas claras": "Comptes clars",
+  "Liquidaciones a tiempo y trimestrales. Si una plataforma se retrasa, te lo decimos.":
+    "Liquidacions puntuals i trimestrals. Si una plataforma s'endarrereix, t'ho diem.",
+  "El sector nos conoce": "El sector ens coneix",
+  "Programas e instituciones con las que andamos.": "Programes i institucions amb qui anem.",
+  "Proyecto residente 2025 de la fábrica de creación del Ajuntament de Barcelona.":
+    "Projecte resident 2025 de la fàbrica de creació de l'Ajuntament de Barcelona.",
+  "Compañía inscrita en la Red Española de Teatros, Auditorios, Circuitos y Festivales.":
+    "Companyia inscrita a la Red Española de Teatros, Auditorios, Circuitos y Festivales.",
+  "Proyecto acompañado por la fundación que conecta cultura y empresa en Catalunya.":
+    "Projecte acompanyat per la fundació que connecta cultura i empresa a Catalunya.",
+  "Ver": "Veure",
+  "Miembros activos de": "Membres actius de",
+  "Con el apoyo de": "Amb el suport de",
+  "También con el apoyo de": "També amb el suport de",
+  "Lo que pensamos, escrito.": "El que pensem, escrit.",
+  "Ver el blog": "Veure el blog",
+  "Leer →": "Llegir →",
+  "¿Hablamos?": "Parlem?",
+  "Cuéntanos qué tienes en la cabeza. Te contestamos nosotros, no un bot.":
+    "Explica'ns què tens al cap. Et contestem nosaltres, no un bot.",
+
   // ── Contacto ──
   "Hablemos": "Parlem-ne",
   "Cogemos el teléfono,": "Despengem el telèfon,",
@@ -149,7 +228,6 @@ const CA: Record<string, string> = {
   "Llámanos": "Truca'ns",
   "Preguntas frecuentes": "Preguntes freqüents",
   "Qué hacemos": "Què fem",
-  "Cómo trabajamos": "Com treballem",
   "Qué ponemos": "Què hi posem",
   "Casos": "Casos",
   "Playlist de Bonito Sound": "Playlist de Bonito Sound",
