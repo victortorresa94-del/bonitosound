@@ -434,6 +434,167 @@ const CA: Record<string, string> = {
   "El seguimiento": "El seguiment",
   "Medimos lo que mueve la aguja y ajustamos mientras corre.":
     "Mesurem el que mou l'agulla i ho ajustem mentre corre.",
+
+  // ── Preguntas frecuentes y cierres de las páginas de servicio ──
+  "¿A quién lleváis en booking?": "A qui porteu en booking?",
+  "A los artistas de nuestro roster. Pocos, para poder llevarlos bien. Los ves en el roster completo.":
+    "Als artistes del nostre roster. Pocs, per poder portar-los bé. Els veus al roster complet.",
+  "¿Contratáis artistas de fuera de Bonito?": "Contracteu artistes de fora de Bonito?",
+  "Para eventos y giras sí trabajamos con artistas de terceros. Para booking de agencia, llevamos a los nuestros.":
+    "Per a esdeveniments i gires sí que treballem amb artistes de tercers. Per a booking d'agència, portem els nostres.",
+  "¿Trabajáis fuera de España?": "Treballeu fora d'Espanya?",
+  "Sí. Hemos movido giras nacionales e internacionales; tenemos artistas con base fuera.":
+    "Sí. Hem mogut gires nacionals i internacionals; tenim artistes amb base fora.",
+  "¿Qué hace exactamente una agencia de booking musical?":
+    "Què fa exactament una agència de booking musical?",
+  "Contrata y cierra los directos de sus artistas: busca las salas y festivales que encajan, negocia las condiciones y coordina que la fecha salga adelante. Trabaja la agenda real, no promesas.":
+    "Contracta i tanca els directes dels seus artistes: busca les sales i festivals que encaixen, negocia les condicions i coordina que la data tiri endavant. Treballa l'agenda real, no promeses.",
+  "¿Qué necesitáis para empezar a moveros con las fechas de un artista?":
+    "Què necessiteu per començar a moure les dates d'un artista?",
+  "Saber dónde está el proyecto, qué directo tiene montado y hacia dónde quiere ir. Con eso vemos qué salas y festivales tienen sentido y empezamos a llamar.":
+    "Saber on és el projecte, quin directe té muntat i cap on vol anar. Amb això veiem quines sales i festivals tenen sentit i comencem a trucar.",
+  "¿Cuánto se tarda en cerrar un bolo?": "Quant es triga a tancar un bolo?",
+  "Depende de la sala, la fecha y la agenda del artista. Lo importante es empezar con margen: cuanto antes se mueve, más opciones hay. A última hora se trabaja con lo que quede libre.":
+    "Depèn de la sala, la data i l'agenda de l'artista. L'important és començar amb marge: com abans es mou, més opcions hi ha. A última hora es treballa amb el que quedi lliure.",
+  "¿En qué se diferencia del booking?": "En què es diferencia del booking?",
+  "El booking cierra fechas. El management lleva la carrera entera: estrategia, lanzamientos, equipo y decisiones a medio plazo.":
+    "El booking tanca dates. El management porta la carrera sencera: estratègia, llançaments, equip i decisions a mitjà termini.",
+  "¿Hace falta estar en el sello?": "Cal ser al segell?",
+  "No es obligatorio, pero cuando management, sello y distribución van juntos, todo encaja mejor.":
+    "No és obligatori, però quan management, segell i distribució van junts, tot encaixa millor.",
+  "¿Con cuántos artistas trabajáis?": "Amb quants artistes treballeu?",
+  "Con pocos, a propósito. Llevar bien una carrera pide tiempo y cabeza, no un catálogo enorme.":
+    "Amb pocs, a posta. Portar bé una carrera demana temps i cap, no un catàleg enorme.",
+  "¿Qué hace exactamente un manager musical?": "Què fa exactament un mànager musical?",
+  "Lleva la carrera del artista: define la estrategia, ordena el calendario de lanzamientos, coordina al equipo y toma —con el artista— las decisiones que importan a medio plazo. Es quien tiene la foto completa.":
+    "Porta la carrera de l'artista: defineix l'estratègia, ordena el calendari de llançaments, coordina l'equip i pren —amb l'artista— les decisions que importen a mitjà termini. És qui té la foto completa.",
+  "¿A partir de qué momento de mi carrera necesito management?":
+    "A partir de quin moment de la meva carrera necessito management?",
+  "Cuando dejas de poder con todo tú solo: cuando las decisiones, los lanzamientos y los bolos empiezan a chocar entre sí. Ahí tener a alguien que ordene el sistema te cambia el día a día.":
+    "Quan deixes de poder amb tot tu sol: quan les decisions, els llançaments i els bolos comencen a xocar entre ells. Aleshores tenir algú que ordeni el sistema et canvia el dia a dia.",
+  "¿Qué hace exactamente un sello independiente?": "Què fa exactament un segell independent?",
+  "Produce, publica y empuja la música de sus artistas asumiendo parte del riesgo, sin depender de una multinacional. Decide repertorio, calendario y estrategia junto al artista.":
+    "Produeix, publica i empeny la música dels seus artistes assumint part del risc, sense dependre d'una multinacional. Decideix repertori, calendari i estratègia amb l'artista.",
+  "¿Sois un sello o una distribuidora?": "Sou un segell o una distribuïdora?",
+  "Las dos cosas, separadas. El sello asume proyecto y riesgo; la distribución es un servicio para llevar tu música a plataformas. Contratas lo que necesites.":
+    "Totes dues coses, separades. El segell assumeix projecte i risc; la distribució és un servei per portar la teva música a plataformes. Contractes el que necessitis.",
+  "¿Trabajáis con artistas que ya tienen música publicada?":
+    "Treballeu amb artistes que ja tenen música publicada?",
+  "Sí. No hace falta empezar de cero: revisamos lo que tienes y decidimos juntos qué relanzar y qué construir nuevo.":
+    "Sí. No cal començar de zero: revisem el que tens i decidim junts què rellançar i què construir de nou.",
+  "¿Cómo se ficha por un sello independiente?": "Com es fitxa per un segell independent?",
+  "Empieza por que escuchemos lo que tienes. Si el proyecto encaja y hay ganas por las dos partes, hablamos de cómo trabajarlo. No hay fórmula mágica ni casting masivo: trabajamos pocos proyectos y en serio.":
+    "Comença per que escoltem el que tens. Si el projecte encaixa i hi ha ganes per les dues bandes, parlem de com treballar-lo. No hi ha fórmula màgica ni càsting massiu: treballem pocs projectes i de debò.",
+  "¿Qué géneros lleváis en el sello?": "Quins gèneres porteu al segell?",
+  "No nos casamos con una etiqueta: nos fijamos en que el proyecto tenga algo que contar y recorrido. Puedes ver a quién llevamos en el roster completo.":
+    "No ens casem amb cap etiqueta: ens fixem que el projecte tingui alguna cosa a explicar i recorregut. Pots veure qui portem al roster complet.",
+  "¿Qué es la gestión editorial?": "Què és la gestió editorial?",
+  "Es ocuparse de los derechos de autor de las canciones: registrarlas, seguir sus usos y asegurar que generen lo que deben. Va aparte de la grabación.":
+    "És ocupar-se dels drets d'autor de les cançons: registrar-les, seguir-ne els usos i assegurar que generin el que han de generar. Va a part de la gravació.",
+  "¿Necesito estar en el sello para la editorial?": "Necessito ser al segell per a l'editorial?",
+  "No. Es un servicio independiente; puedes tener editorial con nosotros aunque publiques por tu cuenta.":
+    "No. És un servei independent; pots tenir editorial amb nosaltres encara que publiquis pel teu compte.",
+  "¿Y las sincronizaciones?": "I les sincronitzacions?",
+  "Cuando surge una oportunidad de sync que encaja con el artista, la gestionamos de principio a fin.":
+    "Quan surt una oportunitat de sync que encaixa amb l'artista, la gestionem de dalt a baix.",
+  "¿Qué diferencia hay entre editorial y sello?":
+    "Quina diferència hi ha entre editorial i segell?",
+  "El sello se ocupa de la grabación: producir, publicar y empujar tus canciones. La editorial se ocupa de la obra: los derechos de autor, su registro y que cada uso genere lo que debe. Son dos cosas distintas y puedes tener una sin la otra.":
+    "El segell s'ocupa de la gravació: produir, publicar i empènyer les teves cançons. L'editorial s'ocupa de l'obra: els drets d'autor, el seu registre i que cada ús generi el que ha de generar. Són dues coses diferents i pots tenir-ne una sense l'altra.",
+  "¿Necesito registrar mis canciones si ya están en Spotify?":
+    "Necessito registrar les meves cançons si ja són a Spotify?",
+  "Sí. Estar en plataformas no es lo mismo que tener la obra registrada y los derechos en orden. Una cosa es que tu canción suene; otra, que cada uso se documente y se cobre donde toca.":
+    "Sí. Ser a plataformes no és el mateix que tenir l'obra registrada i els drets en ordre. Una cosa és que la teva cançó soni; l'altra, que cada ús es documenti i es cobri on toca.",
+  "¿Distribuís a artistas de fuera del sello?": "Distribuïu artistes de fora del segell?",
+  "Sí. La distribución es un servicio independiente; no hace falta estar fichado en el sello.":
+    "Sí. La distribució és un servei independent; no cal estar fitxat al segell.",
+  "¿A qué plataformas llegáis?": "A quines plataformes arribeu?",
+  "A las principales del mundo: Spotify, Apple Music, Amazon Music, YouTube Music, Deezer, Tidal y las tiendas y redes donde se escucha música.":
+    "A les principals del món: Spotify, Apple Music, Amazon Music, YouTube Music, Deezer, Tidal i les botigues i xarxes on s'escolta música.",
+  "¿Cuánto cuesta distribuir mi música?": "Quant costa distribuir la meva música?",
+  "Depende de lo que necesites: un lanzamiento suelto o todo tu catálogo. Lo cerramos contigo antes de subir nada, sin letra pequeña y sin sorpresas. Lo concreto lo hablamos en la primera llamada.":
+    "Depèn del que necessitis: un llançament sol o tot el teu catàleg. Ho tanquem amb tu abans de pujar res, sense lletra petita i sense sorpreses. El concret ho parlem a la primera trucada.",
+  "¿Me quedo con los derechos de mi música?": "Em quedo amb els drets de la meva música?",
+  "Sí. Distribuir no es firmar por un sello: tu música sigue siendo tuya. Nosotros la llevamos a las plataformas y nos ocupamos de que todo esté en orden.":
+    "Sí. Distribuir no és signar per un segell: la teva música continua sent teva. Nosaltres la portem a les plataformes i ens ocupem que tot estigui en ordre.",
+  "¿Puedo distribuir y llevar el resto por mi cuenta?":
+    "Puc distribuir i portar la resta pel meu compte?",
+  "Claro. Contratas solo la distribución si es lo que necesitas.":
+    "És clar. Contractes només la distribució si és el que necessites.",
+  "¿Qué es la distribución digital de música?": "Què és la distribució digital de música?",
+  "Es el servicio que lleva tu música a las plataformas de streaming y descarga con los metadatos en orden, para que se pueda escuchar, encontrar y pagar correctamente. Subir la canción es el minuto uno; distribuir bien es todo lo que hay alrededor.":
+    "És el servei que porta la teva música a les plataformes de streaming i descàrrega amb les metadades en ordre, perquè es pugui escoltar, trobar i pagar correctament. Pujar la cançó és el minut u; distribuir bé és tot el que hi ha al voltant.",
+  "¿Cuánto tarda mi música en aparecer en Spotify?":
+    "Quant triga la meva música a aparèixer a Spotify?",
+  "Conviene entregar el lanzamiento con margen, unas semanas antes de la fecha. Así da tiempo a que las plataformas lo procesen y a optar a listas editoriales, que casi siempre piden antelación.":
+    "Convé lliurar el llançament amb marge, unes setmanes abans de la data. Així dona temps que les plataformes el processin i a optar a llistes editorials, que gairebé sempre demanen antelació.",
+  "¿Por qué son importantes los metadatos?": "Per què són importants les metadades?",
+  "Porque son la ficha de tu canción: título, autoría, ISRC, créditos. Si están mal, no te encuentran y los derechos pueden acabar en el sitio equivocado. Si están bien, las plataformas te entienden y te colocan donde debes estar.":
+    "Perquè són la fitxa de la teva cançó: títol, autoria, ISRC, crèdits. Si estan malament, no et troben i els drets poden acabar al lloc equivocat. Si estan bé, les plataformes t'entenen i et col·loquen on has de ser.",
+  "¿Hace falta ser artista del sello para contratar marketing?":
+    "Cal ser artista del segell per contractar màrqueting?",
+  "No. El marketing es un servicio independiente: llevamos campañas de artistas que no están fichados en Records. Lo que pedimos es tener música o evento de verdad detrás.":
+    "No. El màrqueting és un servei independent: portem campanyes d'artistes que no estan fitxats a Records. El que demanem és tenir música o esdeveniment de debò al darrere.",
+  "¿Cómo planteáis la inversión en ads?": "Com plantegeu la inversió en ads?",
+  "Según el objetivo (oyentes, entradas, territorio) y lo que tengas encima de la mesa. Te decimos qué mueve la aguja y qué no, sobre tu lanzamiento real. Lo concreto lo hablamos.":
+    "Segons l'objectiu (oients, entrades, territori) i el que tinguis damunt la taula. Et diem què mou l'agulla i què no, sobre el teu llançament real. El concret ho parlem.",
+  "¿En qué se diferencia de una agencia normal?": "En què es diferencia d'una agència normal?",
+  "En que venimos del sector musical. Sabemos cómo se mueve un lanzamiento y cómo se llena una sala. No aprendemos tu industria sobre la marcha.":
+    "En què venim del sector musical. Sabem com es mou un llançament i com s'omple una sala. No aprenem la teva indústria sobre la marxa.",
+  "¿Qué incluye una campaña de marketing musical?":
+    "Què inclou una campanya de màrqueting musical?",
+  "Depende del objetivo, pero suele mezclar ads (Meta, TikTok, YouTube), estrategia de contenido para redes y un plan de lanzamiento con su día de estreno y su sostenimiento. Lo montamos sobre lo que tengas de verdad encima de la mesa.":
+    "Depèn de l'objectiu, però sol barrejar ads (Meta, TikTok, YouTube), estratègia de contingut per a xarxes i un pla de llançament amb el seu dia d'estrena i el seu sosteniment. Ho muntem sobre el que tinguis de debò damunt la taula.",
+  "¿Podéis promocionar un concierto o solo lanzamientos?":
+    "Podeu promocionar un concert o només llançaments?",
+  "Las dos cosas. Igual que movemos un single o un álbum, montamos campañas para vender entradas de un directo o dar empujón a un evento.":
+    "Totes dues coses. Igual que movem un single o un àlbum, muntem campanyes per vendre entrades d'un directe o donar empenta a un esdeveniment.",
+  "¿Qué incluye producir una gira?": "Què inclou produir una gira?",
+  "La parte que no se ve: avance con promotores y salas, hojas de ruta, técnica, backline, escenario, transporte y road management. Lo que hace falta para que el artista solo tenga que tocar.":
+    "La part que no es veu: avançament amb promotors i sales, fulls de ruta, tècnica, backline, escenari, transport i road management. El que cal perquè l'artista només hagi de tocar.",
+  "¿Trabajáis con el equipo del artista?": "Treballeu amb l'equip de l'artista?",
+  "Sí. Si ya hay técnico de sonido, tour manager o banda, nos acoplamos. Si no lo hay, lo ponemos nosotros.":
+    "Sí. Si ja hi ha tècnic de so, tour manager o banda, ens hi acoblem. Si no n'hi ha, l'hi posem nosaltres.",
+  "¿Hace falta tener toda la gira cerrada?": "Cal tenir tota la gira tancada?",
+  "No. Podemos entrar con las fechas ya cerradas o antes, ayudando a ordenar la ruta para que la gira se sostenga.":
+    "No. Podem entrar-hi amb les dates ja tancades o abans, ajudant a ordenar la ruta perquè la gira se sostingui.",
+  "¿Solo giras grandes?": "Només gires grans?",
+  "No. Hemos llevado giras de más de cuarenta fechas y también rutas de ocho. Lo que cambia es el tamaño del equipo, no cómo se trabaja.":
+    "No. Hem portat gires de més de quaranta dates i també rutes de vuit. El que canvia és la mida de l'equip, no com es treballa.",
+  "¿Trabajáis en toda España?": "Treballeu a tot Espanya?",
+  "Sí. Tenemos base en Sabadell (Barcelona) y movemos giras por todo el país; también hemos trabajado fuera.":
+    "Sí. Tenim base a Sabadell (Barcelona) i movem gires per tot el país; també hem treballat fora.",
+  "¿Esto es lo mismo que producir mi disco?": "Això és el mateix que produir el meu disc?",
+  "No. Aquí hablamos de producción de gira: el directo. La producción musical de estudio va por otro lado, en records.":
+    "No. Aquí parlem de producció de gira: el directe. La producció musical d'estudi va per una altra banda, a records.",
+  "¿Quieres una fecha?": "Vols una data?",
+  "Cuéntanos qué buscas y para cuándo. Te decimos qué encaja de verdad.":
+    "Explica'ns què busques i per a quan. Et diem què encaixa de debò.",
+  "¿Hablamos de tu carrera?": "Parlem de la teva carrera?",
+  "Cuéntanos dónde estás y a dónde quieres llegar. Te decimos cómo lo haríamos.":
+    "Explica'ns on ets i on vols arribar. Et diem com ho faríem.",
+  "¿Tienes música?": "Tens música?",
+  "Mándanosla. Si encaja, te decimos cómo la sacaríamos.":
+    "Envia-nos-la. Si encaixa, et diem com la trauríem.",
+  "¿Tu música rinde lo que debería?": "La teva música rendeix el que hauria?",
+  "Cuéntanos qué tienes publicado y le echamos un ojo.":
+    "Explica'ns què tens publicat i hi fem un cop d'ull.",
+  "¿Listo para publicar?": "A punt per publicar?",
+  "Cuéntanos qué vas a sacar y te decimos cómo lo distribuiríamos.":
+    "Explica'ns què trauràs i et diem com ho distribuiríem.",
+  "¿Tienes algo que sacar?": "Tens alguna cosa per treure?",
+  "Cuéntanos qué lanzas y cuándo. Te decimos qué se puede hacer de verdad y por dónde empezar.":
+    "Explica'ns què llances i quan. Et diem què es pot fer de debò i per on començar.",
+  "Agenda con nombre": "Agenda amb nom",
+  "Sabemos qué salas, qué festivales y qué fechas encajan con cada artista. No mandamos un dossier y a ver qué pasa.":
+    "Sabem quines sales, quins festivals i quines dates encaixen amb cada artista. No enviem un dossier i a veure què passa.",
+  "Un solo interlocutor": "Un sol interlocutor",
+  "Booking, sello y distribución hablan entre sí porque están en la misma casa. El artista no va rebotando.":
+    "Booking, segell i distribució es parlen perquè són a la mateixa casa. L'artista no va rebotant.",
+  "Del primer demo al máster listo para plataformas. El álbum MARCA DIVINA de Eva Calyza salió de aquí.":
+    "De la primera maqueta al màster llest per a plataformes. L'àlbum MARCA DIVINA d'Eva Calyza va sortir d'aquí.",
+  "Sello, booking y distribución trabajan juntos. Publicamos y sabemos qué hacer al día siguiente.":
+    "Segell, booking i distribució treballen junts. Publiquem i sabem què fer l'endemà.",
 };
 
 /**
