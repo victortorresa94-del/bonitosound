@@ -6,7 +6,9 @@ import { getPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
 import { serverLocale } from "@/lib/locale-server";
+import type { Locale } from "@/lib/i18n";
 import { tr } from "@/lib/copy-ca";
+import { postCa } from "@/lib/content-md-ca";
 
 const posts = getPosts();
 
@@ -21,9 +23,9 @@ export function generateMetadata(): Metadata {
   };
 }
 
-function fmtDate(iso: string) {
+function fmtDate(iso: string, locale: Locale) {
   try {
-    return new Date(iso).toLocaleDateString("es-ES", {
+    return new Date(iso).toLocaleDateString(locale === "ca" ? "ca-ES" : "es-ES", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -35,6 +37,8 @@ function fmtDate(iso: string) {
 
 export default function Diario() {
   const locale = serverLocale();
+  // Los artículos se sirven en el idioma de la página.
+  const entradas = posts.map((x) => postCa(x, locale));
   return (
     <>
       <section className="border-b border-subtle">
@@ -53,10 +57,10 @@ export default function Diario() {
         </div>
       </section>
 
-      {posts.length > 0 ? (
+      {entradas.length > 0 ? (
         <Section>
           <StaggerGroup stagger={0.06} className="grid gap-6 md:grid-cols-2">
-            {posts.map((p) => (
+            {entradas.map((p) => (
               <Link
                 key={p.slug}
                 href={`/diario/${p.slug}`}
@@ -65,7 +69,7 @@ export default function Diario() {
               >
                 <div>
                   <p className="eyebrow mb-3">
-                    {p.cluster ?? "Blog"} · {fmtDate(p.date)}
+                    {p.cluster ?? "Blog"} · {fmtDate(p.date, locale)}
                   </p>
                   <h2 className="display text-[clamp(1.4rem,3vw,2rem)] leading-tight text-text-primary transition-colors group-hover:text-accent-cyan">
                     {p.title}

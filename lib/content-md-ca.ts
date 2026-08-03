@@ -72,3 +72,24 @@ export function eventoCa(e: Evento, locale: Locale, dir: "eventos" | "giras"): E
     ...(body.length ? { body } : {}),
   };
 }
+
+/** Aplica la traducción catalana a un artículo del diario. */
+export function postCa<T extends { slug: string; title: string; description: string; body: string[]; faq?: { q: string; a: string }[]; cluster?: string; tags?: string[] }>(
+  p: T,
+  locale: Locale,
+): T {
+  if (locale === DEFAULT_LOCALE) return p;
+  const o = overlay("diario", p.slug);
+  if (!o) return p;
+  const d = o.data;
+  const body = parrafos(o.body);
+  return {
+    ...p,
+    ...(d.title ? { title: d.title as string } : {}),
+    ...(d.description ? { description: d.description as string } : {}),
+    ...(d.cluster ? { cluster: d.cluster as string } : {}),
+    ...(d.tags ? { tags: d.tags as string[] } : {}),
+    ...(d.faq ? { faq: d.faq as { q: string; a: string }[] } : {}),
+    ...(body.length ? { body } : {}),
+  };
+}

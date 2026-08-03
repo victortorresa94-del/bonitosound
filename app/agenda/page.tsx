@@ -5,6 +5,7 @@ import { getShows } from "@/lib/agenda";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
 import { serverLocale } from "@/lib/locale-server";
+import type { Locale } from "@/lib/i18n";
 import { tr } from "@/lib/copy-ca";
 
 export function generateMetadata(): Metadata {
@@ -18,14 +19,18 @@ export function generateMetadata(): Metadata {
   };
 }
 
-const fmt = new Intl.DateTimeFormat("es-ES", {
-  day: "2-digit",
-  month: "long",
-  year: "numeric",
-});
+/** La fecha se escribe en el idioma de la página. */
+function formateador(locale: Locale) {
+  return new Intl.DateTimeFormat(locale === "ca" ? "ca-ES" : "es-ES", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+}
 
 export default function Agenda() {
   const locale = serverLocale();
+  const fmt = formateador(locale);
   const shows = getShows();
 
   return (
