@@ -6,6 +6,9 @@ import { Cta } from "@/components/ui";
 import { findAsset } from "@/lib/assets";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
+import { localePath } from "@/lib/i18n";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -63,6 +66,7 @@ const BLOCKS = [
 ];
 
 function Card({ b }: { b: (typeof BLOCKS)[number] }) {
+  const locale = serverLocale();
   const inner = (
     <>
       {/* Fila de logo con altura común: los logos se centran en ella, así los
@@ -86,12 +90,12 @@ function Card({ b }: { b: (typeof BLOCKS)[number] }) {
       <h2 className="sr-only">{b.name}</h2>
 
       <p className="mt-6 text-[11px] font-bold uppercase tracking-[0.15em]" style={{ color: CYAN }}>
-        {b.status}
+        {tr(locale, b.status)}
       </p>
-      <p className="mt-3 flex-1 text-sm leading-relaxed text-text-secondary">{b.desc}</p>
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-text-secondary">{tr(locale, b.desc)}</p>
 
       <span className="mt-7 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: NAVY }}>
-        {b.linkLabel}
+        {tr(locale, b.linkLabel)}
         <span className="transition-transform duration-300 group-hover:translate-x-1" style={{ color: CYAN }}>
           →
         </span>
@@ -114,29 +118,29 @@ function Card({ b }: { b: (typeof BLOCKS)[number] }) {
 }
 
 export default function Universo() {
+  const locale = serverLocale();
   return (
     <>
       {/* ── HERO (recreación de la imagen 1, tipografía de la web) ── */}
       <section style={{ backgroundColor: "#FBFAF6" }}>
         <div className="wrap pb-16 pt-20 md:pb-24 md:pt-28">
           <RevealOnScroll as="p" className="mb-6 text-xs font-bold uppercase tracking-[0.25em]">
-            <span style={{ color: CYAN }}>Universo Bonito</span>
+            <span style={{ color: CYAN }}>{tr(locale, "Universo Bonito")}</span>
           </RevealOnScroll>
           <RevealOnScroll
             as="h1"
             delay={0.05}
             className="display leading-[0.98] text-[clamp(2.6rem,8vw,5.6rem)]"
           >
-            <span style={{ color: NAVY }}>No esperamos a que el sector se arregle solo. </span>
-            <span style={{ color: CYAN }}>Lo construimos.</span>
+            <span style={{ color: NAVY }}>{tr(locale, "No esperamos a que el sector se arregle solo. ")}</span>
+            <span style={{ color: CYAN }}>{tr(locale, "Lo construimos.")}</span>
           </RevealOnScroll>
           <RevealOnScroll
             as="p"
             delay={0.12}
             className="mt-7 max-w-xl text-lg text-text-secondary md:text-xl"
           >
-            Cuando entiendes el sistema entero, también le das las herramientas
-            que le faltan. Dos apps y un festival, hechos por nosotros.
+            {tr(locale, "Cuando entiendes el sistema entero, también le das las herramientas que le faltan. Dos apps y un festival, hechos por nosotros.")}
           </RevealOnScroll>
 
           {/* 3 bloques con logo + descripción + enlace */}
@@ -156,12 +160,12 @@ export default function Universo() {
             className="display max-w-3xl text-[clamp(1.9rem,4.5vw,3.2rem)] leading-[1.05]"
           >
             <span style={{ color: NAVY }}>
-              Entender el sistema entero también significa construir lo que le falta.
+              {tr(locale, "Entender el sistema entero también significa construir lo que le falta.")}
             </span>
           </RevealOnScroll>
           <RevealOnScroll delay={0.15} className="mt-9">
             <MagneticButton strength={0.4}>
-              <Cta href="/contacto">Hablamos →</Cta>
+              <Cta href={localePath("/contacto", locale)}>{tr(locale, "Hablamos")} →</Cta>
             </MagneticButton>
           </RevealOnScroll>
         </div>

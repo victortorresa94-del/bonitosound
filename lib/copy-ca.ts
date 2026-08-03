@@ -665,6 +665,99 @@ const CA: Record<string, string> = {
     "Escrivint-nos. Escoltem el que tens, et diem amb honestedat si hi ha encaix i, si n'hi ha, muntem un pla concret. No fitxem per volum.",
   "Mándanosla. Escuchamos lo que tienes y te decimos, sin humo, cómo la sacaríamos.":
     "Envia-nos-la. Escoltem el que tens i et diem, sense fum, com la trauríem.",
+
+  // ── Marketing ──
+  "Marketing musical para artistas — ads y lanzamientos":
+    "Màrqueting musical per a artistes — ads i llançaments",
+  "Campañas de ads, estrategia de redes y lanzamientos de álbum y de evento para artistas. Cuando salga, se entera quien se tiene que enterar.":
+    "Campanyes d'ads, estratègia de xarxes i llançaments d'àlbum i d'esdeveniment per a artistes. Quan surti, se n'assabenta qui se n'ha d'assabentar.",
+  "Marketing musical": "Màrqueting musical",
+  "Movemos tu lanzamiento": "Movem el teu llançament",
+  "como ": "com ",
+  "se merece": "es mereix",
+  "Ads para el lanzamiento de tu single o álbum en Spotify, YouTube, Instagram y TikTok. Del guion del vídeo a la campaña corriendo. A veces ponemos nosotros la inversión.":
+    "Ads per al llançament del teu single o àlbum a Spotify, YouTube, Instagram i TikTok. Del guió del vídeo a la campanya corrent. De vegades hi posem nosaltres la inversió.",
+  "Hablemos de tu lanzamiento →": "Parlem del teu llançament →",
+  "Un buen lanzamiento no es suerte: es un plan corriendo en cada plataforma el día que toca. Y venimos del sector — sabemos qué mueve oyentes y qué llena una sala.":
+    "Un bon llançament no és sort: és un pla corrent a cada plataforma el dia que toca. I venim del sector — sabem què mou oients i què omple una sala.",
+  "Todo lo que movemos.": "Tot el que movem.",
+  "Ads": "Ads",
+  "Configuramos y optimizamos la campaña en cada plataforma. Presupuesto, targeting, creatividades.":
+    "Configurem i optimitzem la campanya a cada plataforma. Pressupost, targeting, creativitats.",
+  "Estrategia de redes": "Estratègia de xarxes",
+  "Inversión propia": "Inversió pròpia",
+  "Cuando creemos en el lanzamiento, ponemos nosotros parte del presupuesto de ads.":
+    "Quan creiem en el llançament, hi posem nosaltres part del pressupost d'ads.",
+  "Material y contenido": "Material i contingut",
+  "Vídeos, cortes verticales y artes para cada formato. Listos para pautar.":
+    "Vídeos, talls verticals i arts per a cada format. Llestos per pautar.",
+  "¿Qué presupuesto de ads necesito?": "Quin pressupost d'ads necessito?",
+  "Según el objetivo (oyentes, entradas, territorio) y lo que tengas encima de la mesa. Montamos el plan sobre tu lanzamiento real y te decimos qué mueve la aguja y qué no. Lo concreto lo hablamos.":
+    "Segons l'objectiu (oients, entrades, territori) i el que tinguis damunt la taula. Muntem el pla sobre el teu llançament real i et diem què mou l'agulla i què no. El concret ho parlem.",
+  "¿En qué se diferencia de una agencia de marketing normal?":
+    "En què es diferencia d'una agència de màrqueting normal?",
+  "En que venimos del sector musical. Sabemos cómo se mueve un lanzamiento, qué mide de verdad una carrera y cómo se llena una sala. No aprendemos tu industria sobre la marcha.":
+    "En què venim del sector musical. Sabem com es mou un llançament, què mesura de debò una carrera i com s'omple una sala. No aprenem la teva indústria sobre la marxa.",
+
+  // ── Universo Bonito ──
+  "Universo Bonito — Artiverse, Giraverse y Jaleo Sound":
+    "Univers Bonito — Artiverse, Giraverse i Jaleo Sound",
+  "Lo que Bonito construye por su cuenta: Artiverse conecta el sector, Giraverse ordena las giras y Jaleo Sound lleva la cultura española a Ámsterdam.":
+    "El que Bonito construeix pel seu compte: Artiverse connecta el sector, Giraverse ordena les gires i Jaleo Sound porta la cultura espanyola a Amsterdam.",
+  "Universo Bonito": "Univers Bonito",
+  "No esperamos a que el sector se arregle solo. ": "No esperem que el sector s'arregli sol. ",
+  "Lo construimos.": "El construïm.",
+  "Cuando entiendes el sistema entero, también le das las herramientas que le faltan. Dos apps y un festival, hechos por nosotros.":
+    "Quan entens el sistema sencer, també li dones les eines que li falten. Dues apps i un festival, fets per nosaltres.",
+  "Software B2B · en marcha": "Programari B2B · en marxa",
+  "La plataforma que conecta agencias, programadores y promotores. Donde el sector deja de trabajar a ciegas y las fechas se cierran con datos, no a base de WhatsApp.":
+    "La plataforma que connecta agències, programadors i promotors. On el sector deixa de treballar a cegues i les dates es tanquen amb dades, no a força de WhatsApp.",
+  "Software · en desarrollo": "Programari · en desenvolupament",
+  "La circulación de giras, ordenada. Lo que hoy se resuelve con llamadas y suerte —qué artista pasa por dónde y cuándo— convertido en software. En desarrollo.":
+    "La circulació de gires, ordenada. El que avui es resol amb trucades i sort —quin artista passa per on i quan— convertit en programari. En desenvolupament.",
+  "Festival propio · Ámsterdam": "Festival propi · Amsterdam",
+  "Nuestro festival de cultura española y latina en Ámsterdam. Sin escenarios enormes ni zonas VIP: buena música, buena comida y buena gente. 11–12 sep 2026.":
+    "El nostre festival de cultura espanyola i llatina a Amsterdam. Sense escenaris enormes ni zones VIP: bona música, bon menjar i bona gent. 11–12 set. 2026.",
+  "El festival": "El festival",
+  "Entender el sistema entero también significa construir lo que le falta.":
+    "Entendre el sistema sencer també vol dir construir el que li falta.",
+
+  // ── Jaleo Sound ──
+  "Festival propio · Cultura española y latina · Amsterdam":
+    "Festival propi · Cultura espanyola i llatina · Amsterdam",
+  "Entradas →": "Entrades →",
+  "Ediciones pasadas": "Edicions passades",
+  "Esto es lo que pasó.": "Això és el que va passar.",
+  "Ver más en jaleosound.com →": "Veure'n més a jaleosound.com →",
+  "El directo de Bonito": "El directe de Bonito",
+  "Lo que montamos cuando nos dejan.": "El que muntem quan ens deixen.",
+  "Final de la Gira 1016 en el Sant Jordi Club de Barcelona. Producido por el mismo equipo que monta Jaleo cada septiembre en Amsterdam.":
+    "Final de la Gira 1016 al Sant Jordi Club de Barcelona. Produït pel mateix equip que munta el Jaleo cada setembre a Amsterdam.",
+  "El antídoto": "L'antídot",
+  "Si estás cansado de shows sin vida, esto es lo tuyo.":
+    "Si estàs cansat de xous sense vida, això és el teu.",
+  "Un festival de cultura española y latina en Amsterdam, hecho por la misma gente que mueve Bonito, con la misma falta de tonterías. Bring friends. Or make new ones.":
+    "Un festival de cultura espanyola i llatina a Amsterdam, fet per la mateixa gent que mou Bonito, amb la mateixa manca de ximpleries. Bring friends. Or make new ones.",
+  "Así sonó 2025.": "Així va sonar el 2025.",
+  "11–12 de octubre de 2025, Posthoornkerk, dentro de los actos del 750 aniversario de Amsterdam. Música, arte y gastronomía.":
+    "11–12 d'octubre del 2025, Posthoornkerk, dins dels actes del 750è aniversari d'Amsterdam. Música, art i gastronomia.",
+  "El cartel de la edición 2026 se anunciará en las próximas semanas en":
+    "El cartell de l'edició 2026 s'anunciarà les properes setmanes a",
+  "La banda sonora": "La banda sonora",
+  "Suena así.": "Sona així.",
+  "La playlist oficial. Para entender el festival antes de pisar Amsterdam.":
+    "La playlist oficial. Per entendre el festival abans de trepitjar Amsterdam.",
+  "Más en jaleosound.com →": "Més a jaleosound.com →",
+  "Con el apoyo del Instituto Cervantes, Embajada de España en Holanda, AIE y Stadsdeel Amsterdam.":
+    "Amb el suport de l'Instituto Cervantes, l'Ambaixada d'Espanya als Països Baixos, l'AIE i el Stadsdeel Amsterdam.",
+  "Web del festival →": "Web del festival →",
+  "Flamenco al piano. Km.0: de la raíz a lo contemporáneo.":
+    "Flamenc al piano. Km.0: de l'arrel al contemporani.",
+  "Nostalgia española + electrónica holandesa. Colectivo The Sun.":
+    "Nostàlgia espanyola + electrònica neerlandesa. Col·lectiu The Sun.",
+  "Jazz melódico afrolatino.": "Jazz melòdic afrollatí.",
+  "Dúo español de jazz-fusión. Disco REELAX.": "Duo espanyol de jazz-fusió. Disc REELAX.",
+  "Flamenco, danza española y electrónica.": "Flamenc, dansa espanyola i electrònica.",
 };
 
 /**
