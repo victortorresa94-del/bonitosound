@@ -18,6 +18,7 @@ import { findAsset, findLogo } from "@/lib/assets";
 import { brands, site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
 import { serverLocale } from "@/lib/locale-server";
+import { eventoCa } from "@/lib/content-md-ca";
 import { tr } from "@/lib/copy-ca";
 import { localePath } from "@/lib/i18n";
 
@@ -73,7 +74,7 @@ const faq = [
 
 export default function EventosMarcas() {
   const locale = serverLocale();
-  const cases = getEventos().filter((e) => e.type === "marca");
+  const cases = getEventos().map((x) => eventoCa(x, locale, "eventos")).filter((e) => e.type === "marca");
   const heroImg = findAsset("heroes", "eventos-marcas");
   return (
     <>

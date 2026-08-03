@@ -12,6 +12,7 @@ import { getEventos } from "@/lib/content";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
 import { serverLocale } from "@/lib/locale-server";
+import { eventoCa } from "@/lib/content-md-ca";
 import { paginaCa } from "@/lib/content-i18n";
 
 export function generateMetadata(): Metadata {
@@ -26,9 +27,10 @@ export function generateMetadata(): Metadata {
 }
 
 export default function Experiencias() {
+  const locale = serverLocale();
   // Experiencias = SOLO marcas (+ teatro y visuales). Las giras y los directos
   // de artista viven ahora en /giras: aquí ya no se mezclan.
-  const marcas = getEventos().filter((e) => e.type === "marca");
+  const marcas = getEventos().map((x) => eventoCa(x, locale, "eventos")).filter((e) => e.type === "marca");
 
   // El resumen solo se pinta si el mp4 existe: lo genera scripts/experiencias-video.sh
   // a partir de los vídeos de evento, y no queremos un hueco si falta.

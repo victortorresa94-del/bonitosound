@@ -13,6 +13,7 @@ import { findAsset, findLogo } from "@/lib/assets";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
 import { serverLocale } from "@/lib/locale-server";
+import { eventoCa } from "@/lib/content-md-ca";
 import { tr } from "@/lib/copy-ca";
 import { localePath } from "@/lib/i18n";
 
@@ -49,8 +50,10 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 
 export default function EventoPage({ params }: { params: { slug: string } }) {
   const locale = serverLocale();
-  const e = getEvento(params.slug);
-  if (!e) notFound();
+  const eEs = getEvento(params.slug);
+  if (!eEs) notFound();
+  // En catalán se superpone content/eventos/<slug>.ca.md sobre el original.
+  const e = eventoCa(eEs, locale, "eventos");
 
   const cover = findAsset("eventos", e.slug);
   const label = e.brand ?? e.artist;
@@ -75,7 +78,7 @@ export default function EventoPage({ params }: { params: { slug: string } }) {
 
   // Relacionados: misma marca → mismo artista → mismo tipo con vídeo → resto
   // con vídeo → resto. Sin duplicados, con vídeo por delante (más vivo).
-  const all = getEventos().filter((x) => x.slug !== e.slug);
+  const all = getEventos().map((x) => eventoCa(x, locale, "eventos")).filter((x) => x.slug !== e.slug);
   const ordered = [
     ...all.filter((x) => e.brand && x.brand === e.brand),
     ...all.filter((x) => e.artist && x.artist === e.artist),

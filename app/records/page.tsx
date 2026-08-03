@@ -16,6 +16,7 @@ import { getArtists } from "@/lib/content";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
 import { serverLocale } from "@/lib/locale-server";
+import { artistaCa } from "@/lib/content-md-ca";
 import { tr } from "@/lib/copy-ca";
 import { localePath, t as ui } from "@/lib/i18n";
 
@@ -76,9 +77,9 @@ const faq = [
 ];
 
 export default function Records() {
-  const roster = getArtists().filter((a) => a.tier === "booking");
   const illo = "/img/servicios/heroes/sello.png";
   const locale = serverLocale();
+  const roster = getArtists().map((x) => artistaCa(x, locale)).filter((a) => a.tier === "booking");
   const mailto = `mailto:${site.emails.general}?subject=${encodeURIComponent("Records")}`;
 
   return (

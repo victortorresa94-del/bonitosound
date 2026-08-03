@@ -17,7 +17,7 @@ export function getShows(): Show[] {
   if (!fs.existsSync(dir)) return [];
   return fs
     .readdirSync(dir)
-    .filter((f) => f.endsWith(".md"))
+    .filter((f) => f.endsWith(".md") && !f.endsWith(".ca.md"))
     .map((file) => {
       const { data } = matter(fs.readFileSync(path.join(dir, file), "utf8"));
       return {

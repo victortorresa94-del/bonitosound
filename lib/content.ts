@@ -121,7 +121,10 @@ export type Evento = {
 function readDir(dir: string) {
   const full = path.join(root, dir);
   if (!fs.existsSync(full)) return [];
-  return fs.readdirSync(full).filter((f) => f.endsWith(".md"));
+  // Los ".ca.md" son la traducción catalana de una ficha, no una ficha nueva:
+  // se superponen desde lib/content-md-ca.ts y aquí NO cuentan (si contaran,
+  // generateStaticParams inventaría rutas del tipo /experiencias/corona.ca).
+  return fs.readdirSync(full).filter((f) => f.endsWith(".md") && !f.endsWith(".ca.md"));
 }
 
 /** Ruta del vídeo autoalojado del artista si existe en /public (o undefined). */

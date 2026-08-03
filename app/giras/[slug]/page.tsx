@@ -13,6 +13,7 @@ import { giras } from "@/lib/giras";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
 import { serverLocale } from "@/lib/locale-server";
+import { eventoCa } from "@/lib/content-md-ca";
 import { tr } from "@/lib/copy-ca";
 import { localePath } from "@/lib/i18n";
 
@@ -35,8 +36,10 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 
 export default function GiraPage({ params }: { params: { slug: string } }) {
   const locale = serverLocale();
-  const g = getGira(params.slug);
-  if (!g) notFound();
+  const gEs = getGira(params.slug);
+  if (!gEs) notFound();
+  // En catalán se superpone content/giras/<slug>.ca.md sobre el original.
+  const g = eventoCa(gEs, locale, "giras");
 
   // Los datos duros (años, nº de conciertos) mandan desde lib/giras.ts, que es
   // lo que confirmó Dani; el markdown aporta el relato.
@@ -61,7 +64,7 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
   ];
 
   // Otras giras del mismo artista que tengan página.
-  const masDelArtista = getGiras().filter(
+  const masDelArtista = getGiras().map((x) => eventoCa(x, locale, "giras")).filter(
     (x) => x.slug !== g.slug && x.artist === g.artist,
   );
 

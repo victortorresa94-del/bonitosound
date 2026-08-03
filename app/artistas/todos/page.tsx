@@ -7,6 +7,7 @@ import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
 import { serverLocale } from "@/lib/locale-server";
+import { artistaCa } from "@/lib/content-md-ca";
 import { tr } from "@/lib/copy-ca";
 import { localePath } from "@/lib/i18n";
 
@@ -130,7 +131,7 @@ function GroupHeader({
 
 export default function RosterCompleto() {
   const locale = serverLocale();
-  const all = getArtists();
+  const all = getArtists().map((x) => artistaCa(x, locale));
 
   const booking = all
     .filter((a) => a.tier === "booking")

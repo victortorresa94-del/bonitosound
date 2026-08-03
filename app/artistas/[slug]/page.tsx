@@ -12,6 +12,8 @@ import { ArtistCTA } from "@/components/artistas/ArtistCTA";
 import { getArtist, getArtists } from "@/lib/content";
 import { findAsset, findArtistAudio } from "@/lib/assets";
 import { site } from "@/lib/site";
+import { serverLocale } from "@/lib/locale-server";
+import { artistaCa } from "@/lib/content-md-ca";
 import { alternatesFor } from "@/lib/seo";
 
 // Los 6 destacados del roster (orden del mockup de /artistas) van primero en el
@@ -59,15 +61,19 @@ export default function ArtistPage({
 }: {
   params: { slug: string };
 }) {
-  const a = getArtist(params.slug);
-  if (!a) notFound();
+  const locale = serverLocale();
+  const aEs = getArtist(params.slug);
+  if (!aEs) notFound();
+  // La ficha se sirve en el idioma de la página: en catalán se superpone
+  // content/artistas/<slug>.ca.md sobre el original.
+  const a = artistaCa(aEs, locale);
 
   const photo = a.image ?? findAsset("artistas", a.slug);
 
   // Carrusel navegable: TODOS los artistas en un orden único y consistente
   // (destacados primero, luego el resto), sin importar por cuál se haya
   // entrado. Las flechas (teclado o pantalla) recorren el roster entero.
-  const all = getArtists();
+  const all = getArtists().map((x) => artistaCa(x, locale));
   const featured = FEATURED_ORDER.map((slug) => all.find((x) => x.slug === slug)).filter(
     (x): x is NonNullable<typeof x> => Boolean(x),
   );
