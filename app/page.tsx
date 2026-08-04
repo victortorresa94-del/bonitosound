@@ -6,6 +6,7 @@ import { ArtistsBand } from "@/components/home/HomeProof";
 import { TrustedWall } from "@/components/home/TrustedWall";
 import { NarrativeScene } from "@/components/home/NarrativeScene";
 import { PresentacionVideo } from "@/components/home/PresentacionVideo";
+import { InstitutionalStrip } from "@/components/home/InstitutionalStrip";
 import { scenes } from "@/lib/home";
 import { alternatesFor } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -53,6 +54,7 @@ export default function HomePage() {
             displayIndex={i + 2}
           />
           {scene.id === "marketing" && <PresentacionVideo />}
+          {scene.id === "tecnologia" && <InstitutionalStrip />}
           {scene.id === "marcas" && <TrustedWall />}
           {scene.id === "giras" && <ArtistsBand />}
         </Fragment>
