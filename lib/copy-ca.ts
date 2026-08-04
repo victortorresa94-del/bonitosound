@@ -1082,6 +1082,9 @@ const CA: Record<string, string> = {
   "Coordinación de lanzamientos": "Coordinació de llançaments",
   "Que cada lanzamiento salga cuando toca y con todo en su sitio.":
     "Que cada llançament surti quan toca i amb tot al seu lloc.",
+  "Empresas que han confiado en": "Empreses que han confiat a",
+  "hacerlo bonito": "fer-ho bonito",
+  "Verlos todos": "Veure'ls tots",
 };
 
 /**
