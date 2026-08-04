@@ -1073,6 +1073,9 @@ const CA: Record<string, string> = {
   "A Nàtura la lleva una persona, no un buzón.": "La Nàtura la porta una persona, no una bústia.",
   "Management personal: estrategia, calendario y las decisiones que importan, con un interlocutor que coge el teléfono. Booking, records y editorial en la misma casa, así que nadie va rebotando entre empresas.":
     "Management personal: estratègia, calendari i les decisions que importen, amb un interlocutor que despenja el telèfon. Booking, records i editorial a la mateixa casa, així ningú no va rebotant entre empreses.",
+  "Coordinación de lanzamientos": "Coordinació de llançaments",
+  "Que cada lanzamiento salga cuando toca y con todo en su sitio.":
+    "Que cada llançament surti quan toca i amb tot al seu lloc.",
 };
 
 /**
