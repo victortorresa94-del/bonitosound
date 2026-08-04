@@ -12,6 +12,12 @@ import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
  *
  * Regla: si una frase no está traducida, sale en castellano. Nunca un hueco.
  *
+ * ⚠️ "BONITO" NO SE TRADUCE. Nunca "bonic" ni "bonica" ni "bonites": es la
+ * marca, y medio copy de la casa juega con ella ("hacerlo bonito", "suenan
+ * bonito", "Giras Bonitas", "el rollo bonito"). Traducirla rompe el juego y
+ * deja de nombrar a la empresa. En catalán se queda invariable, como un nombre
+ * propio usado de adjetivo — que es exactamente lo que es.
+ *
  * ⚠️ Limitación asumida: si la misma frase castellana necesitara dos catalanes
  * distintos según el contexto, esto no lo distingue. No pasa hoy; si pasara,
  * esa frase concreta se saca a lib/i18n.ts con clave propia.
@@ -27,7 +33,7 @@ const CA: Record<string, string> = {
   "¿Tienes una gira que mover?": "Tens una gira per moure?",
   "Cuéntanos las fechas y el proyecto. Te decimos cómo la montamos y por dónde empezaríamos.":
     "Explica'ns les dates i el projecte. Et diem com la muntem i per on començaríem.",
-  "Giras Bonitas.": "Gires Bonites.",
+  "Giras Bonitas.": "Gires Bonito.",
   "Ver la gira →": "Veure la gira →",
   "Conciertos": "Concerts",
   "Giras": "Gires",
@@ -97,7 +103,7 @@ const CA: Record<string, string> = {
   "Proyección de mapping en una fachada": "Projecció de mapping en una façana",
   "Mapping y espectáculos visuales": "Mapping i espectacles visuals",
   "No organizamos eventos.": "No organitzem esdeveniments.",
-  "Creamos momentos que suenan bonito.": "Creem moments que sonen bonic.",
+  "Creamos momentos que suenan bonito.": "Creem moments que sonen bonito.",
   "Cuéntanoslo.": "Explica'ns-ho.",
   "Hablemos →": "Parlem-ne →",
   "¿Quieres crear un evento? Hablemos": "Vols crear un esdeveniment? Parlem-ne",
@@ -118,7 +124,7 @@ const CA: Record<string, string> = {
   "Somos la gente": "Som la gent",
   "del sector.": "del sector.",
   "Booking, management, sello, distribución y eventos. Una agencia musical joven con treinta años de oficio detrás. Hacemos las cosas bonitas, sin postureo, porque nos gusta de verdad.":
-    "Booking, management, segell, distribució i esdeveniments. Una agència musical jove amb trenta anys d'ofici al darrere. Fem les coses boniques, sense postureig, perquè ens agrada de debò.",
+    "Booking, management, segell, distribució i esdeveniments. Una agència musical jove amb trenta anys d'ofici al darrere. Ho fem bonito, sense postureig, perquè ens agrada de debò.",
   "El equipo de Bonito Sound": "L'equip de Bonito Sound",
   "años": "anys",
   "de oficio": "d'ofici",
@@ -206,7 +212,7 @@ const CA: Record<string, string> = {
 
   // ── Clientes ──
   "Clientes": "Clients",
-  "Empresas que han confiado en hacerlo bonito.": "Empreses que han confiat a fer-ho bonic.",
+  "Empresas que han confiado en hacerlo bonito.": "Empreses que han confiat a fer-ho bonito.",
   "Marcas, agencias, festivales, ayuntamientos y asociaciones para las que ha trabajado Bonito Sound.":
     "Marques, agències, festivals, ajuntaments i associacions per a qui ha treballat Bonito Sound.",
   "Categorías": "Categories",
