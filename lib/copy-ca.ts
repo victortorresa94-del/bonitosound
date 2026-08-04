@@ -966,6 +966,7 @@ const CA: Record<string, string> = {
   "Producción y tour management de:": "Producció i tour management de:",
   "Medio minuto de lo que montamos": "Mig minut del que muntem",
   "No te lo contamos. Míralo.": "No t'ho expliquem. Mira-ho.",
+  "Esto suena mejor que cualquier case study.": "Això sona millor que qualsevol case study.",
   "Giras y directos de artista": "Gires i directes d'artista",
   "También llenamos giras.": "També omplim gires.",
   "Más eventos en vídeo": "Més esdeveniments en vídeo",
