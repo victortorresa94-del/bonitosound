@@ -35,6 +35,8 @@ const CA: Record<string, string> = {
     "Explica'ns les dates i el projecte. Et diem com la muntem i per on començaríem.",
   "Giras Bonitas.": "Gires Bonito.",
   "Ver la gira →": "Veure la gira →",
+  "Ver el artista →": "Veure l'artista →",
+  "Su web →": "La seva web →",
   "Conciertos": "Concerts",
   "Giras": "Gires",
   "Artistas": "Artistes",
