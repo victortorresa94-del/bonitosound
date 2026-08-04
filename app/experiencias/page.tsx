@@ -4,7 +4,6 @@ import path from "node:path";
 import { EventosHero } from "@/components/eventos/EventosHero";
 import { ExperienciasResumen } from "@/components/eventos/ExperienciasResumen";
 import { EventosShowcase } from "@/components/eventos/EventosShowcase";
-import { EventosBento } from "@/components/eventos/EventosBento";
 import { EventosBrands } from "@/components/eventos/EventosBrands";
 import { TeatroYVisuales } from "@/components/eventos/TeatroYVisuales";
 import { EventosOutro } from "@/components/eventos/EventosOutro";
@@ -42,12 +41,14 @@ export default function Experiencias() {
   return (
     <div style={{ backgroundColor: "#FBFAF6" }}>
       {/* Orden: banda superior + showcase con el texto de experiencias +
-          marca por marca + más vídeos + teatro/mapping + cierre. */}
+          marca por marca + teatro/mapping + cierre.
+          Se quitó adrede el bloque "Míralo, no te lo contamos" (bento de
+          vídeos por marca al final): repetía vídeos que ya se ven arriba, en
+          el resumen y en cada tarjeta de marca — sobraba. */}
       <EventosHero />
       {hayResumen && <ExperienciasResumen src={resumen} />}
       <EventosShowcase eventos={marcas} />
       <EventosBrands eventos={marcas} />
-      <EventosBento eventos={marcas} />
       <TeatroYVisuales />
       <EventosOutro />
     </div>

@@ -151,14 +151,12 @@ const CA: Record<string, string> = {
   "Dani Boada · Fundador": "Dani Boada · Fundador",
   "Treinta años en esto. Y sigue al teléfono.": "Trenta anys en això. I encara despenja el telèfon.",
   "La entrevista a Dani, sin guion.": "L'entrevista a en Dani, sense guió.",
-  "Management, contratos y la llamada que cierra el bolo: ese es el día a día de Dani. En treinta años en la industria ha llevado a artistas que hoy llenan estadios.":
-    "Management, contractes i la trucada que tanca el bolo: aquest és el dia a dia d'en Dani. En trenta anys a la indústria ha portat artistes que avui omplen estadis.",
-  "Empezó donde se aprende de verdad: cargando y montando. Backliner, producción técnica y dirección de giras por toda España, de sala en sala y de furgoneta en furgoneta. También producción en televisión, en":
-    "Va començar on s'aprèn de debò: carregant i muntant. Backliner, producció tècnica i direcció de gires per tot Espanya, de sala en sala i de furgoneta en furgoneta. També producció en televisió, a",
-  ". Nada de lo que pide hoy a un equipo es algo que no haya hecho antes él.":
-    ". Res del que demana avui a un equip no ho hagi fet ell abans.",
-  "Ha visto de todo lo que se puede ver en este oficio: lo que funciona, lo que no, y por qué. Ese recorrido es lo que hay detrás de cada decisión que tomamos en Bonito.":
-    "Ha vist tot el que es pot veure en aquest ofici: el que funciona, el que no, i per què. Aquest recorregut és el que hi ha darrere de cada decisió que prenem a Bonito.",
+  "Management, contratos y la llamada que cierra el bolo: ese es el día a día de Dani. En más de treinta años en la industria ha acompañado el desarrollo de artistas, impulsado proyectos y trabajado junto a profesionales que hoy llenan estadios.":
+    "Management, contractes i la trucada que tanca el bolo: aquest és el dia a dia d'en Dani. En més de trenta anys a la indústria ha acompanyat el desenvolupament d'artistes, ha impulsat projectes i ha treballat amb professionals que avui omplen estadis.",
+  "Pero todo empezó mucho antes, como músico. Después llegaron los escenarios desde el otro lado: cargando, montando y aprendiendo el oficio desde la base. Backliner, producción técnica y dirección de giras por toda España, de sala en sala y de furgoneta en furgoneta. Esa experiencia le ha permitido conocer cada pieza del engranaje que hace posible un concierto.":
+    "Però tot va començar molt abans, com a músic. Després van arribar els escenaris des de l'altra banda: carregant, muntant i aprenent l'ofici des de la base. Backliner, producció tècnica i direcció de gires per tot Espanya, de sala en sala i de furgoneta en furgoneta. Aquesta experiència li ha permès conèixer cada peça de l'engranatge que fa possible un concert.",
+  "Ha visto prácticamente todo lo que puede ocurrir en este oficio: lo que funciona, lo que no y, sobre todo, por qué. Ese recorrido es el que hay detrás de cada decisión que tomamos en Bonito.":
+    "Ha vist pràcticament tot el que pot passar en aquest ofici: el que funciona, el que no i, sobretot, per què. Aquest recorregut és el que hi ha darrere de cada decisió que prenem a Bonito.",
   "Cómo trabajamos": "Com treballem",
   "Lo que firmas con nosotros.": "El que signes amb nosaltres.",
   "En este sector, demasiados artistas descubren la letra pequeña cuando ya es tarde. Con nosotros no hay letra pequeña. Los números se hablan; los principios, aquí.":

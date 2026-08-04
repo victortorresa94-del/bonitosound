@@ -340,15 +340,13 @@ export default function Nosotros() {
           </RevealOnScroll>
           <RevealOnScroll delay={0.15} className="space-y-5 text-base leading-relaxed text-text-secondary md:order-2 md:text-lg">
             <p>
-              {tr(locale, "Management, contratos y la llamada que cierra el bolo: ese es el día a día de Dani. En treinta años en la industria ha llevado a artistas que hoy llenan estadios.")}
+              {tr(locale, "Management, contratos y la llamada que cierra el bolo: ese es el día a día de Dani. En más de treinta años en la industria ha acompañado el desarrollo de artistas, impulsado proyectos y trabajado junto a profesionales que hoy llenan estadios.")}
             </p>
             <p>
-              {tr(locale, "Empezó donde se aprende de verdad: cargando y montando. Backliner, producción técnica y dirección de giras por toda España, de sala en sala y de furgoneta en furgoneta. También producción en televisión, en")}{" "}
-              <em>Tu Cara Me Suena</em>
-              {tr(locale, ". Nada de lo que pide hoy a un equipo es algo que no haya hecho antes él.")}
+              {tr(locale, "Pero todo empezó mucho antes, como músico. Después llegaron los escenarios desde el otro lado: cargando, montando y aprendiendo el oficio desde la base. Backliner, producción técnica y dirección de giras por toda España, de sala en sala y de furgoneta en furgoneta. Esa experiencia le ha permitido conocer cada pieza del engranaje que hace posible un concierto.")}
             </p>
             <p>
-              {tr(locale, "Ha visto de todo lo que se puede ver en este oficio: lo que funciona, lo que no, y por qué. Ese recorrido es lo que hay detrás de cada decisión que tomamos en Bonito.")}
+              {tr(locale, "Ha visto prácticamente todo lo que puede ocurrir en este oficio: lo que funciona, lo que no y, sobre todo, por qué. Ese recorrido es el que hay detrás de cada decisión que tomamos en Bonito.")}
             </p>
           </RevealOnScroll>
         </div>
