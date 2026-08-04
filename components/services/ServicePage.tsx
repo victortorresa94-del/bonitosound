@@ -25,6 +25,7 @@ import { serverLocale } from "@/lib/locale-server";
 import { localePath, t } from "@/lib/i18n";
 import { servicioCa } from "@/lib/content-i18n";
 import { tr } from "@/lib/copy-ca";
+import { eventoCa } from "@/lib/content-md-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -66,7 +67,12 @@ export function ServicePage({
   // Los casos pueden ser eventos de marca o giras (viven en carpetas distintas).
   const caseEventos = d.caseVideos
     ? d.caseVideos
-        .map((s) => getEventos().find((e) => e.slug === s) ?? getGiras().find((g) => g.slug === s))
+        .map((s) => {
+          const ev = getEventos().find((e) => e.slug === s);
+          if (ev) return eventoCa(ev, locale, "eventos");
+          const gi = getGiras().find((g) => g.slug === s);
+          return gi ? eventoCa(gi, locale, "giras") : undefined;
+        })
         .filter(Boolean)
     : [];
   // Giras a destacar: los datos duros salen de lib/giras.ts, y la tarjeta
@@ -226,7 +232,7 @@ export function ServicePage({
                   {g.artist}
                 </p>
                 <h3 className="display mt-1.5 text-xl leading-tight" style={{ color: NAVY }}>
-                  {g.tour}
+                  {tr(locale, g.tour)}
                 </h3>
                 <p className="mt-2 font-mono text-xs tabular-nums text-text-muted">
                   {[g.years ?? g.year, g.shows].filter(Boolean).join(" · ")}

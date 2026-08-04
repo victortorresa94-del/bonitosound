@@ -37,8 +37,9 @@ export function PresentacionVideo() {
 
         {/* Prueba, más pequeño, debajo del vídeo. */}
         <RevealOnScroll as="p" delay={0.2} className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-text-secondary">
-          Más de <span className="font-semibold text-text-primary">150 lanzamientos</span> desde 2022,
-          artistas, eventos de marca y festival propio. Esto es lo que montamos.
+          {tr(locale, "Más de")}{" "}
+          <span className="font-semibold text-text-primary">{tr(locale, "150 lanzamientos")}</span>{" "}
+          {tr(locale, "desde 2022, artistas, eventos de marca y festival propio. Esto es lo que montamos.")}
         </RevealOnScroll>
 
         {/* CTA a Nosotros (antes iba a Instagram). */}

@@ -190,7 +190,7 @@ const CA: Record<string, string> = {
   "Ver": "Veure",
   "Miembros activos de": "Membres actius de",
   "Con el apoyo de": "Amb el suport de",
-  "También con el apoyo de": "També amb el suport de",
+  "También con el apoyo de": "També amb el suport de:",
   "Lo que pensamos, escrito.": "El que pensem, escrit.",
   "Ver el blog": "Veure el blog",
   "Leer →": "Llegir →",
@@ -1085,6 +1085,13 @@ const CA: Record<string, string> = {
   "Empresas que han confiado en": "Empreses que han confiat a",
   "hacerlo bonito": "fer-ho bonito",
   "Verlos todos": "Veure'ls tots",
+  "150 lanzamientos": "150 llançaments",
+  "desde 2022, artistas, eventos de marca y festival propio. Esto es lo que montamos.":
+    "des del 2022, artistes, esdeveniments de marca i festival propi. Això és el que muntem.",
+  "y cómo montarlo, sin vueltas.": "i com muntar-ho, sense voltes.",
+  "Marcas, agencias, festivales, ayuntamientos y asociaciones para las que hemos trabajado desde que empezamos.":
+    "Marques, agències, festivals, ajuntaments i associacions per a qui hem treballat des que vam començar.",
+  "Gira en España": "Gira per Espanya",
 };
 
 /**

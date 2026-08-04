@@ -78,10 +78,10 @@ function GiraCard({ g, tilt, href }: { g: Gira; tilt: number; href?: string }) {
         <h3 className="display text-[1.35rem] leading-tight" style={{ color: NAVY }}>
           {g.artist}
         </h3>
-        <p className="mt-0.5 text-sm italic text-text-secondary">{g.tour}</p>
+        <p className="mt-0.5 text-sm italic text-text-secondary">{tr(serverLocale(), g.tour)}</p>
         {(g.shows || g.years) && (
           <p className="mt-1.5 font-mono text-[0.68rem] tabular-nums text-text-muted">
-            {[g.years ?? g.year, g.shows].filter(Boolean).join(" · ")}
+            {[g.years ?? g.year, g.shows && tr(serverLocale(), g.shows)].filter(Boolean).join(" · ")}
           </p>
         )}
         {/* Autoría de la foto, cuando la tiene (crédito a quien la hizo). */}
