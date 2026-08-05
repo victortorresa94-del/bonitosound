@@ -260,13 +260,39 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
       </Section>
 
       {/* VÍDEO — solo YouTube. El mp4 ya se ve arriba, en la polaroid, y
-          enseñarlo dos veces en la misma página no aporta nada. */}
+          enseñarlo dos veces en la misma página no aporta nada.
+          Antes era un iframe centrado y suelto en medio de una sección vacía
+          (queja de Víctor: "MAL POSICIONADISIMO"). Ahora va en un split con
+          texto que lo ancla —igual que el resto de la página—, en vez de
+          flotar solo sin contexto. Sin repetir el `result`, que ya se lee
+          arriba en el relato: aquí el texto de apoyo es nuevo. */}
       {g.youtubeId && (
         <Section className="bg-bg-primary">
-          <RevealOnScroll as="p" className="eyebrow mb-6">{tr(locale, "El vídeo lo cuenta mejor")}</RevealOnScroll>
-          <RevealOnScroll delay={0.08} className="mx-auto max-w-3xl">
-            <YouTubeEmbed id={g.youtubeId} title={g.title} />
-          </RevealOnScroll>
+          <div className="grid gap-8 md:grid-cols-[0.9fr_1.4fr] md:items-center md:gap-14">
+            <RevealOnScroll>
+              <p className="eyebrow mb-4">{tr(locale, "Así se vivió")}</p>
+              <h3
+                className="display text-[clamp(1.5rem,3vw,2.1rem)] leading-[1.12]"
+                style={{ color: NAVY }}
+              >
+                {tr(locale, "El cierre de la gira, contado en vídeo.")}
+              </h3>
+              {g.location && (
+                <p className="mt-5 flex items-center gap-2.5 text-sm font-semibold text-text-muted">
+                  <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: CYAN }} />
+                  {g.location}
+                </p>
+              )}
+            </RevealOnScroll>
+            <RevealOnScroll delay={0.1}>
+              <div
+                className="overflow-hidden rounded-3xl border border-subtle"
+                style={{ boxShadow: "0 14px 36px rgba(20,40,60,0.12)" }}
+              >
+                <YouTubeEmbed id={g.youtubeId} title={g.title} />
+              </div>
+            </RevealOnScroll>
+          </div>
         </Section>
       )}
 

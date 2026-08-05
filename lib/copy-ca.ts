@@ -114,6 +114,8 @@ const CA: Record<string, string> = {
   "Ver los eventos": "Veure els esdeveniments",
   "Teatro y espectáculos visuales": "Teatre i espectacles visuals",
   "El vídeo lo cuenta mejor": "El vídeo ho explica millor",
+  "Así se vivió": "Així es va viure",
+  "El cierre de la gira, contado en vídeo.": "El tancament de la gira, explicat en vídeo.",
 
   // ── Qué somos ──
   "El equipo": "L'equip",
