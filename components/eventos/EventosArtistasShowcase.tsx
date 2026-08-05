@@ -3,6 +3,8 @@ import Image from "next/image";
 import { LazyVideo } from "@/components/LazyVideo";
 import type { Evento } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -71,6 +73,7 @@ const TILT = ["md:rotate-[-1.8deg]", "md:rotate-[1.5deg] md:mt-10", "md:rotate-[
  * y Anne Lukin son producciones nuestras y entran en cuanto suba su clip a R2.
  */
 export function EventosArtistasShowcase({ eventos }: { eventos: Evento[] }) {
+  const locale = serverLocale();
   const arts = eventos.filter(
     (e) => (e.type === "gira" || e.type === "showcase") && e.artist && (e.youtubeId || e.video)
   );
@@ -84,15 +87,13 @@ export function EventosArtistasShowcase({ eventos }: { eventos: Evento[] }) {
     <section className="w-full" style={{ backgroundColor: "#FBFAF6" }}>
       <div className="mx-auto max-w-6xl px-5 pb-16 pt-6 md:px-10 md:pb-24">
         <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>
-          Eventos para artistas
+          {tr(locale, "Eventos para artistas")}
         </p>
         <h2 className="mb-4 font-round text-3xl font-bold md:text-5xl" style={{ color: NAVY }}>
-          Giras y directos que montamos.
+          {tr(locale, "Giras y directos que montamos.")}
         </h2>
         <p className="mb-12 max-w-2xl text-base text-text-secondary md:text-lg">
-          No solo activamos marcas. Cuando el que sube al escenario es el artista,
-          ponemos la producción, la técnica y la logística de la gira — para que lo
-          único que se vea sea el directo.
+          {tr(locale, "No solo activamos marcas. Cuando el que sube al escenario es el artista, ponemos la producción, la técnica y la logística de la gira — para que lo único que se vea sea el directo.")}
         </p>
 
         <div className="grid gap-6 md:grid-cols-3 md:gap-8">
@@ -118,7 +119,7 @@ export function EventosArtistasShowcase({ eventos }: { eventos: Evento[] }) {
         </div>
 
         <div className="mt-14 border-t border-subtle pt-8">
-          <p className="mb-4 text-sm text-text-muted">Producción y tour management de:</p>
+          <p className="mb-4 text-sm text-text-muted">{tr(locale, "Producción y tour management de:")}</p>
           <div className="flex flex-wrap gap-x-6 gap-y-2 font-round text-lg font-semibold md:text-xl" style={{ color: NAVY }}>
             {PRODUCCIONES.map((name, i) => (
               <span key={name} className="whitespace-nowrap">

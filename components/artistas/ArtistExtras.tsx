@@ -52,7 +52,11 @@ export function ArtistExtras({ name, extras }: { name: string; extras?: Extra[] 
             href={e.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="card group flex items-center gap-4 transition-transform duration-300 hover:-translate-y-1"
+            // min-w-0: sin esto la tarjeta es un hijo de grid con min-width:auto
+            // y se estira hasta caber su texto más largo, desbordando la pantalla
+            // en móvil. El truncate de dentro solo funciona si el padre puede
+            // encogerse.
+            className="card group flex min-w-0 items-center gap-4 transition-transform duration-300 hover:-translate-y-1"
           >
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent-cyan/10 text-text-primary transition-colors group-hover:bg-accent-cyan/20">
               <Glyph kind={e.kind} />

@@ -21,7 +21,7 @@ const HOME_CA: Record<string, EscenaCa> = {
     statement: "Portem la música a tot arreu.",
     accent: "tot arreu",
     support:
-      "Tant li fa si és amb un cantant, un esdeveniment, una gravació o difusió. La qüestió és fer-ho bonic.",
+      "Tant li fa si és amb un cantant, un esdeveniment, una gravació o difusió. La qüestió és fer-ho bonito.",
   },
   marcas: {
     kicker: "Marques",

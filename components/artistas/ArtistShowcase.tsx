@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArtistPlayer } from "./ArtistPlayer";
+import { useLocale } from "@/components/LocaleProvider";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -36,6 +38,7 @@ export function ArtistShowcase({
   artists: ShowcaseArtist[];
   startSlug?: string;
 }) {
+  const locale = useLocale();
   const router = useRouter();
   const [i, setI] = useState(() => {
     const idx = artists.findIndex((x) => x.slug === startSlug);
@@ -131,7 +134,7 @@ export function ArtistShowcase({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Escuchar a ${a.name} en Spotify`}
-              title="Escuchar en Spotify"
+              title={tr(locale, "Escuchar en Spotify")}
               className="grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 transition-transform duration-200 hover:scale-105"
               style={{ borderColor: NAVY, color: NAVY }}
             >
@@ -161,12 +164,12 @@ export function ArtistShowcase({
               className="ml-1 inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold text-white transition-transform duration-200 hover:scale-[1.02]"
               style={{ backgroundColor: CYAN }}
             >
-              Contratar booking →
+              {tr(locale, "Contratar booking →")}
             </Link>
           </div>
 
           <div className="mt-8 flex items-center justify-between gap-4">
-            <span className="text-sm text-text-muted">Desliza o usa las flechas para ver más artistas</span>
+            <span className="text-sm text-text-muted">{tr(locale, "Desliza o usa las flechas para ver más artistas")}</span>
             <div className="flex items-center gap-3">
               <button onClick={() => go(-1)} aria-label="Artista anterior" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>←</button>
               <button onClick={() => go(1)} aria-label="Siguiente artista" className="flex h-11 w-11 items-center justify-center rounded-full border-2 transition-colors hover:bg-black/5" style={{ borderColor: NAVY, color: NAVY }}>→</button>
@@ -198,7 +201,7 @@ export function ArtistShowcase({
             )}
             {!a.isIllustration && (
               <span className="absolute bottom-4 left-4 rounded-full bg-black/55 px-4 py-1.5 text-sm font-semibold text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
-                Ver ficha →
+                {tr(locale, "Ver ficha →")}
               </span>
             )}
           </Link>

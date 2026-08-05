@@ -51,17 +51,21 @@ export function ExperienciasResumen({ src }: { src: string }) {
   return (
     <section className="wrap py-16 md:py-24">
       <RevealOnScroll as="p" className="eyebrow mb-4">
-        Medio minuto de lo que montamos
+        {tr(locale, "Medio minuto de lo que montamos")}
       </RevealOnScroll>
       <RevealOnScroll
         as="h2"
         delay={0.05}
         className="display mb-10 max-w-3xl text-[clamp(1.9rem,4.5vw,3.2rem)] leading-[1.05] text-[#14283C]"
       >
-        No te lo contamos. Míralo.
+        {tr(locale, "Esto suena mejor que cualquier case study.")}
       </RevealOnScroll>
 
-      <RevealOnScroll delay={0.1}>
+      {/* Más pequeño en escritorio a propósito: el material es vertical
+          amplíado a 16:9 (ver scripts/experiencias-video.sh), y a todo el
+          ancho del wrap se nota el escalado. En móvil se queda a ancho
+          completo, que es donde de verdad hace falta. */}
+      <RevealOnScroll delay={0.1} className="md:max-w-xl lg:max-w-2xl">
         <div
           className="relative overflow-hidden rounded-3xl"
           style={{ backgroundColor: NAVY }}

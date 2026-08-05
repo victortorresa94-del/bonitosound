@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Section } from "@/components/ui";
 import { RevealOnScroll, SplitTextReveal, MagneticButton } from "@/components/motion";
 import { EventHeroVideo } from "@/components/eventos/EventHeroVideo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const CYAN = "#16b6d4";
 
@@ -15,6 +17,7 @@ const CYAN = "#16b6d4";
  * el nombre — nunca una caja vacía. En cuanto se sube el .mp4, se ve.
  */
 export function PresentacionVideo() {
+  const locale = serverLocale();
   return (
     <Section className="bg-bg-primary">
       <div className="mx-auto max-w-2xl text-center">
@@ -22,7 +25,7 @@ export function PresentacionVideo() {
           Esto es Bonito Sound
         </RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(1.9rem,4.2vw,3rem)]">
-          Un minuto y lo ves todo.
+          {tr(locale, "Un minuto y lo ves todo.")}
         </SplitTextReveal>
 
         {/* Vídeo vertical (reel) en el centro. */}
@@ -34,8 +37,9 @@ export function PresentacionVideo() {
 
         {/* Prueba, más pequeño, debajo del vídeo. */}
         <RevealOnScroll as="p" delay={0.2} className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-text-secondary">
-          Más de <span className="font-semibold text-text-primary">150 lanzamientos</span> desde 2022,
-          artistas, eventos de marca y festival propio. Esto es lo que montamos.
+          {tr(locale, "Más de")}{" "}
+          <span className="font-semibold text-text-primary">{tr(locale, "150 lanzamientos")}</span>{" "}
+          {tr(locale, "desde 2022, artistas, eventos de marca y festival propio. Esto es lo que montamos.")}
         </RevealOnScroll>
 
         {/* CTA a Nosotros (antes iba a Instagram). */}
@@ -46,7 +50,7 @@ export function PresentacionVideo() {
               className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-base font-bold text-white transition-transform duration-200 hover:scale-[1.03]"
               style={{ backgroundColor: CYAN }}
             >
-              Conócenos →
+              {tr(locale, "Conócenos →")}
             </Link>
           </MagneticButton>
         </RevealOnScroll>

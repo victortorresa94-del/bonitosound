@@ -50,6 +50,44 @@ export const giras: Gira[] = [
   { slug: "alfred-garcia-1016", artist: "Alfred García", tour: "Gira 1016", year: "2019", years: "2019–2021", shows: "+40 conciertos", showsCount: 40, credit: "Roser Gamonal", youtubeId: "r47SP4OULcI" },
 ];
 
+/**
+ * Adónde lleva la tarjeta de una gira SIN página de detalle propia (no tiene
+ * .md en content/giras). Nunca se deja una tarjeta muerta pudiendo evitarlo:
+ * al artista si tiene ficha en /artistas, a su gira grande si es de las que
+ * llevamos siempre (Alfred/Albert), o a su web/Instagram oficial si no tiene
+ * nada propio en el sitio. Verificado uno a uno — si un artista no aparece
+ * aquí es porque no se encontró una fuente oficial fiable, no por olvido.
+ */
+
+/** Artista → slug de su ficha en /artistas (content/artistas/<slug>.md). */
+export const ARTIST_PROFILE_SLUG: Record<string, string> = {
+  Dulze: "dulze",
+  Nàtura: "natura",
+  "Eva Calyza": "eva-calyza",
+  "Pablo Rojo": "pablo-rojo",
+  "Egon Calle": "egon-calle",
+  Fabián: "fabian",
+};
+
+/** Artista sin ficha propia pero con una gira grande ya publicada: sus giras
+ *  sueltas caen ahí en vez de a ningún sitio. */
+export const ARTIST_FALLBACK_GIRA: Record<string, string> = {
+  "Alfred García": "alfred-garcia-1016",
+  "Albert Pla": "albert-pla-rumbagenarios",
+};
+
+/** Artista sin nada propio en el sitio → su web o Instagram oficial. */
+export const ARTIST_EXTERNAL_LINK: Record<string, string> = {
+  "Laura Andrés": "https://laurandres.com",
+  "Ernest Prana": "https://www.instagram.com/ernestprana/",
+  "Ramón Mirabet": "https://ramonmirabet.com",
+  "Ruth Lorenzo": "https://ruthlorenzo.com",
+  "Nerea Rodríguez": "https://www.instagram.com/nerearoficial/",
+  "Bemba Saoco": "https://www.instagram.com/bembasaoco/",
+  // Vicente García: sin fuente oficial verificada (solo Wikipedia/Spotify
+  // genéricos) — se deja sin enlace antes que arriesgar un sitio equivocado.
+};
+
 /** Números de la sección, DERIVADOS de los datos de arriba (no inventados). */
 export const girasStats = {
   /** Suma de los conciertos documentados, redondeada a la baja a la centena. */

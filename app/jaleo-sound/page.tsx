@@ -8,6 +8,8 @@ import { MarqueeRow } from "@/components/motion";
 import { findAsset } from "@/lib/assets";
 import { site, support } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 export function generateMetadata(): Metadata {
   return {
@@ -52,6 +54,7 @@ function listJaleoPhotos(): string[] {
 }
 
 export default function JaleoSound() {
+  const locale = serverLocale();
   const seccion = findAsset("secciones", "jaleo");
   const photos = listJaleoPhotos();
 
@@ -84,7 +87,7 @@ export default function JaleoSound() {
 
         <div className="wrap relative">
           <p className="text-xs font-semibold uppercase tracking-[0.35em] text-white/70">
-            Festival propio · Cultura española y latina · Amsterdam
+            {tr(locale, "Festival propio · Cultura española y latina · Amsterdam")}
           </p>
         </div>
 
@@ -107,7 +110,7 @@ export default function JaleoSound() {
           </div>
           <div className="flex flex-wrap gap-3 md:justify-end">
             <a href={site.external.jaleo} target="_blank" rel="noopener noreferrer" className="btn bg-white font-semibold text-[color:var(--jaleo-red)]">
-              Entradas →
+              {tr(locale, "Entradas →")}
             </a>
             <a href={`${site.external.jaleo}/open-call`} target="_blank" rel="noopener noreferrer" className="btn border border-white/40 text-white">
               Open Call →
@@ -134,9 +137,9 @@ export default function JaleoSound() {
       <section className="border-b border-white/15 py-20 md:py-28">
         <div className="wrap mb-10 flex items-end justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">Ediciones pasadas</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">{tr(locale, "Ediciones pasadas")}</p>
             <h2 className="display mt-3 text-[clamp(2.2rem,6vw,4rem)] leading-[0.95]">
-              Esto es lo que pasó.
+              {tr(locale, "Esto es lo que pasó.")}
             </h2>
           </div>
           <a
@@ -145,7 +148,7 @@ export default function JaleoSound() {
             rel="noopener noreferrer"
             className="hidden text-sm font-semibold text-white underline underline-offset-4 hover:text-accent-warm-soft md:inline-block"
           >
-            Ver más en jaleosound.com →
+            {tr(locale, "Ver más en jaleosound.com →")}
           </a>
         </div>
 
@@ -173,13 +176,12 @@ export default function JaleoSound() {
       {/* ───── Vídeo (Sant Jordi Club) como muestra del directo Bonito ───── */}
       <section className="border-b border-white/15 py-20 md:py-28">
         <div className="wrap">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">El directo de Bonito</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">{tr(locale, "El directo de Bonito")}</p>
           <h2 className="display mt-3 text-[clamp(2.2rem,6vw,4rem)] leading-[0.95]">
-            Lo que montamos cuando nos dejan.
+            {tr(locale, "Lo que montamos cuando nos dejan.")}
           </h2>
           <p className="mt-4 max-w-2xl text-white/80">
-            Final de la Gira 1016 en el Sant Jordi Club de Barcelona. Producido
-            por el mismo equipo que monta Jaleo cada septiembre en Amsterdam.
+            {tr(locale, "Final de la Gira 1016 en el Sant Jordi Club de Barcelona. Producido por el mismo equipo que monta Jaleo cada septiembre en Amsterdam.")}
           </p>
           <div className="mt-8 overflow-hidden rounded-2xl border border-white/20">
             <YouTubeEmbed id="r47SP4OULcI" title="Final Gira 1016 — Sant Jordi Club" />
@@ -191,14 +193,12 @@ export default function JaleoSound() {
       <section className="py-24 md:py-32">
         <div className="wrap grid gap-12 md:grid-cols-[1fr_1fr] md:items-center">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">El antídoto</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">{tr(locale, "El antídoto")}</p>
             <h2 className="display mt-4 text-[clamp(2.2rem,6vw,4.5rem)] leading-[0.95]">
-              Si estás cansado de shows sin vida, esto es lo tuyo.
+              {tr(locale, "Si estás cansado de shows sin vida, esto es lo tuyo.")}
             </h2>
             <p className="mt-6 max-w-xl text-lg text-white/80">
-              Un festival de cultura española y latina en Amsterdam, hecho por
-              la misma gente que mueve Bonito, con la misma falta de tonterías.
-              Bring friends. Or make new ones.
+              {tr(locale, "Un festival de cultura española y latina en Amsterdam, hecho por la misma gente que mueve Bonito, con la misma falta de tonterías. Bring friends. Or make new ones.")}
             </p>
           </div>
           {seccion && (
@@ -214,11 +214,10 @@ export default function JaleoSound() {
         <div className="wrap">
           <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <h2 className="display text-[clamp(2.5rem,8vw,6rem)] leading-[0.9]">
-              Así sonó 2025.
+              {tr(locale, "Así sonó 2025.")}
             </h2>
             <p className="max-w-sm text-sm text-white/70 md:text-right">
-              11–12 de octubre de 2025, Posthoornkerk, dentro de los actos del
-              750 aniversario de Amsterdam. Música, arte y gastronomía.
+              {tr(locale, "11–12 de octubre de 2025, Posthoornkerk, dentro de los actos del 750 aniversario de Amsterdam. Música, arte y gastronomía.")}
             </p>
           </div>
           <ul className="mt-12 divide-y divide-white/20 border-y border-white/20">
@@ -233,13 +232,12 @@ export default function JaleoSound() {
                     {a.name}
                   </span>
                 </div>
-                <span className="text-sm text-white/70 md:pl-6">{a.line}</span>
+                <span className="text-sm text-white/70 md:pl-6">{tr(locale, a.line)}</span>
               </li>
             ))}
           </ul>
           <p className="mt-8 text-sm text-white/60">
-            El cartel de la edición 2026 se anunciará en las próximas semanas
-            en{" "}
+            {tr(locale, "El cartel de la edición 2026 se anunciará en las próximas semanas en")}{" "}
             <a
               href={site.external.jaleo}
               target="_blank"
@@ -257,10 +255,10 @@ export default function JaleoSound() {
       <section className="border-t border-white/20 py-24 md:py-32">
         <div className="wrap grid gap-12 md:grid-cols-[1fr_1.3fr] md:items-center">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">La banda sonora</p>
-            <h2 className="display mt-4 text-[clamp(2.2rem,6vw,4rem)] leading-[0.95]">Suena así.</h2>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">{tr(locale, "La banda sonora")}</p>
+            <h2 className="display mt-4 text-[clamp(2.2rem,6vw,4rem)] leading-[0.95]">{tr(locale, "Suena así.")}</h2>
             <p className="mt-5 max-w-md text-lg text-white/80">
-              La playlist oficial. Para entender el festival antes de pisar Amsterdam.
+              {tr(locale, "La playlist oficial. Para entender el festival antes de pisar Amsterdam.")}
             </p>
             <a
               href={site.external.jaleo}
@@ -268,7 +266,7 @@ export default function JaleoSound() {
               rel="noopener noreferrer"
               className="mt-6 inline-block text-sm font-semibold text-white underline underline-offset-4"
             >
-              Más en jaleosound.com →
+              {tr(locale, "Más en jaleosound.com →")}
             </a>
           </div>
           <div className="rounded-2xl bg-black/15 p-2">
@@ -281,12 +279,12 @@ export default function JaleoSound() {
       <section className="border-t border-white/20 py-16">
         <div className="wrap">
           <p className="text-sm text-white/70">
-            Con el apoyo del Instituto Cervantes, Embajada de España en Holanda, AIE y
-            Stadsdeel Amsterdam. {support.join(" · ")}.
+            {tr(locale, "Con el apoyo del Instituto Cervantes, Embajada de España en Holanda, AIE y Stadsdeel Amsterdam.")}{" "}
+            {support.join(" · ")}.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={site.external.jaleo} target="_blank" rel="noopener noreferrer" className="btn bg-white font-semibold text-[color:var(--jaleo-red)]">
-              Web del festival →
+              {tr(locale, "Web del festival →")}
             </a>
           </div>
         </div>

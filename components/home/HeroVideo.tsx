@@ -5,6 +5,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { usePlayer } from "@/components/player/PlayerProvider";
 import { useLocale } from "@/components/LocaleProvider";
 import { t } from "@/lib/i18n";
+import { tr } from "@/lib/copy-ca";
 
 type HeroVideoProps = {
   src: string;
@@ -85,7 +86,7 @@ export function HeroVideo({ src, poster }: HeroVideoProps) {
       className="relative flex h-[100svh] w-full items-center justify-center overflow-hidden bg-bg-primary pb-[10svh]"
     >
       <h1 className="sr-only">
-        Bonito Sound — música, eventos para marcas, festival y tecnología del sector
+        {tr(locale, "Bonito Sound — música, eventos para marcas, festival y tecnología del sector")}
       </h1>
 
       {/* Vídeo centrado a ~la mitad de la pantalla. El fondo del vídeo ya es el

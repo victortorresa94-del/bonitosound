@@ -8,6 +8,8 @@ import {
 } from "@/components/motion";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 export function generateMetadata(): Metadata {
   return {
@@ -30,6 +32,7 @@ const faq = [
 ];
 
 export default function Giraverse() {
+  const locale = serverLocale();
   return (
     <>
       <JsonLd
@@ -48,11 +51,10 @@ export default function Giraverse() {
           <div className="max-w-3xl">
             <RevealOnScroll as="p" className="eyebrow mb-4">Lab · Giraverse · En desarrollo</RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
-              Las giras dejan de montarse a mano.
+              {tr(locale, "Las giras dejan de montarse a mano.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mt-7 text-lg text-text-secondary" delay={0.2}>
-              Circulación de giras nacional e internacional, ordenada. Lo que
-              ahora resuelven cien llamadas y una hoja de cálculo compartida.
+              {tr(locale, "Circulación de giras nacional e internacional, ordenada. Lo que ahora resuelven cien llamadas y una hoja de cálculo compartida.")}
             </RevealOnScroll>
             <RevealOnScroll className="mt-9" delay={0.35}>
               <MagneticButton strength={0.35}>
@@ -61,7 +63,7 @@ export default function Giraverse() {
                     "Avísame cuando esté Giraverse",
                   )}`}
                 >
-                  Avísame cuando esté listo →
+                  {tr(locale, "Avísame cuando esté listo →")}
                 </Cta>
               </MagneticButton>
             </RevealOnScroll>
@@ -70,7 +72,7 @@ export default function Giraverse() {
       </section>
 
       <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "Preguntas frecuentes")}</RevealOnScroll>
         <div className="mt-8 max-w-3xl">
           <FaqMotion items={faq} />
         </div>

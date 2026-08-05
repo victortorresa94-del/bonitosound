@@ -14,6 +14,9 @@ import {
 } from "@/components/servicios/ServiceFeatures";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
+import { localePath } from "@/lib/i18n";
 
 export function generateMetadata(): Metadata {
   return {
@@ -86,6 +89,7 @@ const faq = [
 ];
 
 export default function Marketing() {
+  const locale = serverLocale();
   return (
     <>
       <JsonLd
@@ -115,27 +119,25 @@ export default function Marketing() {
       <section style={{ backgroundColor: "#FBFAF6" }}>
         <div className="wrap pb-8 pt-24 md:pb-12 md:pt-32">
           <RevealOnScroll as="p" className="eyebrow mb-6">
-            Marketing musical
+            {tr(locale, "Marketing musical")}
           </RevealOnScroll>
           <h1 className="display max-w-[16ch] text-[clamp(2.8rem,7.5vw,6rem)] leading-[0.98] text-[#14283C]">
-            Movemos tu lanzamiento<br />
-            como <span className="text-[#16b6d4]">se merece</span>.
+            {tr(locale, "Movemos tu lanzamiento")}<br />
+            {tr(locale, "como ")}<span className="text-[#16b6d4]">{tr(locale, "se merece")}</span>.
           </h1>
           <RevealOnScroll
             as="p"
             delay={0.15}
             className="mt-8 max-w-[52ch] text-lg leading-relaxed text-text-secondary md:text-xl"
           >
-            Ads para el lanzamiento de tu single o álbum en Spotify, YouTube,
-            Instagram y TikTok. Del guion del vídeo a la campaña corriendo.
-            A veces ponemos nosotros la inversión.
+            {tr(locale, "Ads para el lanzamiento de tu single o álbum en Spotify, YouTube, Instagram y TikTok. Del guion del vídeo a la campaña corriendo. A veces ponemos nosotros la inversión.")}
           </RevealOnScroll>
           <RevealOnScroll className="mt-10" delay={0.25}>
             <MagneticButton strength={0.35}>
               <Cta
                 href={`mailto:${site.emails.general}?subject=${encodeURIComponent("Marketing para artistas")}`}
               >
-                Hablemos de tu lanzamiento →
+                {tr(locale, "Hablemos de tu lanzamiento →")}
               </Cta>
             </MagneticButton>
           </RevealOnScroll>
@@ -145,9 +147,7 @@ export default function Marketing() {
       {/* Intro con garabato cian (el "rollo" Bonito, como el resto de servicios). */}
       <Section>
         <RevealOnScroll as="p" className="statement mx-auto max-w-4xl text-center text-[clamp(1.5rem,3.4vw,2.5rem)] leading-tight text-text-primary">
-          Un buen lanzamiento no es suerte: es un plan corriendo en cada plataforma
-          el día que toca. Y venimos del sector — sabemos qué mueve oyentes y qué
-          llena una sala.
+          {tr(locale, "Un buen lanzamiento no es suerte: es un plan corriendo en cada plataforma el día que toca. Y venimos del sector — sabemos qué mueve oyentes y qué llena una sala.")}
         </RevealOnScroll>
         <RevealOnScroll className="mx-auto mt-7 w-40" delay={0.15}>
           <svg viewBox="0 0 160 16" fill="none" aria-hidden className="h-4 w-full">
@@ -157,24 +157,24 @@ export default function Marketing() {
       </Section>
 
       <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-4">Qué hacemos</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "Qué hacemos")}</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-          Todo lo que movemos.
+          {tr(locale, "Todo lo que movemos.")}
         </SplitTextReveal>
         <RevealOnScroll className="mt-12" delay={0.15}>
-          <ServiceFeatures features={features} />
+          <ServiceFeatures features={features.map((f) => ({ ...f, title: tr(locale, f.title), text: tr(locale, f.text) }))} />
         </RevealOnScroll>
       </Section>
 
       {/* Proceso */}
       <Section>
-        <RevealOnScroll as="p" className="eyebrow mb-10">Cómo montamos una campaña</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-10">{tr(locale, "Cómo montamos una campaña")}</RevealOnScroll>
         <StaggerGroup stagger={0.08} className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {proceso.map((p, i) => (
             <div key={p.title}>
               <span className="font-round text-5xl font-bold leading-none" style={{ color: CYAN }}>{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-4 display text-xl leading-tight">{p.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-text-secondary">{p.desc}</p>
+              <h3 className="mt-4 display text-xl leading-tight">{tr(locale, p.title)}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-text-secondary">{tr(locale, p.desc)}</p>
             </div>
           ))}
         </StaggerGroup>
@@ -182,17 +182,16 @@ export default function Marketing() {
 
       <Section>
         <CtaBlock
-          title="¿Tienes algo que sacar?"
-          desc="Cuéntanos qué lanzas y cuándo. Te decimos qué se puede hacer de verdad y por dónde empezar."
-          href="/contacto"
-          cta="Hablamos →"
+          title={tr(locale, "¿Tienes algo que sacar?")}
+          desc={tr(locale, "Cuéntanos qué lanzas y cuándo. Te decimos qué se puede hacer de verdad y por dónde empezar.")}
+          href={localePath("/contacto", locale)}
         />
       </Section>
 
       <Section className="bg-bg-primary">
-        <RevealOnScroll as="p" className="eyebrow mb-4">Preguntas frecuentes</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "Preguntas frecuentes")}</RevealOnScroll>
         <div className="mt-8">
-          <FaqOpen items={faq} />
+          <FaqOpen items={faq.map((f) => ({ ...f, q: tr(locale, f.q), a: tr(locale, f.a) }))} />
         </div>
       </Section>
     </>

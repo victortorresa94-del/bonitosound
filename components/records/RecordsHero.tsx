@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -113,6 +115,7 @@ function TagCard({ t }: { t: (typeof TAGS)[number] }) {
 }
 
 export function RecordsHero() {
+  const locale = serverLocale();
   return (
     <section className="relative w-full overflow-hidden" style={{ backgroundColor: "#FBFAF6" }}>
       <div className="mx-auto max-w-6xl px-5 pb-16 pt-12 md:px-10 md:pb-24 md:pt-16">
@@ -121,19 +124,19 @@ export function RecordsHero() {
         {/* Statement — fuente de los títulos del home (Zilla Slab), recto,
             con "el sistema" en cian. */}
         <h1 className="display leading-[0.95]" style={{ fontSize: "clamp(2.6rem, 9vw, 6.6rem)" }}>
-          <span style={{ color: NAVY }}>Tienes la música.</span>
+          <span style={{ color: NAVY }}>{tr(locale, "Tienes la música.")}</span>
           <br />
-          <span style={{ color: NAVY }}>Te falta </span>
+          <span style={{ color: NAVY }}>{tr(locale, "Te falta ")}</span>
           <span style={{ color: CYAN }}>el sistema.</span>
         </h1>
 
         <p className="mt-5 text-lg font-medium text-text-secondary md:text-xl">
-          Sello, booking, management, distribución y editorial.
+          {tr(locale, "Sello, booking, management, distribución y editorial.")}
         </p>
 
         {/* Texto de apoyo junto a la cascada */}
         <p className="mt-14 max-w-xs text-lg font-semibold leading-snug md:mt-20" style={{ color: NAVY }}>
-          Lo que la mayoría te hace montar con cinco proveedores, aquí está en uno.
+          {tr(locale, "Lo que la mayoría te hace montar con cinco proveedores, aquí está en uno.")}
         </p>
 
         {/* Cadena de tags escalonada, con flechas entre medias */}

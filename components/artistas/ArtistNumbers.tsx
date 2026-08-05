@@ -1,5 +1,7 @@
 import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 type Stat = {
   value: string;
@@ -11,6 +13,7 @@ type Stat = {
  * Plug-and-play: sin stats, no renderiza nada.
  */
 export function ArtistNumbers({ stats }: { stats: Stat[] }) {
+  const locale = serverLocale();
   // Descartamos entradas vacías por si llegan a medias desde el contenido.
   const items = (stats ?? []).filter(
     (s) => s?.value?.trim().length && s?.label?.trim().length
@@ -31,7 +34,7 @@ export function ArtistNumbers({ stats }: { stats: Stat[] }) {
     <Section id="numeros">
       {/* Eyebrow que además es el titular real del bloque (jerarquía + SEO). */}
       <RevealOnScroll as="h2" className="eyebrow">
-        En números
+        {tr(locale, "En números")}
       </RevealOnScroll>
 
       {/* <dl>: cada par cifra//etiqueta es una definición, no texto suelto. */}

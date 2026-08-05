@@ -5,6 +5,10 @@ import { RevealOnScroll, SplitTextReveal, MagneticButton, StaggerGroup } from "@
 import { getPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import type { Locale } from "@/lib/i18n";
+import { tr } from "@/lib/copy-ca";
+import { postCa } from "@/lib/content-md-ca";
 
 const posts = getPosts();
 
@@ -19,9 +23,9 @@ export function generateMetadata(): Metadata {
   };
 }
 
-function fmtDate(iso: string) {
+function fmtDate(iso: string, locale: Locale) {
   try {
-    return new Date(iso).toLocaleDateString("es-ES", {
+    return new Date(iso).toLocaleDateString(locale === "ca" ? "ca-ES" : "es-ES", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -32,6 +36,9 @@ function fmtDate(iso: string) {
 }
 
 export default function Diario() {
+  const locale = serverLocale();
+  // Los artículos se sirven en el idioma de la página.
+  const entradas = posts.map((x) => postCa(x, locale));
   return (
     <>
       <section className="border-b border-subtle">
@@ -41,21 +48,19 @@ export default function Diario() {
               Blog
             </RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
-              Lo que va pasando, sin postureo.
+              {tr(locale, "Lo que va pasando, sin postureo.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" delay={0.2} className="mt-6 max-w-2xl text-lg text-text-secondary">
-              Cómo funciona esto por dentro: booking, sellos, distribución,
-              eventos de marca. Lo que nos gustaría que alguien nos hubiera
-              contado cuando empezamos.
+              {tr(locale, "Cómo funciona esto por dentro: booking, sellos, distribución, eventos de marca. Lo que nos gustaría que alguien nos hubiera contado cuando empezamos.")}
             </RevealOnScroll>
           </div>
         </div>
       </section>
 
-      {posts.length > 0 ? (
+      {entradas.length > 0 ? (
         <Section>
           <StaggerGroup stagger={0.06} className="grid gap-6 md:grid-cols-2">
-            {posts.map((p) => (
+            {entradas.map((p) => (
               <Link
                 key={p.slug}
                 href={`/diario/${p.slug}`}
@@ -64,7 +69,7 @@ export default function Diario() {
               >
                 <div>
                   <p className="eyebrow mb-3">
-                    {p.cluster ?? "Blog"} · {fmtDate(p.date)}
+                    {p.cluster ?? "Blog"} · {fmtDate(p.date, locale)}
                   </p>
                   <h2 className="display text-[clamp(1.4rem,3vw,2rem)] leading-tight text-text-primary transition-colors group-hover:text-accent-cyan">
                     {p.title}
@@ -82,7 +87,7 @@ export default function Diario() {
                     </div>
                   )}
                   <span className="text-sm font-semibold text-accent-cyan transition-transform group-hover:translate-x-1">
-                    Leer →
+                    {tr(locale, "Leer →")}
                   </span>
                 </div>
               </Link>
@@ -93,11 +98,10 @@ export default function Diario() {
         <Section>
           <div className="rounded-3xl border border-subtle bg-bg-primary p-12 text-center">
             <SplitTextReveal as="h3" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-              Todavía no hemos escrito nada aquí.
+              {tr(locale, "Todavía no hemos escrito nada aquí.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mx-auto mt-4 max-w-lg text-text-secondary" delay={0.2}>
-              El blog se llena cuando hay algo que contar de verdad. Mientras
-              tanto, lo que se cuece está en Instagram.
+              {tr(locale, "El blog se llena cuando hay algo que contar de verdad. Mientras tanto, lo que se cuece está en Instagram.")}
             </RevealOnScroll>
             <RevealOnScroll className="mt-8 flex justify-center" delay={0.35}>
               <MagneticButton strength={0.35}>

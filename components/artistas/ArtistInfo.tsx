@@ -1,6 +1,8 @@
 import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { ServiceIcon, type IconName } from "@/components/services/ServiceIcon";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const CYAN = "#16b6d4";
 const NAVY = "#14283C";
@@ -42,6 +44,7 @@ export function ArtistInfo({
   services?: string[];
   influences?: string[];
 }) {
+  const locale = serverLocale();
   const paras = (bio ?? []).filter((p) => p && p.trim().length > 0);
   const miles = (milestones ?? []).filter((m) => m?.year && m?.text);
   const servs = (services ?? []).map((s) => s?.trim()).filter(Boolean) as string[];
@@ -88,7 +91,7 @@ export function ArtistInfo({
 
             {servs.length > 0 && (
               <div>
-                <p className="eyebrow mb-4">Con Bonito</p>
+                <p className="eyebrow mb-4">{tr(locale, "Con Bonito")}</p>
                 {/* Chips navy con el iconito de cada servicio (icono blanco,
                     acento cian) — juega con el azul oscuro de la marca. */}
                 <div className="flex flex-wrap gap-2.5">

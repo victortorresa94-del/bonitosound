@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/lib/site";
+import { useLocale } from "@/components/LocaleProvider";
+import { tr } from "@/lib/copy-ca";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -37,6 +39,7 @@ const examples = [
 ];
 
 export function LeadMagnetBrands() {
+  const locale = useLocale();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const done = step >= steps.length;
@@ -51,7 +54,7 @@ export function LeadMagnetBrands() {
       {!done ? (
         <>
           <div className="mb-6 flex items-center justify-between">
-            <p className="eyebrow">Diseña tu activación · 90 segundos</p>
+            <p className="eyebrow">{tr(locale, "Diseña tu activación · 90 segundos")}</p>
             <p className="text-xs text-text-muted">
               {step + 1} / {steps.length}
             </p>
@@ -103,9 +106,9 @@ export function LeadMagnetBrands() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
         >
-          <p className="eyebrow mb-3">Por lo que cuentas…</p>
+          <p className="eyebrow mb-3">{tr(locale, "Por lo que cuentas…")}</p>
           <h3 className="display mb-6 text-2xl md:text-3xl">
-            Esto del portfolio se parece a lo tuyo:
+            {tr(locale, "Esto del portfolio se parece a lo tuyo:")}
           </h3>
           <ul className="mb-8 space-y-3">
             {examples.map((e, i) => (
@@ -121,8 +124,7 @@ export function LeadMagnetBrands() {
             ))}
           </ul>
           <p className="mb-6 max-w-lg text-text-secondary">
-            No te calculamos el precio por una web. Eso lo hablamos. Cuéntanos
-            el tuyo y te decimos qué se puede hacer de verdad.
+            {tr(locale, "No te calculamos el precio por una web. Eso lo hablamos. Cuéntanos el tuyo y te decimos qué se puede hacer de verdad.")}
           </p>
           <a
             href={`mailto:${site.emails.general}?subject=Activación de marca&body=${encodeURIComponent(

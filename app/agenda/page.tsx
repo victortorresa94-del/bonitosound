@@ -4,6 +4,9 @@ import { RevealOnScroll, SplitTextReveal, MagneticButton } from "@/components/mo
 import { getShows } from "@/lib/agenda";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import type { Locale } from "@/lib/i18n";
+import { tr } from "@/lib/copy-ca";
 
 export function generateMetadata(): Metadata {
   return {
@@ -16,13 +19,18 @@ export function generateMetadata(): Metadata {
   };
 }
 
-const fmt = new Intl.DateTimeFormat("es-ES", {
-  day: "2-digit",
-  month: "long",
-  year: "numeric",
-});
+/** La fecha se escribe en el idioma de la página. */
+function formateador(locale: Locale) {
+  return new Intl.DateTimeFormat(locale === "ca" ? "ca-ES" : "es-ES", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
+}
 
 export default function Agenda() {
+  const locale = serverLocale();
+  const fmt = formateador(locale);
   const shows = getShows();
 
   return (
@@ -57,7 +65,7 @@ export default function Agenda() {
           <div className="max-w-3xl">
             <RevealOnScroll as="p" className="eyebrow mb-4">Agenda</RevealOnScroll>
             <SplitTextReveal as="h1" split="lines" className="display text-[clamp(2.6rem,7vw,5.4rem)]">
-              Dónde estamos sonando.
+              {tr(locale, "Dónde estamos sonando.")}
             </SplitTextReveal>
           </div>
         </div>
@@ -67,11 +75,10 @@ export default function Agenda() {
         {shows.length === 0 ? (
           <div className="rounded-3xl border border-subtle bg-bg-primary p-12 text-center">
             <SplitTextReveal as="h3" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
-              Agenda en construcción.
+              {tr(locale, "Agenda en construcción.")}
             </SplitTextReveal>
             <RevealOnScroll as="p" className="mx-auto mt-4 max-w-lg text-text-secondary" delay={0.2}>
-              Estamos cerrando las próximas fechas. Si quieres a alguien del
-              roster en tu sala o festival, no esperes a la agenda: escríbenos.
+              {tr(locale, "Estamos cerrando las próximas fechas. Si quieres a alguien del roster en tu sala o festival, no esperes a la agenda: escríbenos.")}
             </RevealOnScroll>
             <RevealOnScroll className="mt-8 flex justify-center" delay={0.35}>
               <MagneticButton strength={0.35}>
@@ -100,7 +107,7 @@ export default function Agenda() {
                   </span>
                   {s.ticketsUrl && (
                     <Cta href={s.ticketsUrl} variant="ghost">
-                      Entradas →
+                      {tr(locale, "Entradas →")}
                     </Cta>
                   )}
                 </div>

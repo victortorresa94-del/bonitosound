@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { findAsset } from "@/lib/assets";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 
@@ -37,6 +39,7 @@ const FOTOS: Foto[] = [
 ];
 
 export function DaniGaleria() {
+  const locale = serverLocale();
   const fotos = FOTOS.map((f) => ({ ...f, src: findAsset("nosotros/dani", f.file) })).filter(
     (f): f is Foto & { src: string } => Boolean(f.src),
   );
@@ -46,7 +49,7 @@ export function DaniGaleria() {
     <RevealOnScroll className="mt-14 border-t border-subtle pt-10">
       <p className="eyebrow mb-2">Del archivo</p>
       <p className="mb-8 max-w-xl text-text-secondary">
-        Treinta años dan para mucho carrete. Estas son de las que se guardan.
+        {tr(locale, "Treinta años dan para mucho carrete. Estas son de las que se guardan.")}
       </p>
 
       <StaggerGroup

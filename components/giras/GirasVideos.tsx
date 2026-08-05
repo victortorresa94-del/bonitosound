@@ -3,6 +3,8 @@ import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { YouTubeEmbed } from "@/components/Embeds";
 import { R2Video } from "@/components/R2Video";
 import type { Gira } from "@/lib/giras";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 /**
  * "Míralo en movimiento": las giras que tienen vídeo, en la propia página de
@@ -13,20 +15,21 @@ import type { Gira } from "@/lib/giras";
  * `video` o `youtubeId`. Si no hay ninguna, la sección no existe.
  */
 export function GirasVideos({ giras }: { giras: Gira[] }) {
+  const locale = serverLocale();
   const conVideo = giras.filter((g) => g.video || g.youtubeId);
   if (conVideo.length === 0) return null;
 
   return (
     <Section className="bg-bg-primary">
       <RevealOnScroll as="p" className="eyebrow mb-3">
-        Míralo en movimiento
+        {tr(locale, "Míralo en movimiento")}
       </RevealOnScroll>
       <RevealOnScroll
         as="h2"
         delay={0.05}
         className="display mb-10 text-[clamp(1.8rem,4vw,2.8rem)] text-[#14283C]"
       >
-        Así suenan desde dentro.
+        {tr(locale, "Así suenan desde dentro.")}
       </RevealOnScroll>
 
       <StaggerGroup stagger={0.08} className="grid gap-6 md:grid-cols-2">

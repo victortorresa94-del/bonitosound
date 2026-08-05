@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useLocale } from "@/components/LocaleProvider";
+import { tr } from "@/lib/copy-ca";
 
 /**
  * PRUEBA — Reproductor de Spotify "acoplable".
@@ -24,6 +26,7 @@ import { useEffect, useRef, useState } from "react";
 const PLAYLIST_URI = "spotify:playlist:2lxa6r7k0dthpANWR9wRWs";
 
 export function SpotifyDock() {
+  const locale = useLocale();
   const hostRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<{ play?: () => void; togglePlay?: () => void } | null>(null);
   const [ready, setReady] = useState(false);
@@ -119,7 +122,7 @@ export function SpotifyDock() {
               </svg>
               {ready ? "Dale al play" : "Cargando…"}
             </button>
-            <span className="text-xs text-white/60">La música de Bonito</span>
+            <span className="text-xs text-white/60">{tr(locale, "La música de Bonito")}</span>
           </div>
         )}
 

@@ -1,6 +1,8 @@
 import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { EventHeroVideo } from "@/components/eventos/EventHeroVideo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 function IgGlyph({ className = "h-5 w-5" }: { className?: string }) {
   return (
@@ -59,6 +61,7 @@ export function ArtistSocial({
   instagram?: string;
   tiktok?: string;
 }) {
+  const locale = serverLocale();
   const localReels = (reels ?? [])
     .map((r) => r?.trim())
     .filter((r): r is string => Boolean(r) && r.startsWith("/"))
@@ -84,15 +87,15 @@ export function ArtistSocial({
 
   return (
     <Section id="redes" className="pt-10 md:pt-14">
-      <RevealOnScroll as="p" className="eyebrow mb-4">En Instagram</RevealOnScroll>
+      <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "En Instagram")}</RevealOnScroll>
       <RevealOnScroll as="h2" delay={0.05} className="display text-[clamp(1.8rem,4vw,3rem)]">
-        El día a día de <span style={{ color: "#16b6d4" }}>{name}</span>.
+        {tr(locale, "El día a día de")} <span style={{ color: "#16b6d4" }}>{name}</span>.
       </RevealOnScroll>
 
       {localReels.length > 0 ? (
         <>
           <RevealOnScroll as="p" delay={0.12} className="mt-4 max-w-md text-text-secondary">
-            Directos, backstage y lo que va cayendo.
+            {tr(locale, "Directos, backstage y lo que va cayendo.")}
           </RevealOnScroll>
           <StaggerGroup
             stagger={0.1}
@@ -109,7 +112,7 @@ export function ArtistSocial({
           </StaggerGroup>
           {pills && (
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-              <span className="mr-1 text-sm font-bold uppercase tracking-[0.16em] text-text-muted">Síguele en</span>
+              <span className="mr-1 text-sm font-bold uppercase tracking-[0.16em] text-text-muted">{tr(locale, "Síguele en")}</span>
               {pills}
             </div>
           )}
@@ -125,8 +128,9 @@ export function ArtistSocial({
               <IgGlyph className="h-8 w-8" />
             </span>
             <p className="mx-auto mt-6 max-w-md text-lg leading-relaxed text-white/85">
-              Directos, backstage y el día a día de {name}: todo eso está en su
-              Instagram. Dale un vistazo.
+              {tr(locale, "Directos, backstage y el día a día de")} {name}
+              {tr(locale, ": todo eso está en su")}{" "}
+              {tr(locale, "Instagram. Dale un vistazo.")}
             </p>
             <div className="mt-8">{pills}</div>
           </div>

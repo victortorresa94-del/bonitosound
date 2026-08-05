@@ -26,14 +26,36 @@ trap 'rm -rf "$TMP"' EXIT
 
 # marca:segundo — varios momentos POR evento. Cuando lleguen más vídeos de
 # Dani, se añaden líneas aquí y se relanza el script.
+#
+# Revisado fotograma a fotograma (fila por fila, con contact sheets) tras el
+# aviso de Víctor de que había planos "que no tienen mucho sentido". De los
+# 28, 5 se sustituyeron por otro segundo de la MISMA fuente (nunca un vídeo
+# nuevo — no hay más metraje que este):
+#   · four-roses:2  → four-roses:11  (antes: tío en la barandilla subiendo
+#     rosas contra el cielo, casi sin marca visible. Ahora: banner "Four
+#     Roses Bourbon" leíble, igual que el otro plano de four-roses del reel)
+#   · corona:24     → corona:21      (antes: primer plano ambiguo de tela/
+#     mano, sin marca. Ahora: tres amigos brindando con Corona, de blanco)
+#   · corona:9      → corona:0       (antes: una planta tapa todo el plano.
+#     Ahora: botellas de Corona + la corona de madera, plano limpio)
+#   · natura:14     → natura:12      (antes: caía justo en un momento oscuro
+#     sin texto. Ahora: la cabina con el logo "NÀTURA" bien visible)
+#   · natura:20     → natura:21      (mismo motivo: cae en el tramo con logo
+#     legible en vez de en el corte de planta general)
+# El resto de planos se revisaron uno a uno y están bien: lo que a primera
+# vista parecía "ULTRA" en los planos de Nàtura es en realidad su propio
+# logo (un oso con diadema) mal leído en miniatura — no había nada que tocar
+# ahí. El plano de Pepsi que parecía mostrar una botella de Corona era un
+# artefacto de haber medido el frame exacto del corte entre dos clips, no un
+# error real (verificado extrayendo el mismo segundo directo de pepsi.mp4).
 PLANOS=(
   "corona:4" "schweppes:12" "pepsi:6" "tequila-codigo:9"
-  "corona:14" "schweppes:28" "font-vella:2" "four-roses:2"
-  "chateau:4" "natura:5" "corona:24" "schweppes:44"
+  "corona:14" "schweppes:28" "font-vella:2" "four-roses:11"
+  "chateau:4" "natura:5" "corona:21" "schweppes:44"
   "pepsi:16" "tequila-codigo:22" "font-vella:8" "four-roses:8"
-  "chateau:11" "natura:14" "corona:32" "schweppes:60"
-  "pepsi:26" "tequila-codigo:36" "chateau:15" "natura:20"
-  "schweppes:76" "tequila-codigo:46" "corona:9" "pepsi:31"
+  "chateau:11" "natura:12" "corona:32" "schweppes:60"
+  "pepsi:26" "tequila-codigo:36" "chateau:15" "natura:21"
+  "schweppes:76" "tequila-codigo:46" "corona:0" "pepsi:31"
 )
 
 echo "Cortando ${#PLANOS[@]} planos…"

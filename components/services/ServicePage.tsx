@@ -25,6 +25,7 @@ import { serverLocale } from "@/lib/locale-server";
 import { localePath, t } from "@/lib/i18n";
 import { servicioCa } from "@/lib/content-i18n";
 import { tr } from "@/lib/copy-ca";
+import { eventoCa } from "@/lib/content-md-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -66,7 +67,12 @@ export function ServicePage({
   // Los casos pueden ser eventos de marca o giras (viven en carpetas distintas).
   const caseEventos = d.caseVideos
     ? d.caseVideos
-        .map((s) => getEventos().find((e) => e.slug === s) ?? getGiras().find((g) => g.slug === s))
+        .map((s) => {
+          const ev = getEventos().find((e) => e.slug === s);
+          if (ev) return eventoCa(ev, locale, "eventos");
+          const gi = getGiras().find((g) => g.slug === s);
+          return gi ? eventoCa(gi, locale, "giras") : undefined;
+        })
         .filter(Boolean)
     : [];
   // Giras a destacar: los datos duros salen de lib/giras.ts, y la tarjeta
@@ -213,7 +219,7 @@ export function ServicePage({
             {tr(locale, d.giraSlugsTitle ?? "Giras")}
           </RevealOnScroll>
           <SplitTextReveal as="h2" split="lines" className="display mb-10 text-[clamp(1.8rem,4vw,3rem)]">
-            Lo hemos llevado. No lo contamos.
+            {tr(locale, "Lo hemos llevado. No lo contamos.")}
           </SplitTextReveal>
           <StaggerGroup stagger={0.08} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {giraCases.map((g) => (
@@ -226,7 +232,7 @@ export function ServicePage({
                   {g.artist}
                 </p>
                 <h3 className="display mt-1.5 text-xl leading-tight" style={{ color: NAVY }}>
-                  {g.tour}
+                  {tr(locale, g.tour)}
                 </h3>
                 <p className="mt-2 font-mono text-xs tabular-nums text-text-muted">
                   {[g.years ?? g.year, g.shows].filter(Boolean).join(" · ")}
@@ -235,14 +241,14 @@ export function ServicePage({
                   className="mt-4 inline-block text-sm font-semibold transition-transform duration-300 group-hover:translate-x-1"
                   style={{ color: CYAN }}
                 >
-                  Ver la gira →
+                  {tr(locale, "Ver la gira →")}
                 </span>
               </Link>
             ))}
           </StaggerGroup>
           <RevealOnScroll className="mt-10">
             <Link href="/giras" className="link-underline text-sm font-semibold" style={{ color: CYAN }}>
-              Todas las giras →
+              {tr(locale, "Todas las giras →")}
             </Link>
           </RevealOnScroll>
         </Section>
@@ -253,7 +259,7 @@ export function ServicePage({
         <Section className="bg-bg-primary">
           <RevealOnScroll as="p" className="eyebrow mb-3">{tr(locale, d.caseVideosTitle ?? "Casos")}</RevealOnScroll>
           <SplitTextReveal as="h2" split="lines" className="display mb-10 text-[clamp(1.8rem,4vw,3rem)]">
-            Lo hemos montado. No lo contamos.
+            {tr(locale, "Lo hemos montado. No lo contamos.")}
           </SplitTextReveal>
           <StaggerGroup stagger={0.08} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {caseEventos.map((e) => (
@@ -262,7 +268,7 @@ export function ServicePage({
           </StaggerGroup>
           <RevealOnScroll className="mt-10">
             <Link href="/experiencias" className="link-underline text-sm font-semibold" style={{ color: CYAN }}>
-              Ver todos los eventos →
+              {tr(locale, "Ver todos los eventos →")}
             </Link>
           </RevealOnScroll>
         </Section>
@@ -304,8 +310,8 @@ export function ServicePage({
               </div>
             )}
             <div className="mt-12 flex flex-wrap items-end justify-between gap-4">
-              <p className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>Marcas que han confiado</p>
-              <Link href="/experiencias" className="text-sm font-semibold text-white/70 underline-offset-4 hover:text-white hover:underline">Ver los eventos →</Link>
+              <p className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: CYAN }}>{tr(locale, "Marcas que han confiado")}</p>
+              <Link href={localePath("/experiencias", locale)} className="text-sm font-semibold text-white/70 underline-offset-4 hover:text-white hover:underline">{tr(locale, "Ver los eventos →")}</Link>
             </div>
             <StaggerGroup stagger={0.04} className="mt-8 flex flex-wrap items-center gap-3 md:gap-4">
               {brands

@@ -12,6 +12,12 @@ import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
  *
  * Regla: si una frase no está traducida, sale en castellano. Nunca un hueco.
  *
+ * ⚠️ "BONITO" NO SE TRADUCE. Nunca "bonic" ni "bonica" ni "bonites": es la
+ * marca, y medio copy de la casa juega con ella ("hacerlo bonito", "suenan
+ * bonito", "Giras Bonitas", "el rollo bonito"). Traducirla rompe el juego y
+ * deja de nombrar a la empresa. En catalán se queda invariable, como un nombre
+ * propio usado de adjetivo — que es exactamente lo que es.
+ *
  * ⚠️ Limitación asumida: si la misma frase castellana necesitara dos catalanes
  * distintos según el contexto, esto no lo distingue. No pasa hoy; si pasara,
  * esa frase concreta se saca a lib/i18n.ts con clave propia.
@@ -27,8 +33,10 @@ const CA: Record<string, string> = {
   "¿Tienes una gira que mover?": "Tens una gira per moure?",
   "Cuéntanos las fechas y el proyecto. Te decimos cómo la montamos y por dónde empezaríamos.":
     "Explica'ns les dates i el projecte. Et diem com la muntem i per on començaríem.",
-  "Giras Bonitas.": "Gires Bonites.",
+  "Giras Bonitas.": "Gires Bonito.",
   "Ver la gira →": "Veure la gira →",
+  "Ver el artista →": "Veure l'artista →",
+  "Su web →": "La seva web →",
   "Conciertos": "Concerts",
   "Giras": "Gires",
   "Artistas": "Artistes",
@@ -97,7 +105,7 @@ const CA: Record<string, string> = {
   "Proyección de mapping en una fachada": "Projecció de mapping en una façana",
   "Mapping y espectáculos visuales": "Mapping i espectacles visuals",
   "No organizamos eventos.": "No organitzem esdeveniments.",
-  "Creamos momentos que suenan bonito.": "Creem moments que sonen bonic.",
+  "Creamos momentos que suenan bonito.": "Creem moments que sonen bonito.",
   "Cuéntanoslo.": "Explica'ns-ho.",
   "Hablemos →": "Parlem-ne →",
   "¿Quieres crear un evento? Hablemos": "Vols crear un esdeveniment? Parlem-ne",
@@ -106,6 +114,8 @@ const CA: Record<string, string> = {
   "Ver los eventos": "Veure els esdeveniments",
   "Teatro y espectáculos visuales": "Teatre i espectacles visuals",
   "El vídeo lo cuenta mejor": "El vídeo ho explica millor",
+  "Así se vivió": "Així es va viure",
+  "El cierre de la gira, contado en vídeo.": "El tancament de la gira, explicat en vídeo.",
 
   // ── Qué somos ──
   "El equipo": "L'equip",
@@ -118,7 +128,7 @@ const CA: Record<string, string> = {
   "Somos la gente": "Som la gent",
   "del sector.": "del sector.",
   "Booking, management, sello, distribución y eventos. Una agencia musical joven con treinta años de oficio detrás. Hacemos las cosas bonitas, sin postureo, porque nos gusta de verdad.":
-    "Booking, management, segell, distribució i esdeveniments. Una agència musical jove amb trenta anys d'ofici al darrere. Fem les coses boniques, sense postureig, perquè ens agrada de debò.",
+    "Booking, management, segell, distribució i esdeveniments. Una agència musical jove amb trenta anys d'ofici al darrere. Ho fem bonito, sense postureig, perquè ens agrada de debò.",
   "El equipo de Bonito Sound": "L'equip de Bonito Sound",
   "años": "anys",
   "de oficio": "d'ofici",
@@ -143,14 +153,12 @@ const CA: Record<string, string> = {
   "Dani Boada · Fundador": "Dani Boada · Fundador",
   "Treinta años en esto. Y sigue al teléfono.": "Trenta anys en això. I encara despenja el telèfon.",
   "La entrevista a Dani, sin guion.": "L'entrevista a en Dani, sense guió.",
-  "Management, contratos y la llamada que cierra el bolo: ese es el día a día de Dani. En treinta años en la industria ha llevado a artistas que hoy llenan estadios.":
-    "Management, contractes i la trucada que tanca el bolo: aquest és el dia a dia d'en Dani. En trenta anys a la indústria ha portat artistes que avui omplen estadis.",
-  "Empezó donde se aprende de verdad: cargando y montando. Backliner, producción técnica y dirección de giras por toda España, de sala en sala y de furgoneta en furgoneta. También producción en televisión, en":
-    "Va començar on s'aprèn de debò: carregant i muntant. Backliner, producció tècnica i direcció de gires per tot Espanya, de sala en sala i de furgoneta en furgoneta. També producció en televisió, a",
-  ". Nada de lo que pide hoy a un equipo es algo que no haya hecho antes él.":
-    ". Res del que demana avui a un equip no ho hagi fet ell abans.",
-  "Ha visto de todo lo que se puede ver en este oficio: lo que funciona, lo que no, y por qué. Ese recorrido es lo que hay detrás de cada decisión que tomamos en Bonito.":
-    "Ha vist tot el que es pot veure en aquest ofici: el que funciona, el que no, i per què. Aquest recorregut és el que hi ha darrere de cada decisió que prenem a Bonito.",
+  "Management, contratos y la llamada que cierra el bolo: ese es el día a día de Dani. En más de treinta años en la industria ha acompañado el desarrollo de artistas, impulsado proyectos y trabajado junto a profesionales que hoy llenan estadios.":
+    "Management, contractes i la trucada que tanca el bolo: aquest és el dia a dia d'en Dani. En més de trenta anys a la indústria ha acompanyat el desenvolupament d'artistes, ha impulsat projectes i ha treballat amb professionals que avui omplen estadis.",
+  "Pero todo empezó mucho antes, como músico. Después llegaron los escenarios desde el otro lado: cargando, montando y aprendiendo el oficio desde la base. Backliner, producción técnica y dirección de giras por toda España, de sala en sala y de furgoneta en furgoneta. Esa experiencia le ha permitido conocer cada pieza del engranaje que hace posible un concierto.":
+    "Però tot va començar molt abans, com a músic. Després van arribar els escenaris des de l'altra banda: carregant, muntant i aprenent l'ofici des de la base. Backliner, producció tècnica i direcció de gires per tot Espanya, de sala en sala i de furgoneta en furgoneta. Aquesta experiència li ha permès conèixer cada peça de l'engranatge que fa possible un concert.",
+  "Ha visto prácticamente todo lo que puede ocurrir en este oficio: lo que funciona, lo que no y, sobre todo, por qué. Ese recorrido es el que hay detrás de cada decisión que tomamos en Bonito.":
+    "Ha vist pràcticament tot el que pot passar en aquest ofici: el que funciona, el que no i, sobretot, per què. Aquest recorregut és el que hi ha darrere de cada decisió que prenem a Bonito.",
   "Cómo trabajamos": "Com treballem",
   "Lo que firmas con nosotros.": "El que signes amb nosaltres.",
   "En este sector, demasiados artistas descubren la letra pequeña cuando ya es tarde. Con nosotros no hay letra pequeña. Los números se hablan; los principios, aquí.":
@@ -184,7 +192,7 @@ const CA: Record<string, string> = {
   "Ver": "Veure",
   "Miembros activos de": "Membres actius de",
   "Con el apoyo de": "Amb el suport de",
-  "También con el apoyo de": "També amb el suport de",
+  "También con el apoyo de": "També amb el suport de:",
   "Lo que pensamos, escrito.": "El que pensem, escrit.",
   "Ver el blog": "Veure el blog",
   "Leer →": "Llegir →",
@@ -206,7 +214,7 @@ const CA: Record<string, string> = {
 
   // ── Clientes ──
   "Clientes": "Clients",
-  "Empresas que han confiado en hacerlo bonito.": "Empreses que han confiat a fer-ho bonic.",
+  "Empresas que han confiado en hacerlo bonito.": "Empreses que han confiat a fer-ho bonito.",
   "Marcas, agencias, festivales, ayuntamientos y asociaciones para las que ha trabajado Bonito Sound.":
     "Marques, agències, festivals, ajuntaments i associacions per a qui ha treballat Bonito Sound.",
   "Categorías": "Categories",
@@ -665,6 +673,428 @@ const CA: Record<string, string> = {
     "Escrivint-nos. Escoltem el que tens, et diem amb honestedat si hi ha encaix i, si n'hi ha, muntem un pla concret. No fitxem per volum.",
   "Mándanosla. Escuchamos lo que tienes y te decimos, sin humo, cómo la sacaríamos.":
     "Envia-nos-la. Escoltem el que tens i et diem, sense fum, com la trauríem.",
+
+  // ── Marketing ──
+  "Marketing musical para artistas — ads y lanzamientos":
+    "Màrqueting musical per a artistes — ads i llançaments",
+  "Campañas de ads, estrategia de redes y lanzamientos de álbum y de evento para artistas. Cuando salga, se entera quien se tiene que enterar.":
+    "Campanyes d'ads, estratègia de xarxes i llançaments d'àlbum i d'esdeveniment per a artistes. Quan surti, se n'assabenta qui se n'ha d'assabentar.",
+  "Marketing musical": "Màrqueting musical",
+  "Movemos tu lanzamiento": "Movem el teu llançament",
+  "como ": "com ",
+  "se merece": "es mereix",
+  "Ads para el lanzamiento de tu single o álbum en Spotify, YouTube, Instagram y TikTok. Del guion del vídeo a la campaña corriendo. A veces ponemos nosotros la inversión.":
+    "Ads per al llançament del teu single o àlbum a Spotify, YouTube, Instagram i TikTok. Del guió del vídeo a la campanya corrent. De vegades hi posem nosaltres la inversió.",
+  "Hablemos de tu lanzamiento →": "Parlem del teu llançament →",
+  "Un buen lanzamiento no es suerte: es un plan corriendo en cada plataforma el día que toca. Y venimos del sector — sabemos qué mueve oyentes y qué llena una sala.":
+    "Un bon llançament no és sort: és un pla corrent a cada plataforma el dia que toca. I venim del sector — sabem què mou oients i què omple una sala.",
+  "Todo lo que movemos.": "Tot el que movem.",
+  "Ads": "Ads",
+  "Configuramos y optimizamos la campaña en cada plataforma. Presupuesto, targeting, creatividades.":
+    "Configurem i optimitzem la campanya a cada plataforma. Pressupost, targeting, creativitats.",
+  "Estrategia de redes": "Estratègia de xarxes",
+  "Inversión propia": "Inversió pròpia",
+  "Cuando creemos en el lanzamiento, ponemos nosotros parte del presupuesto de ads.":
+    "Quan creiem en el llançament, hi posem nosaltres part del pressupost d'ads.",
+  "Material y contenido": "Material i contingut",
+  "Vídeos, cortes verticales y artes para cada formato. Listos para pautar.":
+    "Vídeos, talls verticals i arts per a cada format. Llestos per pautar.",
+  "¿Qué presupuesto de ads necesito?": "Quin pressupost d'ads necessito?",
+  "Según el objetivo (oyentes, entradas, territorio) y lo que tengas encima de la mesa. Montamos el plan sobre tu lanzamiento real y te decimos qué mueve la aguja y qué no. Lo concreto lo hablamos.":
+    "Segons l'objectiu (oients, entrades, territori) i el que tinguis damunt la taula. Muntem el pla sobre el teu llançament real i et diem què mou l'agulla i què no. El concret ho parlem.",
+  "¿En qué se diferencia de una agencia de marketing normal?":
+    "En què es diferencia d'una agència de màrqueting normal?",
+  "En que venimos del sector musical. Sabemos cómo se mueve un lanzamiento, qué mide de verdad una carrera y cómo se llena una sala. No aprendemos tu industria sobre la marcha.":
+    "En què venim del sector musical. Sabem com es mou un llançament, què mesura de debò una carrera i com s'omple una sala. No aprenem la teva indústria sobre la marxa.",
+
+  // ── Universo Bonito ──
+  "Universo Bonito — Artiverse, Giraverse y Jaleo Sound":
+    "Univers Bonito — Artiverse, Giraverse i Jaleo Sound",
+  "Lo que Bonito construye por su cuenta: Artiverse conecta el sector, Giraverse ordena las giras y Jaleo Sound lleva la cultura española a Ámsterdam.":
+    "El que Bonito construeix pel seu compte: Artiverse connecta el sector, Giraverse ordena les gires i Jaleo Sound porta la cultura espanyola a Amsterdam.",
+  "Universo Bonito": "Univers Bonito",
+  "No esperamos a que el sector se arregle solo. ": "No esperem que el sector s'arregli sol. ",
+  "Lo construimos.": "El construïm.",
+  "Cuando entiendes el sistema entero, también le das las herramientas que le faltan. Dos apps y un festival, hechos por nosotros.":
+    "Quan entens el sistema sencer, també li dones les eines que li falten. Dues apps i un festival, fets per nosaltres.",
+  "Software B2B · en marcha": "Programari B2B · en marxa",
+  "La plataforma que conecta agencias, programadores y promotores. Donde el sector deja de trabajar a ciegas y las fechas se cierran con datos, no a base de WhatsApp.":
+    "La plataforma que connecta agències, programadors i promotors. On el sector deixa de treballar a cegues i les dates es tanquen amb dades, no a força de WhatsApp.",
+  "Software · en desarrollo": "Programari · en desenvolupament",
+  "La circulación de giras, ordenada. Lo que hoy se resuelve con llamadas y suerte —qué artista pasa por dónde y cuándo— convertido en software. En desarrollo.":
+    "La circulació de gires, ordenada. El que avui es resol amb trucades i sort —quin artista passa per on i quan— convertit en programari. En desenvolupament.",
+  "Festival propio · Ámsterdam": "Festival propi · Amsterdam",
+  "Nuestro festival de cultura española y latina en Ámsterdam. Sin escenarios enormes ni zonas VIP: buena música, buena comida y buena gente. 11–12 sep 2026.":
+    "El nostre festival de cultura espanyola i llatina a Amsterdam. Sense escenaris enormes ni zones VIP: bona música, bon menjar i bona gent. 11–12 set. 2026.",
+  "El festival": "El festival",
+  "Entender el sistema entero también significa construir lo que le falta.":
+    "Entendre el sistema sencer també vol dir construir el que li falta.",
+
+  // ── Jaleo Sound ──
+  "Festival propio · Cultura española y latina · Amsterdam":
+    "Festival propi · Cultura espanyola i llatina · Amsterdam",
+  "Entradas →": "Entrades →",
+  "Ediciones pasadas": "Edicions passades",
+  "Esto es lo que pasó.": "Això és el que va passar.",
+  "Ver más en jaleosound.com →": "Veure'n més a jaleosound.com →",
+  "El directo de Bonito": "El directe de Bonito",
+  "Lo que montamos cuando nos dejan.": "El que muntem quan ens deixen.",
+  "Final de la Gira 1016 en el Sant Jordi Club de Barcelona. Producido por el mismo equipo que monta Jaleo cada septiembre en Amsterdam.":
+    "Final de la Gira 1016 al Sant Jordi Club de Barcelona. Produït pel mateix equip que munta el Jaleo cada setembre a Amsterdam.",
+  "El antídoto": "L'antídot",
+  "Si estás cansado de shows sin vida, esto es lo tuyo.":
+    "Si estàs cansat de xous sense vida, això és el teu.",
+  "Un festival de cultura española y latina en Amsterdam, hecho por la misma gente que mueve Bonito, con la misma falta de tonterías. Bring friends. Or make new ones.":
+    "Un festival de cultura espanyola i llatina a Amsterdam, fet per la mateixa gent que mou Bonito, amb la mateixa manca de ximpleries. Bring friends. Or make new ones.",
+  "Así sonó 2025.": "Així va sonar el 2025.",
+  "11–12 de octubre de 2025, Posthoornkerk, dentro de los actos del 750 aniversario de Amsterdam. Música, arte y gastronomía.":
+    "11–12 d'octubre del 2025, Posthoornkerk, dins dels actes del 750è aniversari d'Amsterdam. Música, art i gastronomia.",
+  "El cartel de la edición 2026 se anunciará en las próximas semanas en":
+    "El cartell de l'edició 2026 s'anunciarà les properes setmanes a",
+  "La banda sonora": "La banda sonora",
+  "Suena así.": "Sona així.",
+  "La playlist oficial. Para entender el festival antes de pisar Amsterdam.":
+    "La playlist oficial. Per entendre el festival abans de trepitjar Amsterdam.",
+  "Más en jaleosound.com →": "Més a jaleosound.com →",
+  "Con el apoyo del Instituto Cervantes, Embajada de España en Holanda, AIE y Stadsdeel Amsterdam.":
+    "Amb el suport de l'Instituto Cervantes, l'Ambaixada d'Espanya als Països Baixos, l'AIE i el Stadsdeel Amsterdam.",
+  "Web del festival →": "Web del festival →",
+  "Flamenco al piano. Km.0: de la raíz a lo contemporáneo.":
+    "Flamenc al piano. Km.0: de l'arrel al contemporani.",
+  "Nostalgia española + electrónica holandesa. Colectivo The Sun.":
+    "Nostàlgia espanyola + electrònica neerlandesa. Col·lectiu The Sun.",
+  "Jazz melódico afrolatino.": "Jazz melòdic afrollatí.",
+  "Dúo español de jazz-fusión. Disco REELAX.": "Duo espanyol de jazz-fusió. Disc REELAX.",
+  "Flamenco, danza española y electrónica.": "Flamenc, dansa espanyola i electrònica.",
+
+  // ── Listados y páginas de detalle ──
+  "Roster completo — todos los artistas de Bonito Sound":
+    "Roster complet — tots els artistes de Bonito Sound",
+  "Todo el roster de Bonito Sound organizado: artistas de booking, management y sello, y el catálogo de distribución y editorial. Fotos, géneros y ficha de cada uno.":
+    "Tot el roster de Bonito Sound organitzat: artistes de booking, management i segell, i el catàleg de distribució i editorial. Fotos, gèneres i fitxa de cadascun.",
+  "Todos los que ": "Tots els que ",
+  "llevamos": "portem",
+  "El roster propio —booking, management y sello— y el catálogo que distribuimos y editamos.":
+    "El roster propi —booking, management i segell— i el catàleg que distribuïm i editem.",
+  "artistas, cada uno con su ficha.": "artistes, cadascun amb la seva fitxa.",
+  "El roster propio": "El roster propi",
+  "artistas que llevamos de la mano": "artistes que portem de la mà",
+  "Distribución · Editorial": "Distribució · Editorial",
+  "El catálogo": "El catàleg",
+  "~20 artistas, una distribuidora": "~20 artistes, una distribuïdora",
+  "← Volver a Artistas": "← Tornar a Artistes",
+  "Producciones": "Produccions",
+  "Dónde": "On",
+  "← Todas las giras": "← Totes les gires",
+  "Más eventos de marca": "Més esdeveniments de marca",
+  "Más giras y directos": "Més gires i directes",
+  "Más directos que hemos montado": "Més directes que hem muntat",
+  "Marca": "Marca",
+  "Artista": "Artista",
+  "Volumen": "Volum",
+  "Míralo.": "Mira-ho.",
+  "¿Montamos el tuyo?": "Muntem el teu?",
+  "Cuéntanos qué tienes en la cabeza. Te decimos qué se puede hacer de verdad.":
+    "Explica'ns què tens al cap. Et diem què es pot fer de debò.",
+  "Hablamos de tu evento →": "Parlem del teu esdeveniment →",
+  "Blog — Bonito Sound": "Blog — Bonito Sound",
+  "El blog de Bonito Sound: cómo funciona la industria de la música por dentro, booking, sellos, distribución y eventos de marca. Sin postureo.":
+    "El blog de Bonito Sound: com funciona la indústria de la música per dins, booking, segells, distribució i esdeveniments de marca. Sense postureig.",
+  "Lo que va pasando, sin postureo.": "El que va passant, sense postureig.",
+  "Todavía no hemos escrito nada aquí.": "Encara no hi hem escrit res.",
+  "Agencia de eventos musicales para marcas": "Agència d'esdeveniments musicals per a marques",
+  "Productora de eventos corporativos con música y activaciones de marca en España. Del brief al titular en 6 semanas. Ballantine's, Pernod Ricard, Pepsico, Absolut.":
+    "Productora d'esdeveniments corporatius amb música i activacions de marca a Espanya. Del brief al titular en 6 setmanes. Ballantine's, Pernod Ricard, Pepsico, Absolut.",
+  "Del brief al titular en 6 semanas. Concepto, artista, producción y dirección artística.":
+    "Del brief al titular en 6 setmanes. Concepte, artista, producció i direcció artística.",
+  "Tu marca de gira. Road, tour y stage management con experiencia real en gira nacional.":
+    "La teva marca de gira. Road, tour i stage management amb experiència real en gira nacional.",
+  "Formatos íntimos de música en directo donde la curaduría manda sobre el tamaño.":
+    "Formats íntims de música en directe on el criteri mana per damunt de la mida.",
+  "Un solo equipo del brief al desmontaje. No rebotas entre cinco proveedores.":
+    "Un sol equip del brief al desmuntatge. No reboteges entre cinc proveïdors.",
+  "Tres décadas de oficio de nuestro fundador: sabemos qué artista funciona en qué evento.":
+    "Tres dècades d'ofici del nostre fundador: sabem quin artista funciona en quin esdeveniment.",
+  "La música no es decoración: la elegimos como decisión estratégica.":
+    "La música no és decoració: l'escollim com una decisió estratègica.",
+  "Producción técnica propia. Lo que prometemos en el deck, lo montamos.":
+    "Producció tècnica pròpia. El que prometem al deck, ho muntem.",
+  "¿Cuánto cuesta producir un evento de marca?": "Quant costa produir un esdeveniment de marca?",
+  "Depende del formato, el artista y la escala — no hay dos iguales. Lo cerramos sobre tu brief real, hablándolo, no con una tarifa de escaparate.":
+    "Depèn del format, l'artista i l'escala — no n'hi ha dos d'iguals. Ho tanquem sobre el teu brief real, parlant-ho, no amb una tarifa d'aparador.",
+  "¿Necesito traer mi propio artista?": "Necessito portar el meu propi artista?",
+  "No. Bonito Sound tiene roster propio y un fundador con tres décadas de agenda en la industria española. Elegimos al artista que encaja con tu marca y tu público, no el que toca por agenda.":
+    "No. Bonito Sound té roster propi i un fundador amb tres dècades d'agenda a la indústria espanyola. Escollim l'artista que encaixa amb la teva marca i el teu públic, no el que toca per agenda.",
+  "¿En qué se diferencia una agencia de eventos de una productora?":
+    "En què es diferencia una agència d'esdeveniments d'una productora?",
+  "Una agencia conecta proveedores. Una productora lo ejecuta. Bonito Sound hace las dos cosas con el mismo equipo: concepto, booking y producción técnica integradas.":
+    "Una agència connecta proveïdors. Una productora ho executa. Bonito Sound fa totes dues coses amb el mateix equip: concepte, booking i producció tècnica integrades.",
+  "¿En cuánto tiempo podéis montar un evento?": "En quant de temps podeu muntar un esdeveniment?",
+  "El formato Brand Live va del brief al titular en 6 semanas. Con menos margen también se puede, pero lo honesto es decírtelo antes de cobrarlo.":
+    "El format Brand Live va del brief al titular en 6 setmanes. Amb menys marge també es pot, però l'honest és dir-t'ho abans de cobrar-ho.",
+  "Qué pusimos": "Què hi vam posar",
+  "Más de": "Més de",
+  "Tipo": "Tipus",
+  "Qué montó Bonito": "Què hi va muntar Bonito",
+  "El encargo": "L'encàrrec",
+  "El resultado": "El resultat",
+  "En el cartel": "Al cartell",
+  "Galería": "Galeria",
+  "Más eventos": "Més esdeveniments",
+  "Ver todos →": "Veure'ls tots →",
+  "Gira": "Gira",
+  "Festival": "Festival",
+  "Showcase": "Showcase",
+
+  // ── Formularios y fichas de artista ──
+  "Concierto": "Concert",
+  "Activación de marca": "Activació de marca",
+  "Evento privado": "Esdeveniment privat",
+  "Corporativo": "Corporatiu",
+  "Aún no lo sé": "Encara no ho sé",
+  "Menos de 200": "Menys de 200",
+  "Más de 5.000": "Més de 5.000",
+  "No lo sé": "No ho sé",
+  "Todavía por definir": "Encara per definir",
+  "Ajustado": "Ajustat",
+  "Con margen": "Amb marge",
+  "Sin problema": "Sense problema",
+  "Promotor/a": "Promotor/a",
+  "Empresa o institución": "Empresa o institució",
+  "Particular": "Particular",
+  "Otro": "Altres",
+  "Te hemos abierto el correo.": "T'hem obert el correu.",
+  "Dale a enviar y lo tenemos. Si no se te ha abierto nada, escríbenos directo a":
+    "Dona-li a enviar i ja el tenim. Si no se t'ha obert res, escriu-nos directament a",
+  "y te contestamos nosotros, no un bot.": "i et contestem nosaltres, no un bot.",
+  "← Volver a editar la solicitud": "← Tornar a editar la sol·licitud",
+  "¿Qué artista te interesa?": "Quin artista t'interessa?",
+  "Nombre del artista (o cuéntanos qué buscas)": "Nom de l'artista (o explica'ns què busques)",
+  "¿Para cuándo?": "Per a quan?",
+  "Aún sin fecha cerrada": "Encara sense data tancada",
+  "¿Dónde?": "On?",
+  "Ciudad, sala o festival": "Ciutat, sala o festival",
+  "¿Cuánta gente esperáis?": "Quanta gent espereu?",
+  "Presupuesto orientativo": "Pressupost orientatiu",
+  "Opcional. Nos ayuda a proponerte algo realista, sin sorpresas.":
+    "Opcional. Ens ajuda a proposar-te alguna cosa realista, sense sorpreses.",
+  "¿Qué tienes en la cabeza?": "Què tens al cap?",
+  "¿Quién eres?": "Qui ets?",
+  "Tu nombre *": "El teu nom *",
+  "Tu email *": "El teu email *",
+  "Teléfono (opcional)": "Telèfon (opcional)",
+  "Empresa / marca (opcional)": "Empresa / marca (opcional)",
+  "Enviar solicitud →": "Enviar la sol·licitud →",
+  "Te contestamos nosotros, no un bot. Sin compromiso.":
+    "Et contestem nosaltres, no un bot. Sense compromís.",
+  "Tu nombre": "El teu nom",
+  "Tu empresa o marca": "La teva empresa o marca",
+  "Enviar": "Enviar",
+  "Cuéntanos fecha, sitio y qué tienes en mente. Te contamos disponibilidad":
+    "Explica'ns data, lloc i què tens al cap. T'expliquem disponibilitat",
+  "Ver todo el roster →": "Veure tot el roster →",
+  "Todas sus canciones.": "Totes les seves cançons.",
+  "Abrir en Spotify": "Obrir a Spotify",
+  "En números": "En números",
+  "Escuchar en Spotify": "Escoltar a Spotify",
+  "Contratar booking →": "Contractar booking →",
+  "Ver ficha →": "Veure fitxa →",
+  "Directos, backstage y lo que va cayendo.": "Directes, backstage i el que va caient.",
+  "Instagram. Dale un vistazo.": "Instagram. Fes-hi un cop d'ull.",
+  "Cogemos el teléfono, no un formulario": "Despengem el telèfon, no un formulari",
+  "Dale a enviar y lo tenemos. Si no se abrió nada, escríbenos directo a":
+    "Dona-li a enviar i ja el tenim. Si no s'ha obert res, escriu-nos directament a",
+  "← Volver a editar": "← Tornar a editar",
+  "Contratando a": "Contractant",
+  "Nombre": "Nom",
+  "Empresa": "Empresa",
+  "(opcional)": "(opcional)",
+  "Mensaje": "Missatge",
+  "Cuéntanos el bolo…": "Explica'ns el bolo…",
+  "Cuéntanos en qué podemos ayudarte…": "Explica'ns en què et podem ajudar…",
+  "Te respondemos rápido, y por personas. No un bot.":
+    "Et responem ràpid, i persones de veritat. No un bot.",
+
+  // ── Eventos para marcas ──
+  "Música que la gente recuerda. No decorado.": "Música que la gent recorda. No decorat.",
+  "Producimos activaciones, lanzamientos y experiencias culturales para marcas premium. Del brief al titular, con un solo equipo.":
+    "Produïm activacions, llançaments i experiències culturals per a marques premium. Del brief al titular, amb un sol equip.",
+  "Reservar llamada de 30 min →": "Reservar trucada de 30 min →",
+  "Diseña tu activación": "Dissenya la teva activació",
+  "Diseña tu activación en 90 segundos": "Dissenya la teva activació en 90 segons",
+  "Cuatro preguntas. Sin email para usarlo. Al final te enseñamos qué del portfolio se parece a lo tuyo.":
+    "Quatre preguntes. Sense email per fer-lo servir. Al final t'ensenyem què del porfoli s'assembla al teu.",
+  "Lo hemos hecho. No lo contamos, lo montamos.": "Ho hem fet. No ho expliquem, ho muntem.",
+  "Tres formas de hacerlo bien.": "Tres maneres de fer-ho bé.",
+  "Marcas con las que hemos trabajado": "Marques amb qui hem treballat",
+  "Por qué nosotros": "Per què nosaltres",
+  "Cuatro razones, ninguna de relleno.": "Quatre raons, cap de farciment.",
+  "¿Lo hablamos?": "Ho parlem?",
+  "Una llamada de 30 minutos. Tú cuentas el evento, nosotros te decimos qué se puede hacer de verdad.":
+    "Una trucada de 30 minuts. Tu expliques l'esdeveniment, nosaltres et diem què es pot fer de debò.",
+  "Reservar llamada →": "Reservar trucada →",
+  "Lo que nos preguntáis antes de la llamada.": "El que ens pregunteu abans de la trucada.",
+
+  // ── Componentes compartidos y páginas sueltas ──
+  "Ver la ficha →": "Veure la fitxa →",
+  "Ya distribuyen con nosotros": "Ja distribueixen amb nosaltres",
+  "En todas las plataformas": "A totes les plataformes",
+  "Que suene donde tenga que sonar.": "Que soni on hagi de sonar.",
+  "Y en el resto de tiendas y redes donde la gente descubre y guarda música.":
+    "I a la resta de botigues i xarxes on la gent descobreix i guarda música.",
+  "El precio": "El preu",
+  "Hablado antes de empezar. Sin sorpresas.": "Parlat abans de començar. Sense sorpreses.",
+  "La distribución se ajusta a lo que necesitas —un single suelto o todo tu catálogo— y lo cerramos contigo antes de subir nada. Sin letra pequeña: tu música sigue siendo tuya.":
+    "La distribució s'ajusta al que necessites —un single sol o tot el teu catàleg— i ho tanquem amb tu abans de pujar res. Sense lletra petita: la teva música continua sent teva.",
+  "artistas": "artistes",
+  "distribuyendo desde": "distribuint des de",
+  "Lo hemos llevado. No lo contamos.": "Ho hem portat. No ho expliquem.",
+  "Lo hemos montado. No lo contamos.": "Ho hem muntat. No ho expliquem.",
+  "Todas las giras →": "Totes les gires →",
+  "Ver todos los eventos →": "Veure tots els esdeveniments →",
+  "Nuestras ediciones": "Les nostres edicions",
+  "Más de 150 lanzamientos desde 2022.": "Més de 150 llançaments des del 2022.",
+  "El sello no es una promesa: es un catálogo. Estas son algunas de las ediciones que han salido con nosotros — del máster a las plataformas.":
+    "El segell no és una promesa: és un catàleg. Aquestes són algunes de les edicions que han sortit amb nosaltres — del màster a les plataformes.",
+  "Tienes la música.": "Tens la música.",
+  "Te falta ": "Et falta ",
+  "Sello, booking, management, distribución y editorial.":
+    "Segell, booking, management, distribució i editorial.",
+  "Lo que la mayoría te hace montar con cinco proveedores, aquí está en uno.":
+    "El que la majoria et fa muntar amb cinc proveïdors, aquí és en un de sol.",
+  "Espectáculos visuales": "Espectacles visuals",
+  "Eventos para artistas": "Esdeveniments per a artistes",
+  "Giras y directos que montamos.": "Gires i directes que muntem.",
+  "Producción y tour management de:": "Producció i tour management de:",
+  "Medio minuto de lo que montamos": "Mig minut del que muntem",
+  "No te lo contamos. Míralo.": "No t'ho expliquem. Mira-ho.",
+  "Esto suena mejor que cualquier case study.": "Això sona millor que qualsevol case study.",
+  "Giras y directos de artista": "Gires i directes d'artista",
+  "También llenamos giras.": "També omplim gires.",
+  "Más eventos en vídeo": "Més esdeveniments en vídeo",
+  "Míralo, no te lo contamos.": "Mira-ho, no t'ho expliquem.",
+  "Diseña tu activación · 90 segundos": "Dissenya la teva activació · 90 segons",
+  "Por lo que cuentas…": "Pel que expliques…",
+  "Esto del portfolio se parece a lo tuyo:": "Això del porfoli s'assembla al teu:",
+  "¿Encajas con Bonito?": "Encaixes amb Bonito?",
+  "Escríbelo corto": "Escriu-ho curt",
+  "Diagnóstico": "Diagnòstic",
+  "Que lo hablemos →": "Que ho parlem →",
+  "La música de Bonito": "La música de Bonito",
+  "Así suenan desde dentro.": "Així sonen des de dins.",
+  "Lo que hemos llevado": "El que hem portat",
+  "Ver publicación en Instagram →": "Veure la publicació a Instagram →",
+  "Desliza o usa las flechas para ver más artistas":
+    "Llisca o fes servir les fletxes per veure més artistes",
+  "Síguele en": "Segueix-lo a",
+  "Escúchale": "Escolta'l",
+  "Lo último que ha sacado": "L'últim que ha tret",
+  "En vídeo": "En vídeo",
+  "Con Bonito": "Amb Bonito",
+  "Cogemos el teléfono": "Despengem el telèfon",
+  "Treinta años dan para mucho carrete. Estas son de las que se guardan.":
+    "Trenta anys donen per a molt carret. Aquestes són de les que es guarden.",
+  "Artistas con los que trabajamos": "Artistes amb qui treballem",
+  "Marcas que han sonado con nosotros": "Marques que han sonat amb nosaltres",
+  "Miembros y apoyos institucionales": "Membres i suports institucionals",
+  "Miembros de": "Membres de",
+  "Míranos un minuto. Luego hablamos.": "Mira'ns un minut. Després parlem.",
+  "Síguenos en Instagram →": "Segueix-nos a Instagram →",
+  "Empresas que han confiado en Bonito Sound": "Empreses que han confiat en Bonito Sound",
+  "Confían en nosotros": "Hi confien",
+  "Un minuto y lo ves todo.": "Un minut i ho veus tot.",
+  "Conócenos →": "Coneix-nos →",
+  "Y un festival propio en Amsterdam, porque por qué no.":
+    "I un festival propi a Amsterdam, perquè per què no.",
+  "Dónde estamos sonando.": "On estem sonant.",
+  "Agenda en construcción.": "Agenda en construcció.",
+  "Aquí no hay jaleo.": "Aquí no hi ha gresca.",
+  "Esta página no existe o la movimos. El jaleo está en otra parte.":
+    "Aquesta pàgina no existeix o l'hem moguda. La gresca és en un altre lloc.",
+  "Política de privacidad": "Política de privacitat",
+  "¿Hablamos de lo tuyo?": "Parlem del teu?",
+  "Ver más →": "Veure'n més →",
+  "Deja de trabajar a ciegas.": "Deixa de treballar a cegues.",
+  "Qué resuelve": "Què resol",
+  "Las giras dejan de montarse a mano.": "Les gires deixen de muntar-se a mà.",
+  "Avísame cuando esté listo →": "Avisa'm quan estigui a punt →",
+  "Bonito Sound se monta en 2022 en Sabadell. ": "Bonito Sound es munta el 2022 a Sabadell. ",
+  "La empresa es joven; el oficio, no.": "L'empresa és jove; l'ofici, no.",
+  "Activación de marca con música — Bonito Sound": "Activació de marca amb música — Bonito Sound",
+
+  // ── Párrafos largos que quedaban ──
+  "Estamos cerrando las próximas fechas. Si quieres a alguien del roster en tu sala o festival, no esperes a la agenda: escríbenos.":
+    "Estem tancant les properes dates. Si vols algú del roster a la teva sala o festival, no esperis a l'agenda: escriu-nos.",
+  "Los datos que nos facilites a través de los formularios se usan solo para responderte y gestionar tu solicitud. No los vendemos ni los cedemos a terceros.":
+    "Les dades que ens facilitis a través dels formularis només es fan servir per respondre't i gestionar la teva sol·licitud. No les venem ni les cedim a tercers.",
+  "Puedes ejercer tus derechos de acceso, rectificación y supresión escribiendo a":
+    "Pots exercir els teus drets d'accés, rectificació i supressió escrivint a",
+  "Política RGPD completa pendiente de revisión jurídica antes del go-live.":
+    "Política RGPD completa pendent de revisió jurídica abans del go-live.",
+  "Actividad: actividades de grabación de sonido y edición musical (CNAE 5920).":
+    "Activitat: activitats d'enregistrament de so i edició musical (CNAE 5920).",
+  "Texto legal completo pendiente de revisión jurídica antes del go-live (§16 del brief: no publicar en producción sin revisión).":
+    "Text legal complet pendent de revisió jurídica abans del go-live (§16 del brief: no publicar en producció sense revisió).",
+  "Cómo funciona esto por dentro: booking, sellos, distribución, eventos de marca. Lo que nos gustaría que alguien nos hubiera contado cuando empezamos.":
+    "Com funciona això per dins: booking, segells, distribució, esdeveniments de marca. El que ens hauria agradat que algú ens hagués explicat quan vam començar.",
+  "El blog se llena cuando hay algo que contar de verdad. Mientras tanto, lo que se cuece está en Instagram.":
+    "El blog s'omple quan hi ha alguna cosa a explicar de debò. Mentrestant, el que es cou és a Instagram.",
+  "La app de la programación artística: artistas, promotores, salas y agencias en la misma plataforma, con datos reales en vez de corazonadas. La parte del sector que decidió ordenarse.":
+    "L'app de la programació artística: artistes, promotors, sales i agències a la mateixa plataforma, amb dades reals en comptes de pressentiments. La part del sector que va decidir ordenar-se.",
+  "Circulación de giras nacional e internacional, ordenada. Lo que ahora resuelven cien llamadas y una hoja de cálculo compartida.":
+    "Circulació de gires nacional i internacional, ordenada. El que ara resolen cent trucades i un full de càlcul compartit.",
+  "No solo activamos marcas. Cuando el que sube al escenario es el artista, ponemos la producción, la técnica y la logística de la gira — para que lo único que se vea sea el directo.":
+    "No només activem marques. Quan qui puja a l'escenari és l'artista, hi posem la producció, la tècnica i la logística de la gira — perquè l'única cosa que es vegi sigui el directe.",
+  "No te calculamos el precio por una web. Eso lo hablamos. Cuéntanos el tuyo y te decimos qué se puede hacer de verdad.":
+    "No et calculem el preu per una web. Això ho parlem. Explica'ns el teu i et diem què es pot fer de debò.",
+  "Nuestra presentación, en vídeo. Si te encaja lo que ves, el día a día lo contamos en Instagram — ahí está lo que montamos, semana a semana.":
+    "La nostra presentació, en vídeo. Si t'encaixa el que veus, el dia a dia l'expliquem a Instagram — allà hi ha el que muntem, setmana a setmana.",
+  "Cultura española y latina. No massive stages, no VIP fences, no nonsense. Just music, good taste, great food and people.":
+    "Cultura espanyola i llatina. No massive stages, no VIP fences, no nonsense. Just music, good taste, great food and people.",
+  "Ver los eventos →":
+    "Veure els esdeveniments →",
+  "Bonito Sound — música, eventos para marcas, festival y tecnología del sector":
+    "Bonito Sound — música, esdeveniments per a marques, festival i tecnologia del sector",
+
+  // ── El equipo y microcopy de ficha ──
+  "En Instagram": "A Instagram",
+  "El día a día de": "El dia a dia de",
+  "Directos, backstage y el día a día de": "Directes, backstage i el dia a dia de",
+  ": todo eso está en su": ": tot això és al seu",
+  "Fundador": "Fundador",
+  "30 años en la industria. Management, contratos, la llamada que cierra el bolo.":
+    "30 anys a la indústria. Management, contractes, la trucada que tanca el bolo.",
+  "Cofundador": "Cofundador",
+  "Project management, financiación y booking. Cuadra los números y cierra las fechas.":
+    "Project management, finançament i booking. Quadra els números i tanca les dates.",
+  "El que convierte el deck en evento. La producción que se ve en el escenario.":
+    "El que converteix el deck en esdeveniment. La producció que es veu a l'escenari.",
+  "Comunicación": "Comunicació",
+  "Coordina lo de dentro y lo de fuera. Lo que ves publicado, ha pasado por ella.":
+    "Coordina el de dins i el de fora. El que veus publicat, hi ha passat per ella.",
+  "Marketing Artístico & IA": "Màrqueting Artístic i IA",
+  "Campañas, contenido y la IA que hace que cada lanzamiento llegue más lejos.":
+    "Campanyes, contingut i la IA que fa que cada llançament arribi més lluny.",
+  "Un ejemplo": "Un exemple",
+  "MARCA DIVINA, de Eva Calyza.": "MARCA DIVINA, d'Eva Calyza.",
+  "El primer álbum de Eva Calyza — diez canciones que fusionan folclore andaluz y electrónica oscura — se produjo con nosotros y salió en 2025. Del máster a la calle, con criterio.":
+    "El primer àlbum d'Eva Calyza — deu cançons que fusionen folklore andalús i electrònica fosca — es va produir amb nosaltres i va sortir el 2025. Del màster al carrer, amb criteri.",
+  "A Nàtura la lleva una persona, no un buzón.": "La Nàtura la porta una persona, no una bústia.",
+  "Management personal: estrategia, calendario y las decisiones que importan, con un interlocutor que coge el teléfono. Booking, records y editorial en la misma casa, así que nadie va rebotando entre empresas.":
+    "Management personal: estratègia, calendari i les decisions que importen, amb un interlocutor que despenja el telèfon. Booking, records i editorial a la mateixa casa, així ningú no va rebotant entre empreses.",
+  "Coordinación de lanzamientos": "Coordinació de llançaments",
+  "Que cada lanzamiento salga cuando toca y con todo en su sitio.":
+    "Que cada llançament surti quan toca i amb tot al seu lloc.",
+  "Empresas que han confiado en": "Empreses que han confiat a",
+  "hacerlo bonito": "fer-ho bonito",
+  "Verlos todos": "Veure'ls tots",
+  "150 lanzamientos": "150 llançaments",
+  "desde 2022, artistas, eventos de marca y festival propio. Esto es lo que montamos.":
+    "des del 2022, artistes, esdeveniments de marca i festival propi. Això és el que muntem.",
+  "y cómo montarlo, sin vueltas.": "i com muntar-ho, sense voltes.",
+  "Marcas, agencias, festivales, ayuntamientos y asociaciones para las que hemos trabajado desde que empezamos.":
+    "Marques, agències, festivals, ajuntaments i associacions per a qui hem treballat des que vam començar.",
+  "Gira en España": "Gira per Espanya",
 };
 
 /**

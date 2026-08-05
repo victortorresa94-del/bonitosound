@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "permissions": {
+    "allow": [
+      "mcp__Aura_Studio__aura_generate_image",
+      "mcp__Aura_Studio__aura_check_generation",
+      "mcp__Aura_Studio__aura_list_pending_generations",
+      "mcp__Aura_Studio__aura_list_canvases",
+      "mcp__Aura_Studio__aura_list_assets",
+      "mcp__Aura_Studio__aura_get_asset",
+      "mcp__Aura_Studio__aura_show_assets",
+      "mcp__Aura_Studio__aura_review_asset",
+      "mcp__Aura_Studio__aura_upscale_image",
+      "mcp__Aura_Studio__aura_get_prompting_guide",
+      "mcp__Higgsfield__generate_image",
+      "mcp__Higgsfield__media_import_url",
+      "mcp__Higgsfield__job_display",
+      "mcp__Higgsfield__show_generations"
+    ]
+  }
+}

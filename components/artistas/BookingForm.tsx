@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { site } from "@/lib/site";
+import { useLocale } from "@/components/LocaleProvider";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -110,6 +112,7 @@ export function BookingForm({
   artistName?: string;
   artistGenre?: string;
 }) {
+  const locale = useLocale();
   const preloaded = Boolean(artistName);
 
   const [artistaManual, setArtistaManual] = useState("");
@@ -175,22 +178,21 @@ export function BookingForm({
           </svg>
         </div>
         <h2 className="display mt-6 text-[clamp(1.6rem,3.5vw,2.4rem)]" style={{ color: NAVY }}>
-          Te hemos abierto el correo.
+          {tr(locale, "Te hemos abierto el correo.")}
         </h2>
         <p className="mx-auto mt-3 max-w-md text-text-secondary">
-          Dale a enviar y lo tenemos. Si no se te ha abierto nada, escríbenos
-          directo a{" "}
+          {tr(locale, "Dale a enviar y lo tenemos. Si no se te ha abierto nada, escríbenos directo a")}{" "}
           <a className="font-semibold underline underline-offset-4" href={`mailto:${site.emails.booking}`}>
             {site.emails.booking}
           </a>{" "}
-          y te contestamos nosotros, no un bot.
+          {tr(locale, "y te contestamos nosotros, no un bot.")}
         </p>
         <button
           type="button"
           onClick={() => setSent(false)}
           className="mt-8 text-sm font-semibold text-text-muted underline-offset-4 hover:text-text-primary hover:underline"
         >
-          ← Volver a editar la solicitud
+          {tr(locale, "← Volver a editar la solicitud")}
         </button>
       </div>
     );
@@ -205,18 +207,18 @@ export function BookingForm({
             ♪
           </span>
           <p className="text-sm text-text-secondary">
-            Cuéntanos el bolo para{" "}
+            {tr(locale, "Cuéntanos el bolo para")}{" "}
             <span className="font-bold" style={{ color: NAVY }}>{artistName}</span>
             {artistGenre ? <span className="text-text-muted"> · {artistGenre}</span> : null}
           </p>
         </div>
       ) : (
         <div className="mb-8">
-          <Field label="¿Qué artista te interesa?">
+          <Field label={tr(locale, "¿Qué artista te interesa?")}>
             <input
               value={artistaManual}
               onChange={(e) => setArtistaManual(e.target.value)}
-              placeholder="Nombre del artista (o cuéntanos qué buscas)"
+              placeholder={tr(locale, "Nombre del artista (o cuéntanos qué buscas)")}
               className={inputCls}
             />
           </Field>
@@ -228,14 +230,14 @@ export function BookingForm({
           <div className="flex flex-wrap gap-2">
             {TIPOS.map((t) => (
               <Chip key={t} active={tipo === t} onClick={() => setTipo(t)}>
-                {t}
+                {tr(locale, t)}
               </Chip>
             ))}
           </div>
         </Field>
 
         <div className="grid gap-6 sm:grid-cols-2">
-          <Field label="¿Para cuándo?">
+          <Field label={tr(locale, "¿Para cuándo?")}>
             <input
               type="date"
               value={fecha}
@@ -250,43 +252,43 @@ export function BookingForm({
                 onChange={(e) => setSinFecha(e.target.checked)}
                 className="h-4 w-4 accent-[#16b6d4]"
               />
-              Aún sin fecha cerrada
+              {tr(locale, "Aún sin fecha cerrada")}
             </label>
           </Field>
 
-          <Field label="¿Dónde?">
+          <Field label={tr(locale, "¿Dónde?")}>
             <input
               value={lugar}
               onChange={(e) => setLugar(e.target.value)}
-              placeholder="Ciudad, sala o festival"
+              placeholder={tr(locale, "Ciudad, sala o festival")}
               className={inputCls}
             />
           </Field>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
-          <Field label="¿Cuánta gente esperáis?">
+          <Field label={tr(locale, "¿Cuánta gente esperáis?")}>
             <div className="flex flex-wrap gap-2">
               {AFOROS.map((a) => (
                 <Chip key={a} active={aforo === a} onClick={() => setAforo(a)}>
-                  {a}
+                  {tr(locale, a)}
                 </Chip>
               ))}
             </div>
           </Field>
 
-          <Field label="Presupuesto orientativo" hint="Opcional. Nos ayuda a proponerte algo realista, sin sorpresas.">
+          <Field label={tr(locale, "Presupuesto orientativo")} hint={tr(locale, "Opcional. Nos ayuda a proponerte algo realista, sin sorpresas.")}>
             <div className="flex flex-wrap gap-2">
               {PRESUS.map((p) => (
                 <Chip key={p} active={presu === p} onClick={() => setPresu(p)}>
-                  {p}
+                  {tr(locale, p)}
                 </Chip>
               ))}
             </div>
           </Field>
         </div>
 
-        <Field label="¿Qué tienes en la cabeza?">
+        <Field label={tr(locale, "¿Qué tienes en la cabeza?")}>
           <textarea
             required
             rows={5}
@@ -299,11 +301,11 @@ export function BookingForm({
 
         {/* Quién escribe */}
         <div className="border-t border-subtle pt-8">
-          <Field label="¿Quién eres?">
+          <Field label={tr(locale, "¿Quién eres?")}>
             <div className="mb-5 flex flex-wrap gap-2">
               {PERFILES.map((p) => (
                 <Chip key={p} active={perfil === p} onClick={() => setPerfil(p)}>
-                  {p}
+                  {tr(locale, p)}
                 </Chip>
               ))}
             </div>
@@ -314,7 +316,7 @@ export function BookingForm({
               required
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
-              placeholder="Tu nombre *"
+              placeholder={tr(locale, "Tu nombre *")}
               className={inputCls}
             />
             <input
@@ -322,20 +324,20 @@ export function BookingForm({
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Tu email *"
+              placeholder={tr(locale, "Tu email *")}
               className={inputCls}
             />
             <input
               type="tel"
               value={tel}
               onChange={(e) => setTel(e.target.value)}
-              placeholder="Teléfono (opcional)"
+              placeholder={tr(locale, "Teléfono (opcional)")}
               className={inputCls}
             />
             <input
               value={empresa}
               onChange={(e) => setEmpresa(e.target.value)}
-              placeholder="Empresa / marca (opcional)"
+              placeholder={tr(locale, "Empresa / marca (opcional)")}
               className={inputCls}
             />
           </div>
@@ -343,10 +345,10 @@ export function BookingForm({
 
         <div className="flex flex-wrap items-center gap-4 pt-2">
           <button type="submit" className="btn btn-primary px-8 py-4 text-base">
-            Enviar solicitud →
+            {tr(locale, "Enviar solicitud →")}
           </button>
           <p className="text-xs text-text-muted">
-            Te contestamos nosotros, no un bot. Sin compromiso.
+            {tr(locale, "Te contestamos nosotros, no un bot. Sin compromiso.")}
           </p>
         </div>
       </div>

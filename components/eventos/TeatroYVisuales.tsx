@@ -1,7 +1,7 @@
 import { Section } from "@/components/ui";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { VimeoEmbed, YouTubeEmbed } from "@/components/Embeds";
-import { findAsset } from "@/lib/assets";
+import { findAsset, findLogo } from "@/lib/assets";
 import Image from "next/image";
 import { serverLocale } from "@/lib/locale-server";
 import { tr } from "@/lib/copy-ca";
@@ -9,7 +9,17 @@ import { tr } from "@/lib/copy-ca";
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
-/** Vídeos de mapping y espectáculos visuales (links aportados por Dani). */
+/**
+ * Vídeos de mapping y espectáculos visuales (links aportados por Dani). El
+ * primero es el destacado grande de la sección; el resto va en la columna
+ * lateral, más pequeños — estilo "siguiente vídeo" de YouTube.
+ *
+ * ⚠️ Víctor pidió que el destacado fuera el de HYPNOCITY. No he podido
+ * verificar los títulos de estos 5 vídeos (Vimeo y YouTube devuelven 403 a
+ * las herramientas de esta sesión, incluso al oEmbed público) así que el
+ * orden de abajo es el que ya traía el archivo, sin tocar. Si el primero
+ * (536427671) no es Hypnocity, basta con subirlo a la primera posición.
+ */
 const MAPPING_VIDEOS = [
   { kind: "vimeo", id: "536427671" },
   { kind: "vimeo", id: "294375960" },
@@ -20,8 +30,10 @@ const MAPPING_VIDEOS = [
 
 /**
  * "No todo es música": teatro y espectáculos visuales (mapping). Datos reales
- * aportados por Dani. Las fotos/vídeos de mapping aún no están: mientras, el
- * bloque se sostiene con tipografía + un patrón navy (nunca un hueco vacío).
+ * aportados por Dani. El logo de cada obra es plug-and-play, igual que el
+ * resto del sitio: si existe /img/teatro/<slug>.(png|jpg|svg) se pinta ahí
+ * mismo, encima del título; si no, la tarjeta se sostiene solo con
+ * tipografía (nunca un hueco vacío mientras no llegue el fichero).
  */
 const TEATRO = [
   { title: "Dumbo", tour: "Gira verano 2023", shows: "8 actuaciones" },
@@ -49,11 +61,24 @@ export function TeatroYVisuales() {
       </RevealOnScroll>
 
       <StaggerGroup stagger={0.08} className="mt-10 grid gap-5 sm:grid-cols-3">
-        {TEATRO.map((t) => (
+        {TEATRO.map((t) => {
+          const logo = findLogo("teatro", t.title);
+          return (
           <div
             key={t.title}
             className="rounded-2xl border border-subtle p-6 transition-colors duration-300 hover:border-text-primary/25"
           >
+            {logo && (
+              <div className="relative mb-4 h-12 w-full">
+                <Image
+                  src={logo}
+                  alt={t.title}
+                  fill
+                  sizes="200px"
+                  className="object-contain object-left"
+                />
+              </div>
+            )}
             <h3 className="display text-xl leading-tight" style={{ color: NAVY }}>
               {t.title}
             </h3>
@@ -62,13 +87,14 @@ export function TeatroYVisuales() {
               {t.shows}
             </p>
           </div>
-        ))}
+          );
+        })}
       </StaggerGroup>
 
       {/* ---- Espectáculos visuales / mapping ---- */}
       <div className="mt-16 grid gap-10 md:mt-20 md:grid-cols-[1fr_1fr] md:items-center md:gap-14">
         <RevealOnScroll>
-          <p className="eyebrow mb-4">Espectáculos visuales</p>
+          <p className="eyebrow mb-4">{tr(locale, "Espectáculos visuales")}</p>
           <h3 className="display text-[clamp(1.7rem,3.6vw,2.6rem)] leading-[1.06]">
             Convertimos una fachada en un{" "}
             <span style={{ color: CYAN }}>espectáculo</span>.
@@ -110,18 +136,29 @@ export function TeatroYVisuales() {
         </RevealOnScroll>
       </div>
 
-      {/* Vídeos de mapping: el trabajo se explica solo viéndolo. */}
+      {/* Vídeos de mapping: el trabajo se explica solo viéndolo. Uno grande
+          destacado + el resto en columna, más pequeños — rollo YouTube: el
+          vídeo que estás viendo a la izquierda, los siguientes a la derecha.
+          En móvil el destacado va arriba a todo ancho y el resto en 2
+          columnas debajo, para que no se haga eterno. */}
       <RevealOnScroll as="p" className="eyebrow mb-5 mt-16 md:mt-20">
         {tr(locale, "Míralo en movimiento")}
       </RevealOnScroll>
-      <StaggerGroup stagger={0.08} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {MAPPING_VIDEOS.map((v) =>
-          v.kind === "vimeo" ? (
-            <VimeoEmbed key={v.id} id={v.id} title={tr(locale, "Mapping y espectáculos visuales")} />
-          ) : (
-            <YouTubeEmbed key={v.id} id={v.id} title={tr(locale, "Mapping y espectáculos visuales")} />
-          ),
+      <StaggerGroup stagger={0.08} className="grid gap-4 md:grid-cols-[1.7fr_1fr] md:gap-5">
+        {MAPPING_VIDEOS[0].kind === "vimeo" ? (
+          <VimeoEmbed id={MAPPING_VIDEOS[0].id} title={tr(locale, "Mapping y espectáculos visuales")} />
+        ) : (
+          <YouTubeEmbed id={MAPPING_VIDEOS[0].id} title={tr(locale, "Mapping y espectáculos visuales")} />
         )}
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-1 md:gap-3.5">
+          {MAPPING_VIDEOS.slice(1).map((v) =>
+            v.kind === "vimeo" ? (
+              <VimeoEmbed key={v.id} id={v.id} title={tr(locale, "Mapping y espectáculos visuales")} />
+            ) : (
+              <YouTubeEmbed key={v.id} id={v.id} title={tr(locale, "Mapping y espectáculos visuales")} />
+            ),
+          )}
+        </div>
       </StaggerGroup>
     </Section>
   );

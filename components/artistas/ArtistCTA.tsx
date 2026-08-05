@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Section, Cta } from "@/components/ui";
 import { RevealOnScroll, MagneticButton } from "@/components/motion";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 /**
  * Cierre de la ficha de artista: booking + seguir + volver al roster.
@@ -17,6 +19,7 @@ export function ArtistCTA({
   instagram?: string;
   slug: string;
 }) {
+  const locale = serverLocale();
   // Datos esenciales: sin ellos el bloque no tiene sentido.
   const nombre = name?.trim();
   const email = bookingEmail?.trim();
@@ -30,7 +33,7 @@ export function ArtistCTA({
     <Section id={slug ? `booking-${slug}` : "booking"}>
       <div className="rounded-3xl border border-subtle bg-bg-secondary px-6 py-14 text-center sm:px-8 md:py-20">
         <RevealOnScroll as="p" className="eyebrow">
-          Booking
+          {tr(locale, "Booking")}
         </RevealOnScroll>
 
         <RevealOnScroll
@@ -46,8 +49,8 @@ export function ArtistCTA({
           delay={0.12}
           className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-text-secondary md:text-lg"
         >
-          Cuéntanos fecha, sitio y qué tienes en mente. Te contamos disponibilidad
-          y cómo montarlo, sin vueltas.
+          {tr(locale, "Cuéntanos fecha, sitio y qué tienes en mente. Te contamos disponibilidad")}{" "}
+          {tr(locale, "y cómo montarlo, sin vueltas.")}
         </RevealOnScroll>
 
         <RevealOnScroll
@@ -66,7 +69,7 @@ export function ArtistCTA({
             href="/artistas/todos"
             className="text-sm font-semibold text-text-muted underline-offset-4 transition-colors hover:text-text-primary hover:underline"
           >
-            Ver todo el roster →
+            {tr(locale, "Ver todo el roster →")}
           </Link>
         </RevealOnScroll>
       </div>

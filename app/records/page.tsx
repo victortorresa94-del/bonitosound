@@ -16,6 +16,7 @@ import { getArtists } from "@/lib/content";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
 import { serverLocale } from "@/lib/locale-server";
+import { artistaCa } from "@/lib/content-md-ca";
 import { tr } from "@/lib/copy-ca";
 import { localePath, t as ui } from "@/lib/i18n";
 
@@ -76,9 +77,9 @@ const faq = [
 ];
 
 export default function Records() {
-  const roster = getArtists().filter((a) => a.tier === "booking");
   const illo = "/img/servicios/heroes/sello.png";
   const locale = serverLocale();
+  const roster = getArtists().map((x) => artistaCa(x, locale)).filter((a) => a.tier === "booking");
   const mailto = `mailto:${site.emails.general}?subject=${encodeURIComponent("Records")}`;
 
   return (
@@ -166,7 +167,7 @@ export default function Records() {
 
       {/* ── ROSTER ── */}
       <Section>
-        <RevealOnScroll as="p" className="eyebrow mb-4">Roster</RevealOnScroll>
+        <RevealOnScroll as="p" className="eyebrow mb-4">{tr(locale, "Roster")}</RevealOnScroll>
         <SplitTextReveal as="h2" split="lines" className="display text-[clamp(2rem,4.5vw,3.4rem)]">
           {tr(locale, "Artistas que llevamos.")}
         </SplitTextReveal>

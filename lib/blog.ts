@@ -32,7 +32,7 @@ export function getPosts(): Post[] {
   if (!fs.existsSync(root)) return [];
   return fs
     .readdirSync(root)
-    .filter((f) => f.endsWith(".md"))
+    .filter((f) => f.endsWith(".md") && !f.endsWith(".ca.md"))
     .map((file) => {
       const raw = fs.readFileSync(path.join(root, file), "utf8");
       const { data, content } = matter(raw);

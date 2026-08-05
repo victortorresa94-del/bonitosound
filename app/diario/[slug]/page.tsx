@@ -8,14 +8,18 @@ import { PostBody } from "@/components/blog/PostBody";
 import { getPost, getPosts } from "@/lib/blog";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { postCa } from "@/lib/content-md-ca";
+import { serverLocale } from "@/lib/locale-server";
+import type { Locale } from "@/lib/i18n";
+import { tr } from "@/lib/copy-ca";
 
 export function generateStaticParams() {
   return getPosts().map((p) => ({ slug: p.slug }));
 }
 
-function fmtDate(iso: string) {
+function fmtDate(iso: string, locale: Locale) {
   try {
-    return new Date(iso).toLocaleDateString("es-ES", {
+    return new Date(iso).toLocaleDateString(locale === "ca" ? "ca-ES" : "es-ES", {
       day: "numeric",
       month: "long",
       year: "numeric",
@@ -48,8 +52,11 @@ export function generateMetadata({
 }
 
 export default function PostPage({ params }: { params: { slug: string } }) {
-  const p = getPost(params.slug);
-  if (!p) notFound();
+  const locale = serverLocale();
+  const pEs = getPost(params.slug);
+  if (!pEs) notFound();
+  // En catalán se superpone content/diario/<slug>.ca.md sobre el original.
+  const p = postCa(pEs, locale);
 
   const url = `${site.url}/diario/${p.slug}`;
   const author = p.author ?? site.name;
@@ -71,7 +78,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
             url: site.url,
           },
           mainEntityOfPage: url,
-          inLanguage: "es-ES",
+          inLanguage: locale === "ca" ? "ca-ES" : "es-ES",
         }}
       />
       <JsonLd
@@ -109,7 +116,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
           </Link>
           <div className="mt-8 max-w-3xl">
             <RevealOnScroll as="p" className="eyebrow mb-4">
-              {p.cluster ?? "Blog"} · {fmtDate(p.date)}
+              {p.cluster ?? "Blog"} · {fmtDate(p.date, locale)}
             </RevealOnScroll>
             <RevealOnScroll
               as="h1"
@@ -147,7 +154,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         <Section className="bg-bg-primary">
           <div className="mx-auto max-w-2xl">
             <RevealOnScroll as="p" className="eyebrow mb-8">
-              Preguntas frecuentes
+              {tr(locale, "Preguntas frecuentes")}
             </RevealOnScroll>
             <Faq items={p.faq} />
           </div>
@@ -157,14 +164,14 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       {/* CTA al pillar relacionado */}
       <Section>
         <CtaBlock
-          title="¿Hablamos de lo tuyo?"
+          title={tr(locale, "¿Hablamos de lo tuyo?")}
           desc="Si esto te ha sonado a algo que necesitas, cuéntanoslo. Te respondemos nosotros, no un bot."
           href="/contacto"
           cta="Hablamos →"
           secondary={
             p.pillarHref ? (
               <Link href={p.pillarHref} className="underline-offset-4 hover:text-accent-cyan hover:underline">
-                Ver más →
+                {tr(locale, "Ver más →")}
               </Link>
             ) : undefined
           }

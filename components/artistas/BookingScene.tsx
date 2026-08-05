@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { findAsset } from "@/lib/assets";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -14,6 +16,7 @@ const CYAN = "#16b6d4";
  * aquí deja de pintarse. Mientras tanto, esta escena vale de sobra.
  */
 export function BookingScene({ className = "" }: { className?: string }) {
+  const locale = serverLocale();
   const generated = findAsset("marca", "contratar-scene");
 
   if (generated) {
@@ -21,7 +24,7 @@ export function BookingScene({ className = "" }: { className?: string }) {
       <div className={`relative mx-auto aspect-square w-full max-w-md ${className}`}>
         <Image
           src={generated}
-          alt="Cogemos el teléfono"
+          alt={tr(locale, "Cogemos el teléfono")}
           fill
           sizes="(max-width: 768px) 80vw, 40vw"
           className="object-contain"
@@ -37,7 +40,7 @@ export function BookingScene({ className = "" }: { className?: string }) {
       className={`mx-auto w-full max-w-md ${className}`}
       fill="none"
       role="img"
-      aria-label="Cogemos el teléfono, no un formulario"
+      aria-label={tr(serverLocale(), "Cogemos el teléfono, no un formulario")}
     >
       {/* chispas y estrellas */}
       <g stroke={NAVY} strokeWidth="4" strokeLinecap="round">

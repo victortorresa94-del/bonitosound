@@ -83,15 +83,15 @@ export const team = [
     line: "Project management, financiación y booking. Cuadra los números y cierra las fechas.",
   },
   {
-    name: "Xavi Julià",
-    role: "Producción",
-    line: "El que convierte el deck en evento. La producción que se ve en el escenario.",
-  },
-  {
     name: "Cristina Soler",
     role: "Comunicación",
     line: "Coordina lo de dentro y lo de fuera. Lo que ves publicado, ha pasado por ella.",
   },
+  // Quim Planas (coordinación de lanzamientos) entra en cuanto exista su
+  // retrato en /img/equipo/ilustracion/quim-planas.png. Su foto ya está en
+  // /img/equipo/quim-planas.jpg, lista para generarlo. No se publica antes:
+  // el bloque son cinco retratos dibujados y una foto ahí en medio se ve
+  // como un hueco sin terminar.
   {
     name: "Victor Torres",
     role: "Marketing Artístico & IA",

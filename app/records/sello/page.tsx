@@ -4,6 +4,8 @@ import { ArtistFeatureCase } from "@/components/services/cases";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const s = services.sello;
 export function generateMetadata(): Metadata {
@@ -15,14 +17,15 @@ export function generateMetadata(): Metadata {
 }
 
 export default function Page() {
+  const locale = serverLocale();
   return (
     <ServicePage
       service={s}
       caseSlot={
         <ArtistFeatureCase
-          eyebrow="Un ejemplo"
-          h2="MARCA DIVINA, de Eva Calyza."
-          body="El primer álbum de Eva Calyza — diez canciones que fusionan folclore andaluz y electrónica oscura — se produjo con nosotros y salió en 2025. Del máster a la calle, con criterio."
+          eyebrow={tr(locale, "Un ejemplo")}
+          h2={tr(locale, "MARCA DIVINA, de Eva Calyza.")}
+          body={tr(locale, "El primer \u00e1lbum de Eva Calyza \u2014 diez canciones que fusionan folclore andaluz y electr\u00f3nica oscura \u2014 se produjo con nosotros y sali\u00f3 en 2025. Del m\u00e1ster a la calle, con criterio.")}
           slug="eva-calyza"
           spotifyId="6rUgNfaBgUk0WCQbNafgKh"
         />

@@ -2,14 +2,42 @@ import Image from "next/image";
 import Link from "next/link";
 import { RevealOnScroll } from "@/components/motion";
 import { findAsset, findLogo } from "@/lib/assets";
-import type { Gira } from "@/lib/giras";
-import { localePath } from "@/lib/i18n";
+import {
+  ARTIST_EXTERNAL_LINK,
+  ARTIST_FALLBACK_GIRA,
+  ARTIST_PROFILE_SLUG,
+  type Gira,
+} from "@/lib/giras";
+import { localePath, type Locale } from "@/lib/i18n";
 import { serverLocale } from "@/lib/locale-server";
 import { tr } from "@/lib/copy-ca";
 
-
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
+
+/** Adónde lleva la tarjeta: prioridad ficha propia → artista → gira grande
+ *  del mismo artista → web/Instagram oficial. Nunca se deja una tarjeta
+ *  muerta pudiendo evitarlo (ver lib/giras.ts). */
+type Destino = { href: string; label: string; external: boolean };
+
+function destinoDe(g: Gira, conPagina: string[], locale: Locale): Destino | undefined {
+  if (conPagina.includes(g.slug)) {
+    return { href: localePath(`/giras/${g.slug}`, locale), label: tr(locale, "Ver la gira →"), external: false };
+  }
+  const perfil = ARTIST_PROFILE_SLUG[g.artist];
+  if (perfil) {
+    return { href: localePath(`/artistas/${perfil}`, locale), label: tr(locale, "Ver el artista →"), external: false };
+  }
+  const fallback = ARTIST_FALLBACK_GIRA[g.artist];
+  if (fallback) {
+    return { href: localePath(`/giras/${fallback}`, locale), label: tr(locale, "Ver la gira →"), external: false };
+  }
+  const externo = ARTIST_EXTERNAL_LINK[g.artist];
+  if (externo) {
+    return { href: externo, label: tr(locale, "Su web →"), external: true };
+  }
+  return undefined;
+}
 
 /** Cinta adhesiva de la polaroid (beige translúcido, girada). */
 function Tape({ className = "" }: { className?: string }) {
@@ -23,8 +51,11 @@ function Tape({ className = "" }: { className?: string }) {
 }
 
 /** Tarjeta-polaroid de una gira. Foto si existe; si no, fallback navy.
- *  Si la gira tiene página de detalle (`href`), la tarjeta es un enlace. */
-function GiraCard({ g, tilt, href }: { g: Gira; tilt: number; href?: string }) {
+ *  `dest` decide si es enlace y adónde (ver destinoDe: ficha propia → artista
+ *  → gira grande del mismo artista → web oficial). Sin destino, es una tarjeta
+ *  muda — pero eso ya no debería pasar salvo para el único artista sin fuente
+ *  verificada (ver lib/giras.ts). */
+function GiraCard({ g, tilt, dest }: { g: Gira; tilt: number; dest?: Destino }) {
   // Foto por prioridad: la de ESA gira → la del artista en el roster → la de
   // su ficha de trayectoria. Así casi todas las tarjetas llevan cara aunque no
   // tengamos foto específica de la gira.
@@ -32,13 +63,15 @@ function GiraCard({ g, tilt, href }: { g: Gira; tilt: number; href?: string }) {
     findAsset("giras", g.slug) ??
     findLogo("artistas", g.artist) ??
     findLogo("artistas-dani", g.artist);
-  const Tag = (href ? Link : "div") as React.ElementType;
+  const Tag = (dest ? Link : "div") as React.ElementType;
 
   return (
     <Tag
-      {...(href ? { href } : {})}
+      {...(dest
+        ? { href: dest.href, ...(dest.external ? { target: "_blank", rel: "noopener noreferrer" } : {}) }
+        : {})}
       className={`relative block w-full max-w-[19rem] bg-white p-3 pb-4 shadow-[0_10px_30px_rgba(20,40,60,0.13)] transition-transform duration-300 hover:!rotate-0 hover:scale-[1.03] ${
-        href ? "cursor-pointer" : ""
+        dest ? "cursor-pointer" : ""
       }`}
       style={{ transform: `rotate(${tilt}deg)` }}
     >
@@ -78,19 +111,19 @@ function GiraCard({ g, tilt, href }: { g: Gira; tilt: number; href?: string }) {
         <h3 className="display text-[1.35rem] leading-tight" style={{ color: NAVY }}>
           {g.artist}
         </h3>
-        <p className="mt-0.5 text-sm italic text-text-secondary">{g.tour}</p>
+        <p className="mt-0.5 text-sm italic text-text-secondary">{tr(serverLocale(), g.tour)}</p>
         {(g.shows || g.years) && (
           <p className="mt-1.5 font-mono text-[0.68rem] tabular-nums text-text-muted">
-            {[g.years ?? g.year, g.shows].filter(Boolean).join(" · ")}
+            {[g.years ?? g.year, g.shows && tr(serverLocale(), g.shows)].filter(Boolean).join(" · ")}
           </p>
         )}
         {/* Autoría de la foto, cuando la tiene (crédito a quien la hizo). */}
         {g.credit && photo && (
           <p className="mt-1 text-[0.6rem] text-text-muted/70">© {g.credit}</p>
         )}
-        {href && (
+        {dest && (
           <p className="mt-2 text-[0.68rem] font-bold" style={{ color: CYAN }}>
-            {tr(serverLocale(), "Ver la gira →")}
+            {dest.label}
           </p>
         )}
       </div>
@@ -115,11 +148,12 @@ export function GirasRuta({
   /** Slugs que tienen página de detalle (los que tienen .md en content/giras). */
   conPagina?: string[];
 }) {
+  const locale = serverLocale();
   return (
     <section className="relative overflow-hidden py-16 md:py-24">
       <div className="wrap">
         <RevealOnScroll as="p" className="eyebrow mb-3">
-          Lo que hemos llevado
+          {tr(locale, "Lo que hemos llevado")}
         </RevealOnScroll>
         <RevealOnScroll
           as="h2"
@@ -176,10 +210,8 @@ export function GirasRuta({
                 {g.year}
               </span>
             );
-            const href = conPagina.includes(g.slug)
-              ? localePath(`/giras/${g.slug}`, serverLocale())
-              : undefined;
-            const card = <GiraCard g={g} tilt={tilt} href={href} />;
+            const dest = destinoDe(g, conPagina, locale);
+            const card = <GiraCard g={g} tilt={tilt} dest={dest} />;
 
             return (
               <li

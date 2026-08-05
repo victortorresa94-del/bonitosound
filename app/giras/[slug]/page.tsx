@@ -12,6 +12,10 @@ import { findAsset } from "@/lib/assets";
 import { giras } from "@/lib/giras";
 import { site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
+import { serverLocale } from "@/lib/locale-server";
+import { eventoCa } from "@/lib/content-md-ca";
+import { tr } from "@/lib/copy-ca";
+import { localePath } from "@/lib/i18n";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -31,8 +35,11 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 }
 
 export default function GiraPage({ params }: { params: { slug: string } }) {
-  const g = getGira(params.slug);
-  if (!g) notFound();
+  const locale = serverLocale();
+  const gEs = getGira(params.slug);
+  if (!gEs) notFound();
+  // En catalán se superpone content/giras/<slug>.ca.md sobre el original.
+  const g = eventoCa(gEs, locale, "giras");
 
   // Los datos duros (años, nº de conciertos) mandan desde lib/giras.ts, que es
   // lo que confirmó Dani; el markdown aporta el relato.
@@ -57,7 +64,7 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
   ];
 
   // Otras giras del mismo artista que tengan página.
-  const masDelArtista = getGiras().filter(
+  const masDelArtista = getGiras().map((x) => eventoCa(x, locale, "giras")).filter(
     (x) => x.slug !== g.slug && x.artist === g.artist,
   );
 
@@ -80,10 +87,10 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
         <div className="wrap py-16 md:py-24">
           <RevealOnScroll className="mb-6">
             <Link
-              href="/giras"
+              href={localePath("/giras", locale)}
               className="text-sm font-semibold text-text-muted underline-offset-4 transition-colors hover:text-accent-cyan hover:underline"
             >
-              ← Todas las giras
+              {tr(locale, "← Todas las giras")}
             </Link>
           </RevealOnScroll>
 
@@ -148,7 +155,7 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
                   {facts.map((f) => (
                     <div key={f.k}>
                       <p className="text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-text-muted">
-                        {f.k}
+                        {tr(locale, f.k)}
                       </p>
                       <p className="mt-1 font-round text-lg font-bold" style={{ color: NAVY }}>
                         {f.v}
@@ -221,7 +228,7 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
         <div className="grid gap-12 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
           {g.services && g.services.length > 0 && (
             <RevealOnScroll>
-              <p className="eyebrow mb-5">Qué pusimos</p>
+              <p className="eyebrow mb-5">{tr(locale, "Qué pusimos")}</p>
               <ul className="space-y-2.5">
                 {g.services.map((s) => (
                   <li key={s} className="flex items-start gap-2.5 text-text-secondary">
@@ -253,13 +260,39 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
       </Section>
 
       {/* VÍDEO — solo YouTube. El mp4 ya se ve arriba, en la polaroid, y
-          enseñarlo dos veces en la misma página no aporta nada. */}
+          enseñarlo dos veces en la misma página no aporta nada.
+          Antes era un iframe centrado y suelto en medio de una sección vacía
+          (queja de Víctor: "MAL POSICIONADISIMO"). Ahora va en un split con
+          texto que lo ancla —igual que el resto de la página—, en vez de
+          flotar solo sin contexto. Sin repetir el `result`, que ya se lee
+          arriba en el relato: aquí el texto de apoyo es nuevo. */}
       {g.youtubeId && (
         <Section className="bg-bg-primary">
-          <RevealOnScroll as="p" className="eyebrow mb-6">El vídeo lo cuenta mejor</RevealOnScroll>
-          <RevealOnScroll delay={0.08} className="mx-auto max-w-3xl">
-            <YouTubeEmbed id={g.youtubeId} title={g.title} />
-          </RevealOnScroll>
+          <div className="grid gap-8 md:grid-cols-[0.9fr_1.4fr] md:items-center md:gap-14">
+            <RevealOnScroll>
+              <p className="eyebrow mb-4">{tr(locale, "Así se vivió")}</p>
+              <h3
+                className="display text-[clamp(1.5rem,3vw,2.1rem)] leading-[1.12]"
+                style={{ color: NAVY }}
+              >
+                {tr(locale, "El cierre de la gira, contado en vídeo.")}
+              </h3>
+              {g.location && (
+                <p className="mt-5 flex items-center gap-2.5 text-sm font-semibold text-text-muted">
+                  <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: CYAN }} />
+                  {g.location}
+                </p>
+              )}
+            </RevealOnScroll>
+            <RevealOnScroll delay={0.1}>
+              <div
+                className="overflow-hidden rounded-3xl border border-subtle"
+                style={{ boxShadow: "0 14px 36px rgba(20,40,60,0.12)" }}
+              >
+                <YouTubeEmbed id={g.youtubeId} title={g.title} />
+              </div>
+            </RevealOnScroll>
+          </div>
         </Section>
       )}
 
@@ -267,7 +300,7 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
       {masDelArtista.length > 0 && (
         <Section>
           <RevealOnScroll as="p" className="eyebrow mb-6">
-            Más de {g.artist}
+            {tr(locale, "Más de")} {g.artist}
           </RevealOnScroll>
           <StaggerGroup stagger={0.08} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {masDelArtista.map((o) => {
@@ -275,7 +308,7 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
               return (
                 <Link
                   key={o.slug}
-                  href={`/giras/${o.slug}`}
+                  href={localePath(`/giras/${o.slug}`, locale)}
                   className="rounded-2xl border border-subtle p-5 transition-colors duration-300 hover:border-text-primary/25"
                 >
                   <h3 className="display text-lg leading-tight" style={{ color: NAVY }}>
@@ -293,10 +326,10 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
 
       <Section>
         <CtaBlock
-          title="¿Tienes una gira que mover?"
-          desc="Cuéntanos las fechas y el proyecto. Te decimos cómo la montamos y por dónde empezaríamos."
-          href="/contacto"
-          cta="Cuéntanos tu gira →"
+          title={tr(locale, "¿Tienes una gira que mover?")}
+          desc={tr(locale, "Cuéntanos las fechas y el proyecto. Te decimos cómo la montamos y por dónde empezaríamos.")}
+          href={localePath("/contacto", locale)}
+          cta={tr(locale, "Cuéntanos tu gira →")}
         />
       </Section>
     </div>

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/lib/site";
+import { useLocale } from "@/components/LocaleProvider";
+import { tr } from "@/lib/copy-ca";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -59,6 +61,7 @@ function diagnose(a: Record<string, string | string[]>): string {
 }
 
 export function LeadMagnetArtists() {
+  const locale = useLocale();
   const [i, setI] = useState(0);
   const [a, setA] = useState<Record<string, string | string[]>>({});
   const [text, setText] = useState("");
@@ -86,7 +89,7 @@ export function LeadMagnetArtists() {
       {!done ? (
         <>
           <div className="mb-6 flex items-center justify-between">
-            <p className="eyebrow">¿Encajas con Bonito?</p>
+            <p className="eyebrow">{tr(locale, "¿Encajas con Bonito?")}</p>
             <p className="text-xs text-text-muted">
               {i + 1} / {questions.length}
             </p>
@@ -161,7 +164,7 @@ export function LeadMagnetArtists() {
                     autoFocus
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    placeholder="Escríbelo corto"
+                    placeholder={tr(locale, "Escríbelo corto")}
                     className="w-full rounded-xl border border-subtle bg-bg-tertiary px-5 py-4 text-text-primary outline-none focus:border-accent-warm"
                   />
                   <button className="btn btn-primary mt-6">Siguiente →</button>
@@ -185,7 +188,7 @@ export function LeadMagnetArtists() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
         >
-          <p className="eyebrow mb-3">Diagnóstico</p>
+          <p className="eyebrow mb-3">{tr(locale, "Diagnóstico")}</p>
           <p className="mb-8 max-w-xl text-xl text-text-primary">
             {diagnose(a)}
           </p>
@@ -204,7 +207,7 @@ export function LeadMagnetArtists() {
             )}`}
             className="btn btn-primary"
           >
-            Que lo hablemos →
+            {tr(locale, "Que lo hablemos →")}
           </a>
           <button
             onClick={() => {

@@ -10,6 +10,7 @@ import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
 import { alternatesFor } from "@/lib/seo";
 import { serverLocale } from "@/lib/locale-server";
+import { artistaCa } from "@/lib/content-md-ca";
 import { paginaCa } from "@/lib/content-i18n";
 import { tr } from "@/lib/copy-ca";
 import { localePath } from "@/lib/i18n";
@@ -81,7 +82,7 @@ const ROSTER: RosterEntry[] = [
 
 export default function Artistas() {
   const locale = serverLocale();
-  const all = getArtists();
+  const all = getArtists().map((x) => artistaCa(x, locale));
   // Parrilla curada del mockup (por slug, no por tier): estos 6 son el roster
   // de /artistas —Dulze incluida—, cada uno con su layout asimétrico. El `tier`
   // sigue mandando en /artistas/todos y en la ficha; aquí la selección es fija
