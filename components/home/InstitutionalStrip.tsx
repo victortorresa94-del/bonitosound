@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { RevealOnScroll } from "@/components/motion";
-import { findLogo } from "@/lib/assets";
+import { MarqueeLogoWallClient } from "@/components/motion/MarqueeLogoWallClient";
+import { resolveLogos } from "@/lib/assets";
 import { memberships, support, supportPending } from "@/lib/site";
 import { serverLocale } from "@/lib/locale-server";
 import { tr } from "@/lib/copy-ca";
@@ -12,33 +12,62 @@ import { tr } from "@/lib/copy-ca";
  * Va entre la escena de tecnología y la del festival: cierra el bloque de
  * "esto es lo que hacemos" con quién nos avala, antes de pasar al festival.
  *
- * Sobre CREMA, como el resto del home. Los ficheros de logo son siluetas
- * BLANCAS (venían de un fondo navy), así que aquí se invierten a negro con
- * brightness(0) y se bajan de opacidad: quedan como un sello grabado,
- * presentes sin gritar. Sin invertirlos no se verían. Solo pinta los que
- * tienen archivo (plug-and-play).
+ * Sobre CREMA, como el resto del home, y en MOVIMIENTO como el resto de
+ * bandas de logos del sitio. Los logos van en negro plano (`mono`): vienen
+ * de mil sitios con mil fondos y en silueta quedan como un sello grabado,
+ * presentes sin gritar. Solo se pintan los que tienen archivo — el resto
+ * entra solo en cuanto se suba a public/img/.
  */
-function Logo({ dir, name }: { dir: string; name: string }) {
-  const src = findLogo(dir, name);
-  if (!src) return null;
+
+/**
+ * Repite la lista hasta llenar la fila. Con 4-5 logos el marquee se quedaba
+ * corto y dejaba un hueco enorme antes de volver a empezar; duplicando da
+ * igual que se repitan — lo que importa es que la banda se vea continua.
+ * Mismo truco que la banda de artistas (HomeProof.tsx).
+ */
+function llenar<T>(items: T[], minimo = 14): T[] {
+  if (items.length === 0) return items;
+  const veces = Math.max(2, Math.ceil(minimo / items.length));
+  return Array.from({ length: veces }, () => items).flat();
+}
+
+function Grupo({
+  etiqueta,
+  logos,
+  direction,
+}: {
+  etiqueta: string;
+  logos: { name: string; src: string | null; aguantaSilueta: boolean }[];
+  direction: "left" | "right";
+}) {
+  // La key del marquee es el nombre y aquí repetimos la lista, así que el
+  // nombre se hace único con el índice.
+  const items = llenar(logos).map((l, i) => ({ ...l, name: `${l.name}·${i}` }));
   return (
-    <span className="relative inline-block h-7 w-[92px] opacity-55 transition-opacity duration-300 hover:opacity-100 md:h-8 md:w-[104px]">
-      <Image
-        src={src}
-        alt={name}
-        fill
-        sizes="104px"
-        className="object-contain"
-        style={{ filter: "brightness(0)" }}
-      />
-    </span>
+    // w-full explícito: el contenedor de arriba es `items-center` (no stretch),
+    // así que sin esto el grupo se dimensiona al CONTENIDO — y el contenido es
+    // un marquee de varios miles de px, que se llevaba por delante el ancho de
+    // la página en móvil.
+    <div className="flex w-full min-w-0 flex-1 flex-col items-center gap-3 md:flex-row md:gap-5">
+      <span
+        className="shrink-0 text-[0.62rem] font-semibold uppercase tracking-[0.22em]"
+        style={{ color: "rgba(20,40,60,0.45)" }}
+      >
+        {etiqueta}
+      </span>
+      <div className="w-full min-w-0 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+        <MarqueeLogoWallClient items={items} speed={26} direction={direction} mono />
+      </div>
+    </div>
   );
 }
 
 export function InstitutionalStrip() {
   const locale = serverLocale();
-  const members = memberships.filter((n) => findLogo("instituciones", n));
-  const apoyos = [...support, ...supportPending].filter((n) => findLogo("apoyos", n));
+  const members = resolveLogos("instituciones", memberships).filter((l) => l.src);
+  const apoyos = resolveLogos("apoyos", [...support, ...supportPending]).filter(
+    (l) => l.src,
+  );
   if (members.length === 0 && apoyos.length === 0) return null;
 
   return (
@@ -46,41 +75,19 @@ export function InstitutionalStrip() {
       aria-label={tr(locale, "Miembros y apoyos institucionales")}
       className="border-y border-subtle"
     >
-      <RevealOnScroll className="wrap flex flex-col items-center gap-7 py-10 text-center md:flex-row md:justify-center md:gap-14 md:py-11">
+      <RevealOnScroll className="wrap flex flex-col items-center gap-7 py-10 md:flex-row md:gap-10 md:py-11">
         {members.length > 0 && (
-          <div className="flex flex-col items-center gap-3 md:flex-row md:gap-5">
-            <span
-              className="text-[0.62rem] font-semibold uppercase tracking-[0.22em]"
-              style={{ color: "rgba(20,40,60,0.45)" }}
-            >
-              {tr(locale, "Miembros de")}
-            </span>
-            <div className="flex flex-wrap items-center justify-center gap-5 md:gap-7">
-              {members.map((n) => (
-                <Logo key={n} dir="instituciones" name={n} />
-              ))}
-            </div>
-          </div>
+          <Grupo etiqueta={tr(locale, "Miembros de")} logos={members} direction="left" />
         )}
 
         {members.length > 0 && apoyos.length > 0 && (
-          <span aria-hidden className="hidden h-8 w-px bg-[rgba(20,40,60,0.12)] md:block" />
+          <span aria-hidden className="hidden h-8 w-px shrink-0 bg-[rgba(20,40,60,0.12)] md:block" />
         )}
 
         {apoyos.length > 0 && (
-          <div className="flex flex-col items-center gap-3 md:flex-row md:gap-5">
-            <span
-              className="text-[0.62rem] font-semibold uppercase tracking-[0.22em]"
-              style={{ color: "rgba(20,40,60,0.45)" }}
-            >
-              {tr(locale, "Con el apoyo de")}
-            </span>
-            <div className="flex flex-wrap items-center justify-center gap-5 md:gap-7">
-              {apoyos.map((n) => (
-                <Logo key={n} dir="apoyos" name={n} />
-              ))}
-            </div>
-          </div>
+          // En sentido contrario al de al lado: dos filas moviéndose igual
+          // se leen como una sola banda; en espejo se distinguen los grupos.
+          <Grupo etiqueta={tr(locale, "Con el apoyo de")} logos={apoyos} direction="right" />
         )}
       </RevealOnScroll>
     </section>

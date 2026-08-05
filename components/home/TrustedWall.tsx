@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
+import { MarqueeLogoWallClient } from "@/components/motion/MarqueeLogoWallClient";
 import { resolveLogos } from "@/lib/assets";
 import { trustedBy } from "@/lib/site";
 import { serverLocale } from "@/lib/locale-server";
@@ -17,25 +18,38 @@ const CYAN = "#16b6d4";
  * completo vive en /clientes.
  *
  * Va sobre crema, como el resto del home: era la única banda oscura que
- * quedaba y cortaba el recorrido en seco. Los logos, que vienen de mil sitios
- * y con mil fondos, se meten en chips blancos con filete para que ninguno se
- * pierda sobre el crema.
+ * quedaba y cortaba el recorrido en seco.
  *
- * Sin marquee a propósito: el home ya tiene dos (BrandsBand y ArtistsBand).
+ * Los logos van en MARQUEE, como la banda de artistas, y en negro plano: son
+ * logos de mil sitios distintos y a color la fila parecía una feria. En
+ * silueta se lee como un muro y no compite con el titular.
  */
 export function TrustedWall() {
   const locale = serverLocale();
   const clientes = trustedBy.filter((c) => c.id !== "proveedores");
   const total = clientes.reduce((n, c) => n + c.items.length, 0);
 
-  // Los destacados de cada categoría, mezclados a propósito (marca + festival +
-  // institución + ayuntamiento) para que se vea la variedad de un vistazo.
-  // SOLO los que tienen logo de verdad: un chip con el nombre escrito canta
-  // como un hueco y desluce la fila entera. Los que falten aparecen solos en
+  // TODOS los logos que tengamos, de todas las categorías, mezclados a
+  // propósito. Solo los que tienen fichero de verdad: pintar el nombre en
+  // texto dentro de una fila de logos canta como un hueco. Los que faltan ya
+  // se cuentan en los números de arriba, y entran solos en el marquee en
   // cuanto se suba su fichero a public/img/<categoría>/.
-  const featured = clientes
-    .flatMap((c) => resolveLogos(c.dir, c.featured ?? []).map((l) => ({ ...l, cat: c.id })))
-    .filter((l) => l.src);
+  //
+  // Fuera los JPG: en esas carpetas no son logos sino FOTOS del evento
+  // (la barra de Monkey 47, por ejemplo). A 28px de alto una foto es una
+  // mancha marrón que rompe la fila — y ennegrecerla daría un tocho negro.
+  // Entran solas el día que se suba su logo de verdad en PNG/SVG.
+  //
+  // La key del marquee es el nombre, así que un duplicado entre categorías
+  // rompería React: de-duplicamos por nombre antes de pasarlo.
+  const vistos = new Set<string>();
+  const logos = clientes
+    .flatMap((c) => resolveLogos(c.dir, c.items))
+    .filter((l) => {
+      if (!l.src || l.isPhoto || vistos.has(l.name)) return false;
+      vistos.add(l.name);
+      return true;
+    });
 
   if (total === 0) return null;
 
@@ -75,28 +89,6 @@ export function TrustedWall() {
           ))}
         </StaggerGroup>
 
-        {/* Una muestra con cara: chips blancos con filete, sin filtros (aguantan
-            cualquier logo, venga con el fondo que venga). */}
-        {featured.length > 0 && (
-          <StaggerGroup stagger={0.04} className="mt-12 flex flex-wrap items-center gap-3">
-            {featured.map((l) => (
-              <span
-                key={`${l.cat}-${l.slug}`}
-                className="flex h-14 items-center justify-center rounded-xl border border-subtle bg-white px-5 shadow-sm"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={l.src!}
-                  alt={l.name}
-                  loading="lazy"
-                  decoding="async"
-                  className="max-h-8 w-auto max-w-[130px] object-contain"
-                />
-              </span>
-            ))}
-          </StaggerGroup>
-        )}
-
         <RevealOnScroll className="mt-10" delay={0.2}>
           <Link
             href={localePath("/clientes", locale)}
@@ -107,6 +99,19 @@ export function TrustedWall() {
           </Link>
         </RevealOnScroll>
       </div>
+
+      {/* La banda en movimiento, a TODO el ancho (fuera del .wrap): los logos
+          entran y salen por los bordes de la pantalla, como la de artistas.
+          Todos los que tengamos fichero, de todas las categorías mezcladas
+          — marca, festival, ayuntamiento, asociación — para que se vea la
+          variedad sin leer una lista. En NEGRO plano: vienen de mil sitios
+          con mil colores y a color esto parecía una feria; en silueta es un
+          muro. Los que aún no tienen logo no se pintan (se cuentan arriba). */}
+      {logos.length > 0 && (
+        <div className="overflow-hidden border-y border-subtle py-8 md:py-10">
+          <MarqueeLogoWallClient items={logos} speed={38} mono />
+        </div>
+      )}
     </section>
   );
 }

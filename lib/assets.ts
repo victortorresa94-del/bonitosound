@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { pngAguantaSilueta } from "./png-alpha";
 
 const pub = path.join(process.cwd(), "public");
 const EXT = ["svg", "webp", "png", "jpg", "jpeg", "avif"];
@@ -40,7 +41,41 @@ export type ResolvedLogo = {
   src: string | null;
   /** .jpg/.jpeg = foto con fondo, NO admite el filtro de silueta blanca. */
   isPhoto: boolean;
+  /**
+   * El logo es tinta sobre fondo transparente, así que aguanta el filtro de
+   * silueta (`brightness(0)`) sin convertirse en un rectángulo negro. Los que
+   * traen el fondo incrustado dan `false` — ver lib/png-alpha.ts.
+   */
+  aguantaSilueta: boolean;
 };
+
+/**
+ * ¿El fichero aguanta el filtro de silueta sin volverse un rectángulo negro?
+ * El detalle de por qué hace falta y cómo se comprueba está en lib/png-alpha.ts.
+ *
+ * Los SVG se dan por transparentes: es lo normal en un logotipo vectorial y
+ * analizarlos para comprobarlo no compensa.
+ *
+ * Se cachea por ruta: esto corre en build/SSR y un mismo logo sale en varias
+ * páginas — no tiene sentido releer el fichero cada vez.
+ */
+const cacheSilueta = new Map<string, boolean>();
+
+function aguantaSilueta(rutaPublica: string): boolean {
+  const cacheado = cacheSilueta.get(rutaPublica);
+  if (cacheado !== undefined) return cacheado;
+
+  let resultado = false;
+  if (/\.svg$/i.test(rutaPublica)) {
+    resultado = true;
+  } else if (/\.png$/i.test(rutaPublica)) {
+    resultado = pngAguantaSilueta(path.join(pub, rutaPublica.replace(/^\//, "")));
+  }
+  // JPG y compañía: sin canal alfa por definición, siempre opacos.
+
+  cacheSilueta.set(rutaPublica, resultado);
+  return resultado;
+}
 
 /**
  * Resuelve una lista de nombres a sus logos. Devuelve SIEMPRE una entrada por
@@ -51,7 +86,13 @@ export function resolveLogos(dir: string, items: readonly string[]): ResolvedLog
   return items.map((name) => {
     const slug = assetSlug(name);
     const src = findAsset(dir, slug);
-    return { name, slug, src, isPhoto: Boolean(src && /\.jpe?g$/i.test(src)) };
+    return {
+      name,
+      slug,
+      src,
+      isPhoto: Boolean(src && /\.jpe?g$/i.test(src)),
+      aguantaSilueta: Boolean(src && aguantaSilueta(src)),
+    };
   });
 }
 
