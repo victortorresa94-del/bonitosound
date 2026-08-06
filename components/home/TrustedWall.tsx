@@ -13,16 +13,17 @@ const CYAN = "#16b6d4";
 /**
  * "Empresas que han confiado en hacerlo bonito" — el muro de clientes del home.
  *
- * Con ~110 logos, pintarlos todos aquí satura. La solución: los NÚMEROS venden
- * el volumen y una selección de los reconocibles pone la cara. El listado
- * completo vive en /clientes.
+ * Con ~110 logos, pintarlos todos aquí satura: los NÚMEROS venden el volumen y
+ * la banda de logos pone la cara. El listado completo vive en /clientes.
  *
- * Va sobre crema, como el resto del home: era la única banda oscura que
- * quedaba y cortaba el recorrido en seco.
+ * Todo CENTRADO y compacto a propósito. La primera versión era un bloque
+ * alineado a la izquierda con un titular a tamaño de portada, y encima la
+ * banda de logos: dos pesos pesados peleándose en la misma sección. Ahora el
+ * titular baja de tamaño, los números pasan a ser el elemento grande —que es
+ * lo que de verdad cuenta la historia— y la banda cierra por debajo como un
+ * pie, no como un segundo protagonista.
  *
- * Los logos van en MARQUEE, como la banda de artistas, y en negro plano: son
- * logos de mil sitios distintos y a color la fila parecía una feria. En
- * silueta se lee como un muro y no compite con el titular.
+ * Va sobre crema, como el resto del home.
  */
 export function TrustedWall() {
   const locale = serverLocale();
@@ -55,33 +56,38 @@ export function TrustedWall() {
 
   return (
     <section aria-label={tr(locale, "Empresas que han confiado en Bonito Sound")}>
-      <div className="wrap py-16 md:py-24">
-        <RevealOnScroll as="p" className="mb-4 text-xs font-semibold uppercase tracking-[0.2em]">
-          <span style={{ color: CYAN }}>{tr(locale, "Confían en nosotros")}</span>
-        </RevealOnScroll>
+      {/* Padding asimétrico: por abajo va más corto porque debajo viene la
+          banda de logos con su propio aire. Simétrico dejaba un hueco muerto
+          entre el enlace y la línea. */}
+      <div className="wrap pb-9 pt-14 text-center md:pb-11 md:pt-20">
         <RevealOnScroll
           as="h2"
-          delay={0.05}
-          className="display max-w-3xl text-[clamp(1.9rem,4.5vw,3.2rem)] leading-[1.05]"
+          className="display mx-auto max-w-2xl text-[clamp(1.5rem,3vw,2.1rem)] leading-[1.15]"
         >
           <span style={{ color: NAVY }}>{tr(locale, "Empresas que han confiado en")}</span>{" "}
           <span style={{ color: CYAN }}>{tr(locale, "hacerlo bonito")}</span>
           <span style={{ color: NAVY }}>.</span>
         </RevealOnScroll>
 
-        {/* Los números primero: cuentan el volumen sin pintar 110 logos. */}
+        {/* Los números SON la pieza grande de la sección: cuentan el volumen
+            sin pintar 110 logos. Rejilla de 2 en móvil y 4 en escritorio para
+            que las cifras queden alineadas en columna, no desparramadas por
+            una fila flexible con anchos distintos. */}
         <StaggerGroup
-          stagger={0.08}
-          className="mt-10 flex flex-wrap gap-x-12 gap-y-6 md:mt-12"
+          stagger={0.07}
+          className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-9 md:mt-12 md:grid-cols-4 md:gap-x-4"
         >
           {clientes.map((c) => (
             <div key={c.id}>
-              <p className="font-round text-[clamp(1.8rem,4vw,2.8rem)] font-bold leading-none" style={{ color: CYAN }}>
+              <p
+                className="font-round text-[clamp(2.6rem,6vw,3.8rem)] font-bold leading-none tracking-tight"
+                style={{ color: CYAN }}
+              >
                 {c.items.length}
               </p>
               <p
-                className="mt-1.5 text-xs font-semibold uppercase tracking-[0.14em]"
-                style={{ color: "rgba(20,40,60,0.55)" }}
+                className="mx-auto mt-2 max-w-[9rem] text-[0.68rem] font-semibold uppercase leading-snug tracking-[0.16em]"
+                style={{ color: "rgba(20,40,60,0.5)" }}
               >
                 {tr(locale, c.label)}
               </p>
@@ -89,7 +95,7 @@ export function TrustedWall() {
           ))}
         </StaggerGroup>
 
-        <RevealOnScroll className="mt-10" delay={0.2}>
+        <RevealOnScroll className="mt-11" delay={0.18}>
           <Link
             href={localePath("/clientes", locale)}
             className="text-sm font-bold underline-offset-4 transition-colors hover:underline"
@@ -100,16 +106,14 @@ export function TrustedWall() {
         </RevealOnScroll>
       </div>
 
-      {/* La banda en movimiento, a TODO el ancho (fuera del .wrap): los logos
-          entran y salen por los bordes de la pantalla, como la de artistas.
-          Todos los que tengamos fichero, de todas las categorías mezcladas
-          — marca, festival, ayuntamiento, asociación — para que se vea la
-          variedad sin leer una lista. En NEGRO plano: vienen de mil sitios
-          con mil colores y a color esto parecía una feria; en silueta es un
-          muro. Los que aún no tienen logo no se pintan (se cuentan arriba). */}
+      {/* La banda cierra la sección, a todo el ancho (fuera del .wrap): los
+          logos entran y salen por los bordes de la pantalla. Va más baja y con
+          los logos más pequeños que la primera versión para que lea como un
+          pie de sección y no como un segundo bloque. Máscara a los lados para
+          que aparezcan y desaparezcan en vez de cortarse en seco. */}
       {logos.length > 0 && (
-        <div className="overflow-hidden border-y border-subtle py-8 md:py-10">
-          <MarqueeLogoWallClient items={logos} speed={38} mono />
+        <div className="overflow-hidden border-t border-subtle py-6 [mask-image:linear-gradient(to_right,transparent,black_7%,black_93%,transparent)] md:py-7">
+          <MarqueeLogoWallClient items={logos} speed={32} mono logoClass="h-6" />
         </div>
       )}
     </section>

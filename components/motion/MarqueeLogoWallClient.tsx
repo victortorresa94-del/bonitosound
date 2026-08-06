@@ -21,6 +21,8 @@ type Props = {
    * extensión del fichero.
    */
   mono?: boolean;
+  /** Alto de cada logo. Por defecto `h-7`; la banda-pie del home usa `h-6`. */
+  logoClass?: string;
 };
 
 export function MarqueeLogoWallClient({
@@ -29,6 +31,7 @@ export function MarqueeLogoWallClient({
   speed = 50,
   direction = "left",
   mono = false,
+  logoClass = "h-7",
 }: Props) {
   return (
     <div>
@@ -48,11 +51,9 @@ export function MarqueeLogoWallClient({
                   width={140}
                   height={36}
                   loading="eager"
-                  className={
-                    silueta
-                      ? "h-7 w-auto object-contain opacity-55 transition-opacity duration-300 hover:opacity-100"
-                      : "h-7 w-auto object-contain opacity-70 transition-opacity hover:opacity-100"
-                  }
+                  className={`${logoClass} w-auto object-contain transition-opacity duration-300 ${
+                    silueta ? "opacity-55 hover:opacity-100" : "opacity-70 hover:opacity-100"
+                  }`}
                   style={silueta ? { filter: "brightness(0)" } : undefined}
                 />
               ) : (
