@@ -121,7 +121,7 @@ export function FloatingPlayer() {
   return (
     <div
       ref={wrapRef}
-      className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2.5 opacity-0 print:hidden"
+      className="fixed bottom-3.5 right-3.5 z-50 flex flex-col items-end gap-1.5 opacity-0 print:hidden sm:bottom-5 sm:right-5 sm:gap-2.5"
       style={{ willChange: "transform, opacity" }}
     >
       {/* La radio, desplegada sobre los botones. Solo con ≥2 temas: con uno
@@ -191,7 +191,7 @@ export function FloatingPlayer() {
         aria-label={label}
         aria-pressed={playing}
         title={label}
-        className="relative grid h-[52px] w-[52px] place-items-center rounded-full shadow-xl transition-transform duration-200 hover:scale-105 active:scale-95"
+        className="relative grid h-11 w-11 place-items-center rounded-full shadow-xl transition-transform duration-200 hover:scale-105 active:scale-95 sm:h-[52px] sm:w-[52px]"
         style={{ backgroundColor: NAVY }}
       >
         {playing ? <PauseBonito /> : <PlayIcon />}

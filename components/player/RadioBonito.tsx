@@ -38,9 +38,15 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
 
   return (
     /* Sin tarjeta: la radio va suelta sobre la página, como los demás dibujos
-       de la casa. Más estrecha en móvil, donde antes se comía media pantalla. */
+       de la casa. Deliberadamente pequeña en móvil: es un adorno con función,
+       no una pieza de contenido, y ahí compite con la página por un espacio
+       que no tiene.
+       El ancho de móvil (8,25rem ≈ 132px) está igualado a propósito con el de
+       la fila de botones de abajo. Más estrecha no se gana nada —el ancho del
+       conjunto lo fijan los botones— y la radio se ve descolgada de sus
+       propios controles. */
     <div
-      className="relative w-[10.5rem] sm:w-[13rem]"
+      className="relative w-[8.25rem] sm:w-[11rem]"
       role="region"
       aria-label={t(locale, "radio.titulo")}
     >
@@ -48,10 +54,10 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
       <button
         onClick={onClose}
         aria-label={t(locale, "radio.cerrar")}
-        className="absolute -top-1 right-0 z-10 grid h-6 w-6 place-items-center rounded-full transition-opacity hover:opacity-60"
+        className="absolute -top-0.5 right-0 z-10 grid h-5 w-5 place-items-center rounded-full transition-opacity hover:opacity-60 sm:h-6 sm:w-6"
         style={{ color: NAVY, backgroundColor: "rgba(251,250,246,0.9)" }}
       >
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" aria-hidden>
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" aria-hidden>
           <path d="M5 5l14 14M19 5L5 19" strokeLinecap="round" />
         </svg>
       </button>
@@ -150,18 +156,18 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
       </svg>
 
       {/* ── Qué suena ── */}
-      <div className="mt-0.5 flex min-h-[2.1rem] items-center">
+      <div className="flex min-h-[1.7rem] items-center sm:min-h-[2rem]">
         {tuning ? (
-          <p className="font-mono text-[0.6rem] uppercase tracking-[0.2em]" style={{ color: "rgba(20,40,60,0.5)" }}>
+          <p className="font-mono text-[0.55rem] uppercase tracking-[0.18em] sm:text-[0.6rem]" style={{ color: "rgba(20,40,60,0.5)" }}>
             {t(locale, "radio.sintonizando")}
           </p>
         ) : (
           <div className="min-w-0">
-            <p className="truncate font-round text-xs font-bold leading-tight sm:text-sm" style={{ color: NAVY }}>
+            <p className="truncate font-round text-[0.7rem] font-bold leading-tight sm:text-sm" style={{ color: NAVY }}>
               {current?.title}
             </p>
             {current?.artist && (
-              <p className="truncate text-[0.65rem] sm:text-xs" style={{ color: "rgba(20,40,60,0.55)" }}>
+              <p className="truncate text-[0.6rem] leading-tight sm:text-xs" style={{ color: "rgba(20,40,60,0.55)" }}>
                 {current.artist}
               </p>
             )}
