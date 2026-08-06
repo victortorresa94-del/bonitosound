@@ -215,7 +215,7 @@ const CA: Record<string, string> = {
 
   // ── Clientes ──
   "Clientes": "Clients",
-  "Empresas que han confiado en hacerlo bonito.": "Empreses que han confiat a fer-ho bonito.",
+  "Han confiado en hacerlo bonito.": "Han confiat a fer-ho bonito.",
   "Marcas, agencias, festivales, ayuntamientos y asociaciones para las que ha trabajado Bonito Sound.":
     "Marques, agències, festivals, ajuntaments i associacions per a qui ha treballat Bonito Sound.",
   "Categorías": "Categories",
@@ -1002,7 +1002,7 @@ const CA: Record<string, string> = {
   "Miembros de": "Membres de",
   "Míranos un minuto. Luego hablamos.": "Mira'ns un minut. Després parlem.",
   "Síguenos en Instagram →": "Segueix-nos a Instagram →",
-  "Empresas que han confiado en Bonito Sound": "Empreses que han confiat en Bonito Sound",
+  "Han confiado en Bonito Sound": "Han confiat en Bonito Sound",
   "Confían en nosotros": "Hi confien",
   "Un minuto y lo ves todo.": "Un minut i ho veus tot.",
   "Conócenos →": "Coneix-nos →",
@@ -1087,7 +1087,7 @@ const CA: Record<string, string> = {
   "Coordinación de lanzamientos": "Coordinació de llançaments",
   "Que cada lanzamiento salga cuando toca y con todo en su sitio.":
     "Que cada llançament surti quan toca i amb tot al seu lloc.",
-  "Empresas que han confiado en": "Empreses que han confiat a",
+  "Han confiado en": "Han confiat a",
   "hacerlo bonito": "fer-ho bonito",
   "Verlos todos": "Veure'ls tots",
   "150 lanzamientos": "150 llançaments",

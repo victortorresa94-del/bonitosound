@@ -11,7 +11,7 @@ const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
 /**
- * "Empresas que han confiado en hacerlo bonito" — el muro de clientes del home.
+ * "Han confiado en hacerlo bonito" — el muro de clientes del home.
  *
  * Con ~110 logos, pintarlos todos aquí satura: los NÚMEROS venden el volumen y
  * la banda de logos pone la cara. El listado completo vive en /clientes.
@@ -55,7 +55,7 @@ export function TrustedWall() {
   if (total === 0) return null;
 
   return (
-    <section aria-label={tr(locale, "Empresas que han confiado en Bonito Sound")}>
+    <section aria-label={tr(locale, "Han confiado en Bonito Sound")}>
       {/* Padding asimétrico: por abajo va más corto porque debajo viene la
           banda de logos con su propio aire. Simétrico dejaba un hueco muerto
           entre el enlace y la línea. */}
@@ -64,7 +64,10 @@ export function TrustedWall() {
           as="h2"
           className="display mx-auto max-w-2xl text-[clamp(1.5rem,3vw,2.1rem)] leading-[1.15]"
         >
-          <span style={{ color: NAVY }}>{tr(locale, "Empresas que han confiado en")}</span>{" "}
+          {/* "Han confiado", no "Empresas que han confiado": aquí hay
+              ayuntamientos, asociaciones e instituciones, que no son
+              empresas. */}
+          <span style={{ color: NAVY }}>{tr(locale, "Han confiado en")}</span>{" "}
           <span style={{ color: CYAN }}>{tr(locale, "hacerlo bonito")}</span>
           <span style={{ color: NAVY }}>.</span>
         </RevealOnScroll>

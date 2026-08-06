@@ -11,7 +11,7 @@ import { localePath } from "@/lib/i18n";
 
 export function generateMetadata(): Metadata {
   return {
-  title: "Clientes — Empresas que han confiado en hacerlo bonito",
+  title: "Clientes — Han confiado en hacerlo bonito",
   description:
     "Marcas, agencias, festivales, ayuntamientos y asociaciones para las que ha trabajado Bonito Sound.",
   alternates: alternatesFor(`/clientes`),
@@ -51,7 +51,7 @@ export default function Clientes() {
             split="lines"
             className="display max-w-4xl text-[clamp(2.2rem,6vw,4.4rem)] leading-[1.03]"
           >
-            {tr(locale, "Empresas que han confiado en hacerlo bonito.")}
+            {tr(locale, "Han confiado en hacerlo bonito.")}
           </SplitTextReveal>
           <RevealOnScroll
             as="p"
