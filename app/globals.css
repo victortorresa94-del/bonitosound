@@ -273,15 +273,27 @@ svg[data-bs-metamorphic] path {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *,
+
+  /* Se para el MOVIMIENTO, no el diseño. `transform` fuera de aquí a
+     propósito: hay rotaciones e inclinaciones que son estáticas y forman
+     parte de la maqueta —la cinta y el giro de las polaroids, el "GIRAS" de
+     la cabecera, el nº de conciertos escrito a mano, la banda diagonal— y
+     anularlas dejaba la página recta y sosa para quien tiene activado
+     "reducir movimiento". Eso no es accesibilidad, es perder el diseño. */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Estas sí necesitan que se les quite el transform: arrancan desplazadas
+     (translateY) esperando a que la animación de entrada las coloque. Sin
+     animación habría que dejarlas en su sitio o no se verían. */
   .stagger > *,
   .animate-reveal-up,
   .animate-fade-in,
   .bs-split-line,
   .bs-split-word,
   .bs-split-char {
-    animation: none !important;
-    transition: none !important;
     transform: none !important;
   }
   html.bs-cursor-active,

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { LocaleProvider } from "@/components/LocaleProvider";
 import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
-import { Zilla_Slab, Fredoka, Caveat } from "next/font/google";
+import { Zilla_Slab, Fredoka, Caveat, Playfair_Display, Archivo } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
@@ -38,6 +38,25 @@ const hand = Caveat({
   variable: "--font-hand",
   display: "swap",
   weight: ["500", "600", "700"],
+});
+
+// Serif de ALTO CONTRASTE (fino/grueso muy marcado), para titulares que quieran
+// sonar a revista y no a slab. Zilla Slab es robusta y uniforme; esta aporta el
+// registro elegante que le falta.
+const editorial = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-editorial",
+  display: "swap",
+  weight: ["400", "700", "900"],
+});
+
+// Grotesca de peso alto para titulares tipo cartel: mete mucho texto en poco
+// ancho sin encoger el cuerpo. Complementa a Fredoka, que es simpática pero ancha.
+const cartel = Archivo({
+  subsets: ["latin"],
+  variable: "--font-cartel",
+  display: "swap",
+  weight: ["600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -109,7 +128,7 @@ export default function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${display.variable} ${round.variable} ${hand.variable} ${GeistSans.variable}`}
+      className={`${display.variable} ${round.variable} ${hand.variable} ${editorial.variable} ${cartel.variable} ${GeistSans.variable}`}
     >
       <body style={{ ["--font-body" as string]: "var(--font-geist-sans)" }}>
         <JsonLd data={orgLd} />

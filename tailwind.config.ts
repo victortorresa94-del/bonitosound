@@ -38,6 +38,8 @@ const config: Config = {
         body: ["var(--font-body)", "ui-sans-serif", "system-ui"],
         round: ["var(--font-round)", "ui-rounded", "ui-sans-serif", "system-ui"],
         hand: ["var(--font-hand)", "ui-rounded", "cursive"],
+        editorial: ["var(--font-editorial)", "Georgia", "serif"],
+        cartel: ["var(--font-cartel)", "ui-sans-serif", "system-ui"],
       },
       maxWidth: {
         content: "1240px",
