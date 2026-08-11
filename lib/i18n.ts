@@ -84,6 +84,7 @@ const UI: Record<Locale, Dict> = {
     "footer.records": "Records",
     "footer.nosotros": "Nosotros",
     "footer.blog": "Blog",
+    "footer.miembros": "Miembros de",
     "footer.avisoLegal": "Aviso legal",
     "footer.privacidad": "Privacidad",
 
@@ -141,6 +142,7 @@ const UI: Record<Locale, Dict> = {
     "footer.records": "Records",
     "footer.nosotros": "Nosaltres",
     "footer.blog": "Blog",
+    "footer.miembros": "Membres de",
     "footer.avisoLegal": "Avís legal",
     "footer.privacidad": "Privacitat",
 
