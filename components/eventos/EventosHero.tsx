@@ -2,52 +2,102 @@ import { serverLocale } from "@/lib/locale-server";
 import { tr } from "@/lib/copy-ca";
 
 /**
- * Cabecera de /experiencias.
+ * Cabecera de /experiencias — variante EA del banco de pruebas.
  *
- * La versión anterior era la palabra en outline inclinada con una onda cian
- * cruzándola. Víctor la veía "más floja que el diseño antiguo de eventos" y
- * pidió rehacerla sin miedo. Esta es la variante E4 del banco de pruebas
- * (/lab/secciones): la palabra PARTIDA en dos líneas a tamaño de cartel, en
- * grotesca de peso alto, con el segundo tramo en cian.
+ * La palabra a todo el ancho en OUTLINE (filete navy sobre relleno del color
+ * del fondo, así que se lee hueca) con una línea cian que se enreda entre las
+ * letras: pasa por detrás de unas y por delante de otras, como un cable de
+ * escenario. Los puntitos cian rematan.
  *
- * Por qué esta y no la de las cifras: las tres cifras de la página (250
- * eventos · 58 marcas · 53 artistas) ya salen inmediatamente debajo, en
- * EventosShowcase. Repetirlas aquí sería decir dos veces lo mismo en dos
- * pantallas seguidas.
+ * Va en SVG y no con `-webkit-text-stroke` a propósito: esa propiedad de CSS
+ * pinta el filete sobre los tramos que se cruzan dentro de una misma letra y
+ * deja artefactos en la R y la A a tamaños grandes (el mismo fallo que hubo
+ * que arreglar en la cabecera de /giras). Con `stroke` + `paint-order` el
+ * filete sigue el contorno real de la fuente y sale limpio.
  *
- * El título se parte a propósito, así que el <h1> lleva `aria-label` con la
- * palabra entera y el dibujo va `aria-hidden`: quien use lector de pantalla
- * oye "Experiencias", no "Experi. Encias".
+ * El tejido está hecho con tres capas: línea detrás → tipografía →
+ * fragmentos de la MISMA línea recortados por delante. Los fragmentos se
+ * dibujan con un `clipPath` de bandas verticales, así que basta con mover
+ * las bandas para cambiar por dónde asoma.
  */
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
+const CREMA = "#FBFAF6";
+
+/** El recorrido del cable. Compartido por la capa de detrás y la de delante. */
+const CABLE =
+  "M-40 232 C 90 118, 190 274, 300 214 C 410 154, 470 84, 560 122 C 660 164, 612 276, 700 268 C 796 260, 826 140, 946 158 C 1026 170, 1038 232, 1044 244";
+
+/** Por dónde asoma el cable POR DELANTE de las letras (x inicial y ancho). */
+const DELANTE = [
+  { x: 120, w: 95 },
+  { x: 430, w: 110 },
+  { x: 740, w: 100 },
+];
 
 export function EventosHero() {
   const locale = serverLocale();
   return (
-    <div className="px-5 pb-4 pt-14 md:px-10 md:pt-16">
-      <h1
+    <div className="px-5 pb-4 pt-12 md:px-10 md:pt-16">
+      <svg
+        viewBox="0 0 1000 300"
+        className="block w-full"
+        role="img"
         aria-label={tr(locale, "Experiencias")}
-        className="font-cartel font-black uppercase leading-[0.86] tracking-tight"
-        style={{ color: NAVY, fontSize: "clamp(2.8rem,11vw,8.5rem)" }}
       >
-        <span aria-hidden>
-          EXPERI
-          <br />
-          <span style={{ color: CYAN }}>ENCIAS</span>
-        </span>
-      </h1>
+        <defs>
+          <clipPath id="exp-delante">
+            {DELANTE.map((b) => (
+              <rect key={b.x} x={b.x} y="0" width={b.w} height="300" />
+            ))}
+          </clipPath>
+        </defs>
 
-      {/* El garabato hace de guion entre el titular y la frase: los ata sin
-          necesidad de una línea de separación. */}
-      <div className="mt-7 flex items-start gap-4 md:mt-8 md:items-center">
+        {/* 1 · el cable, por detrás */}
+        <path d={CABLE} stroke={CYAN} strokeWidth="7" strokeLinecap="round" fill="none" />
+
+        {/* 2 · la palabra.
+               El relleno es CREMA, no `none`: con las letras realmente huecas
+               el cable de la capa 1 se vería a través y no habría tejido
+               ninguno —delante y detrás se verían igual—. Relleno del color
+               del fondo, el cuerpo de la letra tapa lo que pasa por detrás.
+               `textLength` la obliga a caber exactamente en el viewBox: sin
+               eso, con 12 letras se salía por los dos lados, y además el
+               ancho dependía de si la fuente había cargado ya. */}
+        <text
+          x="500"
+          y="232"
+          textAnchor="middle"
+          textLength="952"
+          lengthAdjust="spacingAndGlyphs"
+          className="font-round"
+          style={{ fontSize: "180px", fontWeight: 700 }}
+          fill={CREMA}
+          stroke={NAVY}
+          strokeWidth="3.5"
+          paintOrder="stroke"
+        >
+          EXPERIENCIAS
+        </text>
+
+        {/* 3 · el mismo cable otra vez, recortado: solo asoma en tres tramos,
+               y ahí parece que pase por delante de la letra */}
+        <g clipPath="url(#exp-delante)">
+          <path d={CABLE} stroke={CYAN} strokeWidth="7" strokeLinecap="round" fill="none" />
+        </g>
+
+        {/* 4 · puntitos sueltos, como el resto de dibujos de la casa */}
+        <g fill={CYAN}>
+          <circle cx="152" cy="104" r="8" />
+          <circle cx="616" cy="78" r="7" />
+          <circle cx="858" cy="278" r="8" />
+          <circle cx="352" cy="282" r="6" />
+        </g>
+      </svg>
+
+      <div className="mt-2 flex items-start gap-4 md:mt-4 md:items-center">
         <svg className="mt-1.5 h-3 w-16 shrink-0 md:mt-0 md:w-28" viewBox="0 0 112 12" fill="none" aria-hidden>
-          <path
-            d="M2 8 Q 14 2, 28 7 T 56 7 T 84 7 T 110 5"
-            stroke={CYAN}
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
+          <path d="M2 8 Q 14 2, 28 7 T 56 7 T 84 7 T 110 5" stroke={CYAN} strokeWidth="2.5" strokeLinecap="round" />
         </svg>
         <p className="max-w-md text-[0.8rem] font-semibold uppercase leading-snug md:text-sm" style={{ color: NAVY }}>
           {tr(locale, "Diseñamos experiencias musicales que conectan marcas, artistas y personas.")}
