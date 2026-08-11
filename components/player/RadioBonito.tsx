@@ -21,8 +21,17 @@ const ROJO = "#c8452f";
  * dial es pulsable y el ecualizador responde a si suena o no. Un vídeo sería
  * bonito pero mudo a la interacción.
  *
- * Vida en bucle, como la furgoneta: la carcasa bota suave y las ondas de la
- * antena laten cuando está sonando. Todo se para con prefers-reduced-motion.
+ * Vida, en capas y por orden de aparición:
+ *   · al abrirse, la AGUJA BARRE el dial de lado a lado y frena en la emisora
+ *     que suena, como quien busca una;
+ *   · un HALO cian la acompaña: la emisora sintonizada ilumina el dial;
+ *   · mientras sintoniza entre temas, la aguja TIEMBLA en vez de deslizarse;
+ *   · un REFLEJO cruza el cristal del dial cada siete segundos;
+ *   · y con la música sonando, la carcasa bota, las ondas de la antena laten
+ *     y la rejilla del altavoz hace de ecualizador.
+ *
+ * Cada cosa dice algo del estado: nada se mueve solo por moverse. Todo se
+ * para con prefers-reduced-motion.
  */
 export function RadioBonito({ onClose }: { onClose: () => void }) {
   const { current, index, total, tuning, playing, goTo } = usePlayer();
@@ -62,6 +71,12 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
 
       {/* ── La radio dibujada ── */}
       <svg viewBox="0 0 400 290" className="w-full" role="img" aria-label={t(locale, "radio.titulo")}>
+        <defs>
+          {/* Recorta el reflejo al hueco del dial. Mismo rect y mismo radio. */}
+          <clipPath id="bs-dial">
+            <rect x="52" y="82" width="296" height="62" rx="16" />
+          </clipPath>
+        </defs>
         <g className={vivo ? "bs-radio-bob" : undefined} style={{ transformOrigin: "200px 260px" }}>
           {/* Antena + ondas de señal */}
           <g stroke={NAVY} strokeWidth="7" strokeLinecap="round" fill="none">
@@ -119,12 +134,34 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
               </g>
             );
           })}
-          {/* La aguja */}
-          <line
-            x1={aguja} y1="88" x2={aguja} y2="138"
-            stroke={ROJO} strokeWidth="6" strokeLinecap="round"
-            style={{ transition: "all 0.7s cubic-bezier(0.22,1,0.36,1)" }}
-          />
+          {/* El reflejo que recorre el cristal, recortado al dial. */}
+          <g clipPath="url(#bs-dial)">
+            <rect
+              className="bs-radio-brillo"
+              x="52" y="82" width="46" height="62"
+              fill={CYAN} opacity="0"
+              style={{ mixBlendMode: "multiply" }}
+            />
+          </g>
+
+          {/* La aguja.
+              Va dentro de un <g> con `translateX` en vez de mover x1/x2: los
+              atributos de geometría no animan igual en todos los navegadores,
+              y un transform sí. La posición base es x0 y el desplazamiento lo
+              pone --aguja, que es también donde termina el barrido. */}
+          <g
+            className={tuning ? "bs-radio-jitter" : "bs-radio-sweep"}
+            style={{
+              ["--aguja" as string]: `${aguja - x0}px`,
+              transform: `translateX(${aguja - x0}px)`,
+              transition: "transform 0.7s cubic-bezier(0.22,1,0.36,1)",
+            }}
+          >
+            {/* Halo: la emisora sintonizada "ilumina" el dial a su alrededor. */}
+            <ellipse cx={x0} cy="113" rx="26" ry="30" fill={CYAN}
+              opacity={vivo ? 0.16 : 0.07} style={{ transition: "opacity 0.4s" }} />
+            <line x1={x0} y1="88" x2={x0} y2="138" stroke={ROJO} strokeWidth="6" strokeLinecap="round" />
+          </g>
 
           {/* ── Rejilla del altavoz: hace de ecualizador ── */}
           <rect x="52" y="162" width="184" height="76" rx="16" fill={TEAL} stroke={NAVY} strokeWidth="7" />

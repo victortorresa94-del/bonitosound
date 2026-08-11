@@ -227,9 +227,45 @@ body {
   50% { opacity: 1; }
 }
 
+/* La aguja BARRE el dial, como quien busca emisora, y frena en la que suena.
+   Corre al abrirse la radio y cada vez que termina de sintonizar un tema
+   nuevo (ahí la clase cambia de jitter a sweep y la animación rearranca).
+
+   El fotograma final es la posición REAL de la emisora, que el componente
+   pasa en --aguja, y el relleno es `backwards`, no `both`: con `both` el
+   100% se quedaba fijado para siempre y pisaba el `transform` en línea, así
+   que al pulsar otra emisora la aguja no se movía del sitio. Terminando en
+   el mismo valor que el transform base, el relevo no se nota. */
+@keyframes bs-radio-sweep {
+  0%   { transform: translateX(0); }
+  55%  { transform: translateX(276px); }
+  100% { transform: translateX(var(--aguja)); }
+}
+.bs-radio-sweep { animation: bs-radio-sweep 1.15s cubic-bezier(0.33, 1, 0.68, 1) backwards; }
+
+/* Mientras sintoniza, la aguja tiembla: no ha encontrado la emisora. */
+@keyframes bs-radio-jitter {
+  0%, 100% { transform: translateX(-2px); }
+  50%      { transform: translateX(2px); }
+}
+.bs-radio-jitter { animation: bs-radio-jitter 0.14s ease-in-out infinite; }
+
+/* Un reflejo recorre el cristal del dial de vez en cuando. Muy espaciado
+   (7s) para que sea un destello y no un parpadeo. */
+@keyframes bs-radio-brillo {
+  0%, 72%, 100% { transform: translateX(-70px); opacity: 0; }
+  78%           { opacity: 0.5; }
+  92%           { transform: translateX(320px); opacity: 0; }
+}
+.bs-radio-brillo { animation: bs-radio-brillo 7s ease-in-out infinite; }
+
 /* Sin movimiento para quien lo pida: la radio se queda quieta y legible. */
 @media (prefers-reduced-motion: reduce) {
-  .bs-radio-bob { animation: none; }
+  .bs-radio-bob,
+  .bs-radio-sweep,
+  .bs-radio-jitter,
+  .bs-radio-brillo { animation: none; }
+  .bs-radio-brillo { opacity: 0; }
 }
 
 /* Marquee en bucle continuo (MarqueeRow). El contenido se renderiza 2×, así
