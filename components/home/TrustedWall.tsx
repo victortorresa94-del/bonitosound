@@ -16,12 +16,11 @@ const CYAN = "#16b6d4";
  * Con ~110 logos, pintarlos todos aquí satura: los NÚMEROS venden el volumen y
  * la banda de logos pone la cara. El listado completo vive en /clientes.
  *
- * Todo CENTRADO y compacto a propósito. La primera versión era un bloque
- * alineado a la izquierda con un titular a tamaño de portada, y encima la
- * banda de logos: dos pesos pesados peleándose en la misma sección. Ahora el
- * titular baja de tamaño, los números pasan a ser el elemento grande —que es
- * lo que de verdad cuenta la historia— y la banda cierra por debajo como un
- * pie, no como un segundo protagonista.
+ * SPLIT ASIMÉTRICO, no centrado: el titular manda a la izquierda, grande, y
+ * las cifras bajan en columna a la derecha, cada una con su filete. La
+ * versión centrada anterior se leía como un bloque de estadísticas de
+ * plantilla; así el titular respira y los números se recorren como una lista.
+ * La banda de logos cierra por debajo, a todo el ancho.
  *
  * Va sobre crema, como el resto del home.
  */
@@ -59,54 +58,57 @@ export function TrustedWall() {
       {/* Padding asimétrico: por abajo va más corto porque debajo viene la
           banda de logos con su propio aire. Simétrico dejaba un hueco muerto
           entre el enlace y la línea. */}
-      <div className="wrap pb-9 pt-14 text-center md:pb-11 md:pt-20">
-        <RevealOnScroll
-          as="h2"
-          className="display mx-auto max-w-2xl text-[clamp(1.5rem,3vw,2.1rem)] leading-[1.15]"
-        >
-          {/* "Han confiado", no "Empresas que han confiado": aquí hay
-              ayuntamientos, asociaciones e instituciones, que no son
-              empresas. */}
-          <span style={{ color: NAVY }}>{tr(locale, "Han confiado en")}</span>{" "}
-          <span style={{ color: CYAN }}>{tr(locale, "hacerlo bonito")}</span>
-          <span style={{ color: NAVY }}>.</span>
-        </RevealOnScroll>
+      <div className="wrap grid gap-10 pb-9 pt-14 md:grid-cols-[1.15fr_1fr] md:items-center md:gap-16 md:pb-11 md:pt-20">
+        <div>
+          <RevealOnScroll
+            as="h2"
+            className="font-round text-[clamp(1.9rem,4.4vw,3.2rem)] font-bold leading-[1.03] tracking-tight"
+          >
+            {/* "Han confiado", no "Empresas que han confiado": aquí hay
+                ayuntamientos, asociaciones e instituciones, que no son
+                empresas. */}
+            <span style={{ color: NAVY }}>{tr(locale, "Han confiado en")}</span>{" "}
+            <span style={{ color: CYAN }}>{tr(locale, "hacerlo bonito")}</span>
+            <span style={{ color: NAVY }}>.</span>
+          </RevealOnScroll>
 
-        {/* Los números SON la pieza grande de la sección: cuentan el volumen
-            sin pintar 110 logos. Rejilla de 2 en móvil y 4 en escritorio para
-            que las cifras queden alineadas en columna, no desparramadas por
-            una fila flexible con anchos distintos. */}
-        <StaggerGroup
-          stagger={0.07}
-          className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-9 md:mt-12 md:grid-cols-4 md:gap-x-4"
-        >
+          <RevealOnScroll className="mt-8" delay={0.18}>
+            <Link
+              href={localePath("/clientes", locale)}
+              className="text-sm font-bold underline-offset-4 transition-colors hover:underline"
+              style={{ color: CYAN }}
+            >
+              {tr(locale, "Verlos todos")} ({total}) →
+            </Link>
+          </RevealOnScroll>
+        </div>
+
+        {/* Las cifras, en columna y separadas por filetes: se recorren como una
+            lista, no como una fila de estadísticas. La cifra a la izquierda y
+            la etiqueta alineada a la derecha, para que los números queden
+            todos a plomo aunque las etiquetas midan distinto. */}
+        <StaggerGroup stagger={0.07}>
           {clientes.map((c) => (
-            <div key={c.id}>
-              <p
-                className="font-round text-[clamp(2.6rem,6vw,3.8rem)] font-bold leading-none tracking-tight"
+            <div
+              key={c.id}
+              className="flex items-baseline justify-between gap-6 border-t py-4"
+              style={{ borderColor: "rgba(20,40,60,0.14)" }}
+            >
+              <span
+                className="font-round text-[clamp(1.9rem,3.4vw,2.5rem)] font-bold leading-none tracking-tight"
                 style={{ color: CYAN }}
               >
                 {c.items.length}
-              </p>
-              <p
-                className="mx-auto mt-2 max-w-[9rem] text-[0.68rem] font-semibold uppercase leading-snug tracking-[0.16em]"
-                style={{ color: "rgba(20,40,60,0.5)" }}
+              </span>
+              <span
+                className="max-w-[11rem] text-right text-[0.68rem] font-semibold uppercase leading-snug tracking-[0.16em]"
+                style={{ color: "rgba(20,40,60,0.55)" }}
               >
                 {tr(locale, c.label)}
-              </p>
+              </span>
             </div>
           ))}
         </StaggerGroup>
-
-        <RevealOnScroll className="mt-11" delay={0.18}>
-          <Link
-            href={localePath("/clientes", locale)}
-            className="text-sm font-bold underline-offset-4 transition-colors hover:underline"
-            style={{ color: CYAN }}
-          >
-            {tr(locale, "Verlos todos")} ({total}) →
-          </Link>
-        </RevealOnScroll>
       </div>
 
       {/* La banda cierra la sección, a todo el ancho (fuera del .wrap): los
