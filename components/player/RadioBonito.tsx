@@ -41,12 +41,10 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
        de la casa. Deliberadamente pequeña en móvil: es un adorno con función,
        no una pieza de contenido, y ahí compite con la página por un espacio
        que no tiene.
-       El ancho de móvil (8,25rem ≈ 132px) está igualado a propósito con el de
-       la fila de botones de abajo. Más estrecha no se gana nada —el ancho del
-       conjunto lo fijan los botones— y la radio se ve descolgada de sus
-       propios controles. */
+       Ahora que fuera solo queda el botón de play, el ancho del conjunto ya
+       no lo fijan los botones y la radio puede bajar de tamaño de verdad. */
     <div
-      className="relative w-[8.25rem] sm:w-[11rem]"
+      className="relative w-[7.5rem] sm:w-[9.5rem]"
       role="region"
       aria-label={t(locale, "radio.titulo")}
     >
@@ -54,7 +52,7 @@ export function RadioBonito({ onClose }: { onClose: () => void }) {
       <button
         onClick={onClose}
         aria-label={t(locale, "radio.cerrar")}
-        className="absolute -top-0.5 right-0 z-10 grid h-5 w-5 place-items-center rounded-full transition-opacity hover:opacity-60 sm:h-6 sm:w-6"
+        className="absolute -top-0.5 right-0 z-10 grid h-6 w-6 place-items-center rounded-full transition-opacity hover:opacity-60"
         style={{ color: NAVY, backgroundColor: "rgba(251,250,246,0.9)" }}
       >
         <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" aria-hidden>

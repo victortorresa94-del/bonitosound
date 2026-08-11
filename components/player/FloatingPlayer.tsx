@@ -42,33 +42,28 @@ function PauseBonito() {
   );
 }
 
-/** Siguiente, minimalista. */
-function NextIcon() {
-  return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M5 5l9 7-9 7z" />
-      <rect x="16" y="5" width="3" height="14" rx="1.5" />
-    </svg>
-  );
-}
-
-/** Logo de Spotify. */
-function SpotifyIcon() {
-  return (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 1 1-.277-1.213c3.809-.871 7.076-.496 9.712 1.114a.623.623 0 0 1 .207.856Zm1.223-2.722a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.13-9.965-1.166a.779.779 0 1 1-.452-1.49c3.632-1.102 8.147-.568 11.232 1.327a.779.779 0 0 1 .257 1.072Zm.105-2.835c-3.223-1.914-8.54-2.09-11.617-1.156a.935.935 0 1 1-.542-1.79c3.532-1.072 9.404-.865 13.115 1.338a.935.935 0 1 1-.956 1.608Z" />
-    </svg>
-  );
-}
-
+/**
+ * El reproductor flotante.
+ *
+ * A la IZQUIERDA: la derecha es por donde se pasa el pulgar al hacer scroll en
+ * móvil, y ahí el botón estorbaba.
+ *
+ * Un solo botón, play/pausa. Antes había hasta cinco (radio, siguiente,
+ * Spotify, play y el de cerrar del panel) para algo que es un detalle de la
+ * casa, no una aplicación de música. Cambiar de emisora sigue estando, pero
+ * dentro del dial de la radio, que es su sitio.
+ *
+ * La radio se despliega sola y SE CIERRA AL DARLE AL PLAY: ha cumplido su
+ * función —enseñarse— y a partir de ahí estorba. Se vuelve a abrir con el
+ * iconito de radio, que solo aparece cuando está cerrada.
+ */
 export function FloatingPlayer() {
-  const { playing, everStarted, isHome, canNext, spotifyUrl, total, start, toggle, next } = usePlayer();
+  const { playing, everStarted, isHome, total, start, toggle } = usePlayer();
   const locale = useLocale();
   const [revealed, setRevealed] = useState(false);
-  // La radio arranca ABIERTA: es una pieza de la web, no un widget escondido
-  // detrás de un botón. Se puede cerrar y volver a abrir con el iconito.
   const [radioOpen, setRadioOpen] = useState(true);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const shownOnce = useRef(false);
 
   // Revelado:
@@ -92,127 +87,133 @@ export function FloatingPlayer() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHome]);
 
-  // Entrada "con vida": aparece con un pop elástico + un pequeño meneo, como los
-  // dibujos del home. Respeta reduced-motion (solo fade).
+  // Entrada del conjunto: entra deslizándose DESDE EL BORDE IZQUIERDO, como si
+  // hubiera estado ahí fuera esperando. Respeta reduced-motion (solo fade).
   useEffect(() => {
     if (!revealed || shownOnce.current) return;
     const el = wrapRef.current;
     if (!el) return;
     shownOnce.current = true;
 
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.4 });
       return;
     }
-    const tl = gsap.timeline();
-    tl.fromTo(
+    gsap.fromTo(
       el,
-      { opacity: 0, scale: 0, y: 24, rotate: -12 },
-      { opacity: 1, scale: 1, y: 0, rotate: 0, duration: 0.7, ease: "elastic.out(1, 0.55)" },
-    ).to(el, { rotate: 6, duration: 0.12, yoyo: true, repeat: 3, ease: "sine.inOut" }, "-=0.15");
+      { opacity: 0, x: -140, rotate: -8 },
+      { opacity: 1, x: 0, rotate: 0, duration: 0.85, ease: "elastic.out(1, 0.62)" },
+    );
   }, [revealed]);
+
+  // La radio entra y sale por el borde izquierdo, no aparece y desaparece de
+  // golpe. Al cerrarse hay que esperar a la animación antes de desmontarla,
+  // de ahí el onComplete.
+  const cerrarRadio = () => {
+    const p = panelRef.current;
+    if (!p || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setRadioOpen(false);
+      return;
+    }
+    gsap.to(p, {
+      opacity: 0,
+      x: -120,
+      scale: 0.9,
+      duration: 0.4,
+      ease: "power3.in",
+      onComplete: () => setRadioOpen(false),
+    });
+  };
+
+  useEffect(() => {
+    const p = panelRef.current;
+    if (!radioOpen || !p) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    gsap.fromTo(
+      p,
+      { opacity: 0, x: -110, scale: 0.92 },
+      { opacity: 1, x: 0, scale: 1, duration: 0.7, ease: "back.out(1.5)" },
+    );
+  }, [radioOpen]);
 
   if (!revealed) return null;
 
   const label = t(locale, playing ? "radio.pausar" : everStarted ? "radio.reanudar" : "radio.poner");
-  const onMain = () => (everStarted ? toggle() : start());
+
+  // Al arrancar la música la radio se retira: ya se ha lucido.
+  const onMain = () => {
+    if (!everStarted) {
+      start();
+      if (radioOpen) cerrarRadio();
+      return;
+    }
+    toggle();
+  };
 
   return (
     <div
       ref={wrapRef}
-      className="fixed bottom-3.5 right-3.5 z-50 flex flex-col items-end gap-1.5 opacity-0 print:hidden sm:bottom-5 sm:right-5 sm:gap-2.5"
+      className="fixed bottom-3.5 left-3.5 z-50 flex flex-col items-start gap-2 opacity-0 print:hidden sm:bottom-5 sm:left-5 sm:gap-2.5"
       style={{ willChange: "transform, opacity" }}
     >
-      {/* La radio, desplegada sobre los botones. Solo con ≥2 temas: con uno
-          solo no hay emisoras que sintonizar y sobra el dial. */}
-      {radioOpen && total > 1 && <RadioBonito onClose={() => setRadioOpen(false)} />}
+      {/* La radio, desplegada sobre el botón. Solo con ≥2 temas: con uno solo
+          no hay emisoras que sintonizar y sobra el dial. */}
+      {radioOpen && total > 1 && (
+        <div ref={panelRef} style={{ willChange: "transform, opacity" }}>
+          <RadioBonito onClose={cerrarRadio} />
+        </div>
+      )}
 
       <div className="flex items-center gap-2">
-      {/* Abrir/cerrar la radio. */}
-      {total > 1 && (
+        {/* Botón principal: play/pausa. Es el único control de fuera. */}
         <button
           type="button"
-          onClick={() => setRadioOpen((v) => !v)}
-          aria-label={t(locale, radioOpen ? "radio.cerrar" : "radio.abrir")}
-          aria-expanded={radioOpen}
-          title={t(locale, "radio.titulo")}
-          className="grid h-9 w-9 place-items-center rounded-full border transition-all duration-200 hover:scale-110"
-          style={{
-            borderColor: radioOpen ? CYAN : "rgba(20,40,60,0.25)",
-            color: radioOpen ? CYAN : NAVY,
-            background: "rgba(251,250,246,0.85)",
-            backdropFilter: "blur(6px)",
-          }}
+          onClick={onMain}
+          aria-label={label}
+          aria-pressed={playing}
+          title={label}
+          className="relative grid h-11 w-11 place-items-center rounded-full shadow-xl transition-transform duration-200 hover:scale-105 active:scale-95 sm:h-[52px] sm:w-[52px]"
+          style={{ backgroundColor: NAVY }}
         >
-          <RadioIcon />
+          {playing ? <PauseBonito /> : <PlayIcon />}
+
+          {/* Anillo-ecualizador con vida cuando suena. */}
+          {playing && (
+            <span className="pointer-events-none absolute -bottom-1 left-1/2 flex -translate-x-1/2 items-end gap-[2px]" aria-hidden>
+              {[0.5, 1, 0.7].map((h, i) => (
+                <span
+                  key={i}
+                  className="w-[2.5px] rounded-full"
+                  style={{
+                    height: 8 * h,
+                    backgroundColor: CYAN,
+                    animation: `eq 0.9s ease-in-out infinite ${i * 0.15}s`,
+                  }}
+                />
+              ))}
+            </span>
+          )}
         </button>
-      )}
 
-      {/* Siguiente tema propio (solo si hay ≥2 en la playlist local). */}
-      {canNext && (
-        <button
-          type="button"
-          onClick={next}
-          aria-label={t(locale, "radio.siguiente")}
-          title={t(locale, "radio.siguiente")}
-          className="grid h-9 w-9 place-items-center rounded-full border transition-all duration-200 hover:scale-110"
-          style={{
-            borderColor: "rgba(20,40,60,0.25)",
-            color: NAVY,
-            background: "rgba(251,250,246,0.85)",
-            backdropFilter: "blur(6px)",
-          }}
-        >
-          <NextIcon />
-        </button>
-      )}
-
-      {/* Fuera del home: la playlist de artistas de Bonito en Spotify. Enlace
-          limpio (el embed de Spotify obliga a mostrar su banner de marca). */}
-      {!isHome && (
-        <a
-          href={spotifyUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={t(locale, "radio.spotify")}
-          title={t(locale, "radio.spotify")}
-          className="grid h-9 w-9 place-items-center rounded-full transition-all duration-200 hover:scale-110"
-          style={{ backgroundColor: "#1DB954", color: "#fff" }}
-        >
-          <SpotifyIcon />
-        </a>
-      )}
-
-      {/* Botón principal: negro, redondo, play/pausa. */}
-      <button
-        type="button"
-        onClick={onMain}
-        aria-label={label}
-        aria-pressed={playing}
-        title={label}
-        className="relative grid h-11 w-11 place-items-center rounded-full shadow-xl transition-transform duration-200 hover:scale-105 active:scale-95 sm:h-[52px] sm:w-[52px]"
-        style={{ backgroundColor: NAVY }}
-      >
-        {playing ? <PauseBonito /> : <PlayIcon />}
-
-        {/* Anillo-ecualizador con vida cuando suena. */}
-        {playing && (
-          <span className="pointer-events-none absolute -bottom-1 left-1/2 flex -translate-x-1/2 items-end gap-[2px]" aria-hidden>
-            {[0.5, 1, 0.7].map((h, i) => (
-              <span
-                key={i}
-                className="w-[2.5px] rounded-full"
-                style={{
-                  height: 8 * h,
-                  backgroundColor: "#16b6d4",
-                  animation: `eq 0.9s ease-in-out infinite ${i * 0.15}s`,
-                }}
-              />
-            ))}
-          </span>
+        {/* Volver a abrir la radio. Solo cuando está cerrada: si está abierta
+            ya tiene su propia aspa y tener los dos botones sobra. */}
+        {!radioOpen && total > 1 && (
+          <button
+            type="button"
+            onClick={() => setRadioOpen(true)}
+            aria-label={t(locale, "radio.abrir")}
+            title={t(locale, "radio.titulo")}
+            className="grid h-9 w-9 place-items-center rounded-full border transition-all duration-200 hover:scale-110"
+            style={{
+              borderColor: "rgba(20,40,60,0.25)",
+              color: NAVY,
+              background: "rgba(251,250,246,0.85)",
+              backdropFilter: "blur(6px)",
+            }}
+          >
+            <RadioIcon />
+          </button>
         )}
-      </button>
       </div>
     </div>
   );
