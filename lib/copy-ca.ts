@@ -77,6 +77,7 @@ const CA: Record<string, string> = {
   "Escuchar": "Escoltar",
 
   // ── Experiencias ──
+  "Experiencias": "Experiències",
   "Eventos para marcas": "Esdeveniments per a marques",
   "Diseñamos experiencias musicales que conectan marcas, artistas y personas.":
     "Dissenyem experiències musicals que connecten marques, artistes i persones.",

@@ -1,59 +1,57 @@
 import { serverLocale } from "@/lib/locale-server";
 import { tr } from "@/lib/copy-ca";
+
 /**
- * Banda superior de /eventos (mockup): título EVENTOS gigante en outline,
- * LIGERAMENTE INCLINADO, con una onda cyan hand-drawn cruzándolo, y la
- * descripción arriba a la derecha con su garabato. Crema dominante.
+ * Cabecera de /experiencias.
+ *
+ * La versión anterior era la palabra en outline inclinada con una onda cian
+ * cruzándola. Víctor la veía "más floja que el diseño antiguo de eventos" y
+ * pidió rehacerla sin miedo. Esta es la variante E4 del banco de pruebas
+ * (/lab/secciones): la palabra PARTIDA en dos líneas a tamaño de cartel, en
+ * grotesca de peso alto, con el segundo tramo en cian.
+ *
+ * Por qué esta y no la de las cifras: las tres cifras de la página (250
+ * eventos · 58 marcas · 53 artistas) ya salen inmediatamente debajo, en
+ * EventosShowcase. Repetirlas aquí sería decir dos veces lo mismo en dos
+ * pantallas seguidas.
+ *
+ * El título se parte a propósito, así que el <h1> lleva `aria-label` con la
+ * palabra entera y el dibujo va `aria-hidden`: quien use lector de pantalla
+ * oye "Experiencias", no "Experi. Encias".
  */
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
 
 export function EventosHero() {
+  const locale = serverLocale();
   return (
-    <div className="relative px-5 pt-14 md:px-10 md:pt-16">
-      {/* EVENTOS gigante, inclinado, en outline + onda cyan cruzando */}
-      <div className="pointer-events-none relative">
-        <h1
-          aria-label="Experiencias"
-          className="select-none whitespace-nowrap font-round font-bold leading-[0.82]"
-          style={{
-            fontSize: "clamp(2.6rem, 12.5vw, 11rem)",
-            letterSpacing: "-0.015em",
-            color: "transparent",
-            WebkitTextStroke: `clamp(1.5px, 0.3vw, 3.5px) ${NAVY}`,
-            transform: "rotate(-3deg)",
-            transformOrigin: "left center",
-            marginLeft: "-0.5vw",
-          }}
-        >
-          EXPERIENCIAS
-        </h1>
+    <div className="px-5 pb-4 pt-14 md:px-10 md:pt-16">
+      <h1
+        aria-label={tr(locale, "Experiencias")}
+        className="font-cartel font-black uppercase leading-[0.86] tracking-tight"
+        style={{ color: NAVY, fontSize: "clamp(2.8rem,11vw,8.5rem)" }}
+      >
+        <span aria-hidden>
+          EXPERI
+          <br />
+          <span style={{ color: CYAN }}>ENCIAS</span>
+        </span>
+      </h1>
 
-        {/* Onda cyan hand-drawn cruzando el título, con caída a la derecha */}
-        <svg
-          className="absolute left-0 top-1/2 h-[46%] w-full -translate-y-[46%]"
-          viewBox="0 0 1200 180"
-          fill="none"
-          preserveAspectRatio="none"
-          aria-hidden
-        >
+      {/* El garabato hace de guion entre el titular y la frase: los ata sin
+          necesidad de una línea de separación. */}
+      <div className="mt-7 flex items-start gap-4 md:mt-8 md:items-center">
+        <svg className="mt-1.5 h-3 w-16 shrink-0 md:mt-0 md:w-28" viewBox="0 0 112 12" fill="none" aria-hidden>
           <path
-            d="M-30 110 C 140 40, 320 40, 500 96 C 640 138, 720 150, 840 96 C 960 44, 1080 60, 1230 128"
+            d="M2 8 Q 14 2, 28 7 T 56 7 T 84 7 T 110 5"
             stroke={CYAN}
-            strokeWidth="15"
+            strokeWidth="2.5"
             strokeLinecap="round"
           />
         </svg>
-      </div>
-
-      {/* Descripción a la derecha, bajo el título (no la solapa) */}
-      <div className="ml-auto mt-2 max-w-[15rem] md:-mt-2 md:max-w-[17rem]">
-        <p className="text-[0.8rem] font-semibold uppercase leading-snug tracking-[0.03em] md:text-sm" style={{ color: NAVY }}>
-          {tr(serverLocale(), "Diseñamos experiencias musicales que conectan marcas, artistas y personas.")}
+        <p className="max-w-md text-[0.8rem] font-semibold uppercase leading-snug md:text-sm" style={{ color: NAVY }}>
+          {tr(locale, "Diseñamos experiencias musicales que conectan marcas, artistas y personas.")}
         </p>
-        <svg className="mt-2 h-3 w-24" viewBox="0 0 96 12" fill="none" aria-hidden>
-          <path d="M2 8 Q 12 2, 24 7 T 48 7 T 72 7 T 94 5" stroke={CYAN} strokeWidth="2.5" strokeLinecap="round" />
-        </svg>
       </div>
     </div>
   );
