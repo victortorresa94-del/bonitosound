@@ -34,6 +34,37 @@ function navKey(href: string) {
  * navegación completa el servidor vuelve a decidir el idioma y todo cuadra.
  * Cambiar de idioma se hace una vez por visita: la recarga no molesta.
  */
+/**
+ * Las dos banderas, dibujadas en SVG.
+ *
+ * Van dibujadas y no como emoji 🇪🇸/🇨🇦 porque Windows NO pinta las banderas
+ * de emoji: sale el par de letras "ES"/"CA" en una cajita, que es justo lo que
+ * queríamos quitar. Y la senyera ni siquiera existe como emoji.
+ *
+ * Cada una lleva su borde: sobre el crema del fondo, el amarillo de la senyera
+ * y el de la bandera española se pierden sin un filete que los recorte.
+ */
+function Bandera({ pais }: { pais: Locale }) {
+  const comun = "block h-[1.15rem] w-[1.6rem] rounded-[3px]";
+  return pais === "ca" ? (
+    // Senyera: cuatro barras rojas sobre amarillo.
+    <svg viewBox="0 0 27 18" className={comun} aria-hidden>
+      <rect width="27" height="18" fill="#FCDD09" />
+      {[2, 6, 10, 14].map((y) => (
+        <rect key={y} y={y} width="27" height="2" fill="#DA121A" />
+      ))}
+      <rect x="0.4" y="0.4" width="26.2" height="17.2" rx="2.6" fill="none" stroke="rgba(20,40,60,0.28)" strokeWidth="0.8" />
+    </svg>
+  ) : (
+    // Bandera de España: rojo-amarillo-rojo, con la banda central al doble.
+    <svg viewBox="0 0 27 18" className={comun} aria-hidden>
+      <rect width="27" height="18" fill="#AA151B" />
+      <rect y="4.5" width="27" height="9" fill="#F1BF00" />
+      <rect x="0.4" y="0.4" width="26.2" height="17.2" rx="2.6" fill="none" stroke="rgba(20,40,60,0.28)" strokeWidth="0.8" />
+    </svg>
+  );
+}
+
 function LangSwitch({ pathname, locale }: { pathname: string; locale: Locale }) {
   const base = stripLocale(pathname);
   const otro: Locale = locale === "es" ? "ca" : "es";
@@ -41,9 +72,13 @@ function LangSwitch({ pathname, locale }: { pathname: string; locale: Locale }) 
     <a
       href={localePath(base, otro)}
       aria-label={t(locale, "lang.switch")}
-      className="text-sm font-semibold uppercase tracking-wide text-text-secondary transition-colors hover:text-text-primary"
+      title={otro === "ca" ? "Català" : "Castellano"}
+      className="flex items-center opacity-80 transition-all duration-200 hover:scale-110 hover:opacity-100"
     >
-      {otro === "ca" ? "CA" : "ES"}
+      <Bandera pais={otro} />
+      {/* El idioma al que se va, para quien no distinga las banderas o navegue
+          con lector de pantalla. */}
+      <span className="sr-only">{otro === "ca" ? "Català" : "Castellano"}</span>
     </a>
   );
 }

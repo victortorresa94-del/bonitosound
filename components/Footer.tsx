@@ -61,7 +61,7 @@ export function Footer() {
 
   return (
     <footer style={{ backgroundColor: NAVY }}>
-      <div className="wrap grid gap-10 pb-12 pt-16 md:grid-cols-4 md:pt-20">
+      <div className="wrap grid gap-10 gap-y-12 pb-16 pt-16 md:grid-cols-4 md:pb-20 md:pt-20">
         {cols.map((c) => (
           <div key={c.title}>
             <Titulo>{t(locale, c.title)}</Titulo>
@@ -121,7 +121,11 @@ export function Footer() {
 
       {/* Franja inferior: membresías a la izquierda, legales a la derecha. */}
       <div className="border-t" style={{ borderColor: "rgba(251,250,246,0.14)" }}>
-        <div className="wrap flex flex-col gap-5 py-6 md:flex-row md:items-center md:justify-between">
+        {/* Aire de sobra arriba y abajo: esta franja quedaba pegada al bloque
+            de columnas y al wordmark gigante, y todo el pie parecía amontonado
+            en dos centímetros. El respiro grande va DEBAJO, que es donde entra
+            el BONITO SOUND enorme. */}
+        <div className="wrap flex flex-col gap-6 pb-12 pt-9 md:flex-row md:items-center md:justify-between md:gap-8 md:pb-16 md:pt-11">
           {insti.length > 0 && (
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <span className="text-[0.58rem] font-semibold uppercase tracking-[0.2em]" style={{ color: "rgba(251,250,246,0.45)" }}>
