@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { LocaleProvider } from "@/components/LocaleProvider";
 import { DEFAULT_LOCALE, type Locale } from "@/lib/i18n";
-import { Zilla_Slab, Fredoka, Caveat, Playfair_Display, Archivo } from "next/font/google";
+import { Zilla_Slab, Fredoka, Caveat, Playfair_Display, Archivo, Anton } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
@@ -57,6 +57,19 @@ const cartel = Archivo({
   variable: "--font-cartel",
   display: "swap",
   weight: ["600", "700", "800", "900"],
+});
+
+// Grotesca ULTRACONDENSADA de cartel de conciertos. Es la del muro de clientes
+// del home y solo de ahí: en mayúsculas y a tamaño enorme deja "HAN CONFIADO EN
+// HACERLO BONITO." a todo el ancho sin partirse en cuatro líneas, que es lo que
+// pasaba con Fredoka —que es simpática pero muy ancha—. Un solo peso, que es
+// como viene y como se usa: si hiciera falta un segundo peso, es que no es la
+// tipografía adecuada para ese sitio.
+const poster = Anton({
+  subsets: ["latin"],
+  variable: "--font-poster",
+  display: "swap",
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -128,7 +141,7 @@ export default function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${display.variable} ${round.variable} ${hand.variable} ${editorial.variable} ${cartel.variable} ${GeistSans.variable}`}
+      className={`${display.variable} ${round.variable} ${hand.variable} ${editorial.variable} ${cartel.variable} ${poster.variable} ${GeistSans.variable}`}
     >
       <body style={{ ["--font-body" as string]: "var(--font-geist-sans)" }}>
         <JsonLd data={orgLd} />

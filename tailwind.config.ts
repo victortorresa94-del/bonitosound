@@ -40,6 +40,7 @@ const config: Config = {
         hand: ["var(--font-hand)", "ui-rounded", "cursive"],
         editorial: ["var(--font-editorial)", "Georgia", "serif"],
         cartel: ["var(--font-cartel)", "ui-sans-serif", "system-ui"],
+        poster: ["var(--font-poster)", "Impact", "ui-sans-serif", "system-ui"],
       },
       maxWidth: {
         content: "1240px",

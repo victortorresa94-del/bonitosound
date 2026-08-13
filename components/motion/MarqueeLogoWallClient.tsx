@@ -23,6 +23,14 @@ type Props = {
   mono?: boolean;
   /** Alto de cada logo. Por defecto `h-7`; la banda-pie del home usa `h-6`. */
   logoClass?: string;
+  /**
+   * Separación entre logos. Por defecto `3rem`, que va bien en una banda ancha
+   * y suelta. El muro del home la baja: ahí la fila es más corta y con 3rem se
+   * veían cuatro logos perdidos en medio de la nada.
+   */
+  gap?: string;
+  /** Ancho mínimo de la celda de cada logo. Mismo motivo que `gap`. */
+  minAncho?: string;
 };
 
 export function MarqueeLogoWallClient({
@@ -32,17 +40,20 @@ export function MarqueeLogoWallClient({
   direction = "left",
   mono = false,
   logoClass = "h-7",
+  gap = "3rem",
+  minAncho = "100px",
 }: Props) {
   return (
     <div>
       {label && <p className="eyebrow mb-6">{label}</p>}
-      <MarqueeRow speed={speed} direction={direction} gap="3rem">
+      <MarqueeRow speed={speed} direction={direction} gap={gap}>
         {items.map((it) => {
           const silueta = mono && it.aguantaSilueta !== false;
           return (
             <div
               key={it.name}
-              className="flex h-14 min-w-[100px] shrink-0 items-center justify-center px-3"
+              className="flex h-14 shrink-0 items-center justify-center px-3"
+              style={{ minWidth: minAncho }}
             >
               {it.src ? (
                 <Image
