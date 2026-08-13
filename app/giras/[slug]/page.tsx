@@ -7,6 +7,8 @@ import { CtaBlock } from "@/components/CtaBlock";
 import { R2Video } from "@/components/R2Video";
 import { YouTubeEmbed } from "@/components/Embeds";
 import { RevealOnScroll, StaggerGroup, SplitTextReveal } from "@/components/motion";
+import { GiraGaleria } from "@/components/giras/GiraGaleria";
+import { girasFotos } from "@/lib/giras-fotos";
 import { getGira, getGiraSlugs, getGiras } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { giras } from "@/lib/giras";
@@ -56,6 +58,8 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
   // que ahí no se puede reproducir mudo en bucle: ese caso se queda abajo.
   const candidato = g.video ?? meta?.video ?? null;
   const heroVideo = candidato?.startsWith("/") ? candidato : null;
+
+  const tieneGaleria = girasFotos(g.slug).length > 0;
 
   const facts = [
     ...(meta?.years || g.year ? [{ k: "Años", v: meta?.years ?? g.year }] : []),
@@ -258,6 +262,15 @@ export default function GiraPage({ params }: { params: { slug: string } }) {
           )}
         </div>
       </Section>
+
+      {/* EL ARCHIVO DE LA GIRA. La condición va aquí y no dentro del
+          componente: si no, la <Section> se pintaría igual y quedaría una
+          franja de color vacía en las giras que no tienen carpeta de fotos. */}
+      {tieneGaleria && (
+        <Section className="bg-bg-primary">
+          <GiraGaleria slug={g.slug} />
+        </Section>
+      )}
 
       {/* VÍDEO — solo YouTube. El mp4 ya se ve arriba, en la polaroid, y
           enseñarlo dos veces en la misma página no aporta nada.

@@ -187,7 +187,10 @@ export function getEventos(): Evento[] {
         video: resolveEventoVideo(slug) ?? fm.video ?? (fm.videoUrl ? r2(fm.videoUrl) : undefined),
       };
     })
-    .sort((a, b) => b.year.localeCompare(a.year));
+    // `year` puede faltar en un markdown recién escrito. Sin el ?? "" un
+    // fichero incompleto tumbaba el build entero con un TypeError en el
+    // sort — mejor que esa ficha caiga al final de la lista.
+    .sort((a, b) => (b.year ?? "").localeCompare(a.year ?? ""));
 }
 
 export function getEvento(slug: string): Evento | undefined {
@@ -232,7 +235,10 @@ export function getGiras(): Evento[] {
           (fm.videoUrl ? r2(fm.videoUrl) : undefined),
       };
     })
-    .sort((a, b) => b.year.localeCompare(a.year));
+    // `year` puede faltar en un markdown recién escrito. Sin el ?? "" un
+    // fichero incompleto tumbaba el build entero con un TypeError en el
+    // sort — mejor que esa ficha caiga al final de la lista.
+    .sort((a, b) => (b.year ?? "").localeCompare(a.year ?? ""));
 }
 
 export function getGira(slug: string): Evento | undefined {

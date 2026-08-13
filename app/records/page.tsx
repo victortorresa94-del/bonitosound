@@ -77,7 +77,7 @@ const faq = [
 ];
 
 export default function Records() {
-  const illo = "/img/servicios/heroes/sello.png";
+  const illo = "/img/servicios/heroes/sello.jpg";
   const locale = serverLocale();
   const roster = getArtists().map((x) => artistaCa(x, locale)).filter((a) => a.tier === "booking");
   const mailto = `mailto:${site.emails.general}?subject=${encodeURIComponent("Records")}`;
