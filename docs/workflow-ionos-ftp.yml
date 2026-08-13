@@ -1,0 +1,50 @@
+# Publicar en el webspace de IONOS en cada push.
+#
+# NO ESTÁ ACTIVO. Para activarlo, cópialo a .github/workflows/deploy-ionos.yml
+# y crea los tres secretos en GitHub → Settings → Secrets and variables →
+# Actions:  IONOS_FTP_SERVER, IONOS_FTP_USER, IONOS_FTP_PASSWORD
+#
+# ⚠️ Antes de usarlo, lee la opción 2 de docs/DESPLIEGUE.md: para que la web
+# quepa en un hosting de PHP hay que exportarla a estático, y eso rompe el
+# catalán (lo sirve middleware.ts) y desactiva la optimización de imágenes.
+# No lo enciendas sin haber resuelto eso primero.
+
+name: Desplegar en IONOS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # para lanzarlo a mano desde la pestaña Actions
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # Requiere output: "export" en next.config.mjs. Deja la web en ./out
+      - run: npx next build
+
+      # Los 234 redirects del WordPress viejo. En Apache no vale
+      # next.config.mjs: hay que traducirlos a .htaccess y subirlo con la web.
+      - run: node scripts/htaccess.mjs > out/.htaccess
+
+      - name: Subir por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.IONOS_FTP_SERVER }}
+          username: ${{ secrets.IONOS_FTP_USER }}
+          password: ${{ secrets.IONOS_FTP_PASSWORD }}
+          local-dir: ./out/
+          # OJO: el WordPress vive en /bonito/. Apunta esto a la carpeta que
+          # sirva el dominio, y ten la copia de seguridad hecha (paso 1).
+          server-dir: /
+          # Sube solo lo que ha cambiado desde el último despliegue.
+          state-name: .ftp-deploy-sync-state.json

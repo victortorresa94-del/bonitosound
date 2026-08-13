@@ -6,6 +6,11 @@ services: ["Booking"]
 spotifyArtistId: "79qGj0n6B3skao1b5Ojt2V"
 instagram: "https://www.instagram.com/paulemusica/"
 image: "/img/artistas/paule.jpeg"
+milestones:
+  - { year: "2026", text: "Álbum 'Les galetes quan s'estoven'" }
+  - { year: "2025", text: "Single 'T'estimo com abans'" }
+  - { year: "2025", text: "EP 'Hipercub'" }
+  - { year: "2025", text: "Single 'Llum d'estiu'" }
 musicStyle: "Canción de autor que parece sencilla hasta que intentas escribir una igual. El oficio no se ve, se nota."
 forWho: "Para quien escucha las letras y valora una canción bien hecha."
 ---

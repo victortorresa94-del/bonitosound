@@ -192,3 +192,90 @@ en dos minutos.
 | 2 | ¿Monto Keystatic para Dani? (paso 6) |
 | 3 | Los IDs de Analytics / Pixel, si los había |
 | 4 | Acceso a Vercel, o lo creas tú con GitHub y me dices cuándo está |
+
+---
+
+# Subirlo a IONOS (si no quieres Vercel)
+
+> Pregunta tuya: *"ya lo hice una vez manualmente y cada cambio es un rollazo,
+> necesitamos encontrar la forma de hacerlo desde Claude Code"*.
+
+Lo primero, el dato que cambia la conversación: **ya tienes Vercel conectado y
+funcionando**. El proyecto `bonitosound` está enlazado al repo de GitHub y
+publica solo en cada push — de hecho hoy ha desplegado once veces. El "rollazo"
+de subir ficheros a mano ya está resuelto; lo único que falta es apuntar el
+dominio.
+
+Dicho eso, aquí van las tres formas de hacerlo en IONOS, con lo que cuesta cada
+una de verdad.
+
+## Opción 1 · IONOS Deploy Now
+
+Existe: producto en `ionos.com/hosting/deploy-now`, documentación en
+`docs.ionos.space`. Se conecta a un repo de GitHub, te genera un workflow de
+GitHub Actions y publica en cada push. En concepto, lo mismo que Vercel.
+
+⚠️ **Lo que NO he podido verificar hoy**: si su plan soporta Next.js **con
+servidor** (SSR + `middleware.ts`) o solo sitios estáticos. Su documentación
+cambió de estructura y las páginas que buscaba dan 404. Antes de contratarlo,
+pregúntales literalmente esto:
+
+> "¿Deploy Now ejecuta una app Next.js 14 con App Router, renderizado en
+> servidor y `middleware.ts`, o solo publica el resultado de `next export`?"
+
+Si la respuesta es que **solo estático**, aplica todo lo de la opción 2.
+
+## Opción 2 · El webspace de siempre, por FTP, automatizado
+
+Es tu hosting actual, el del WordPress. Automatizarlo **sí se puede** y no hace
+falta volver a arrastrar carpetas nunca más: se añade un workflow de GitHub
+Actions que compila y sube por FTP en cada push. Lo tienes escrito y listo en
+`docs/workflow-ionos-ftp.yml` — no está activado a propósito.
+
+Para activarlo:
+
+1. Cópialo a `.github/workflows/deploy-ionos.yml`.
+2. En GitHub → *Settings* → *Secrets and variables* → *Actions*, crea
+   `IONOS_FTP_SERVER`, `IONOS_FTP_USER` y `IONOS_FTP_PASSWORD` con los datos
+   FTP que te da el panel de IONOS. **Nunca en el repo.**
+
+### Pero esto tiene un precio, y hay que decirlo
+
+Para que quepa en un hosting de PHP, la web tiene que exportarse a ficheros
+estáticos (`output: "export"`). Al hacerlo se pierden tres cosas:
+
+| Qué se rompe | Por qué | Se puede arreglar |
+|---|---|---|
+| **El catalán** | Lo sirve `middleware.ts`, que reescribe `/ca/...` para no duplicar 35 páginas. En estático no hay middleware. | Sí, generando de verdad las 35 páginas `/ca/*`. Es trabajo, no imposible. |
+| **Las imágenes** | `next/image` las redimensiona en servidor. Hay que poner `images.unoptimized: true`. | No: la web pesa más y carga peor. |
+| **Los 234 redirects** | `next.config.mjs` no existe en un servidor Apache. | Sí: `node scripts/htaccess.mjs` te los saca en formato `.htaccess`. |
+
+Ese script ya está hecho. Genera el fichero listo para subir a la raíz del
+webspace, junto a los ficheros de la web.
+
+## Opción 3 · Un VPS de IONOS
+
+Node + pm2 + nginx + certbot. Funciona todo tal cual, sin perder nada. Pero el
+mantenimiento pasa a ser tuyo: actualizaciones de seguridad, renovar el
+certificado, reiniciar el proceso si se cae. Desde ~10 €/mes. Solo tiene sentido
+si quieres control total y alguien que lo cuide.
+
+## Comparativa
+
+| | Vercel (ya montado) | Deploy Now | Webspace + FTP | VPS |
+|---|---|---|---|---|
+| Coste | 0 € | por confirmar | ya lo pagas | ~10 €/mes |
+| Sube sola en cada push | ✅ | ✅ | ✅ con el workflow | con trabajo |
+| Catalán | ✅ | por confirmar | ❌ hay que rehacerlo | ✅ |
+| Imágenes optimizadas | ✅ | por confirmar | ❌ | ✅ |
+| Mantenimiento | ninguno | ninguno | ninguno | tuyo |
+
+## Mi recomendación
+
+**Quédate en Vercel y deja el dominio en IONOS.** No es pereza: es que la única
+razón para mover el alojamiento sería ahorrar, y Vercel te sale a cero mientras
+que el webspace te obliga a romper el catalán y las imágenes para que quepa.
+Cambias dos registros DNS (paso 5) y has terminado.
+
+Si aun así quieres IONOS, la opción 2 está lista para usar y no te ata a nada:
+el mismo repo puede publicar en los dos sitios a la vez mientras decides.
