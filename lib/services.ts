@@ -185,6 +185,35 @@ export const services: Record<string, Service> = {
     ],
     cta: { h2: "¿Tienes una gira que mover?", desc: "Cuéntanos las fechas y el proyecto. Te decimos cómo la montamos y por dónde empezaríamos." },
   },
+
+  // Estudio de grabación. Se llama "Estudio" y no "Producción musical" para
+  // que no choque con "Producción de giras", que es la de aquí arriba: giras
+  // se producen, canciones se hacen en estudio. Es un acuerdo con el estudio
+  // de Marco La Testa y Jano Montano, no un servicio interno — de ahí que el
+  // copy hable de acompañamiento y no de "nuestro estudio".
+  estudio: {
+    slug: "estudio",
+    path: "/records/estudio",
+    eyebrow: "Estudio de grabación",
+    h1: "Cada proyecto es único.",
+    h1Cyan: "único.",
+    desc: "Entendemos la creación musical como un proceso creativo al servicio de la identidad de cada artista. De la composición al máster, con Marco La Testa y Jano Montano.",
+    ctaSubject: "Estudio de grabación",
+    aspects: [
+      { name: "Composición y producción", desc: "Desde la idea o desde la maqueta. Se trabaja la canción hasta que dice lo que tiene que decir." },
+      { name: "Grabación, mezcla y máster", desc: "Todas las fases en el mismo sitio y con el mismo criterio, sin ir saltando de estudio en estudio." },
+      { name: "Tu identidad, no la nuestra", desc: "Ni fórmulas ni un sonido propio impuesto a todos los proyectos. Cada decisión va a reforzar lo que ya eres." },
+    ],
+    faq: [
+      { q: "¿Quién produce?", a: "Marco La Testa y Jano Montano. En los últimos tres años han participado en más de cien canciones publicadas." },
+      { q: "¿Con qué artistas habéis trabajado?", a: "Entre otros, Alfred García, Maruja Limón, Tribade, Sofia Gabanna, J Dose, Elane, Huda, Albali, Paule y D Nácar." },
+      { q: "¿Tenéis un sonido propio?", a: "No, y es a propósito. Cada artista tiene una identidad y una manera de comunicar; la producción está para potenciar eso, no para taparlo con un sello reconocible." },
+      { q: "¿Hace falta traer la canción terminada?", a: "No. Se puede entrar con un tema cerrado, con una maqueta o con una idea suelta. Cambia por dónde se empieza, no cómo se trabaja." },
+      { q: "¿Puedo grabar solo la mezcla o el máster?", a: "Sí. Se puede entrar en cualquier fase, aunque el resultado suele ser mejor cuando las decisiones creativas y las técnicas van de la mano desde el principio." },
+      { q: "¿Esto es lo mismo que la producción de giras?", a: "No. Aquí se hacen canciones; la producción de giras es el directo, y va por otro lado." },
+    ],
+    cta: { h2: "¿Tienes una canción que grabar?", desc: "Cuéntanos en qué punto está el proyecto y te decimos cómo lo abordaríamos." },
+  },
 };
 
 export const serviceList = Object.values(services);

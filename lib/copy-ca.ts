@@ -119,6 +119,16 @@ const CA: Record<string, string> = {
   "Así se vivió": "Així es va viure",
   "El cierre de la gira, contado en vídeo.": "El tancament de la gira, explicat en vídeo.",
 
+  // ── Estudio de grabación ──
+  // Los dos párrafos largos son la bio ORIGINAL que mandó el estudio: aquí va
+  // tal cual y el castellano de EstudioPartner.tsx es la traducción.
+  "Quién lo hace": "Qui ho fa",
+  "Marco La Testa y Jano Montano ofrecen un acompañamiento integral en todas las fases de un proyecto musical. Desde la composición y la producción hasta la grabación, la mezcla y el máster, trabajan para que cada decisión creativa y técnica refuerce la identidad de la canción.":
+    "Marco La Testa i Jano Montano ofereixen un acompanyament integral a artistes en totes les fases d'un projecte musical. Des de la composició i la producció fins a la gravació, la mescla i el màster, treballen perquè cada decisió creativa i tècnica contribueixi a reforçar la identitat de la cançó.",
+  "No entienden la producción como un conjunto de fórmulas ni como un sonido propio impuesto a todos los proyectos. Cada artista tiene una identidad, una manera de comunicar y un universo propio. Cada decisión creativa está al servicio de potenciar esa identidad y llevar cada canción a su mejor versión.":
+    "No entenen la producció com un conjunt de fórmules ni com un so propi imposat a tots els projectes. Cada artista té una identitat, una manera de comunicar i un univers propi. Cada decisió creativa està al servei de potenciar aquesta identitat i portar cada cançó a la seva millor versió.",
+  "canciones publicadas en los últimos tres años": "cançons publicades els últims tres anys",
+
   // ── Qué somos ──
   "El equipo": "L'equip",
   "Ha trabajado con": "Ha treballat amb",

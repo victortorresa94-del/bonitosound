@@ -124,6 +124,14 @@ const SERVICIOS_CA: Record<string, ServicioCa> = {
     h1: "Tu toques. De la resta ens n'ocupem nosaltres.",
     desc: "Producció tècnica, escenari, logística i coordinació de gires d'artista. Plaça a plaça, de la producció prèvia al desmuntatge.",
   },
+  // El catalán del estudio es el original: la frase destacada y la bio vinieron
+  // así del propio estudio, y el castellano de lib/services.ts es la traducción.
+  estudio: {
+    eyebrow: "Estudi de gravació",
+    h1: "Cada projecte és únic.",
+    h1Cyan: "únic.",
+    desc: "Entenem la creació musical com un procés creatiu al servei de la identitat de cada artista. De la composició al màster, amb Marco La Testa i Jano Montano.",
+  },
 };
 
 export function servicioCa(slug: string): ServicioCa | undefined {

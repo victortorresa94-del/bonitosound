@@ -35,14 +35,15 @@ type Servicio = {
 const SERVICIOS: Servicio[] = [
   { n: "01", slug: "booking", title: "Booking", href: "/booking", desc: "Conectamos tu música con el público adecuado. Giras, festivales y conciertos a medida para que tu directo llegue más lejos." },
   { n: "02", slug: "management", title: "Management", href: "/management", desc: "Acompañamos tu carrera con visión, estrategia y experiencia para que tomes las mejores decisiones en cada etapa." },
-  { n: "03", slug: "produccion", title: "Producción", href: "/records/producciones", desc: "Damos forma a tu sonido. Producción musical, grabación, mezcla y mastering con criterio y sin prisas." },
-  { n: "04", slug: "editorial", title: "Editorial", href: "/records/editorial", desc: "Publicamos y administramos tus derechos para que tus canciones generen ingresos y lleguen a todas partes." },
-  { n: "05", slug: "distribucion", title: "Distribución", href: "/records/distribucion", desc: "Tu música en todas las plataformas. Distribución digital global, gestión de derechos y cuentas claras." },
-  { n: "06", slug: "marketing", title: "Marketing", href: "/marketing", desc: "Campañas para dar a conocer tu proyecto, conectar con tu audiencia y que el lanzamiento no pase desapercibido." },
+  { n: "03", slug: "produccion", title: "Producción de giras", href: "/records/producciones", desc: "Producción técnica, escenario, logística y road management. Plaza a plaza, de la producción previa al desmontaje." },
+  { n: "04", slug: "estudio", title: "Estudio", href: "/records/estudio", desc: "De la composición al máster. Grabación y producción musical con Marco La Testa y Jano Montano, al servicio de tu identidad." },
+  { n: "05", slug: "editorial", title: "Editorial", href: "/records/editorial", desc: "Publicamos y administramos tus derechos para que tus canciones generen ingresos y lleguen a todas partes." },
+  { n: "06", slug: "distribucion", title: "Distribución", href: "/records/distribucion", desc: "Tu música en todas las plataformas. Distribución digital global, gestión de derechos y cuentas claras." },
+  { n: "07", slug: "marketing", title: "Marketing", href: "/marketing", desc: "Campañas para dar a conocer tu proyecto, conectar con tu audiencia y que el lanzamiento no pase desapercibido." },
 ];
 
 const RECORDS: Servicio = {
-  n: "07",
+  n: "08",
   slug: "records",
   title: "Records",
   href: "/records",
