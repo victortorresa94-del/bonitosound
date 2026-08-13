@@ -140,7 +140,6 @@ export const brands = [
   "Concert Studio",
   "Global Talent Services",
   "Sweet Bird",
-  "Código 1530",
   "Lighthouse",
   "Corre Lola Corre",
   "Sr. Wilson",
@@ -227,6 +226,10 @@ const PROVEEDORES = [
 
 /**
  * Marcas que NO están en `brands` pero sí han trabajado con nosotros.
+ *
+ * OJO: "Código 1530" y "Tequila Código" eran la misma marca contada dos veces
+ * —lo confirmó Víctor viendo los dos logos juntos—. Se queda "Tequila Código",
+ * que es la que firma su experiencia en content/eventos/.
  *  - Las tres primeras las aportó Dani (carpeta de Drive).
  *  - Château, Pepsi y Tequila Código tienen su propia experiencia escrita en
  *    content/eventos/ pero faltaban en esta lista, así que se caían del muro de
