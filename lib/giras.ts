@@ -47,7 +47,11 @@ export const giras: Gira[] = [
   { slug: "ramon-mirabet-del-mar", artist: "Ramón Mirabet", tour: "Gira del Mar — ruta por el Mediterráneo", year: "2021", shows: "+12 conciertos", showsCount: 12 },
   { slug: "nerea-rodriguez-doble-o-nada", artist: "Nerea Rodríguez", tour: "Doble o Nada Tour", year: "2021", shows: "+15 conciertos", showsCount: 15 },
   { slug: "fabian-acustica", artist: "Fabián", tour: "Gira Acústica", year: "2021", shows: "+10 conciertos", showsCount: 10 },
-  { slug: "alfred-garcia-1016", artist: "Alfred García", tour: "Gira 1016", year: "2019", years: "2019–2021", shows: "+40 conciertos", showsCount: 40, credit: "Roser Gamonal", youtubeId: "r47SP4OULcI" },
+  // Sin `credit`: la portada de esta gira pasó a ser un retrato del artista y
+  // no sabemos de quién es. La foto de público de Roser Gamonal sigue en el
+  // repo como alfred-garcia-1016-publico.jpg — en cuanto haya una foto suya
+  // DE ALFRED en la gira, se vuelve a poner aquí con su crédito.
+  { slug: "alfred-garcia-1016", artist: "Alfred García", tour: "Gira 1016", year: "2019", years: "2019–2021", shows: "+40 conciertos", showsCount: 40, youtubeId: "r47SP4OULcI" },
 ];
 
 /**
