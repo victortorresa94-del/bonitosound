@@ -3,7 +3,10 @@ import path from "node:path";
 import { pngAguantaSilueta } from "./png-alpha";
 
 const pub = path.join(process.cwd(), "public");
-const EXT = ["svg", "webp", "png", "jpg", "jpeg", "avif"];
+// El orden importa: gana el primero que exista. Vectorial antes que mapa de
+// bits, y el gif al final porque un par de asociaciones solo nos han pasado el
+// logo en ese formato — no es un formato que elijamos, es el que hay.
+const EXT = ["svg", "webp", "png", "jpg", "jpeg", "avif", "gif"];
 
 /** Pasa un nombre de marca/persona a slug de fichero: "Ballantine's" -> "ballantines". */
 export function assetSlug(name: string): string {

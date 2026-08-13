@@ -14,7 +14,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const EXT = ["svg", "webp", "png", "jpg", "jpeg", "avif"];
+const EXT = ["svg", "webp", "png", "jpg", "jpeg", "avif", "gif"];
 
 /** Copia exacta de assetSlug() en lib/assets.ts. */
 function assetSlug(name) {
