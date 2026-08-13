@@ -89,7 +89,7 @@ export function TrustedWall() {
           <RevealOnScroll className="mt-4 md:mt-6" delay={0.2}>
             <Link
               href={localePath("/clientes", locale)}
-              className="text-sm font-bold underline-offset-4 transition-colors hover:underline"
+              className="text-sm font-medium underline-offset-4 transition-colors hover:underline"
               style={{ color: CYAN }}
             >
               {tr(locale, "Verlos todos")} ({total}) →
