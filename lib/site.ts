@@ -87,11 +87,11 @@ export const team = [
     role: "Comunicación",
     line: "Coordina lo de dentro y lo de fuera. Lo que ves publicado, ha pasado por ella.",
   },
-  // Quim Planas (coordinación de lanzamientos) entra en cuanto exista su
-  // retrato en /img/equipo/ilustracion/quim-planas.png. Su foto ya está en
-  // /img/equipo/quim-planas.jpg, lista para generarlo. No se publica antes:
-  // el bloque son cinco retratos dibujados y una foto ahí en medio se ve
-  // como un hueco sin terminar.
+  {
+    name: "Quim Planas",
+    role: "Lanzamientos",
+    line: "Coordina los lanzamientos y sube las canciones a plataformas. Si suena, ha pasado por sus manos.",
+  },
   {
     name: "Victor Torres",
     role: "Marketing Artístico & IA",
