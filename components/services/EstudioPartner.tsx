@@ -13,17 +13,20 @@ const CYAN = "#16b6d4";
  * ACUERDO con el estudio de Marco La Testa y Jano Montano, así que el bloque
  * los presenta con nombre y cara en vez de hablar en primera persona.
  *
- * Las fotos son plug-and-play, como el resto del sitio: en cuanto existan
- * /img/estudio/marco-la-testa.jpg y /img/estudio/jano-montano.jpg se pintan
- * solas. Mientras no estén, la ficha se sostiene con tipografía — nunca un
- * hueco gris esperando imagen.
+ * Las fotos que mandaron son todas del DÚO trabajando (no hay retratos
+ * individuales), así que el bloque enseña el estudio en vez de dos fichas de
+ * persona: el retrato de los dos manda y dos planos del trabajo lo acompañan.
+ * Siguen siendo plug-and-play — si un fichero no está, ese hueco simplemente
+ * no se pinta.
  *
  * Los artistas y el "+100 canciones" son dato real que aportó el estudio; por
  * eso van aquí y no inventados en el copy de servicio.
  */
-const DUO = [
-  { nombre: "Marco La Testa", slug: "marco-la-testa" },
-  { nombre: "Jano Montano", slug: "jano-montano" },
+/** Las tres fotos del estudio, por orden de peso en la composición. */
+const FOTOS = [
+  { slug: "duo", alt: "Marco La Testa y Jano Montano en el estudio" },
+  { slug: "mesa", alt: "Marco La Testa y Jano Montano trabajando en la mesa" },
+  { slug: "instrumentos", alt: "Marco La Testa y Jano Montano tocando en el estudio" },
 ];
 
 const ARTISTAS = [
@@ -33,7 +36,7 @@ const ARTISTAS = [
 
 export function EstudioPartner() {
   const locale = serverLocale();
-  const conFoto = DUO.map((p) => ({ ...p, foto: findAsset("estudio", p.slug) }));
+  const fotos = FOTOS.map((f) => ({ ...f, src: findAsset("estudio", f.slug) })).filter((f) => f.src);
 
   return (
     <Section id="estudio-partner">
@@ -43,26 +46,40 @@ export function EstudioPartner() {
             {tr(locale, "Quién lo hace")}
           </RevealOnScroll>
 
-          <StaggerGroup stagger={0.1} className="grid grid-cols-2 gap-5">
-            {conFoto.map((p) => (
-              <div key={p.slug}>
-                {p.foto && (
-                  <div className="relative mb-3 aspect-[3/4] overflow-hidden rounded-2xl bg-bg-tertiary">
-                    <Image
-                      src={p.foto}
-                      alt={p.nombre}
-                      fill
-                      sizes="(max-width: 768px) 45vw, 240px"
-                      className="object-cover"
-                    />
-                  </div>
-                )}
-                <p className="font-round text-base font-bold leading-tight" style={{ color: NAVY }}>
-                  {p.nombre}
-                </p>
+          {fotos.length > 0 && (
+            <StaggerGroup stagger={0.1}>
+              {/* La primera manda a todo el ancho; las otras dos, debajo y
+                  más pequeñas. Si solo hay una, ocupa ella sola el bloque. */}
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-bg-tertiary">
+                <Image
+                  src={fotos[0].src!}
+                  alt={tr(locale, fotos[0].alt)}
+                  fill
+                  sizes="(max-width: 768px) 92vw, 42vw"
+                  className="object-cover"
+                />
               </div>
-            ))}
-          </StaggerGroup>
+              {fotos.length > 1 && (
+                <div className="mt-4 grid grid-cols-2 gap-4">
+                  {fotos.slice(1).map((f) => (
+                    <div key={f.slug} className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-bg-tertiary">
+                      <Image
+                        src={f.src!}
+                        alt={tr(locale, f.alt)}
+                        fill
+                        sizes="(max-width: 768px) 45vw, 21vw"
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </StaggerGroup>
+          )}
+
+          <p className="mt-4 font-round text-base font-bold leading-tight" style={{ color: NAVY }}>
+            Marco La Testa · Jano Montano
+          </p>
         </div>
 
         <RevealOnScroll delay={0.1} className="space-y-5 text-lg leading-relaxed text-text-secondary">
