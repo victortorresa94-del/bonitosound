@@ -13,7 +13,14 @@ const NAVY = "#14283C";
  * /public/img/nosotros/dani/. Si no hay ninguna, la sección no existe.
  * Estética polaroid (marco blanco, cinta, rotación), la misma que /giras.
  */
-type Foto = { file: string; alt: string; caption: string; credit?: string };
+type Foto = {
+  file: string;
+  alt: string;
+  caption: string;
+  credit?: string;
+  /** Dónde ancla el recorte. Los verticales necesitan "top" o pierden cabezas. */
+  encuadre?: "top" | "center";
+};
 
 const FOTOS: Foto[] = [
   {
@@ -22,40 +29,28 @@ const FOTOS: Foto[] = [
     caption: "De backliner en carretera",
   },
   {
-    file: "en-directo",
-    alt: "Dani en producción durante un directo",
-    caption: "Producción en directo",
+    file: "maldita-nerea-directo",
+    alt: "Dani tocando en el escenario de Maldita Nerea",
+    caption: "Dani rockeando",
   },
-  {
-    file: "ruth-lorenzo",
-    alt: "Dani con Ruth Lorenzo",
-    caption: "Con Ruth Lorenzo",
-  },
-  // La de Tu Cara Me Suena la sustituye esta: es la foto que Víctor llevaba
-  // tiempo queriendo publicar.
   {
     file: "ivan-ferreiro",
     alt: "Dani con Iván Ferreiro y su banda después de un concierto",
     caption: "Con Iván Ferreiro",
   },
   {
+    file: "ruth-lorenzo",
+    alt: "Dani con Ruth Lorenzo y su equipo antes de salir a escena",
+    caption: "Con Ruth Lorenzo",
+  },
+  {
     file: "maldita-nerea",
     alt: "El equipo de la gira de Maldita Nerea en camerinos",
-    caption: "Equipo de Maldita Nerea",
-  },
-  {
-    file: "maldita-nerea-directo",
-    alt: "Escenario de Maldita Nerea visto desde el lateral durante el concierto",
-    caption: "Maldita Nerea, desde el lateral",
-  },
-  {
-    file: "sombra",
-    alt: "Silueta de Dani a contraluz entre el humo del escenario",
-    caption: "A contraluz",
+    caption: "El equipo de Maldita Nerea",
   },
   {
     file: "serginhio-moreira",
-    alt: "Dani con Serginhio Moreira, batería, junto a los camiones de producción",
+    alt: "Dani con el batería Serginhio Moreira junto a los camiones de producción",
     caption: "Con Serginhio Moreira",
     credit: "Roser Gamonal",
   },
@@ -65,15 +60,12 @@ const FOTOS: Foto[] = [
     caption: "Con Sweet Bird",
   },
   {
+    // Retrato vertical: encuadrado arriba, que si no el recorte a 4/3 le corta
+    // la cabeza a Dani.
     file: "camerino",
     alt: "Dani con una artista en camerinos, antes de salir a escena",
     caption: "Antes de salir",
-  },
-  {
-    file: "en-directo-2",
-    alt: "Concierto en directo con las luces azules del escenario",
-    caption: "Sala, noche de directo",
-    credit: "Roser Gamonal",
+    encuadre: "top",
   },
 ];
 
@@ -118,7 +110,7 @@ export function DaniGaleria() {
                 alt={f.alt}
                 fill
                 sizes="(max-width: 768px) 62vw, 240px"
-                className="object-cover"
+                className={`object-cover ${f.encuadre === "top" ? "object-top" : ""}`}
               />
             </div>
             <figcaption className="px-1 pt-2.5 text-center">

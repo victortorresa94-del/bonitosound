@@ -94,7 +94,7 @@ export const team = [
   },
   {
     name: "Victor Torres",
-    role: "Marketing Artístico & IA",
+    role: "Marketing & IA",
     line: "Campañas, contenido y la IA que hace que cada lanzamiento llegue más lejos.",
   },
 ] as const;

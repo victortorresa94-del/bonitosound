@@ -100,11 +100,11 @@ export default config({
         services: fields.array(fields.text({ label: "Servicio" }), {
           label: "Qué pusimos",
           description: "Ej.: «Producción técnica», «Tour management». Solo si es real.",
-          itemLabel: (p) => p.value,
+          itemLabel: (p: any) => p.value,
         }),
         lineup: fields.array(fields.text({ label: "Nombre" }), {
           label: "Line-up",
-          itemLabel: (p) => p.value,
+          itemLabel: (p: any) => p.value,
         }),
         result: fields.text({ label: "Cierre", description: "La frase que remata el relato.", multiline: true }),
         youtubeId: fields.text({
@@ -139,7 +139,7 @@ export default config({
         services: fields.array(fields.text({ label: "Servicio" }), {
           label: "Qué le llevamos",
           description: "Booking, Management, Records, Editorial…",
-          itemLabel: (p) => p.value,
+          itemLabel: (p: any) => p.value,
         }),
         spotifyArtistId: fields.text({ label: "ID de artista en Spotify" }),
         instagram: fields.url({ label: "Instagram" }),
@@ -154,7 +154,7 @@ export default config({
             year: fields.text({ label: "Año" }),
             text: fields.text({ label: "Qué pasó" }),
           }),
-          { label: "Hitos", itemLabel: (p) => `${p.fields.year.value} · ${p.fields.text.value}` },
+          { label: "Hitos", itemLabel: (p: any) => `${p.fields.year.value} · ${p.fields.text.value}` },
         ),
         content: cuerpo,
       },
@@ -181,14 +181,14 @@ export default config({
         author: fields.text({ label: "Firma", defaultValue: "Bonito Sound" }),
         tags: fields.array(fields.text({ label: "Etiqueta" }), {
           label: "Etiquetas",
-          itemLabel: (p) => p.value,
+          itemLabel: (p: any) => p.value,
         }),
         faq: fields.array(
           fields.object({
             q: fields.text({ label: "Pregunta" }),
             a: fields.text({ label: "Respuesta", multiline: true }),
           }),
-          { label: "Preguntas frecuentes", itemLabel: (p) => p.fields.q.value },
+          { label: "Preguntas frecuentes", itemLabel: (p: any) => p.fields.q.value },
         ),
         content: cuerpo,
       },
