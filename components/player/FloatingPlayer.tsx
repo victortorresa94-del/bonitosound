@@ -45,8 +45,11 @@ function PauseBonito() {
 /**
  * El reproductor flotante.
  *
- * A la IZQUIERDA: la derecha es por donde se pasa el pulgar al hacer scroll en
- * móvil, y ahí el botón estorbaba.
+ * IZQUIERDA en móvil y DERECHA en escritorio. En el móvil la derecha es por
+ * donde se pasa el pulgar al hacer scroll y el botón estorbaba; en escritorio
+ * no hay ese problema y la esquina de siempre para un reproductor flotante es
+ * la derecha. Las animaciones de entrada/salida miran el lado en el que esté
+ * para deslizarse hacia fuera de la pantalla, no hacia dentro.
  *
  * Un solo botón, play/pausa. Antes había hasta cinco (radio, siguiente,
  * Spotify, play y el de cerrar del panel) para algo que es un detalle de la
@@ -87,8 +90,13 @@ export function FloatingPlayer() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHome]);
 
-  // Entrada del conjunto: entra deslizándose DESDE EL BORDE IZQUIERDO, como si
-  // hubiera estado ahí fuera esperando. Respeta reduced-motion (solo fade).
+  // De qué lado entra y sale: el mismo en el que está pegado, para que se
+  // deslice hacia FUERA de la pantalla y no hacia dentro. El breakpoint es el
+  // `sm` de Tailwind (640px), que es donde cambia de esquina.
+  const desdeFuera = () => (window.matchMedia("(min-width: 640px)").matches ? 1 : -1);
+
+  // Entrada del conjunto: entra deslizándose desde su borde, como si hubiera
+  // estado ahí fuera esperando. Respeta reduced-motion (solo fade).
   useEffect(() => {
     if (!revealed || shownOnce.current) return;
     const el = wrapRef.current;
@@ -99,16 +107,17 @@ export function FloatingPlayer() {
       gsap.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.4 });
       return;
     }
+    const s = desdeFuera();
     gsap.fromTo(
       el,
-      { opacity: 0, x: -140, rotate: -8 },
+      { opacity: 0, x: 140 * s, rotate: 8 * s },
       { opacity: 1, x: 0, rotate: 0, duration: 0.85, ease: "elastic.out(1, 0.62)" },
     );
   }, [revealed]);
 
-  // La radio entra y sale por el borde izquierdo, no aparece y desaparece de
-  // golpe. Al cerrarse hay que esperar a la animación antes de desmontarla,
-  // de ahí el onComplete.
+  // La radio entra y sale por su borde, no aparece y desaparece de golpe. Al
+  // cerrarse hay que esperar a la animación antes de desmontarla, de ahí el
+  // onComplete.
   const cerrarRadio = () => {
     const p = panelRef.current;
     if (!p || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -117,7 +126,7 @@ export function FloatingPlayer() {
     }
     gsap.to(p, {
       opacity: 0,
-      x: -120,
+      x: 120 * desdeFuera(),
       scale: 0.9,
       duration: 0.4,
       ease: "power3.in",
@@ -131,7 +140,7 @@ export function FloatingPlayer() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     gsap.fromTo(
       p,
-      { opacity: 0, x: -110, scale: 0.92 },
+      { opacity: 0, x: 110 * desdeFuera(), scale: 0.92 },
       { opacity: 1, x: 0, scale: 1, duration: 0.7, ease: "back.out(1.5)" },
     );
   }, [radioOpen]);
@@ -153,7 +162,7 @@ export function FloatingPlayer() {
   return (
     <div
       ref={wrapRef}
-      className="fixed bottom-3.5 left-3.5 z-50 flex flex-col items-start gap-2 opacity-0 print:hidden sm:bottom-5 sm:left-5 sm:gap-2.5"
+      className="fixed bottom-3.5 left-3.5 z-50 flex flex-col items-start gap-2 opacity-0 print:hidden sm:bottom-5 sm:left-auto sm:right-5 sm:items-end sm:gap-2.5"
       style={{ willChange: "transform, opacity" }}
     >
       {/* La radio, desplegada sobre el botón. Solo con ≥2 temas: con uno solo
