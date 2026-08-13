@@ -25,12 +25,12 @@ type Foto = {
 const FOTOS: Foto[] = [
   {
     file: "backliner",
-    alt: "Dani trabajando como backliner en una gira",
+    alt: "Dani afinando la guitarra de un artista en el escenario",
     caption: "De backliner en carretera",
   },
   {
-    file: "maldita-nerea-directo",
-    alt: "Dani tocando en el escenario de Maldita Nerea",
+    file: "en-directo",
+    alt: "La banda saltando en el escenario durante un concierto",
     caption: "Dani rockeando",
   },
   {
@@ -45,27 +45,25 @@ const FOTOS: Foto[] = [
   },
   {
     file: "maldita-nerea",
-    alt: "El equipo de la gira de Maldita Nerea en camerinos",
-    caption: "El equipo de Maldita Nerea",
+    alt: "Dani con el equipo de la gira de Maldita Nerea en camerinos",
+    caption: "Con Maldita Nerea",
+  },
+  {
+    file: "corro",
+    alt: "El equipo de la gira juntando las manos en el corro de antes de salir",
+    caption: "El corro de antes de salir",
+    credit: "Roser Gamonal",
+  },
+  {
+    file: "equipo-alfred",
+    alt: "El equipo al completo de la gira de Alfred García",
+    caption: "El equipo de Alfred García",
   },
   {
     file: "serginhio-moreira",
     alt: "Dani con el batería Serginhio Moreira junto a los camiones de producción",
     caption: "Con Serginhio Moreira",
     credit: "Roser Gamonal",
-  },
-  {
-    file: "sweet-bird",
-    alt: "Dani con Sweet Bird en un festival",
-    caption: "Con Sweet Bird",
-  },
-  {
-    // Retrato vertical: encuadrado arriba, que si no el recorte a 4/3 le corta
-    // la cabeza a Dani.
-    file: "camerino",
-    alt: "Dani con una artista en camerinos, antes de salir a escena",
-    caption: "Antes de salir",
-    encuadre: "top",
   },
 ];
 
