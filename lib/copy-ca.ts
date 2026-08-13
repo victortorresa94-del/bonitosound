@@ -1111,6 +1111,27 @@ const CA: Record<string, string> = {
   "Marcas, agencias, festivales, ayuntamientos y asociaciones para las que hemos trabajado desde que empezamos.":
     "Marques, agències, festivals, ajuntaments i associacions per a qui hem treballat des que vam començar.",
   "Gira en España": "Gira per Espanya",
+
+  // Estudio de grabación · las cinco fases
+  "El proceso": "El procés",
+  "Cinco fases,": "Cinc fases,",
+  "un solo criterio.": "un sol criteri.",
+  "Composición": "Composició",
+  "Grabación": "Gravació",
+  "Mezcla": "Mescla",
+  "Máster": "Màster",
+  "Desde una idea suelta o desde lo que ya tengas escrito.":
+    "Des d'una idea solta o des del que ja tinguis escrit.",
+  "Darle forma: qué instrumentos, qué arreglo, qué sobra.":
+    "Donar-li forma: quins instruments, quin arranjament, què sobra.",
+  "Registrar las tomas buenas, las que se quedan.":
+    "Registrar les preses bones, les que es queden.",
+  "Que cada elemento ocupe su sitio y se entienda la canción.":
+    "Que cada element ocupi el seu lloc i s'entengui la cançó.",
+  "El acabado, para que suene igual de bien en cualquier sitio.":
+    "L'acabat, perquè soni igual de bé a qualsevol lloc.",
+  "Se puede entrar en cualquiera de ellas. Pero cuando las decisiones creativas y las técnicas van juntas desde el principio, la canción sale mejor.":
+    "S'hi pot entrar per qualsevol d'elles. Però quan les decisions creatives i les tècniques van juntes des del principi, la cançó surt millor.",
 };
 
 /**

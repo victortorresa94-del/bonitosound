@@ -34,7 +34,7 @@ const ARTISTAS = [
   "Elane", "Huda", "Albali", "Paule", "D Nácar",
 ];
 
-export function EstudioPartner() {
+function QuienLoHace() {
   const locale = serverLocale();
   const fotos = FOTOS.map((f) => ({ ...f, src: findAsset("estudio", f.slug) })).filter((f) => f.src);
 
@@ -110,5 +110,88 @@ export function EstudioPartner() {
         </RevealOnScroll>
       </div>
     </Section>
+  );
+}
+
+/**
+ * LAS CINCO FASES.
+ *
+ * El correo de Marco y Jano las enumera en cadena —composición, producción,
+ * grabación, mezcla y máster— y ese encadenado es justo lo que venden: que no
+ * hay que cambiar de sitio ni de criterio a mitad del camino. Arriba quedaban
+ * comprimidas en dos frases y se perdía.
+ *
+ * Se pinta como una carretera, con la línea cian cruzando los cinco puntos: el
+ * mismo lenguaje que la ruta de /giras. Aquí significa que el camino es uno,
+ * aunque se pueda entrar por cualquier punto.
+ */
+const FASES = [
+  { n: "01", t: "Composición", d: "Desde una idea suelta o desde lo que ya tengas escrito." },
+  { n: "02", t: "Producción", d: "Darle forma: qué instrumentos, qué arreglo, qué sobra." },
+  { n: "03", t: "Grabación", d: "Registrar las tomas buenas, las que se quedan." },
+  { n: "04", t: "Mezcla", d: "Que cada elemento ocupe su sitio y se entienda la canción." },
+  { n: "05", t: "Máster", d: "El acabado, para que suene igual de bien en cualquier sitio." },
+];
+
+function Fases() {
+  const locale = serverLocale();
+  return (
+    <Section className="border-t border-subtle">
+      <RevealOnScroll as="p" className="eyebrow mb-3">
+        {tr(locale, "El proceso")}
+      </RevealOnScroll>
+      <RevealOnScroll
+        as="h2"
+        className="display max-w-[20ch] text-[clamp(1.8rem,4vw,2.8rem)] leading-[1.08]"
+      >
+        <span style={{ color: NAVY }}>{tr(locale, "Cinco fases,")} </span>
+        <span style={{ color: CYAN }}>{tr(locale, "un solo criterio.")}</span>
+      </RevealOnScroll>
+
+      <div className="relative mt-12">
+        {/* La carretera. Solo en escritorio: en móvil las fases caen en columna
+            y una línea horizontal no diría nada. */}
+        <div
+          aria-hidden
+          className="absolute left-1 right-1 top-[4px] hidden h-[2px] md:block"
+          style={{ backgroundColor: "rgba(22,182,212,0.3)" }}
+        />
+        <StaggerGroup stagger={0.08} className="grid gap-8 sm:grid-cols-2 md:grid-cols-5 md:gap-5">
+          {FASES.map((f) => (
+            <div key={f.n} className="relative">
+              <span
+                aria-hidden
+                className="mb-5 hidden h-[10px] w-[10px] rounded-full md:block"
+                style={{ backgroundColor: CYAN }}
+              />
+              <p className="font-mono text-[0.7rem] font-bold tabular-nums" style={{ color: CYAN }}>
+                {f.n}
+              </p>
+              <h3 className="font-round mt-1 text-lg font-bold leading-tight" style={{ color: NAVY }}>
+                {tr(locale, f.t)}
+              </h3>
+              <p className="mt-1.5 text-[0.82rem] leading-snug text-text-secondary">
+                {tr(locale, f.d)}
+              </p>
+            </div>
+          ))}
+        </StaggerGroup>
+      </div>
+
+      <RevealOnScroll delay={0.2} className="mt-11">
+        <p className="max-w-[58ch] text-lg leading-relaxed" style={{ color: NAVY }}>
+          {tr(locale, "Se puede entrar en cualquiera de ellas. Pero cuando las decisiones creativas y las técnicas van juntas desde el principio, la canción sale mejor.")}
+        </p>
+      </RevealOnScroll>
+    </Section>
+  );
+}
+
+export function EstudioPartner() {
+  return (
+    <>
+      <QuienLoHace />
+      <Fases />
+    </>
   );
 }
