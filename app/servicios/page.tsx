@@ -65,13 +65,16 @@ const TILT = ["-1.4deg", "1deg", "-0.8deg", "1.2deg", "-1.1deg", "0.7deg", "-0.6
 /** Combo por tarjeta: fuente (Zilla Slab / Fredoka) + color (navy / cian),
  *  mezclado a mano para dinamismo. En grid de 3 columnas, i e i+3 caen en la
  *  MISMA columna: ningún par comparte fuente ni color → nada de franjas. */
+// ⚠️ Una entrada por servicio de SERVICIOS, en el mismo orden: se indexa por
+// posición (COMBO[i]) y si falta una, la página revienta en servidor.
 const COMBO: { font: string; color: string }[] = [
   { font: "font-round", color: NAVY }, // 01 Booking
   { font: "display", color: CYAN }, //    02 Management
-  { font: "display", color: NAVY }, //    03 Producción
-  { font: "display", color: CYAN }, //    04 Editorial
-  { font: "font-round", color: NAVY }, // 05 Distribución
-  { font: "font-round", color: CYAN }, // 06 Marketing
+  { font: "display", color: NAVY }, //    03 Producción de giras
+  { font: "font-round", color: CYAN }, // 04 Estudio
+  { font: "display", color: CYAN }, //    05 Editorial
+  { font: "font-round", color: NAVY }, // 06 Distribución
+  { font: "font-round", color: CYAN }, // 07 Marketing
 ];
 
 /** Dibujo de la tarjeta (gpt-image-2) en /public/img/servicios/index/<slug>.png.
