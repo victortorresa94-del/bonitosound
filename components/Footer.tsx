@@ -159,12 +159,19 @@ export function Footer() {
         </div>
       </div>
 
-      {/* El wordmark, hueco y recortado por abajo. `textLength` lo obliga a
+      {/* El wordmark, hueco y CORTADO POR LA MITAD contra el borde de la
+          página: se lee entero igual y firma sin ocupar media pantalla.
+          El corte lo hace el margen negativo, no el viewBox — así el hueco que
+          lo separa de la franja de membresías no cambia al ajustarlo.
+          La cuenta: la caja alta de la letra ocupa el ~92% del alto del SVG y
+          el SVG mide 9,6vw de alto (1000×96 a ancho completo), así que para
+          esconder justo la mitad de la letra hay que tirar de ~4,8vw.
+          `textLength` lo obliga a
           caber justo en el viewBox: sin eso el ancho dependería de si la
           fuente ha cargado, y se saldría por los lados. Va aria-hidden porque
           el nombre de la marca ya está en el copyright de arriba. */}
       <div className="overflow-hidden px-3" aria-hidden>
-        <svg viewBox="0 0 1000 96" className="mb-[-1.6vw] block w-full">
+        <svg viewBox="0 0 1000 96" className="mb-[-4.8vw] block w-full">
           <text
             x="500"
             y="92"
