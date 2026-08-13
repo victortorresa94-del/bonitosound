@@ -31,10 +31,49 @@ const FOTOS: Foto[] = [
     alt: "Dani con Ruth Lorenzo",
     caption: "Con Ruth Lorenzo",
   },
+  // La de Tu Cara Me Suena la sustituye esta: es la foto que Víctor llevaba
+  // tiempo queriendo publicar.
   {
-    file: "tu-cara-me-suena",
-    alt: "Producción técnica en el programa Tu Cara Me Suena",
-    caption: "Tu Cara Me Suena",
+    file: "ivan-ferreiro",
+    alt: "Dani con Iván Ferreiro y su banda después de un concierto",
+    caption: "Con Iván Ferreiro",
+  },
+  {
+    file: "maldita-nerea",
+    alt: "El equipo de la gira de Maldita Nerea en camerinos",
+    caption: "Equipo de Maldita Nerea",
+  },
+  {
+    file: "maldita-nerea-directo",
+    alt: "Escenario de Maldita Nerea visto desde el lateral durante el concierto",
+    caption: "Maldita Nerea, desde el lateral",
+  },
+  {
+    file: "sombra",
+    alt: "Silueta de Dani a contraluz entre el humo del escenario",
+    caption: "A contraluz",
+  },
+  {
+    file: "serginhio-moreira",
+    alt: "Dani con Serginhio Moreira, batería, junto a los camiones de producción",
+    caption: "Con Serginhio Moreira",
+    credit: "Roser Gamonal",
+  },
+  {
+    file: "sweet-bird",
+    alt: "Dani con Sweet Bird en un festival",
+    caption: "Con Sweet Bird",
+  },
+  {
+    file: "camerino",
+    alt: "Dani con una artista en camerinos, antes de salir a escena",
+    caption: "Antes de salir",
+  },
+  {
+    file: "en-directo-2",
+    alt: "Concierto en directo con las luces azules del escenario",
+    caption: "Sala, noche de directo",
+    credit: "Roser Gamonal",
   },
 ];
 
