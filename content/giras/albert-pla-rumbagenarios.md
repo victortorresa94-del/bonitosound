@@ -6,10 +6,8 @@ videoUrl: "albert-pla.mp4"
 year: "2024"
 location: "España"
 services:
-  - "Producción"
-  - "Coordinación técnica"
-  - "Logística de gira"
-  - "Tour management"
+  - "Producción técnica"
+  - "Road management"
 lineup:
   - "Albert Pla"
 context: "Producción, coordinación técnica y logística de la gira Rumbagenarios de Albert Pla, fecha a fecha por España."

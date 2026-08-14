@@ -6,9 +6,9 @@ location: "Sant Jordi Club, Barcelona"
 youtubeId: "r47SP4OULcI"
 year: "2023"
 services:
+  - "Producción técnica"
+  - "Logística"
   - "Road management"
-  - "Tour management"
-  - "Stage management"
 lineup:
   - "Alfred García"
 context: "Road, tour y stage management de la Gira 1016 de Alfred García, hasta cerrarla en el Sant Jordi Club de Barcelona."

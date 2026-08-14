@@ -2,7 +2,7 @@
 name: "Paule"
 genre: "Cantautor / Pop de autor"
 tier: "booking"
-services: ["Booking"]
+services: ["Booking", "Records"]
 spotifyArtistId: "79qGj0n6B3skao1b5Ojt2V"
 instagram: "https://www.instagram.com/paulemusica/"
 image: "/img/artistas/paule.jpeg"

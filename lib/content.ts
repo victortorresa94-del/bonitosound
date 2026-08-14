@@ -10,6 +10,19 @@ export type Artist = {
   name: string;
   genre: string;
   tier: "booking" | "distribucion";
+  /**
+   * La colaboración YA TERMINÓ: el artista pasó por Bonito pero ya no está en
+   * booking ni en management.
+   *
+   * Cambia dos cosas, las dos pedidas por Dani: el botón deja de decir
+   * "Contratar" y pasa a "Saber más" —no se puede contratar a quien no
+   * llevamos—, y desaparece el enlace a su web, porque la ficha está para
+   * contar lo que hicimos juntos, no para mandar tráfico fuera.
+   *
+   * La ficha se sigue publicando a propósito: son parte de la historia de la
+   * casa y hablan bien de ella.
+   */
+  pasado?: boolean;
   /** Servicios de Bonito que usa este artista (plug-and-play, para el desglose
    *  por servicio en /artistas/todos). Valores libres, ej:
    *    services: ["Booking", "Management", "Sello"]

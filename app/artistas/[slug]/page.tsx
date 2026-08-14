@@ -153,7 +153,9 @@ export default function ArtistPage({
       <ArtistSocial name={a.name} reels={a.reels} instagram={a.instagram} tiktok={a.tiktok} />
 
       {/* 7. Más de X: recursos extra (prensa, web…) si los hay. */}
-      <ArtistExtras name={a.name} extras={a.extras} />
+      {/* Las colaboraciones terminadas NO enlazan fuera: la ficha está para
+          contar lo que hicimos juntos, no para mandar tráfico a su web. */}
+      {!a.pasado && <ArtistExtras name={a.name} extras={a.extras} />}
 
       {/* 8. Cierre: booking. */}
       <ArtistCTA
@@ -161,6 +163,7 @@ export default function ArtistPage({
         bookingEmail={site.emails.booking}
         instagram={a.instagram}
         slug={a.slug}
+        pasado={a.pasado}
       />
     </>
   );
