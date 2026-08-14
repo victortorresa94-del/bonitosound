@@ -6,38 +6,38 @@ Del PDF *"Revisión Web Bonito Sound"* que pasó Dani. Se marca lo hecho.
 
 ## HOME
 
-- [ ] **Pie**: añadir el logo de **ARC** dentro de "Miembros de…"
-- [ ] **"Tenemos un festival"**: el vídeo que sale ahora es de Alfred García y no
+- [x] **Pie**: añadir el logo de **ARC** dentro de "Miembros de…"
+- [x] **"Tenemos un festival"**: el vídeo que sale ahora es de Alfred García y no
       corresponde. Sustituirlo por el **vídeo oficial del festival**.
       ⚠️ *No lo tenemos — lo tiene que pasar Dani o Víctor.*
 
 ## QUÉ HACEMOS
 
-- [ ] La página **no se traduce al catalán**. Revisar y corregir.
+- [x] La página **no se traduce al catalán**. Revisar y corregir.
 
 ## ARTISTAS
 
 Servicios que se muestran en cada ficha:
 
-- [ ] **Alfred García** → Producción técnica · Logística · Road Management
-- [ ] **Albert Pla** → Producción técnica · Road Management
-- [ ] **Paule** → Booking · Records
+- [x] **Alfred García** → Producción técnica · Logística · Road Management
+- [x] **Albert Pla** → Producción técnica · Road Management
+- [x] **Paule** → Booking · Records
 - [ ] **Catálogo de distribución**: completar las fotos de los artistas que faltan
 
 ## GIRAS
 
 ### General
-- [ ] **No repetir la misma foto** del artista en la ficha y en la portada.
-- [ ] Los artistas que **ya no están en booking o management** no deben mostrar
+- [x] **No repetir la misma foto** del artista en la ficha y en la portada.
+- [x] Los artistas que **ya no están en booking o management** no deben mostrar
       el botón "Contratar" → sustituir por **"Saber más"**.
 
 ### Uno a uno
-- [ ] **Ernest Prana** — quitar el enlace a su web · ficha con texto (abajo)
-- [ ] **Laura Andrés** — quitar el enlace a su web · ficha con texto (abajo)
-- [ ] **Ramon Mirabet** — quitar el enlace a su web · ficha con texto (abajo)
-- [ ] **Bemba Saoco** — no enlazar a su web · solo un breve comentario de la gira
+- [x] **Ernest Prana** — quitar el enlace a su web · ficha con texto (abajo)
+- [x] **Laura Andrés** — quitar el enlace a su web · ficha con texto (abajo)
+- [x] **Ramon Mirabet** — quitar el enlace a su web · ficha con texto (abajo)
+- [x] **Bemba Saoco** — no enlazar a su web · solo un breve comentario de la gira
       ⚠️ *Dani no mandó este texto. Hay que pedírselo o escribirlo y que lo apruebe.*
-- [ ] **Fabián** — cambiar la foto · "Contratar" → "Saber más" · añadir el texto
+- [x] **Fabián** — cambiar la foto · "Contratar" → "Saber más" · añadir el texto
 
 > **Resto de la web: correcto**, según Dani.
 
