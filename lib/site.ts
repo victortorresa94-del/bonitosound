@@ -100,6 +100,11 @@ export const team = [
 ] as const;
 
 export const memberships = [
+  // ARC — Associació Professional de Representants, Promotors i Mànagers de
+  // Catalunya. La pidió Dani. El fichero es la marca en BLANCO con las letras
+  // caladas, que es la versión que ellos publican para fondos oscuros: aguanta
+  // el filtro de silueta del pie sin convertirse en un borrón.
+  "ARC",
   "UFI",
   "SGAE",
   "AGEDI",
