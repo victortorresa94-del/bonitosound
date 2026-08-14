@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
+import { fotoPortada } from "@/lib/artist-photo";
 import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
@@ -136,11 +137,11 @@ export default function RosterCompleto() {
   const booking = all
     .filter((a) => a.tier === "booking")
     .sort((a, b) => BOOKING_ORDER.indexOf(a.slug) - BOOKING_ORDER.indexOf(b.slug))
-    .map((a) => ({ ...a, photo: a.image ?? findAsset("artistas", a.slug) }));
+    .map((a) => ({ ...a, photo: fotoPortada(a) }));
 
   const distribucion = all
     .filter((a) => a.tier === "distribucion")
-    .map((a) => ({ ...a, photo: a.image ?? findAsset("artistas", a.slug) }));
+    .map((a) => ({ ...a, photo: fotoPortada(a) }));
 
   // Nombre → slug de los que tienen ficha, para linkar el catálogo cuando existe.
   const slugForName = (name: string) =>

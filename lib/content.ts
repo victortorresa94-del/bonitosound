@@ -35,6 +35,15 @@ export type Artist = {
   /** Perfil de TikTok (URL completa). Se muestra en el CTA de redes. */
   tiktok?: string;
   image?: string;
+  /**
+   * Foto DISTINTA para la portada (el roster, /artistas). Si no está, la
+   * portada usa la misma que la ficha.
+   *
+   * Lo pidió Dani: ver dos veces el mismo retrato —en la parrilla y al entrar—
+   * hace que la ficha parezca la misma página. Se resuelve también por fichero:
+   * basta con dejar /img/artistas/<slug>-portada.jpg y se coge solo.
+   */
+  cover?: string;
   /** Vídeo corto para el hover del roster (mudo, en bucle). Se resuelve por
    *  prioridad: /public/video/artistas/<slug>.mp4 → `video` forzado →
    *  `videoUrl` (R2). Si no hay, en el hover cae al primer YouTube. */

@@ -55,6 +55,15 @@ function listJaleoPhotos(): string[] {
 
 export default function JaleoSound() {
   const locale = serverLocale();
+
+  // El vídeo oficial del festival, cuando lo haya. Se busca en disco en vez de
+  // escribir la ruta a pelo: así la sección aparece sola el día que se suba el
+  // fichero, sin desplegar nada.
+  const videoFestival = fs.existsSync(
+    path.join(process.cwd(), "public", "video", "jaleo", "festival.mp4"),
+  )
+    ? "/video/jaleo/festival.mp4"
+    : null;
   const seccion = findAsset("secciones", "jaleo");
   const photos = listJaleoPhotos();
 
@@ -173,21 +182,35 @@ export default function JaleoSound() {
       </section>
       )}
 
-      {/* ───── Vídeo (Sant Jordi Club) como muestra del directo Bonito ───── */}
-      <section className="border-b border-white/15 py-20 md:py-28">
-        <div className="wrap">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">{tr(locale, "El directo de Bonito")}</p>
-          <h2 className="display mt-3 text-[clamp(2.2rem,6vw,4rem)] leading-[0.95]">
-            {tr(locale, "Lo que montamos cuando nos dejan.")}
-          </h2>
-          <p className="mt-4 max-w-2xl text-white/80">
-            {tr(locale, "Final de la Gira 1016 en el Sant Jordi Club de Barcelona. Producido por el mismo equipo que monta Jaleo cada septiembre en Amsterdam.")}
-          </p>
-          <div className="mt-8 overflow-hidden rounded-2xl border border-white/20">
-            <YouTubeEmbed id="r47SP4OULcI" title="Final Gira 1016 — Sant Jordi Club" />
+      {/* ───── El vídeo del festival ─────
+             Aquí había el final de la Gira 1016 de Alfred García en el Sant
+             Jordi Club. Dani lo cortó y con razón: es una gira nuestra, no el
+             festival, y en la página del festival da a entender lo que no es.
+
+             Queda plug-and-play: en cuanto exista /public/video/jaleo/festival.mp4
+             la sección vuelve sola, sin tocar código. Mientras no esté, no se
+             pinta nada — mejor un hueco que un vídeo que engaña. */}
+      {videoFestival && (
+        <section className="border-b border-white/15 py-20 md:py-28">
+          <div className="wrap">
+            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
+              {tr(locale, "El festival")}
+            </p>
+            <h2 className="display mt-3 text-[clamp(2.2rem,6vw,4rem)] leading-[0.95]">
+              {tr(locale, "Así suena Jaleo.")}
+            </h2>
+            <div className="mt-8 overflow-hidden rounded-2xl border border-white/20">
+              <video
+                className="block w-full"
+                src={videoFestival}
+                controls
+                playsInline
+                preload="metadata"
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ───── Qué es ───── */}
       <section className="py-24 md:py-32">

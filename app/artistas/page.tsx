@@ -5,6 +5,7 @@ import {
   StaggerGroup,
 } from "@/components/motion";
 import { RosterCard } from "@/components/artistas/RosterCard";
+import { fotoPortada } from "@/lib/artist-photo";
 import { getArtists } from "@/lib/content";
 import { findAsset } from "@/lib/assets";
 import { distributionCatalog, site } from "@/lib/site";
@@ -107,7 +108,7 @@ export default function Artistas() {
       name: a.name,
       genre: a.genre,
       href: undefined,
-      photo: a.image ?? findAsset("artistas", a.slug),
+      photo: fotoPortada(a),
     };
   }).filter((r): r is NonNullable<typeof r> => Boolean(r));
 

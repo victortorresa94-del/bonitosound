@@ -9,6 +9,7 @@ import { ArtistFeaturedMusic } from "@/components/artistas/ArtistFeaturedMusic";
 import { ArtistSocial } from "@/components/artistas/ArtistSocial";
 import { ArtistExtras } from "@/components/artistas/ArtistExtras";
 import { ArtistCTA } from "@/components/artistas/ArtistCTA";
+import { fotoFicha } from "@/lib/artist-photo";
 import { getArtist, getArtists } from "@/lib/content";
 import { findAsset, findArtistAudio } from "@/lib/assets";
 import { site } from "@/lib/site";
@@ -68,7 +69,7 @@ export default function ArtistPage({
   // content/artistas/<slug>.ca.md sobre el original.
   const a = artistaCa(aEs, locale);
 
-  const photo = a.image ?? findAsset("artistas", a.slug);
+  const photo = fotoFicha(a);
 
   // Carrusel navegable: TODOS los artistas en un orden único y consistente
   // (destacados primero, luego el resto), sin importar por cuál se haya
