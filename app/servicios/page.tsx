@@ -6,6 +6,8 @@ import Image from "next/image";
 import { RevealOnScroll, StaggerGroup } from "@/components/motion";
 import { JsonLd } from "@/components/ui";
 import { site } from "@/lib/site";
+import { serverLocale } from "@/lib/locale-server";
+import { tr } from "@/lib/copy-ca";
 
 const NAVY = "#14283C";
 const CYAN = "#16b6d4";
@@ -106,6 +108,7 @@ const CARD =
   "flex h-full flex-col border border-[#14283C]/20 bg-[#FBFAF6] p-3.5 shadow-[0_2px_20px_-14px_rgba(20,40,60,0.35)] transition-[box-shadow,border-color] duration-300 group-hover:border-[#14283C] group-hover:shadow-[0_22px_44px_-24px_rgba(20,40,60,0.45)] md:p-4";
 
 export default function Servicios() {
+  const locale = serverLocale();
   return (
     <>
       <JsonLd
@@ -126,23 +129,21 @@ export default function Servicios() {
       <section style={{ backgroundColor: "#FBFAF6" }}>
         <div className="wrap pb-4 pt-14 md:pb-6 md:pt-16">
           <RevealOnScroll as="p" className="eyebrow mb-4">
-            Servicios
+            {tr(locale, "Servicios")}
           </RevealOnScroll>
           <h1
             className="display font-bold leading-[0.95] text-[clamp(2.1rem,5.4vw,4rem)]"
             style={{ color: NAVY }}
           >
-            Lo que la mayoría te hace montar con cinco proveedores,{" "}
-            <span style={{ color: CYAN }}>aquí está en uno.</span>
+            {tr(locale, "Lo que la mayoría te hace montar con cinco proveedores,")}{" "}
+            <span style={{ color: CYAN }}>{tr(locale, "aquí está en uno.")}</span>
           </h1>
           <RevealOnScroll
             as="p"
             delay={0.15}
             className="mt-5 max-w-[52ch] text-base leading-relaxed text-text-secondary"
           >
-            En Bonito Sound reunimos todo lo que tu proyecto necesita para
-            crecer, sonar mejor y llegar más lejos. Menos complicaciones, más
-            música.
+            {tr(locale, "En Bonito Sound reunimos todo lo que tu proyecto necesita para crecer, sonar mejor y llegar más lejos. Menos complicaciones, más música.")}
           </RevealOnScroll>
         </div>
       </section>
@@ -181,10 +182,10 @@ export default function Servicios() {
                                 propósito: se leen como un par, no como dos
                                 sorpresas distintas. */}
                             <h2 className="display mt-1 text-3xl font-bold md:text-4xl" style={{ color: NAVY }}>
-                              {s.title}
+                              {tr(locale, s.title)}
                             </h2>
                             <p className="mt-2 max-w-[52ch] text-sm leading-relaxed text-text-secondary">
-                              {s.desc}
+                              {tr(locale, s.desc)}
                             </p>
                           </div>
                         </div>
@@ -207,10 +208,10 @@ export default function Servicios() {
                           <Illu slug={s.slug} className="h-full w-auto max-w-full transition-transform duration-500 group-hover:scale-[1.05]" />
                         </div>
                         <h2 className={`${combo.font} mt-0.5 text-2xl font-bold leading-tight md:text-[1.6rem]`} style={{ color: combo.color }}>
-                          {s.title}
+                          {tr(locale, s.title)}
                         </h2>
                         <p className="mt-1 line-clamp-2 text-[0.75rem] leading-snug text-text-secondary">
-                          {s.desc}
+                          {tr(locale, s.desc)}
                         </p>
                       </div>
                     </Link>

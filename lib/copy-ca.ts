@@ -1132,6 +1132,17 @@ const CA: Record<string, string> = {
     "L'acabat, perquè soni igual de bé a qualsevol lloc.",
   "Se puede entrar en cualquiera de ellas. Pero cuando las decisiones creativas y las técnicas van juntas desde el principio, la canción sale mejor.":
     "S'hi pot entrar per qualsevol d'elles. Però quan les decisions creatives i les tècniques van juntes des del principi, la cançó surt millor.",
+
+  // /servicios — la pagina entera, que no se traducia (lo pillo Dani)
+  "Marketing de redes sociales": "Màrqueting de xarxes socials",
+  "Estudio de grabación": "Estudi de gravació",
+  "Bonito Records": "Bonito Records",
+  "Montamos la gira entera: producción técnica, escenario, logística y road management, plaza a plaza.":
+    "Muntem la gira sencera: producció tècnica, escenari, logística i road management, plaça a plaça.",
+  "Campañas, contenido y paid media para dar a conocer tu proyecto, conectar con tu audiencia y que ningún lanzamiento pase desapercibido.":
+    "Campanyes, contingut i paid media per donar a conèixer el teu projecte, connectar amb la teva audiència i que cap llançament passi desapercebut.",
+  "De la composición al máster. Grabación y producción musical con Marco La Testa y Jano Montano, al servicio de tu identidad.":
+    "De la composició al màster. Gravació i producció musical amb en Marco La Testa i en Jano Montano, al servei de la teva identitat.",
 };
 
 /**
