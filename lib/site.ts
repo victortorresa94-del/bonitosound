@@ -122,6 +122,14 @@ export const supportPending = [
   "Stadsdeel Amsterdam",
 ] as const;
 
+/**
+ * Marcas del muro. Dos se quedan SIN logo a propósito, no por olvido:
+ *  - "Lighthouse" y "Le Souffle" son nombres tan comunes que no hay forma de
+ *    saber cuál de las mil empresas homónimas es la clienta. Ya se metió una
+ *    vez el logo equivocado. Decisión de Víctor: se quedan solo con el nombre
+ *    —cuentan igual en el total— hasta que Dani confirme cuáles son.
+ * No hace falta volver a buscarlos.
+ */
 export const brands = [
   "Ballantine's",
   "Pernod Ricard",
