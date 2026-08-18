@@ -75,7 +75,8 @@ const nextConfig = {
       // estas cuatro.
       { source: "/artista/dj-natura", destination: "/artistas/natura", statusCode: 301 },
       { source: "/artista/fabian-d-cuesta", destination: "/artistas/fabian", statusCode: 301 },
-      { source: "/artista/overpopulation", destination: "/artistas/overpulation", statusCode: 301 },
+      // Overpopulation conserva su slug: el WordPress viejo lo tenia BIEN y era la
+      // web nueva la que lo habia escrito mal ("Overpulation"). Corregido.
       // Estos cuatro ya no tienen ficha propia: al roster, que es lo más
       // cercano. Nunca al home a lo bruto — el que buscaba un artista sigue
       // aterrizando entre artistas.

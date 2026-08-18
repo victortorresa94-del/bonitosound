@@ -328,7 +328,7 @@ export const distributionCatalog = [
   "Fabian",
   "Eva Calyza",
   "Kenai White",
-  "Overpulation",
+  "Overpopulation",
   "D Nácar",
   "AlexDeLion",
   "Marco la Testa",

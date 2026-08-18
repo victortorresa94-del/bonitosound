@@ -1,5 +1,6 @@
 ---
 name: "Rumba Menuda"
+image: "/img/artistas/rumba-menuda.jpg"
 genre: "Música infantil con rumba catalana"
 tier: "distribucion"
 spotifyArtistId: "6TRII33dajYbLquqNZsxOr"
